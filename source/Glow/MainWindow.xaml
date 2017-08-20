@@ -1,0 +1,1112 @@
+﻿<!-- 
+    Glow
+    Copyright (C) 2017 Matt McManis
+    http://github.com/MattMcManis/Glow
+    http://glowmpv.github.io
+    mattmcmanis@outlook.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.If not, see<http://www.gnu.org/licenses/> . 
+ -->
+<Window x:Class="Glow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:my="clr-namespace:Glow"
+        xmlns:settings="clr-namespace:Glow.Properties"
+        
+        Closing="MainWindow_Closing" 
+        UseLayoutRounding="True"
+        Width="775" Height="613.899"
+        Top="{Binding Top, Source={x:Static settings:Settings.Default}, Mode=TwoWay}"
+        Left="{Binding Left, Source={x:Static settings:Settings.Default}, Mode=TwoWay}"
+        Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
+        >
+    <Grid>
+        <Grid Margin="0,0,-1,0">
+            <!-- Main Tabs -->
+            <TabControl Margin="0,10,18,59" HorizontalAlignment="Right" Width="230">
+
+                <!-- Video Tab -->
+                <TabItem Header="Video" >
+                    <Grid Background="#FFE5E5E5">
+                        <ScrollViewer Margin="0,0,0,0">
+                            <Grid Margin="0,0,0,30">
+
+                                <!-- Driver -->
+                                <Label Content="Driver" HorizontalAlignment="Left" Margin="10,10,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboVideoDriver" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>opengl</System:String>
+                                    <System:String>opengl-hq</System:String>
+                                    <System:String>direct3d</System:String>
+                                    <System:String>sdl</System:String>
+                                    <System:String>vaapi</System:String>
+                                </ComboBox>
+
+                                <!-- Hardware Decoder -->
+                                <Label Content="HW Decoder" HorizontalAlignment="Left" Margin="10,37,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboHWDecoder" HorizontalAlignment="Left" Margin="93,37,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>no</System:String>
+                                    <System:String>yes</System:String>
+                                    <System:String>auto-copy</System:String>
+                                    <System:String>dxva2</System:String>
+                                    <System:String>dxva2-copy</System:String>
+                                    <System:String>d3d11va</System:String>
+                                    <System:String>d3d11va-copy</System:String>
+                                    <System:String>cuda</System:String>
+                                    <System:String>cuda-copy</System:String>
+                                    <System:String>crystalhd</System:String>
+                                </ComboBox>
+
+                                <!-- Color Space -->
+                                <Label Content="Color Space" HorizontalAlignment="Left" Margin="10,64,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboColorSpace" HorizontalAlignment="Left" Margin="93,64,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>auto</System:String>
+                                    <System:String>bt.601</System:String>
+                                    <System:String>bt.709</System:String>
+                                    <System:String>bt.2020-ncl</System:String>
+                                    <System:String>bt.2020-cl</System:String>
+                                    <System:String>mpte-240m</System:String>
+                                </ComboBox>
+
+                                <!-- Color Range -->
+                                <Label Content="Color Range" HorizontalAlignment="Left" Margin="10,91,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboColorRange" HorizontalAlignment="Left" Margin="93,91,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>auto</System:String>
+                                    <System:String>limited</System:String>
+                                    <System:String>full</System:String>
+                                </ComboBox>
+
+                                <!-- Gamma -->
+                                <Label Content="Gamma" HorizontalAlignment="Left" Margin="10,118,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboGamma" HorizontalAlignment="Left" Margin="93,118,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>auto</System:String>
+                                    <System:String>bt.1886</System:String>
+                                    <System:String>srgb</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>gamma1.8</System:String>
+                                    <System:String>gamma2.2</System:String>
+                                    <System:String>gamma2.8</System:String>
+                                    <System:String>prophoto</System:String>
+                                    <System:String>pq</System:String>
+                                    <System:String>hlg</System:String>
+                                    <System:String>v-log</System:String>
+                                    <System:String>s-log1</System:String>
+                                    <System:String>s-log2</System:String>
+                                </ComboBox>
+
+                                <!-- Scale -->
+                                <Label Content="Scale" HorizontalAlignment="Left" Margin="10,145,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboScale" HorizontalAlignment="Left" Margin="93,145,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>nearest</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>bilinear</System:String>
+                                    <System:String>bicubic</System:String>
+                                    <System:String>gaussian</System:String>
+                                    <System:String>lanczos</System:String>
+                                    <System:String>ewa_lanczos</System:String>
+                                    <System:String>ewa_lanczossharp</System:String>
+                                    <System:String>ewa_lanczossoft</System:String>
+                                    <System:String>robidoux</System:String>
+                                    <System:String>robidouxsharp</System:String>
+                                    <System:String>ewa_ginseng</System:String>
+                                    <System:String>ewa_hanning</System:String>
+                                    <System:String>mitchell</System:String>
+                                    <System:String>catmull_rom</System:String>
+                                    <System:String>spline16</System:String>
+                                    <System:String>spline36</System:String>
+                                    <System:String>spline64</System:String>
+                                    <System:String>oversample</System:String>
+                                </ComboBox>
+
+                                <!-- Chroma Scale -->
+                                <Label Content="Chroma Scale" HorizontalAlignment="Left" Margin="10,172,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboChromaScale" HorizontalAlignment="Left" Margin="93,172,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>nearest</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>bilinear</System:String>
+                                    <System:String>bicubic</System:String>
+                                    <System:String>gaussian</System:String>
+                                    <System:String>lanczos</System:String>
+                                    <System:String>ewa_lanczos</System:String>
+                                    <System:String>ewa_lanczossharp</System:String>
+                                    <System:String>ewa_lanczossoft</System:String>
+                                    <System:String>robidoux</System:String>
+                                    <System:String>robidouxsharp</System:String>
+                                    <System:String>ewa_ginseng</System:String>
+                                    <System:String>ewa_hanning</System:String>
+                                    <System:String>mitchell</System:String>
+                                    <System:String>catmull_rom</System:String>
+                                    <System:String>spline16</System:String>
+                                    <System:String>spline36</System:String>
+                                    <System:String>spline64</System:String>
+                                    <System:String>oversample</System:String>
+                                </ComboBox>
+
+                                <!-- Downscale -->
+                                <Label Content="Downscale" HorizontalAlignment="Left" Margin="10,199,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboDownscale" HorizontalAlignment="Left" Margin="93,199,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>nearest</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>bilinear</System:String>
+                                    <System:String>bicubic</System:String>
+                                    <System:String>gaussian</System:String>
+                                    <System:String>lanczos</System:String>
+                                    <System:String>ewa_lanczos</System:String>
+                                    <System:String>ewa_lanczossharp</System:String>
+                                    <System:String>ewa_lanczossoft</System:String>
+                                    <System:String>robidoux</System:String>
+                                    <System:String>robidouxsharp</System:String>
+                                    <System:String>ewa_ginseng</System:String>
+                                    <System:String>ewa_hanning</System:String>
+                                    <System:String>mitchell</System:String>
+                                    <System:String>catmull_rom</System:String>
+                                    <System:String>spline16</System:String>
+                                    <System:String>spline36</System:String>
+                                    <System:String>spline64</System:String>
+                                    <System:String>oversample</System:String>
+                                </ComboBox>
+
+                                <!-- Antiring -->
+                                <Label Content="Antiring" HorizontalAlignment="Left" Margin="10,226,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboAntiring" HorizontalAlignment="Left" Margin="93,226,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Dithering -->
+                                <Label Content="Dither" HorizontalAlignment="Left" Margin="10,255,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboDither" HorizontalAlignment="Left" Margin="93,255,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>no</System:String>
+                                    <System:String>auto</System:String>
+                                    <System:String>8</System:String>
+                                </ComboBox>
+
+                                <!-- Deband -->
+                                <Label Content="Deband" HorizontalAlignment="Left" Margin="10,282,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboDeband" HorizontalAlignment="Left" Margin="93,282,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Deband Grain -->
+                                <Label Content="Deband Grain" HorizontalAlignment="Left" Margin="10,309,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboDebandGrain" HorizontalAlignment="Left" Margin="93,309,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>off</System:String>
+                                    <System:String>custom</System:String>
+                                </ComboBox>
+
+                                <!-- Deinterlace -->
+                                <Label Content="Deinterlace" HorizontalAlignment="Left" Margin="10,336,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboDeinterlace" HorizontalAlignment="Left" Margin="93,336,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>auto</System:String>
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Vsync -->
+                                <Label Content="Video Sync" HorizontalAlignment="Left" Margin="10,363,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboVideoSync" HorizontalAlignment="Left" Margin="93,363,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>off</System:String>
+                                    <System:String>display-resample</System:String>
+                                    <System:String>display-resample-vdrop</System:String>
+                                    <System:String>display-resample-desync</System:String>
+                                    <System:String>display-vdrop</System:String>
+                                    <System:String>display-adrop</System:String>
+                                    <System:String>display-desync</System:String>
+                                    <System:String>desync</System:String>
+                                    <System:String>audio</System:String>
+                                </ComboBox>
+
+                                <!-- Framedrop -->
+                                <Label Content="Framedrop" HorizontalAlignment="Left" Margin="10,390,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboFramedrop" HorizontalAlignment="Left" Margin="93,390,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>no</System:String>
+                                    <System:String>vo</System:String>
+                                    <System:String>decoder</System:String>
+                                    <System:String>decoder+vo</System:String>
+                                </ComboBox>
+
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+
+                <!-- Audio Tab -->
+                <TabItem Header="Audio"  >
+                    <Grid Background="#FFE5E5E5">
+                        <ScrollViewer Margin="0,0,0,0">
+                            <Grid Margin="0,0,0,20">
+
+                                <!-- Driver -->
+                                <Label Content="Driver" HorizontalAlignment="Left" Margin="10,10,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboAudioDriver" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>wasapi</System:String>
+                                    <System:String>oss</System:String>
+                                    <System:String>jack</System:String>
+                                    <System:String>openal</System:String>
+                                    <System:String>pulse</System:String>
+                                    <System:String>sdl</System:String>
+                                    <System:String>pcm</System:String>
+                                    <System:String>rsound</System:String>
+                                    <System:String>null</System:String>
+                                </ComboBox>
+
+                                <!-- Audio Languages -->
+                                <!--<Label Content="Languages" HorizontalAlignment="Left" Margin="10,37,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboAudioLanguages" HorizontalAlignment="Left" Margin="93,37,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>Spanish</System:String>
+                                    <System:String>English</System:String>
+                                    <System:String>Japanese</System:String>
+                                </ComboBox>-->
+
+                                <!--<ComboBox x:Name="cboAudioLanguages" HorizontalAlignment="Left" Margin="93,37,0,0" VerticalAlignment="Top" Width="100" Height="22">
+
+                                    <ListView x:Name="listViewAudioLanguages" 
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top" 
+                                            Width="150"
+                                            BorderThickness="0"
+                                            SelectionMode="Multiple"
+                                            ItemsSource="{Binding}"
+                                            IsSynchronizedWithCurrentItem="True"
+                                            SelectionChanged="listViewAudioLanguages_SelectionChanged">
+
+                                        <ListView.Resources>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </Style>
+                                        </ListView.Resources>
+
+
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="{x:Type ListViewItem}">
+
+                                                <Style.Resources>
+                                                    <LinearGradientBrush x:Key="ListItemHoverFill" EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="#FF999999" Offset="0"/>
+                                                        <GradientStop Color="#FF999999" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Style.Resources>
+
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                            <Border CornerRadius="2" SnapsToDevicePixels="True"  
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"   
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"   
+                                                                    Background="{TemplateBinding Background}">
+
+                                                                <Border Name="InnerBorder" CornerRadius="1" BorderThickness="1">
+                                                                    <Grid>
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition MaxHeight="11" />
+                                                                            <RowDefinition />
+                                                                        </Grid.RowDefinitions>
+
+                                                                        <Rectangle Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                                                        <GridViewRowPresenter Grid.RowSpan="2"   
+                                                                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"   
+                                                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                                    </Grid>
+                                                                </Border>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="Background" Value="{StaticResource ListItemHoverFill}" />
+                                                                    <Setter Property="BorderBrush" Value="#FF555555" />
+                                                                    <Setter TargetName="UpperHighlight" Property="Visibility" Value="Visible" />
+                                                                </Trigger>
+                                                                <Trigger Property="IsEnabled" Value="False">
+                                                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+
+                                        -->
+                                <!-- List Checkboxes -->
+                                <!--
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn>
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <CheckBox Tag="{Binding ItemCore}" 
+                                                                      IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn>
+                                                    <GridViewColumn/>
+                                                </GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+
+                                </ComboBox>-->
+
+
+                                <!-- Channels -->
+                                <Label Content="Channels" HorizontalAlignment="Left" Margin="10,38,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboChannels" HorizontalAlignment="Left" Margin="93,38,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>auto-safe</System:String>
+                                    <System:String>auto</System:String>
+                                    <System:String>stereo</System:String>
+                                    <System:String>5.1</System:String>
+                                    <System:String>7.1</System:String>
+                                </ComboBox>
+
+                                <!-- Volume -->
+                                <Label Content="Volume" HorizontalAlignment="Left" Margin="10,65,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboVolume" HorizontalAlignment="Left" Margin="93,65,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>100</System:String>
+                                    <System:String>90</System:String>
+                                    <System:String>80</System:String>
+                                    <System:String>70</System:String>
+                                    <System:String>60</System:String>
+                                    <System:String>50</System:String>
+                                    <System:String>40</System:String>
+                                    <System:String>30</System:String>
+                                    <System:String>20</System:String>
+                                    <System:String>10</System:String>
+                                </ComboBox>
+
+                                <!-- Soft Volume -->
+                                <Label Content="Soft Volume" HorizontalAlignment="Left" Margin="10,92,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSoftVolume" HorizontalAlignment="Left" Margin="93,92,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Normalize -->
+                                <Label Content="Normalize" HorizontalAlignment="Left" Margin="10,119,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboNormalize" HorizontalAlignment="Left" Margin="93,119,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Scale Tempo -->
+                                <Label Content="Scale Tempo" HorizontalAlignment="Left" Margin="10,146,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboScaleTempo" HorizontalAlignment="Left" Margin="93,146,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Load Audio Files -->
+                                <Label Content="Load Files" HorizontalAlignment="Left" Margin="10,173,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboAudioLoadFiles" HorizontalAlignment="Left" Margin="93,173,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>no</System:String>
+                                    <System:String>exact</System:String>
+                                    <System:String>fuzzy</System:String>
+                                    <System:String>all</System:String>
+                                </ComboBox>
+
+                                <!-- Audio Languages -->
+                                <Label Content="Languages" HorizontalAlignment="Left" Margin="10,205,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+
+                                <ListView x:Name="listViewAudioLanguages" 
+                                          HorizontalAlignment="Left" 
+                                          Height="103" 
+                                          Margin="10,229,0,0"
+                                          VerticalAlignment="Top"
+                                          Width="155"
+                                          BorderThickness="0"
+                                          ItemsSource="{Binding AudioLanguageItems}"
+                                          IsSynchronizedWithCurrentItem="True"
+                                          SelectionChanged="listViewAudioLanguages_SelectionChanged">
+
+                                    <ListView.Resources>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </Style>
+                                    </ListView.Resources>
+
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                        <Border CornerRadius="2" SnapsToDevicePixels="True"  
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"   
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"   
+                                                                    Background="{TemplateBinding Background}">
+
+                                                            <Border Name="InnerBorder" CornerRadius="1" BorderThickness="1">
+                                                                <Grid>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition MaxHeight="11" />
+                                                                        <RowDefinition />
+                                                                    </Grid.RowDefinitions>
+
+                                                                    <Rectangle Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                                                    <GridViewRowPresenter Grid.RowSpan="2"   
+                                                                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"   
+                                                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                                </Grid>
+                                                            </Border>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="#FFE6E6E6" />
+                                                                <Setter TargetName="UpperHighlight" Property="Visibility" Value="Hidden" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <!-- List Checkboxes -->
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Tag="{Binding ItemCore}" 
+                                                                  IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn>
+                                                <GridViewColumn/>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+                                <!-- Item Up -->
+                                <Button x:Name="buttonAudioLanguageUp" VerticalAlignment="Top" Height="22" Cursor="Hand" Click="buttonAudioLanguageUp_Click" Margin="0,229,14,0" HorizontalAlignment="Right" Width="22">
+                                    <TextBlock Text="^" Margin="0,0,0,0"/>
+                                </Button>
+                                <!-- Item Down -->
+                                <Button x:Name="buttonAudioLanguageDown" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageDown_Click" Margin="0,256,14,0">
+                                    <TextBlock Text="v" Margin="0,0,0,0"/>
+                                </Button>
+                                <!-- Select All -->
+                                <Button x:Name="buttonAudioLanguageSelectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageSelectAll_Click" Margin="0,283,14,0">
+                                    <TextBlock Text="+" Margin="0,0,0,0"/>
+                                </Button>
+                                <!-- Deselect All -->
+                                <Button x:Name="buttonAudioLanguageDeselectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageDeselectAll_Click" Margin="0,310,14,0">
+                                    <TextBlock Text="-" Margin="0,0,0,0"/>
+                                </Button>
+
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+
+                <!-- Subtitle Tab -->
+                <TabItem Header="Subtitle"  >
+                    <Grid Background="#FFE5E5E5">
+                        <ScrollViewer Margin="0,0,0,0">
+                            <Grid Margin="0,0,0,20">
+
+                                <!-- Subtitles -->
+                                <Label Content="Subtitles" HorizontalAlignment="Left" Margin="10,10,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitles" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Subtitle Languages -->
+                                <!--<Label Content="Languages" HorizontalAlignment="Left" Margin="10,37,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlesLanguages" HorizontalAlignment="Left" Margin="93,37,0,0" VerticalAlignment="Top" Width="100"
+                                          IsReadOnly="True" 
+                                          ItemsSource="{Binding}"
+                                          IsSynchronizedWithCurrentItem="True"
+                                          SelectionChanged="cboSubtitlesLanguages_SelectionChanged">
+
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox
+                                                      Content="{Binding}" 
+                                                      IsChecked="{Binding IsSelected}" 
+                                                      Checked="cboSubtitleLanguagesCheckBox_Checked"
+                                                      Unchecked="cboSubtitleLanguagesCheckBox_Unchecked"
+                                                      />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+
+                                    <System:String>Spanish</System:String>
+                                    <System:String>English</System:String>
+                                    <System:String>Japanese</System:String>
+                                </ComboBox>-->
+
+
+                                <!-- Subtitles Load Files -->
+                                <Label Content="Load Files" HorizontalAlignment="Left" Margin="10,38,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlesLoadFiles" HorizontalAlignment="Left" Margin="93,38,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>no</System:String>
+                                    <System:String>exact</System:String>
+                                    <System:String>fuzzy</System:String>
+                                    <System:String>all</System:String>
+                                </ComboBox>
+
+                                <!-- Position -->
+                                <Label Content="Position" HorizontalAlignment="Left" Margin="10,65,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlePosition" HorizontalAlignment="Left" Margin="93,65,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>100</System:String>
+                                    <System:String>95</System:String>
+                                    <System:String>90</System:String>
+                                    <System:String>85</System:String>
+                                    <System:String>80</System:String>
+                                    <System:String>75</System:String>
+                                </ComboBox>
+
+                                <!-- Blend -->
+                                <Label Content="Blend" HorizontalAlignment="Left" Margin="10,93,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlesBlend" HorizontalAlignment="Left" Margin="93,93,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>video</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Font -->
+                                <Label Content="Font" HorizontalAlignment="Left" Margin="10,120,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlesFont"
+                                          ItemsSource="{Binding FontItems}" 
+                                          SelectedItem="{Binding FontSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                          HorizontalAlignment="Left"
+                                          Margin="93,120,0,0"
+                                          VerticalAlignment="Top"
+                                          Width="100">
+                                </ComboBox>
+
+                                <!-- Font Size -->
+                                <Label Content="Font Size" HorizontalAlignment="Left" Margin="10,147,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlesFontSize" HorizontalAlignment="Left" Margin="93,147,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>96</System:String>
+                                    <System:String>88</System:String>
+                                    <System:String>80</System:String>
+                                    <System:String>72</System:String>
+                                    <System:String>66</System:String>
+                                    <System:String>60</System:String>
+                                    <System:String>54</System:String>
+                                    <System:String>48</System:String>
+                                    <System:String>44</System:String>
+                                    <System:String>40</System:String>
+                                    <System:String>36</System:String>
+                                    <System:String>32</System:String>
+                                    <System:String>28</System:String>
+                                    <System:String>26</System:String>
+                                </ComboBox>
+
+                                <!-- Font Color -->
+                                <Label Content="Font Color" HorizontalAlignment="Left" Margin="10,174,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlesFontColor" HorizontalAlignment="Left" Margin="93,174,0,0" VerticalAlignment="Top" Width="100">
+                                    <!-- White -->
+                                    <ComboBoxItem Background="White" Foreground="Black">
+                                        White
+                                    </ComboBoxItem>
+                                    <!-- Gray -->
+                                    <ComboBoxItem Background="Gray" Foreground="White">
+                                        Gray
+                                    </ComboBoxItem>
+                                    <!-- Dark Gray -->
+                                    <ComboBoxItem Background="#FF262626" Foreground="White">
+                                        Dark Gray
+                                    </ComboBoxItem>
+                                    <!-- Black -->
+                                    <ComboBoxItem Background="Black" Foreground="White">
+                                        Black
+                                    </ComboBoxItem>
+                                    <!-- Yellow -->
+                                    <ComboBoxItem Background="#FFfdfd02">
+                                        Yellow
+                                    </ComboBoxItem>
+                                    <!-- Blue -->
+                                    <ComboBoxItem Background="#FF9aafe4">
+                                        Blue
+                                    </ComboBoxItem>
+                                    <!-- Pink -->
+                                    <ComboBoxItem Background="#FFffb0b0">
+                                        Pink
+                                    </ComboBoxItem>
+                                </ComboBox>
+
+                                <!-- Border Size -->
+                                <Label Content="Border Size" HorizontalAlignment="Left" Margin="10,201,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlesBorderSize" HorizontalAlignment="Left" Margin="93,201,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>0</System:String>
+                                    <System:String>1</System:String>
+                                    <System:String>2</System:String>
+                                    <System:String>3</System:String>
+                                    <System:String>4</System:String>
+                                    <System:String>5</System:String>
+                                    <System:String>6</System:String>
+                                    <System:String>7</System:String>
+                                    <System:String>8</System:String>
+                                </ComboBox>
+
+                                <!-- Border Color -->
+                                <Label Content="Border Color" HorizontalAlignment="Left" Margin="10,228,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSubtitlesBorderColor" HorizontalAlignment="Left" Margin="93,228,0,0" VerticalAlignment="Top" Width="100">
+                                    <!-- White -->
+                                    <ComboBoxItem Background="White" Foreground="Black">
+                                        White
+                                    </ComboBoxItem>
+                                    <!-- Gray -->
+                                    <ComboBoxItem Background="Gray" Foreground="White">
+                                        Gray
+                                    </ComboBoxItem>
+                                    <!-- Dark Gray -->
+                                    <ComboBoxItem Background="#FF262626" Foreground="White">
+                                        Dark Gray
+                                    </ComboBoxItem>
+                                    <!-- Black -->
+                                    <ComboBoxItem Background="Black" Foreground="White">
+                                        Black
+                                    </ComboBoxItem>
+                                    <!-- Yellow -->
+                                    <ComboBoxItem Background="#FFfdfd02">
+                                        Yellow
+                                    </ComboBoxItem>
+                                    <!-- Blue -->
+                                    <ComboBoxItem Background="#FF9aafe4">
+                                        Blue
+                                    </ComboBoxItem>
+                                    <!-- Pink -->
+                                    <ComboBoxItem Background="#FFffb0b0">
+                                        Pink
+                                    </ComboBoxItem>
+                                </ComboBox>
+
+                                <!-- Subtitle Languages -->
+                                <Label Content="Languages" HorizontalAlignment="Left" Margin="10,261,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+
+                                <ListView x:Name="listViewSubtitleLanguages" 
+                                          HorizontalAlignment="Left" 
+                                          Height="103" 
+                                          Margin="10,284,0,0"
+                                          VerticalAlignment="Top"
+                                          Width="155"
+                                          BorderThickness="0"
+                                          ItemsSource="{Binding SubtitleLanguageItems}"
+                                          IsSynchronizedWithCurrentItem="True"
+                                          SelectionChanged="listViewSubtitleLanguages_SelectionChanged">
+
+                                    <ListView.Resources>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </Style>
+                                    </ListView.Resources>
+
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                        <Border CornerRadius="2" SnapsToDevicePixels="True"  
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"   
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"   
+                                                                    Background="{TemplateBinding Background}">
+
+                                                            <Border Name="InnerBorder" CornerRadius="1" BorderThickness="1">
+                                                                <Grid>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition MaxHeight="11" />
+                                                                        <RowDefinition />
+                                                                    </Grid.RowDefinitions>
+
+                                                                    <Rectangle Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                                                    <GridViewRowPresenter Grid.RowSpan="2"   
+                                                                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"   
+                                                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                                </Grid>
+                                                            </Border>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="#FFE6E6E6" />
+                                                                <Setter TargetName="UpperHighlight" Property="Visibility" Value="Hidden" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <!-- List Checkboxes -->
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Tag="{Binding ItemCore}" 
+                                                                  IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn>
+                                                <GridViewColumn/>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+                                <!-- List Up -->
+                                <Button x:Name="buttonSubtitleLanguageUp" VerticalAlignment="Top" Height="22" Cursor="Hand" Click="buttonSubtitleLanguageUp_Click" Margin="0,284,14,0" HorizontalAlignment="Right" Width="22">
+                                    <TextBlock Text="^" Margin="0,0,0,0"/>
+                                </Button>
+                                <!-- List Down -->
+                                <Button x:Name="buttonSubtitleLanguageDown" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonSubtitleLanguageDown_Click" Margin="0,311,14,0">
+                                    <TextBlock Text="v" Margin="0,0,0,0"/>
+                                </Button>
+                                <!-- Select All -->
+                                <Button x:Name="buttonSubtitleLanguageSelectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonSubtitleLanguageSelectAll_Click" Margin="0,338,14,0">
+                                    <TextBlock Text="+" Margin="0,0,0,0"/>
+                                </Button>
+                                <!-- Deselect All -->
+                                <Button x:Name="buttonSubtitleLanguageDeselectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonSubtitleLanguageDeselectAll_Click" Margin="0,365,14,0">
+                                    <TextBlock Text="-" Margin="0,0,0,0"/>
+                                </Button>
+
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+
+                <!-- General -->
+                <TabItem Header="General" >
+                    <Grid Background="#FFE5E5E5">
+                        <ScrollViewer Margin="0,0,0,0">
+                            <Grid Margin="0,0,0,30">
+
+                                <!-- Priority -->
+                                <Label Content="Priority" HorizontalAlignment="Left" Margin="10,10,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboPriority" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>high</System:String>
+                                    <System:String>abovenormal</System:String>
+                                    <System:String>normal</System:String>
+                                    <System:String>belownormal</System:String>
+                                    <System:String>idle</System:String>
+                                </ComboBox>
+
+                                <!-- Keep Open -->
+                                <Label Content="Keep Open" HorizontalAlignment="Left" Margin="10,37,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboKeepOpen" HorizontalAlignment="Left" Margin="93,37,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- On Top -->
+                                <Label Content="On Top" HorizontalAlignment="Left" Margin="10,64,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOnTop" HorizontalAlignment="Left" Margin="93,64,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- OSC -->
+                                <Label Content="OSC" HorizontalAlignment="Left" Margin="10,91,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSC" HorizontalAlignment="Left" Margin="93,91,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Screenshot -->
+                                <Label Content="Screenshot" HorizontalAlignment="Left" Margin="10,118,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboScreenshot" HorizontalAlignment="Left" Margin="93,118,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>png</System:String>
+                                    <System:String>jpg</System:String>
+                                    <System:String>jpeg</System:String>
+                                </ComboBox>
+
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+
+                <!-- Stream -->
+                <TabItem Header="Stream">
+                    <Grid Background="#FFE5E5E5">
+                        <ScrollViewer Margin="0,0,0,0">
+                            <Grid Margin="0,0,0,30">
+
+                                <!-- Cache -->
+                                <Label Content="Cache" HorizontalAlignment="Left" Margin="10,10,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboCache" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>auto</System:String>
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Cache Default -->
+                                <Label Content="Default" HorizontalAlignment="Left" Margin="10,37,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbxCacheDefault" HorizontalAlignment="Left" Margin="93,37,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                </TextBox>
+
+                                <!-- Cache Initial -->
+                                <Label Content="Initial" HorizontalAlignment="Left" Margin="10,64,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbxCacheInitial" HorizontalAlignment="Left" Margin="93,64,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                </TextBox>
+
+                                <!-- Cache Seek Min -->
+                                <Label Content="Seek Min" HorizontalAlignment="Left" Margin="10,91,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbxCacheSeekMin" HorizontalAlignment="Left" Margin="93,91,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                </TextBox>
+
+                                <!-- Cache Backbuffer -->
+                                <Label Content="Backbuffer" HorizontalAlignment="Left" Margin="10,118,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbxCacheBackbuffer" HorizontalAlignment="Left" Margin="93,118,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                </TextBox>
+
+                                <!-- Cache Seconds -->
+                                <Label Content="Seconds" HorizontalAlignment="Left" Margin="10,145,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbxCacheSeconds" HorizontalAlignment="Left" Margin="93,145,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                </TextBox>
+
+                                <!-- Cache File -->
+                                <Label Content="File" HorizontalAlignment="Left" Margin="10,173,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboCacheFile" HorizontalAlignment="Left" Margin="93,173,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>TMP</System:String>
+                                    <System:String>path</System:String>
+                                </ComboBox>
+
+                                <!-- Cache File Size -->
+                                <Label Content="File Size" HorizontalAlignment="Left" Margin="10,200,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbxCacheFileSize" HorizontalAlignment="Left" Margin="93,200,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                </TextBox>
+
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+
+                <!-- OSD -->
+                <TabItem Header="OSD">
+                    <Grid Background="#FFE5E5E5">
+                        <ScrollViewer Margin="0,0,0,0">
+                            <Grid Margin="0,0,0,30">
+
+                                <!-- OSD -->
+                                <Label Content="OSD" HorizontalAlignment="Left" Margin="10,10,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSD" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- OSD Duration -->
+                                <Label Content="Duration" HorizontalAlignment="Left" Margin="10,37,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbxOSDDuration" HorizontalAlignment="Left" Margin="93,37,0,0" VerticalAlignment="Top" Width="100" Height="22"/>
+
+                                <!-- OSD Level -->
+                                <Label Content="Level" HorizontalAlignment="Left" Margin="10,64,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDLevel" HorizontalAlignment="Left" Margin="93,64,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                    <System:String>0</System:String>
+                                    <System:String>1</System:String>
+                                    <System:String>2</System:String>
+                                    <System:String>3</System:String>
+                                </ComboBox>
+
+                                <!-- OSD Scale -->
+                                <Label Content="Scale" HorizontalAlignment="Left" Margin="10,91,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbxOSDScale" HorizontalAlignment="Left" Margin="93,91,0,0" VerticalAlignment="Top" Width="100" Height="22"/>
+
+                                <!-- OSD Font -->
+                                <Label Content="Font" HorizontalAlignment="Left" Margin="10,118,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFont" 
+                                          ItemsSource="{Binding FontItems}" 
+                                          SelectedItem="{Binding FontSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                          HorizontalAlignment="Left" 
+                                          Margin="93,118,0,0"
+                                          VerticalAlignment="Top" 
+                                          Width="100"/>
+
+                                <!-- OSD Font Size -->
+                                <Label Content="Font Size" HorizontalAlignment="Left" Margin="10,145,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFontSize" HorizontalAlignment="Left" Margin="93,145,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                    <System:String>96</System:String>
+                                    <System:String>88</System:String>
+                                    <System:String>80</System:String>
+                                    <System:String>72</System:String>
+                                    <System:String>66</System:String>
+                                    <System:String>60</System:String>
+                                    <System:String>54</System:String>
+                                    <System:String>48</System:String>
+                                    <System:String>44</System:String>
+                                    <System:String>40</System:String>
+                                    <System:String>36</System:String>
+                                    <System:String>32</System:String>
+                                    <System:String>28</System:String>
+                                    <System:String>26</System:String>
+                                </ComboBox>
+
+                                <!-- OSD Font Color -->
+                                <Label Content="Font Color" HorizontalAlignment="Left" Margin="10,173,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFontColor" HorizontalAlignment="Left" Margin="93,173,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                    <!-- White -->
+                                    <ComboBoxItem Background="White" Foreground="Black">
+                                        White
+                                    </ComboBoxItem>
+                                    <!-- Gray -->
+                                    <ComboBoxItem Background="Gray" Foreground="White">
+                                        Gray
+                                    </ComboBoxItem>
+                                    <!-- Dark Gray -->
+                                    <ComboBoxItem Background="#FF262626" Foreground="White">
+                                        Dark Gray
+                                    </ComboBoxItem>
+                                    <!-- Black -->
+                                    <ComboBoxItem Background="Black" Foreground="White">
+                                        Black
+                                    </ComboBoxItem>
+                                    <!-- Yellow -->
+                                    <ComboBoxItem Background="#FFfdfd02">
+                                        Yellow
+                                    </ComboBoxItem>
+                                    <!-- Blue -->
+                                    <ComboBoxItem Background="#FF9aafe4">
+                                        Blue
+                                    </ComboBoxItem>
+                                    <!-- Pink -->
+                                    <ComboBoxItem Background="#FFffb0b0">
+                                        Pink
+                                    </ComboBoxItem>
+                                </ComboBox>
+
+                                <!-- OSD Border Size -->
+                                <Label Content="Border Size" HorizontalAlignment="Left" Margin="10,201,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFontBorderSize" HorizontalAlignment="Left" Margin="93,201,0,0" VerticalAlignment="Top" Width="100">
+                                    <System:String>0</System:String>
+                                    <System:String>1</System:String>
+                                    <System:String>2</System:String>
+                                    <System:String>3</System:String>
+                                    <System:String>4</System:String>
+                                    <System:String>5</System:String>
+                                    <System:String>6</System:String>
+                                    <System:String>7</System:String>
+                                    <System:String>8</System:String>
+                                </ComboBox>
+
+                                <!-- OSD Border Color -->
+                                <Label Content="Border Color" HorizontalAlignment="Left" Margin="10,228,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFontBorderColor" HorizontalAlignment="Left" Margin="93,228,0,0" VerticalAlignment="Top" Width="100">
+                                    <!-- White -->
+                                    <ComboBoxItem Background="White" Foreground="Black">
+                                        White
+                                    </ComboBoxItem>
+                                    <!-- Gray -->
+                                    <ComboBoxItem Background="Gray" Foreground="White">
+                                        Gray
+                                    </ComboBoxItem>
+                                    <!-- Dark Gray -->
+                                    <ComboBoxItem Background="#FF262626" Foreground="White">
+                                        Dark Gray
+                                    </ComboBoxItem>
+                                    <!-- Black -->
+                                    <ComboBoxItem Background="Black" Foreground="White">
+                                        Black
+                                    </ComboBoxItem>
+                                    <!-- Yellow -->
+                                    <ComboBoxItem Background="#FFfdfd02">
+                                        Yellow
+                                    </ComboBoxItem>
+                                    <!-- Blue -->
+                                    <ComboBoxItem Background="#FF9aafe4">
+                                        Blue
+                                    </ComboBoxItem>
+                                    <!-- Pink -->
+                                    <ComboBoxItem Background="#FFffb0b0">
+                                        Pink
+                                    </ComboBoxItem>
+                                </ComboBox>
+
+                                <!-- Fractions -->
+                                <Label Content="Fractions" HorizontalAlignment="Left" Margin="10,255,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFractions" HorizontalAlignment="Left" Margin="93,255,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+
+
+            <!-- Config RichTextBox -->
+            <RichTextBox x:Name="rtbConfig" Margin="10,10,258,59" Padding="10" FontSize="14" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Auto"/>
+
+
+
+            <!-- Info -->
+            <Button x:Name="buttonInfo" HorizontalAlignment="Left" Margin="10,0,0,19" VerticalAlignment="Bottom" Width="22" Height="22" Cursor="Hand" Click="buttonInfo_Click">
+                <TextBlock Text="i" Margin="0,-2,0,0"/>
+            </Button>
+
+            <!-- Website -->
+            <Button x:Name="buttonWebsite" HorizontalAlignment="Left" Margin="38,0,0,19" VerticalAlignment="Bottom" Width="22" Height="22" Cursor="Hand" Click="buttonWebsite_Click">
+                <TextBlock Text="w" Margin="0,-2,0,0"/>
+            </Button>
+
+            <!-- Update -->
+            <Button x:Name="buttonUpdate" HorizontalAlignment="Left" Margin="66,0,0,19" VerticalAlignment="Bottom" Width="22" Height="22" Cursor="Hand" Click="buttonUpdate_Click">
+                <TextBlock Text="u" Margin="0,-2,0,0"/>
+            </Button>
+
+            <!-- Config Folder -->
+            <Button x:Name="buttonConfigDir" HorizontalAlignment="Left" Margin="94,0,0,19" VerticalAlignment="Bottom" Width="22" Height="22" Cursor="Hand" Click="buttonConfigDir_Click">
+                <TextBlock Text="d" Margin="0,-2,0,0"/>
+            </Button>
+
+
+
+            <!-- Save -->
+            <Button x:Name="buttonSave" Margin="230,0,0,19" Cursor="Hand" MaxWidth="75" MaxHeight="22" MinWidth="75" MinHeight="22" Height="22" VerticalAlignment="Bottom" Width="72" Click="buttonSave_Click" HorizontalAlignment="Left">
+                <TextBlock Text="Save" Margin="0,-2,0,0"/>
+            </Button>
+            <!-- Copy -->
+            <Button x:Name="buttonCopy" Margin="142,0,0,19" Click="buttonCopy_Click" Cursor="Hand" MaxWidth="75" MaxHeight="22" MinWidth="75" MinHeight="22" Height="22" VerticalAlignment="Bottom" Width="72" HorizontalAlignment="Left">
+                <TextBlock Text="Copy" Margin="0,-2,0,0"/>
+            </Button>
+
+
+
+            <!-- Presets -->
+            <Label Content="Preset" Margin="0,0,211,17" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="43"/>
+
+            <ComboBox x:Name="cboPreset" Margin="0,0,133,19" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" SelectionChanged="cboPreset_SelectionChanged">
+                <System:String>Default</System:String>
+                <System:String>Ultra</System:String>
+                <System:String>High</System:String>
+                <System:String>Medium</System:String>
+                <System:String>Low</System:String>
+
+            </ComboBox>
+
+            <!-- Generate -->
+            <Button x:Name="buttonGenerate" Content="Generate" Cursor="Hand" Margin="0,0,18,19" Click="buttonGenerate_Click" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+
+
+        </Grid>
+
+    </Grid>
+</Window>
