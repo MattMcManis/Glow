@@ -19,10 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Glow
@@ -43,16 +40,22 @@ namespace Glow
             // Convert ComboBox Selected Color to Hex
             if (selected == "White")
                 color = "#FFFFFF";
+
             else if (selected == "Gray")
                 color = "#A9A9A9";
+
             else if (selected == "Dark Gray")
                 color = "#262626";
+
             else if (selected == "Black")
                 color = "#000000";
+
             else if (selected == "Yellow")
                 color = "#FDFD02";
+
             else if (selected == "Blue")
                 color = "#9AAFE4";
+
             else if (selected == "Pink")
                 color = "#FFB0B0";
 

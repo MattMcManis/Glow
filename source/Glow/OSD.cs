@@ -21,9 +21,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Glow
@@ -31,7 +28,7 @@ namespace Glow
     public partial class OSD
     {
         private static ComboBoxItem selectedItem;
-        //private static string selected;
+        private static string selected;
 
         /// <summary>
         ///    OSD Config
@@ -108,7 +105,14 @@ namespace Glow
             // Shadow Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontShadowColor.SelectedValue);
-            string shadowcolor = "osd-shadow-color=" + ColorPicker.HexColor(selectedItem);
+            selected = (string)(selectedItem.Content);
+
+            string shadowcolor = string.Empty;
+
+            if (selected != "None")
+            {
+                shadowcolor = "osd-shadow-color=" + ColorPicker.HexColor(selectedItem);
+            }
 
             // -------------------------
             // Shadow Offset

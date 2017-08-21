@@ -29,7 +29,7 @@ namespace Glow
     {
         // Selected Item
         private static ComboBoxItem selectedItem;
-        //private static string selected;
+        private static string selected;
 
 
         /// <summary>
@@ -114,6 +114,28 @@ namespace Glow
             string bordercolor = "sub-text-border-color=" + ColorPicker.HexColor(selectedItem);
 
             // -------------------------
+            // Shadow Color
+            // -------------------------
+            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue);
+            selected = (string)(selectedItem.Content);
+
+            string shadowcolor = string.Empty;
+
+            if (selected != "None")
+            {
+                shadowcolor = "sub-shadow-color=" + ColorPicker.HexColor(selectedItem);
+            }
+                
+
+            // -------------------------
+            // Shadow Offset
+            // -------------------------
+            string shadowoffset = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowOffset.Text))
+                shadowoffset = "sub-shadow-offset=" + mainwindow.tbxSubtitlesShadowOffset.Text.ToString();
+
+            // -------------------------
             // Extra
             // -------------------------
             string extra = "sub-fix-timing=no" 
@@ -151,6 +173,8 @@ namespace Glow
                 fontcolor,
                 bordersize,
                 bordercolor,
+                shadowcolor,
+                shadowoffset,
                 extra,
                 ass,
                 embeddedfonts,
