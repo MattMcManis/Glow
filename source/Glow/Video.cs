@@ -104,16 +104,20 @@ namespace Glow
             // -------------------------
             string deband = string.Empty;
 
-            if ((string)mainwindow.cboDebandGrain.SelectedItem == "yes")
+            if ((string)mainwindow.cboDeband.SelectedItem == "yes")
                 deband = "deband"; // special rule
 
             // -------------------------
             // Deband Grain
             // -------------------------
+            // only use if deband is on
+            // and deband grain is not empty
+
             string debandgrain = string.Empty;
 
-            if ((string)mainwindow.cboDebandGrain.SelectedItem != "no")
-                debandgrain = "dither-grain=" + mainwindow.cboDebandGrain.SelectedItem.ToString();
+            if ((string)mainwindow.cboDeband.SelectedItem == "yes"
+                && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
+                debandgrain = "deband-grain=" + mainwindow.tbxDebandGrain.Text.ToString();
 
             // -------------------------
             // Deinterlace
@@ -123,9 +127,11 @@ namespace Glow
             // -------------------------
             // Video Sync
             // -------------------------
+            // only if video sync is on
+
             string videosync = string.Empty;
 
-            if ((string)mainwindow.cboDebandGrain.SelectedItem != "off")
+            if ((string)mainwindow.cboVideoSync.SelectedItem != "off")
                 videosync = "video-sync=" + mainwindow.cboVideoSync.SelectedItem.ToString();
 
             // -------------------------

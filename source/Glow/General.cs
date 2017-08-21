@@ -42,6 +42,14 @@ namespace Glow
             string priority = "priority=" + mainwindow.cboPriority.SelectedItem.ToString();
 
             // -------------------------
+            // Save Position on Quit
+            // -------------------------
+            string savepositionquit = string.Empty;
+
+            if ((string)mainwindow.cboSavePositionQuit.SelectedItem == "yes")
+                savepositionquit = "save-position-on-quit";
+
+            // -------------------------
             // Keep Open
             // -------------------------
             string keepopen = "keep-open=" + mainwindow.cboKeepOpen.SelectedItem.ToString();
@@ -67,6 +75,11 @@ namespace Glow
             string geometry = "geometry=50%:50%";
 
             // -------------------------
+            // Window Title
+            // -------------------------
+            string windowtitle = "title=\"${ filename}\"";
+
+            // -------------------------
             // Screenshot
             // -------------------------
             string screenshot = "screenshot-format=" + mainwindow.cboScreenshot.SelectedItem.ToString();
@@ -80,10 +93,12 @@ namespace Glow
             {
                 title,
                 priority,
+                savepositionquit,
                 keepopen,
                 ontop,
                 autofit,
                 geometry,
+                windowtitle,
                 screenshot,
                 screenshot_template,
                 screenshot_tag_colorspace,

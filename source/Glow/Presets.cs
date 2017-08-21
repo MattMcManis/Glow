@@ -30,33 +30,39 @@ namespace Glow
             // -------------------------
             if ((string)mainwindow.cboPreset.SelectedItem == "Default")
             {
+                // -------------------------
                 // General
+                // -------------------------
                 mainwindow.cboPriority.SelectedItem = "normal";
+                mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
                 mainwindow.cboOSC.SelectedItem = "yes";
                 mainwindow.cboScreenshot.SelectedItem = "png";
 
+                // -------------------------
                 // Video
+                // -------------------------
                 mainwindow.cboVideoDriver.SelectedIndex = 0;
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 mainwindow.cboColorSpace.SelectedIndex = 0;
                 mainwindow.cboColorRange.SelectedIndex = 0;
-                mainwindow.cboGamma.SelectedIndex = 0;
+                mainwindow.cboGamma.SelectedItem = "auto";
                 mainwindow.cboScale.SelectedItem = "bicubic";
                 mainwindow.cboChromaScale.SelectedItem = "bicubic";
                 mainwindow.cboDownscale.SelectedItem = "bicubic";
                 mainwindow.cboAntiring.SelectedItem = "no";
                 mainwindow.cboDither.SelectedItem = "no";
                 mainwindow.cboDeband.SelectedItem = "no";
-                mainwindow.cboDebandGrain.SelectedItem = "off";
+                mainwindow.tbxDebandGrain.Text = "";
                 mainwindow.cboDeinterlace.SelectedItem = "auto";
                 mainwindow.cboVideoSync.SelectedItem = "off";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
 
+                // -------------------------
                 // Audio
+                // -------------------------
                 mainwindow.cboAudioDriver.SelectedItem = "wasapi";
-                //mainwindow.cboAudioLanguages.SelectedIndex = 0;
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.cboVolume.SelectedItem = "100";
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
@@ -64,19 +70,29 @@ namespace Glow
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
 
+                // -------------------------
                 // Subtitles
+                // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
-                //mainwindow.cboSubtitlesLanguages.SelectedIndex = 0;
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
                 mainwindow.cboSubtitlePosition.SelectedItem = "95";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
-                mainwindow.cboSubtitlesFont.SelectedItem = "Arial";
+                // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0;
+                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2;
+                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                // Shadow
+                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 2; //gray
+                mainwindow.tbxSubtitlesShadowOffset.Text = "1.25";
 
+                // -------------------------
                 // Stream
+                // -------------------------
+                mainwindow.cboDemuxerThread.SelectedItem = "no";
+                mainwindow.tbxDemuxerBuffersize.Text = "32768";
+                mainwindow.tbxDemuxerReadahead.Text = "5.0";
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
                 mainwindow.tbxCacheInitial.Text = "1024";
@@ -86,16 +102,23 @@ namespace Glow
                 mainwindow.cboCacheFile.SelectedItem = "TMP";
                 mainwindow.tbxCacheFileSize.Text = "1048576";
 
+                // -------------------------
                 // OSD
+                // -------------------------
                 mainwindow.cboOSD.SelectedItem = "yes";
+                mainwindow.cboOSDFractions.SelectedItem = "yes";
                 mainwindow.tbxOSDDuration.Text = "1500";
                 mainwindow.cboOSDLevel.SelectedItem = "1";
                 mainwindow.tbxOSDScale.Text = "0.5";
+                // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "44";
-                mainwindow.cboOSDFontColor.SelectedIndex = 0;
+                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                // Border
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
-                mainwindow.cboOSDFontBorderColor.SelectedIndex = 2;
-                mainwindow.cboOSDFractions.SelectedItem = "yes";
+                mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
+                // Shadow
+                mainwindow.cboOSDFontShadowColor.SelectedIndex = 2; //gray
+                mainwindow.tbxOSDFontShadowOffset.Text = "1.25";
             }
 
             // -------------------------
@@ -103,33 +126,39 @@ namespace Glow
             // -------------------------
             else if ((string)mainwindow.cboPreset.SelectedItem == "Ultra")
             {
+                // -------------------------
                 // General
+                // -------------------------
                 mainwindow.cboPriority.SelectedItem = "high";
+                mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
                 mainwindow.cboOSC.SelectedItem = "yes";
                 mainwindow.cboScreenshot.SelectedItem = "png";
 
+                // -------------------------
                 // Video
+                // -------------------------
                 mainwindow.cboVideoDriver.SelectedItem = "opengl-hq";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 mainwindow.cboColorSpace.SelectedIndex = 0;
                 mainwindow.cboColorRange.SelectedIndex = 0;
-                mainwindow.cboGamma.SelectedIndex = 0;
+                mainwindow.cboGamma.SelectedItem = "auto";
                 mainwindow.cboScale.SelectedItem = "ewa_lanczossharp";
                 mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
                 mainwindow.cboDownscale.SelectedItem = "mitchell";
                 mainwindow.cboAntiring.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "8";
                 mainwindow.cboDeband.SelectedItem = "yes";
-                mainwindow.cboDebandGrain.SelectedItem = "off";
+                mainwindow.tbxDebandGrain.Text = "80";
                 mainwindow.cboDeinterlace.SelectedItem = "auto";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
 
+                // -------------------------
                 // Audio
+                // -------------------------
                 mainwindow.cboAudioDriver.SelectedItem = "wasapi";
-                //mainwindow.cboAudioLanguages.SelectedIndex = 0;
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.cboVolume.SelectedItem = "100";
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
@@ -137,19 +166,29 @@ namespace Glow
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
 
+                // -------------------------
                 // Subtitles
+                // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
-                //mainwindow.cboSubtitlesLanguages.SelectedIndex = 0;
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
                 mainwindow.cboSubtitlePosition.SelectedItem = "95";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
-                mainwindow.cboSubtitlesFont.SelectedItem = "Arial";
+                // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0;
+                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2;
+                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                // Shadow
+                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 2; //gray
+                mainwindow.tbxSubtitlesShadowOffset.Text = "1.25";
 
+                // -------------------------
                 // Stream
+                // -------------------------
+                mainwindow.cboDemuxerThread.SelectedItem = "no";
+                mainwindow.tbxDemuxerBuffersize.Text = "32768";
+                mainwindow.tbxDemuxerReadahead.Text = "5.0";
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
                 mainwindow.tbxCacheInitial.Text = "1024";
@@ -159,16 +198,23 @@ namespace Glow
                 mainwindow.cboCacheFile.SelectedItem = "TMP";
                 mainwindow.tbxCacheFileSize.Text = "1048576";
 
+                // -------------------------
                 // OSD
+                // -------------------------
                 mainwindow.cboOSD.SelectedItem = "yes";
+                mainwindow.cboOSDFractions.SelectedItem = "yes";
                 mainwindow.tbxOSDDuration.Text = "1500";
                 mainwindow.cboOSDLevel.SelectedItem = "1";
                 mainwindow.tbxOSDScale.Text = "0.5";
+                // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "44";
-                mainwindow.cboOSDFontColor.SelectedIndex = 0;
+                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                // Border
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
-                mainwindow.cboOSDFontBorderColor.SelectedIndex = 2;
-                mainwindow.cboOSDFractions.SelectedItem = "yes";
+                mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
+                // Shadow
+                mainwindow.cboOSDFontShadowColor.SelectedIndex = 2; //gray
+                mainwindow.tbxOSDFontShadowOffset.Text = "1.25";
             }
         }
     }

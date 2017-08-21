@@ -81,13 +81,8 @@ namespace Glow
         // -------------------------
         // Bind Audio Language Items
         // -------------------------
-        public static List<string> listAudioLang = new List<string>()
-        {
-            "English",
-            "Japanese",
-            "Spanish",
-            "French"
-        };
+        private static List<string> listAudioLang = Languages.listLanguages;
+
         public static ObservableCollection<string> _audioLangItems = new ObservableCollection<string>(listAudioLang);
         public static ObservableCollection<string> AudioLanguageItems
         {
@@ -98,13 +93,8 @@ namespace Glow
         // -------------------------
         // Bind Subtitle Language Items
         // -------------------------
-        public static List<string> listSubtitleLang = new List<string>()
-        {
-            "English",
-            "Japanese",
-            "Spanish",
-            "French"
-        };
+        private static List<string> listSubtitleLang = Languages.listLanguages;
+
         public static ObservableCollection<string> _subLangItems = new ObservableCollection<string>(listSubtitleLang);
         public static ObservableCollection<string> SubtitleLanguageItems
         {
@@ -190,19 +180,12 @@ namespace Glow
                 }
             }
 
-
-            // -------------------------
+            // --------------------------------------------------
             // Control Defaults
-            // -------------------------
+            // --------------------------------------------------
+            // Font
             cboPreset.SelectedItem = "Default";
             FontSelectedItem = "Arial";
-
-
-            // -------------------------
-            // Load Audio Languages
-            // -------------------------
-            //listViewAudioLanguages.ItemsSource = Audio.collectionAudioLangItems;
-
         }
 
 
@@ -253,20 +236,213 @@ namespace Glow
         /// </summary>
         // --------------------------------------------------------------------------------------------------------
 
-        /// <summary>
-        ///     Write Config to RichTextBox
-        /// </summary>
-        private void buttonGenerate_Click(object sender, RoutedEventArgs e)
-        {
-            // Write Config to RichTextBox
-            Paragraph p = new Paragraph();
+        // --------------------------------------------------
+        // Video Controls
+        // --------------------------------------------------
 
-            rtbConfig.Document = new FlowDocument(p);
-            rtbConfig.BeginChange();
-            p.Inlines.Add(new Run(Generate.GenerateConfig(this)));
-            rtbConfig.EndChange();
+        /// <summary>
+        ///    Deband
+        /// </summary>
+        private void cboDeband_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enabled
+            if ((string)cboDeband.SelectedItem == "yes")
+            {
+                tbxDebandGrain.IsEnabled = true;
+            }
+            // Diabled
+            else if ((string)cboDeband.SelectedItem == "no")
+            {
+                tbxDebandGrain.IsEnabled = false;
+                tbxDebandGrain.Text = "";
+            }
         }
 
+
+
+        // --------------------------------------------------
+        // Audio Controls
+        // --------------------------------------------------
+
+        /// <summary>
+        ///    Audio Languages
+        /// </summary>
+        private void listViewAudioLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //// Remove
+            //foreach (string item in e.RemovedItems)
+            //{
+            //    Audio.listAudioLanguages.Remove(item);
+            //    Audio.listAudioLanguages.TrimExcess();
+            //}
+
+            //// Add
+            //foreach (string item in e.AddedItems)
+            //{
+            //    Audio.listAudioLanguages.Add(item);
+            //}
+        }
+
+        /// <summary>
+        ///    Audio Language Up
+        /// </summary>
+        private void buttonAudioLanguageUp_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
+
+            if (selectedIndex > 0)
+            {
+                var itemToMoveUp = AudioLanguageItems[selectedIndex];
+                AudioLanguageItems.RemoveAt(selectedIndex);
+                AudioLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
+                this.listViewAudioLanguages.SelectedIndex = selectedIndex - 1;
+            }
+        }
+        /// <summary>
+        ///    Audio Language Down
+        /// </summary>
+        private void buttonAudioLanguageDown_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
+
+            if (selectedIndex + 1 < AudioLanguageItems.Count)
+            {
+                var itemToMoveDown = AudioLanguageItems[selectedIndex];
+                AudioLanguageItems.RemoveAt(selectedIndex);
+                AudioLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
+                this.listViewAudioLanguages.SelectedIndex = selectedIndex + 1;
+            }
+        }
+        /// <summary>
+        ///    Audio Select All
+        /// </summary>
+        private void buttonAudioLanguageSelectAll_Click(object sender, RoutedEventArgs e)
+        {
+            listViewAudioLanguages.SelectAll();
+        }
+        /// <summary>
+        ///    Audio Deselect All
+        /// </summary>
+        private void buttonAudioLanguageDeselectAll_Click(object sender, RoutedEventArgs e)
+        {
+            listViewAudioLanguages.SelectedIndex = -1;
+        }
+
+
+
+        // --------------------------------------------------
+        // Subtitle Controls
+        // --------------------------------------------------
+
+        /// <summary>
+        ///    Subtitle Shadow Color
+        /// </summary>
+        private void cboSubtitleShadowColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Get Selected Item
+            ComboBoxItem selectedItem = (ComboBoxItem)(cboSubtitlesShadowColor.SelectedValue);
+            string selected = (string)(selectedItem.Content);
+
+            // Disable
+            if (selected == "None")
+            {
+                tbxSubtitlesShadowOffset.IsEnabled = false;
+                tbxSubtitlesShadowOffset.Text = "";
+            }
+            // Enable
+            else
+            {
+                tbxSubtitlesShadowOffset.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        ///    Subtitle Languages
+        /// </summary>
+        private void listViewSubtitleLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        ///    Subtitle Language Up
+        /// </summary>
+        private void buttonSubtitleLanguageUp_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedIndex = this.listViewSubtitleLanguages.SelectedIndex;
+
+            if (selectedIndex > 0)
+            {
+                var itemToMoveUp = SubtitleLanguageItems[selectedIndex];
+                SubtitleLanguageItems.RemoveAt(selectedIndex);
+                SubtitleLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
+                this.listViewSubtitleLanguages.SelectedIndex = selectedIndex - 1;
+            }
+        }
+        /// <summary>
+        ///    Subtitle Language Down
+        /// </summary>
+        private void buttonSubtitleLanguageDown_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedIndex = this.listViewSubtitleLanguages.SelectedIndex;
+
+            if (selectedIndex + 1 < SubtitleLanguageItems.Count)
+            {
+                var itemToMoveDown = SubtitleLanguageItems[selectedIndex];
+                SubtitleLanguageItems.RemoveAt(selectedIndex);
+                SubtitleLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
+                this.listViewSubtitleLanguages.SelectedIndex = selectedIndex + 1;
+            }
+        }
+        /// <summary>
+        ///    Subtitle Select All
+        /// </summary>
+        private void buttonSubtitleLanguageSelectAll_Click(object sender, RoutedEventArgs e)
+        {
+            listViewSubtitleLanguages.SelectAll();
+        }
+        /// <summary>
+        ///    Subtitle Deselect All
+        /// </summary>
+        private void buttonSubtitleLanguageDeselectAll_Click(object sender, RoutedEventArgs e)
+        {
+            listViewSubtitleLanguages.SelectedIndex = -1;
+        }
+
+
+
+        // --------------------------------------------------
+        // OSD Controls
+        // --------------------------------------------------
+
+        /// <summary>
+        ///    OSD Shadow
+        /// </summary>
+        private void cboOSDFontShadowColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Get Selected Item
+            ComboBoxItem selectedItem = (ComboBoxItem)(cboOSDFontShadowColor.SelectedValue);
+            string selected = (string)(selectedItem.Content);
+
+            // Disable
+            if (selected == "None")
+            {
+                tbxOSDFontShadowOffset.IsEnabled = false;
+                tbxOSDFontShadowOffset.Text = "";
+            }
+            // Enable
+            else
+            {
+                tbxOSDFontShadowOffset.IsEnabled = true;
+            }
+
+        }
+
+
+
+        // --------------------------------------------------
+        // Main Controls
+        // --------------------------------------------------
 
         /// <summary>
         ///     Info Button
@@ -375,138 +551,27 @@ namespace Glow
         }
 
 
-
-
-
-        /// <summary>
-        ///    Audio Languages
-        /// </summary>
-        private void listViewAudioLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //// Remove
-            //foreach (string item in e.RemovedItems)
-            //{
-            //    Audio.listAudioLanguages.Remove(item);
-            //    Audio.listAudioLanguages.TrimExcess();
-            //}
-
-            //// Add
-            //foreach (string item in e.AddedItems)
-            //{
-            //    Audio.listAudioLanguages.Add(item);
-            //}
-        }
-
-        /// <summary>
-        ///    Audio Language Up
-        /// </summary>
-        private void buttonAudioLanguageUp_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
-
-            if (selectedIndex > 0)
-            {
-                var itemToMoveUp = AudioLanguageItems[selectedIndex];
-                AudioLanguageItems.RemoveAt(selectedIndex);
-                AudioLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
-                this.listViewAudioLanguages.SelectedIndex = selectedIndex - 1;
-            }
-        }
-        /// <summary>
-        ///    Audio Language Down
-        /// </summary>
-        private void buttonAudioLanguageDown_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
-
-            if (selectedIndex + 1 < AudioLanguageItems.Count)
-            {
-                var itemToMoveDown = AudioLanguageItems[selectedIndex];
-                AudioLanguageItems.RemoveAt(selectedIndex);
-                AudioLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
-                this.listViewAudioLanguages.SelectedIndex = selectedIndex + 1;
-            }
-        }
-        /// <summary>
-        ///    Audio Select All
-        /// </summary>
-        private void buttonAudioLanguageSelectAll_Click(object sender, RoutedEventArgs e)
-        {
-            listViewAudioLanguages.SelectAll();
-        }
-        /// <summary>
-        ///    Audio Deselect All
-        /// </summary>
-        private void buttonAudioLanguageDeselectAll_Click(object sender, RoutedEventArgs e)
-        {
-            listViewAudioLanguages.SelectedIndex = -1;
-        }
-
-
-
-
-
-        /// <summary>
-        ///    Subtitle Languages
-        /// </summary>
-        private void listViewSubtitleLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        ///    Subtitle Language Up
-        /// </summary>
-        private void buttonSubtitleLanguageUp_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedIndex = this.listViewSubtitleLanguages.SelectedIndex;
-
-            if (selectedIndex > 0)
-            {
-                var itemToMoveUp = SubtitleLanguageItems[selectedIndex];
-                SubtitleLanguageItems.RemoveAt(selectedIndex);
-                SubtitleLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
-                this.listViewSubtitleLanguages.SelectedIndex = selectedIndex - 1;
-            }
-        }
-        /// <summary>
-        ///    Subtitle Language Down
-        /// </summary>
-        private void buttonSubtitleLanguageDown_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedIndex = this.listViewSubtitleLanguages.SelectedIndex;
-
-            if (selectedIndex + 1 < SubtitleLanguageItems.Count)
-            {
-                var itemToMoveDown = SubtitleLanguageItems[selectedIndex];
-                SubtitleLanguageItems.RemoveAt(selectedIndex);
-                SubtitleLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
-                this.listViewSubtitleLanguages.SelectedIndex = selectedIndex + 1;
-            }
-        }
-        /// <summary>
-        ///    Subtitle Select All
-        /// </summary>
-        private void buttonSubtitleLanguageSelectAll_Click(object sender, RoutedEventArgs e)
-        {
-            listViewSubtitleLanguages.SelectAll();
-        }
-        /// <summary>
-        ///    Subtitle Deselect All
-        /// </summary>
-        private void buttonSubtitleLanguageDeselectAll_Click(object sender, RoutedEventArgs e)
-        {
-            listViewSubtitleLanguages.SelectedIndex = -1;
-        }
-
-
-
         /// <summary>
         ///    Preset
         /// </summary>
         private void cboPreset_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Presets.Preset(this);
+        }
+
+
+        /// <summary>
+        ///     Generate
+        /// </summary>
+        private void buttonGenerate_Click(object sender, RoutedEventArgs e)
+        {
+            // Write Config to RichTextBox
+            Paragraph p = new Paragraph();
+
+            rtbConfig.Document = new FlowDocument(p);
+            rtbConfig.BeginChange();
+            p.Inlines.Add(new Run(Generate.GenerateConfig(this)));
+            rtbConfig.EndChange();
         }
 
 

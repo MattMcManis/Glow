@@ -20,11 +20,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ---------------------------------------------------------------------- */
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Glow
@@ -76,6 +72,11 @@ namespace Glow
                 languages = "slang=" + string.Join(",", listSubtitlesLanguages.Where(s => !string.IsNullOrEmpty(s)));
 
             // -------------------------
+            // Embedded Fonts
+            // -------------------------
+            string embeddedfonts = "embeddedfonts=no";
+
+            // -------------------------
             // Load Files
             // -------------------------
             string loadfiles = "sub-auto=" + mainwindow.cboSubtitlesLoadFiles.SelectedItem.ToString();
@@ -84,11 +85,6 @@ namespace Glow
             // Position
             // -------------------------
             string position = "sub-pos=" + mainwindow.cboSubtitlePosition.SelectedItem.ToString();
-
-            // -------------------------
-            // Blend
-            // -------------------------
-            string blend = "blend-subtitles=" + mainwindow.cboSubtitlesBlend.SelectedItem.ToString();
 
             // -------------------------
             // Font
@@ -120,14 +116,25 @@ namespace Glow
             // -------------------------
             // Extra
             // -------------------------
-            string extra = @"sub-fix-timing=no
-sub-use-margins
-sub-ass-force-margins
-ass-style-override=force
-ass-force-style=Kerning=yes
-ass-shaper=simple
-demuxer-mkv-subtitle-preroll
-embeddedfonts=no";
+            string extra = "sub-fix-timing=no" 
+                            + "\r\n" 
+                            + "sub-use-margins";
+
+            // -------------------------
+            // ass
+            // -------------------------
+            string ass = "sub-ass-force-margins"
+                        + "\r\n"
+                        + "ass-style-override=force"
+                        + "\r\n"
+                        + "ass-force-style=Kerning=yes"
+                        + "\r\n"
+                        + "ass-shaper=simple";
+
+            // -------------------------
+            // Blend
+            // -------------------------
+            string blend = "blend-subtitles=" + mainwindow.cboSubtitlesBlend.SelectedItem.ToString();
 
             // -------------------------
             // Combine
@@ -135,17 +142,19 @@ embeddedfonts=no";
             List<string> listSubtitle = new List<string>()
             {
                 title,
-                subtitles,
                 languages,
+                subtitles,
                 loadfiles,
                 position,
-                blend,
                 font,
                 fontsize,
                 fontcolor,
                 bordersize,
                 bordercolor,
                 extra,
+                ass,
+                embeddedfonts,
+                blend,
             };
 
             string subtitle = string.Join("\r\n", listSubtitle

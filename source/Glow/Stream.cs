@@ -34,26 +34,92 @@ namespace Glow
         public static String StreamConfig(MainWindow mainwindow)
         {
             // -------------------------
-            // Stream
+            // Title
             // -------------------------
             string title = "# [ STREAM ]";
 
+            // -------------------------
+            // Demuxer Thread
+            // -------------------------
+            string demuxthread = "demuxer-thread=" + mainwindow.cboDemuxerThread.SelectedItem.ToString();
+
+            // -------------------------
+            // Demuxer Buffersize
+            // -------------------------
+            string demuxerbuffersize = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxDemuxerBuffersize.Text))
+                demuxerbuffersize = "demuxer-lavf-buffersize=" + mainwindow.tbxDemuxerBuffersize.Text.ToString();
+
+            // -------------------------
+            // Demuxer Readahead
+            // -------------------------
+            string demuxerreadahead = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxDemuxerReadahead.Text))
+                demuxerreadahead = "demuxer-readahead-secs=" + mainwindow.tbxDemuxerReadahead.Text.ToString();
+
+            // -------------------------
+            // Cache
+            // -------------------------
             string cache = "cache=" + mainwindow.cboCache.SelectedItem.ToString();
 
-            string cachedefault = "cache-default=" + mainwindow.tbxCacheDefault.Text.ToString();
+            // -------------------------
+            // Cache Default
+            // -------------------------
+            string cachedefault = string.Empty;
 
-            string initial = "cache-initial=" + mainwindow.tbxCacheInitial.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheDefault.Text))
+                cachedefault = "cache-default=" + mainwindow.tbxCacheDefault.Text.ToString();
 
-            string seekmin = "cache-seek-min=" + mainwindow.tbxCacheSeekMin.Text.ToString();
+            // -------------------------
+            // Cache Initial
+            // -------------------------
+            string initial = string.Empty;
 
-            string backbuffer = "cache-backbuffer=" + mainwindow.tbxCacheBackbuffer.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheInitial.Text))
+                initial = "cache-initial=" + mainwindow.tbxCacheInitial.Text.ToString();
 
-            string seconds = "cache-secs=" + mainwindow.tbxCacheSeconds.Text.ToString();
+            // -------------------------
+            // Cache Seek Min
+            // -------------------------
+            string seekmin = string.Empty;
 
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheSeekMin.Text))
+                seekmin = "cache-seek-min=" + mainwindow.tbxCacheSeekMin.Text.ToString();
+
+            // -------------------------
+            // Cache Backbuffer
+            // -------------------------
+            string backbuffer = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheBackbuffer.Text))
+                backbuffer = "cache-backbuffer=" + mainwindow.tbxCacheBackbuffer.Text.ToString();
+
+            // -------------------------
+            // Second
+            // -------------------------
+            string seconds = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheSeconds.Text))
+                seconds = "cache-secs=" + mainwindow.tbxCacheSeconds.Text.ToString();
+
+            // -------------------------
+            // Cache File
+            // -------------------------
             string file = "cache-file=" + mainwindow.cboCacheFile.SelectedItem.ToString();
 
-            string filesize = "cache-file-size=" + mainwindow.tbxCacheFileSize.Text.ToString();
+            // -------------------------
+            // Cache File Size
+            // -------------------------
+            string filesize = string.Empty;
 
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheFileSize.Text))
+                filesize = "cache-file-size=" + mainwindow.tbxCacheFileSize.Text.ToString();
+
+            // -------------------------
+            // Extra
+            // -------------------------
             string extra = @"ytdl=yes
 ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/bestaudio)/best";
 
@@ -61,6 +127,9 @@ ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/best
             List <string> listStream = new List<string>()
             {
                 title,
+                demuxthread,
+                demuxerbuffersize,
+                demuxerreadahead,
                 cache,
                 cachedefault,
                 initial,

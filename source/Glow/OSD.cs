@@ -49,9 +49,20 @@ namespace Glow
             string videoosd = "video-osd=" + mainwindow.cboOSD.SelectedItem.ToString();
 
             // -------------------------
+            // Fractions
+            // -------------------------
+            string fractions = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheFileSize.Text))
+                fractions = "osd-fractions=" + mainwindow.tbxCacheFileSize.Text.ToString();
+
+            // -------------------------
             // Duration
             // -------------------------
-            string duration = "osd-duration=" + mainwindow.tbxOSDDuration.Text.ToString();
+            string duration = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDDuration.Text))
+                duration = "osd-duration=" + mainwindow.tbxOSDDuration.Text.ToString();
 
             // -------------------------
             // Level
@@ -61,7 +72,10 @@ namespace Glow
             // -------------------------
             // Scale
             // -------------------------
-            string scale = "osd-scale=" + mainwindow.tbxOSDScale.Text.ToString();
+            string scale = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDScale.Text))
+                scale = "osd-scale=" + mainwindow.tbxOSDScale.Text.ToString();
 
             // -------------------------
             // Font Name
@@ -91,9 +105,18 @@ namespace Glow
             string bordercolor = "osd-border-color=" + ColorPicker.HexColor(selectedItem);
 
             // -------------------------
-            // Fractions
+            // Shadow Color
             // -------------------------
-            string fractions = "osd-fractions=" + mainwindow.tbxCacheFileSize.Text.ToString();
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontShadowColor.SelectedValue);
+            string shadowcolor = "osd-shadow-color=" + ColorPicker.HexColor(selectedItem);
+
+            // -------------------------
+            // Shadow Offset
+            // -------------------------
+            string shadowoffset = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDFontShadowOffset.Text))
+                shadowoffset = "osd-shadow-offset=" + mainwindow.tbxOSDFontShadowOffset.Text.ToString();
 
             // -------------------------
             // Combine
@@ -102,6 +125,7 @@ namespace Glow
             {
                 title,
                 videoosd,
+                fractions,
                 duration,
                 level,
                 scale,
@@ -110,7 +134,8 @@ namespace Glow
                 fontcolor,
                 bordersize,
                 bordercolor,
-                fractions
+                shadowcolor,
+                shadowoffset,
             };
 
             string osd = string.Join("\r\n", listOSD

@@ -28,6 +28,19 @@ namespace Glow
 {
     public partial class Languages
     {
+        // Languages
+        // For Populating Audio and Subtitle Item Sources
+        public static List<string> listLanguages = new List<string>()
+        {
+            "English",
+            "Chinese",
+            "French",
+            "Japanese",
+            "Korean",
+            "Spanish",
+        };
+
+
         /// <summary>
         ///    Language Code Converter
         /// </summary>
@@ -36,17 +49,29 @@ namespace Glow
         {
             string language = string.Empty;
 
+            // Enlgish
             if (input == "English")
-                language = "eng,en,enUS,en-US";
+                language = "eng,en,enUS,en-US,English";
 
-            else if (input == "Japanese")
-                language = "jpn,jp";
-
-            else if (input == "Spanish")
-                language = "es,spa";
-
-            else if (input == "French")
+            // Chinese
+            else if (input == "Chinese")
                 language = "fr,fra,fre,fra";
+
+            // French
+            else if (input == "French")
+                language = "fr,fra,fre,fra,French";
+
+            // Japanese
+            else if (input == "Japanese")
+                language = "jpn,jp,jap,Japanese";
+
+            // Korean
+            else if (input == "Korean")
+                language = "kor,ko,Korean";
+
+            // Spanish
+            else if (input == "Spanish")
+                language = "es,spa,Spanish";
 
             return language;
         }
