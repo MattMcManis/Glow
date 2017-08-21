@@ -75,6 +75,22 @@ namespace Glow
                 scale = "osd-scale=" + mainwindow.tbxOSDScale.Text.ToString();
 
             // -------------------------
+            // Bar Width
+            // -------------------------
+            string barwidth = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarWidth.Text))
+                barwidth = "osd-bar-w=" + mainwindow.tbxOSDBarWidth.Text.ToString();
+
+            // -------------------------
+            // Bar Height
+            // -------------------------
+            string barheight = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarHeight.Text))
+                barheight = "osd-bar-h=" + mainwindow.tbxOSDBarHeight.Text.ToString();
+
+            // -------------------------
             // Font Name
             // -------------------------
             string font = "osd-font=" + "\"" + mainwindow.cboOSDFont.SelectedItem.ToString() + "\"";
@@ -88,7 +104,7 @@ namespace Glow
             // Font Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue);
-            string fontcolor = "osd-color=" + ColorPicker.HexColor(selectedItem);
+            string fontcolor = "osd-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Border Size
@@ -99,7 +115,7 @@ namespace Glow
             // Border Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontBorderColor.SelectedValue);
-            string bordercolor = "osd-border-color=" + ColorPicker.HexColor(selectedItem);
+            string bordercolor = "osd-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Shadow Color
@@ -111,7 +127,7 @@ namespace Glow
 
             if (selected != "None")
             {
-                shadowcolor = "osd-shadow-color=" + ColorPicker.HexColor(selectedItem);
+                shadowcolor = "osd-shadow-color=" + "\"" + "#33" + ColorPicker.HexColor(selectedItem) + "\"";
             }
 
             // -------------------------
@@ -119,8 +135,8 @@ namespace Glow
             // -------------------------
             string shadowoffset = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDFontShadowOffset.Text))
-                shadowoffset = "osd-shadow-offset=" + mainwindow.tbxOSDFontShadowOffset.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDShadowOffset.Text))
+                shadowoffset = "osd-shadow-offset=" + mainwindow.tbxOSDShadowOffset.Text.ToString();
 
             // -------------------------
             // Combine
@@ -133,6 +149,8 @@ namespace Glow
                 duration,
                 level,
                 scale,
+                barwidth,
+                barheight,
                 font,
                 fontsize,
                 fontcolor,

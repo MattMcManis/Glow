@@ -84,7 +84,7 @@ namespace Glow
             // -------------------------
             // Position
             // -------------------------
-            string position = "sub-pos=" + mainwindow.cboSubtitlePosition.SelectedItem.ToString();
+            string position = "sub-pos=" + mainwindow.tbxSubtitlePosition.Text.ToString();
 
             // -------------------------
             // Font
@@ -100,7 +100,7 @@ namespace Glow
             // Font Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesFontColor.SelectedValue);
-            string fontcolor = "sub-text-color=" + ColorPicker.HexColor(selectedItem);
+            string fontcolor = "sub-text-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Border Size
@@ -111,7 +111,7 @@ namespace Glow
             // Border Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue);
-            string bordercolor = "sub-text-border-color=" + ColorPicker.HexColor(selectedItem);
+            string bordercolor = "sub-text-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Shadow Color
@@ -123,7 +123,7 @@ namespace Glow
 
             if (selected != "None")
             {
-                shadowcolor = "sub-shadow-color=" + ColorPicker.HexColor(selectedItem);
+                shadowcolor = "sub-text-shadow-color=" + "\"" + "#33" + ColorPicker.HexColor(selectedItem) + "\"";
             }
                 
 

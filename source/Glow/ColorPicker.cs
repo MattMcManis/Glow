@@ -39,25 +39,25 @@ namespace Glow
 
             // Convert ComboBox Selected Color to Hex
             if (selected == "White")
-                color = "#FFFFFF";
+                color = "FFFFFF";
 
             else if (selected == "Gray")
-                color = "#A9A9A9";
+                color = "A9A9A9";
 
             else if (selected == "Dark Gray")
-                color = "#262626";
+                color = "262626";
 
             else if (selected == "Black")
-                color = "#000000";
+                color = "000000";
 
             else if (selected == "Yellow")
-                color = "#FDFD02";
+                color = "FDFD02";
 
             else if (selected == "Blue")
-                color = "#9AAFE4";
+                color = "9AAFE4";
 
             else if (selected == "Pink")
-                color = "#FFB0B0";
+                color = "FFB0B0";
 
             return color;
         }

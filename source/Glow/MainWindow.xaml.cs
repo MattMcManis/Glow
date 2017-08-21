@@ -346,12 +346,18 @@ namespace Glow
             // Disable
             if (selected == "None")
             {
+                // slider
+                slSubtitlesShadowOffset.IsEnabled = false;
+                // textbox
                 tbxSubtitlesShadowOffset.IsEnabled = false;
                 tbxSubtitlesShadowOffset.Text = "";
             }
             // Enable
             else
             {
+                // slider
+                slSubtitlesShadowOffset.IsEnabled = true;
+                // textbox
                 tbxSubtitlesShadowOffset.IsEnabled = true;
             }
         }
@@ -427,13 +433,19 @@ namespace Glow
             // Disable
             if (selected == "None")
             {
-                tbxOSDFontShadowOffset.IsEnabled = false;
-                tbxOSDFontShadowOffset.Text = "";
+                // slider
+                slOSDShadowOffset.IsEnabled = false;
+                tbxOSDShadowOffset.IsEnabled = false;
+                // textbox
+                tbxOSDShadowOffset.Text = "";
             }
             // Enable
             else
             {
-                tbxOSDFontShadowOffset.IsEnabled = true;
+                // slider
+                slOSDShadowOffset.IsEnabled = true;
+                // textbox
+                tbxOSDShadowOffset.IsEnabled = true;
             }
 
         }
@@ -529,7 +541,7 @@ namespace Glow
             saveFile.RestoreDirectory = true;
             //saveFile.Filter = "Text file (*.txt)|*.txt";
             saveFile.DefaultExt = "";
-            saveFile.FileName = "config2";
+            saveFile.FileName = "config";
 
             // Show save file dialog box
             Nullable<bool> result = saveFile.ShowDialog();

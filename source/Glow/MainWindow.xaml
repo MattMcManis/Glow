@@ -294,48 +294,68 @@
 
                                 <!-- Volume -->
                                 <Label Content="Volume" HorizontalAlignment="Left" Margin="10,91,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboVolume" HorizontalAlignment="Left" Margin="93,91,0,0" VerticalAlignment="Top" Width="100">
-                                    <System:String>100</System:String>
-                                    <System:String>90</System:String>
-                                    <System:String>80</System:String>
-                                    <System:String>70</System:String>
-                                    <System:String>60</System:String>
-                                    <System:String>50</System:String>
-                                    <System:String>40</System:String>
-                                    <System:String>30</System:String>
-                                    <System:String>20</System:String>
-                                    <System:String>10</System:String>
-                                </ComboBox>
+
+                                <Slider x:Name="slVolume" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,92,48,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="66"
+                                        Maximum="100" 
+                                        IsSnapToTickEnabled="True"
+                                        />
+
+                                <TextBox x:Name="tbxVolume"
+                                         Text="{Binding ElementName=slVolume, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,91,14,0" HorizontalAlignment="Right" Width="29" VerticalAlignment="Top"/>
+
+                                <!-- Volume -->
+                                <Label Content="Volume Max" HorizontalAlignment="Left" Margin="10,118,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+
+                                <Slider x:Name="slVolumeMax" 
+                                    HorizontalAlignment="Right"
+                                    Margin="0,119,48,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="66"
+                                    Maximum="200" 
+                                    IsSnapToTickEnabled="True"
+                                        />
+                                <TextBox x:Name="tbxVolumeMax"
+                                    Text="{Binding Value, ElementName=slVolumeMax, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="22" 
+                                    TextWrapping="Wrap" 
+                                    Margin="0,118,14,0" HorizontalAlignment="Right" Width="29" VerticalAlignment="Top"/>
 
                                 <!-- Soft Volume -->
-                                <Label Content="Soft Volume" HorizontalAlignment="Left" Margin="10,118,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboSoftVolume" HorizontalAlignment="Left" Margin="93,118,0,0" VerticalAlignment="Top" Width="100">
+                                <Label Content="Soft Volume" HorizontalAlignment="Left" Margin="10,145,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboSoftVolume" HorizontalAlignment="Left" Margin="93,145,0,0" VerticalAlignment="Top" Width="100">
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Normalize -->
-                                <Label Content="Normalize" HorizontalAlignment="Left" Margin="10,145,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboNormalize" HorizontalAlignment="Left" Margin="93,145,0,0" VerticalAlignment="Top" Width="100">
+                                <Label Content="Normalize" HorizontalAlignment="Left" Margin="10,199,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboNormalize" HorizontalAlignment="Left" Margin="93,199,0,0" VerticalAlignment="Top" Width="100">
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Scale Tempo -->
-                                <Label Content="Scale Tempo" HorizontalAlignment="Left" Margin="10,172,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboScaleTempo" HorizontalAlignment="Left" Margin="93,172,0,0" VerticalAlignment="Top" Width="100">
+                                <Label Content="Scale Tempo" HorizontalAlignment="Left" Margin="10,226,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboScaleTempo" HorizontalAlignment="Left" Margin="93,226,0,0" VerticalAlignment="Top" Width="100">
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
 
 
                                 <!-- Audio Languages -->
-                                <Label Content="Languages" HorizontalAlignment="Left" Margin="10,205,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <Label Content="Languages" HorizontalAlignment="Left" Margin="10,259,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
 
                                 <ListView x:Name="listViewAudioLanguages" 
                                           HorizontalAlignment="Left" 
                                           Height="103" 
-                                          Margin="10,229,0,0"
+                                          Margin="10,283,0,0"
                                           VerticalAlignment="Top"
                                           Width="155"
                                           BorderThickness="0"
@@ -406,21 +426,38 @@
                                 </ListView>
 
                                 <!-- Item Up -->
-                                <Button x:Name="buttonAudioLanguageUp" VerticalAlignment="Top" Height="22" Cursor="Hand" Click="buttonAudioLanguageUp_Click" Margin="0,229,14,0" HorizontalAlignment="Right" Width="22">
+                                <Button x:Name="buttonAudioLanguageUp" VerticalAlignment="Top" Height="22" Cursor="Hand" Click="buttonAudioLanguageUp_Click" Margin="0,283,14,0" HorizontalAlignment="Right" Width="22">
                                     <TextBlock Text="^" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- Item Down -->
-                                <Button x:Name="buttonAudioLanguageDown" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageDown_Click" Margin="0,256,14,0">
+                                <Button x:Name="buttonAudioLanguageDown" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageDown_Click" Margin="0,310,14,0">
                                     <TextBlock Text="v" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- Select All -->
-                                <Button x:Name="buttonAudioLanguageSelectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageSelectAll_Click" Margin="0,283,14,0">
+                                <Button x:Name="buttonAudioLanguageSelectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageSelectAll_Click" Margin="0,337,14,0">
                                     <TextBlock Text="+" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- Deselect All -->
-                                <Button x:Name="buttonAudioLanguageDeselectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageDeselectAll_Click" Margin="0,310,14,0">
+                                <Button x:Name="buttonAudioLanguageDeselectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonAudioLanguageDeselectAll_Click" Margin="0,364,14,0">
                                     <TextBlock Text="-" Margin="0,0,0,0"/>
                                 </Button>
+
+                                <!-- Soft Volume Max -->
+                                <Label Content="Soft Vol Max" HorizontalAlignment="Left" Margin="10,172,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+
+                                <Slider x:Name="slSoftVolumeMax" 
+                                    HorizontalAlignment="Right"
+                                    Margin="0,173,48,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="66"
+                                    Maximum="200" 
+                                    IsSnapToTickEnabled="True"
+                                        />
+                                <TextBox x:Name="tbxSoftVolumeMax"
+                                    Text="{Binding Value, ElementName=slSoftVolumeMax, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="22" 
+                                    TextWrapping="Wrap" 
+                                    Margin="0,172,14,0" HorizontalAlignment="Right" Width="29" VerticalAlignment="Top"/>
 
                             </Grid>
                         </ScrollViewer>
@@ -451,14 +488,20 @@
 
                                 <!-- Position -->
                                 <Label Content="Position" HorizontalAlignment="Left" Margin="10,64,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboSubtitlePosition" HorizontalAlignment="Left" Margin="93,64,0,0" VerticalAlignment="Top" Width="100">
-                                    <System:String>100</System:String>
-                                    <System:String>95</System:String>
-                                    <System:String>90</System:String>
-                                    <System:String>85</System:String>
-                                    <System:String>80</System:String>
-                                    <System:String>75</System:String>
-                                </ComboBox>
+                                <Slider x:Name="slSubtitlePosition" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,65,48,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="66"
+                                        Maximum="100" 
+                                        IsSnapToTickEnabled="True"
+                                        />
+
+                                <TextBox x:Name="tbxSubtitlePosition"
+                                         Text="{Binding ElementName=slSubtitlePosition, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,64,14,0" HorizontalAlignment="Right" Width="29" VerticalAlignment="Top"/>
 
                                 <!-- Blend -->
                                 <Label Content="Blend" HorizontalAlignment="Left" Margin="10,91,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
@@ -606,9 +649,19 @@
 
                                 <!-- Subtitle Shadow Offset -->
                                 <Label Content="Shadow Offset" HorizontalAlignment="Left" Margin="10,280,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="78"/>
-                                <TextBox x:Name="tbxSubtitlesShadowOffset" HorizontalAlignment="Left" Margin="93,280,0,0" VerticalAlignment="Top" Width="100" Height="22">
-                                </TextBox>
 
+                                <Slider x:Name="slSubtitlesShadowOffset" 
+                                    HorizontalAlignment="Right"
+                                    Margin="0,281,48,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="66"
+                                    Maximum="5"/>
+
+                                <TextBox x:Name="tbxSubtitlesShadowOffset"
+                                    Text="{Binding Value, ElementName=slSubtitlesShadowOffset, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="22" 
+                                    TextWrapping="Wrap" 
+                                    Margin="0,280,14,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="29"/>
 
                                 <!-- Subtitle Languages -->
                                 <Label Content="Languages" HorizontalAlignment="Left" Margin="10,312,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
@@ -702,6 +755,7 @@
                                 <Button x:Name="buttonSubtitleLanguageDeselectAll" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Height="22" Cursor="Hand" Click="buttonSubtitleLanguageDeselectAll_Click" Margin="0,416,14,0">
                                     <TextBlock Text="-" Margin="0,0,0,0"/>
                                 </Button>
+
 
                             </Grid>
                         </ScrollViewer>
@@ -880,21 +934,65 @@
 
                                 <!-- OSD Scale -->
                                 <Label Content="Scale" HorizontalAlignment="Left" Margin="10,118,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <TextBox x:Name="tbxOSDScale" HorizontalAlignment="Left" Margin="93,118,0,0" VerticalAlignment="Top" Width="100" Height="22"/>
+                                <Slider x:Name="slOSDScale" 
+                                    HorizontalAlignment="Right"
+                                    Margin="0,119,48,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="66"
+                                    Minimum="0.1"
+                                    Maximum="10"/>
+
+                                <TextBox x:Name="tbxOSDScale"
+                                    Text="{Binding Value, ElementName=slOSDScale, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="22" 
+                                    TextWrapping="Wrap" 
+                                    Margin="0,118,14,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="29"/>
+
+                                <!-- Bar Width -->
+                                <Label Content="Bar Width" HorizontalAlignment="Left" Margin="10,145,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <Slider x:Name="slOSDBarWidth" 
+                                    HorizontalAlignment="Right"
+                                    Margin="0,146,48,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="66"
+                                    Minimum="0.1"
+                                    Maximum="100"/>
+
+                                <TextBox x:Name="tbxOSDBarWidth"
+                                    Text="{Binding Value, ElementName=slOSDBarWidth, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="22" 
+                                    TextWrapping="Wrap" 
+                                    Margin="0,145,14,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="29"/>
+
+                                <!-- Bar Height -->
+                                <Label Content="Bar Height" HorizontalAlignment="Left" Margin="10,172,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <Slider x:Name="slOSDBarHeight" 
+                                    HorizontalAlignment="Right"
+                                    Margin="0,173,48,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="66"
+                                    Minimum="0.1"
+                                    Maximum="50"/>
+
+                                <TextBox x:Name="tbxOSDBarHeight"
+                                    Text="{Binding Value, ElementName=slOSDBarHeight, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="22" 
+                                    TextWrapping="Wrap" 
+                                    Margin="0,172,14,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="29"/>
 
                                 <!-- OSD Font -->
-                                <Label Content="Font" HorizontalAlignment="Left" Margin="10,145,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <Label Content="Font" HorizontalAlignment="Left" Margin="10,199,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
                                 <ComboBox x:Name="cboOSDFont" 
                                           ItemsSource="{Binding FontItems}" 
                                           SelectedItem="{Binding FontSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                           HorizontalAlignment="Left" 
-                                          Margin="93,145,0,0"
+                                          Margin="93,199,0,0"
                                           VerticalAlignment="Top" 
                                           Width="100"/>
 
                                 <!-- OSD Font Size -->
-                                <Label Content="Font Size" HorizontalAlignment="Left" Margin="10,172,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboOSDFontSize" HorizontalAlignment="Left" Margin="93,172,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                <Label Content="Font Size" HorizontalAlignment="Left" Margin="10,226,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFontSize" HorizontalAlignment="Left" Margin="93,226,0,0" VerticalAlignment="Top" Width="100" Height="22">
                                     <System:String>96</System:String>
                                     <System:String>88</System:String>
                                     <System:String>80</System:String>
@@ -912,8 +1010,8 @@
                                 </ComboBox>
 
                                 <!-- OSD Font Color -->
-                                <Label Content="Font Color" HorizontalAlignment="Left" Margin="10,199,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboOSDFontColor" HorizontalAlignment="Left" Margin="93,199,0,0" VerticalAlignment="Top" Width="100" Height="22">
+                                <Label Content="Font Color" HorizontalAlignment="Left" Margin="10,253,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFontColor" HorizontalAlignment="Left" Margin="93,253,0,0" VerticalAlignment="Top" Width="100" Height="22">
                                     <!-- White -->
                                     <ComboBoxItem Background="White" Foreground="Black">
                                         White
@@ -945,8 +1043,8 @@
                                 </ComboBox>
 
                                 <!-- OSD Border Size -->
-                                <Label Content="Border Size" HorizontalAlignment="Left" Margin="10,227,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboOSDFontBorderSize" HorizontalAlignment="Left" Margin="93,227,0,0" VerticalAlignment="Top" Width="100">
+                                <Label Content="Border Size" HorizontalAlignment="Left" Margin="10,281,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFontBorderSize" HorizontalAlignment="Left" Margin="93,281,0,0" VerticalAlignment="Top" Width="100">
                                     <System:String>0</System:String>
                                     <System:String>1</System:String>
                                     <System:String>2</System:String>
@@ -959,8 +1057,8 @@
                                 </ComboBox>
 
                                 <!-- OSD Border Color -->
-                                <Label Content="Border Color" HorizontalAlignment="Left" Margin="10,254,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
-                                <ComboBox x:Name="cboOSDFontBorderColor" HorizontalAlignment="Left" Margin="93,254,0,0" VerticalAlignment="Top" Width="100">
+                                <Label Content="Border Color" HorizontalAlignment="Left" Margin="10,308,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="75"/>
+                                <ComboBox x:Name="cboOSDFontBorderColor" HorizontalAlignment="Left" Margin="93,308,0,0" VerticalAlignment="Top" Width="100">
                                     <!-- White -->
                                     <ComboBoxItem Background="White" Foreground="Black">
                                         White
@@ -992,8 +1090,8 @@
                                 </ComboBox>
 
                                 <!-- Shadow Color -->
-                                <Label Content="Shadow Color" HorizontalAlignment="Left" Margin="10,281,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="78"/>
-                                <ComboBox x:Name="cboOSDFontShadowColor" HorizontalAlignment="Left" Margin="93,281,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="cboOSDFontShadowColor_SelectionChanged">
+                                <Label Content="Shadow Color" HorizontalAlignment="Left" Margin="10,335,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="78"/>
+                                <ComboBox x:Name="cboOSDFontShadowColor" HorizontalAlignment="Left" Margin="93,335,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="cboOSDFontShadowColor_SelectionChanged">
                                     <!-- None -->
                                     <ComboBoxItem Background="Transparent" Foreground="Black">
                                         None
@@ -1017,9 +1115,19 @@
                                 </ComboBox>
 
                                 <!-- Shadow Offset -->
-                                <Label Content="Shadow Offset" HorizontalAlignment="Left" Margin="10,308,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="78"/>
-                                <TextBox x:Name="tbxOSDFontShadowOffset" HorizontalAlignment="Left" Margin="93,308,0,0" VerticalAlignment="Top" Width="100" Height="22">
-                                </TextBox>
+                                <Label Content="Shadow Offset" HorizontalAlignment="Left" Margin="10,362,0,0" Padding="0, 0, 0, 6" VerticalAlignment="Top" Width="78"/>
+                                <Slider x:Name="slOSDShadowOffset" 
+                                    HorizontalAlignment="Left"
+                                    Margin="93,363,0,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="66"
+                                    Maximum="5"/>
+
+                                <TextBox x:Name="tbxOSDShadowOffset"
+                                    Text="{Binding Value, ElementName=slOSDShadowOffset, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="22" 
+                                    TextWrapping="Wrap" 
+                                    Margin="164,362,14,159"/>
 
                             </Grid>
                         </ScrollViewer>
@@ -1095,7 +1203,7 @@
                     Click="buttonCopy_Click" >
                 <TextBlock Text="Copy" Margin="0,-2,0,0"/>
             </Button>
-            
+
             <!-- Save -->
             <Button x:Name="buttonSave"
                     Margin="230,0,0,19" 
@@ -1108,7 +1216,7 @@
                     >
                 <TextBlock Text="Save" Margin="0,-2,0,0"/>
             </Button>
-            
+
 
 
             <!-- Presets -->

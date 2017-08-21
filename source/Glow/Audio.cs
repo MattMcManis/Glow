@@ -20,9 +20,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ---------------------------------------------------------------------- */
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace Glow
 {
@@ -75,12 +73,22 @@ namespace Glow
             // -------------------------
             // Volume
             // -------------------------
-            string volume = "volume=" + mainwindow.cboVolume.SelectedItem.ToString();
+            string volume = "volume=" + mainwindow.tbxVolume.Text.ToString();
+
+            // -------------------------
+            // Max Volume
+            // -------------------------
+            string maxvolume = "volume-max=" + mainwindow.tbxVolumeMax.Text.ToString();
 
             // -------------------------
             // Soft Volume
             // -------------------------
             string softvolume = "softvol=" + mainwindow.cboSoftVolume.SelectedItem.ToString();
+
+            // -------------------------
+            // Soft Volume Max
+            // -------------------------
+            string softvolumemax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
 
             // -------------------------
             // Normalize
@@ -107,7 +115,9 @@ namespace Glow
                 languages,
                 channels,
                 volume,
+                maxvolume,
                 softvolume,
+                softvolumemax,
                 normalize,
                 scaletempo,
                 loadfiles,

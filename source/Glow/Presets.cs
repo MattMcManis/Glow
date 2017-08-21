@@ -64,8 +64,10 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboAudioDriver.SelectedItem = "wasapi";
                 mainwindow.cboChannels.SelectedItem = "auto";
-                mainwindow.cboVolume.SelectedItem = "100";
+                mainwindow.slVolume.Value = 100;
+                mainwindow.slVolumeMax.Value = 150;
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
+                mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -75,7 +77,7 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlePosition.SelectedItem = "95";
+                mainwindow.slSubtitlePosition.Value = 95;
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
@@ -84,8 +86,8 @@ namespace Glow
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
                 mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
-                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 2; //gray
-                mainwindow.tbxSubtitlesShadowOffset.Text = "1.25";
+                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.slSubtitlesShadowOffset.Value = 1.25;
 
                 // -------------------------
                 // Stream
@@ -109,7 +111,10 @@ namespace Glow
                 mainwindow.cboOSDFractions.SelectedItem = "yes";
                 mainwindow.tbxOSDDuration.Text = "1500";
                 mainwindow.cboOSDLevel.SelectedItem = "1";
-                mainwindow.tbxOSDScale.Text = "0.5";
+                mainwindow.slOSDScale.Value = 0.5;
+                // Bar
+                mainwindow.slOSDBarWidth.Value = 100;
+                mainwindow.slOSDBarHeight.Value = 0.1;
                 // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "44";
                 mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
@@ -117,8 +122,8 @@ namespace Glow
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
                 mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
-                mainwindow.cboOSDFontShadowColor.SelectedIndex = 2; //gray
-                mainwindow.tbxOSDFontShadowOffset.Text = "1.25";
+                mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.slOSDShadowOffset.Value = 1.25;
             }
 
             // -------------------------
@@ -160,8 +165,10 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboAudioDriver.SelectedItem = "wasapi";
                 mainwindow.cboChannels.SelectedItem = "auto";
-                mainwindow.cboVolume.SelectedItem = "100";
+                mainwindow.slVolume.Value = 100;
+                mainwindow.slVolumeMax.Value = 150;
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
+                mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -171,7 +178,7 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlePosition.SelectedItem = "95";
+                mainwindow.slSubtitlePosition.Value = 95;
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
@@ -180,8 +187,8 @@ namespace Glow
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
                 mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
-                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 2; //gray
-                mainwindow.tbxSubtitlesShadowOffset.Text = "1.25";
+                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.slSubtitlesShadowOffset.Value = 1.25;
 
                 // -------------------------
                 // Stream
@@ -205,7 +212,10 @@ namespace Glow
                 mainwindow.cboOSDFractions.SelectedItem = "yes";
                 mainwindow.tbxOSDDuration.Text = "1500";
                 mainwindow.cboOSDLevel.SelectedItem = "1";
-                mainwindow.tbxOSDScale.Text = "0.5";
+                mainwindow.slOSDScale.Value = 0.5;
+                // Bar
+                mainwindow.slOSDBarWidth.Value = 100;
+                mainwindow.slOSDBarHeight.Value = 0.1;
                 // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "44";
                 mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
@@ -213,8 +223,8 @@ namespace Glow
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
                 mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
-                mainwindow.cboOSDFontShadowColor.SelectedIndex = 2; //gray
-                mainwindow.tbxOSDFontShadowOffset.Text = "1.25";
+                mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.slOSDShadowOffset.Value = 1.25;
             }
         }
     }
