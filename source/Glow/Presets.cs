@@ -92,9 +92,12 @@ namespace Glow
                 // -------------------------
                 // Stream
                 // -------------------------
+                // Demuxer
                 mainwindow.cboDemuxerThread.SelectedItem = "no";
                 mainwindow.tbxDemuxerBuffersize.Text = "32768";
                 mainwindow.tbxDemuxerReadahead.Text = "5.0";
+                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                // Cache
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
                 mainwindow.tbxCacheInitial.Text = "1024";
@@ -193,9 +196,12 @@ namespace Glow
                 // -------------------------
                 // Stream
                 // -------------------------
+                // Demuxer
                 mainwindow.cboDemuxerThread.SelectedItem = "no";
                 mainwindow.tbxDemuxerBuffersize.Text = "32768";
                 mainwindow.tbxDemuxerReadahead.Text = "5.0";
+                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                // Cache
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
                 mainwindow.tbxCacheInitial.Text = "1024";

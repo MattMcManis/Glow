@@ -94,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,7 +131,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Icons\" />
+    <Folder Include="Resources\Images\Icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\configuregear.png" />
+    <Resource Include="Resources\Images\Buttons\folder.png" />
+    <Resource Include="Resources\Images\Buttons\info.png" />
+    <Resource Include="Resources\Images\Buttons\update.png" />
+    <Resource Include="Resources\Images\Buttons\web.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

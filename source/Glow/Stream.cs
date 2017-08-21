@@ -60,6 +60,14 @@ namespace Glow
                 demuxerreadahead = "demuxer-readahead-secs=" + mainwindow.tbxDemuxerReadahead.Text.ToString();
 
             // -------------------------
+            // Demuxer MKV Subtitle Preroll
+            // -------------------------
+            string demuxerMKVSubtitlePreroll = string.Empty;
+
+            if ((string)mainwindow.cboDemuxerMKVSubPreroll.SelectedItem == "yes")
+                demuxerMKVSubtitlePreroll = "demuxer-mkv-subtitle-preroll";
+
+            // -------------------------
             // Cache
             // -------------------------
             string cache = "cache=" + mainwindow.cboCache.SelectedItem.ToString();
@@ -130,6 +138,7 @@ ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/best
                 demuxthread,
                 demuxerbuffersize,
                 demuxerreadahead,
+                demuxerMKVSubtitlePreroll,
                 cache,
                 cachedefault,
                 initial,

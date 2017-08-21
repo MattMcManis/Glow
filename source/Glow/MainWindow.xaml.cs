@@ -120,7 +120,7 @@ namespace Glow
 
             DataContext = this;
 
-            this.MinWidth = 775;
+            this.MinWidth = 712;
             this.MinHeight = 400;
 
             // -------------------------
@@ -350,7 +350,7 @@ namespace Glow
                 slSubtitlesShadowOffset.IsEnabled = false;
                 // textbox
                 tbxSubtitlesShadowOffset.IsEnabled = false;
-                tbxSubtitlesShadowOffset.Text = "";
+                tbxSubtitlesShadowOffset.Text = "0.00";
             }
             // Enable
             else
@@ -437,7 +437,7 @@ namespace Glow
                 slOSDShadowOffset.IsEnabled = false;
                 tbxOSDShadowOffset.IsEnabled = false;
                 // textbox
-                tbxOSDShadowOffset.Text = "";
+                tbxOSDShadowOffset.Text = "0.00";
             }
             // Enable
             else
@@ -579,6 +579,7 @@ namespace Glow
         {
             // Write Config to RichTextBox
             Paragraph p = new Paragraph();
+            p.LineHeight = 2;
 
             rtbConfig.Document = new FlowDocument(p);
             rtbConfig.BeginChange();
