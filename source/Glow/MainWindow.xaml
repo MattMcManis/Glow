@@ -795,6 +795,9 @@
                                                                 <Setter Property="Background" Value="#FF333333" />
                                                                 <Setter TargetName="UpperHighlight" Property="Visibility" Value="Hidden" />
                                                             </Trigger>
+                                                            <Trigger Property="IsSelected" Value="true">
+                                                                <Setter Property="Foreground" Value="#FFb478df"/>
+                                                            </Trigger>
                                                             <Trigger Property="IsEnabled" Value="False">
                                                                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                                                             </Trigger>
@@ -1244,6 +1247,9 @@
                                                             <Trigger Property="IsMouseOver" Value="True">
                                                                 <Setter Property="Background" Value="#FF333333" />
                                                                 <Setter TargetName="UpperHighlight" Property="Visibility" Value="Hidden" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="true">
+                                                                <Setter Property="Foreground" Value="#FFb478df"/>
                                                             </Trigger>
                                                             <Trigger Property="IsEnabled" Value="False">
                                                                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />

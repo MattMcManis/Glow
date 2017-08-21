@@ -83,7 +83,7 @@
 
     <!-- RichTextBox -->
     <SolidColorBrush x:Key="RichTextBox.Static.Border" Color="#FF9259bd"/>
-    <SolidColorBrush x:Key="RichTextBox.MouseOver.Border" Color="#FFABADB3"/>
+    <SolidColorBrush x:Key="RichTextBox.MouseOver.Border" Color="#FFb478df"/>
     
     <!-- TextBox -->
     <SolidColorBrush x:Key="TextBox.Static.Foreground" Color="#FFFFFFFF"/>
@@ -933,6 +933,7 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsKeyboardFocused" Value="False"/>
                 </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="#FFb478df"/>
                 <Setter Property="Background" TargetName="Bd" Value="#FF151515"/>
                 <Setter Property="BorderBrush" TargetName="Bd" Value="#A8151515"/>
             </MultiTrigger>
@@ -972,6 +973,7 @@
                     <Condition Property="IsMouseOver" Value="False"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="#FFb478df"/>
                 <Setter Property="BorderBrush" TargetName="Bd" Value="#FF151515"/>
             </MultiTrigger>
             <!-- Background Mouse Over Not Selected Keyboard Focused -->
@@ -981,6 +983,7 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="#FFb478df"/>
                 <Setter Property="Background" TargetName="Bd" Value="#FF151515"/>
                 <Setter Property="BorderBrush" TargetName="Bd" Value="#FF151515"/>
             </MultiTrigger>
@@ -1291,7 +1294,9 @@
     <SolidColorBrush x:Key="ListView.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ListView.Static.Background" Color="#FF111111"/>
     <SolidColorBrush x:Key="ListView.Static.Border" Color="#FF111111"/>
-    
+
+    <!--<SolidColorBrush x:Key="ListView.Selected.Foreground" Color="#FFb478df"/>-->
+
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="{DynamicResource ListView.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ListView.Static.Border}"/>
@@ -1306,7 +1311,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListView}">
-                    <Themes:ListBoxChrome x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" SnapsToDevicePixels="true">
+                    <Themes:ListBoxChrome x:Name="Bd" 
+                                          BorderBrush="{TemplateBinding BorderBrush}" 
+                                          BorderThickness="{TemplateBinding BorderThickness}" 
+                                          Background="{TemplateBinding Background}"
+                                          RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                          RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" 
+                                          SnapsToDevicePixels="true">
                         <ScrollViewer Padding="{TemplateBinding Padding}" Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </ScrollViewer>
@@ -1315,6 +1326,9 @@
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
                         </Trigger>
+                        <!--<Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Foreground" Value="{DynamicResource ListView.Selected.Foreground}"/>
+                        </Trigger>-->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsGrouping" Value="true"/>
