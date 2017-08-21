@@ -250,11 +250,123 @@ namespace Glow
             {
                 tbxDebandGrain.IsEnabled = true;
             }
-            // Diabled
+            // Disabled
             else if ((string)cboDeband.SelectedItem == "no")
             {
                 tbxDebandGrain.IsEnabled = false;
                 tbxDebandGrain.Text = "";
+            }
+        }
+
+        /// <summary>
+        ///    Scale
+        /// </summary>
+        private void cboScale_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Off
+            // Turn off Scale Antiring
+            if ((string)cboScale.SelectedItem == "off")
+            {
+                slScaleAntiring.IsEnabled = false;
+                slScaleAntiring.Value = 0;
+                tbxScaleAntiring.IsEnabled = false;
+            }
+            // On
+            // Enable Scale Antiring
+            else
+            {
+                slScaleAntiring.IsEnabled = true;
+                tbxScaleAntiring.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        ///    Chroma Scale
+        /// </summary>
+        private void cboChromaScale_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Off
+            // Turn off Chroma Scale Antiring
+            if ((string)cboChromaScale.SelectedItem == "off")
+            {
+                slChromaAntiring.IsEnabled = false;
+                slChromaAntiring.Value = 0;
+                tbxChromaAntiring.IsEnabled = false;
+            }
+            // On
+            // Enable Chroma Scale Antiring
+            else
+            {
+                slChromaAntiring.IsEnabled = true;
+                tbxChromaAntiring.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        ///    Downscale
+        /// </summary>
+        private void cboDownscale_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Off
+            // Turn off Downscale Antiring
+            if ((string)cboDownscale.SelectedItem == "off")
+            {
+                slDownscaleAntiring.IsEnabled = false;
+                slDownscaleAntiring.Value = 0;
+                tbxDownscaleAntiring.IsEnabled = false;
+            }
+            // On
+            // Enable Downscale Antiring
+            else
+            {
+                slDownscaleAntiring.IsEnabled = true;
+                tbxDownscaleAntiring.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        ///    Software Scaler
+        /// </summary>
+        private void cboSoftwareScale_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enabled
+            if ((string)cboSoftwareScaler.SelectedItem != "off")
+            {
+                // Scale
+                cboScale.IsEnabled = false;
+                slScaleAntiring.IsEnabled = false;
+                slScaleAntiring.Value = 0;
+                tbxScaleAntiring.IsEnabled = false;
+
+                // Chroma
+                cboChromaScale.IsEnabled = false;
+                slChromaAntiring.IsEnabled = false;
+                slChromaAntiring.Value = 0;
+                tbxChromaAntiring.IsEnabled = false;
+
+                // Downscale
+                cboDownscale.IsEnabled = false;
+                slDownscaleAntiring.IsEnabled = false;
+                slDownscaleAntiring.Value = 0;
+                tbxDownscaleAntiring.IsEnabled = false;
+            }
+            // Disabled
+            else
+            {
+                // Scale
+                cboScale.IsEnabled = true;
+                slScaleAntiring.IsEnabled = true;
+                tbxScaleAntiring.IsEnabled = true;
+
+                // Chroma
+                cboChromaScale.IsEnabled = true;
+                slChromaAntiring.IsEnabled = true;
+                tbxChromaAntiring.IsEnabled = true;
+
+                // Downscale
+                cboDownscale.IsEnabled = true;
+                slDownscaleAntiring.IsEnabled = true;
+                tbxDownscaleAntiring.IsEnabled = true;
             }
         }
 
@@ -496,9 +608,108 @@ namespace Glow
         /// <summary>
         ///    Update Button
         /// </summary>
+        private Boolean IsUpdateWindowOpened = false;
         private void buttonUpdate_Click(object sender, RoutedEventArgs e)
         {
+            // Proceed if Internet Connection
+            //
+            if (UpdateWindow.CheckForInternetConnection() == true)
+            {
+                // Parse GitHub .version file
+                //
+                string parseLatestVersion = string.Empty;
 
+                try
+                {
+                    parseLatestVersion = UpdateWindow.wc.DownloadString("https://raw.githubusercontent.com/MattMcManis/Glow/master/.version");
+                }
+                catch
+                {
+                    MessageBox.Show("GitHub version file not found.");
+                }
+
+
+                //Split Version & Build Phase by dash
+                //
+                if (!string.IsNullOrEmpty(parseLatestVersion)) //null check
+                {
+                    try
+                    {
+                        // Split Version and Build Phase
+                        splitVersionBuildPhase = Convert.ToString(parseLatestVersion).Split('-');
+
+                        // Set Version Number
+                        latestVersion = new Version(splitVersionBuildPhase[0]); //number
+                        latestBuildPhase = splitVersionBuildPhase[1]; //alpha
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error reading version.");
+                    }
+
+                    // Debug
+                    //MessageBox.Show(Convert.ToString(latestVersion));
+                    //MessageBox.Show(latestBuildPhase);
+
+
+                    // Check if Axiom is the Latest Version
+                    // Update Available
+                    if (latestVersion > currentVersion)
+                    {
+                        // Yes/No Dialog Confirmation
+                        //
+                        MessageBoxResult result = MessageBox.Show("v" + latestVersion + "-" + latestBuildPhase + "\n\nDownload Update?", "Update Available ", MessageBoxButton.YesNo);
+                        switch (result)
+                        {
+                            case MessageBoxResult.Yes:
+                                // Detect which screen we're on
+                                var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
+                                var thisScreen = allScreens.SingleOrDefault(s => this.Left >= s.WorkingArea.Left && this.Left < s.WorkingArea.Right);
+
+                                // Start Window
+                                UpdateWindow updatewindow = new UpdateWindow();
+
+                                // Keep in Front
+                                updatewindow.Owner = Window.GetWindow(this);
+
+                                // Only allow 1 Window instance
+                                if (IsUpdateWindowOpened) return;
+                                updatewindow.ContentRendered += delegate { IsUpdateWindowOpened = true; };
+                                updatewindow.Closed += delegate { IsUpdateWindowOpened = false; };
+
+                                // Position Relative to MainWindow
+                                // Keep from going off screen
+                                updatewindow.Left = Math.Max((this.Left + (this.Width - updatewindow.Width) / 2), thisScreen.WorkingArea.Left);
+                                updatewindow.Top = Math.Max((this.Top + (this.Height - updatewindow.Height) / 2), thisScreen.WorkingArea.Top);
+
+                                // Open Window
+                                updatewindow.Show();
+                                break;
+                            case MessageBoxResult.No:
+                                break;
+                        }
+                    }
+                    // Update Not Available
+                    else if (latestVersion <= currentVersion)
+                    {
+                        MessageBox.Show("This version is up to date.");
+                    }
+                    // Unknown
+                    else // null
+                    {
+                        MessageBox.Show("Could not find download. Try updating manually.");
+                    }
+                }
+                // Version is Null
+                else
+                {
+                    MessageBox.Show("GitHub version file returned empty.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Could not detect Internet Connection.");
+            }
         }
 
         /// <summary>

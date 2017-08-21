@@ -48,10 +48,15 @@ namespace Glow
                 mainwindow.cboColorSpace.SelectedIndex = 0;
                 mainwindow.cboColorRange.SelectedIndex = 0;
                 mainwindow.cboGamma.SelectedItem = "auto";
+
                 mainwindow.cboScale.SelectedItem = "bicubic";
+                mainwindow.slScaleAntiring.Value = 0;
                 mainwindow.cboChromaScale.SelectedItem = "bicubic";
+                mainwindow.slChromaAntiring.Value = 0;
                 mainwindow.cboDownscale.SelectedItem = "bicubic";
-                mainwindow.cboAntiring.SelectedItem = "no";
+                mainwindow.slDownscaleAntiring.Value = 0;
+                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+
                 mainwindow.cboDither.SelectedItem = "no";
                 mainwindow.cboDeband.SelectedItem = "no";
                 mainwindow.tbxDebandGrain.Text = "";
@@ -152,10 +157,15 @@ namespace Glow
                 mainwindow.cboColorSpace.SelectedIndex = 0;
                 mainwindow.cboColorRange.SelectedIndex = 0;
                 mainwindow.cboGamma.SelectedItem = "auto";
+
                 mainwindow.cboScale.SelectedItem = "ewa_lanczossharp";
+                mainwindow.slScaleAntiring.Value = 1;
                 mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
+                mainwindow.slChromaAntiring.Value = 1;
                 mainwindow.cboDownscale.SelectedItem = "mitchell";
-                mainwindow.cboAntiring.SelectedItem = "yes";
+                mainwindow.slDownscaleAntiring.Value = 1;
+                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+
                 mainwindow.cboDither.SelectedItem = "8";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "80";

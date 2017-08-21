@@ -41,8 +41,9 @@ namespace Glow
             // -------------------------
             string driver = "vo=" + mainwindow.cboVideoDriver.SelectedItem.ToString();
 
+            // special rule
             if ((string)mainwindow.cboVideoDriver.SelectedItem == "opengl-hq")
-                driver = "profile=opengl-hq"; // special rule
+                driver = "profile=opengl-hq";
 
             // -------------------------
             // Hardware Decoder
@@ -64,35 +65,9 @@ namespace Glow
             // -------------------------
             string gamma = "target-trc=" + mainwindow.cboGamma.SelectedItem.ToString();
 
+            // auto
             if ((string)mainwindow.cboGamma.SelectedItem == "auto")
-                gamma = "gamma-auto"; // special rule
-
-            // -------------------------
-            // Scale
-            // -------------------------
-            string scale = "scale=" + mainwindow.cboScale.SelectedItem.ToString();
-
-            // Antiring
-            if (mainwindow.cboAntiring.SelectedItem.ToString() == "yes")
-                scale = scale + ":scale-antiring=1";
-
-            // -------------------------
-            // Chroma Scale
-            // -------------------------
-            string chromascale = "cscale=" + mainwindow.cboChromaScale.SelectedItem.ToString();
-
-            // Antiring
-            if (mainwindow.cboAntiring.SelectedItem.ToString() == "yes")
-                chromascale = chromascale + ":scale-antiring=1";
-
-            // -------------------------
-            // Downscale
-            // -------------------------
-            string downscale = "dscale=" + mainwindow.cboDownscale.SelectedItem.ToString();
-
-            // Antiring
-            if (mainwindow.cboAntiring.SelectedItem.ToString() == "yes")
-                downscale = downscale + ":scale-antiring=1";
+                gamma = "gamma-auto";
 
             // -------------------------
             // Dither
@@ -105,19 +80,102 @@ namespace Glow
             string deband = string.Empty;
 
             if ((string)mainwindow.cboDeband.SelectedItem == "yes")
-                deband = "deband"; // special rule
+                deband = "deband";
 
             // -------------------------
             // Deband Grain
             // -------------------------
-            // only use if deband is on
-            // and deband grain is not empty
-
             string debandgrain = string.Empty;
 
-            if ((string)mainwindow.cboDeband.SelectedItem == "yes"
-                && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
+            // only use if deband is on
+            // and deband grain is not empty
+            if ((string)mainwindow.cboDeband.SelectedItem == "yes" && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
                 debandgrain = "deband-grain=" + mainwindow.tbxDebandGrain.Text.ToString();
+
+            // -------------------------
+            // Scale
+            // -------------------------
+            string scale = string.Empty;
+
+            // scale must be on
+            // software scaler must be off
+            if ((string)mainwindow.cboScale.SelectedItem != "off" 
+                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off") 
+
+                scale = "scale=" + mainwindow.cboScale.SelectedItem.ToString();
+
+            // -------------------------
+            // Scale Antiring
+            // -------------------------
+            string scaleAntiring = string.Empty;
+
+            // scale must be on
+            // antitring must be above 0
+            // software scaler must be off
+            if ((string)mainwindow.cboScale.SelectedItem != "off"
+                && mainwindow.slScaleAntiring.Value != 0 
+                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+                scaleAntiring = "scale-antiring=" + mainwindow.tbxScaleAntiring.Text.ToString();
+
+            // -------------------------
+            // Chroma Scale
+            // -------------------------
+            string chromascale = string.Empty;
+
+            // chrome scale must be on
+            // software scaler must be off
+            if ((string)mainwindow.cboChromaScale.SelectedItem != "off"
+                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+
+                chromascale = "cscale=" + mainwindow.cboChromaScale.SelectedItem.ToString();
+
+            // -------------------------
+            // Chroma Antiring
+            // -------------------------
+            // chrome scale must be on
+            // antitring must be above 0
+            // software scaler must be off
+            string chromascaleAntiring = string.Empty;
+
+            if ((string)mainwindow.cboChromaScale.SelectedItem != "off"
+                && mainwindow.slChromaAntiring.Value != 0 
+                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+
+                chromascaleAntiring = "cscale-antiring=" + mainwindow.tbxChromaAntiring.Text.ToString();
+
+            // -------------------------
+            // Downscale
+            // -------------------------
+            string downscale = string.Empty;
+
+            // downscale must be on
+            // software scaler must be off
+            if ((string)mainwindow.cboDownscale.SelectedItem != "off"
+                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+
+                downscale = "dscale=" + mainwindow.cboDownscale.SelectedItem.ToString();
+
+            // -------------------------
+            // Downscale Antiring
+            // -------------------------
+            string downscaleAntiring = string.Empty;
+
+            // downscale must be on
+            // antitring must be above 0
+            // software scaler must be off
+            if ((string)mainwindow.cboDownscale.SelectedItem != "off"
+                && mainwindow.slDownscaleAntiring.Value != 0 
+                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+                downscaleAntiring = "dscale-antiring=" + mainwindow.tbxDownscaleAntiring.Text.ToString();
+
+            // -------------------------
+            // Software Scaler
+            // -------------------------
+            string softwarescaler = string.Empty;
+
+            // software scaler must be off
+            if ((string)mainwindow.cboSoftwareScaler.SelectedItem != "off")
+                softwarescaler = "sws-scaler=" + mainwindow.cboSoftwareScaler.SelectedItem.ToString();
 
             // -------------------------
             // Deinterlace
@@ -126,11 +184,10 @@ namespace Glow
 
             // -------------------------
             // Video Sync
-            // -------------------------
-            // only if video sync is on
-
+            // -------------------------          
             string videosync = string.Empty;
 
+            // only if video sync is on
             if ((string)mainwindow.cboVideoSync.SelectedItem != "off")
                 videosync = "video-sync=" + mainwindow.cboVideoSync.SelectedItem.ToString();
 
@@ -147,17 +204,24 @@ namespace Glow
                 title,
                 driver,
                 hwdec,
+                deinterlace,
+                videosync,
+                framedrop,
+
                 colorspace,
                 colorrange,
                 gamma,
-                scale,
-                chromascale,
-                downscale,
                 dither,
                 deband,
                 debandgrain,
-                videosync,
-                framedrop,
+
+                scale,
+                scaleAntiring,
+                chromascale,
+                chromascaleAntiring,
+                downscale,
+                downscaleAntiring,
+                softwarescaler,
             };
 
             string video = string.Join("\r\n", listVideo
