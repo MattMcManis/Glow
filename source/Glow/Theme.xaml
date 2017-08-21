@@ -171,6 +171,15 @@
     </Style>
 
 
+    <!--/////////////////////////////////////
+        Scrollbar
+        /////////////////////////////////////-->
+
+    <!-- Background -->
+    <Style TargetType="{x:Type ScrollBar}">
+        <Setter Property="Background" Value="#FF191919"/>
+        <Setter Property="BorderBrush" Value="#FF191919"/>
+    </Style>
 
 
     <!--/////////////////////////////////////

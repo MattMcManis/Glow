@@ -27,7 +27,6 @@
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         xmlns:my="clr-namespace:Glow"
         xmlns:settings="clr-namespace:Glow.Properties"
-        
         xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="Glow.MainWindow"
         
         Closing="MainWindow_Closing" 
@@ -37,7 +36,7 @@
         Left="{Binding Left, Mode=TwoWay, Source={x:Static settings:Settings.Default}}"
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
         
-        Style="{DynamicResource WindowStyle}"
+        Style="{DynamicResource WindowStyle}" Icon="Resources/Images/Icons/logo.ico"
         >
 
     <Grid>
@@ -336,7 +335,8 @@
                                           VerticalAlignment="Top"
                                           Width="100"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboScale_SelectionChanged">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScale_SelectionChanged">
                                     <System:String>off</System:String>
                                     <System:String>nearest</System:String>
                                     <System:String>linear</System:String>
@@ -403,7 +403,8 @@
                                           VerticalAlignment="Top" 
                                           Width="100"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboChromaScale_SelectionChanged">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboChromaScale_SelectionChanged">
                                     <System:String>off</System:String>
                                     <System:String>nearest</System:String>
                                     <System:String>linear</System:String>
@@ -470,7 +471,8 @@
                                           VerticalAlignment="Top"
                                           Width="100"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboDownscale_SelectionChanged">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboDownscale_SelectionChanged">
                                     <System:String>off</System:String>
                                     <System:String>nearest</System:String>
                                     <System:String>linear</System:String>
@@ -537,7 +539,8 @@
                                           VerticalAlignment="Top"
                                           Width="100"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboSoftwareScale_SelectionChanged">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
+                                          SelectionChanged="cboSoftwareScale_SelectionChanged">
                                     <System:String>off</System:String>
                                     <System:String>bilinear</System:String>
                                     <System:String>bicubic</System:String>
