@@ -40,35 +40,11 @@
         Style="{DynamicResource WindowStyle}"
         >
 
-    <Window.Resources>
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-    </Window.Resources>
-
     <Grid>
         <Grid Margin="0,0,-1,0">
 
             <!-- Main Tabs -->
-            <TabControl Margin="0,10,18,59" 
+            <TabControl Margin="0,10,11,54" 
                         HorizontalAlignment="Right" 
                         Width="230" 
                         Style="{DynamicResource TabControlStyle}">
@@ -667,12 +643,12 @@
 
 
                                 <!-- Audio Languages -->
-                                <Label Content="Languages"
+                                <Label Content="Language Priority"
                                        HorizontalAlignment="Left"
                                        Margin="10,259,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
-                                       Width="75"
+                                       Width="155"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ListView x:Name="listViewAudioLanguages" 
                                           HorizontalAlignment="Left" 
@@ -1116,12 +1092,12 @@
                                         Style="{DynamicResource TextBoxStyle}"/>
 
                                 <!-- Subtitle Languages -->
-                                <Label Content="Languages" 
+                                <Label Content="Language Priority" 
                                        HorizontalAlignment="Left" 
                                        Margin="10,312,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
-                                       Width="75"
+                                       Width="155"
                                        Style="{DynamicResource LabelStyle}"/>
 
                                 <ListView x:Name="listViewSubtitleLanguages" 
@@ -1990,7 +1966,7 @@
 
             <!-- Config RichTextBox -->
             <RichTextBox x:Name="rtbConfig" 
-                         Margin="10,10,258,59"
+                         Margin="10,10,251,54"
                          Padding="10" 
                          FontSize="14"
                          FontFamily="Gudea"
@@ -2002,7 +1978,7 @@
             <!-- Info -->
             <Button x:Name="buttonInfo" 
                     HorizontalAlignment="Left" 
-                    Margin="10,0,0,19"
+                    Margin="10,0,0,16"
                     VerticalAlignment="Bottom" 
                     Width="22" Height="22" 
                     Cursor="Hand" 
@@ -2019,7 +1995,7 @@
             <!-- Website -->
             <Button x:Name="buttonWebsite" 
                     HorizontalAlignment="Left"
-                    Margin="38,0,0,19" 
+                    Margin="38,0,0,16" 
                     VerticalAlignment="Bottom" 
                     Width="22" Height="22"
                     Cursor="Hand" 
@@ -2037,7 +2013,7 @@
             <!-- Update -->
             <Button x:Name="buttonUpdate" 
                     HorizontalAlignment="Left" 
-                    Margin="66,0,0,19" 
+                    Margin="66,0,0,16" 
                     VerticalAlignment="Bottom"
                     Width="22" Height="22"
                     Cursor="Hand" 
@@ -2054,7 +2030,7 @@
             <!-- Config Folder -->
             <Button x:Name="buttonConfigDir" 
                     HorizontalAlignment="Left" 
-                    Margin="94,0,0,19" 
+                    Margin="94,0,0,16" 
                     VerticalAlignment="Bottom"
                     Width="22" Height="22"
                     Cursor="Hand"
@@ -2071,27 +2047,27 @@
 
             <!-- Copy -->
             <Button x:Name="buttonCopy" 
-                    Margin="142,0,0,19" 
-                    Cursor="Hand"  
-                    Width="75" 
-                    Height="22" 
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Left"
+                    Margin="-164,0,164,16" 
+                    Cursor="Hand"
                     Click="buttonCopy_Click" 
-                    Style="{DynamicResource ButtonStyle}">
+                    Height="22"
+                    MinWidth="75"
+                    MaxWidth="75"
+                    Style="{DynamicResource ButtonStyle}" 
+                    VerticalAlignment="Bottom">
                 <TextBlock Text="Copy" Margin="0,-2,0,0"/>
             </Button>
 
             <!-- Save -->
             <Button x:Name="buttonSave"
-                    Margin="230,0,0,19" 
+                    Margin="-79,0,79,16" 
                     Cursor="Hand" 
-                    Width="75" 
-                    Height="22" 
-                    VerticalAlignment="Bottom" 
-                    HorizontalAlignment="Left"
+                    Height="22"
+                    MinWidth="75"
+                    MaxWidth="75"
+                    VerticalAlignment="Bottom"
                     Click="buttonSave_Click" 
-                    Style="{DynamicResource ButtonStyle}"
+                    Style="{DynamicResource ButtonStyle}" 
                     >
                 <TextBlock Text="Save" Margin="0,-2,0,0"/>
             </Button>
@@ -2100,7 +2076,7 @@
 
             <!-- Presets -->
             <Label Content="Preset" 
-                   Margin="0,0,211,17"
+                   Margin="0,0,204,14"
                    Height="26"
                    VerticalAlignment="Bottom" 
                    HorizontalAlignment="Right" 
@@ -2108,7 +2084,7 @@
                    Style="{DynamicResource LabelStyle}"/>
 
             <ComboBox x:Name="cboPreset" 
-                      Margin="0,0,133,19"
+                      Margin="0,0,126,16"
                       Width="75" 
                       Height="22" 
                       VerticalAlignment="Bottom"
@@ -2128,7 +2104,7 @@
             <Button x:Name="buttonGenerate" 
                     Content="Generate" 
                     Cursor="Hand" 
-                    Margin="0,0,18,19" 
+                    Margin="0,0,11,16" 
                     Click="buttonGenerate_Click" 
                     Width="75"
                     Height="22" 

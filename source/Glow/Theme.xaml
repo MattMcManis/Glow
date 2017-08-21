@@ -923,8 +923,8 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsKeyboardFocused" Value="False"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" TargetName="Bd" Value="#FF000000"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#A8000000"/>
+                <Setter Property="Background" TargetName="Bd" Value="#FF151515"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#A8151515"/>
             </MultiTrigger>
             <!-- Background Selected -->
             <MultiTrigger>
@@ -933,8 +933,8 @@
                     <Condition Property="IsMouseOver" Value="False"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" TargetName="Bd" Value="#FF191919"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF191919"/>
+                <Setter Property="Background" TargetName="Bd" Value="#FF333333"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF333333"/>
             </MultiTrigger>
             <!-- Background Mouse Over Selected -->
             <MultiTrigger>
@@ -942,8 +942,8 @@
                     <Condition Property="IsSelected" Value="True"/>
                     <Condition Property="IsMouseOver" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" TargetName="Bd" Value="#FF000000"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF000000"/>
+                <Setter Property="Background" TargetName="Bd" Value="#FF111111"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF111111"/>
             </MultiTrigger>
             <!-- Background Selected -->
             <MultiTrigger>
@@ -952,8 +952,8 @@
                     <Condition Property="IsMouseOver" Value="False"/>
                     <Condition Property="IsKeyboardFocused" Value="False"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" TargetName="Bd" Value="#FF191919"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF191919"/>
+                <Setter Property="Background" TargetName="Bd" Value="#FF333333"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF333333"/>
             </MultiTrigger>
             <!-- Background Not Selected Keyboard Focused -->
             <MultiTrigger>
@@ -962,7 +962,7 @@
                     <Condition Property="IsMouseOver" Value="False"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF000000"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF151515"/>
             </MultiTrigger>
             <!-- Background Mouse Over Not Selected Keyboard Focused -->
             <MultiTrigger>
@@ -971,8 +971,8 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" TargetName="Bd" Value="#FF000000"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF000000"/>
+                <Setter Property="Background" TargetName="Bd" Value="#FF151515"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF151515"/>
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -982,11 +982,11 @@
     <Style x:Key="ComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Template" Value="{StaticResource ComboBoxCustom.Item.ControlTemplate}"/>
         <Setter Property="Foreground" Value="#FFFFFFFF" />
-        <Setter Property="Background" Value="#FF191919" />
-        <Setter Property="BorderBrush" Value="#FF191919" />
+        <Setter Property="Background" Value="#FF333333" />
+        <Setter Property="BorderBrush" Value="#FF333333" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="true">
-                <Setter Property="Background" Value="#FF191919" />
+                <Setter Property="Background" Value="#FF333333" />
             </Trigger>
         </Style.Triggers>
     </Style>
