@@ -31,7 +31,7 @@
         
         Closing="MainWindow_Closing" 
         UseLayoutRounding="True"
-        Width="712" Height="869"
+        Width="712" Height="400"
         Top="{Binding Top, Mode=TwoWay, Source={x:Static settings:Settings.Default}}"
         Left="{Binding Left, Mode=TwoWay, Source={x:Static settings:Settings.Default}}"
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
@@ -754,7 +754,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ListView x:Name="listViewAudioLanguages" 
                                           HorizontalAlignment="Left" 
-                                          Height="103" 
+                                          Height="150" 
                                           Margin="10,301,0,0"
                                           VerticalAlignment="Top"
                                           Width="155"
@@ -774,12 +774,12 @@
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                                        <Border CornerRadius="2" SnapsToDevicePixels="True"  
+                                                        <Border CornerRadius="0" SnapsToDevicePixels="True"  
                                                                     BorderThickness="{TemplateBinding BorderThickness}"   
                                                                     BorderBrush="{TemplateBinding BorderBrush}"   
                                                                     Background="{TemplateBinding Background}">
 
-                                                            <Border x:Name="InnerBorder" CornerRadius="1" BorderThickness="1">
+                                                            <Border x:Name="InnerBorder" CornerRadius="0" BorderThickness="1">
                                                                 <Grid>
                                                                     <Grid.RowDefinitions>
                                                                         <RowDefinition MaxHeight="11" />
@@ -800,6 +800,7 @@
                                                             </Trigger>
                                                             <Trigger Property="IsSelected" Value="true">
                                                                 <Setter Property="Foreground" Value="#FFb478df"/>
+                                                                <Setter Property="Background" Value="#FF222222"/>
                                                             </Trigger>
                                                             <Trigger Property="IsEnabled" Value="False">
                                                                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
@@ -822,7 +823,8 @@
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
-                                            <GridViewColumn>
+                                            <!-- Names -->
+                                            <GridViewColumn Width="94">
                                                 <GridViewColumn/>
                                             </GridViewColumn>
                                         </GridView>
@@ -1207,7 +1209,7 @@
 
                                 <ListView x:Name="listViewSubtitleLanguages" 
                                           HorizontalAlignment="Left" 
-                                          Height="103" 
+                                          Height="150" 
                                           Margin="10,358,0,0"
                                           VerticalAlignment="Top"
                                           Width="155"
@@ -1253,6 +1255,7 @@
                                                             </Trigger>
                                                             <Trigger Property="IsSelected" Value="true">
                                                                 <Setter Property="Foreground" Value="#FFb478df"/>
+                                                                <Setter Property="Background" Value="#FF222222"/>
                                                             </Trigger>
                                                             <Trigger Property="IsEnabled" Value="False">
                                                                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
@@ -1275,7 +1278,8 @@
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
-                                            <GridViewColumn>
+                                            <!-- Names -->
+                                            <GridViewColumn Width="94">
                                                 <GridViewColumn/>
                                             </GridViewColumn>
                                         </GridView>

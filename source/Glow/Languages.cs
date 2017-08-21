@@ -31,11 +31,19 @@ namespace Glow
         public static List<string> listLanguages = new List<string>()
         {
             "English",
+            "Arabic",
+            "Bengali",
             "Chinese",
             "French",
+            "German",
+            "Hindi",
+            "Italian",
             "Japanese",
             "Korean",
+            "Portuguese",
+            "Russian",
             "Spanish",
+            "Vietnamese",
         };
 
 
@@ -51,6 +59,14 @@ namespace Glow
             if (input == "English")
                 language = "eng,en,enUS,en-US,English";
 
+            // Arabic
+            else if (input == "Arabic")
+                language = "ar,ara,Arabic";
+
+            // Bengali
+            else if (input == "Bengali")
+                language = "bn,ben,Bengali";
+
             // Chinese
             else if (input == "Chinese")
                 language = "fr,fra,fre,fra";
@@ -58,6 +74,18 @@ namespace Glow
             // French
             else if (input == "French")
                 language = "fr,fra,fre,fra,French";
+
+            // German
+            else if (input == "German")
+                language = "de,ger,deu,German";
+
+            // Hindi
+            else if (input == "Hindi")
+                language = "hi,hin,Hindi";
+
+            // Italian
+            else if (input == "Italian")
+                language = "it,ita,Italian";
 
             // Japanese
             else if (input == "Japanese")
@@ -67,9 +95,21 @@ namespace Glow
             else if (input == "Korean")
                 language = "kor,ko,Korean";
 
+            // Portuguese
+            else if (input == "Portuguese")
+                language = "pt,por,Portuguese";
+
+            // Russian
+            else if (input == "Russian")
+                language = "ru,rus,Russian";
+
             // Spanish
             else if (input == "Spanish")
                 language = "es,spa,Spanish";
+
+            // Vietnamese
+            else if (input == "Vietnamese")
+                language = "vi,vie,Vietnamese";
 
             return language;
         }
