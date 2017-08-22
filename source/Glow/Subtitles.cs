@@ -58,10 +58,10 @@ namespace Glow
 
             // Add Each Language In Priority Order from the top to Audio Languages List
             // Regardless of Order checked in
-            foreach (string item in mainwindow.listViewSubtitleLanguages.Items)
+            foreach (string item in mainwindow.listViewSubtitlesLanguages.Items)
             {
                 // If list contains a checked item
-                if (mainwindow.listViewSubtitleLanguages.SelectedItems.Contains(item))
+                if (mainwindow.listViewSubtitlesLanguages.SelectedItems.Contains(item))
                 {
                     // Convert Selected Language (e.g. English) into (eng,en,enUS,en-US)
                     string language = Languages.LanguageCode(item);

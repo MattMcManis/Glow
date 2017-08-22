@@ -594,6 +594,128 @@ namespace Glow
                 mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
+
+            // -------------------------
+            // Debug
+            // -------------------------
+            else if ((string)mainwindow.cboPreset.SelectedItem == "Debug")
+            {
+                // -------------------------
+                // General
+                // -------------------------
+                mainwindow.cboPriority.SelectedItem = "high";
+                mainwindow.cboSavePositionQuit.SelectedItem = "no";
+                mainwindow.cboKeepOpen.SelectedItem = "yes";
+                mainwindow.cboOnTop.SelectedItem = "no";
+                mainwindow.cboOSC.SelectedItem = "yes";
+                mainwindow.cboScreenshot.SelectedItem = "png";
+
+                // -------------------------
+                // Video
+                // -------------------------
+                mainwindow.cboVideoDriver.SelectedItem = "opengl-hq";
+                mainwindow.cboOpenGLPBO.SelectedItem = "off";
+                mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
+                // Display
+                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
+                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
+                mainwindow.cboColorSpace.SelectedIndex = 0;
+                mainwindow.cboColorRange.SelectedIndex = 0;
+                mainwindow.cboVideoSync.SelectedItem = "display-resample";
+                mainwindow.cboFramedrop.SelectedItem = "vo";
+                // Image
+                mainwindow.cboGammaAuto.SelectedItem = "on";
+                mainwindow.cboDither.SelectedItem = "8";
+                mainwindow.cboDeband.SelectedItem = "yes";
+                mainwindow.tbxDebandGrain.Text = "80";
+                mainwindow.cboDeinterlace.SelectedItem = "auto";
+                // Scaling
+                mainwindow.cboSigmoid.SelectedItem = "on";
+                mainwindow.cboScale.SelectedItem = "spline36";
+                mainwindow.slScaleAntiring.Value = 1;
+                mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
+                mainwindow.slChromaAntiring.Value = 1;
+                mainwindow.cboDownscale.SelectedItem = "mitchell";
+                mainwindow.slDownscaleAntiring.Value = 1;
+                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+
+                // -------------------------
+                // Audio
+                // -------------------------
+                mainwindow.cboAudioDriver.SelectedItem = "wasapi";
+                mainwindow.cboChannels.SelectedItem = "auto";
+                mainwindow.slVolume.Value = 100;
+                mainwindow.slVolumeMax.Value = 150;
+                mainwindow.cboSoftVolume.SelectedItem = "yes";
+                mainwindow.slSoftVolumeMax.Value = 150;
+                mainwindow.cboNormalize.SelectedItem = "yes";
+                mainwindow.cboScaleTempo.SelectedItem = "yes";
+                mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                //Language
+                mainwindow.listViewAudioLanguages.SelectedItems.Add("English");
+                mainwindow.listViewAudioLanguages.SelectedItems.Add("Japanese");
+
+
+                // -------------------------
+                // Subtitles
+                //// -------------------------
+                mainwindow.cboSubtitles.SelectedItem = "yes";
+                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
+                mainwindow.slSubtitlePosition.Value = 95;
+                mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
+                // Font
+                mainwindow.cboSubtitlesFont.SelectedItem = "Noto Sans";
+                mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
+                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                // Border
+                mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
+                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                // Shadow
+                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                //Language
+                mainwindow.listViewSubtitlesLanguages.SelectedItems.Add("English");
+
+                // -------------------------
+                // Stream
+                // -------------------------
+                // Demuxer
+                mainwindow.cboDemuxerThread.SelectedItem = "yes";
+                mainwindow.tbxDemuxerBuffersize.Text = "32768";
+                mainwindow.tbxDemuxerReadahead.Text = "5.0";
+                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                // Cache
+                mainwindow.cboCache.SelectedItem = "auto";
+                mainwindow.tbxCacheDefault.Text = "100000";
+                mainwindow.tbxCacheInitial.Text = "1024";
+                mainwindow.tbxCacheSeekMin.Text = "1024";
+                mainwindow.tbxCacheBackbuffer.Text = "25000";
+                mainwindow.tbxCacheSeconds.Text = "30";
+                mainwindow.cboCacheFile.SelectedItem = "TMP";
+                mainwindow.tbxCacheFileSize.Text = "1048576";
+
+                // -------------------------
+                // OSD
+                // -------------------------
+                mainwindow.cboOSD.SelectedItem = "yes";
+                mainwindow.cboOSDFractions.SelectedItem = "yes";
+                mainwindow.tbxOSDDuration.Text = "1500";
+                mainwindow.cboOSDLevel.SelectedItem = "1";
+                mainwindow.slOSDScale.Value = 0.5;
+                // Bar
+                mainwindow.slOSDBarWidth.Value = 95;
+                mainwindow.slOSDBarHeight.Value = 2;
+                // Font
+                mainwindow.cboOSDFont.SelectedItem = "Noto Sans";
+                mainwindow.cboOSDFontSize.SelectedItem = "60";
+                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                // Border
+                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
+                mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
+                // Shadow
+                mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.slOSDShadowOffset.Value = 1.25;
+            }
         }
     }
 }

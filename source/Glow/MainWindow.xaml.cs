@@ -550,14 +550,14 @@ namespace Glow
         /// </summary>
         private void buttonSubtitleLanguageUp_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = this.listViewSubtitleLanguages.SelectedIndex;
+            var selectedIndex = this.listViewSubtitlesLanguages.SelectedIndex;
 
             if (selectedIndex > 0)
             {
                 var itemToMoveUp = SubtitleLanguageItems[selectedIndex];
                 SubtitleLanguageItems.RemoveAt(selectedIndex);
                 SubtitleLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
-                this.listViewSubtitleLanguages.SelectedIndex = selectedIndex - 1;
+                this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex - 1;
             }
         }
         /// <summary>
@@ -565,14 +565,14 @@ namespace Glow
         /// </summary>
         private void buttonSubtitleLanguageDown_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = this.listViewSubtitleLanguages.SelectedIndex;
+            var selectedIndex = this.listViewSubtitlesLanguages.SelectedIndex;
 
             if (selectedIndex + 1 < SubtitleLanguageItems.Count)
             {
                 var itemToMoveDown = SubtitleLanguageItems[selectedIndex];
                 SubtitleLanguageItems.RemoveAt(selectedIndex);
                 SubtitleLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
-                this.listViewSubtitleLanguages.SelectedIndex = selectedIndex + 1;
+                this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex + 1;
             }
         }
         /// <summary>
@@ -580,14 +580,14 @@ namespace Glow
         /// </summary>
         private void buttonSubtitleLanguageSelectAll_Click(object sender, RoutedEventArgs e)
         {
-            listViewSubtitleLanguages.SelectAll();
+            listViewSubtitlesLanguages.SelectAll();
         }
         /// <summary>
         ///    Subtitle Deselect All
         /// </summary>
         private void buttonSubtitleLanguageDeselectAll_Click(object sender, RoutedEventArgs e)
         {
-            listViewSubtitleLanguages.SelectedIndex = -1;
+            listViewSubtitlesLanguages.SelectedIndex = -1;
         }
 
 

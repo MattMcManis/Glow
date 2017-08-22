@@ -1415,7 +1415,7 @@
                                        Width="155"
                                        Style="{DynamicResource LabelStyle}"/>
 
-                                <ListView x:Name="listViewSubtitleLanguages" 
+                                <ListView x:Name="listViewSubtitlesLanguages" 
                                           Height="150" 
                                           Margin="10,358,42,0"
                                           VerticalAlignment="Top"
@@ -2433,6 +2433,7 @@
                 <System:String>High</System:String>
                 <System:String>Medium</System:String>
                 <System:String>Low</System:String>
+                <System:String>Debug</System:String>
 
             </ComboBox>
 
