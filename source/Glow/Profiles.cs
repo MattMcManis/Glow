@@ -18,7 +18,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -755,6 +754,7 @@ namespace Glow
             inif.Write("General", "keepOpen", mainwindow.cboKeepOpen.SelectedItem.ToString());
             inif.Write("General", "onTop", mainwindow.cboOnTop.SelectedItem.ToString());
             inif.Write("General", "osc", mainwindow.cboOSC.SelectedItem.ToString());
+            inif.Write("General", "screenshot", mainwindow.cboScreenshot.SelectedItem.ToString());
 
             // --------------------------------------------------
             // Video
@@ -794,12 +794,9 @@ namespace Glow
             // --------------------------------------------------
             inif.Write("Audio", "driver", mainwindow.cboAudioDriver.SelectedItem.ToString());
 
-            //int langCount = 0;
             List<string> listLangAudio = new List<string>();
             foreach (string item in mainwindow.listViewAudioLanguages.SelectedItems)
             {
-                //langCount++;
-                //inif.Write("Audio", "language" + Convert.ToString(langCount), item);
                 listLangAudio.Add(item);
             }
             string languagesAudio = string.Join(",", listLangAudio.Where(s => !string.IsNullOrEmpty(s)));
@@ -898,8 +895,6 @@ namespace Glow
         }
 
 
-
-
         /// <summary>
         ///    Import Preset
         /// </summary>
@@ -909,17 +904,61 @@ namespace Glow
             // Get from Select File Dialog Path
             string input = inputDir + inputFileName + inputExt;
 
+            // If control failed to imported, add to list
+            List<string> listFailedImports = new List<string>();
+
             INIFile inif = new INIFile(input);
 
             // --------------------------------------------------
             // General
             // --------------------------------------------------
-            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "priority");
-            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "savePositiOnQuit");
-            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "keepOpen");
-            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "onTop");
-            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "osc");
-            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "screenshot");
+            // Priority
+            string priority = inif.Read("General", "priority");
+            if (mainwindow.cboPriority.Items.Contains(priority))
+                mainwindow.cboPriority.SelectedItem = priority;
+            else
+                listFailedImports.Add("General: Priority");
+
+            // Save Position
+            string savePositiOnQuit = inif.Read("General", "savePositiOnQuit");
+            if (mainwindow.cboSavePositionQuit.Items.Contains(savePositiOnQuit))
+                mainwindow.cboSavePositionQuit.SelectedItem = savePositiOnQuit;
+            else
+                listFailedImports.Add("General: Save Position");
+
+            // Keep Open
+            string keepOpen = inif.Read("General", "keepOpen");
+            if (mainwindow.cboKeepOpen.Items.Contains(keepOpen))
+                mainwindow.cboKeepOpen.SelectedItem = keepOpen;
+            else
+                listFailedImports.Add("General: Keep Open");
+
+            // On Top
+            string onTop = inif.Read("General", "onTop");
+            if (mainwindow.cboOnTop.Items.Contains(onTop))
+                mainwindow.cboOnTop.SelectedItem = onTop;
+            else
+                listFailedImports.Add("General: On Top");
+
+            // OSC
+            string osc = inif.Read("General", "osc");
+            if (mainwindow.cboOSC.Items.Contains(osc))
+                mainwindow.cboOSC.SelectedItem = osc;
+            else
+                listFailedImports.Add("General: OSC");
+
+            // Screenshot
+            string screenshot = inif.Read("General", "screenshot");
+            if (mainwindow.cboScreenshot.Items.Contains(screenshot))
+                mainwindow.cboScreenshot.SelectedItem = screenshot;
+            else
+                listFailedImports.Add("General: Screenshot");
+
+            //mainwindow.cboSavePositionQuit.SelectedItem = inif.Read("General", "savePositiOnQuit");
+            //mainwindow.cboKeepOpen.SelectedItem = inif.Read("General", "keepOpen");
+            //mainwindow.cboOnTop.SelectedItem = inif.Read("General", "onTop");
+            //mainwindow.cboOSC.SelectedItem = inif.Read("General", "osc");
+            //mainwindow.cboScreenshot.SelectedItem = inif.Read("General", "screenshot");
 
             // --------------------------------------------------
             // Video
@@ -1030,8 +1069,14 @@ namespace Glow
             mainwindow.tbxOSDShadowOffset.Text = inif.Read("OSD", "shadowOffset");
 
 
-            //debug
-            //MessageBox.Show(sectionVideo);
+            // --------------------------------------------------
+            // Failed Imports
+            // --------------------------------------------------
+            if (listFailedImports.Count() > 0 && listFailedImports != null)
+            {
+                var message = string.Join(Environment.NewLine, listFailedImports);
+                MessageBox.Show(message, "Failed To Import", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
 

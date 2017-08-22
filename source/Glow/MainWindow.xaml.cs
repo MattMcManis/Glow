@@ -872,9 +872,16 @@ namespace Glow
         /// </summary>
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            // Check if mpv config dir exists
-            // If not, create it
-            Directory.CreateDirectory(configDir);
+            try
+            {
+                // Check if mpv config dir exists
+                // If not, create it
+                Directory.CreateDirectory(configDir);
+            }
+            catch
+            {
+                // program will crash if not administrator
+            }
 
 
             // Open 'Save File'
@@ -919,9 +926,16 @@ namespace Glow
         /// </summary>
         private void buttonExport_Click(object sender, RoutedEventArgs e)
         {
-            // Check if presets directory exists
-            // If not, create it
-            Directory.CreateDirectory(appDir + "profiles");
+            try
+            {
+                // Check if presets directory exists
+                // If not, create it
+                Directory.CreateDirectory(appDir + "profiles");
+            }
+            catch
+            {
+                // program will crash if not administrator
+            }
 
             // Presets Diretory
             string profilesDir = appDir + "profiles";
