@@ -44,7 +44,7 @@ namespace Glow
 
         // Web Downloads
         public static WebClient wc = new WebClient();
-        public static ManualResetEvent waiter = new ManualResetEvent(false); // Download one at a time
+        public static ManualResetEvent waiter = new ManualResetEvent(false);
 
         // Progress Label Info
         public static string progressInfo;
@@ -110,22 +110,13 @@ namespace Glow
         // -------------------------
         // Check For Internet Connection
         // -------------------------
+        [System.Runtime.InteropServices.DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
+
         public static bool CheckForInternetConnection()
         {
-            try
-            {
-                using (var client = new WebClient())
-                {
-                    using (client.OpenRead("http://clients3.google.com/generate_204"))
-                    {
-                        return true;
-                    }
-                }
-            }
-            catch
-            {
-                return false;
-            }
+            int desc;
+            return InternetGetConnectedState(out desc, 0);
         }
 
 

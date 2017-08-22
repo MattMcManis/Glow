@@ -81,7 +81,7 @@ namespace Glow
         // -------------------------
         // Bind Audio Language Items
         // -------------------------
-        private static List<string> listAudioLang = Languages.listLanguages;
+        public static List<string> listAudioLang = Languages.listLanguages;
 
         public static ObservableCollection<string> _audioLangItems = new ObservableCollection<string>(listAudioLang);
         public static ObservableCollection<string> AudioLanguageItems
@@ -93,13 +93,13 @@ namespace Glow
         // -------------------------
         // Bind Subtitle Language Items
         // -------------------------
-        private static List<string> listSubtitleLang = Languages.listLanguages;
+        public static List<string> listSubtitlesLang = Languages.listLanguages;
 
-        public static ObservableCollection<string> _subLangItems = new ObservableCollection<string>(listSubtitleLang);
-        public static ObservableCollection<string> SubtitleLanguageItems
+        public static ObservableCollection<string> _subsLangItems = new ObservableCollection<string>(listSubtitlesLang);
+        public static ObservableCollection<string> SubtitlesLanguageItems
         {
-            get { return _subLangItems; }
-            set { _subLangItems = value; }
+            get { return _subsLangItems; }
+            set { _subsLangItems = value; }
         }
 
 
@@ -163,15 +163,25 @@ namespace Glow
             // Load Saved Settings
             // --------------------------------------------------
             // Window Position
-            this.Top = Settings.Default.Top;
-            this.Left = Settings.Default.Left;
-            this.Height = Settings.Default.Height;
-            this.Width = Settings.Default.Width;
-
-            if (Settings.Default.Maximized)
+            // First time use
+            if (Convert.ToDouble(Settings.Default["Left"]) == 0 && Convert.ToDouble(Settings.Default["Top"]) == 0)
             {
-                WindowState = WindowState.Maximized;
+                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             }
+            // Load Saved
+            else
+            { 
+                this.Top = Settings.Default.Top;
+                this.Left = Settings.Default.Left;
+                this.Height = Settings.Default.Height;
+                this.Width = Settings.Default.Width;
+
+                if (Settings.Default.Maximized)
+                {
+                    WindowState = WindowState.Maximized;
+                }
+            }
+            
 
             // --------------------------------------------------
             // Load Fonts
@@ -615,9 +625,9 @@ namespace Glow
 
             if (selectedIndex > 0)
             {
-                var itemToMoveUp = SubtitleLanguageItems[selectedIndex];
-                SubtitleLanguageItems.RemoveAt(selectedIndex);
-                SubtitleLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
+                var itemToMoveUp = SubtitlesLanguageItems[selectedIndex];
+                SubtitlesLanguageItems.RemoveAt(selectedIndex);
+                SubtitlesLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
                 this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex - 1;
             }
         }
@@ -628,11 +638,11 @@ namespace Glow
         {
             var selectedIndex = this.listViewSubtitlesLanguages.SelectedIndex;
 
-            if (selectedIndex + 1 < SubtitleLanguageItems.Count)
+            if (selectedIndex + 1 < SubtitlesLanguageItems.Count)
             {
-                var itemToMoveDown = SubtitleLanguageItems[selectedIndex];
-                SubtitleLanguageItems.RemoveAt(selectedIndex);
-                SubtitleLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
+                var itemToMoveDown = SubtitlesLanguageItems[selectedIndex];
+                SubtitlesLanguageItems.RemoveAt(selectedIndex);
+                SubtitlesLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
                 this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex + 1;
             }
         }
@@ -959,8 +969,18 @@ namespace Glow
             {
                 // Set Input Dir, Name, Ext
                 string inputDir = Path.GetDirectoryName(saveFile.FileName).TrimEnd('\\') + @"\";
+                //string inputFileName = Path.GetFileName(saveFile.FileName);
                 string inputFileName = Path.GetFileNameWithoutExtension(saveFile.FileName);
                 string inputExt = Path.GetExtension(saveFile.FileName);
+                //string input = Path.Combine(inputDir, inputFileName);
+                string input = inputDir + inputFileName + inputExt;
+
+                // Overwriting doesn't work properly with INI Writer
+                // Delete File instead before saving new
+                if (File.Exists(input))
+                {
+                    File.Delete(input);
+                }
 
                 // Export ini file
                 Profiles.ExportProfile(this, inputDir, inputFileName, inputExt);
@@ -997,8 +1017,11 @@ namespace Glow
             {
                 // Set Input Dir, Name, Ext
                 string inputDir = Path.GetDirectoryName(selectFile.FileName).TrimEnd('\\') + @"\";
+                //string inputFileName = Path.GetFileName(selectFile.FileName);
                 string inputFileName = Path.GetFileNameWithoutExtension(selectFile.FileName);
                 string inputExt = Path.GetExtension(selectFile.FileName);
+                //string input = Path.Combine(inputDir, inputFileName);
+                //string input = inputDir + inputFileName + inputExt;
 
                 // Import ini file
                 Profiles.ImportProfile(this, inputDir, inputFileName, inputExt);

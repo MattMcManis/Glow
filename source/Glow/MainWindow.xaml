@@ -1419,7 +1419,7 @@
                                           Margin="10,358,42,0"
                                           VerticalAlignment="Top"
                                           BorderThickness="0"
-                                          ItemsSource="{Binding SubtitleLanguageItems}"
+                                          ItemsSource="{Binding SubtitlesLanguageItems}"
                                           SelectionChanged="listViewSubtitleLanguages_SelectionChanged" 
                                           Style="{DynamicResource ListViewStyle}">
 
@@ -2473,7 +2473,7 @@
 
             <!-- Export ini -->
             <Button x:Name="buttonExport"
-                    Margin="0,0,123,16" 
+                    Margin="0,0,122,16" 
                     Width="22" Height="22"
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" 
@@ -2495,7 +2495,7 @@
             <!-- Export ini -->
             <Button x:Name="buttonImport" 
                     HorizontalAlignment="Right"
-                    Margin="0,0,152,16" 
+                    Margin="0,0,151,16" 
                     VerticalAlignment="Bottom" 
                     Width="22" Height="22"
                     Cursor="Hand" 

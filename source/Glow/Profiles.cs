@@ -20,6 +20,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ---------------------------------------------------------------------- */
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -814,13 +815,23 @@ namespace Glow
             // --------------------------------------------------
             inif.Write("Audio", "driver", mainwindow.cboAudioDriver.SelectedItem.ToString());
 
-            List<string> listLangAudio = new List<string>();
+            // -------------------------
+            // Languages
+            // -------------------------
+            // Order
+            List<string> listAudioLangOrder = new List<string>(MainWindow.AudioLanguageItems);
+            string audioLanguagesOrder = string.Join(",", listAudioLangOrder.Where(s => !string.IsNullOrEmpty(s)));
+            inif.Write("Audio", "languagesOrder", audioLanguagesOrder);
+
+            // Selected
+            List<string> listAudioLangSelected = new List<string>();
             foreach (string item in mainwindow.listViewAudioLanguages.SelectedItems)
             {
-                listLangAudio.Add(item);
+                // add checked item name to list
+                listAudioLangSelected.Add(item);
             }
-            string languagesAudio = string.Join(",", listLangAudio.Where(s => !string.IsNullOrEmpty(s)));
-            inif.Write("Audio", "languages", languagesAudio);
+            string audioLanguagesSelected = string.Join(",", listAudioLangSelected.Where(s => !string.IsNullOrEmpty(s)));
+            inif.Write("Audio", "languagesSelected", audioLanguagesSelected);
 
             inif.Write("Audio", "channels", mainwindow.cboChannels.SelectedItem.ToString());
             inif.Write("Audio", "volume", mainwindow.tbxVolume.Text.ToString());
@@ -836,13 +847,22 @@ namespace Glow
             // --------------------------------------------------
             inif.Write("Subtitles", "subtitles", mainwindow.cboSubtitles.SelectedItem.ToString());
 
-            List<string> listLangSubtitles = new List<string>();
+            // -------------------------
+            // Languages
+            // -------------------------
+            // Order
+            List<string> listSubtitlesLangOrder = new List<string>(MainWindow.SubtitlesLanguageItems);
+            string subtitlesLanguagesOrder = string.Join(",", listSubtitlesLangOrder.Where(s => !string.IsNullOrEmpty(s)));
+            inif.Write("Subtitles", "languagesOrder", subtitlesLanguagesOrder);
+
+            // Selected
+            List<string> listSubtitlesLang = new List<string>();
             foreach (string item in mainwindow.listViewSubtitlesLanguages.SelectedItems)
             {
-                listLangSubtitles.Add(item);
+                listSubtitlesLang.Add(item);
             }
-            string languagesSubtitles = string.Join(",", listLangAudio.Where(s => !string.IsNullOrEmpty(s)));
-            inif.Write("Subtitles", "languages", languagesSubtitles);
+            string subtitlesLanguages = string.Join(",", listSubtitlesLang.Where(s => !string.IsNullOrEmpty(s)));
+            inif.Write("Subtitles", "languagesSelected", subtitlesLanguages);
 
             //inif.Write("Subtitles", "embeddedFonts", mainwindow.cboAudioLoadFiles.SelectedItem.ToString());
             inif.Write("Subtitles", "loadFiles", mainwindow.cboSubtitlesLoadFiles.SelectedItem.ToString());
@@ -1172,7 +1192,9 @@ namespace Glow
             // Soft Volume Max
             mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");
 
+            // -------------------------
             // Normalize
+            // -------------------------
             string normalize = inif.Read("Audio", "normalize");
             if (mainwindow.cboNormalize.Items.Contains(normalize))
                 mainwindow.cboNormalize.SelectedItem = normalize;
@@ -1180,7 +1202,9 @@ namespace Glow
                 listFailedImports.Add("Audio: Normalize");
             //mainwindow.cboNormalize.SelectedItem = inif.Read("Audio", "normalize");
 
+            // -------------------------
             // Load Files
+            // -------------------------
             string AudioLoadFiles = inif.Read("Audio", "loadFiles");
             if (mainwindow.cboAudioLoadFiles.Items.Contains(AudioLoadFiles))
                 mainwindow.cboAudioLoadFiles.SelectedItem = AudioLoadFiles;
@@ -1188,18 +1212,35 @@ namespace Glow
                 listFailedImports.Add("Audio: Load Files");
             //mainwindow.cboAudioLoadFiles.SelectedItem = inif.Read("Audio", "loadFiles");
 
+            // -------------------------
             // languages
-            string languagesAudio = inif.Read("Audio", "languages");
-            string[] arrLangAudio = languagesAudio.Split(',');
-            foreach (string item in arrLangAudio)
+            // -------------------------
+            // Order
+            // import full list new order
+            string audioLangOrder = inif.Read("Audio", "languagesOrder");
+            string[] arrAudioLangOrder = audioLangOrder.Split(',');
+            // recreate the list
+            MainWindow.listAudioLang = new List<string>(arrAudioLangOrder);
+            // recreate item sources
+            MainWindow._audioLangItems = new ObservableCollection<string>(MainWindow.listAudioLang);
+            mainwindow.listViewAudioLanguages.ItemsSource = MainWindow._audioLangItems;
+
+            // Selected
+            string audioLanguagesSelected = inif.Read("Audio", "languagesSelected");
+            // Empty List Check
+            if (!string.IsNullOrEmpty(audioLanguagesSelected))
             {
-                if (mainwindow.listViewAudioLanguages.Items.Contains(item))
+                string[] arrAudioLang = audioLanguagesSelected.Split(',');
+                foreach (string item in arrAudioLang)
                 {
-                    mainwindow.listViewAudioLanguages.SelectedItems.Add(item);
-                }  
-                else
-                {
-                    listFailedImports.Add("Audio Languages: " + item);
+                    if (mainwindow.listViewAudioLanguages.Items.Contains(item))
+                    {
+                        mainwindow.listViewAudioLanguages.SelectedItems.Add(item);
+                    }
+                    else
+                    {
+                        listFailedImports.Add("Audio Languages: " + item);
+                    }
                 }
             }
 
@@ -1284,18 +1325,35 @@ namespace Glow
                 listFailedImports.Add("Subtitles: Blend");
             //mainwindow.cboSubtitlesBlend.SelectedItem = inif.Read("Subtitles", "blend");
 
+            // -------------------------
             // languages
-            string languagesSubtitles = inif.Read("Subtitles", "languages");
-            string[] arrLangSubs = languagesSubtitles.Split(',');
-            foreach (string item in arrLangSubs)
+            // -------------------------
+            // Order
+            // import full list new order
+            string subtitlesLangOrder = inif.Read("Subtitles", "languagesOrder");
+            string[] arrSubtitlesLangOrder = subtitlesLangOrder.Split(',');
+            // recreate the list
+            MainWindow.listSubtitlesLang = new List<string>(arrSubtitlesLangOrder);
+            // recreate item sources
+            MainWindow._subsLangItems = new ObservableCollection<string>(MainWindow.listSubtitlesLang);
+            mainwindow.listViewSubtitlesLanguages.ItemsSource = MainWindow._subsLangItems;
+
+            // Selected
+            string subtitlesLanguagesSelected = inif.Read("Subtitles", "languagesSelected");
+            // Empty List Check
+            if (!string.IsNullOrEmpty(subtitlesLanguagesSelected))
             {
-                if (mainwindow.listViewSubtitlesLanguages.Items.Contains(item))
+                string[] arrSubtitlesLang = subtitlesLanguagesSelected.Split(',');
+                foreach (string item in arrSubtitlesLang)
                 {
-                    mainwindow.listViewSubtitlesLanguages.SelectedItems.Add(item);
-                }
-                else
-                {
-                    listFailedImports.Add("Subtitle Languages: " + item);
+                    if (mainwindow.listViewSubtitlesLanguages.Items.Contains(item))
+                    {
+                        mainwindow.listViewSubtitlesLanguages.SelectedItems.Add(item);
+                    }
+                    else
+                    {
+                        listFailedImports.Add("Subtitles Languages: " + item);
+                    }
                 }
             }
 
