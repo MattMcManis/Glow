@@ -53,20 +53,20 @@ namespace Glow
             // -------------------------
             // Save Position on Quit
             // -------------------------
-            string savepositionquit = string.Empty;
+            string savePositiOnQuit = string.Empty;
 
             if ((string)mainwindow.cboSavePositionQuit.SelectedItem == "yes")
-                savepositionquit = "save-position-on-quit";
+                savePositiOnQuit = "save-position-on-quit";
 
             // -------------------------
             // Keep Open
             // -------------------------
-            string keepopen = "keep-open=" + mainwindow.cboKeepOpen.SelectedItem.ToString();
+            string keepOpen = "keep-open=" + mainwindow.cboKeepOpen.SelectedItem.ToString();
 
             // -------------------------
             // On Top
             // -------------------------
-            string ontop = "ontop=" + mainwindow.cboOnTop.SelectedItem.ToString();
+            string onTop = "onTop=" + mainwindow.cboOnTop.SelectedItem.ToString();
 
             // -------------------------
             // On Screen Display
@@ -76,7 +76,7 @@ namespace Glow
             // -------------------------
             // Auto-Fit
             // -------------------------
-            string autofit = "autofit-larger=100%x95%";
+            string autoFit = "autoFit-larger=100%x95%";
 
             // -------------------------
             // Geometry
@@ -86,7 +86,7 @@ namespace Glow
             // -------------------------
             // Window Title
             // -------------------------
-            string windowtitle = "title=\"${ filename}\"";
+            string windowTitle = "title=\"${ filename}\"";
 
 
             // --------------------------------------------------
@@ -108,12 +108,12 @@ namespace Glow
             {
                 title,
                 priority,
-                savepositionquit,
-                keepopen,
-                ontop,
-                autofit,
+                savePositiOnQuit,
+                keepOpen,
+                onTop,
+                autoFit,
                 geometry,
-                windowtitle,
+                windowTitle,
                 screenshot,
                 screenshot_template,
                 screenshot_tag_colorspace,

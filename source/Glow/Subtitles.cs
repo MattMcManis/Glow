@@ -78,12 +78,12 @@ namespace Glow
             // -------------------------
             // Embedded Fonts
             // -------------------------
-            string embeddedfonts = "embeddedfonts=no";
+            string embeddedFonts = "embeddedFonts=no";
 
             // -------------------------
             // Load Files
             // -------------------------
-            string loadfiles = "sub-auto=" + mainwindow.cboSubtitlesLoadFiles.SelectedItem.ToString();
+            string loadFiles = "sub-auto=" + mainwindow.cboSubtitlesLoadFiles.SelectedItem.ToString();
 
             // -------------------------
             // Position
@@ -113,24 +113,24 @@ namespace Glow
             // -------------------------
             // Font Size
             // -------------------------
-            string fontsize = "sub-text-font-size=" + mainwindow.cboSubtitlesFontSize.SelectedItem.ToString();
+            string fontSize = "sub-text-font-size=" + mainwindow.cboSubtitlesFontSize.SelectedItem.ToString();
 
             // -------------------------
             // Font Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesFontColor.SelectedValue);
-            string fontcolor = "sub-text-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
+            string fontColor = "sub-text-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Border Size
             // -------------------------
-            string bordersize = "sub-text-border-size=" + mainwindow.cboSubtitlesBorderSize.SelectedItem.ToString();
+            string borderSize = "sub-text-border-size=" + mainwindow.cboSubtitlesBorderSize.SelectedItem.ToString();
 
             // -------------------------
             // Border Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue);
-            string bordercolor = "sub-text-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
+            string borderColor = "sub-text-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Shadow Color
@@ -138,21 +138,21 @@ namespace Glow
             selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue);
             selected = (string)(selectedItem.Content);
 
-            string shadowcolor = string.Empty;
+            string shadowColor = string.Empty;
 
             if (selected != "None")
             {
-                shadowcolor = "sub-text-shadow-color=" + "\"" + "#33" + ColorPicker.HexColor(selectedItem) + "\"";
+                shadowColor = "sub-text-shadow-color=" + "\"" + "#33" + ColorPicker.HexColor(selectedItem) + "\"";
             }
                 
 
             // -------------------------
             // Shadow Offset
             // -------------------------
-            string shadowoffset = string.Empty;
+            string shadowOffset = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowOffset.Text))
-                shadowoffset = "sub-shadow-offset=" + mainwindow.tbxSubtitlesShadowOffset.Text.ToString();
+                shadowOffset = "sub-shadow-offset=" + mainwindow.tbxSubtitlesShadowOffset.Text.ToString();
 
 
             // --------------------------------------------------
@@ -185,19 +185,19 @@ namespace Glow
                 title,
                 languages,
                 subtitles,
-                loadfiles,
+                loadFiles,
                 position,
                 timing,
                 margins,
                 font,
-                fontsize,
-                fontcolor,
-                bordersize,
-                bordercolor,
-                shadowcolor,
-                shadowoffset,
+                fontSize,
+                fontColor,
+                borderSize,
+                borderColor,
+                shadowColor,
+                shadowOffset,
                 ass,
-                embeddedfonts,
+                embeddedFonts,
                 blend,
             };
 

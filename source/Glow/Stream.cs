@@ -45,23 +45,23 @@ namespace Glow
             // -------------------------
             // Demuxer Thread
             // -------------------------
-            string demuxthread = "demuxer-thread=" + mainwindow.cboDemuxerThread.SelectedItem.ToString();
+            string demuxThread = "demuxer-thread=" + mainwindow.cboDemuxerThread.SelectedItem.ToString();
 
             // -------------------------
             // Demuxer Buffersize
             // -------------------------
-            string demuxerbuffersize = string.Empty;
+            string demuxerBufferSize = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxDemuxerBuffersize.Text))
-                demuxerbuffersize = "demuxer-lavf-buffersize=" + mainwindow.tbxDemuxerBuffersize.Text.ToString();
+                demuxerBufferSize = "demuxer-lavf-buffersize=" + mainwindow.tbxDemuxerBuffersize.Text.ToString();
 
             // -------------------------
             // Demuxer Readahead
             // -------------------------
-            string demuxerreadahead = string.Empty;
+            string demuxerReadAhead = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxDemuxerReadahead.Text))
-                demuxerreadahead = "demuxer-readahead-secs=" + mainwindow.tbxDemuxerReadahead.Text.ToString();
+                demuxerReadAhead = "demuxer-readahead-secs=" + mainwindow.tbxDemuxerReadahead.Text.ToString();
 
             // -------------------------
             // Demuxer MKV Subtitle Preroll
@@ -84,10 +84,10 @@ namespace Glow
             // -------------------------
             // Cache Default
             // -------------------------
-            string cachedefault = string.Empty;
+            string cacheDefault = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheDefault.Text))
-                cachedefault = "cache-default=" + mainwindow.tbxCacheDefault.Text.ToString();
+                cacheDefault = "cache-default=" + mainwindow.tbxCacheDefault.Text.ToString();
 
             // -------------------------
             // Cache Initial
@@ -100,18 +100,18 @@ namespace Glow
             // -------------------------
             // Cache Seek Min
             // -------------------------
-            string seekmin = string.Empty;
+            string seekMin = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheSeekMin.Text))
-                seekmin = "cache-seek-min=" + mainwindow.tbxCacheSeekMin.Text.ToString();
+                seekMin = "cache-seek-min=" + mainwindow.tbxCacheSeekMin.Text.ToString();
 
             // -------------------------
             // Cache Backbuffer
             // -------------------------
-            string backbuffer = string.Empty;
+            string backBuffer = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheBackbuffer.Text))
-                backbuffer = "cache-backbuffer=" + mainwindow.tbxCacheBackbuffer.Text.ToString();
+                backBuffer = "cache-backBuffer=" + mainwindow.tbxCacheBackbuffer.Text.ToString();
 
             // -------------------------
             // Second
@@ -129,15 +129,15 @@ namespace Glow
             // -------------------------
             // Cache File Size
             // -------------------------
-            string filesize = string.Empty;
+            string fileSize = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheFileSize.Text))
-                filesize = "cache-file-size=" + mainwindow.tbxCacheFileSize.Text.ToString();
+                fileSize = "cache-file-size=" + mainwindow.tbxCacheFileSize.Text.ToString();
 
             // -------------------------
             // YouTube
             // -------------------------
-            string youtube = "ytdl=yes"
+            string youTube = "ytdl=yes"
                             + "\r\n"
                             + "ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/bestaudio)/best";
 
@@ -150,21 +150,21 @@ namespace Glow
                 title,
 
                 // Demuxer
-                demuxthread,
-                demuxerbuffersize,
-                demuxerreadahead,
+                demuxThread,
+                demuxerBufferSize,
+                demuxerReadAhead,
                 demuxerMKVSubtitlePreroll,
 
                 // Cache
                 cache,
-                cachedefault,
+                cacheDefault,
                 initial,
-                seekmin,
-                backbuffer,
+                seekMin,
+                backBuffer,
                 seconds,
                 file,
-                filesize,
-                youtube,
+                fileSize,
+                youTube,
             };
 
             // -------------------------

@@ -47,7 +47,7 @@ namespace Glow
             // -------------------------
             // OSD
             // -------------------------
-            string videoosd = "video-osd=" + mainwindow.cboOSD.SelectedItem.ToString();
+            string videoOSD = "video-osd=" + mainwindow.cboOSD.SelectedItem.ToString();
 
             // -------------------------
             // Fractions
@@ -86,18 +86,18 @@ namespace Glow
             // -------------------------
             // Bar Width
             // -------------------------
-            string barwidth = string.Empty;
+            string barWidth = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarWidth.Text))
-                barwidth = "osd-bar-w=" + mainwindow.tbxOSDBarWidth.Text.ToString();
+                barWidth = "osd-bar-w=" + mainwindow.tbxOSDBarWidth.Text.ToString();
 
             // -------------------------
             // Bar Height
             // -------------------------
-            string barheight = string.Empty;
+            string barHeight = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarHeight.Text))
-                barheight = "osd-bar-h=" + mainwindow.tbxOSDBarHeight.Text.ToString();
+                barHeight = "osd-bar-h=" + mainwindow.tbxOSDBarHeight.Text.ToString();
 
 
             // --------------------------------------------------
@@ -112,24 +112,24 @@ namespace Glow
             // -------------------------
             // Font Size
             // -------------------------
-            string fontsize = "osd-font-size=" + mainwindow.cboOSDFontSize.SelectedItem.ToString();
+            string fontSize = "osd-font-size=" + mainwindow.cboOSDFontSize.SelectedItem.ToString();
 
             // -------------------------
             // Font Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue);
-            string fontcolor = "osd-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
+            string fontColor = "osd-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Border Size
             // -------------------------
-            string bordersize = "osd-border-size=" + mainwindow.cboOSDFontBorderSize.SelectedItem.ToString();
+            string borderSize = "osd-border-size=" + mainwindow.cboOSDFontBorderSize.SelectedItem.ToString();
 
             // -------------------------
             // Border Color
             // -------------------------
             selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontBorderColor.SelectedValue);
-            string bordercolor = "osd-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
+            string borderColor = "osd-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Shadow Color
@@ -137,20 +137,20 @@ namespace Glow
             selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontShadowColor.SelectedValue);
             selected = (string)(selectedItem.Content);
 
-            string shadowcolor = string.Empty;
+            string shadowColor = string.Empty;
 
             if (selected != "None")
             {
-                shadowcolor = "osd-shadow-color=" + "\"" + "#33" + ColorPicker.HexColor(selectedItem) + "\"";
+                shadowColor = "osd-shadow-color=" + "\"" + "#33" + ColorPicker.HexColor(selectedItem) + "\"";
             }
 
             // -------------------------
             // Shadow Offset
             // -------------------------
-            string shadowoffset = string.Empty;
+            string shadowOffset = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDShadowOffset.Text))
-                shadowoffset = "osd-shadow-offset=" + mainwindow.tbxOSDShadowOffset.Text.ToString();
+                shadowOffset = "osd-shadow-offset=" + mainwindow.tbxOSDShadowOffset.Text.ToString();
 
             // --------------------------------------------------
             // Combine
@@ -158,24 +158,24 @@ namespace Glow
             List<string> listOSD = new List<string>()
             {
                 title,
-                videoosd,
+                videoOSD,
                 fractions,
                 duration,
                 level,
 
                 // Controls
                 scale,
-                barwidth,
-                barheight,
+                barWidth,
+                barHeight,
 
                 // Text
                 font,
-                fontsize,
-                fontcolor,
-                bordersize,
-                bordercolor,
-                shadowcolor,
-                shadowoffset,
+                fontSize,
+                fontColor,
+                borderSize,
+                borderColor,
+                shadowColor,
+                shadowOffset,
             };
 
             // -------------------------

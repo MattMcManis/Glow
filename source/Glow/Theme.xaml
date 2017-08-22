@@ -176,12 +176,12 @@
         /////////////////////////////////////-->
 
     <!-- Background -->
-    <!--<Style TargetType="{x:Type ScrollBar}">
+    <Style TargetType="{x:Type ScrollBar}">
         <Setter Property="Background" Value="#FF191919"/>
         <Setter Property="BorderBrush" Value="#FF191919"/>
-    </Style>-->
+    </Style>
 
-    <ControlTemplate x:Key="ScrollBarControlTemplate" TargetType="{x:Type ScrollBar}">
+    <!--<ControlTemplate x:Key="ScrollBarControlTemplate" TargetType="{x:Type ScrollBar}">
         <Grid x:Name="Bg" SnapsToDevicePixels="True">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
@@ -389,7 +389,7 @@
                 <Setter Property="Fill" TargetName="ArrowBottom" Value="#FFBFBFBF"/>
             </Trigger>
         </ControlTemplate.Triggers>
-    </ControlTemplate>
+    </ControlTemplate>-->
 
 
     <!--/////////////////////////////////////

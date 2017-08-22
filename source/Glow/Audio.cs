@@ -83,17 +83,17 @@ namespace Glow
             // -------------------------
             // Max Volume
             // -------------------------
-            string maxvolume = "volume-max=" + mainwindow.tbxVolumeMax.Text.ToString();
+            string volumeMax = "volume-max=" + mainwindow.tbxVolumeMax.Text.ToString();
 
             // -------------------------
             // Soft Volume
             // -------------------------
-            string softvolume = "softvol=" + mainwindow.cboSoftVolume.SelectedItem.ToString();
+            string softVolume = "softvol=" + mainwindow.cboSoftVolume.SelectedItem.ToString();
 
             // -------------------------
             // Soft Volume Max
             // -------------------------
-            string softvolumemax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
+            string softVolumeMax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
 
             // -------------------------
             // Normalize
@@ -103,12 +103,12 @@ namespace Glow
             // -------------------------
             // Scale Tempo
             // -------------------------
-            string scaletempo = "audio-pitch-correction=" + mainwindow.cboScaleTempo.SelectedItem.ToString();
+            string scaleTempo = "audio-pitch-correction=" + mainwindow.cboScaleTempo.SelectedItem.ToString();
 
             // -------------------------
             // Normalize
             // -------------------------
-            string loadfiles = "audio-file-auto=" + mainwindow.cboAudioLoadFiles.SelectedItem.ToString();
+            string loadFiles = "audio-file-auto=" + mainwindow.cboAudioLoadFiles.SelectedItem.ToString();
 
 
             // --------------------------------------------------
@@ -121,12 +121,12 @@ namespace Glow
                 languages,
                 channels,
                 volume,
-                maxvolume,
-                softvolume,
-                softvolumemax,
+                volumeMax,
+                softVolume,
+                softVolumeMax,
                 normalize,
-                scaletempo,
-                loadfiles,
+                scaleTempo,
+                loadFiles,
             };
 
             // -------------------------

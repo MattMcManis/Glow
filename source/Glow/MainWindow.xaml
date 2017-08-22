@@ -32,8 +32,7 @@
         Closing="MainWindow_Closing" 
         UseLayoutRounding="True"
         Width="712" Height="400"
-        Top="{Binding Top, Mode=TwoWay, Source={x:Static settings:Settings.Default}}"
-        Left="{Binding Left, Mode=TwoWay, Source={x:Static settings:Settings.Default}}"
+
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
         
         Style="{DynamicResource WindowStyle}" Icon="Resources/Images/Icons/logo.ico"
@@ -2318,6 +2317,9 @@
                     VerticalAlignment="Bottom" 
                     Width="22" Height="22" 
                     Cursor="Hand" 
+                    ToolTipService.InitialShowDelay="1000" 
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip="Info"
                     Click="buttonInfo_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
                 <Image Source="Resources/Images/Buttons/info.png" 
@@ -2331,10 +2333,13 @@
             <!-- Website -->
             <Button x:Name="buttonWebsite" 
                     HorizontalAlignment="Left"
-                    Margin="38,0,0,16" 
+                    Margin="39,0,0,16" 
                     VerticalAlignment="Bottom" 
                     Width="22" Height="22"
                     Cursor="Hand" 
+                    ToolTipService.InitialShowDelay="1000" 
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip="Website"
                     Click="buttonWebsite_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
                 <Image Source="Resources/Images/Buttons/web.png" 
@@ -2346,13 +2351,37 @@
                    VerticalAlignment="Center"/>
             </Button>
 
+            <!-- Configure -->
+            <Button x:Name="buttonConfigure" 
+                    HorizontalAlignment="Left"
+                    Margin="68,0,0,16" 
+                    VerticalAlignment="Bottom" 
+                    Width="22" Height="22"
+                    Cursor="Hand" 
+                    ToolTipService.InitialShowDelay="1000" 
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip="Configure"
+                    Click="buttonConfigure_Click"
+                    Style="{DynamicResource ButtonSmallStyle}">
+                <Image Source="Resources/Images/Buttons/configure.png" 
+                Width="11" 
+                Height="11" 
+                Margin="0,-1,0,0"
+                Stretch="Fill" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
+            </Button>
+
             <!-- Update -->
             <Button x:Name="buttonUpdate" 
                     HorizontalAlignment="Left" 
-                    Margin="66,0,0,16" 
+                    Margin="97,0,0,16" 
                     VerticalAlignment="Bottom"
                     Width="22" Height="22"
                     Cursor="Hand" 
+                    ToolTipService.InitialShowDelay="1000" 
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip="Check for Updates"
                     Click="buttonUpdate_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
                 <Image Source="Resources/Images/Buttons/update.png" 
@@ -2366,10 +2395,13 @@
             <!-- Config Folder -->
             <Button x:Name="buttonConfigDir" 
                     HorizontalAlignment="Left" 
-                    Margin="94,0,0,16" 
+                    Margin="126,0,0,16" 
                     VerticalAlignment="Bottom"
                     Width="22" Height="22"
                     Cursor="Hand"
+                    ToolTipService.InitialShowDelay="1000" 
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip="Open Config Folder"
                     Click="buttonConfigDir_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
                 <Image Source="Resources/Images/Buttons/folder.png" 
@@ -2383,7 +2415,7 @@
 
             <!-- Copy -->
             <Button x:Name="buttonCopy" 
-                    Margin="-164,0,164,16" 
+                    Margin="158,0,447,16" 
                     Cursor="Hand"
                     Click="buttonCopy_Click" 
                     Height="22"
@@ -2396,7 +2428,7 @@
 
             <!-- Save -->
             <Button x:Name="buttonSave"
-                    Margin="-79,0,79,16" 
+                    Margin="247,0,358,16" 
                     Cursor="Hand" 
                     Height="22"
                     MinWidth="75"
@@ -2411,21 +2443,24 @@
 
 
             <!-- Presets -->
-            <Label Content="Preset" 
-                   Margin="0,0,204,14"
+            <!--<Label Content="Preset" 
+                   Margin="0,0,217,14"
                    Height="26"
                    VerticalAlignment="Bottom" 
                    HorizontalAlignment="Right" 
                    Width="43"
-                   Style="{DynamicResource LabelStyle}"/>
+                   Style="{DynamicResource LabelStyle}"/>-->
 
-            <ComboBox x:Name="cboPreset" 
-                      Margin="0,0,126,16"
+            <ComboBox x:Name="cboProfile" 
+                      Margin="0,0,181,16"
                       Width="75" 
                       Height="22" 
                       VerticalAlignment="Bottom"
                       HorizontalAlignment="Right" 
-                      SelectionChanged="cboPreset_SelectionChanged"
+                      ToolTipService.InitialShowDelay="1000" 
+                      ToolTipService.ShowOnDisabled="True" 
+                      ToolTip="Profile"
+                      SelectionChanged="cboProfile_SelectionChanged"
                       Style="{DynamicResource ComboBoxStyle}"
                       ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
                 <System:String>Default</System:String>
@@ -2434,8 +2469,49 @@
                 <System:String>Medium</System:String>
                 <System:String>Low</System:String>
                 <System:String>Debug</System:String>
-
             </ComboBox>
+
+            <!-- Export ini -->
+            <Button x:Name="buttonExport"
+                    Margin="0,0,123,16" 
+                    Width="22" Height="22"
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" 
+                    Cursor="Hand" 
+                    ToolTipService.InitialShowDelay="1000" 
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip="Save Profile"
+                    Click="buttonExport_Click"
+                    Style="{DynamicResource ButtonSmallStyle}">
+                <Image Source="Resources/Images/Buttons/export.png" 
+                    Width="11" 
+                    Height="11" 
+                    Margin="0,-1,0,0"
+                    Stretch="Fill" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"/>
+            </Button>
+
+            <!-- Export ini -->
+            <Button x:Name="buttonImport" 
+                    HorizontalAlignment="Right"
+                    Margin="0,0,152,16" 
+                    VerticalAlignment="Bottom" 
+                    Width="22" Height="22"
+                    Cursor="Hand" 
+                    ToolTipService.InitialShowDelay="1000" 
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip="Import Profile"
+                    Click="buttonImport_Click"
+                    Style="{DynamicResource ButtonSmallStyle}">
+                <Image Source="Resources/Images/Buttons/import.png" 
+                    Width="9" 
+                    Height="11" 
+                    Margin="0,-1,0,0"
+                    Stretch="Fill" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"/>
+            </Button>
 
             <!-- Generate -->
             <Button x:Name="buttonGenerate" 
@@ -2451,7 +2527,6 @@
             </Button>
 
         </Grid>
-
 
 
     </Grid>

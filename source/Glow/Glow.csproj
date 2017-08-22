@@ -72,7 +72,7 @@
     </Compile>
     <Compile Include="Languages.cs" />
     <Compile Include="OSD.cs" />
-    <Compile Include="Presets.cs" />
+    <Compile Include="Profiles.cs" />
     <Compile Include="Stream.cs" />
     <Compile Include="Subtitles.cs" />
     <Compile Include="UpdateWindow.xaml.cs">
@@ -124,6 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -133,9 +134,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\configuregear.png" />
+    <Resource Include="Resources\Images\Buttons\configure.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\Images\Buttons\folder.png" />
     <Resource Include="Resources\Images\Buttons\info.png" />
     <Resource Include="Resources\Images\Buttons\update.png" />
@@ -143,6 +145,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\import.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\export.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

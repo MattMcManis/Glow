@@ -19,16 +19,27 @@ You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+
 namespace Glow
 {
-    public partial class Presets
+    public partial class Profiles
     {
+        /// <summary>
+        ///    Choose Preset
+        /// </summary>
         public static void Preset(MainWindow mainwindow)
         {
             // -------------------------
             // Default
             // -------------------------
-            if ((string)mainwindow.cboPreset.SelectedItem == "Default")
+            if ((string)mainwindow.cboProfile.SelectedItem == "Default")
             {
                 // -------------------------
                 // General
@@ -142,7 +153,7 @@ namespace Glow
             // -------------------------
             // Ultra
             // -------------------------
-            else if ((string)mainwindow.cboPreset.SelectedItem == "Ultra")
+            else if ((string)mainwindow.cboProfile.SelectedItem == "Ultra")
             {
                 // -------------------------
                 // General
@@ -256,7 +267,7 @@ namespace Glow
             // -------------------------
             // High
             // -------------------------
-            else if ((string)mainwindow.cboPreset.SelectedItem == "High")
+            else if ((string)mainwindow.cboProfile.SelectedItem == "High")
             {
                 // -------------------------
                 // General
@@ -370,7 +381,7 @@ namespace Glow
             // -------------------------
             // Medium
             // -------------------------
-            else if ((string)mainwindow.cboPreset.SelectedItem == "Medium")
+            else if ((string)mainwindow.cboProfile.SelectedItem == "Medium")
             {
                 // -------------------------
                 // General
@@ -484,7 +495,7 @@ namespace Glow
             // -------------------------
             // Low
             // -------------------------
-            else if ((string)mainwindow.cboPreset.SelectedItem == "Low")
+            else if ((string)mainwindow.cboProfile.SelectedItem == "Low")
             {
                 // -------------------------
                 // General
@@ -598,7 +609,7 @@ namespace Glow
             // -------------------------
             // Debug
             // -------------------------
-            else if ((string)mainwindow.cboPreset.SelectedItem == "Debug")
+            else if ((string)mainwindow.cboProfile.SelectedItem == "Debug")
             {
                 // -------------------------
                 // General
@@ -717,5 +728,347 @@ namespace Glow
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
         }
+
+
+
+        /// <summary>
+        ///    Export Preset
+        /// </summary>
+        public static void ExportProfile(MainWindow mainwindow, string inputDir, string inputFileName, string inputExt)
+        {
+            // Selected Item
+            ComboBoxItem selectedItem = null;
+            string selected = string.Empty;
+
+            // Export's ini file path
+            // Get from Save Dialog Path
+            string input = inputDir + inputFileName + inputExt;
+
+            // Start INI File Write
+            INIFile inif = new INIFile(input);
+
+            // --------------------------------------------------
+            // General
+            // --------------------------------------------------
+            inif.Write("General", "priority", mainwindow.cboPriority.SelectedItem.ToString());
+            inif.Write("General", "savePositiOnQuit", mainwindow.cboSavePositionQuit.SelectedItem.ToString());
+            inif.Write("General", "keepOpen", mainwindow.cboKeepOpen.SelectedItem.ToString());
+            inif.Write("General", "onTop", mainwindow.cboOnTop.SelectedItem.ToString());
+            inif.Write("General", "osc", mainwindow.cboOSC.SelectedItem.ToString());
+
+            // --------------------------------------------------
+            // Video
+            // --------------------------------------------------
+            // Hardware
+            inif.Write("Video", "videoDriver", mainwindow.cboVideoDriver.SelectedItem.ToString());
+            inif.Write("Video", "openglPBO", mainwindow.cboOpenGLPBO.SelectedItem.ToString());
+            inif.Write("Video", "hwdec", mainwindow.cboHWDecoder.SelectedItem.ToString());
+            // Display
+            inif.Write("Video", "displayPrimaries", mainwindow.cboDisplayPrimaries.SelectedItem.ToString());
+            inif.Write("Video", "colorSpace", mainwindow.cboColorSpace.SelectedItem.ToString());
+            inif.Write("Video", "colorRange", mainwindow.cboColorRange.SelectedItem.ToString());
+            inif.Write("Video", "deinterlace", mainwindow.cboDeinterlace.SelectedItem.ToString());
+            inif.Write("Video", "videoSync", mainwindow.cboVideoSync.SelectedItem.ToString());
+            inif.Write("Video", "frameDrop", mainwindow.cboFramedrop.SelectedItem.ToString());
+            // Image
+            inif.Write("Video", "brightness", mainwindow.tbxBrightness.Text.ToString());
+            inif.Write("Video", "contrast", mainwindow.tbxContrast.Text.ToString());
+            inif.Write("Video", "hue", mainwindow.tbxHue.Text.ToString());
+            inif.Write("Video", "saturation", mainwindow.tbxSaturation.Text.ToString());
+            inif.Write("Video", "gamma", mainwindow.tbxGamma.Text.ToString());
+            inif.Write("Video", "deband", mainwindow.cboDeband.SelectedItem.ToString());
+            inif.Write("Video", "debandGrain", mainwindow.tbxDebandGrain.Text.ToString());
+            inif.Write("Video", "dither", mainwindow.cboDither.SelectedItem.ToString());
+            // Scaling
+            inif.Write("Video", "sigmoidUpscaling", mainwindow.cboSigmoid.SelectedItem.ToString());
+            inif.Write("Video", "scale", mainwindow.cboScale.SelectedItem.ToString());
+            inif.Write("Video", "scaleAntiring", mainwindow.tbxScaleAntiring.Text.ToString());
+            inif.Write("Video", "chromaScale", mainwindow.cboChromaScale.SelectedItem.ToString());
+            inif.Write("Video", "chromaScaleAntiring", mainwindow.tbxChromaAntiring.Text.ToString());
+            inif.Write("Video", "downscale", mainwindow.cboDownscale.SelectedItem.ToString());
+            inif.Write("Video", "downscaleAntiring", mainwindow.tbxDownscaleAntiring.Text.ToString());
+            inif.Write("Video", "softwareScaler", mainwindow.cboSoftwareScaler.SelectedItem.ToString());
+
+            // --------------------------------------------------
+            // Audio
+            // --------------------------------------------------
+            inif.Write("Audio", "driver", mainwindow.cboAudioDriver.SelectedItem.ToString());
+
+            //int langCount = 0;
+            List<string> listLangAudio = new List<string>();
+            foreach (string item in mainwindow.listViewAudioLanguages.SelectedItems)
+            {
+                //langCount++;
+                //inif.Write("Audio", "language" + Convert.ToString(langCount), item);
+                listLangAudio.Add(item);
+            }
+            string languagesAudio = string.Join(",", listLangAudio.Where(s => !string.IsNullOrEmpty(s)));
+            inif.Write("Audio", "languages", languagesAudio);
+
+            inif.Write("Audio", "channels", mainwindow.cboChannels.SelectedItem.ToString());
+            inif.Write("Audio", "volume", mainwindow.tbxVolume.Text.ToString());
+            inif.Write("Audio", "volumeMax", mainwindow.tbxVolumeMax.Text.ToString());
+            inif.Write("Audio", "softVolume", mainwindow.cboSoftVolume.Text.ToString());
+            inif.Write("Audio", "softVolumeMax", mainwindow.tbxSoftVolumeMax.Text.ToString());
+            inif.Write("Audio", "normalize", mainwindow.cboNormalize.SelectedItem.ToString());
+            inif.Write("Audio", "scaleTempo", mainwindow.cboScaleTempo.SelectedItem.ToString());
+            inif.Write("Audio", "loadFiles", mainwindow.cboAudioLoadFiles.SelectedItem.ToString());
+
+            // --------------------------------------------------
+            // Subtitle
+            // --------------------------------------------------
+            inif.Write("Subtitles", "subtitles", mainwindow.cboSubtitles.SelectedItem.ToString());
+
+            List<string> listLangSubtitles = new List<string>();
+            foreach (string item in mainwindow.listViewSubtitlesLanguages.SelectedItems)
+            {
+                listLangSubtitles.Add(item);
+            }
+            string languagesSubtitles = string.Join(",", listLangAudio.Where(s => !string.IsNullOrEmpty(s)));
+            inif.Write("Subtitles", "languages", languagesSubtitles);
+
+            //inif.Write("Subtitles", "embeddedFonts", mainwindow.cboAudioLoadFiles.SelectedItem.ToString());
+            inif.Write("Subtitles", "loadFiles", mainwindow.cboSubtitlesLoadFiles.SelectedItem.ToString());
+            inif.Write("Subtitles", "position", mainwindow.tbxSubtitlePosition.Text.ToString());
+            inif.Write("Subtitles", "font", mainwindow.cboSubtitlesFont.SelectedItem.ToString());
+            inif.Write("Subtitles", "fontSize", mainwindow.cboSubtitlesFontSize.SelectedItem.ToString());
+
+            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesFontColor.SelectedValue);
+            selected = (string)(selectedItem.Content);
+            inif.Write("Subtitles", "fontColor", selected);
+
+            inif.Write("Subtitles", "borderSize", mainwindow.cboSubtitlesBorderSize.SelectedItem.ToString());
+
+            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue);
+            selected = (string)(selectedItem.Content);
+            inif.Write("Subtitles", "borderColor", selected);
+
+            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue);
+            selected = (string)(selectedItem.Content);
+            inif.Write("Subtitles", "shadowColor", selected);
+
+            inif.Write("Subtitles", "shadowOffset", mainwindow.tbxSubtitlesShadowOffset.Text.ToString());
+            inif.Write("Subtitles", "blend", mainwindow.cboSubtitlesBlend.SelectedItem.ToString());
+
+            // --------------------------------------------------
+            // Stream
+            // --------------------------------------------------
+            inif.Write("Stream", "demuxThread", mainwindow.cboDemuxerThread.SelectedItem.ToString());
+            inif.Write("Stream", "demuxerBufferSize", mainwindow.tbxDemuxerBuffersize.Text.ToString());
+            inif.Write("Stream", "demuxerReadAhead", mainwindow.tbxDemuxerReadahead.Text.ToString());
+            inif.Write("Stream", "demuxerMKVSubtitlePreroll", mainwindow.cboDemuxerMKVSubPreroll.SelectedItem.ToString());
+            inif.Write("Stream", "cache", mainwindow.cboCache.SelectedItem.ToString());
+            inif.Write("Stream", "cacheDefault", mainwindow.tbxCacheDefault.Text.ToString());
+            inif.Write("Stream", "initial", mainwindow.tbxCacheInitial.Text.ToString());
+            inif.Write("Stream", "seekMin", mainwindow.tbxCacheSeekMin.Text.ToString());
+            inif.Write("Stream", "backBuffer", mainwindow.tbxCacheBackbuffer.Text.ToString());
+            inif.Write("Stream", "seconds", mainwindow.tbxCacheSeconds.Text.ToString());
+            inif.Write("Stream", "file", mainwindow.cboCacheFile.SelectedItem.ToString());
+            inif.Write("Stream", "fileSize", mainwindow.tbxCacheFileSize.Text.ToString());
+
+            // --------------------------------------------------
+            // OSD
+            // --------------------------------------------------
+            inif.Write("OSD", "videoOSD", mainwindow.cboOSD.SelectedItem.ToString());
+            inif.Write("OSD", "fractions", mainwindow.tbxCacheFileSize.Text.ToString());
+            inif.Write("OSD", "duration", mainwindow.tbxOSDDuration.Text.ToString());
+            inif.Write("OSD", "level", mainwindow.cboOSDLevel.SelectedItem.ToString());
+            inif.Write("OSD", "scale", mainwindow.tbxOSDScale.Text.ToString());
+            inif.Write("OSD", "barWidth", mainwindow.tbxOSDBarWidth.Text.ToString());
+            inif.Write("OSD", "barHeight", mainwindow.tbxOSDBarHeight.Text.ToString());
+            inif.Write("OSD", "font", mainwindow.cboOSDFont.SelectedItem.ToString());
+            inif.Write("OSD", "fontSize", mainwindow.cboOSDFontSize.SelectedItem.ToString());
+
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue);
+            selected = (string)(selectedItem.Content);
+            inif.Write("OSD", "fontColor", selected);
+
+            inif.Write("OSD", "borderSize", mainwindow.cboOSDFontBorderSize.SelectedItem.ToString());
+
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontBorderColor.SelectedValue);
+            selected = (string)(selectedItem.Content);
+            inif.Write("OSD", "borderColor", selected);
+
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontShadowColor.SelectedValue);
+            selected = (string)(selectedItem.Content);
+            inif.Write("OSD", "shadowColor", selected);
+
+            inif.Write("OSD", "shadowOffset", mainwindow.tbxOSDShadowOffset.Text.ToString());
+
+        }
+
+
+
+
+        /// <summary>
+        ///    Import Preset
+        /// </summary>
+        public static void ImportProfile(MainWindow mainwindow, string inputDir, string inputFileName, string inputExt)
+        {
+            // Import's ini file path
+            // Get from Select File Dialog Path
+            string input = inputDir + inputFileName + inputExt;
+
+            INIFile inif = new INIFile(input);
+
+            // --------------------------------------------------
+            // General
+            // --------------------------------------------------
+            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "priority");
+            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "savePositiOnQuit");
+            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "keepOpen");
+            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "onTop");
+            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "osc");
+            mainwindow.cboVideoDriver.SelectedItem = inif.Read("General", "screenshot");
+
+            // --------------------------------------------------
+            // Video
+            // --------------------------------------------------
+            // Hardware
+            mainwindow.cboVideoDriver.SelectedItem = inif.Read("Video", "videoDriver");
+            mainwindow.cboOpenGLPBO.SelectedItem = inif.Read("Video", "openglPBO");
+            mainwindow.cboHWDecoder.SelectedItem = inif.Read("Video", "hwdec");
+            // Display
+            mainwindow.cboDisplayPrimaries.SelectedItem = inif.Read("Video", "displayPrimaries");
+            mainwindow.cboColorSpace.SelectedItem = inif.Read("Video", "colorSpace");
+            mainwindow.cboColorRange.SelectedItem = inif.Read("Video", "colorRange");
+            mainwindow.cboDeinterlace.SelectedItem = inif.Read("Video", "deinterlace");
+            mainwindow.cboVideoSync.SelectedItem = inif.Read("Video", "videoSync");
+            mainwindow.cboFramedrop.SelectedItem = inif.Read("Video", "frameDrop");
+            // Image
+            mainwindow.tbxBrightness.Text = inif.Read("Video", "brightness");
+            mainwindow.tbxContrast.Text = inif.Read("Video", "contrast");
+            mainwindow.tbxHue.Text = inif.Read("Video", "hue");
+            mainwindow.tbxSaturation.Text = inif.Read("Video", "saturation");
+            mainwindow.tbxGamma.Text = inif.Read("Video", "gamma");
+            mainwindow.cboDeband.SelectedItem = inif.Read("Video", "deband");
+            mainwindow.tbxDebandGrain.Text = inif.Read("Video", "debandGrain");
+            mainwindow.cboDither.SelectedItem = inif.Read("Video", "dither");
+            // Scaling
+            mainwindow.cboSigmoid.SelectedItem = inif.Read("Video", "sigmoidUpscaling");
+            mainwindow.cboScale.SelectedItem = inif.Read("Video", "scale");
+            mainwindow.tbxScaleAntiring.Text = inif.Read("Video", "scaleAntiring");
+            mainwindow.cboChromaScale.SelectedItem = inif.Read("Video", "chromaScale");
+            mainwindow.tbxChromaAntiring.Text = inif.Read("Video", "chromaScaleAntiring");
+            mainwindow.cboDownscale.SelectedItem = inif.Read("Video", "downscale");
+            mainwindow.tbxDownscaleAntiring.Text = inif.Read("Video", "downscaleAntiring");
+            mainwindow.cboSoftwareScaler.SelectedItem = inif.Read("Video", "softwareScaler");
+
+            // --------------------------------------------------
+            // Audio
+            // --------------------------------------------------
+            mainwindow.cboAudioDriver.SelectedItem = inif.Read("Audio", "driver");
+            mainwindow.cboChannels.SelectedItem = inif.Read("Audio", "channels");
+            mainwindow.tbxVolume.Text = inif.Read("Audio", "volume");
+            mainwindow.tbxVolumeMax.Text = inif.Read("Audio", "volumeMax");
+            mainwindow.cboSoftVolume.SelectedItem = inif.Read("Audio", "softVolume");
+            mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");
+            mainwindow.cboNormalize.SelectedItem = inif.Read("Audio", "normalize");
+            mainwindow.cboAudioLoadFiles.SelectedItem = inif.Read("Audio", "loadFiles");
+            // languages
+            string languagesAudio = inif.Read("Audio", "languages");
+            string[] arrLangAudio = languagesAudio.Split(',');
+            foreach (string item in arrLangAudio)
+            {
+                mainwindow.listViewAudioLanguages.SelectedItems.Add(item);
+            }
+
+            // --------------------------------------------------
+            // Subtitles
+            // --------------------------------------------------
+            mainwindow.cboSubtitles.SelectedItem = inif.Read("Subtitles", "subtitles");
+            mainwindow.cboSubtitlesLoadFiles.SelectedItem = inif.Read("Subtitles", "loadFiles");
+            mainwindow.tbxSubtitlePosition.Text = inif.Read("Subtitles", "position");
+            mainwindow.cboSubtitlesFont.SelectedItem = inif.Read("Subtitles", "font");
+            mainwindow.cboSubtitlesFontSize.SelectedItem = inif.Read("Subtitles", "fontSize");
+            mainwindow.cboSubtitlesFontColor.SelectedItem = inif.Read("Subtitles", "fontColor");
+            mainwindow.cboSubtitlesBorderColor.SelectedItem = inif.Read("Subtitles", "borderColor");
+            mainwindow.cboSubtitlesBorderSize.SelectedItem = inif.Read("Subtitles", "borderSize");
+            mainwindow.cboSubtitlesShadowColor.SelectedItem = inif.Read("Subtitles", "shadowColor");
+            mainwindow.tbxSubtitlesShadowOffset.Text = inif.Read("Subtitles", "shadowOffset");
+            mainwindow.cboSubtitlesBlend.SelectedItem = inif.Read("Subtitles", "blend");
+            // languages
+            string languagesSubtitles = inif.Read("Subtitles", "languages");
+            string[] arrLangSubtitles = languagesAudio.Split(',');
+            foreach (string item in arrLangAudio)
+            {
+                mainwindow.listViewSubtitlesLanguages.SelectedItems.Add(item);
+            }
+
+            // --------------------------------------------------
+            // Stream
+            // --------------------------------------------------
+            mainwindow.cboDemuxerThread.SelectedItem = inif.Read("Stream", "demuxThread");
+            mainwindow.tbxDemuxerBuffersize.Text = inif.Read("Stream", "demuxerBufferSize");
+            mainwindow.tbxDemuxerReadahead.Text = inif.Read("Stream", "demuxerReadAhead");
+            mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = inif.Read("Stream", "demuxerMKVSubtitlePreroll");
+            mainwindow.cboCache.SelectedItem = inif.Read("Stream", "cache");
+            mainwindow.tbxCacheDefault.Text = inif.Read("Stream", "cacheDefault");
+            mainwindow.tbxCacheInitial.Text = inif.Read("Stream", "initial");
+            mainwindow.tbxCacheSeekMin.Text = inif.Read("Stream", "seekMin");
+            mainwindow.tbxCacheBackbuffer.Text = inif.Read("Stream", "backBuffer");
+            mainwindow.tbxCacheSeconds.Text = inif.Read("Stream", "seconds");
+            mainwindow.cboCacheFile.SelectedItem = inif.Read("Stream", "file");
+            mainwindow.tbxCacheFileSize.Text = inif.Read("Stream", "fileSize");
+
+            // --------------------------------------------------
+            // OSD
+            // --------------------------------------------------
+            mainwindow.cboOSD.SelectedItem = inif.Read("OSD", "videoOSD");
+            mainwindow.tbxCacheFileSize.Text = inif.Read("OSD", "fractions");
+            mainwindow.tbxOSDDuration.Text = inif.Read("OSD", "duration");
+            mainwindow.cboOSDLevel.SelectedItem = inif.Read("OSD", "level");
+            mainwindow.tbxOSDScale.Text = inif.Read("OSD", "scale");
+            mainwindow.tbxOSDBarWidth.Text = inif.Read("OSD", "barWidth");
+            mainwindow.tbxOSDBarHeight.Text = inif.Read("OSD", "barHeight");
+            mainwindow.cboOSDFont.SelectedItem = inif.Read("OSD", "font");
+            mainwindow.cboOSDFontSize.SelectedItem = inif.Read("OSD", "fontSize");
+            mainwindow.cboOSDFontColor.SelectedItem = inif.Read("OSD", "fontColor");
+            mainwindow.cboOSDFontBorderSize.SelectedItem = inif.Read("OSD", "borderSize");
+            mainwindow.cboOSDFontBorderColor.SelectedItem = inif.Read("OSD", "borderColor");
+            mainwindow.cboOSDFontShadowColor.SelectedItem = inif.Read("OSD", "shadowColor");
+            mainwindow.tbxOSDShadowOffset.Text = inif.Read("OSD", "shadowOffset");
+
+
+            //debug
+            //MessageBox.Show(sectionVideo);
+        }
+
+
+
+        /// <summary>
+        ///    INI Reader
+        /// </summary>
+        /*
+        * Source: GitHub Sn0wCrack
+        * https://gist.github.com/Sn0wCrack/5891612
+        */
+        public partial class INIFile
+        {
+            public string path { get; private set; }
+
+            [DllImport("kernel32")]
+            private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+            [DllImport("kernel32")]
+            private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+
+            public INIFile(string INIPath)
+            {
+                path = INIPath;
+            }
+            public void Write(string Section, string Key, string Value)
+            {
+                WritePrivateProfileString(Section, Key, Value, this.path);
+            }
+
+            public string Read(string Section, string Key)
+            {
+                StringBuilder temp = new StringBuilder(255);
+                int i = GetPrivateProfileString(Section, Key, "", temp, 255, this.path);
+                return temp.ToString();
+            }
+        }
+
+
     }
 }

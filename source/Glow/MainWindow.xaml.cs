@@ -163,11 +163,14 @@ namespace Glow
             // Load Saved Settings
             // --------------------------------------------------
             // Window Position
-            // First time use
-            if (Convert.ToDouble(Settings.Default["Left"]) == 0
-                || Convert.ToDouble(Settings.Default["Top"]) == 0)
+            this.Top = Settings.Default.Top;
+            this.Left = Settings.Default.Left;
+            this.Height = Settings.Default.Height;
+            this.Width = Settings.Default.Width;
+
+            if (Settings.Default.Maximized)
             {
-                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                WindowState = WindowState.Maximized;
             }
 
             // --------------------------------------------------
@@ -184,8 +187,8 @@ namespace Glow
             // Control Defaults
             // --------------------------------------------------
             // Font
-            cboPreset.SelectedItem = "Default";
-            FontSelectedItem = "Arial";
+            cboProfile.SelectedItem = "Default";
+            FontSelectedItem = "Segoe UI";
         }
 
 
@@ -199,9 +202,29 @@ namespace Glow
             Application.Current.Shutdown();
         }
 
-        // Save Window Position
+        // Save Window Position, Width, Height
         void MainWindow_Closing(object sender, CancelEventArgs e)
         {
+            //Settings.Default.Save();
+
+            if (WindowState == WindowState.Maximized)
+            {
+                // Use the RestoreBounds as the current values will be 0, 0 and the size of the screen
+                Settings.Default.Top = RestoreBounds.Top;
+                Settings.Default.Left = RestoreBounds.Left;
+                Settings.Default.Height = RestoreBounds.Height;
+                Settings.Default.Width = RestoreBounds.Width;
+                Settings.Default.Maximized = true;
+            }
+            else
+            {
+                Settings.Default.Top = this.Top;
+                Settings.Default.Left = this.Left;
+                Settings.Default.Height = this.Height;
+                Settings.Default.Width = this.Width;
+                Settings.Default.Maximized = false;
+            }
+
             Settings.Default.Save();
         }
 
@@ -212,6 +235,44 @@ namespace Glow
         ///    Methods
         /// </summary>
         // --------------------------------------------------------------------------------------------------------
+
+        ///// <summary>
+        /////    File Renamer
+        ///// </summary>
+        //public static void FileRenamer()
+        //{
+        //    // Set Output
+        //    outputDir = inputDir;
+
+        //    if (!string.IsNullOrEmpty(outputDir)) //null check
+        //    {
+        //        output = Path.Combine(outputDir, outputFileName + outputExt);
+        //    }
+
+        //    // Add number to filename if it already exists
+        //    if (!string.IsNullOrEmpty(output)) //null check
+        //    {
+        //        int count = 1;
+
+        //        while (File.Exists(output))
+        //        {
+        //            string outputNewFileName = string.Format("{0}({1})", outputFileName, count++);
+        //            output = Path.Combine(outputDir, outputNewFileName + outputExt);
+        //        }
+
+        //        // Set the Output File Name
+        //        outputFileName = Path.GetFileNameWithoutExtension(output);
+
+        //        // Combine Output
+        //        output = Path.Combine(outputDir, outputFileName + outputExt);
+        //    }
+
+        //}
+
+
+        /// <summary>
+        ///    Config RichTextBox
+        /// </summary>
         public String ConfigRichTextBox()
         {
             // Select All Text
@@ -669,6 +730,14 @@ namespace Glow
         }
 
         /// <summary>
+        ///    Configure Button
+        /// </summary>
+        private void buttonConfigure_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
         ///    Update Button
         /// </summary>
         private Boolean IsUpdateWindowOpened = false;
@@ -831,7 +900,7 @@ namespace Glow
                 }
                 catch
                 {
-                    MessageBox.Show("Error Saving Output Log to " + "\"" + configDir + "\"" + ". May require Administrator Privileges.");
+                    MessageBox.Show("Error Saving Config to " + "\"" + configDir + "\"" + ". May require Administrator Privileges.");
                 }
             }
         }
@@ -840,9 +909,86 @@ namespace Glow
         /// <summary>
         ///    Preset
         /// </summary>
-        private void cboPreset_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cboProfile_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Presets.Preset(this);
+            Profiles.Preset(this);
+        }
+
+        /// <summary>
+        ///    Export Preset
+        /// </summary>
+        private void buttonExport_Click(object sender, RoutedEventArgs e)
+        {
+            // Check if presets directory exists
+            // If not, create it
+            Directory.CreateDirectory(appDir + "profiles");
+
+            // Presets Diretory
+            string profilesDir = appDir + "profiles";
+
+
+            // Open 'Save File'
+            Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
+
+            // Defaults
+            saveFile.InitialDirectory = profilesDir;
+            saveFile.RestoreDirectory = true;
+            saveFile.Filter = "ini file (*.ini)|*.ini";
+            saveFile.DefaultExt = "";
+            saveFile.FileName = "profile.ini";
+
+            // Show save file dialog box
+            Nullable<bool> result = saveFile.ShowDialog();
+
+            // Process dialog box
+            if (result == true)
+            {
+                // Set Input Dir, Name, Ext
+                string inputDir = Path.GetDirectoryName(saveFile.FileName).TrimEnd('\\') + @"\";
+                string inputFileName = Path.GetFileNameWithoutExtension(saveFile.FileName);
+                string inputExt = Path.GetExtension(saveFile.FileName);
+
+                // Export ini file
+                Profiles.ExportProfile(this, inputDir, inputFileName, inputExt);
+            }
+        }
+
+
+        /// <summary>
+        ///    Import Preset
+        /// </summary>
+        private void buttonImport_Click(object sender, RoutedEventArgs e)
+        {
+            // Check if presets directory exists
+            // If not, create it
+            Directory.CreateDirectory(appDir + "profiles");
+
+            // Presets Diretory
+            string profilesDir = appDir + "profiles";
+
+
+            // Open 'Select File'
+            Microsoft.Win32.OpenFileDialog selectFile = new Microsoft.Win32.OpenFileDialog();
+
+            // Defaults
+            selectFile.InitialDirectory = profilesDir;
+            selectFile.RestoreDirectory = true;
+            selectFile.Filter = "ini file (*.ini)|*.ini";
+
+            // Show select file dialog box
+            Nullable<bool> result = selectFile.ShowDialog();
+
+            // Process dialog box
+            if (result == true)
+            {
+                // Set Input Dir, Name, Ext
+                string inputDir = Path.GetDirectoryName(selectFile.FileName).TrimEnd('\\') + @"\";
+                string inputFileName = Path.GetFileNameWithoutExtension(selectFile.FileName);
+                string inputExt = Path.GetExtension(selectFile.FileName);
+
+                // Import ini file
+                Profiles.ImportProfile(this, inputDir, inputFileName, inputExt);
+            }
         }
 
 
