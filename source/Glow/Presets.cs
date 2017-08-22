@@ -129,10 +129,10 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
-                mainwindow.cboOSDFontSize.SelectedItem = "44";
+                mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
+                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
                 mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
                 mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
@@ -243,10 +243,10 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
-                mainwindow.cboOSDFontSize.SelectedItem = "44";
+                mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
+                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
                 mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
                 mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
@@ -357,10 +357,10 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
-                mainwindow.cboOSDFontSize.SelectedItem = "44";
+                mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
+                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
                 mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
                 mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
@@ -471,10 +471,10 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
-                mainwindow.cboOSDFontSize.SelectedItem = "44";
+                mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
+                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
                 mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
                 mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
@@ -585,10 +585,10 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
-                mainwindow.cboOSDFontSize.SelectedItem = "44";
+                mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "2";
+                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
                 mainwindow.cboOSDFontBorderColor.SelectedIndex = 2; //dark gray
                 // Shadow
                 mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray

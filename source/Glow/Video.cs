@@ -68,6 +68,7 @@ namespace Glow
             // -------------------------
             string hwdec = "hwdec=" + mainwindow.cboHWDecoder.SelectedItem.ToString();
 
+
             // --------------------------------------------------
             // Display
             // --------------------------------------------------

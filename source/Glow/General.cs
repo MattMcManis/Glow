@@ -97,7 +97,7 @@ namespace Glow
             // Screenshot
             // -------------------------
             string screenshot = "screenshot-format=" + mainwindow.cboScreenshot.SelectedItem.ToString();
-            string screenshot_template = "screenshot-template=mpvsnap-%tY.%tm.%td-%tHh%tMm%tSs%00n";
+            string screenshot_template = "screenshot-template=\"%F-%wHh%wMm%wSs\"";
             string screenshot_tag_colorspace = "screenshot-tag-colorspace=yes";
 
 
