@@ -31,6 +31,10 @@ namespace Glow
         /// </summary>
         public static String GeneralConfig(MainWindow mainwindow)
         {
+            // --------------------------------------------------
+            // Main
+            // --------------------------------------------------
+
             // -------------------------
             // Title
             // -------------------------
@@ -40,6 +44,11 @@ namespace Glow
             // Priority
             // -------------------------
             string priority = "priority=" + mainwindow.cboPriority.SelectedItem.ToString();
+
+
+            // --------------------------------------------------
+            // Window
+            // --------------------------------------------------
 
             // -------------------------
             // Save Position on Quit
@@ -79,6 +88,11 @@ namespace Glow
             // -------------------------
             string windowtitle = "title=\"${ filename}\"";
 
+
+            // --------------------------------------------------
+            // Screenshot
+            // --------------------------------------------------
+
             // -------------------------
             // Screenshot
             // -------------------------
@@ -86,9 +100,10 @@ namespace Glow
             string screenshot_template = "screenshot-template=mpvsnap-%tY.%tm.%td-%tHh%tMm%tSs%00n";
             string screenshot_tag_colorspace = "screenshot-tag-colorspace=yes";
 
-            // -------------------------
+
+            // --------------------------------------------------
             // Combine
-            // -------------------------
+            // --------------------------------------------------
             List<string> listGeneral = new List<string>()
             {
                 title,
@@ -104,6 +119,9 @@ namespace Glow
                 screenshot_tag_colorspace,
             };
 
+            // -------------------------
+            // Join
+            // -------------------------
             string general = string.Join("\r\n", listGeneral
                 .Where(s => !string.IsNullOrEmpty(s))
                 );

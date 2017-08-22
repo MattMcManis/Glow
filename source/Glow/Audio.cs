@@ -21,6 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace Glow
 {
@@ -31,6 +32,10 @@ namespace Glow
         /// </summary>
         public static String AudioConfig(MainWindow mainwindow)
         {
+            // --------------------------------------------------
+            // Main
+            // --------------------------------------------------
+
             // -------------------------
             // Title
             // -------------------------
@@ -105,9 +110,10 @@ namespace Glow
             // -------------------------
             string loadfiles = "audio-file-auto=" + mainwindow.cboAudioLoadFiles.SelectedItem.ToString();
 
-            // -------------------------
+
+            // --------------------------------------------------
             // Combine
-            // -------------------------
+            // --------------------------------------------------
             List<string> listAudio = new List<string>()
             {
                 title,
@@ -123,6 +129,9 @@ namespace Glow
                 loadfiles,
             };
 
+            // -------------------------
+            // Join
+            // -------------------------
             string audio = string.Join("\r\n", listAudio
                 .Where(s => !string.IsNullOrEmpty(s))
                 );

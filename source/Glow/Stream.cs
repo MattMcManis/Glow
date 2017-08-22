@@ -38,6 +38,10 @@ namespace Glow
             // -------------------------
             string title = "# [ STREAM ]";
 
+            // --------------------------------------------------
+            // Demuxer
+            // --------------------------------------------------
+
             // -------------------------
             // Demuxer Thread
             // -------------------------
@@ -66,6 +70,11 @@ namespace Glow
 
             if ((string)mainwindow.cboDemuxerMKVSubPreroll.SelectedItem == "yes")
                 demuxerMKVSubtitlePreroll = "demuxer-mkv-subtitle-preroll";
+
+
+            // --------------------------------------------------
+            // Cache
+            // --------------------------------------------------
 
             // -------------------------
             // Cache
@@ -126,19 +135,27 @@ namespace Glow
                 filesize = "cache-file-size=" + mainwindow.tbxCacheFileSize.Text.ToString();
 
             // -------------------------
-            // Extra
+            // YouTube
             // -------------------------
-            string extra = @"ytdl=yes
-ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/bestaudio)/best";
+            string youtube = "ytdl=yes"
+                            + "\r\n"
+                            + "ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/bestaudio)/best";
 
+
+            // --------------------------------------------------
             // Combine
-            List <string> listStream = new List<string>()
+            // --------------------------------------------------
+            List<string> listStream = new List<string>()
             {
                 title,
+
+                // Demuxer
                 demuxthread,
                 demuxerbuffersize,
                 demuxerreadahead,
                 demuxerMKVSubtitlePreroll,
+
+                // Cache
                 cache,
                 cachedefault,
                 initial,
@@ -147,14 +164,19 @@ ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/best
                 seconds,
                 file,
                 filesize,
-                extra,
+                youtube,
             };
 
+            // -------------------------
+            // Join
+            // -------------------------
             string stream = string.Join("\r\n", listStream
                 .Where(s => !string.IsNullOrEmpty(s))
                 );
 
+            // -------------------------
             // Return
+            // -------------------------
             return stream;
         }
     }

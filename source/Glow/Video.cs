@@ -21,6 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace Glow
 {
@@ -31,10 +32,18 @@ namespace Glow
         /// </summary>
         public static String VideoConfig(MainWindow mainwindow)
         {
+            // --------------------------------------------------
+            // Main
+            // --------------------------------------------------
+
             // -------------------------
             // Title
             // -------------------------
             string title = "# [ VIDEO ]";
+
+            // --------------------------------------------------
+            // Hardware
+            // --------------------------------------------------
 
             // -------------------------
             // Video Driver
@@ -46,9 +55,32 @@ namespace Glow
                 driver = "profile=opengl-hq";
 
             // -------------------------
+            // OpenGL PBO
+            // -------------------------
+            string openglpbo = string.Empty;
+
+            // only if on
+            if ((string)mainwindow.cboOpenGLPBO.SelectedItem == "on")
+                openglpbo = "opengl-pbo";
+
+            // -------------------------
             // Hardware Decoder
             // -------------------------
             string hwdec = "hwdec=" + mainwindow.cboHWDecoder.SelectedItem.ToString();
+
+            // --------------------------------------------------
+            // Display
+            // --------------------------------------------------
+
+            // -------------------------
+            // Primaries
+            // -------------------------
+            string displayPrimaries = "target-prim=" + mainwindow.cboDisplayPrimaries.SelectedItem.ToString();
+
+            // -------------------------
+            // Transfer Characteristics
+            // -------------------------
+            string displayTransChar = "target-trc=" + mainwindow.cboTransferCharacteristics.SelectedItem.ToString();
 
             // -------------------------
             // Color Space
@@ -61,18 +93,77 @@ namespace Glow
             string colorrange = "video-output-levels=" + mainwindow.cboColorRange.SelectedItem.ToString();
 
             // -------------------------
+            // Deinterlace
+            // -------------------------
+            string deinterlace = "deinterlace=" + mainwindow.cboDeinterlace.SelectedItem.ToString();
+
+            // -------------------------
+            // Video Sync
+            // -------------------------          
+            string videosync = string.Empty;
+
+            // only if video sync is on
+            if ((string)mainwindow.cboVideoSync.SelectedItem != "off")
+                videosync = "video-sync=" + mainwindow.cboVideoSync.SelectedItem.ToString();
+
+            // -------------------------
+            // Framedrop
+            // -------------------------
+            string framedrop = "framedrop=" + mainwindow.cboFramedrop.SelectedItem.ToString();
+
+
+            // --------------------------------------------------
+            // Image
+            // --------------------------------------------------
+
+            // -------------------------
+            // Brightness
+            // -------------------------
+            string brightness = string.Empty;
+
+            // only if not 0
+            if (mainwindow.tbxBrightness.Text != "0")
+                brightness = "brightness=" + mainwindow.tbxBrightness.Text.ToString();
+
+            // -------------------------
+            // Contrast
+            // -------------------------
+            string contrast = string.Empty;
+
+            // only if not 0
+            if (mainwindow.tbxContrast.Text != "0")
+                contrast = "contrast=" + mainwindow.tbxContrast.Text.ToString();
+
+            // -------------------------
+            // Hue
+            // -------------------------
+            string hue = string.Empty;
+
+            // only if not 0
+            if (mainwindow.tbxHue.Text != "0")
+                hue = "hue=" + mainwindow.tbxHue.Text.ToString();
+
+            // -------------------------
+            // Saturation
+            // -------------------------
+            string saturation = string.Empty;
+
+            // only if not 0
+            if (mainwindow.tbxSaturation.Text != "0")
+                saturation = "saturation=" + mainwindow.tbxSaturation.Text.ToString();
+
+            // -------------------------
             // Gamma
             // -------------------------
-            string gamma = "target-trc=" + mainwindow.cboGamma.SelectedItem.ToString();
+            string gamma = string.Empty;
+
+            // only if not 0
+            if (mainwindow.tbxGamma.Text != "0")
+                gamma = "gamma=" + mainwindow.tbxGamma.Text.ToString();
 
             // auto
-            if ((string)mainwindow.cboGamma.SelectedItem == "auto")
+            if ((string)mainwindow.cboGammaAuto.SelectedItem == "on")
                 gamma = "gamma-auto";
-
-            // -------------------------
-            // Dither
-            // -------------------------
-            string dither = "dither-depth=" + mainwindow.cboDither.SelectedItem.ToString();
 
             // -------------------------
             // Deband
@@ -91,6 +182,31 @@ namespace Glow
             // and deband grain is not empty
             if ((string)mainwindow.cboDeband.SelectedItem == "yes" && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
                 debandgrain = "deband-grain=" + mainwindow.tbxDebandGrain.Text.ToString();
+
+            // -------------------------
+            // Dither
+            // -------------------------
+            string dither = "dither-depth=" + mainwindow.cboDither.SelectedItem.ToString();
+
+
+            // --------------------------------------------------
+            // Scaling
+            // --------------------------------------------------
+
+            // -------------------------
+            // Resize Only
+            // -------------------------
+            // always on
+            string scalerResizeOnly = "scaler-resizes-only";
+
+            // -------------------------
+            // Sigmoid Upscaling
+            // -------------------------
+            string sigmoidUpscaling = string.Empty;
+
+            if ((string)mainwindow.cboSigmoid.SelectedItem == "on")
+
+                sigmoidUpscaling = "sigmoid-upscaling";
 
             // -------------------------
             // Scale
@@ -177,44 +293,41 @@ namespace Glow
             if ((string)mainwindow.cboSoftwareScaler.SelectedItem != "off")
                 softwarescaler = "sws-scaler=" + mainwindow.cboSoftwareScaler.SelectedItem.ToString();
 
-            // -------------------------
-            // Deinterlace
-            // -------------------------
-            string deinterlace = "deinterlace=" + mainwindow.cboDeinterlace.SelectedItem.ToString();
 
-            // -------------------------
-            // Video Sync
-            // -------------------------          
-            string videosync = string.Empty;
-
-            // only if video sync is on
-            if ((string)mainwindow.cboVideoSync.SelectedItem != "off")
-                videosync = "video-sync=" + mainwindow.cboVideoSync.SelectedItem.ToString();
-
-            // -------------------------
-            // Framedrop
-            // -------------------------
-            string framedrop = "framedrop=" + mainwindow.cboFramedrop.SelectedItem.ToString();
-
-            // -------------------------
+            // --------------------------------------------------
             // Combine
-            // -------------------------
+            // --------------------------------------------------
             List<string> listVideo = new List<string>()
             {
                 title,
+
+                // Hardware
                 driver,
+                openglpbo,
                 hwdec,
+
+                // Display
+                displayPrimaries,
+                displayTransChar,
+                colorspace,
+                colorrange,
                 deinterlace,
                 videosync,
                 framedrop,
 
-                colorspace,
-                colorrange,
+                // Image
+                brightness,
+                contrast,
+                hue,
+                saturation,
                 gamma,
-                dither,
                 deband,
                 debandgrain,
+                dither,
 
+                // Scaling
+                scalerResizeOnly,
+                sigmoidUpscaling,
                 scale,
                 scaleAntiring,
                 chromascale,
@@ -224,6 +337,9 @@ namespace Glow
                 softwarescaler,
             };
 
+            // -------------------------
+            // Join
+            // -------------------------
             string video = string.Join("\r\n", listVideo
                 .Where(s => !string.IsNullOrEmpty(s))
                 );

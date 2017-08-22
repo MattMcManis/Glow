@@ -241,10 +241,59 @@ namespace Glow
         // --------------------------------------------------
 
         /// <summary>
+        ///    Video Driver
+        /// </summary>
+        private void cboVideoDriver_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enable/Disable OpenGL PBO
+
+            // Enabled
+            if ((string)cboVideoDriver.SelectedItem == "opengl"
+                || (string)cboVideoDriver.SelectedItem == "opengl-hq")
+            {
+                cboOpenGLPBO.IsEnabled = true;
+            }
+            // Disabled
+            else
+            {
+                cboOpenGLPBO.SelectedItem = "off";
+                cboOpenGLPBO.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
+        ///    Gamma Auto
+        /// </summary>
+        private void cboGammaAuto_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enable/Disable Gamma
+
+            // Enabled
+            if ((string)cboGammaAuto.SelectedItem == "on")
+            {
+                // Slider
+                slGamma.Value = 0;
+                slGamma.IsEnabled = false;
+                // TextBox
+                tbxGamma.IsEnabled = false;
+            }
+            // Disabled
+            else if ((string)cboGammaAuto.SelectedItem == "off")
+            {
+                // Slider
+                slGamma.IsEnabled = true;
+                // TextBox
+                tbxGamma.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
         ///    Deband
         /// </summary>
         private void cboDeband_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Enable/Disable Deband Grain
+
             // Enabled
             if ((string)cboDeband.SelectedItem == "yes")
             {
@@ -263,6 +312,8 @@ namespace Glow
         /// </summary>
         private void cboScale_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Enable/Disable Scale Antiring
+
             // Off
             // Turn off Scale Antiring
             if ((string)cboScale.SelectedItem == "off")
@@ -285,6 +336,8 @@ namespace Glow
         /// </summary>
         private void cboChromaScale_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Enable/Disable Chroma Scale Antiring
+
             // Off
             // Turn off Chroma Scale Antiring
             if ((string)cboChromaScale.SelectedItem == "off")
@@ -307,6 +360,8 @@ namespace Glow
         /// </summary>
         private void cboDownscale_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Enable/Disable Downscale Antiring
+
             // Off
             // Turn off Downscale Antiring
             if ((string)cboDownscale.SelectedItem == "off")
@@ -329,9 +384,14 @@ namespace Glow
         /// </summary>
         private void cboSoftwareScale_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Enable/Disable Hardware Scaling if Software Scaling is on
+
             // Enabled
             if ((string)cboSoftwareScaler.SelectedItem != "off")
             {
+                // Sigmoid
+                cboSigmoid.IsEnabled = false;
+
                 // Scale
                 cboScale.IsEnabled = false;
                 slScaleAntiring.IsEnabled = false;
@@ -353,6 +413,9 @@ namespace Glow
             // Disabled
             else
             {
+                // Sigmoid
+                cboSigmoid.IsEnabled = true;
+
                 // Scale
                 cboScale.IsEnabled = true;
                 slScaleAntiring.IsEnabled = true;

@@ -37,6 +37,10 @@ namespace Glow
         /// </summary>
         public static String SubtitleConfig(MainWindow mainwindow)
         {
+            // --------------------------------------------------
+            // Main
+            // --------------------------------------------------
+
             // -------------------------
             // Title
             // -------------------------
@@ -87,6 +91,21 @@ namespace Glow
             string position = "sub-pos=" + mainwindow.tbxSubtitlePosition.Text.ToString();
 
             // -------------------------
+            // Timing
+            // -------------------------
+            string timing = "sub-fix-timing=no";
+
+            // -------------------------
+            // Margins
+            // -------------------------
+            string margins = "sub-use-margins";
+
+
+            // --------------------------------------------------
+            // Font
+            // --------------------------------------------------
+
+            // -------------------------
             // Font
             // -------------------------
             string font = "sub-text-font=" + "\"" + mainwindow.cboSubtitlesFont.SelectedItem.ToString() + "\"";
@@ -135,12 +154,10 @@ namespace Glow
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowOffset.Text))
                 shadowoffset = "sub-shadow-offset=" + mainwindow.tbxSubtitlesShadowOffset.Text.ToString();
 
-            // -------------------------
-            // Extra
-            // -------------------------
-            string extra = "sub-fix-timing=no" 
-                            + "\r\n" 
-                            + "sub-use-margins";
+
+            // --------------------------------------------------
+            // ASS Advanced SSA
+            // --------------------------------------------------
 
             // -------------------------
             // ass
@@ -153,14 +170,16 @@ namespace Glow
                         + "\r\n"
                         + "ass-shaper=simple";
 
-            // -------------------------
+
+            // --------------------------------------------------
             // Blend
-            // -------------------------
+            // --------------------------------------------------
             string blend = "blend-subtitles=" + mainwindow.cboSubtitlesBlend.SelectedItem.ToString();
 
-            // -------------------------
+
+            // --------------------------------------------------
             // Combine
-            // -------------------------
+            // --------------------------------------------------
             List<string> listSubtitle = new List<string>()
             {
                 title,
@@ -168,6 +187,8 @@ namespace Glow
                 subtitles,
                 loadfiles,
                 position,
+                timing,
+                margins,
                 font,
                 fontsize,
                 fontcolor,
@@ -175,12 +196,14 @@ namespace Glow
                 bordercolor,
                 shadowcolor,
                 shadowoffset,
-                extra,
                 ass,
                 embeddedfonts,
                 blend,
             };
 
+            // -------------------------
+            // Join
+            // -------------------------
             string subtitle = string.Join("\r\n", listSubtitle
                 .Where(s => !string.IsNullOrEmpty(s))
                 );

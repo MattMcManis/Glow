@@ -35,6 +35,10 @@ namespace Glow
         /// </summary>
         public static String OSDConfig(MainWindow mainwindow)
         {
+            // --------------------------------------------------
+            // Main
+            // --------------------------------------------------
+
             // -------------------------
             // Title
             // -------------------------
@@ -66,6 +70,11 @@ namespace Glow
             // -------------------------
             string level = "osd-level=" + mainwindow.cboOSDLevel.SelectedItem.ToString();
 
+
+            // --------------------------------------------------
+            // Controls
+            // --------------------------------------------------
+
             // -------------------------
             // Scale
             // -------------------------
@@ -89,6 +98,11 @@ namespace Glow
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarHeight.Text))
                 barheight = "osd-bar-h=" + mainwindow.tbxOSDBarHeight.Text.ToString();
+
+
+            // --------------------------------------------------
+            // Text
+            // --------------------------------------------------
 
             // -------------------------
             // Font Name
@@ -138,9 +152,9 @@ namespace Glow
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDShadowOffset.Text))
                 shadowoffset = "osd-shadow-offset=" + mainwindow.tbxOSDShadowOffset.Text.ToString();
 
-            // -------------------------
+            // --------------------------------------------------
             // Combine
-            // -------------------------
+            // --------------------------------------------------
             List<string> listOSD = new List<string>()
             {
                 title,
@@ -148,9 +162,13 @@ namespace Glow
                 fractions,
                 duration,
                 level,
+
+                // Controls
                 scale,
                 barwidth,
                 barheight,
+
+                // Text
                 font,
                 fontsize,
                 fontcolor,
@@ -160,6 +178,9 @@ namespace Glow
                 shadowoffset,
             };
 
+            // -------------------------
+            // Join
+            // -------------------------
             string osd = string.Join("\r\n", listOSD
                 .Where(s => !string.IsNullOrEmpty(s))
                 );

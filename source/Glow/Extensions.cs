@@ -31,42 +31,76 @@ namespace Glow
         /// </summary>
         public static String ExtensionsConfig(MainWindow mainwindow)
         {
+            // --------------------------------------------------
+            // Main
+            // --------------------------------------------------
+
             // -------------------------
             // Title
             // -------------------------
             string title = "# [ EXTENSIONS ]";
 
             // -------------------------
-            // All Extensions
+            // MP4
             // -------------------------
-            string allExtensions = @"[extension.mp4]
-loop-file=inf
-
-[extension.webm]
-cache=no
-loop-file=inf
-
-[extension.jpg]
-cache=no
-pause
-
-[extension.png]
-cache=no
-pause
-
-[extension.gif]
-cache=no
-loop-file=inf";
+            string mp4 = string.Empty;
+            //string mp4 = "[extension.mp4]";
+            //            + "\r\n"
+            //            + "loop-file=inf";
 
             // -------------------------
+            // WebM
+            // -------------------------
+            string webm = "[extension.webm]"
+                        + "\r\n"
+                        + "cache=no"
+                        + "\r\n"
+                        + "loop-file=inf";
+
+            // -------------------------
+            // JPG
+            // -------------------------
+            string jpg = "[extension.jpg]"
+                        + "\r\n"
+                        + "cache=no"
+                        + "\r\n"
+                        + "pause";
+
+            // -------------------------
+            // PNG
+            // -------------------------
+            string png = "[extension.png]"
+                        + "\r\n"
+                        + "cache=no"
+                        + "\r\n"
+                        + "pause";
+
+            // -------------------------
+            // GIF
+            // -------------------------
+            string gif = "[extension.gif]"
+                        + "\r\n"
+                        + "cache=no"
+                        + "\r\n"
+                        + "loop-file=inf";
+
+
+            // --------------------------------------------------
             // Combine
-            // -------------------------
+            // --------------------------------------------------
             List<string> listExtensions = new List<string>()
             {
                 title,
-                allExtensions
+                mp4,
+                webm,
+                jpg,
+                png,
+                gif
             };
 
+            // -------------------------
+            // Join
+            // -------------------------
             string extensions = string.Join("\r\n", listExtensions
                 .Where(s => !string.IsNullOrEmpty(s))
                 );

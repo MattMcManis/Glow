@@ -34,6 +34,8 @@ namespace Glow
             "Arabic",
             "Bengali",
             "Chinese",
+            "Dutch",
+            "Finnish",
             "French",
             "German",
             "Hindi",
@@ -43,6 +45,7 @@ namespace Glow
             "Portuguese",
             "Russian",
             "Spanish",
+            "Swedish",
             "Vietnamese",
         };
 
@@ -54,6 +57,7 @@ namespace Glow
         public static String LanguageCode(string input)
         {
             string language = string.Empty;
+
 
             // Enlgish
             if (input == "English")
@@ -69,7 +73,15 @@ namespace Glow
 
             // Chinese
             else if (input == "Chinese")
-                language = "fr,fra,fre,fra";
+                language = "chi,zh,zho,Chinese";
+
+            // Dutch
+            else if (input == "Dutch")
+                language = "nl,nld,dut,Dutch";
+
+            // Finnish
+            else if (input == "Finnish")
+                language = "fi,fin,Finnish";
 
             // French
             else if (input == "French")
@@ -107,10 +119,16 @@ namespace Glow
             else if (input == "Spanish")
                 language = "es,spa,Spanish";
 
+            // Swedish
+            else if (input == "Swedish")
+                language = "sv,swe,Swedish";
+
             // Vietnamese
             else if (input == "Vietnamese")
                 language = "vi,vie,Vietnamese";
 
+
+            // Return
             return language;
         }
     }
