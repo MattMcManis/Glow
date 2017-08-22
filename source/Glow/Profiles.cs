@@ -91,6 +91,8 @@ namespace Glow
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                // deselect all languages
+                mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
@@ -108,6 +110,8 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                // deselect all languages
+                mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Stream
@@ -205,6 +209,8 @@ namespace Glow
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                // deselect all languages
+                mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
@@ -222,6 +228,8 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                // deselect all languages
+                mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Stream
@@ -319,6 +327,8 @@ namespace Glow
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                // deselect all languages
+                mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
@@ -336,6 +346,8 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                // deselect all languages
+                mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Stream
@@ -433,6 +445,8 @@ namespace Glow
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                // deselect all languages
+                mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
@@ -450,6 +464,8 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                // deselect all languages
+                mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Stream
@@ -547,6 +563,8 @@ namespace Glow
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                // deselect all languages
+                mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
@@ -564,6 +582,8 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 0; //none
                 mainwindow.slSubtitlesShadowOffset.Value = 0;
+                // deselect all languages
+                mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Stream
@@ -891,7 +911,6 @@ namespace Glow
             inif.Write("OSD", "shadowColor", selected);
 
             inif.Write("OSD", "shadowOffset", mainwindow.tbxOSDShadowOffset.Text.ToString());
-
         }
 
 
@@ -918,6 +937,7 @@ namespace Glow
                 mainwindow.cboPriority.SelectedItem = priority;
             else
                 listFailedImports.Add("General: Priority");
+            //mainwindow.cboPriority.SelectedItem = inif.Read("General", "priority");
 
             // Save Position
             string savePositiOnQuit = inif.Read("General", "savePositiOnQuit");
@@ -925,6 +945,7 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = savePositiOnQuit;
             else
                 listFailedImports.Add("General: Save Position");
+            //mainwindow.cboSavePositionQuit.SelectedItem = inif.Read("General", "savePositiOnQuit");
 
             // Keep Open
             string keepOpen = inif.Read("General", "keepOpen");
@@ -932,6 +953,7 @@ namespace Glow
                 mainwindow.cboKeepOpen.SelectedItem = keepOpen;
             else
                 listFailedImports.Add("General: Keep Open");
+            //mainwindow.cboKeepOpen.SelectedItem = inif.Read("General", "keepOpen");
 
             // On Top
             string onTop = inif.Read("General", "onTop");
@@ -939,6 +961,7 @@ namespace Glow
                 mainwindow.cboOnTop.SelectedItem = onTop;
             else
                 listFailedImports.Add("General: On Top");
+            //mainwindow.cboOnTop.SelectedItem = inif.Read("General", "onTop");
 
             // OSC
             string osc = inif.Read("General", "osc");
@@ -946,6 +969,7 @@ namespace Glow
                 mainwindow.cboOSC.SelectedItem = osc;
             else
                 listFailedImports.Add("General: OSC");
+            //mainwindow.cboOSC.SelectedItem = inif.Read("General", "osc");
 
             // Screenshot
             string screenshot = inif.Read("General", "screenshot");
@@ -953,119 +977,446 @@ namespace Glow
                 mainwindow.cboScreenshot.SelectedItem = screenshot;
             else
                 listFailedImports.Add("General: Screenshot");
-
-            //mainwindow.cboSavePositionQuit.SelectedItem = inif.Read("General", "savePositiOnQuit");
-            //mainwindow.cboKeepOpen.SelectedItem = inif.Read("General", "keepOpen");
-            //mainwindow.cboOnTop.SelectedItem = inif.Read("General", "onTop");
-            //mainwindow.cboOSC.SelectedItem = inif.Read("General", "osc");
             //mainwindow.cboScreenshot.SelectedItem = inif.Read("General", "screenshot");
 
             // --------------------------------------------------
             // Video
             // --------------------------------------------------
             // Hardware
-            mainwindow.cboVideoDriver.SelectedItem = inif.Read("Video", "videoDriver");
-            mainwindow.cboOpenGLPBO.SelectedItem = inif.Read("Video", "openglPBO");
-            mainwindow.cboHWDecoder.SelectedItem = inif.Read("Video", "hwdec");
+
+            // Video Driver
+            string videoDriver = inif.Read("Video", "videoDriver");
+            if (mainwindow.cboVideoDriver.Items.Contains(videoDriver))
+                mainwindow.cboVideoDriver.SelectedItem = videoDriver;
+            else
+                listFailedImports.Add("Video: Video Driver");
+            //mainwindow.cboVideoDriver.SelectedItem = inif.Read("Video", "videoDriver");
+
+            // OpenGL PBO
+            string openglPBO = inif.Read("Video", "openglPBO");
+            if (mainwindow.cboOpenGLPBO.Items.Contains(openglPBO))
+                mainwindow.cboOpenGLPBO.SelectedItem = openglPBO;
+            else
+                listFailedImports.Add("Video: OpenGL PBO");
+            //mainwindow.cboOpenGLPBO.SelectedItem = inif.Read("Video", "openglPBO");
+
+            // HW Decoder
+            string hwdec = inif.Read("Video", "hwdec");
+            if (mainwindow.cboHWDecoder.Items.Contains(hwdec))
+                mainwindow.cboHWDecoder.SelectedItem = hwdec;
+            else
+                listFailedImports.Add("Video: HW Decoder");
+            //mainwindow.cboHWDecoder.SelectedItem = inif.Read("Video", "hwdec");
+
+
             // Display
-            mainwindow.cboDisplayPrimaries.SelectedItem = inif.Read("Video", "displayPrimaries");
-            mainwindow.cboColorSpace.SelectedItem = inif.Read("Video", "colorSpace");
-            mainwindow.cboColorRange.SelectedItem = inif.Read("Video", "colorRange");
-            mainwindow.cboDeinterlace.SelectedItem = inif.Read("Video", "deinterlace");
-            mainwindow.cboVideoSync.SelectedItem = inif.Read("Video", "videoSync");
-            mainwindow.cboFramedrop.SelectedItem = inif.Read("Video", "frameDrop");
+
+            // Display Primaries
+            string displayPrimaries = inif.Read("Video", "displayPrimaries");
+            if (mainwindow.cboDisplayPrimaries.Items.Contains(displayPrimaries))
+                mainwindow.cboDisplayPrimaries.SelectedItem = displayPrimaries;
+            else
+                listFailedImports.Add("Video: Display Primaries");
+            //mainwindow.cboDisplayPrimaries.SelectedItem = inif.Read("Video", "displayPrimaries");
+
+            // Color Space
+            string colorSpace = inif.Read("Video", "colorSpace");
+            if (mainwindow.cboColorSpace.Items.Contains(colorSpace))
+                mainwindow.cboColorSpace.SelectedItem = colorSpace;
+            else
+                listFailedImports.Add("Video: Color Space");
+            //mainwindow.cboColorSpace.SelectedItem = inif.Read("Video", "colorSpace");
+
+            // Color Range
+            string colorRange = inif.Read("Video", "colorRange");
+            if (mainwindow.cboColorRange.Items.Contains(colorRange))
+                mainwindow.cboColorRange.SelectedItem = colorRange;
+            else
+                listFailedImports.Add("Video: Color Range");
+            //mainwindow.cboColorRange.SelectedItem = inif.Read("Video", "colorRange");
+
+            // Deinterlace
+            string deinterlace = inif.Read("Video", "deinterlace");
+            if (mainwindow.cboDeinterlace.Items.Contains(deinterlace))
+                mainwindow.cboDeinterlace.SelectedItem = deinterlace;
+            else
+                listFailedImports.Add("Video: Deinterlace");
+            //mainwindow.cboDeinterlace.SelectedItem = inif.Read("Video", "deinterlace");
+
+            // Video Sync
+            string videoSync = inif.Read("Video", "videoSync");
+            if (mainwindow.cboVideoSync.Items.Contains(videoSync))
+                mainwindow.cboVideoSync.SelectedItem = videoSync;
+            else
+                listFailedImports.Add("Video: Video Sync");
+            //mainwindow.cboVideoSync.SelectedItem = inif.Read("Video", "videoSync");
+
+            // Frame Drop
+            string frameDrop = inif.Read("Video", "frameDrop");
+            if (mainwindow.cboFramedrop.Items.Contains(frameDrop))
+                mainwindow.cboFramedrop.SelectedItem = frameDrop;
+            else
+                listFailedImports.Add("Video: Frame Drop");
+            //mainwindow.cboFramedrop.SelectedItem = inif.Read("Video", "frameDrop");
+
+
             // Image
             mainwindow.tbxBrightness.Text = inif.Read("Video", "brightness");
             mainwindow.tbxContrast.Text = inif.Read("Video", "contrast");
             mainwindow.tbxHue.Text = inif.Read("Video", "hue");
             mainwindow.tbxSaturation.Text = inif.Read("Video", "saturation");
             mainwindow.tbxGamma.Text = inif.Read("Video", "gamma");
-            mainwindow.cboDeband.SelectedItem = inif.Read("Video", "deband");
+
+
+            // Deband
+            string deband = inif.Read("Video", "deband");
+            if (mainwindow.cboDeband.Items.Contains(deband))
+                mainwindow.cboDeband.SelectedItem = deband;
+            else
+                listFailedImports.Add("Video: Deband");
+            //mainwindow.cboDeband.SelectedItem = inif.Read("Video", "deband");
+
+            // Deband Grain
             mainwindow.tbxDebandGrain.Text = inif.Read("Video", "debandGrain");
-            mainwindow.cboDither.SelectedItem = inif.Read("Video", "dither");
+
+            // Dither
+            string dither = inif.Read("Video", "dither");
+            if (mainwindow.cboDither.Items.Contains(dither))
+                mainwindow.cboDither.SelectedItem = dither;
+            else
+                listFailedImports.Add("Video: Dither");
+            //mainwindow.cboDither.SelectedItem = inif.Read("Video", "dither");
+
             // Scaling
-            mainwindow.cboSigmoid.SelectedItem = inif.Read("Video", "sigmoidUpscaling");
-            mainwindow.cboScale.SelectedItem = inif.Read("Video", "scale");
+
+            // Sigmoid Upscaling
+            string sigmoidUpscaling = inif.Read("Video", "sigmoidUpscaling");
+            if (mainwindow.cboSigmoid.Items.Contains(sigmoidUpscaling))
+                mainwindow.cboSigmoid.SelectedItem = sigmoidUpscaling;
+            else
+                listFailedImports.Add("Video: Sigmoid");
+            //mainwindow.cboSigmoid.SelectedItem = inif.Read("Video", "sigmoidUpscaling");
+
+            // Scale
+            string scale = inif.Read("Video", "scale");
+            if (mainwindow.cboScale.Items.Contains(scale))
+                mainwindow.cboScale.SelectedItem = scale;
+            else
+                listFailedImports.Add("Video: Scale");
+            //mainwindow.cboScale.SelectedItem = inif.Read("Video", "scale");
+
+            // Scale Antiring
             mainwindow.tbxScaleAntiring.Text = inif.Read("Video", "scaleAntiring");
-            mainwindow.cboChromaScale.SelectedItem = inif.Read("Video", "chromaScale");
+
+            // Chroma Scale
+            string chromaScale = inif.Read("Video", "chromaScale");
+            if (mainwindow.cboChromaScale.Items.Contains(chromaScale))
+                mainwindow.cboChromaScale.SelectedItem = chromaScale;
+            else
+                listFailedImports.Add("Video: Chroma Scale");
+            //mainwindow.cboChromaScale.SelectedItem = inif.Read("Video", "chromaScale");
+
+            // Chroma Antiring
             mainwindow.tbxChromaAntiring.Text = inif.Read("Video", "chromaScaleAntiring");
-            mainwindow.cboDownscale.SelectedItem = inif.Read("Video", "downscale");
+
+            // Downscale
+            string downscale = inif.Read("Video", "downscale");
+            if (mainwindow.cboDownscale.Items.Contains(downscale))
+                mainwindow.cboDownscale.SelectedItem = downscale;
+            else
+                listFailedImports.Add("Video: Downscale");
+            //mainwindow.cboDownscale.SelectedItem = inif.Read("Video", "downscale");
+
+            // Downscale Antiring
             mainwindow.tbxDownscaleAntiring.Text = inif.Read("Video", "downscaleAntiring");
-            mainwindow.cboSoftwareScaler.SelectedItem = inif.Read("Video", "softwareScaler");
+
+            // Software Scaler
+            string softwareScaler = inif.Read("Video", "softwareScaler");
+            if (mainwindow.cboSoftwareScaler.Items.Contains(softwareScaler))
+                mainwindow.cboSoftwareScaler.SelectedItem = softwareScaler;
+            else
+                listFailedImports.Add("Video: Software Scaler");
+            //mainwindow.cboSoftwareScaler.SelectedItem = inif.Read("Video", "softwareScaler");
 
             // --------------------------------------------------
             // Audio
             // --------------------------------------------------
-            mainwindow.cboAudioDriver.SelectedItem = inif.Read("Audio", "driver");
-            mainwindow.cboChannels.SelectedItem = inif.Read("Audio", "channels");
+            // Audio Driver
+            string audioDriver = inif.Read("Audio", "driver");
+            if (mainwindow.cboAudioDriver.Items.Contains(audioDriver))
+                mainwindow.cboAudioDriver.SelectedItem = audioDriver;
+            else
+                listFailedImports.Add("Audio: Audio Driver");
+            //mainwindow.cboAudioDriver.SelectedItem = inif.Read("Audio", "driver");
+
+            // Channels
+            string channels = inif.Read("Audio", "channels");
+            if (mainwindow.cboChannels.Items.Contains(channels))
+                mainwindow.cboChannels.SelectedItem = channels;
+            else
+                listFailedImports.Add("Audio: Channels");
+            //mainwindow.cboChannels.SelectedItem = inif.Read("Audio", "channels");
+
+            // Volume
             mainwindow.tbxVolume.Text = inif.Read("Audio", "volume");
             mainwindow.tbxVolumeMax.Text = inif.Read("Audio", "volumeMax");
-            mainwindow.cboSoftVolume.SelectedItem = inif.Read("Audio", "softVolume");
+
+            // Soft Volume
+            string softVolume = inif.Read("Audio", "softVolume");
+            if (mainwindow.cboSoftVolume.Items.Contains(softVolume))
+                mainwindow.cboSoftVolume.SelectedItem = softVolume;
+            else
+                listFailedImports.Add("Audio: Soft Volume");
+            //mainwindow.cboSoftVolume.SelectedItem = inif.Read("Audio", "softVolume");
+
+            // Soft Volume Max
             mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");
-            mainwindow.cboNormalize.SelectedItem = inif.Read("Audio", "normalize");
-            mainwindow.cboAudioLoadFiles.SelectedItem = inif.Read("Audio", "loadFiles");
+
+            // Normalize
+            string normalize = inif.Read("Audio", "normalize");
+            if (mainwindow.cboNormalize.Items.Contains(normalize))
+                mainwindow.cboNormalize.SelectedItem = normalize;
+            else
+                listFailedImports.Add("Audio: Normalize");
+            //mainwindow.cboNormalize.SelectedItem = inif.Read("Audio", "normalize");
+
+            // Load Files
+            string AudioLoadFiles = inif.Read("Audio", "loadFiles");
+            if (mainwindow.cboAudioLoadFiles.Items.Contains(AudioLoadFiles))
+                mainwindow.cboAudioLoadFiles.SelectedItem = AudioLoadFiles;
+            else
+                listFailedImports.Add("Audio: Load Files");
+            //mainwindow.cboAudioLoadFiles.SelectedItem = inif.Read("Audio", "loadFiles");
+
             // languages
             string languagesAudio = inif.Read("Audio", "languages");
             string[] arrLangAudio = languagesAudio.Split(',');
             foreach (string item in arrLangAudio)
             {
-                mainwindow.listViewAudioLanguages.SelectedItems.Add(item);
+                if (mainwindow.listViewAudioLanguages.Items.Contains(item))
+                {
+                    mainwindow.listViewAudioLanguages.SelectedItems.Add(item);
+                }  
+                else
+                {
+                    listFailedImports.Add("Audio Languages: " + item);
+                }
             }
 
             // --------------------------------------------------
             // Subtitles
             // --------------------------------------------------
-            mainwindow.cboSubtitles.SelectedItem = inif.Read("Subtitles", "subtitles");
-            mainwindow.cboSubtitlesLoadFiles.SelectedItem = inif.Read("Subtitles", "loadFiles");
+            // Subtitles
+            string subtitles = inif.Read("Subtitles", "subtitles");
+            if (mainwindow.cboSubtitles.Items.Contains(subtitles))
+                mainwindow.cboSubtitles.SelectedItem = subtitles;
+            else
+                listFailedImports.Add("Subtitles: Subtitles");
+            //mainwindow.cboSubtitles.SelectedItem = inif.Read("Subtitles", "subtitles");
+
+            // Subtitles Load Files
+            string SubtitlesLoadFiles = inif.Read("Subtitles", "loadFiles");
+            if (mainwindow.cboSubtitlesLoadFiles.Items.Contains(SubtitlesLoadFiles))
+                mainwindow.cboSubtitlesLoadFiles.SelectedItem = SubtitlesLoadFiles;
+            else
+                listFailedImports.Add("Subtitles: Load Files");
+            //mainwindow.cboSubtitlesLoadFiles.SelectedItem = inif.Read("Subtitles", "loadFiles");
+
+            // Subtitles Position
             mainwindow.tbxSubtitlePosition.Text = inif.Read("Subtitles", "position");
-            mainwindow.cboSubtitlesFont.SelectedItem = inif.Read("Subtitles", "font");
-            mainwindow.cboSubtitlesFontSize.SelectedItem = inif.Read("Subtitles", "fontSize");
-            mainwindow.cboSubtitlesFontColor.SelectedItem = inif.Read("Subtitles", "fontColor");
-            mainwindow.cboSubtitlesBorderColor.SelectedItem = inif.Read("Subtitles", "borderColor");
-            mainwindow.cboSubtitlesBorderSize.SelectedItem = inif.Read("Subtitles", "borderSize");
-            mainwindow.cboSubtitlesShadowColor.SelectedItem = inif.Read("Subtitles", "shadowColor");
+
+            // Subtitles Font
+            string Subtitlesfont = inif.Read("Subtitles", "font");
+            if (mainwindow.cboSubtitlesFont.Items.Contains(Subtitlesfont))
+                mainwindow.cboSubtitlesFont.SelectedItem = Subtitlesfont;
+            else
+                listFailedImports.Add("Subtitles: Font");
+            //mainwindow.cboSubtitlesFont.SelectedItem = inif.Read("Subtitles", "font");
+
+            // Font Size
+            string fontSize = inif.Read("Subtitles", "fontSize");
+            if (mainwindow.cboSubtitlesFontSize.Items.Contains(fontSize))
+                mainwindow.cboSubtitlesFontSize.SelectedItem = fontSize;
+            else
+                listFailedImports.Add("Subtitles: Font Size");
+            //mainwindow.cboSubtitlesFontSize.SelectedItem = inif.Read("Subtitles", "fontSize");
+
+            // Font Color
+            string SubtitlesFontColor = inif.Read("Subtitles", "fontColor");
+            if (mainwindow.cboSubtitlesFontColor.Items.Contains(SubtitlesFontColor))
+                mainwindow.cboSubtitlesFontColor.SelectedItem = SubtitlesFontColor;
+            else
+                listFailedImports.Add("Subtitles: Font Color");
+            //mainwindow.cboSubtitlesFontColor.SelectedItem = inif.Read("Subtitles", "fontColor");
+
+            // Border Color
+            string SubtitlesBorderColor = inif.Read("Subtitles", "borderColor");
+            if (mainwindow.cboSubtitlesBorderColor.Items.Contains(SubtitlesBorderColor))
+                mainwindow.cboSubtitlesBorderColor.SelectedItem = SubtitlesBorderColor;
+            else
+                listFailedImports.Add("Subtitles: Border Color");
+            //mainwindow.cboSubtitlesBorderColor.SelectedItem = inif.Read("Subtitles", "borderColor");
+
+            // Border Size
+            string SubtitlesBorderSize = inif.Read("Subtitles", "borderSize");
+            if (mainwindow.cboSubtitlesBorderSize.Items.Contains(SubtitlesBorderSize))
+                mainwindow.cboSubtitlesBorderSize.SelectedItem = SubtitlesBorderSize;
+            else
+                listFailedImports.Add("Subtitles: Border Size");
+            //mainwindow.cboSubtitlesBorderSize.SelectedItem = inif.Read("Subtitles", "borderSize");
+
+            // Shadow Color
+            string SubtitlesShadowColor = inif.Read("Subtitles", "shadowColor");
+            if (mainwindow.cboSubtitlesShadowColor.Items.Contains(SubtitlesShadowColor))
+                mainwindow.cboSubtitlesShadowColor.SelectedItem = SubtitlesShadowColor;
+            else
+                listFailedImports.Add("Subtitles: Shadow Color");
+            //mainwindow.cboSubtitlesShadowColor.SelectedItem = inif.Read("Subtitles", "shadowColor");
+
+            // Shadow Offset
             mainwindow.tbxSubtitlesShadowOffset.Text = inif.Read("Subtitles", "shadowOffset");
-            mainwindow.cboSubtitlesBlend.SelectedItem = inif.Read("Subtitles", "blend");
+
+            // Blend
+            string blend = inif.Read("Subtitles", "blend");
+            if (mainwindow.cboSubtitlesBlend.Items.Contains(blend))
+                mainwindow.cboSubtitlesBlend.SelectedItem = blend;
+            else
+                listFailedImports.Add("Subtitles: Blend");
+            //mainwindow.cboSubtitlesBlend.SelectedItem = inif.Read("Subtitles", "blend");
+
             // languages
             string languagesSubtitles = inif.Read("Subtitles", "languages");
-            string[] arrLangSubtitles = languagesAudio.Split(',');
-            foreach (string item in arrLangAudio)
+            string[] arrLangSubs = languagesSubtitles.Split(',');
+            foreach (string item in arrLangSubs)
             {
-                mainwindow.listViewSubtitlesLanguages.SelectedItems.Add(item);
+                if (mainwindow.listViewSubtitlesLanguages.Items.Contains(item))
+                {
+                    mainwindow.listViewSubtitlesLanguages.SelectedItems.Add(item);
+                }
+                else
+                {
+                    listFailedImports.Add("Subtitle Languages: " + item);
+                }
             }
 
             // --------------------------------------------------
             // Stream
             // --------------------------------------------------
-            mainwindow.cboDemuxerThread.SelectedItem = inif.Read("Stream", "demuxThread");
+            // Demux Thread
+            string demuxThread = inif.Read("Stream", "demuxThread");
+            if (mainwindow.cboDemuxerThread.Items.Contains(demuxThread))
+                mainwindow.cboDemuxerThread.SelectedItem = demuxThread;
+            else
+                listFailedImports.Add("Stream: Demux Thread");
+            //mainwindow.cboDemuxerThread.SelectedItem = inif.Read("Stream", "demuxThread");
+
             mainwindow.tbxDemuxerBuffersize.Text = inif.Read("Stream", "demuxerBufferSize");
+
             mainwindow.tbxDemuxerReadahead.Text = inif.Read("Stream", "demuxerReadAhead");
+
             mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = inif.Read("Stream", "demuxerMKVSubtitlePreroll");
-            mainwindow.cboCache.SelectedItem = inif.Read("Stream", "cache");
+
+            // Cache
+            string cache = inif.Read("Stream", "cache");
+            if (mainwindow.cboCache.Items.Contains(cache))
+                mainwindow.cboCache.SelectedItem = cache;
+            else
+                listFailedImports.Add("Stream: Cache");
+            //mainwindow.cboCache.SelectedItem = inif.Read("Stream", "cache");
+
             mainwindow.tbxCacheDefault.Text = inif.Read("Stream", "cacheDefault");
             mainwindow.tbxCacheInitial.Text = inif.Read("Stream", "initial");
             mainwindow.tbxCacheSeekMin.Text = inif.Read("Stream", "seekMin");
             mainwindow.tbxCacheBackbuffer.Text = inif.Read("Stream", "backBuffer");
             mainwindow.tbxCacheSeconds.Text = inif.Read("Stream", "seconds");
-            mainwindow.cboCacheFile.SelectedItem = inif.Read("Stream", "file");
+
+            // Cache File
+            string cachefile = inif.Read("Stream", "file");
+            if (mainwindow.cboCacheFile.Items.Contains(cachefile))
+                mainwindow.cboCacheFile.SelectedItem = cachefile;
+            else
+                listFailedImports.Add("Stream: Cache File");
+            //mainwindow.cboCacheFile.SelectedItem = inif.Read("Stream", "file");
+
+
             mainwindow.tbxCacheFileSize.Text = inif.Read("Stream", "fileSize");
 
             // --------------------------------------------------
             // OSD
             // --------------------------------------------------
-            mainwindow.cboOSD.SelectedItem = inif.Read("OSD", "videoOSD");
+            // OSD
+            string videoOSD = inif.Read("OSD", "videoOSD");
+            if (mainwindow.cboOSD.Items.Contains(videoOSD))
+                mainwindow.cboOSD.SelectedItem = videoOSD;
+            else
+                listFailedImports.Add("OSD: OSD");
+            //mainwindow.cboOSD.SelectedItem = inif.Read("OSD", "videoOSD");
+
             mainwindow.tbxCacheFileSize.Text = inif.Read("OSD", "fractions");
             mainwindow.tbxOSDDuration.Text = inif.Read("OSD", "duration");
-            mainwindow.cboOSDLevel.SelectedItem = inif.Read("OSD", "level");
+
+            // Level
+            string osdLevel = inif.Read("OSD", "level");
+            if (mainwindow.cboOSDLevel.Items.Contains(osdLevel))
+                mainwindow.cboOSDLevel.SelectedItem = osdLevel;
+            else
+                listFailedImports.Add("OSD: Level");
+            //mainwindow.cboOSDLevel.SelectedItem = inif.Read("OSD", "level");
+
+
             mainwindow.tbxOSDScale.Text = inif.Read("OSD", "scale");
             mainwindow.tbxOSDBarWidth.Text = inif.Read("OSD", "barWidth");
             mainwindow.tbxOSDBarHeight.Text = inif.Read("OSD", "barHeight");
-            mainwindow.cboOSDFont.SelectedItem = inif.Read("OSD", "font");
-            mainwindow.cboOSDFontSize.SelectedItem = inif.Read("OSD", "fontSize");
-            mainwindow.cboOSDFontColor.SelectedItem = inif.Read("OSD", "fontColor");
-            mainwindow.cboOSDFontBorderSize.SelectedItem = inif.Read("OSD", "borderSize");
-            mainwindow.cboOSDFontBorderColor.SelectedItem = inif.Read("OSD", "borderColor");
-            mainwindow.cboOSDFontShadowColor.SelectedItem = inif.Read("OSD", "shadowColor");
+
+            // Font
+            string osdFont = inif.Read("OSD", "font");
+            if (mainwindow.cboOSDFont.Items.Contains(osdFont))
+                mainwindow.cboOSDFont.SelectedItem = osdFont;
+            else
+                listFailedImports.Add("OSD: Font");
+            //mainwindow.cboOSDFont.SelectedItem = inif.Read("OSD", "font");
+
+            // Font Size
+            string osdFontSize = inif.Read("OSD", "fontSize");
+            if (mainwindow.cboOSDFontSize.Items.Contains(osdFontSize))
+                mainwindow.cboOSDFontSize.SelectedItem = osdFontSize;
+            else
+                listFailedImports.Add("OSD: Font Size");
+            //mainwindow.cboOSDFontSize.SelectedItem = inif.Read("OSD", "fontSize");
+
+            // Font Color
+            string osdFontColor = inif.Read("OSD", "fontColor");
+            if (mainwindow.cboOSDFontColor.Items.Contains(osdFontColor))
+                mainwindow.cboOSDFontColor.SelectedItem = osdFontColor;
+            else
+                listFailedImports.Add("OSD: Font Color");
+            //mainwindow.cboOSDFontColor.SelectedItem = inif.Read("OSD", "fontColor");
+
+            // Border Size
+            string osdFontBorderSize = inif.Read("OSD", "borderSize");
+            if (mainwindow.cboOSDFontBorderSize.Items.Contains(osdFontBorderSize))
+                mainwindow.cboOSDFontBorderSize.SelectedItem = osdFontBorderSize;
+            else
+                listFailedImports.Add("OSD: Border Size");
+            //mainwindow.cboOSDFontBorderSize.SelectedItem = inif.Read("OSD", "borderSize");
+
+            // Border Color
+            string osdFontBorderColor = inif.Read("OSD", "borderColor");
+            if (mainwindow.cboOSDFontBorderColor.Items.Contains(osdFontBorderColor))
+                mainwindow.cboOSDFontBorderColor.SelectedItem = osdFontBorderColor;
+            else
+                listFailedImports.Add("OSD: Border Color");
+            //mainwindow.cboOSDFontBorderColor.SelectedItem = inif.Read("OSD", "borderColor");
+
+            // Shadow Color
+            string osdFontShadowColor = inif.Read("OSD", "shadowColor");
+            if (mainwindow.cboOSDFontShadowColor.Items.Contains(osdFontShadowColor))
+                mainwindow.cboOSDFontShadowColor.SelectedItem = osdFontShadowColor;
+            else
+                listFailedImports.Add("OSD: Shadow Color");
+            //mainwindow.cboOSDFontShadowColor.SelectedItem = inif.Read("OSD", "shadowColor");
+
+            // Shadow Offset
             mainwindow.tbxOSDShadowOffset.Text = inif.Read("OSD", "shadowOffset");
 
 
