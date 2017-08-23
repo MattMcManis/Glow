@@ -2460,15 +2460,17 @@
                       ToolTipService.InitialShowDelay="1000" 
                       ToolTipService.ShowOnDisabled="True" 
                       ToolTip="Profile"
+                      ItemsSource="{Binding ProfilesItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding ProfileSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectionChanged="cboProfile_SelectionChanged"
                       Style="{DynamicResource ComboBoxStyle}"
                       ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                <System:String>Default</System:String>
+                <!--<System:String>Default</System:String>
                 <System:String>Ultra</System:String>
                 <System:String>High</System:String>
                 <System:String>Medium</System:String>
                 <System:String>Low</System:String>
-                <System:String>Debug</System:String>
+                <System:String>Debug</System:String>-->
             </ComboBox>
 
             <!-- Export ini -->

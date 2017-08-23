@@ -21,6 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -31,6 +32,39 @@ namespace Glow
 {
     public partial class Profiles
     {
+        public static List<string> listCustomProfilesPaths = new List<string>();
+        /// <summary>
+        ///    Scan PC Custom Profiles
+        /// </summary>
+        public static void GetCustomProfiles()
+        {
+            // Presets
+            List<string> _presetsItems = new List<string>()
+            {
+                "Ultra",
+                "High",
+                "Medium",
+                "Low",
+                "Debug",
+            };
+
+            // User Custom Profiles
+            List<string> _customProfilesItems = Directory.GetFiles(MainWindow.profilesDir, "*.ini")
+                .Select(Path.GetFileNameWithoutExtension)
+                .ToList();
+
+            // User Custom Profiles Full Path
+            listCustomProfilesPaths = Directory.GetFiles(MainWindow.profilesDir, "*.ini")
+                .Select(Path.GetFullPath)
+                .ToList();
+
+            // Join Presets and Profiles Lists
+            _presetsItems.AddRange(_customProfilesItems);
+            // Populate ComboBox
+            MainWindow._profilesItems = _presetsItems.ToList();
+        }
+
+
         /// <summary>
         ///    Choose Preset
         /// </summary>
@@ -747,6 +781,30 @@ namespace Glow
                 mainwindow.cboOSDFontShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
+
+            // -------------------------
+            // User Custom Profile
+            // -------------------------
+            else
+            {
+                // Get Profile INI Path
+                string input = string.Empty;
+                foreach (string path in listCustomProfilesPaths)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(path);
+
+                    if ((string)mainwindow.cboProfile.SelectedItem == filename)
+                    //if (listCustomProfilesPaths.Any(p => p.Contains(mainwindow.cboProfile.SelectedItem.ToString() + ".ini")))
+                    {
+                        input = path;
+                        break;
+                    }
+                }
+
+                // Import ini file
+                ImportProfile(mainwindow, input);
+            }
+
         }
 
 
@@ -754,7 +812,7 @@ namespace Glow
         /// <summary>
         ///    Export Preset
         /// </summary>
-        public static void ExportProfile(MainWindow mainwindow, string inputDir, string inputFileName, string inputExt)
+        public static void ExportProfile(MainWindow mainwindow, string input)
         {
             // Selected Item
             ComboBoxItem selectedItem = null;
@@ -762,7 +820,7 @@ namespace Glow
 
             // Export's ini file path
             // Get from Save Dialog Path
-            string input = inputDir + inputFileName + inputExt;
+            //string input = input;
 
             // Start INI File Write
             INIFile inif = new INIFile(input);
@@ -937,11 +995,11 @@ namespace Glow
         /// <summary>
         ///    Import Preset
         /// </summary>
-        public static void ImportProfile(MainWindow mainwindow, string inputDir, string inputFileName, string inputExt)
+        public static void ImportProfile(MainWindow mainwindow, string input)
         {
             // Import's ini file path
             // Get from Select File Dialog Path
-            string input = inputDir + inputFileName + inputExt;
+            //string input = inputDir + inputFileName + inputExt;
 
             // If control failed to imported, add to list
             List<string> listFailedImports = new List<string>();
@@ -1284,16 +1342,16 @@ namespace Glow
 
             // Font Color
             string SubtitlesFontColor = inif.Read("Subtitles", "fontColor");
-            if (mainwindow.cboSubtitlesFontColor.Items.Contains(SubtitlesFontColor))
-                mainwindow.cboSubtitlesFontColor.SelectedItem = SubtitlesFontColor;
+            if (mainwindow.cboSubtitlesFontColor.Text.Contains(SubtitlesFontColor))
+                mainwindow.cboSubtitlesFontColor.Text = SubtitlesFontColor;
             else
                 listFailedImports.Add("Subtitles: Font Color");
             //mainwindow.cboSubtitlesFontColor.SelectedItem = inif.Read("Subtitles", "fontColor");
 
             // Border Color
             string SubtitlesBorderColor = inif.Read("Subtitles", "borderColor");
-            if (mainwindow.cboSubtitlesBorderColor.Items.Contains(SubtitlesBorderColor))
-                mainwindow.cboSubtitlesBorderColor.SelectedItem = SubtitlesBorderColor;
+            if (mainwindow.cboSubtitlesBorderColor.Text.Contains(SubtitlesBorderColor))
+                mainwindow.cboSubtitlesBorderColor.Text = SubtitlesBorderColor;
             else
                 listFailedImports.Add("Subtitles: Border Color");
             //mainwindow.cboSubtitlesBorderColor.SelectedItem = inif.Read("Subtitles", "borderColor");
@@ -1308,8 +1366,8 @@ namespace Glow
 
             // Shadow Color
             string SubtitlesShadowColor = inif.Read("Subtitles", "shadowColor");
-            if (mainwindow.cboSubtitlesShadowColor.Items.Contains(SubtitlesShadowColor))
-                mainwindow.cboSubtitlesShadowColor.SelectedItem = SubtitlesShadowColor;
+            if (mainwindow.cboSubtitlesShadowColor.Text.Contains(SubtitlesShadowColor))
+                mainwindow.cboSubtitlesShadowColor.Text = SubtitlesShadowColor;
             else
                 listFailedImports.Add("Subtitles: Shadow Color");
             //mainwindow.cboSubtitlesShadowColor.SelectedItem = inif.Read("Subtitles", "shadowColor");
@@ -1444,8 +1502,8 @@ namespace Glow
 
             // Font Color
             string osdFontColor = inif.Read("OSD", "fontColor");
-            if (mainwindow.cboOSDFontColor.Items.Contains(osdFontColor))
-                mainwindow.cboOSDFontColor.SelectedItem = osdFontColor;
+            if (mainwindow.cboOSDFontColor.Text.Contains(osdFontColor))
+                mainwindow.cboOSDFontColor.Text = osdFontColor;
             else
                 listFailedImports.Add("OSD: Font Color");
             //mainwindow.cboOSDFontColor.SelectedItem = inif.Read("OSD", "fontColor");
@@ -1460,16 +1518,16 @@ namespace Glow
 
             // Border Color
             string osdFontBorderColor = inif.Read("OSD", "borderColor");
-            if (mainwindow.cboOSDFontBorderColor.Items.Contains(osdFontBorderColor))
-                mainwindow.cboOSDFontBorderColor.SelectedItem = osdFontBorderColor;
+            if (mainwindow.cboOSDFontBorderColor.Text.Contains(osdFontBorderColor))
+                mainwindow.cboOSDFontBorderColor.Text = osdFontBorderColor;
             else
                 listFailedImports.Add("OSD: Border Color");
             //mainwindow.cboOSDFontBorderColor.SelectedItem = inif.Read("OSD", "borderColor");
 
             // Shadow Color
             string osdFontShadowColor = inif.Read("OSD", "shadowColor");
-            if (mainwindow.cboOSDFontShadowColor.Items.Contains(osdFontShadowColor))
-                mainwindow.cboOSDFontShadowColor.SelectedItem = osdFontShadowColor;
+            if (mainwindow.cboOSDFontShadowColor.Text.Contains(osdFontShadowColor))
+                mainwindow.cboOSDFontShadowColor.Text = osdFontShadowColor;
             else
                 listFailedImports.Add("OSD: Shadow Color");
             //mainwindow.cboOSDFontShadowColor.SelectedItem = inif.Read("OSD", "shadowColor");

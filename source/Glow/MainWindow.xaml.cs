@@ -63,8 +63,11 @@ namespace Glow
         public static string appDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\') + @"\"; //Glow.exe directory
         public static string userDir = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%").TrimEnd('\\') + @"\";
         public static string configDir = userDir + @"AppData\Roaming\mpv\"; //mpv config directory
+        public static string profilesDir = appDir + "profiles"; //custom profiles
 
+        // -------------------------
         // Fonts
+        // -------------------------
         public static List<string> fonts = new List<string>();
         public static InstalledFontCollection installedFonts = new InstalledFontCollection();
         // Bind ComboBox Fonts Items
@@ -76,6 +79,20 @@ namespace Glow
 
         // Font Selected Item
         public string FontSelectedItem { get; set; }
+
+
+        // -------------------------
+        // Bind Custom Profiles
+        // -------------------------
+        public static List<string> _profilesItems = new List<string>();
+        public List<string> ProfilesItems
+        {
+            get { return _profilesItems; }
+            set { _profilesItems = value; }
+        }
+
+        // Selected Item
+        public string ProfileSelectedItem { get; set; }
 
 
         // -------------------------
@@ -199,6 +216,14 @@ namespace Glow
             // Font
             cboProfile.SelectedItem = "Default";
             FontSelectedItem = "Segoe UI";
+
+            // --------------------------------------------------
+            // Custom Profiles
+            // --------------------------------------------------
+            // Load Custom INI's
+            Profiles.GetCustomProfiles();
+            // Default Selected Item
+            ProfileSelectedItem = ProfilesItems[0];
         }
 
 
@@ -534,14 +559,17 @@ namespace Glow
         /// </summary>
         private void buttonAudioLanguageUp_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
-
-            if (selectedIndex > 0)
+            if (listViewAudioLanguages.SelectedItems.Count > 0)
             {
-                var itemToMoveUp = AudioLanguageItems[selectedIndex];
-                AudioLanguageItems.RemoveAt(selectedIndex);
-                AudioLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
-                this.listViewAudioLanguages.SelectedIndex = selectedIndex - 1;
+                var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
+
+                if (selectedIndex > 0)
+                {
+                    var itemToMoveUp = AudioLanguageItems[selectedIndex];
+                    AudioLanguageItems.RemoveAt(selectedIndex);
+                    AudioLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
+                    this.listViewAudioLanguages.SelectedIndex = selectedIndex - 1;
+                }
             }
         }
         /// <summary>
@@ -549,14 +577,17 @@ namespace Glow
         /// </summary>
         private void buttonAudioLanguageDown_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
-
-            if (selectedIndex + 1 < AudioLanguageItems.Count)
+            if (listViewAudioLanguages.SelectedItems.Count > 0)
             {
-                var itemToMoveDown = AudioLanguageItems[selectedIndex];
-                AudioLanguageItems.RemoveAt(selectedIndex);
-                AudioLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
-                this.listViewAudioLanguages.SelectedIndex = selectedIndex + 1;
+                var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
+
+                if (selectedIndex + 1 < AudioLanguageItems.Count)
+                {
+                    var itemToMoveDown = AudioLanguageItems[selectedIndex];
+                    AudioLanguageItems.RemoveAt(selectedIndex);
+                    AudioLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
+                    this.listViewAudioLanguages.SelectedIndex = selectedIndex + 1;
+                }
             }
         }
         /// <summary>
@@ -621,14 +652,17 @@ namespace Glow
         /// </summary>
         private void buttonSubtitleLanguageUp_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = this.listViewSubtitlesLanguages.SelectedIndex;
-
-            if (selectedIndex > 0)
+            if (listViewSubtitlesLanguages.SelectedItems.Count > 0)
             {
-                var itemToMoveUp = SubtitlesLanguageItems[selectedIndex];
-                SubtitlesLanguageItems.RemoveAt(selectedIndex);
-                SubtitlesLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
-                this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex - 1;
+                var selectedIndex = this.listViewSubtitlesLanguages.SelectedIndex;
+
+                if (selectedIndex > 0)
+                {
+                    var itemToMoveUp = SubtitlesLanguageItems[selectedIndex];
+                    SubtitlesLanguageItems.RemoveAt(selectedIndex);
+                    SubtitlesLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
+                    this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex - 1;
+                }
             }
         }
         /// <summary>
@@ -636,14 +670,17 @@ namespace Glow
         /// </summary>
         private void buttonSubtitleLanguageDown_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = this.listViewSubtitlesLanguages.SelectedIndex;
-
-            if (selectedIndex + 1 < SubtitlesLanguageItems.Count)
+            if (listViewSubtitlesLanguages.SelectedItems.Count > 0)
             {
-                var itemToMoveDown = SubtitlesLanguageItems[selectedIndex];
-                SubtitlesLanguageItems.RemoveAt(selectedIndex);
-                SubtitlesLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
-                this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex + 1;
+                var selectedIndex = this.listViewSubtitlesLanguages.SelectedIndex;
+
+                if (selectedIndex + 1 < SubtitlesLanguageItems.Count)
+                {
+                    var itemToMoveDown = SubtitlesLanguageItems[selectedIndex];
+                    SubtitlesLanguageItems.RemoveAt(selectedIndex);
+                    SubtitlesLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
+                    this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex + 1;
+                }
             }
         }
         /// <summary>
@@ -940,7 +977,7 @@ namespace Glow
             {
                 // Check if presets directory exists
                 // If not, create it
-                Directory.CreateDirectory(appDir + "profiles");
+                Directory.CreateDirectory(profilesDir);
             }
             catch
             {
@@ -948,7 +985,7 @@ namespace Glow
             }
 
             // Presets Diretory
-            string profilesDir = appDir + "profiles";
+            //string profilesDir = profilesDir;
 
 
             // Open 'Save File'
@@ -983,7 +1020,7 @@ namespace Glow
                 }
 
                 // Export ini file
-                Profiles.ExportProfile(this, inputDir, inputFileName, inputExt);
+                Profiles.ExportProfile(this, input);
             }
         }
 
@@ -995,10 +1032,10 @@ namespace Glow
         {
             // Check if presets directory exists
             // If not, create it
-            Directory.CreateDirectory(appDir + "profiles");
+            Directory.CreateDirectory(profilesDir);
 
             // Presets Diretory
-            string profilesDir = appDir + "profiles";
+            //string profilesDir = appDir + "profiles";
 
 
             // Open 'Select File'
@@ -1021,10 +1058,10 @@ namespace Glow
                 string inputFileName = Path.GetFileNameWithoutExtension(selectFile.FileName);
                 string inputExt = Path.GetExtension(selectFile.FileName);
                 //string input = Path.Combine(inputDir, inputFileName);
-                //string input = inputDir + inputFileName + inputExt;
+                string input = inputDir + inputFileName + inputExt;
 
                 // Import ini file
-                Profiles.ImportProfile(this, inputDir, inputFileName, inputExt);
+                Profiles.ImportProfile(this, input);
             }
         }
 
