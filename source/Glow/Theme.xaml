@@ -86,12 +86,12 @@
         /////////////////////////////////////-->
     
     <SolidColorBrush x:Key="RichTextBox.Static.Foreground" Color="#FFFFFFFF"/>
-    <!--<SolidColorBrush x:Key="RichTextBox.Static.Background" Color="#FF111111"/>-->
-    <LinearGradientBrush x:Key="RichTextBox.Static.Background" EndPoint="0,1" StartPoint="0,0">
+    <SolidColorBrush x:Key="RichTextBox.Static.Background" Color="#FF121114"/>
+    <!--<LinearGradientBrush x:Key="RichTextBox.Static.Background" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#FF000000" Offset="0.0"/>
         <GradientStop Color="#FF1a1a1d" Offset="1.0"/>
-        <!--<GradientStop Color="#FF230721" Offset="1.0"/>-->
-    </LinearGradientBrush>
+        --><!--<GradientStop Color="#FF230721" Offset="1.0"/>--><!--
+    </LinearGradientBrush>-->
 
     <SolidColorBrush x:Key="RichTextBox.Static.Border" Color="#FF9b9b9b"/>
     <!--<LinearGradientBrush x:Key="RichTextBox.Static.Border" EndPoint="0,1" StartPoint="0,0">
@@ -407,15 +407,19 @@
     </ControlTemplate>-->
 
 
+    
+    
     <!--/////////////////////////////////////
         Tab Control
         /////////////////////////////////////-->
 
-    <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#000000"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Foreground" Color="#FF882cac"/>
+    
+    <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FF000000"/>
 
-    <SolidColorBrush x:Key="TabItem.Top.Selected.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="TabItem.Top.Selected.Border" Color="#FF9b9b9b"/>
 
-    <SolidColorBrush x:Key="TabItem.Selected.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Border" Color="#FF9b9b9b"/>
     <!--<LinearGradientBrush x:Key="TabItem.Selected.Border" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#FF882cac" Offset="0.0"/>
         <GradientStop Color="#FF9b9b9b" Offset="1.0"/>
@@ -522,9 +526,6 @@
     <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#F0F0F0"/>
     <SolidColorBrush x:Key="TabItem.Disabled.Border" Color="#D9D9D9"/>
 
-    <!-- Selected -->
-    <SolidColorBrush x:Key="TabItem.Selected.Background2" Color="#FF000000"/>
-    
     <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Foreground" Value="{StaticResource TabItem.Static.Foreground}"/>
@@ -546,7 +547,7 @@
                             <Border x:Name="innerBorder"
                                     BorderBrush="{StaticResource TabItem.Top.Selected.Border}" 
                                     BorderThickness="1,1,1,0" 
-                                    Background="{StaticResource TabItem.Selected.Background2}"
+                                    Background="{StaticResource TabItem.Selected.Background}"
                                     Margin="-1" 
                                     Opacity="0"/>
                         </Border>
@@ -676,6 +677,7 @@
                                 <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom"/>
                             </MultiDataTrigger.Conditions>
+                            <Setter Property="Foreground" Value="{StaticResource TabItem.Selected.Foreground}"/>
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Margin" Value="-2,0,-2,-2"/>
                             <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
@@ -897,14 +899,14 @@
     </LinearGradientBrush>
     
     <!-- Pressed -->
-    <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FFb478df"/>
+    <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FFb154f5"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#FFb478df"/>
+    <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#FFb154f5"/>
     <LinearGradientBrush x:Key="ComboBox.Pressed.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#FFDAEBFC" Offset="0.0"/>
         <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#FFb478df"/>
+    <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#FFb154f5"/>
     
     <!-- Disabled -->
     <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#FFBFBFBF"/>
@@ -1173,7 +1175,7 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsKeyboardFocused" Value="False"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Foreground" Value="#FFb478df"/>
+                <Setter Property="Foreground" Value="#FFb154f5"/>
                 <Setter Property="Background" TargetName="Bd" Value="#FF070707"/>
                 <Setter Property="BorderBrush" TargetName="Bd" Value="#A8070707"/>
             </MultiTrigger>
@@ -1213,7 +1215,7 @@
                     <Condition Property="IsMouseOver" Value="False"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Foreground" Value="#FFb478df"/>
+                <Setter Property="Foreground" Value="#FFb154f5"/>
                 <Setter Property="BorderBrush" TargetName="Bd" Value="#FF070707"/>
             </MultiTrigger>
             <!-- Background Mouse Over Not Selected Keyboard Focused -->
@@ -1223,7 +1225,7 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Foreground" Value="#FFb478df"/>
+                <Setter Property="Foreground" Value="#FFb154f5"/>
                 <Setter Property="Background" TargetName="Bd" Value="#FF070707"/>
                 <Setter Property="BorderBrush" TargetName="Bd" Value="#FF070707"/>
             </MultiTrigger>
@@ -1261,7 +1263,7 @@
     <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#FF882cac"/>
     <!-- Pressed -->
     <SolidColorBrush x:Key="SliderThumb.Pressed.Background" Color="#FF000000"/>
-    <SolidColorBrush x:Key="SliderThumb.Pressed.Border" Color="#FFb478df"/>
+    <SolidColorBrush x:Key="SliderThumb.Pressed.Border" Color="#FFb154f5"/>
     <!-- Disabled -->
     <SolidColorBrush x:Key="SliderThumb.Disabled.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="SliderThumb.Disabled.Border" Color="#FF444444"/>
@@ -1535,7 +1537,7 @@
     <SolidColorBrush x:Key="ListView.Static.Background" Color="#FF111111"/>
     <SolidColorBrush x:Key="ListView.Static.Border" Color="#FF111111"/>
 
-    <!--<SolidColorBrush x:Key="ListView.Selected.Foreground" Color="#FFb478df"/>-->
+    <!--<SolidColorBrush x:Key="ListView.Selected.Foreground" Color="#FFb154f5"/>-->
 
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="{DynamicResource ListView.Static.Background}"/>
@@ -1593,7 +1595,7 @@
     <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FF1a1a1d"/>
     <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
     <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF882cac"/>
-    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FFb478df"/>
+    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FFb154f5"/>
     
     <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource TextBox.Static.Background}"/>
@@ -1783,7 +1785,7 @@
     <SolidColorBrush x:Key="ButtonLang.MouseOver.Background" Color="#FF111111"/>
     <SolidColorBrush x:Key="ButtonLang.MouseOver.Border" Color="#FF882cac"/>
 
-    <SolidColorBrush x:Key="ButtonLang.Pressed.Background" Color="#FFb478df"/>
+    <SolidColorBrush x:Key="ButtonLang.Pressed.Background" Color="#FFb154f5"/>
     <SolidColorBrush x:Key="ButtonLang.Pressed.Border" Color="#FF882cac"/>
     
     <SolidColorBrush x:Key="ButtonLang.Disabled.Background" Color="#FFF4F4F4"/>
