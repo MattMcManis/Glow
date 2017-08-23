@@ -62,8 +62,9 @@ namespace Glow
         // Paths
         public static string appDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\') + @"\"; //Glow.exe directory
         public static string userDir = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%").TrimEnd('\\') + @"\";
+        public static string mpvDir = string.Empty;
         public static string configDir = userDir + @"AppData\Roaming\mpv\"; //mpv config directory
-        public static string profilesDir = appDir + "profiles"; //custom profiles
+        public static string profilesDir = appDir + "profiles"; //custom ini profiles
 
         // -------------------------
         // Fonts
@@ -198,7 +199,18 @@ namespace Glow
                     WindowState = WindowState.Maximized;
                 }
             }
-            
+
+            SettingsWindow Settingswindow = new SettingsWindow(this);
+
+            // Theme
+            SettingsWindow.LoadTheme(Settingswindow);
+            // mpv Path
+            SettingsWindow.LoadMpvPath(Settingswindow);
+            // Config Path
+            SettingsWindow.LoadConfigPath(Settingswindow);
+            // Profiles Path
+            SettingsWindow.LoadProfilesPath(Settingswindow);
+
 
             // --------------------------------------------------
             // Load Fonts
@@ -743,11 +755,27 @@ namespace Glow
         }
 
         /// <summary>
-        ///    Configure Button
+        ///    Configure Window Button
         /// </summary>
         private void buttonConfigure_Click(object sender, RoutedEventArgs e)
         {
+            // Detect which screen we're on
+            var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
+            var thisScreen = allScreens.SingleOrDefault(s => this.Left >= s.WorkingArea.Left && this.Left < s.WorkingArea.Right);
 
+            // Open Configure Window
+            SettingsWindow Settingswindow = new SettingsWindow(this);
+
+            // Position Relative to MainWindow
+            // Keep from going off screen
+            Settingswindow.Left = Math.Max((this.Left + (this.Width - Settingswindow.Width) / 2), thisScreen.WorkingArea.Left);
+            Settingswindow.Top = Math.Max(this.Top - Settingswindow.Height - 12, thisScreen.WorkingArea.Top);
+
+            // Keep Window on Top
+            Settingswindow.Owner = Window.GetWindow(this);
+
+            // Open Winndow
+            Settingswindow.ShowDialog();
         }
 
         /// <summary>

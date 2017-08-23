@@ -78,6 +78,31 @@
     </Style>
 
 
+    <!-- Configure Window Style -->
+    <SolidColorBrush x:Key="ConfigureWindow.Static.Background" Color="#000000"/>
+
+    <Style x:Key="ConfigureWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource ConfigureWindow.Static.Background}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <AdornerDecorator>
+                            <ContentPresenter/>
+                        </AdornerDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
 
 
 
@@ -1841,6 +1866,71 @@
         </Setter>
     </Style>
 
+
+    <!--/////////////////////////////////////
+        Button Rervert
+        /////////////////////////////////////-->
+
+    <SolidColorBrush x:Key="ButtonRevert.Static.Foreground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ButtonRevert.Static.Background" Color="#FF000000"/>
+    <SolidColorBrush x:Key="ButtonRevert.Static.Border" Color="Transparent"/>
+
+    <SolidColorBrush x:Key="ButtonRevert.MouseOver.Background" Color="#FF222222"/>
+    <SolidColorBrush x:Key="ButtonRevert.MouseOver.Border" Color="Transparent"/>
+
+    <SolidColorBrush x:Key="ButtonRevert.Pressed.Background" Color="#FFfff69c"/>
+    <SolidColorBrush x:Key="ButtonRevert.Pressed.Border" Color="#FFfff69c"/>
+
+    <SolidColorBrush x:Key="ButtonRevert.Disabled.Background" Color="#FF000000"/>
+    <SolidColorBrush x:Key="ButtonRevert.Disabled.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonRevert.Disabled.Foreground" Color="#FF838383"/>
+
+    <Style x:Key="ButtonRevertStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonRevert.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonRevert.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonRevert.Static.Foreground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}" 
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" 
+                                          Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Margin="{TemplateBinding Padding}" 
+                                          RecognizesAccessKey="True" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonRevert.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonRevert.MouseOver.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonRevert.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonRevert.Pressed.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonRevert.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonRevert.Disabled.Border}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource ButtonRevert.Disabled.Foreground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
 
