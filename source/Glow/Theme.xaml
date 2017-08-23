@@ -86,12 +86,14 @@
         /////////////////////////////////////-->
     
     <SolidColorBrush x:Key="RichTextBox.Static.Foreground" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="RichTextBox.Static.Background" Color="#FF121114"/>
-    <!--<LinearGradientBrush x:Key="RichTextBox.Static.Background" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FF000000" Offset="0.0"/>
-        <GradientStop Color="#FF1a1a1d" Offset="1.0"/>
-        --><!--<GradientStop Color="#FF230721" Offset="1.0"/>--><!--
-    </LinearGradientBrush>-->
+    <!--<SolidColorBrush x:Key="RichTextBox.Static.Background" Color="#FF121114"/>-->
+    <LinearGradientBrush x:Key="RichTextBox.Static.Background" 
+                         StartPoint="0,0" EndPoint="0,1" 
+		                 SpreadMethod="Pad" 
+                         ColorInterpolationMode="SRgbLinearInterpolation">
+        <GradientStop Color="#FF000000" Offset="0.2" />
+        <GradientStop Color="#FF2a073e" Offset="1" />
+    </LinearGradientBrush>
 
     <SolidColorBrush x:Key="RichTextBox.Static.Border" Color="#FF9b9b9b"/>
     <!--<LinearGradientBrush x:Key="RichTextBox.Static.Border" EndPoint="0,1" StartPoint="0,0">
@@ -413,7 +415,7 @@
         Tab Control
         /////////////////////////////////////-->
 
-    <SolidColorBrush x:Key="TabItem.Selected.Foreground" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Foreground" Color="#FF8313c1"/>
     
     <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FF000000"/>
 
@@ -421,7 +423,7 @@
 
     <SolidColorBrush x:Key="TabItem.Selected.Border" Color="#FF9b9b9b"/>
     <!--<LinearGradientBrush x:Key="TabItem.Selected.Border" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FF882cac" Offset="0.0"/>
+        <GradientStop Color="#FF8313c1" Offset="0.0"/>
         <GradientStop Color="#FF9b9b9b" Offset="1.0"/>
     </LinearGradientBrush>-->
 
@@ -521,7 +523,7 @@
     <SolidColorBrush x:Key="TabItem.Static.Border" Color="#FF9B9B9B"/>
 
     <SolidColorBrush x:Key="TabItem.MouseOver.Background" Color="#FF111111"/>
-    <SolidColorBrush x:Key="TabItem.MouseOver.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="TabItem.MouseOver.Border" Color="#FF8313c1"/>
 
     <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#F0F0F0"/>
     <SolidColorBrush x:Key="TabItem.Disabled.Border" Color="#D9D9D9"/>
@@ -767,7 +769,7 @@
 
     <!-- Label Title -->
     <Style x:Key="LabelTitleStyle" TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="#FF882cac"/>
+        <Setter Property="Foreground" Value="#FF8313c1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -882,16 +884,16 @@
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
     
     <!-- MouseOver -->
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FF8313c1"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FF111111"/>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#FF8313c1"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#FF7EB4EA"/>
     <LinearGradientBrush x:Key="ComboBox.MouseOver.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#FFEBF4FC" Offset="0.0"/>
         <GradientStop Color="#FFDCECFC" Offset="1.0"/>
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#FF8313c1"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Glyph" Color="#FF000000"/>
     <LinearGradientBrush x:Key="ComboBox.Pressed.Background" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#FFDAECFC" Offset="0.0"/>
@@ -1260,7 +1262,7 @@
     <SolidColorBrush x:Key="SliderThumb.Static.Border" Color="#FFB9B9B9"/>
     <!-- Mouse Over -->
     <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#FF111111"/>
-    <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#FF8313c1"/>
     <!-- Pressed -->
     <SolidColorBrush x:Key="SliderThumb.Pressed.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="SliderThumb.Pressed.Border" Color="#FFb154f5"/>
@@ -1594,7 +1596,7 @@
     <SolidColorBrush x:Key="TextBox.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FF1a1a1d"/>
     <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
-    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF8313c1"/>
     <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FFb154f5"/>
     
     <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
@@ -1647,12 +1649,12 @@
 
     <SolidColorBrush x:Key="Button.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="Button.Static.Background" Color="#FF000000"/>
-    <!--<SolidColorBrush x:Key="Button.Static.Border" Color="#FF882cac"/>-->
+    <!--<SolidColorBrush x:Key="Button.Static.Border" Color="#FF8313c1"/>-->
     <SolidColorBrush x:Key="Button.Static.Border" Color="#FFe9e9e9"/>
     <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF111111"/>
-    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF882cac"/>
-    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF882cac"/>
-    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF8313c1"/>
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF8313c1"/>
+    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF8313c1"/>
     <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
     <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
@@ -1712,14 +1714,14 @@
 
     <SolidColorBrush x:Key="ButtonSmall.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ButtonSmall.Static.Background" Color="#FF000000"/>
-    <!--<SolidColorBrush x:Key="ButtonSmall.Static.Border" Color="#FF882cac"/>-->
+    <!--<SolidColorBrush x:Key="ButtonSmall.Static.Border" Color="#FF8313c1"/>-->
     <SolidColorBrush x:Key="ButtonSmall.Static.Border" Color="#FFe9e9e9"/>
     
     <SolidColorBrush x:Key="ButtonSmall.MouseOver.Background" Color="#FF111111"/>
-    <SolidColorBrush x:Key="ButtonSmall.MouseOver.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="ButtonSmall.MouseOver.Border" Color="#FF8313c1"/>
 
-    <SolidColorBrush x:Key="ButtonSmall.Pressed.Background" Color="#FF882cac"/>
-    <SolidColorBrush x:Key="ButtonSmall.Pressed.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="ButtonSmall.Pressed.Background" Color="#FF8313c1"/>
+    <SolidColorBrush x:Key="ButtonSmall.Pressed.Border" Color="#FF8313c1"/>
     
     <SolidColorBrush x:Key="ButtonSmall.Disabled.Background" Color="#FFF4F4F4"/>
     <SolidColorBrush x:Key="ButtonSmall.Disabled.Border" Color="#FFADB2B5"/>
@@ -1783,10 +1785,10 @@
     <SolidColorBrush x:Key="ButtonLang.Static.Border" Color="#FF1a1a1d"/>
     
     <SolidColorBrush x:Key="ButtonLang.MouseOver.Background" Color="#FF111111"/>
-    <SolidColorBrush x:Key="ButtonLang.MouseOver.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="ButtonLang.MouseOver.Border" Color="#FF8313c1"/>
 
     <SolidColorBrush x:Key="ButtonLang.Pressed.Background" Color="#FFb154f5"/>
-    <SolidColorBrush x:Key="ButtonLang.Pressed.Border" Color="#FF882cac"/>
+    <SolidColorBrush x:Key="ButtonLang.Pressed.Border" Color="#FF8313c1"/>
     
     <SolidColorBrush x:Key="ButtonLang.Disabled.Background" Color="#FFF4F4F4"/>
     <SolidColorBrush x:Key="ButtonLang.Disabled.Border" Color="#FFADB2B5"/>
