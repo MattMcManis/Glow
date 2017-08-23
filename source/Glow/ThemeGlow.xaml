@@ -1242,8 +1242,8 @@
                     <Condition Property="IsMouseOver" Value="False"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" TargetName="Bd" Value="#FF020f31"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF020f31"/>
+                <!--<Setter Property="Background" TargetName="Bd" Value="#FF020f31"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF020f31"/>-->
             </MultiTrigger>
             <!-- Background Mouse Over Selected -->
             <MultiTrigger>
@@ -1261,8 +1261,8 @@
                     <Condition Property="IsMouseOver" Value="False"/>
                     <Condition Property="IsKeyboardFocused" Value="False"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" TargetName="Bd" Value="#FF020f31"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF020f31"/>
+                <!--<Setter Property="Background" TargetName="Bd" Value="#FF020f31"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF020f31"/>-->
             </MultiTrigger>
             <!-- Background Not Selected Keyboard Focused -->
             <MultiTrigger>

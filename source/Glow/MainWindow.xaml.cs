@@ -507,11 +507,110 @@ namespace Glow
             }
         }
 
+        /// <summary>
+        ///     Video Brightness DoubleClick
+        /// </summary>
+        private void slBrightness_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slBrightness.Value = 0;
+        }
+
+        /// <summary>
+        ///     Video Contrast DoubleClick
+        /// </summary>
+        private void slContrast_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slContrast.Value = 0;
+        }
+
+        /// <summary>
+        ///     Video Hue DoubleClick
+        /// </summary>
+        private void slHue_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slHue.Value = 0;
+        }
+
+        /// <summary>
+        ///     Video Saturation DoubleClick
+        /// </summary>
+        private void slSaturation_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slSaturation.Value = 0;
+        }
+
+        /// <summary>
+        ///     Video Gamma DoubleClick
+        /// </summary>
+        private void slGamma_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slGamma.Value = 0;
+        }
+
+        /// <summary>
+        ///     Video Scale Antiring
+        /// </summary>
+        private void slScaleAntiring_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slScaleAntiring.Value = 0;
+        }
+
+        /// <summary>
+        ///     Video Chroma Antiring
+        /// </summary>
+        private void slChromaAntiring_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slChromaAntiring.Value = 0;
+        }
+
+        /// <summary>
+        ///     Video Downscale Antiring
+        /// </summary>
+        private void cboDownscaleAntiring_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slDownscaleAntiring.Value = 0;
+        }
+
 
 
         // --------------------------------------------------
         // Audio Controls
         // --------------------------------------------------
+
+        /// <summary>
+        ///     Volume Slider DoubleClick
+        /// </summary>
+        private void slVolume_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slVolume.Value = 100;
+        }
+
+        /// <summary>
+        ///     Volume Max Slider DoubleClick
+        /// </summary>
+        private void slVolumeMax_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slVolumeMax.Value = 150;
+        }
+
+        /// <summary>
+        ///     Soft Volume Max Slider DoubleClick
+        /// </summary>
+        private void slSoftVolumeMax_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slSoftVolumeMax.Value = 150;
+        }
 
         /// <summary>
         ///    Audio Languages
@@ -618,6 +717,22 @@ namespace Glow
         }
 
         /// <summary>
+        ///     Subtitle Position DoubleClick
+        /// </summary>
+        private void slSubtitlePosition_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            slSubtitlePosition.Value = 95;
+        }
+
+        /// <summary>
+        ///     Subtitle Shadow Offset DoubleClick
+        /// </summary>
+        private void slSubtitlesShadowOffset_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            slSubtitlesShadowOffset.Value = 1.25;
+        }
+
+        /// <summary>
         ///    Subtitle Languages
         /// </summary>
         private void listViewSubtitleLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -709,6 +824,38 @@ namespace Glow
                 tbxOSDShadowOffset.IsEnabled = true;
             }
 
+        }
+
+        /// <summary>
+        ///     OSD Scale DoubleClick
+        /// </summary>
+        private void slOSDScale_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            slOSDScale.Value = 0.5;
+        }
+
+        /// <summary>
+        ///     OSD Bar Width DoubleClick
+        /// </summary>
+        private void slOSDBarWidth_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            slOSDBarWidth.Value = 95;
+        }
+
+        /// <summary>
+        ///     OSD Bar Height DoubleClick
+        /// </summary>
+        private void slOSDBarHeight_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            slOSDBarHeight.Value = 2;
+        }
+
+        /// <summary>
+        ///     OSD Shadow Offset DoubleClick
+        /// </summary>
+        private void slOSDShadowOffset_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            slOSDShadowOffset.Value = 1.25;
         }
 
 
@@ -1070,6 +1217,6 @@ namespace Glow
             rtbConfig.EndChange();
         }
 
-
+        
     }
 }

@@ -31,7 +31,7 @@
         
         Closing="MainWindow_Closing" 
         UseLayoutRounding="True"
-        Width="712" Height="400"
+        Width="712" Height="1112"
     
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
         Icon="Resources/Images/Icons/title-logo.ico"
@@ -323,138 +323,143 @@
 
                                 <!-- Brightness-->
                                 <Label Content="Brightness" 
-                                    HorizontalAlignment="Left"
-                                    Margin="10,381,0,0" 
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top" 
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
+                                        HorizontalAlignment="Left"
+                                        Margin="10,381,0,0" 
+                                        Padding="0,0,0,6" 
+                                        VerticalAlignment="Top" 
+                                        Width="75"
+                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slBrightness" 
-                                    HorizontalAlignment="Right"
-                                    Margin="0,382,52,0" 
-                                    VerticalAlignment="Top" 
-                                    Width="65"
-                                    Minimum="-100"
-                                    Maximum="100" 
-                                    IsSnapToTickEnabled="True"
-                                    Style="{DynamicResource SliderStyle}"/>
+                                        HorizontalAlignment="Right"
+                                        Margin="0,382,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="-100"
+                                        Maximum="100" 
+                                        IsSnapToTickEnabled="True"
+                                        MouseDoubleClick="slBrightness_MouseDoubleClick"
+                                        Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxBrightness"
-                                    Text="{Binding Value, ElementName=slBrightness, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="22" 
-                                    TextWrapping="Wrap" 
-                                    Margin="0,381,14,0"
-                                    HorizontalAlignment="Right"
-                                    Width="33" 
-                                    VerticalAlignment="Top"
-                                    Style="{DynamicResource TextBoxStyle}"/>
+                                        Text="{Binding Value, ElementName=slBrightness, UpdateSourceTrigger=PropertyChanged}"
+                                        Height="22" 
+                                        TextWrapping="Wrap" 
+                                        Margin="0,381,14,0"
+                                        HorizontalAlignment="Right"
+                                        Width="33" 
+                                        VerticalAlignment="Top"
+                                        Style="{DynamicResource TextBoxStyle}"/>
 
                                 <!-- Contrast-->
                                 <Label Content="Contrast" 
-                                    HorizontalAlignment="Left"
-                                    Margin="10,410,0,0" 
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top" 
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
+                                        HorizontalAlignment="Left"
+                                        Margin="10,410,0,0" 
+                                        Padding="0,0,0,6" 
+                                        VerticalAlignment="Top" 
+                                        Width="75"
+                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slContrast" 
-                                    HorizontalAlignment="Right"
-                                    Margin="0,411,52,0" 
-                                    VerticalAlignment="Top" 
-                                    Width="65"
-                                    Minimum="-100"
-                                    Maximum="100" 
-                                    IsSnapToTickEnabled="True"
-                                    Style="{DynamicResource SliderStyle}"/>
+                                        HorizontalAlignment="Right"
+                                        Margin="0,411,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="-100"
+                                        Maximum="100" 
+                                        IsSnapToTickEnabled="True"
+                                        MouseDoubleClick="slContrast_MouseDoubleClick"
+                                        Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxContrast"
-                                    Text="{Binding Value, ElementName=slContrast, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="22" 
-                                    TextWrapping="Wrap" 
-                                    Margin="0,410,14,0"
-                                    HorizontalAlignment="Right"
-                                    Width="33" 
-                                    VerticalAlignment="Top"
-                                    Style="{DynamicResource TextBoxStyle}"/>
-
-                                <!-- Saturation-->
-                                <Label Content="Saturation" 
-                                    HorizontalAlignment="Left"
-                                    Margin="10,468,0,0" 
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top" 
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
-                                <Slider x:Name="slSaturation" 
-                                    HorizontalAlignment="Right"
-                                    Margin="0,469,52,0" 
-                                    VerticalAlignment="Top" 
-                                    Width="65"
-                                    Minimum="-100"
-                                    Maximum="100" 
-                                    IsSnapToTickEnabled="True"
-                                    Style="{DynamicResource SliderStyle}"/>
-                                <TextBox x:Name="tbxSaturation"
-                                    Text="{Binding Value, ElementName=slSaturation, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="22" 
-                                    TextWrapping="Wrap" 
-                                    Margin="0,468,14,0"
-                                    HorizontalAlignment="Right"
-                                    Width="33" 
-                                    VerticalAlignment="Top"
-                                    Style="{DynamicResource TextBoxStyle}"/>
-
-                                <!-- Gamma -->
-                                <Label Content="Gamma" 
-                                    HorizontalAlignment="Left"
-                                    Margin="10,497,0,0" 
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top" 
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
-                                <Slider x:Name="slGamma" 
-                                    HorizontalAlignment="Right"
-                                    Margin="0,498,52,0" 
-                                    VerticalAlignment="Top" 
-                                    Width="65"
-                                    Minimum="-100"
-                                    Maximum="100" 
-                                    IsSnapToTickEnabled="True"
-                                    Style="{DynamicResource SliderStyle}"/>
-                                <TextBox x:Name="tbxGamma"
-                                    Text="{Binding Value, ElementName=slGamma, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="22" 
-                                    TextWrapping="Wrap" 
-                                    Margin="0,497,14,0"
-                                    HorizontalAlignment="Right"
-                                    Width="33" 
-                                    VerticalAlignment="Top"
-                                    Style="{DynamicResource TextBoxStyle}"/>
+                                        Text="{Binding Value, ElementName=slContrast, UpdateSourceTrigger=PropertyChanged}"
+                                        Height="22" 
+                                        TextWrapping="Wrap" 
+                                        Margin="0,410,14,0"
+                                        HorizontalAlignment="Right"
+                                        Width="33" 
+                                        VerticalAlignment="Top"
+                                        Style="{DynamicResource TextBoxStyle}"/>
 
                                 <!-- Hue -->
                                 <Label Content="Hue" 
-                                    HorizontalAlignment="Left"
-                                    Margin="10,439,0,0" 
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top" 
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
+                                        HorizontalAlignment="Left"
+                                        Margin="10,439,0,0" 
+                                        Padding="0,0,0,6" 
+                                        VerticalAlignment="Top" 
+                                        Width="75"
+                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slHue" 
-                                    HorizontalAlignment="Right"
-                                    Margin="0,440,52,0" 
-                                    VerticalAlignment="Top" 
-                                    Width="65"
-                                    Minimum="-100"
-                                    Maximum="100" 
-                                    IsSnapToTickEnabled="True"
-                                    Style="{DynamicResource SliderStyle}"/>
+                                        HorizontalAlignment="Right"
+                                        Margin="0,440,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="-100"
+                                        Maximum="100" 
+                                        IsSnapToTickEnabled="True"
+                                        MouseDoubleClick="slHue_MouseDoubleClick"
+                                        Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxHue"
-                                    Text="{Binding Value, ElementName=slHue, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="22" 
-                                    TextWrapping="Wrap" 
-                                    Margin="0,439,14,0"
-                                    HorizontalAlignment="Right"
-                                    Width="33" 
-                                    VerticalAlignment="Top"
-                                    Style="{DynamicResource TextBoxStyle}"/>
+                                        Text="{Binding Value, ElementName=slHue, UpdateSourceTrigger=PropertyChanged}"
+                                        Height="22" 
+                                        TextWrapping="Wrap" 
+                                        Margin="0,439,14,0"
+                                        HorizontalAlignment="Right"
+                                        Width="33" 
+                                        VerticalAlignment="Top"
+                                        Style="{DynamicResource TextBoxStyle}"/>
+
+                                <!-- Saturation-->
+                                <Label Content="Saturation" 
+                                        HorizontalAlignment="Left"
+                                        Margin="10,468,0,0" 
+                                        Padding="0,0,0,6" 
+                                        VerticalAlignment="Top" 
+                                        Width="75"
+                                        Style="{DynamicResource LabelStyle}"/>
+                                <Slider x:Name="slSaturation" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,469,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="-100"
+                                        Maximum="100" 
+                                        IsSnapToTickEnabled="True"
+                                        MouseDoubleClick="slSaturation_MouseDoubleClick"
+                                        Style="{DynamicResource SliderStyle}"/>
+                                <TextBox x:Name="tbxSaturation"
+                                         Text="{Binding Value, ElementName=slSaturation, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,468,14,0"
+                                         HorizontalAlignment="Right"
+                                         Width="33" 
+                                         VerticalAlignment="Top"
+                                         Style="{DynamicResource TextBoxStyle}"/>
+
+                                <!-- Gamma -->
+                                <Label Content="Gamma" 
+                                        HorizontalAlignment="Left"
+                                        Margin="10,497,0,0" 
+                                        Padding="0,0,0,6" 
+                                        VerticalAlignment="Top" 
+                                        Width="75"
+                                        Style="{DynamicResource LabelStyle}"/>
+                                <Slider x:Name="slGamma" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,498,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="-100"
+                                        Maximum="100" 
+                                        IsSnapToTickEnabled="True"
+                                        MouseDoubleClick="slGamma_MouseDoubleClick"
+                                        Style="{DynamicResource SliderStyle}"/>
+                                <TextBox x:Name="tbxGamma"
+                                        Text="{Binding Value, ElementName=slGamma, UpdateSourceTrigger=PropertyChanged}"
+                                        Height="22" 
+                                        TextWrapping="Wrap" 
+                                        Margin="0,497,14,0"
+                                        HorizontalAlignment="Right"
+                                        Width="33" 
+                                        VerticalAlignment="Top"
+                                        Style="{DynamicResource TextBoxStyle}"/>
 
                                 <!-- Gamma Auto -->
                                 <Label Content="Gamma Auto" 
@@ -546,12 +551,12 @@
 
                                 <!-- Sigmoid -->
                                 <Label Content="Sigmoid"
-                                    HorizontalAlignment="Left"
-                                    Margin="10,683,0,0" 
-                                    Padding="0, 0, 0, 6"
-                                    VerticalAlignment="Top"
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
+                                       HorizontalAlignment="Left"
+                                       Margin="10,683,0,0" 
+                                       Padding="0, 0, 0, 6"
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSigmoid"
                                         Margin="0,683,14,0" 
                                         VerticalAlignment="Top"
@@ -620,6 +625,7 @@
                                         Width="65"
                                         Minimum="0"
                                         Maximum="1" 
+                                        MouseDoubleClick="slScaleAntiring_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxScaleAntiring"
@@ -688,6 +694,7 @@
                                         Width="65"
                                         Minimum="0"
                                         Maximum="1" 
+                                        MouseDoubleClick="slChromaAntiring_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxChromaAntiring"
@@ -756,6 +763,7 @@
                                         Width="65"
                                         Minimum="0"
                                         Maximum="1" 
+                                        MouseDoubleClick="cboDownscaleAntiring_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxDownscaleAntiring"
@@ -889,6 +897,7 @@
                                         Width="65"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        MouseDoubleClick="slVolume_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxVolume"
@@ -917,6 +926,7 @@
                                         Width="65"
                                         Maximum="200" 
                                         IsSnapToTickEnabled="True"
+                                        MouseDoubleClick="slVolumeMax_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxVolumeMax"
                                         Text="{Binding Value, ElementName=slVolumeMax, UpdateSourceTrigger=PropertyChanged}"
@@ -1135,6 +1145,7 @@
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Maximum="200" 
+                                        MouseDoubleClick="slSoftVolumeMax_MouseDoubleClick"
                                         IsSnapToTickEnabled="True"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxSoftVolumeMax"
@@ -1211,6 +1222,7 @@
                                         Width="65"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        MouseDoubleClick="slSubtitlePosition_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxSubtitlePosition"
@@ -1424,6 +1436,7 @@
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Maximum="5"
+                                        MouseDoubleClick="slSubtitlesShadowOffset_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxSubtitlesShadowOffset"
@@ -2065,6 +2078,7 @@
                                         Width="65"
                                         Minimum="0.1"
                                         Maximum="10"
+                                        MouseDoubleClick="slOSDScale_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxOSDScale"
@@ -2092,6 +2106,7 @@
                                         Width="65"
                                         Minimum="0.1"
                                         Maximum="100"
+                                        MouseDoubleClick="slOSDBarWidth_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxOSDBarWidth"
@@ -2119,6 +2134,7 @@
                                         Width="65"
                                         Minimum="0.1"
                                         Maximum="50"
+                                        MouseDoubleClick="slOSDBarHeight_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxOSDBarHeight"
@@ -2325,6 +2341,7 @@
                                         Maximum="5"
                                         HorizontalAlignment="Right" 
                                         Width="65"
+                                        MouseDoubleClick="slOSDShadowOffset_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxOSDShadowOffset"
