@@ -373,7 +373,7 @@ namespace Glow
         private void buttonProfilesPathRevert_Click(object sender, RoutedEventArgs e)
         {
             // Set the default path
-            MainWindow.profilesDir = MainWindow.appDir + "profiles";
+            MainWindow.profilesDir = MainWindow.appDir + @"profiles\";
 
             // Display Folder Path in Textbox
             textBoxProfilesPath.Text = MainWindow.profilesDir;
@@ -420,7 +420,7 @@ namespace Glow
             textBoxConfigPath.Text = MainWindow.configDir;
 
             // Revert Profiles Path
-            MainWindow.profilesDir = MainWindow.appDir + "profiles";
+            MainWindow.profilesDir = MainWindow.appDir + @"profiles\";
             textBoxProfilesPath.Text = MainWindow.profilesDir;
 
             // Save Current Window Location
