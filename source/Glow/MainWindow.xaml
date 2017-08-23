@@ -35,7 +35,7 @@
 
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
         
-        Style="{DynamicResource WindowStyle}" Icon="Resources/Images/Icons/logo.ico"
+        Style="{DynamicResource WindowStyle}" Icon="Resources/Images/Icons/title-logo.ico"
         >
     <Window.Resources>
 
@@ -68,7 +68,10 @@
                                           Margin="0,10,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboVideoDriver_SelectionChanged" HorizontalAlignment="Right" Width="103">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
+                                          SelectionChanged="cboVideoDriver_SelectionChanged"
+                                          HorizontalAlignment="Right" 
+                                          Width="103">
                                     <System:String>opengl</System:String>
                                     <System:String>opengl-hq</System:String>
                                     <System:String>direct3d</System:String>
@@ -122,6 +125,122 @@
                                     <System:String>crystalhd</System:String>
                                 </ComboBox>
 
+
+                                <!--/////////////////////////////////////
+                                     Display
+                                    /////////////////////////////////////-->
+                                <Label Content="Display" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,111,0,0"
+                                    Padding="0,0,0,6" 
+                                    VerticalAlignment="Top" 
+                                    Width="75" 
+                                    FontWeight="Bold"
+                                    Style="{DynamicResource LabelTitleStyle}"/>
+
+                                <!-- Primaries -->
+                                <Label Content="Primaries" 
+                                    HorizontalAlignment="Left"
+                                    Margin="10,138,0,0" 
+                                    Padding="0,0,0,6" 
+                                    VerticalAlignment="Top"
+                                    Width="75"
+                                    Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboDisplayPrimaries" 
+                                    Margin="0,138,14,0" 
+                                    VerticalAlignment="Top"
+                                    Style="{DynamicResource ComboBoxStyle}"
+                                    ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right"
+                                          Width="103">
+                                    <System:String>auto</System:String>
+                                    <System:String>bt.470m</System:String>
+                                    <System:String>bt.601-525</System:String>
+                                    <System:String>bt.601-625</System:String>
+                                    <System:String>bt.709</System:String>
+                                    <System:String>bt.2020</System:String>
+                                    <System:String>apple</System:String>
+                                    <System:String>adobe</System:String>
+                                    <System:String>prophoto</System:String>
+                                    <System:String>cie1931</System:String>
+                                    <System:String>dci-p3</System:String>
+                                    <System:String>v-gamut</System:String>
+                                    <System:String>s-gamut</System:String>
+                                </ComboBox>
+
+                                <!-- Transfer Characteristics -->
+                                <Label Content="Characteristics" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,167,0,0" 
+                                       Padding="0, 0, 0, 6"
+                                       VerticalAlignment="Top"
+                                       Width="83"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboTransferCharacteristics"
+                                          Margin="0,167,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right"
+                                          Width="103">
+                                    <System:String>auto</System:String>
+                                    <System:String>bt.1886</System:String>
+                                    <System:String>srgb</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>gamma1.8</System:String>
+                                    <System:String>gamma2.2</System:String>
+                                    <System:String>gamma2.8</System:String>
+                                    <System:String>prophoto</System:String>
+                                    <System:String>pq</System:String>
+                                    <System:String>hlg</System:String>
+                                    <System:String>v-log</System:String>
+                                    <System:String>s-log1</System:String>
+                                    <System:String>s-log2</System:String>
+                                </ComboBox>
+
+                                <!-- Color Space -->
+                                <Label Content="Color Space" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,196,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboColorSpace" 
+                                          Margin="0,196,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right"
+                                          Width="103">
+                                    <System:String>auto</System:String>
+                                    <System:String>bt.601</System:String>
+                                    <System:String>bt.709</System:String>
+                                    <System:String>bt.2020-ncl</System:String>
+                                    <System:String>bt.2020-cl</System:String>
+                                    <System:String>mpte-240m</System:String>
+                                </ComboBox>
+
+                                <!-- Color Range -->
+                                <Label Content="Color Range"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,225,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboColorRange"
+                                          Margin="0,225,14,0"
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right"
+                                          Width="103">
+                                    <System:String>auto</System:String>
+                                    <System:String>limited</System:String>
+                                    <System:String>full</System:String>
+                                </ComboBox>
+
                                 <!-- Deinterlace -->
                                 <Label Content="Deinterlace" 
                                        HorizontalAlignment="Left"
@@ -168,75 +287,6 @@
                                     <System:String>audio</System:String>
                                 </ComboBox>
 
-
-                                <!-- Display -->
-                                <Label Content="Display" 
-                                    HorizontalAlignment="Left" 
-                                    Margin="10,111,0,0"
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top" 
-                                    Width="75" 
-                                    FontWeight="Bold"
-                                    Style="{DynamicResource LabelTitleStyle}"/>
-
-                                <!-- Primaries -->
-                                <Label Content="Primaries" 
-                                    HorizontalAlignment="Left"
-                                    Margin="10,138,0,0" 
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top"
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboDisplayPrimaries" 
-                                    Margin="0,138,14,0" 
-                                    VerticalAlignment="Top"
-                                    Style="{DynamicResource ComboBoxStyle}"
-                                    ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103">
-                                    <System:String>auto</System:String>
-                                    <System:String>bt.470m</System:String>
-                                    <System:String>bt.601-525</System:String>
-                                    <System:String>bt.601-625</System:String>
-                                    <System:String>bt.709</System:String>
-                                    <System:String>bt.2020</System:String>
-                                    <System:String>apple</System:String>
-                                    <System:String>adobe</System:String>
-                                    <System:String>prophoto</System:String>
-                                    <System:String>cie1931</System:String>
-                                    <System:String>dci-p3</System:String>
-                                    <System:String>v-gamut</System:String>
-                                    <System:String>s-gamut</System:String>
-                                </ComboBox>
-
-                                <!-- Transfer Characteristics -->
-                                <Label Content="Characteristics" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,167,0,0" 
-                                       Padding="0, 0, 0, 6"
-                                       VerticalAlignment="Top"
-                                       Width="83"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboTransferCharacteristics"
-                                          Margin="0,167,14,0" 
-                                          VerticalAlignment="Top"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103">
-                                    <System:String>auto</System:String>
-                                    <System:String>bt.1886</System:String>
-                                    <System:String>srgb</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>gamma1.8</System:String>
-                                    <System:String>gamma2.2</System:String>
-                                    <System:String>gamma2.8</System:String>
-                                    <System:String>prophoto</System:String>
-                                    <System:String>pq</System:String>
-                                    <System:String>hlg</System:String>
-                                    <System:String>v-log</System:String>
-                                    <System:String>s-log1</System:String>
-                                    <System:String>s-log2</System:String>
-                                </ComboBox>
-
-
-
                                 <!-- Framedrop -->
                                 <Label Content="Framedrop" 
                                        HorizontalAlignment="Left" 
@@ -259,7 +309,9 @@
                                 </ComboBox>
 
 
-                                <!-- Image -->
+                                <!--/////////////////////////////////////
+                                    Image
+                                /////////////////////////////////////-->
                                 <Label Content="Image" 
                                        HorizontalAlignment="Left" 
                                        Margin="10,354,0,0"
@@ -268,364 +320,6 @@
                                        Width="75" 
                                        FontWeight="Bold"
                                        Style="{DynamicResource LabelTitleStyle}"/>
-
-                                <!-- Color Space -->
-                                <Label Content="Color Space" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,196,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top"
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboColorSpace" 
-                                          Margin="0,196,14,0" 
-                                          VerticalAlignment="Top"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103">
-                                    <System:String>auto</System:String>
-                                    <System:String>bt.601</System:String>
-                                    <System:String>bt.709</System:String>
-                                    <System:String>bt.2020-ncl</System:String>
-                                    <System:String>bt.2020-cl</System:String>
-                                    <System:String>mpte-240m</System:String>
-                                </ComboBox>
-
-                                <!-- Color Range -->
-                                <Label Content="Color Range"
-                                       HorizontalAlignment="Left"
-                                       Margin="10,225,0,0"
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top"
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboColorRange"
-                                          Margin="0,225,14,0"
-                                          VerticalAlignment="Top"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103">
-                                    <System:String>auto</System:String>
-                                    <System:String>limited</System:String>
-                                    <System:String>full</System:String>
-                                </ComboBox>
-
-
-                                <!-- Gamma Auto -->
-                                <Label Content="Gamma Auto" 
-                                        HorizontalAlignment="Left"
-                                        Margin="10,526,0,0" 
-                                        Padding="0, 0, 0, 6"
-                                        VerticalAlignment="Top" 
-                                        Width="75"
-                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboGammaAuto"
-                                        Margin="0,526,14,0" 
-                                        VerticalAlignment="Top"
-                                        Style="{DynamicResource ComboBoxStyle}"
-                                        ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103" SelectionChanged="cboGammaAuto_SelectionChanged">
-                                    <System:String>on</System:String>
-                                    <System:String>off</System:String>
-                                </ComboBox>
-
-
-                                <!-- Dithering -->
-                                <Label Content="Dither" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,613,0,0" 
-                                       Padding="0, 0, 0, 6"
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboDither"
-                                          Margin="0,613,14,0" 
-                                          VerticalAlignment="Top"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103">
-                                    <System:String>no</System:String>
-                                    <System:String>auto</System:String>
-                                    <System:String>8</System:String>
-                                </ComboBox>
-
-                                <!-- Deband -->
-                                <Label Content="Deband" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,555,0,0"
-                                       Padding="0, 0, 0, 6"
-                                       VerticalAlignment="Top"
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboDeband" 
-                                          Margin="0,555,14,0"
-                                          VerticalAlignment="Top"
-                                          SelectionChanged="cboDeband_SelectionChanged"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103">
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
-                                </ComboBox>
-
-                                <!-- Deband Grain -->
-                                <Label Content="Deband Grain" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,584,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <TextBox x:Name="tbxDebandGrain"
-                                         Margin="0,584,14,0" 
-                                         VerticalAlignment="Top" 
-                                         Width="103" Height="22"
-                                         Style="{DynamicResource TextBoxStyle}"
-                                         HorizontalAlignment="Right"/>
-
-
-                                <!-- Scaling -->
-                                <Label Content="Scaling" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,656,0,0"
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75" FontWeight="Bold"
-                                       Style="{DynamicResource LabelTitleStyle}"/>
-
-                                <!-- Sigmoid -->
-                                <Label Content="Sigmoid"
-                                    HorizontalAlignment="Left"
-                                    Margin="10,683,0,0" 
-                                    Padding="0, 0, 0, 6"
-                                    VerticalAlignment="Top"
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSigmoid"
-                                    Margin="0,683,14,0" 
-                                    VerticalAlignment="Top"
-                                    Style="{DynamicResource ComboBoxStyle}"
-                                    ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                    SelectionChanged="cboScale_SelectionChanged" HorizontalAlignment="Right" Width="103">
-                                    <System:String>on</System:String>
-                                    <System:String>off</System:String>
-                                </ComboBox>
-
-                                <!-- Scale -->
-                                <Label Content="Scale"
-                                       HorizontalAlignment="Left"
-                                       Margin="10,712,0,0" 
-                                       Padding="0, 0, 0, 6"
-                                       VerticalAlignment="Top"
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboScale"
-                                          Margin="0,712,14,0" 
-                                          VerticalAlignment="Top"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScale_SelectionChanged" HorizontalAlignment="Right" Width="103">
-                                    <System:String>off</System:String>
-                                    <System:String>nearest</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>bilinear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>gaussian</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>ewa_lanczos</System:String>
-                                    <System:String>ewa_lanczossharp</System:String>
-                                    <System:String>ewa_lanczossoft</System:String>
-                                    <System:String>robidoux</System:String>
-                                    <System:String>robidouxsharp</System:String>
-                                    <System:String>ewa_ginseng</System:String>
-                                    <System:String>ewa_hanning</System:String>
-                                    <System:String>mitchell</System:String>
-                                    <System:String>catmull_rom</System:String>
-                                    <System:String>spline16</System:String>
-                                    <System:String>spline36</System:String>
-                                    <System:String>spline64</System:String>
-                                    <System:String>sinc</System:String>
-                                    <System:String>jinc</System:String>
-                                    <System:String>oversample</System:String>
-                                </ComboBox>
-
-                                <!-- Scale Antiring -->
-                                <Label Content="Antiring" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,741,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-
-                                <Slider x:Name="slScaleAntiring" 
-                                        HorizontalAlignment="Right"
-                                        Margin="0,742,52,0" 
-                                        VerticalAlignment="Top" 
-                                        Width="65"
-                                        Minimum="0"
-                                        Maximum="1" 
-                                        Style="{DynamicResource SliderStyle}"/>
-
-                                <TextBox x:Name="tbxScaleAntiring"
-                                         Text="{Binding Value, ElementName=slScaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
-                                         Height="22" 
-                                         TextWrapping="Wrap" 
-                                         Margin="0,741,14,0"
-                                         HorizontalAlignment="Right"
-                                         Width="33" 
-                                         VerticalAlignment="Top"
-                                         Style="{DynamicResource TextBoxStyle}"/>
-
-                                <!-- Chroma Scale -->
-                                <Label Content="Chroma"
-                                       HorizontalAlignment="Left" 
-                                       Margin="10,770,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboChromaScale" 
-                                          Margin="0,770,14,0" 
-                                          VerticalAlignment="Top"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboChromaScale_SelectionChanged" HorizontalAlignment="Right" Width="103">
-                                    <System:String>off</System:String>
-                                    <System:String>nearest</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>bilinear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>gaussian</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>ewa_lanczos</System:String>
-                                    <System:String>ewa_lanczossharp</System:String>
-                                    <System:String>ewa_lanczossoft</System:String>
-                                    <System:String>robidoux</System:String>
-                                    <System:String>robidouxsharp</System:String>
-                                    <System:String>ewa_ginseng</System:String>
-                                    <System:String>ewa_hanning</System:String>
-                                    <System:String>mitchell</System:String>
-                                    <System:String>catmull_rom</System:String>
-                                    <System:String>spline16</System:String>
-                                    <System:String>spline36</System:String>
-                                    <System:String>spline64</System:String>
-                                    <System:String>sinc</System:String>
-                                    <System:String>jinc</System:String>
-                                    <System:String>oversample</System:String>
-                                </ComboBox>
-
-                                <!-- Chroma Antiring -->
-                                <Label Content="Antiring" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,799,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-
-                                <Slider x:Name="slChromaAntiring" 
-                                        HorizontalAlignment="Right"
-                                        Margin="0,800,52,0" 
-                                        VerticalAlignment="Top" 
-                                        Width="65"
-                                        Minimum="0"
-                                        Maximum="1" 
-                                        Style="{DynamicResource SliderStyle}"/>
-
-                                <TextBox x:Name="tbxChromaAntiring"
-                                         Text="{Binding Value, ElementName=slChromaAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
-                                         Height="22" 
-                                         TextWrapping="Wrap" 
-                                         Margin="0,799,14,0"
-                                         HorizontalAlignment="Right"
-                                         Width="33" 
-                                         VerticalAlignment="Top"
-                                         Style="{DynamicResource TextBoxStyle}"/>
-
-                                <!-- Downscale -->
-                                <Label Content="Downscale" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,828,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboDownscale" 
-                                          Margin="0,828,14,0" 
-                                          VerticalAlignment="Top"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboDownscale_SelectionChanged" HorizontalAlignment="Right" Width="103">
-                                    <System:String>off</System:String>
-                                    <System:String>nearest</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>bilinear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>gaussian</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>ewa_lanczos</System:String>
-                                    <System:String>ewa_lanczossharp</System:String>
-                                    <System:String>ewa_lanczossoft</System:String>
-                                    <System:String>robidoux</System:String>
-                                    <System:String>robidouxsharp</System:String>
-                                    <System:String>ewa_ginseng</System:String>
-                                    <System:String>ewa_hanning</System:String>
-                                    <System:String>mitchell</System:String>
-                                    <System:String>catmull_rom</System:String>
-                                    <System:String>spline16</System:String>
-                                    <System:String>spline36</System:String>
-                                    <System:String>spline64</System:String>
-                                    <System:String>sinc</System:String>
-                                    <System:String>jinc</System:String>
-                                    <System:String>oversample</System:String>
-                                </ComboBox>
-
-                                <!-- Downscale Antiring -->
-                                <Label Content="Antiring" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,857,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-
-                                <Slider x:Name="slDownscaleAntiring" 
-                                        HorizontalAlignment="Right"
-                                        Margin="0,858,52,0" 
-                                        VerticalAlignment="Top" 
-                                        Width="65"
-                                        Minimum="0"
-                                        Maximum="1" 
-                                        Style="{DynamicResource SliderStyle}"/>
-
-                                <TextBox x:Name="tbxDownscaleAntiring"
-                                         Text="{Binding Value, ElementName=slDownscaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
-                                         Height="22" 
-                                         TextWrapping="Wrap" 
-                                         Margin="0,857,14,0"
-                                         HorizontalAlignment="Right"
-                                         Width="33" 
-                                         VerticalAlignment="Top"
-                                         Style="{DynamicResource TextBoxStyle}"/>
-
-                                <!-- Software Scale -->
-                                <Label Content="Software"
-                                       HorizontalAlignment="Left"
-                                       Margin="10,886,0,0" 
-                                       Padding="0, 0, 0, 6"
-                                       VerticalAlignment="Top"
-                                       Width="75"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSoftwareScaler"
-                                          Margin="0,886,14,0" 
-                                          VerticalAlignment="Top"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
-                                          SelectionChanged="cboSoftwareScale_SelectionChanged" HorizontalAlignment="Right" Width="103">
-                                    <System:String>off</System:String>
-                                    <System:String>bilinear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>gauss</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>spline</System:String>
-                                    <System:String>sinc</System:String>
-                                </ComboBox>
 
                                 <!-- Brightness-->
                                 <Label Content="Brightness" 
@@ -761,6 +455,343 @@
                                     Width="33" 
                                     VerticalAlignment="Top"
                                     Style="{DynamicResource TextBoxStyle}"/>
+
+                                <!-- Gamma Auto -->
+                                <Label Content="Gamma Auto" 
+                                        HorizontalAlignment="Left"
+                                        Margin="10,526,0,0" 
+                                        Padding="0, 0, 0, 6"
+                                        VerticalAlignment="Top" 
+                                        Width="75"
+                                        Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboGammaAuto"
+                                        Margin="0,526,14,0" 
+                                        VerticalAlignment="Top"
+                                        Style="{DynamicResource ComboBoxStyle}"
+                                        ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right"
+                                          Width="103"
+                                          SelectionChanged="cboGammaAuto_SelectionChanged">
+                                    <System:String>on</System:String>
+                                    <System:String>off</System:String>
+                                </ComboBox>
+
+
+                                <!-- Dithering -->
+                                <Label Content="Dither" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,613,0,0" 
+                                       Padding="0, 0, 0, 6"
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboDither"
+                                          Margin="0,613,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right" 
+                                          Width="103">
+                                    <System:String>no</System:String>
+                                    <System:String>auto</System:String>
+                                    <System:String>8</System:String>
+                                </ComboBox>
+
+                                <!-- Deband -->
+                                <Label Content="Deband" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,555,0,0"
+                                       Padding="0, 0, 0, 6"
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboDeband" 
+                                          Margin="0,555,14,0"
+                                          VerticalAlignment="Top"
+                                          SelectionChanged="cboDeband_SelectionChanged"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
+                                          HorizontalAlignment="Right" 
+                                          Width="103">
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Deband Grain -->
+                                <Label Content="Deband Grain" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,584,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <TextBox x:Name="tbxDebandGrain"
+                                         Margin="0,584,14,0" 
+                                         VerticalAlignment="Top" 
+                                         Width="103" Height="22"
+                                         Style="{DynamicResource TextBoxStyle}"
+                                         HorizontalAlignment="Right"/>
+
+
+                                <!--/////////////////////////////////////
+                                     Scaling
+                                    /////////////////////////////////////-->
+                                <Label Content="Scaling" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,656,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75" FontWeight="Bold"
+                                       Style="{DynamicResource LabelTitleStyle}"/>
+
+                                <!-- Sigmoid -->
+                                <Label Content="Sigmoid"
+                                    HorizontalAlignment="Left"
+                                    Margin="10,683,0,0" 
+                                    Padding="0, 0, 0, 6"
+                                    VerticalAlignment="Top"
+                                    Width="75"
+                                    Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboSigmoid"
+                                        Margin="0,683,14,0" 
+                                        VerticalAlignment="Top"
+                                        Style="{DynamicResource ComboBoxStyle}"
+                                        ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                        SelectionChanged="cboScale_SelectionChanged" 
+                                         HorizontalAlignment="Right" 
+                                         Width="103">
+                                    <System:String>on</System:String>
+                                    <System:String>off</System:String>
+                                </ComboBox>
+
+                                <!-- Scale -->
+                                <Label Content="Scale"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,712,0,0" 
+                                       Padding="0, 0, 0, 6"
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboScale"
+                                          Margin="0,712,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScale_SelectionChanged" 
+                                          HorizontalAlignment="Right" 
+                                          Width="103">
+                                    <System:String>off</System:String>
+                                    <System:String>nearest</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>bilinear</System:String>
+                                    <System:String>bicubic</System:String>
+                                    <System:String>gaussian</System:String>
+                                    <System:String>lanczos</System:String>
+                                    <System:String>ewa_lanczos</System:String>
+                                    <System:String>ewa_lanczossharp</System:String>
+                                    <System:String>ewa_lanczossoft</System:String>
+                                    <System:String>robidoux</System:String>
+                                    <System:String>robidouxsharp</System:String>
+                                    <System:String>ewa_ginseng</System:String>
+                                    <System:String>ewa_hanning</System:String>
+                                    <System:String>mitchell</System:String>
+                                    <System:String>catmull_rom</System:String>
+                                    <System:String>spline16</System:String>
+                                    <System:String>spline36</System:String>
+                                    <System:String>spline64</System:String>
+                                    <System:String>sinc</System:String>
+                                    <System:String>jinc</System:String>
+                                    <System:String>oversample</System:String>
+                                </ComboBox>
+
+                                <!-- Scale Antiring -->
+                                <Label Content="Antiring" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,741,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+
+                                <Slider x:Name="slScaleAntiring" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,742,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="0"
+                                        Maximum="1" 
+                                        Style="{DynamicResource SliderStyle}"/>
+
+                                <TextBox x:Name="tbxScaleAntiring"
+                                         Text="{Binding Value, ElementName=slScaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,741,14,0"
+                                         HorizontalAlignment="Right"
+                                         Width="33" 
+                                         VerticalAlignment="Top"
+                                         Style="{DynamicResource TextBoxStyle}"/>
+
+                                <!-- Chroma Scale -->
+                                <Label Content="Chroma"
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,770,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboChromaScale" 
+                                          Margin="0,770,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboChromaScale_SelectionChanged"
+                                          HorizontalAlignment="Right" 
+                                          Width="103">
+                                    <System:String>off</System:String>
+                                    <System:String>nearest</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>bilinear</System:String>
+                                    <System:String>bicubic</System:String>
+                                    <System:String>gaussian</System:String>
+                                    <System:String>lanczos</System:String>
+                                    <System:String>ewa_lanczos</System:String>
+                                    <System:String>ewa_lanczossharp</System:String>
+                                    <System:String>ewa_lanczossoft</System:String>
+                                    <System:String>robidoux</System:String>
+                                    <System:String>robidouxsharp</System:String>
+                                    <System:String>ewa_ginseng</System:String>
+                                    <System:String>ewa_hanning</System:String>
+                                    <System:String>mitchell</System:String>
+                                    <System:String>catmull_rom</System:String>
+                                    <System:String>spline16</System:String>
+                                    <System:String>spline36</System:String>
+                                    <System:String>spline64</System:String>
+                                    <System:String>sinc</System:String>
+                                    <System:String>jinc</System:String>
+                                    <System:String>oversample</System:String>
+                                </ComboBox>
+
+                                <!-- Chroma Antiring -->
+                                <Label Content="Antiring" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,799,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+
+                                <Slider x:Name="slChromaAntiring" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,800,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="0"
+                                        Maximum="1" 
+                                        Style="{DynamicResource SliderStyle}"/>
+
+                                <TextBox x:Name="tbxChromaAntiring"
+                                         Text="{Binding Value, ElementName=slChromaAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,799,14,0"
+                                         HorizontalAlignment="Right"
+                                         Width="33" 
+                                         VerticalAlignment="Top"
+                                         Style="{DynamicResource TextBoxStyle}"/>
+
+                                <!-- Downscale -->
+                                <Label Content="Downscale" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,828,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboDownscale" 
+                                          Margin="0,828,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboDownscale_SelectionChanged" 
+                                          HorizontalAlignment="Right"
+                                          Width="103">
+                                    <System:String>off</System:String>
+                                    <System:String>nearest</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>bilinear</System:String>
+                                    <System:String>bicubic</System:String>
+                                    <System:String>gaussian</System:String>
+                                    <System:String>lanczos</System:String>
+                                    <System:String>ewa_lanczos</System:String>
+                                    <System:String>ewa_lanczossharp</System:String>
+                                    <System:String>ewa_lanczossoft</System:String>
+                                    <System:String>robidoux</System:String>
+                                    <System:String>robidouxsharp</System:String>
+                                    <System:String>ewa_ginseng</System:String>
+                                    <System:String>ewa_hanning</System:String>
+                                    <System:String>mitchell</System:String>
+                                    <System:String>catmull_rom</System:String>
+                                    <System:String>spline16</System:String>
+                                    <System:String>spline36</System:String>
+                                    <System:String>spline64</System:String>
+                                    <System:String>sinc</System:String>
+                                    <System:String>jinc</System:String>
+                                    <System:String>oversample</System:String>
+                                </ComboBox>
+
+                                <!-- Downscale Antiring -->
+                                <Label Content="Antiring" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,857,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+
+                                <Slider x:Name="slDownscaleAntiring" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,858,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="0"
+                                        Maximum="1" 
+                                        Style="{DynamicResource SliderStyle}"/>
+
+                                <TextBox x:Name="tbxDownscaleAntiring"
+                                         Text="{Binding Value, ElementName=slDownscaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,857,14,0"
+                                         HorizontalAlignment="Right"
+                                         Width="33" 
+                                         VerticalAlignment="Top"
+                                         Style="{DynamicResource TextBoxStyle}"/>
+
+                                <!-- Software Scale -->
+                                <Label Content="Software"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,886,0,0" 
+                                       Padding="0, 0, 0, 6"
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboSoftwareScaler"
+                                          Margin="0,886,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
+                                          SelectionChanged="cboSoftwareScale_SelectionChanged" 
+                                          HorizontalAlignment="Right"
+                                          Width="103">
+                                    <System:String>off</System:String>
+                                    <System:String>bilinear</System:String>
+                                    <System:String>bicubic</System:String>
+                                    <System:String>gauss</System:String>
+                                    <System:String>lanczos</System:String>
+                                    <System:String>spline</System:String>
+                                    <System:String>sinc</System:String>
+                                </ComboBox>
 
                             </Grid>
                         </ScrollViewer>
@@ -1563,9 +1594,10 @@
                                 <ComboBox x:Name="cboPriority" 
                                           Margin="0,10,14,0" 
                                           VerticalAlignment="Top"
+                                          HorizontalAlignment="Right"
+                                          Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103"
-                                          >
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
                                     <System:String>high</System:String>
                                     <System:String>abovenormal</System:String>
                                     <System:String>normal</System:String>
@@ -1681,7 +1713,9 @@
                         <ScrollViewer Margin="0,0,0,0">
                             <Grid Margin="0,0,0,30">
 
-                                <!-- Demuxer -->
+                                <!--/////////////////////////////////////
+                                    Demuxer
+                                /////////////////////////////////////-->
                                 <Label Content="Demuxer" 
                                        HorizontalAlignment="Left" 
                                        Padding="0,0,0,6" 
@@ -1761,7 +1795,10 @@
                                     <System:String>no</System:String>
                                 </ComboBox>
 
-                                <!-- Cache -->
+                                
+                                <!--/////////////////////////////////////
+                                    Cache
+                                /////////////////////////////////////-->
                                 <Label Content="Cache" 
                                        HorizontalAlignment="Left" 
                                        Padding="0,0,0,6" 
@@ -1779,7 +1816,10 @@
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboCache" HorizontalAlignment="Right" Margin="0,194,14,0" VerticalAlignment="Top" Width="103"
+                                <ComboBox x:Name="cboCache"
+                                          HorizontalAlignment="Right"
+                                          Margin="0,194,14,0"
+                                          VerticalAlignment="Top" Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
                                     <System:String>auto</System:String>
@@ -1998,7 +2038,9 @@
                                 </ComboBox>
 
 
-                                <!-- Controls -->
+                                <!--/////////////////////////////////////
+                                    Controls
+                                /////////////////////////////////////-->
                                 <Label Content="Controls" 
                                        HorizontalAlignment="Left" 
                                        Padding="0,0,0,6" 
@@ -2090,7 +2132,9 @@
                                         Style="{DynamicResource TextBoxStyle}"/>
 
 
-                                <!-- Text -->
+                                <!--/////////////////////////////////////
+                                    Text
+                                /////////////////////////////////////-->
                                 <Label Content="Text" 
                                        HorizontalAlignment="Left" 
                                        Padding="0,0,0,6" 
@@ -2216,7 +2260,7 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDFontBorderColor" 
+                                <ComboBox x:Name="cboOSDBorderColor" 
                                           HorizontalAlignment="Right" 
                                           Margin="0,412,14,0" 
                                           VerticalAlignment="Top"
@@ -2247,7 +2291,7 @@
                                        VerticalAlignment="Top"
                                        Width="78"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDFontShadowColor" 
+                                <ComboBox x:Name="cboOSDShadowColor" 
                                           HorizontalAlignment="Right" 
                                           Margin="0,441,14,0" 
                                           VerticalAlignment="Top" 
@@ -2279,7 +2323,9 @@
                                         Margin="0,471,52,0" 
                                         VerticalAlignment="Top"
                                         Maximum="5"
-                                        Style="{DynamicResource SliderStyle}" HorizontalAlignment="Right" Width="65"/>
+                                        HorizontalAlignment="Right" 
+                                        Width="65"
+                                        Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxOSDShadowOffset"
                                         Text="{Binding Value, ElementName=slOSDShadowOffset, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"

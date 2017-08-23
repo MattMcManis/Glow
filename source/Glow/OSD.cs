@@ -128,13 +128,13 @@ namespace Glow
             // -------------------------
             // Border Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontBorderColor.SelectedValue);
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue);
             string borderColor = "osd-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Shadow Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontShadowColor.SelectedValue);
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue);
             selected = (string)(selectedItem.Content);
 
             string shadowColor = string.Empty;

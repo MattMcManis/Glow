@@ -676,7 +676,7 @@ namespace Glow
         private void cboOSDFontShadowColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Get Selected Item
-            ComboBoxItem selectedItem = (ComboBoxItem)(cboOSDFontShadowColor.SelectedValue);
+            ComboBoxItem selectedItem = (ComboBoxItem)(cboOSDShadowColor.SelectedValue);
             string selected = (string)(selectedItem.Content);
 
             // Disable
