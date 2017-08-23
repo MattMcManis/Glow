@@ -31,7 +31,7 @@
         
         Closing="MainWindow_Closing" 
         UseLayoutRounding="True"
-        Width="712" Height="1112"
+        Width="712" Height="400"
     
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
         Icon="Resources/Images/Icons/title-logo.ico"
