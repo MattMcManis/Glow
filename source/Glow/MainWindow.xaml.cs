@@ -64,7 +64,7 @@ namespace Glow
         public static string userDir = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%").TrimEnd('\\') + @"\";
         public static string mpvDir = string.Empty;
         public static string configDir = userDir + @"AppData\Roaming\mpv\"; //mpv config directory
-        public static string profilesDir = appDir + "profiles"; //custom ini profiles
+        public static string profilesDir = appDir + @"profiles\"; //custom ini profiles
 
         // -------------------------
         // Fonts
