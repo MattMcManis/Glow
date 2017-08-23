@@ -66,9 +66,9 @@ namespace Glow
 
 
         /// <summary>
-        ///    Choose Preset
+        ///     Profile
         /// </summary>
-        public static void Preset(MainWindow mainwindow)
+        public static void Profile(MainWindow mainwindow)
         {
             // -------------------------
             // Default
@@ -810,7 +810,7 @@ namespace Glow
 
 
         /// <summary>
-        ///    Export Preset
+        ///    Export Profile
         /// </summary>
         public static void ExportProfile(MainWindow mainwindow, string input)
         {
@@ -993,7 +993,7 @@ namespace Glow
 
 
         /// <summary>
-        ///    Import Preset
+        ///    Import Profile
         /// </summary>
         public static void ImportProfile(MainWindow mainwindow, string input)
         {

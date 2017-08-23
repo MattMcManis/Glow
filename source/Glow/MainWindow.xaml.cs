@@ -271,40 +271,6 @@ namespace Glow
         /// </summary>
         // --------------------------------------------------------------------------------------------------------
 
-        ///// <summary>
-        /////    File Renamer
-        ///// </summary>
-        //public static void FileRenamer()
-        //{
-        //    // Set Output
-        //    outputDir = inputDir;
-
-        //    if (!string.IsNullOrEmpty(outputDir)) //null check
-        //    {
-        //        output = Path.Combine(outputDir, outputFileName + outputExt);
-        //    }
-
-        //    // Add number to filename if it already exists
-        //    if (!string.IsNullOrEmpty(output)) //null check
-        //    {
-        //        int count = 1;
-
-        //        while (File.Exists(output))
-        //        {
-        //            string outputNewFileName = string.Format("{0}({1})", outputFileName, count++);
-        //            output = Path.Combine(outputDir, outputNewFileName + outputExt);
-        //        }
-
-        //        // Set the Output File Name
-        //        outputFileName = Path.GetFileNameWithoutExtension(output);
-
-        //        // Combine Output
-        //        output = Path.Combine(outputDir, outputFileName + outputExt);
-        //    }
-
-        //}
-
-
         /// <summary>
         ///    Config RichTextBox
         /// </summary>
@@ -831,7 +797,7 @@ namespace Glow
                     //MessageBox.Show(latestBuildPhase);
 
 
-                    // Check if Axiom is the Latest Version
+                    // Check if Glow is the Latest Version
                     // Update Available
                     if (latestVersion > currentVersion)
                     {
@@ -930,7 +896,6 @@ namespace Glow
                 // program will crash if not administrator
             }
 
-
             // Open 'Save File'
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
 
@@ -965,7 +930,7 @@ namespace Glow
         /// </summary>
         private void cboProfile_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Profiles.Preset(this);
+            Profiles.Profile(this);
         }
 
         /// <summary>
@@ -983,10 +948,6 @@ namespace Glow
             {
                 // program will crash if not administrator
             }
-
-            // Presets Diretory
-            //string profilesDir = profilesDir;
-
 
             // Open 'Save File'
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
@@ -1009,8 +970,8 @@ namespace Glow
                 //string inputFileName = Path.GetFileName(saveFile.FileName);
                 string inputFileName = Path.GetFileNameWithoutExtension(saveFile.FileName);
                 string inputExt = Path.GetExtension(saveFile.FileName);
-                //string input = Path.Combine(inputDir, inputFileName);
                 string input = inputDir + inputFileName + inputExt;
+                //string input = Path.Combine(inputDir, inputFileName);
 
                 // Overwriting doesn't work properly with INI Writer
                 // Delete File instead before saving new
@@ -1021,6 +982,10 @@ namespace Glow
 
                 // Export ini file
                 Profiles.ExportProfile(this, input);
+
+                // Refresh Profiles ComboBox
+                Profiles.GetCustomProfiles();
+                cboProfile.ItemsSource = _profilesItems;
             }
         }
 
@@ -1033,10 +998,6 @@ namespace Glow
             // Check if presets directory exists
             // If not, create it
             Directory.CreateDirectory(profilesDir);
-
-            // Presets Diretory
-            //string profilesDir = appDir + "profiles";
-
 
             // Open 'Select File'
             Microsoft.Win32.OpenFileDialog selectFile = new Microsoft.Win32.OpenFileDialog();
@@ -1057,8 +1018,8 @@ namespace Glow
                 //string inputFileName = Path.GetFileName(selectFile.FileName);
                 string inputFileName = Path.GetFileNameWithoutExtension(selectFile.FileName);
                 string inputExt = Path.GetExtension(selectFile.FileName);
-                //string input = Path.Combine(inputDir, inputFileName);
                 string input = inputDir + inputFileName + inputExt;
+                //string input = Path.Combine(inputDir, inputFileName);
 
                 // Import ini file
                 Profiles.ImportProfile(this, input);
