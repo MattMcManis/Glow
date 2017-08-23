@@ -103,6 +103,35 @@
     </Style>
 
 
+    <!-- Update Window Style -->
+    <!--<SolidColorBrush x:Key="UpdateWindow.Static.Background" Color="#000000"/>-->
+    <LinearGradientBrush x:Key="UpdateWindow.Static.Background" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FF000000" Offset="0.0"/>
+        <GradientStop Color="#FF020f31" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <Style x:Key="UpdateWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource UpdateWindow.Static.Background}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <AdornerDecorator>
+                            <ContentPresenter/>
+                        </AdornerDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
 
 
 

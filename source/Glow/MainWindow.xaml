@@ -32,10 +32,10 @@
         Closing="MainWindow_Closing" 
         UseLayoutRounding="True"
         Width="712" Height="400"
-
+    
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
-        
-        Style="{DynamicResource WindowStyle}" Icon="Resources/Images/Icons/title-logo.ico"
+        Icon="Resources/Images/Icons/title-logo.ico"
+        Style="{DynamicResource WindowStyle}" 
         >
     <Window.Resources>
 
@@ -2352,6 +2352,7 @@
                          FontSize="14"
                          Grid.ColumnSpan="1"
                          VerticalScrollBarVisibility="Auto" 
+                         CaretBrush="White"
                          Style="{DynamicResource RichTextBoxStyle}"/>
 
 

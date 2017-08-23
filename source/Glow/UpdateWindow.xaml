@@ -30,8 +30,8 @@
         ResizeMode="CanMinimize"
         UseLayoutRounding="True"
         Height="200" Width="400"
-        
-        Title="Update" >
+        Style="{DynamicResource UpdateWindowStyle}" 
+        Title="Update" Icon="Resources/Images/Icons/logo.ico">
 
     <Grid>
         <Grid>
