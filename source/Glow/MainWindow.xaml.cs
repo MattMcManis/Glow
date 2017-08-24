@@ -343,7 +343,7 @@ namespace Glow
             // Enable/Disable Gamma
 
             // Enabled
-            if ((string)cboGammaAuto.SelectedItem == "on")
+            if ((string)cboGammaAuto.SelectedItem == "yes")
             {
                 // Slider
                 slGamma.Value = 0;
@@ -352,7 +352,7 @@ namespace Glow
                 tbxGamma.IsEnabled = false;
             }
             // Disabled
-            else if ((string)cboGammaAuto.SelectedItem == "off")
+            else if ((string)cboGammaAuto.SelectedItem == "no")
             {
                 // Slider
                 slGamma.IsEnabled = true;
@@ -465,6 +465,7 @@ namespace Glow
             {
                 // Sigmoid
                 cboSigmoid.IsEnabled = false;
+                cboSigmoid.SelectedItem = "no";
 
                 // Scale
                 cboScale.IsEnabled = false;
@@ -489,6 +490,7 @@ namespace Glow
             {
                 // Sigmoid
                 cboSigmoid.IsEnabled = true;
+                cboSigmoid.SelectedItem = "yes";
 
                 // Scale
                 cboScale.IsEnabled = true;

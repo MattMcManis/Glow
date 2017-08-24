@@ -477,8 +477,8 @@
                                           HorizontalAlignment="Right"
                                           Width="103"
                                           SelectionChanged="cboGammaAuto_SelectionChanged">
-                                    <System:String>on</System:String>
-                                    <System:String>off</System:String>
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
                                 </ComboBox>
 
 
@@ -565,8 +565,8 @@
                                         SelectionChanged="cboScale_SelectionChanged" 
                                          HorizontalAlignment="Right" 
                                          Width="103">
-                                    <System:String>on</System:String>
-                                    <System:String>off</System:String>
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Scale -->
@@ -1019,7 +1019,7 @@
                                         </Style>
                                     </ListView.Resources>
 
-                                    <ListView.ItemContainerStyle>
+                                    <!--<ListView.ItemContainerStyle>
                                         <Style TargetType="{x:Type ListViewItem}">
                                             <Setter Property="Template">
                                                 <Setter.Value>
@@ -1060,7 +1060,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </Style>
-                                    </ListView.ItemContainerStyle>
+                                    </ListView.ItemContainerStyle>-->
 
                                     <!-- List Checkboxes -->
                                     <ListView.View>
@@ -1473,7 +1473,7 @@
                                         </Style>
                                     </ListView.Resources>
 
-                                    <ListView.ItemContainerStyle>
+                                    <!--<ListView.ItemContainerStyle>
                                         <Style TargetType="{x:Type ListViewItem}">
                                             <Setter Property="Template">
                                                 <Setter.Value>
@@ -1514,7 +1514,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </Style>
-                                    </ListView.ItemContainerStyle>
+                                    </ListView.ItemContainerStyle>-->
 
                                     <!-- List Checkboxes -->
                                     <ListView.View>
@@ -2488,7 +2488,7 @@
 
             <!-- Save -->
             <Button x:Name="buttonSave"
-                    Margin="247,0,358,16" 
+                    Margin="241,0,364,16" 
                     Cursor="Hand" 
                     Height="22"
                     MinWidth="75"

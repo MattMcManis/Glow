@@ -1670,6 +1670,51 @@
     </Style>
 
 
+    <!--/////////////////////////////////////
+        List Item
+        /////////////////////////////////////-->
+    <Style TargetType="{x:Type ListViewItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <Border CornerRadius="0" SnapsToDevicePixels="True"  
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"   
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"   
+                                                                    Background="{TemplateBinding Background}">
+
+                        <Border x:Name="InnerBorder" CornerRadius="0" BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition MaxHeight="11" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Rectangle x:Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                <GridViewRowPresenter Grid.RowSpan="2"   
+                                                                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"   
+                                                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Grid>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF333333" />
+                            <Setter TargetName="UpperHighlight" Property="Visibility" Value="Hidden" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Foreground" Value="#FFfff69c"/>
+                            <Setter Property="Background" Value="#FF222222"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 
 
     <!--/////////////////////////////////////

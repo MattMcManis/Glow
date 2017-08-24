@@ -163,7 +163,7 @@ namespace Glow
                 gamma = "gamma=" + mainwindow.tbxGamma.Text.ToString();
 
             // auto
-            if ((string)mainwindow.cboGammaAuto.SelectedItem == "on")
+            if ((string)mainwindow.cboGammaAuto.SelectedItem == "yes")
                 gamma = "gamma-auto";
 
             // -------------------------
@@ -205,7 +205,7 @@ namespace Glow
             // -------------------------
             string sigmoidUpscaling = string.Empty;
 
-            if ((string)mainwindow.cboSigmoid.SelectedItem == "on")
+            if ((string)mainwindow.cboSigmoid.SelectedItem == "yes")
 
                 sigmoidUpscaling = "sigmoid-upscaling";
 

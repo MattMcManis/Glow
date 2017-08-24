@@ -130,13 +130,13 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "on";
+                mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "no";
                 mainwindow.cboDeband.SelectedItem = "no";
                 mainwindow.tbxDebandGrain.Text = "";
                 mainwindow.cboDeinterlace.SelectedItem = "auto";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "on";
+                mainwindow.cboSigmoid.SelectedItem = "yes";
                 mainwindow.cboScale.SelectedItem = "bicubic";
                 mainwindow.slScaleAntiring.Value = 0;
                 mainwindow.cboChromaScale.SelectedItem = "bicubic";
@@ -253,13 +253,13 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "on";
+                mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "8";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "80";
                 mainwindow.cboDeinterlace.SelectedItem = "auto";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "on";
+                mainwindow.cboSigmoid.SelectedItem = "yes";
                 mainwindow.cboScale.SelectedItem = "spline36";
                 mainwindow.slScaleAntiring.Value = 1;
                 mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
@@ -376,13 +376,13 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "on";
+                mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "8";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "80";
                 mainwindow.cboDeinterlace.SelectedItem = "auto";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "on";
+                mainwindow.cboSigmoid.SelectedItem = "yes";
                 mainwindow.cboScale.SelectedItem = "ewa_lanczossharp";
                 mainwindow.slScaleAntiring.Value = 0.5;
                 mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
@@ -499,13 +499,13 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "on";
+                mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "auto";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "";
                 mainwindow.cboDeinterlace.SelectedItem = "auto";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "on";
+                mainwindow.cboSigmoid.SelectedItem = "yes";
                 mainwindow.cboScale.SelectedItem = "lanczos";
                 mainwindow.slScaleAntiring.Value = 0;
                 mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
@@ -628,7 +628,7 @@ namespace Glow
                 mainwindow.tbxDebandGrain.Text = "";
                 mainwindow.cboDeinterlace.SelectedItem = "auto";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "off";
+                mainwindow.cboSigmoid.SelectedItem = "no";
                 mainwindow.cboScale.SelectedItem = "bilinear";
                 mainwindow.slScaleAntiring.Value = 0;
                 mainwindow.cboChromaScale.SelectedItem = "bilinear";
@@ -745,13 +745,13 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "on";
+                mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "8";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "80";
                 mainwindow.cboDeinterlace.SelectedItem = "auto";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "on";
+                mainwindow.cboSigmoid.SelectedItem = "yes";
                 mainwindow.cboScale.SelectedItem = "spline36";
                 mainwindow.slScaleAntiring.Value = 1;
                 mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
