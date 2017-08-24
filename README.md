@@ -44,7 +44,7 @@ https://github.com/rossy/mpv-install/blob/master/README.md
 
 ## Troubleshooting
 
-If mpv crashes or displays artifcts, change or remove the following:
+If mpv crashes or displays artifacts, change or remove the following:
 
 * Video/Audio Driver
 * OpenGL PBO
