@@ -1121,25 +1121,14 @@ namespace Glow
                 }
             }
 
-            //try
-            //{
-            //    // Check if mpv config dir exists
-            //    // If not, create it
-            //    Directory.CreateDirectory(configDir);
-            //}
-            //catch
-            //{
-            //    // program will crash if not administrator
-            //}
-
             // Open 'Save File'
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
 
             saveFile.InitialDirectory = configDir;
             saveFile.RestoreDirectory = true;
-            //saveFile.Filter = "Text file (*.txt)|*.txt";
+            saveFile.Filter = "Config Files (*.conf)|*.conf";
             saveFile.DefaultExt = "";
-            saveFile.FileName = "config";
+            saveFile.FileName = "mpv.conf";
 
             // Show save file dialog box
             Nullable<bool> result = saveFile.ShowDialog();
@@ -1201,24 +1190,13 @@ namespace Glow
                 }
             }
 
-            //try
-            //{
-            //    // Check if presets directory exists
-            //    // If not, create it
-            //    Directory.CreateDirectory(profilesDir);
-            //}
-            //catch
-            //{
-            //    // program will crash if not administrator
-            //}
-
             // Open 'Save File'
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
 
             // Defaults
             saveFile.InitialDirectory = profilesDir;
             saveFile.RestoreDirectory = true;
-            saveFile.Filter = "ini file (*.ini)|*.ini";
+            saveFile.Filter = "Initialization Files (*.ini)|*.ini";
             saveFile.DefaultExt = "";
             saveFile.FileName = "profile.ini";
 
