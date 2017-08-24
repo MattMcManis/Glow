@@ -86,7 +86,7 @@ namespace Glow
             // -------------------------
             // Window Title
             // -------------------------
-            string windowTitle = "title=\"${ filename}\"";
+            string windowTitle = "title=\"${filename}\"";
 
 
             // --------------------------------------------------
