@@ -132,6 +132,35 @@
     </Style>
 
 
+    <!-- Info Window Style -->
+    <!--<SolidColorBrush x:Key="UpdateWindow.Static.Background" Color="#000000"/>-->
+    <LinearGradientBrush x:Key="InfoWindow.Static.Background" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FF000000" Offset="0.0"/>
+        <GradientStop Color="#FF020f31" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <Style x:Key="InfoWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource InfoWindow.Static.Background}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <AdornerDecorator>
+                            <ContentPresenter/>
+                        </AdornerDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
 
 
 
@@ -1232,8 +1261,8 @@
                     <Condition Property="IsKeyboardFocused" Value="False"/>
                 </MultiTrigger.Conditions>
                 <Setter Property="Foreground" Value="#FFfff69c"/>
-                <Setter Property="Background" TargetName="Bd" Value="#FF070707"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#A8070707"/>
+                <Setter Property="Background" TargetName="Bd" Value="#FF0080cb"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF0080cb"/>
             </MultiTrigger>
             <!-- Background Selected -->
             <MultiTrigger>
@@ -1251,8 +1280,8 @@
                     <Condition Property="IsSelected" Value="True"/>
                     <Condition Property="IsMouseOver" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" TargetName="Bd" Value="#FF111111"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF111111"/>
+                <Setter Property="Background" TargetName="Bd" Value="#FF0080cb"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF0080cb"/>
             </MultiTrigger>
             <!-- Background Selected -->
             <MultiTrigger>
@@ -1282,8 +1311,8 @@
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
                 <Setter Property="Foreground" Value="#FFfff69c"/>
-                <Setter Property="Background" TargetName="Bd" Value="#FF070707"/>
-                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF070707"/>
+                <Setter Property="Background" TargetName="Bd" Value="#FF0080cb"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF0080cb"/>
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -1961,6 +1990,67 @@
         </Setter>
     </Style>
 
+
+
+    <!--/////////////////////////////////////
+        Button Images White
+        /////////////////////////////////////-->
+
+    <!-- Info Button -->
+    <Style x:Key="ButtonInfo" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/info.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <!-- Website Button -->
+    <Style x:Key="ButtonWebsite" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/web.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <!-- Settings Button -->
+    <Style x:Key="ButtonSettings" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/settings.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <!-- Update Button -->
+    <Style x:Key="ButtonUpdate" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/update.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <!-- Config Folder Button -->
+    <Style x:Key="ButtonConfigFolder" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/folder.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <!-- Import Button -->
+    <Style x:Key="ButtonImport" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/import.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <!-- Export Button -->
+    <Style x:Key="ButtonExport" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/export.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <!-- Revert Arrow Button -->
+    <Style x:Key="ButtonRevertArrow" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/revertarrow.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
 
 
 </ResourceDictionary>

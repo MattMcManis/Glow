@@ -1049,7 +1049,7 @@
                                                                 <Setter TargetName="UpperHighlight" Property="Visibility" Value="Hidden" />
                                                             </Trigger>
                                                             <Trigger Property="IsSelected" Value="true">
-                                                                <Setter Property="Foreground" Value="#FFb478df"/>
+                                                                <Setter Property="Foreground" Value="#FFfff69c"/>
                                                                 <Setter Property="Background" Value="#FF222222"/>
                                                             </Trigger>
                                                             <Trigger Property="IsEnabled" Value="False">
@@ -1328,11 +1328,11 @@
                                     <!-- Black -->
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
                                     <!-- Yellow -->
-                                    <ComboBoxItem Background="#FFfdfd02" Content="Yellow"/>
+                                    <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
                                     <!-- Blue -->
-                                    <ComboBoxItem Background="#FF9aafe4" Content="Blue"/>
+                                    <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
                                     <!-- Pink -->
-                                    <ComboBoxItem Background="#FFffb0b0" Content="Pink"/>
+                                    <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
                                 </ComboBox>
 
                                 <!-- Border Size -->
@@ -1385,11 +1385,11 @@
                                     <!-- Black -->
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
                                     <!-- Yellow -->
-                                    <ComboBoxItem Background="#FFfdfd02" Content="Yellow"/>
+                                    <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
                                     <!-- Blue -->
-                                    <ComboBoxItem Background="#FF9aafe4" Content="Blue"/>
+                                    <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
                                     <!-- Pink -->
-                                    <ComboBoxItem Background="#FFffb0b0" Content="Pink"/>
+                                    <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
                                 </ComboBox>
 
 
@@ -1503,7 +1503,7 @@
                                                                 <Setter TargetName="UpperHighlight" Property="Visibility" Value="Hidden" />
                                                             </Trigger>
                                                             <Trigger Property="IsSelected" Value="true">
-                                                                <Setter Property="Foreground" Value="#FFb478df"/>
+                                                                <Setter Property="Foreground" Value="#FFfff69c"/>
                                                                 <Setter Property="Background" Value="#FF222222"/>
                                                             </Trigger>
                                                             <Trigger Property="IsEnabled" Value="False">
@@ -2235,11 +2235,11 @@
                                     <!-- Black -->
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
                                     <!-- Yellow -->
-                                    <ComboBoxItem Background="#FFfdfd02" Content="Yellow"/>
+                                    <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
                                     <!-- Blue -->
-                                    <ComboBoxItem Background="#FF9aafe4" Content="Blue"/>
+                                    <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
                                     <!-- Pink -->
-                                    <ComboBoxItem Background="#FFffb0b0" Content="Pink"/>
+                                    <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
                                 </ComboBox>
 
                                 <!-- OSD Border Size -->
@@ -2292,11 +2292,11 @@
                                     <!-- Black -->
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
                                     <!-- Yellow -->
-                                    <ComboBoxItem Background="#FFfdfd02" Content="Yellow"/>
+                                    <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
                                     <!-- Blue -->
-                                    <ComboBoxItem Background="#FF9aafe4" Content="Blue"/>
+                                    <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
                                     <!-- Pink -->
-                                    <ComboBoxItem Background="#FFffb0b0" Content="Pink"/>
+                                    <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
                                 </ComboBox>
 
                                 <!-- Shadow Color -->
@@ -2386,10 +2386,9 @@
                     ToolTip="Info"
                     Click="buttonInfo_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
-                <Image Source="Resources/Images/Buttons/info.png" 
+                <Image Style="{DynamicResource ButtonInfo}" 
                    Width="5" 
                    Height="10" 
-                   Stretch="Fill" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"/>
             </Button>
@@ -2406,16 +2405,15 @@
                     ToolTip="Website"
                     Click="buttonWebsite_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
-                <Image Source="Resources/Images/Buttons/web.png" 
+                <Image Style="{DynamicResource ButtonWebsite}" 
                    Width="11" 
                    Height="11" 
                    Margin="0,-1,0,0"
-                   Stretch="Fill" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"/>
             </Button>
 
-            <!-- Configure -->
+            <!-- Settings -->
             <Button x:Name="buttonConfigure" 
                     HorizontalAlignment="Left"
                     Margin="68,0,0,16" 
@@ -2427,11 +2425,10 @@
                     ToolTip="Configure"
                     Click="buttonConfigure_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
-                <Image Source="Resources/Images/Buttons/configure.png" 
+                <Image Style="{DynamicResource ButtonSettings}" 
                 Width="11" 
                 Height="11" 
                 Margin="0,-1,0,0"
-                Stretch="Fill" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"/>
             </Button>
@@ -2448,7 +2445,7 @@
                     ToolTip="Check for Updates"
                     Click="buttonUpdate_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
-                <Image Source="Resources/Images/Buttons/update.png" 
+                <Image Style="{DynamicResource ButtonUpdate}" 
                    Width="10" 
                    Height="10" 
                    Stretch="Fill" 
@@ -2468,10 +2465,9 @@
                     ToolTip="Open Config Folder"
                     Click="buttonConfigDir_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
-                <Image Source="Resources/Images/Buttons/folder.png" 
+                <Image Style="{DynamicResource ButtonConfigFolder}" 
                    Width="11" 
                    Height="7" 
-                   Stretch="Fill"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"/>
             </Button>
@@ -2549,7 +2545,7 @@
                     ToolTip="Save Profile"
                     Click="buttonExport_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
-                <Image Source="Resources/Images/Buttons/export.png" 
+                <Image Style="{DynamicResource ButtonExport}" 
                     Width="11" 
                     Height="11" 
                     Margin="0,-1,0,0"
@@ -2570,7 +2566,7 @@
                     ToolTip="Import Profile"
                     Click="buttonImport_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
-                <Image Source="Resources/Images/Buttons/import.png" 
+                <Image Style="{DynamicResource ButtonImport}" 
                     Width="9" 
                     Height="11" 
                     Margin="0,-1,0,0"

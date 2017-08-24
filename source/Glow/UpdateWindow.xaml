@@ -31,7 +31,7 @@
         UseLayoutRounding="True"
         Height="200" Width="400"
         Style="{DynamicResource UpdateWindowStyle}" 
-        Title="Update" Icon="Resources/Images/Icons/logo.ico">
+        Title="Update" Icon="Resources/Images/Icons/title-logo.ico">
 
     <Grid>
         <Grid>

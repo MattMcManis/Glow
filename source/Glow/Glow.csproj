@@ -150,22 +150,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\configure.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\folder.png" />
-    <Resource Include="Resources\Images\Buttons\info.png" />
-    <Resource Include="Resources\Images\Buttons\update.png" />
-    <Resource Include="Resources\Images\Buttons\web.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Icons\logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\import.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\export.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\title-logo.ico" />
@@ -174,7 +159,28 @@
     <Resource Include="Resources\Images\Icons\configure.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\revertarrow.png" />
+    <Resource Include="Resources\Images\Buttons\White\export.png" />
+    <Resource Include="Resources\Images\Buttons\White\folder.png" />
+    <Resource Include="Resources\Images\Buttons\White\import.png" />
+    <Resource Include="Resources\Images\Buttons\White\info.png" />
+    <Resource Include="Resources\Images\Buttons\White\revertarrow.png" />
+    <Resource Include="Resources\Images\Buttons\White\update.png" />
+    <Resource Include="Resources\Images\Buttons\White\web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\Black\export.png" />
+    <Resource Include="Resources\Images\Buttons\Black\folder.png" />
+    <Resource Include="Resources\Images\Buttons\Black\import.png" />
+    <Resource Include="Resources\Images\Buttons\Black\info.png" />
+    <Resource Include="Resources\Images\Buttons\Black\revertarrow.png" />
+    <Resource Include="Resources\Images\Buttons\Black\update.png" />
+    <Resource Include="Resources\Images\Buttons\Black\web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\Black\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\White\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

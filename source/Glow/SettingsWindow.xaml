@@ -64,7 +64,7 @@
                 ToolTip="Revert to Auto" 
                 Click="buttonMpvPathRevert_Click" 
                 Style="{DynamicResource ButtonRevertStyle}">
-            <Image Source="Resources/Images/Buttons/revertarrow.png"
+            <Image Style="{DynamicResource ButtonRevertArrow}" 
                    Width="9" 
                    Height="11"
                    Stretch="Fill" 
@@ -104,7 +104,7 @@
                 ToolTip="Revert to Auto" 
                 Click="buttonConfigPathRevert_Click"
                 Style="{DynamicResource ButtonRevertStyle}">
-            <Image Source="Resources/Images/Buttons/revertarrow.png"
+            <Image Style="{DynamicResource ButtonRevertArrow}" 
                    Width="9" 
                    Height="11"
                    Stretch="Fill" 
@@ -113,7 +113,7 @@
                    Margin="1,0,0,0"/>
         </Button>
 
-        
+
         <!-- Profiles path -->
         <Label Content="Profiles Path"
                Style="{DynamicResource LabelStyle}"
@@ -144,7 +144,7 @@
             ToolTip="Revert to Auto" 
             Click="buttonProfilesPathRevert_Click"
             Style="{DynamicResource ButtonRevertStyle}">
-            <Image Source="Resources/Images/Buttons/revertarrow.png"
+            <Image Style="{DynamicResource ButtonRevertArrow}" 
                    Width="9" 
                    Height="11"
                    Stretch="Fill" 
@@ -159,14 +159,14 @@
                Style="{DynamicResource LabelStyle}"
                Content="Settings" 
                HorizontalAlignment="Left" 
-               Margin="244,117,0,0"
+               Margin="243,117,0,0"
                VerticalAlignment="Top" 
                Height="26" Width="56" />
 
         <!-- Reset Saved Settigns Button -->
         <Button x:Name="buttonClearAllSavedSettings" 
                 HorizontalAlignment="Left" 
-                Margin="305,119,0,0" 
+                Margin="304,119,0,0" 
                 VerticalAlignment="Top" 
                 Width="55"
                 Background="{x:Null}" 

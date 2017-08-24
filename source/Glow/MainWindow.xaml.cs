@@ -910,19 +910,23 @@ namespace Glow
             var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
             var thisScreen = allScreens.SingleOrDefault(s => this.Left >= s.WorkingArea.Left && this.Left < s.WorkingArea.Right);
 
-            // Open Configure Window
-            SettingsWindow Settingswindow = new SettingsWindow(this);
-
-            // Position Relative to MainWindow
-            // Keep from going off screen
-            Settingswindow.Left = Math.Max((this.Left + (this.Width - Settingswindow.Width) / 2), thisScreen.WorkingArea.Left);
-            Settingswindow.Top = Math.Max(this.Top - Settingswindow.Height - 12, thisScreen.WorkingArea.Top);
+            // Start Window
+            SettingsWindow settingswindow = new SettingsWindow(this);
 
             // Keep Window on Top
-            Settingswindow.Owner = Window.GetWindow(this);
+            settingswindow.Owner = GetWindow(this);
 
-            // Open Winndow
-            Settingswindow.ShowDialog();
+            // Only allow 1 Window instance
+            if (IsInfoWindowOpened) return;
+            settingswindow.ContentRendered += delegate { IsInfoWindowOpened = true; };
+            settingswindow.Closed += delegate { IsInfoWindowOpened = false; };
+
+            // Position Relative to MainWindow
+            settingswindow.Left = Math.Max((this.Left + (this.Width - settingswindow.Width) / 2), thisScreen.WorkingArea.Left);
+            settingswindow.Top = Math.Max((this.Top + (this.Height - settingswindow.Height) / 2), thisScreen.WorkingArea.Top);
+
+            // Open Window
+            settingswindow.ShowDialog();
         }
 
         /// <summary>
@@ -1037,9 +1041,37 @@ namespace Glow
         /// </summary>
         private void buttonConfigDir_Click(object sender, RoutedEventArgs e)
         {
+            // Check if Config Directory exists
+            bool exists = Directory.Exists(configDir);
+            // If not, create it
+            if (!exists)
+            {
+                // Yes/No Dialog Confirmation
+                //
+                MessageBoxResult resultOpen = MessageBox.Show("Config Folder does not exist. Automatically reate it?", "Directory Not Found", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                switch (resultOpen)
+                {
+                    // Create
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Directory.CreateDirectory(configDir);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Could not create Config folder. May require Administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    // Use Default
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+
+
             // Check if mpv config dir exists
             // If not, create it
-            Directory.CreateDirectory(configDir);
+            //Directory.CreateDirectory(configDir);
 
             // Open Directory
             Process.Start("explorer.exe", configDir);
@@ -1060,16 +1092,43 @@ namespace Glow
         /// </summary>
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            try
+            // Check if Config Directory exists
+            bool exists = Directory.Exists(configDir);
+            // If not, create it
+            if (!exists)
             {
-                // Check if mpv config dir exists
-                // If not, create it
-                Directory.CreateDirectory(configDir);
+                // Yes/No Dialog Confirmation
+                //
+                MessageBoxResult resultSave = MessageBox.Show("Config Folder does not exist. Automatically create it?", "Directory Not Found", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                switch (resultSave)
+                {
+                    // Create
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Directory.CreateDirectory(configDir);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Could not create Config folder. May require Administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    // Use Default
+                    case MessageBoxResult.No:
+                        break;
+                }
             }
-            catch
-            {
-                // program will crash if not administrator
-            }
+
+            //try
+            //{
+            //    // Check if mpv config dir exists
+            //    // If not, create it
+            //    Directory.CreateDirectory(configDir);
+            //}
+            //catch
+            //{
+            //    // program will crash if not administrator
+            //}
 
             // Open 'Save File'
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
@@ -1113,16 +1172,43 @@ namespace Glow
         /// </summary>
         private void buttonExport_Click(object sender, RoutedEventArgs e)
         {
-            try
+            // Check if Profiles Directory exists
+            bool exists = Directory.Exists(profilesDir);
+            // If not, create it
+            if (!exists)
             {
-                // Check if presets directory exists
-                // If not, create it
-                Directory.CreateDirectory(profilesDir);
+                // Yes/No Dialog Confirmation
+                //
+                MessageBoxResult resultExport = MessageBox.Show("Profiles Folder does not exist. Automatically create it?", "Directory Not Found", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                switch (resultExport)
+                {
+                    // Create
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Directory.CreateDirectory(profilesDir);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    // Use Default
+                    case MessageBoxResult.No:
+                        break;
+                }
             }
-            catch
-            {
-                // program will crash if not administrator
-            }
+
+            //try
+            //{
+            //    // Check if presets directory exists
+            //    // If not, create it
+            //    Directory.CreateDirectory(profilesDir);
+            //}
+            //catch
+            //{
+            //    // program will crash if not administrator
+            //}
 
             // Open 'Save File'
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
@@ -1172,7 +1258,7 @@ namespace Glow
         {
             // Check if presets directory exists
             // If not, create it
-            Directory.CreateDirectory(profilesDir);
+            //Directory.CreateDirectory(profilesDir);
 
             // Open 'Select File'
             Microsoft.Win32.OpenFileDialog selectFile = new Microsoft.Win32.OpenFileDialog();
