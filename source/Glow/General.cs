@@ -66,7 +66,7 @@ namespace Glow
             // -------------------------
             // On Top
             // -------------------------
-            string onTop = "onTop=" + mainwindow.cboOnTop.SelectedItem.ToString();
+            string onTop = "ontop=" + mainwindow.cboOnTop.SelectedItem.ToString();
 
             // -------------------------
             // On Screen Display
@@ -76,7 +76,7 @@ namespace Glow
             // -------------------------
             // Auto-Fit
             // -------------------------
-            string autoFit = "autoFit-larger=100%x95%";
+            string autoFit = "autofit-larger=100%x95%";
 
             // -------------------------
             // Geometry
