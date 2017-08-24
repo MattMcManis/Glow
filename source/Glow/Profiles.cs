@@ -43,6 +43,7 @@ namespace Glow
             // Presets
             List<string> _presetsItems = new List<string>()
             {
+                "Default",
                 "Ultra",
                 "High",
                 "Medium",
