@@ -16,12 +16,15 @@ Glow is a configuration file generator for the mpv media player.
 ![Glow](https://raw.githubusercontent.com/MattMcManis/Glow/master/images/glow.png)
 
 ## Downloads
-#### Releases
+#### Glow 
 * https://github.com/MattMcManis/Glow/releases
 * Requires [Microsoft .NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 
-#### mpv Builds
-https://mpv.srsfckn.biz
+#### mpv
+
+* Site https://mpv.io
+* Builds https://mpv.srsfckn.biz
+* Keyboard Shortcuts  https://mpv.io/manual/master/
 
 ## Installation
 
@@ -33,8 +36,6 @@ Glow is portable and can be run from any location on the computer.
 3. Save your custom user profiles to ini files.
 
 ### mpv
-
-https://mpv.io
 
 https://github.com/rossy/mpv-install/blob/master/README.md
 
