@@ -191,7 +191,7 @@ namespace Glow
 
                 // ASS
                 mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
                 mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
                 mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
@@ -341,7 +341,7 @@ namespace Glow
 
                 // ASS
                 mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
                 mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
                 mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
@@ -491,7 +491,7 @@ namespace Glow
 
                 // ASS
                 mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
                 mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
                 mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
@@ -641,7 +641,7 @@ namespace Glow
 
                 // ASS
                 mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
                 mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
                 mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
@@ -791,7 +791,7 @@ namespace Glow
 
                 // ASS
                 mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
                 mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
                 mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
@@ -944,7 +944,7 @@ namespace Glow
 
                 // ASS
                 mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
                 mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
                 mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";

@@ -111,7 +111,14 @@ namespace Glow
             // -------------------------
             // Embedded Fonts
             // -------------------------
-            string embeddedFonts = "embeddedFonts=" + (mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty).ToString();
+            string embeddedFonts = string.Empty;
+
+            // yes
+            if ((string)(mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "yes")
+                embeddedFonts = "embeddedfonts";
+            // no
+            else if ((string)(mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "no")
+                embeddedFonts = "no-embeddedfonts";
 
             // -------------------------
             // Font
@@ -184,7 +191,7 @@ namespace Glow
             // -------------------------
             // ASS Override
             // -------------------------
-            string assOverride = "sub-ass-override=" + (mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty).ToString();
+            string assOverride = "sub-ass-override=" + (mainwindow.cboSubtitlesASSOverride.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // ASS Force Margins
@@ -230,6 +237,8 @@ namespace Glow
                 ass,
                 assOverride,
                 assForceMargins,
+                assHinting,
+                assKerning,
             };
 
             // -------------------------
