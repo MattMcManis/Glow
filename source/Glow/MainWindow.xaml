@@ -2376,9 +2376,9 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
                                     <System:String>box</System:String>
+                                    <System:String>slimbox</System:String>
                                     <System:String>bottombar</System:String>
                                     <System:String>topbar</System:String>
-                                    <System:String>slimbox</System:String>
                                 </ComboBox>
 
                                 <!-- OSC Seekbar -->

@@ -52,12 +52,25 @@ namespace Glow
             // -------------------------
             // Layout
             // -------------------------
-            string oscLayout = "layout=" + (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString();
+            string oscLayout = "osc-layout=" + (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
-            // Layout
+            // Seekbar
             // -------------------------
-            string oscSeekbar = "seekbarstyle=" + (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString();
+            string oscSeekbar = "osc-seekbarstyle=" + (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Script Opts
+            // -------------------------
+            // Join Layout, Seekbar
+            List<string> listOSCScriptOpts = new List<string>()
+            {
+                oscLayout,
+                oscSeekbar,
+            };
+            string oscScriptOpts = "script-opts=" + string.Join(",", listOSCScriptOpts
+                .Where(s => !string.IsNullOrEmpty(s))
+            );
 
 
             // -------------------------
@@ -181,8 +194,7 @@ namespace Glow
                 // OSC
                 oscTitle,
                 oscEnable,
-                oscLayout,
-                oscSeekbar,
+                oscScriptOpts,
             };
 
             List <string> listOSD = new List<string>()
