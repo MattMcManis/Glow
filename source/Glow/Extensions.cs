@@ -38,7 +38,7 @@ namespace Glow
             // -------------------------
             // Title
             // -------------------------
-            string title = "# [ EXTENSIONS ]";
+            string title = "## EXTENSIONS ##";
 
             // -------------------------
             // MP4

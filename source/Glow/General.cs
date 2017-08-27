@@ -38,7 +38,7 @@ namespace Glow
             // -------------------------
             // Title
             // -------------------------
-            string title = "# [ GENERAL ]";
+            string title = "## GENERAL ##";
 
             // -------------------------
             // Priority

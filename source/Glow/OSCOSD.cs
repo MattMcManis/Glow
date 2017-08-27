@@ -42,7 +42,7 @@ namespace Glow
             // -------------------------
             // OSC Title
             // -------------------------
-            string oscTitle = "# [ OSC ]";
+            string oscTitle = "## OSC ##";
 
             // -------------------------
             // OSC On Screen Controller
@@ -63,7 +63,7 @@ namespace Glow
             // -------------------------
             // OSD Title
             // -------------------------
-            string osdTitle = "# [ OSD ]";
+            string osdTitle = "## OSD ##";
 
             // -------------------------
             // OSD On Screen Display

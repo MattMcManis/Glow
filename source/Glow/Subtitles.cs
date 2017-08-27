@@ -44,7 +44,7 @@ namespace Glow
             // -------------------------
             // Title
             // -------------------------
-            string title = "# [ SUBTITLE ]";
+            string title = "## SUBTITLES ##";
 
             // -------------------------
             // Subtitles

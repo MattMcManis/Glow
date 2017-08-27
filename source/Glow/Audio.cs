@@ -39,7 +39,7 @@ namespace Glow
             // -------------------------
             // Title
             // -------------------------
-            string title = "# [ AUDIO ]";
+            string title = "## AUDIO ##";
 
             // -------------------------
             // Audio Driver
