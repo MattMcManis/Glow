@@ -81,7 +81,7 @@ namespace Glow
             //_presetsItems.AddRange(_customProfilesItems);
             _presetsItems.AddRange(listCustomProfilesNames);
             // Populate ComboBox
-            MainWindow._profilesItems = _presetsItems.ToList();
+            ViewModel._profilesItems = _presetsItems.ToList();
 
             // Clear Temp Lists
             //listCustomProfilesPaths.Clear();
@@ -108,14 +108,23 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboScreenshot.SelectedItem = "png";
+                mainwindow.slGeometryX.Value = 50;
+                mainwindow.slGeometryY.Value = 50;
+                mainwindow.slAutofitWidth.Value = 100;
+                mainwindow.slAutofitHeight.Value = 95;
+                mainwindow.cboScreensaver.SelectedItem = "off";
+                // Screenshot
+                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
+                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
+                mainwindow.cboScreenshotFormat.SelectedItem = "png";
+                mainwindow.slScreenshotQuality.Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
-                mainwindow.cboVideoDriver.SelectedIndex = 0;
-                mainwindow.cboOpenGLPBO.SelectedItem = "off";
+                mainwindow.cboVideoDriver.SelectedItem = "opengl";
+                mainwindow.cboOpenGLPBO.SelectedItem = "no";
+                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
@@ -165,7 +174,10 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
+                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
                 mainwindow.slSubtitlePosition.Value = 95;
+                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
+                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
@@ -176,6 +188,14 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+
+                // ASS
+                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
+                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
@@ -196,6 +216,13 @@ namespace Glow
                 mainwindow.tbxCacheSeconds.Text = "30";
                 mainwindow.cboCacheFile.SelectedItem = "TMP";
                 mainwindow.tbxCacheFileSize.Text = "1048576";
+
+                // -------------------------
+                // OSC
+                // -------------------------
+                mainwindow.cboOSC.SelectedItem = "yes";
+                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
+                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
@@ -231,14 +258,23 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboScreenshot.SelectedItem = "png";
+                mainwindow.slGeometryX.Value = 50;
+                mainwindow.slGeometryY.Value = 50;
+                mainwindow.slAutofitWidth.Value = 100;
+                mainwindow.slAutofitHeight.Value = 95;
+                mainwindow.cboScreensaver.SelectedItem = "off";
+                // Screenshot
+                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
+                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
+                mainwindow.cboScreenshotFormat.SelectedItem = "png";
+                mainwindow.slScreenshotQuality.Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
                 mainwindow.cboVideoDriver.SelectedItem = "opengl-hq";
-                mainwindow.cboOpenGLPBO.SelectedItem = "off";
+                mainwindow.cboOpenGLPBO.SelectedItem = "no";
+                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
@@ -288,7 +324,10 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
+                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
                 mainwindow.slSubtitlePosition.Value = 95;
+                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
+                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
@@ -299,6 +338,14 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+
+                // ASS
+                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
+                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
@@ -319,6 +366,13 @@ namespace Glow
                 mainwindow.tbxCacheSeconds.Text = "30";
                 mainwindow.cboCacheFile.SelectedItem = "TMP";
                 mainwindow.tbxCacheFileSize.Text = "1048576";
+
+                // -------------------------
+                // OSC
+                // -------------------------
+                mainwindow.cboOSC.SelectedItem = "yes";
+                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
+                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
@@ -354,14 +408,23 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboScreenshot.SelectedItem = "png";
+                mainwindow.slGeometryX.Value = 50;
+                mainwindow.slGeometryY.Value = 50;
+                mainwindow.slAutofitWidth.Value = 100;
+                mainwindow.slAutofitHeight.Value = 95;
+                mainwindow.cboScreensaver.SelectedItem = "off";
+                // Screenshot
+                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
+                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
+                mainwindow.cboScreenshotFormat.SelectedItem = "png";
+                mainwindow.slScreenshotQuality.Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
                 mainwindow.cboVideoDriver.SelectedItem = "opengl-hq";
-                mainwindow.cboOpenGLPBO.SelectedItem = "off";
+                mainwindow.cboOpenGLPBO.SelectedItem = "no";
+                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
@@ -411,7 +474,10 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
+                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
                 mainwindow.slSubtitlePosition.Value = 95;
+                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
+                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
@@ -422,6 +488,14 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+
+                // ASS
+                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
+                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
@@ -442,6 +516,13 @@ namespace Glow
                 mainwindow.tbxCacheSeconds.Text = "30";
                 mainwindow.cboCacheFile.SelectedItem = "TMP";
                 mainwindow.tbxCacheFileSize.Text = "1048576";
+
+                // -------------------------
+                // OSC
+                // -------------------------
+                mainwindow.cboOSC.SelectedItem = "yes";
+                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
+                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
@@ -477,14 +558,23 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboScreenshot.SelectedItem = "png";
+                mainwindow.slGeometryX.Value = 50;
+                mainwindow.slGeometryY.Value = 50;
+                mainwindow.slAutofitWidth.Value = 100;
+                mainwindow.slAutofitHeight.Value = 95;
+                mainwindow.cboScreensaver.SelectedItem = "off";
+                // Screenshot
+                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
+                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
+                mainwindow.cboScreenshotFormat.SelectedItem = "png";
+                mainwindow.slScreenshotQuality.Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
                 mainwindow.cboVideoDriver.SelectedItem = "opengl";
-                mainwindow.cboOpenGLPBO.SelectedItem = "off";
+                mainwindow.cboOpenGLPBO.SelectedItem = "no";
+                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
@@ -534,7 +624,10 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
+                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
                 mainwindow.slSubtitlePosition.Value = 95;
+                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
+                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
@@ -545,6 +638,14 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+
+                // ASS
+                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
+                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
@@ -565,6 +666,13 @@ namespace Glow
                 mainwindow.tbxCacheSeconds.Text = "30";
                 mainwindow.cboCacheFile.SelectedItem = "TMP";
                 mainwindow.tbxCacheFileSize.Text = "1048576";
+
+                // -------------------------
+                // OSC
+                // -------------------------
+                mainwindow.cboOSC.SelectedItem = "yes";
+                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
+                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
@@ -600,14 +708,23 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboScreenshot.SelectedItem = "png";
+                mainwindow.slGeometryX.Value = 50;
+                mainwindow.slGeometryY.Value = 50;
+                mainwindow.slAutofitWidth.Value = 100;
+                mainwindow.slAutofitHeight.Value = 95;
+                mainwindow.cboScreensaver.SelectedItem = "off";
+                // Screenshot
+                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
+                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
+                mainwindow.cboScreenshotFormat.SelectedItem = "png";
+                mainwindow.slScreenshotQuality.Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
                 mainwindow.cboVideoDriver.SelectedItem = "opengl";
-                mainwindow.cboOpenGLPBO.SelectedItem = "off";
+                mainwindow.cboOpenGLPBO.SelectedItem = "no";
+                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
@@ -657,7 +774,10 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
+                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
                 mainwindow.slSubtitlePosition.Value = 95;
+                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
+                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "no";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
@@ -668,6 +788,14 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 0; //none
                 mainwindow.slSubtitlesShadowOffset.Value = 0;
+
+                // ASS
+                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
+                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
 
@@ -688,6 +816,13 @@ namespace Glow
                 mainwindow.tbxCacheSeconds.Text = "30";
                 mainwindow.cboCacheFile.SelectedItem = "TMP";
                 mainwindow.tbxCacheFileSize.Text = "1048576";
+
+                // -------------------------
+                // OSC
+                // -------------------------
+                mainwindow.cboOSC.SelectedItem = "yes";
+                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
+                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
@@ -723,14 +858,23 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboScreenshot.SelectedItem = "png";
+                mainwindow.slGeometryX.Value = 50;
+                mainwindow.slGeometryY.Value = 50;
+                mainwindow.slAutofitWidth.Value = 100;
+                mainwindow.slAutofitHeight.Value = 95;
+                mainwindow.cboScreensaver.SelectedItem = "off";
+                // Screenshot
+                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
+                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
+                mainwindow.cboScreenshotFormat.SelectedItem = "png";
+                mainwindow.slScreenshotQuality.Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
                 mainwindow.cboVideoDriver.SelectedItem = "opengl-hq";
-                mainwindow.cboOpenGLPBO.SelectedItem = "off";
+                mainwindow.cboOpenGLPBO.SelectedItem = "no";
+                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
@@ -782,7 +926,10 @@ namespace Glow
                 //// -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
+                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
                 mainwindow.slSubtitlePosition.Value = 95;
+                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
+                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFont.SelectedItem = "Noto Sans";
@@ -794,6 +941,14 @@ namespace Glow
                 // Shadow
                 mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+
+                // ASS
+                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
+                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+
                 //Language
                 mainwindow.listViewSubtitlesLanguages.SelectedItems.Add("English");
 
@@ -814,6 +969,13 @@ namespace Glow
                 mainwindow.tbxCacheSeconds.Text = "30";
                 mainwindow.cboCacheFile.SelectedItem = "TMP";
                 mainwindow.tbxCacheFileSize.Text = "1048576";
+
+                // -------------------------
+                // OSC
+                // -------------------------
+                mainwindow.cboOSC.SelectedItem = "yes";
+                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
+                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
@@ -883,51 +1045,60 @@ namespace Glow
             // --------------------------------------------------
             // General
             // --------------------------------------------------
-            inif.Write("General", "priority", mainwindow.cboPriority.SelectedItem.ToString());
-            inif.Write("General", "savePositiOnQuit", mainwindow.cboSavePositionQuit.SelectedItem.ToString());
-            inif.Write("General", "keepOpen", mainwindow.cboKeepOpen.SelectedItem.ToString());
-            inif.Write("General", "onTop", mainwindow.cboOnTop.SelectedItem.ToString());
-            inif.Write("General", "osc", mainwindow.cboOSC.SelectedItem.ToString());
-            inif.Write("General", "screenshot", mainwindow.cboScreenshot.SelectedItem.ToString());
+            inif.Write("General", "priority", (mainwindow.cboPriority.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "savePositiOnQuit", (mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "keepOpen", (mainwindow.cboKeepOpen.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "onTop", (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "geometryX", mainwindow.tbxGeometryX.Text.ToString());
+            inif.Write("General", "geometryY", mainwindow.tbxGeometryY.Text.ToString());
+            inif.Write("General", "autofitWidth", mainwindow.tbxAutofitWidth.Text.ToString());
+            inif.Write("General", "autofitHeight", mainwindow.tbxAutofitHeight.Text.ToString());
+            inif.Write("General", "screensaver", (mainwindow.cboScreensaver.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "screenshotPath", mainwindow.tbxScreenshotPath.Text.ToString());
+            inif.Write("General", "screenshotTemplate", (mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "screenshotTagColorspace", (mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "screenshotFormat", (mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "screenshotQuality", mainwindow.tbxScreenshotQuality.Text.ToString());
 
             // --------------------------------------------------
             // Video
             // --------------------------------------------------
             // Hardware
-            inif.Write("Video", "videoDriver", mainwindow.cboVideoDriver.SelectedItem.ToString());
-            inif.Write("Video", "openglPBO", mainwindow.cboOpenGLPBO.SelectedItem.ToString());
-            inif.Write("Video", "hwdec", mainwindow.cboHWDecoder.SelectedItem.ToString());
+            inif.Write("Video", "videoDriver", (mainwindow.cboVideoDriver.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "openglPBO", (mainwindow.cboOpenGLPBO.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "openglPBOFormat", (mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "hwdec", (mainwindow.cboHWDecoder.SelectedItem ?? string.Empty).ToString());
             // Display
-            inif.Write("Video", "displayPrimaries", mainwindow.cboDisplayPrimaries.SelectedItem.ToString());
-            inif.Write("Video", "colorSpace", mainwindow.cboColorSpace.SelectedItem.ToString());
-            inif.Write("Video", "colorRange", mainwindow.cboColorRange.SelectedItem.ToString());
-            inif.Write("Video", "deinterlace", mainwindow.cboDeinterlace.SelectedItem.ToString());
-            inif.Write("Video", "videoSync", mainwindow.cboVideoSync.SelectedItem.ToString());
-            inif.Write("Video", "frameDrop", mainwindow.cboFramedrop.SelectedItem.ToString());
+            inif.Write("Video", "displayPrimaries", (mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "colorSpace", (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "colorRange", (mainwindow.cboColorRange.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "deinterlace", (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "videoSync", (mainwindow.cboVideoSync.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "frameDrop", (mainwindow.cboFramedrop.SelectedItem ?? string.Empty).ToString());
             // Image
             inif.Write("Video", "brightness", mainwindow.tbxBrightness.Text.ToString());
             inif.Write("Video", "contrast", mainwindow.tbxContrast.Text.ToString());
             inif.Write("Video", "hue", mainwindow.tbxHue.Text.ToString());
             inif.Write("Video", "saturation", mainwindow.tbxSaturation.Text.ToString());
             inif.Write("Video", "gamma", mainwindow.tbxGamma.Text.ToString());
-            inif.Write("Video", "gammaAuto", mainwindow.cboGammaAuto.SelectedItem.ToString());
-            inif.Write("Video", "deband", mainwindow.cboDeband.SelectedItem.ToString());
+            inif.Write("Video", "gammaAuto", (mainwindow.cboGammaAuto.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "deband", (mainwindow.cboDeband.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "debandGrain", mainwindow.tbxDebandGrain.Text.ToString());
-            inif.Write("Video", "dither", mainwindow.cboDither.SelectedItem.ToString());
+            inif.Write("Video", "dither", (mainwindow.cboDither.SelectedItem ?? string.Empty).ToString());
             // Scaling
-            inif.Write("Video", "sigmoidUpscaling", mainwindow.cboSigmoid.SelectedItem.ToString());
-            inif.Write("Video", "scale", mainwindow.cboScale.SelectedItem.ToString());
+            inif.Write("Video", "sigmoidUpscaling", (mainwindow.cboSigmoid.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "scale", (mainwindow.cboScale.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "scaleAntiring", mainwindow.tbxScaleAntiring.Text.ToString());
-            inif.Write("Video", "chromaScale", mainwindow.cboChromaScale.SelectedItem.ToString());
+            inif.Write("Video", "chromaScale", (mainwindow.cboChromaScale.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "chromaScaleAntiring", mainwindow.tbxChromaAntiring.Text.ToString());
-            inif.Write("Video", "downscale", mainwindow.cboDownscale.SelectedItem.ToString());
+            inif.Write("Video", "downscale", (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "downscaleAntiring", mainwindow.tbxDownscaleAntiring.Text.ToString());
-            inif.Write("Video", "softwareScaler", mainwindow.cboSoftwareScaler.SelectedItem.ToString());
+            inif.Write("Video", "softwareScaler", (mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty).ToString());
 
             // --------------------------------------------------
             // Audio
             // --------------------------------------------------
-            inif.Write("Audio", "driver", mainwindow.cboAudioDriver.SelectedItem.ToString());
+            inif.Write("Audio", "driver", (mainwindow.cboAudioDriver.SelectedItem ?? string.Empty).ToString());
 
             // -------------------------
             // Languages
@@ -935,7 +1106,7 @@ namespace Glow
             // ------------
             // Order
             // ------------
-            List<string> listAudioLangOrder = new List<string>(MainWindow.AudioLanguageItems);
+            List<string> listAudioLangOrder = new List<string>(ViewModel.AudioLanguageItems);
             string audioLanguagesOrder = string.Join(",", listAudioLangOrder.Where(s => !string.IsNullOrEmpty(s)));
             inif.Write("Audio", "languagesOrder", audioLanguagesOrder);
 
@@ -951,19 +1122,19 @@ namespace Glow
             string audioLanguagesSelected = string.Join(",", listAudioLangSelected.Where(s => !string.IsNullOrEmpty(s)));
             inif.Write("Audio", "languagesSelected", audioLanguagesSelected);
 
-            inif.Write("Audio", "channels", mainwindow.cboChannels.SelectedItem.ToString());
+            inif.Write("Audio", "channels", (mainwindow.cboChannels.SelectedItem ?? string.Empty).ToString());
             inif.Write("Audio", "volume", mainwindow.tbxVolume.Text.ToString());
             inif.Write("Audio", "volumeMax", mainwindow.tbxVolumeMax.Text.ToString());
-            inif.Write("Audio", "softVolume", mainwindow.cboSoftVolume.Text.ToString());
+            inif.Write("Audio", "softVolume", (mainwindow.cboSoftVolume.SelectedItem ?? string.Empty).ToString());
             inif.Write("Audio", "softVolumeMax", mainwindow.tbxSoftVolumeMax.Text.ToString());
-            inif.Write("Audio", "normalize", mainwindow.cboNormalize.SelectedItem.ToString());
-            inif.Write("Audio", "scaleTempo", mainwindow.cboScaleTempo.SelectedItem.ToString());
-            inif.Write("Audio", "loadFiles", mainwindow.cboAudioLoadFiles.SelectedItem.ToString());
+            inif.Write("Audio", "normalize", (mainwindow.cboNormalize.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Audio", "scaleTempo", (mainwindow.cboScaleTempo.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Audio", "loadFiles", (mainwindow.cboAudioLoadFiles.SelectedItem ?? string.Empty).ToString());
 
             // --------------------------------------------------
             // Subtitle
             // --------------------------------------------------
-            inif.Write("Subtitles", "subtitles", mainwindow.cboSubtitles.SelectedItem.ToString());
+            inif.Write("Subtitles", "subtitles", (mainwindow.cboSubtitles.SelectedItem ?? string.Empty).ToString());
 
             // -------------------------
             // Languages
@@ -971,7 +1142,7 @@ namespace Glow
             // ------------
             // Order
             // ------------
-            List<string> listSubtitlesLangOrder = new List<string>(MainWindow.SubtitlesLanguageItems);
+            List<string> listSubtitlesLangOrder = new List<string>(ViewModel.SubtitlesLanguageItems);
             string subtitlesLanguagesOrder = string.Join(",", listSubtitlesLangOrder.Where(s => !string.IsNullOrEmpty(s)));
             inif.Write("Subtitles", "languagesOrder", subtitlesLanguagesOrder);
 
@@ -986,63 +1157,84 @@ namespace Glow
             string subtitlesLanguages = string.Join(",", listSubtitlesLang.Where(s => !string.IsNullOrEmpty(s)));
             inif.Write("Subtitles", "languagesSelected", subtitlesLanguages);
 
-            //inif.Write("Subtitles", "embeddedFonts", mainwindow.cboAudioLoadFiles.SelectedItem.ToString());
-            inif.Write("Subtitles", "loadFiles", mainwindow.cboSubtitlesLoadFiles.SelectedItem.ToString());
+            inif.Write("Subtitles", "loadFiles", (mainwindow.cboSubtitlesLoadFiles.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Subtitles", "embeddedFonts", (mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty).ToString());
             inif.Write("Subtitles", "position", mainwindow.tbxSubtitlePosition.Text.ToString());
-            inif.Write("Subtitles", "font", mainwindow.cboSubtitlesFont.SelectedItem.ToString());
-            inif.Write("Subtitles", "fontSize", mainwindow.cboSubtitlesFontSize.SelectedItem.ToString());
+            inif.Write("Subtitles", "fixTiming", (mainwindow.cboSubtitlesFixTiming.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Subtitles", "useMargins", (mainwindow.cboSubtitlesMargins.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Subtitles", "font", (mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Subtitles", "fontSize", (mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty).ToString());
 
+            // Font Color
             selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesFontColor.SelectedValue);
             selected = (string)(selectedItem.Content);
             inif.Write("Subtitles", "fontColor", selected);
 
-            inif.Write("Subtitles", "borderSize", mainwindow.cboSubtitlesBorderSize.SelectedItem.ToString());
+            // Border Size
+            inif.Write("Subtitles", "borderSize", (mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty).ToString());
 
+            // Border Color
             selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue);
             selected = (string)(selectedItem.Content);
             inif.Write("Subtitles", "borderColor", selected);
 
+            // Shadow Color
             selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue);
             selected = (string)(selectedItem.Content);
             inif.Write("Subtitles", "shadowColor", selected);
 
+            // Shadow Offset
             inif.Write("Subtitles", "shadowOffset", mainwindow.tbxSubtitlesShadowOffset.Text.ToString());
-            inif.Write("Subtitles", "blend", mainwindow.cboSubtitlesBlend.SelectedItem.ToString());
+            inif.Write("Subtitles", "blend", (mainwindow.cboSubtitlesBlend.SelectedItem ?? string.Empty).ToString());
+
+            // ASS
+            inif.Write("Subtitles", "ass", (mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Subtitles", "assOverride", (mainwindow.cboSubtitlesASSOverride.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Subtitles", "assForceMargins", (mainwindow.cboSubtitlesASSForceMargins.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Subtitles", "assHinting", (mainwindow.cboSubtitlesASSHinting.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Subtitles", "assKerning", (mainwindow.cboSubtitlesASSKerning.SelectedItem ?? string.Empty).ToString());
 
             // --------------------------------------------------
             // Stream
             // --------------------------------------------------
-            inif.Write("Stream", "demuxThread", mainwindow.cboDemuxerThread.SelectedItem.ToString());
+            inif.Write("Stream", "demuxThread", (mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty).ToString());
             inif.Write("Stream", "demuxerBufferSize", mainwindow.tbxDemuxerBuffersize.Text.ToString());
             inif.Write("Stream", "demuxerReadAhead", mainwindow.tbxDemuxerReadahead.Text.ToString());
-            inif.Write("Stream", "demuxerMKVSubtitlePreroll", mainwindow.cboDemuxerMKVSubPreroll.SelectedItem.ToString());
-            inif.Write("Stream", "cache", mainwindow.cboCache.SelectedItem.ToString());
+            inif.Write("Stream", "demuxerMKVSubtitlePreroll", (mainwindow.cboDemuxerMKVSubPreroll.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Stream", "cache", (mainwindow.cboCache.SelectedItem ?? string.Empty).ToString());
             inif.Write("Stream", "cacheDefault", mainwindow.tbxCacheDefault.Text.ToString());
             inif.Write("Stream", "initial", mainwindow.tbxCacheInitial.Text.ToString());
             inif.Write("Stream", "seekMin", mainwindow.tbxCacheSeekMin.Text.ToString());
             inif.Write("Stream", "backBuffer", mainwindow.tbxCacheBackbuffer.Text.ToString());
             inif.Write("Stream", "seconds", mainwindow.tbxCacheSeconds.Text.ToString());
-            inif.Write("Stream", "file", mainwindow.cboCacheFile.SelectedItem.ToString());
+            inif.Write("Stream", "file", (mainwindow.cboCacheFile.SelectedItem ?? string.Empty).ToString());
             inif.Write("Stream", "fileSize", mainwindow.tbxCacheFileSize.Text.ToString());
+
+            // --------------------------------------------------
+            // OSC
+            // --------------------------------------------------
+            inif.Write("OSC", "osc", (mainwindow.cboOSC.SelectedItem ?? string.Empty).ToString());
+            inif.Write("OSC", "oscLayout", (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString());
+            inif.Write("OSC", "oscSeekbar", (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString());
 
             // --------------------------------------------------
             // OSD
             // --------------------------------------------------
-            inif.Write("OSD", "videoOSD", mainwindow.cboOSD.SelectedItem.ToString());
+            inif.Write("OSD", "videoOSD", (mainwindow.cboOSD.SelectedItem ?? string.Empty).ToString());
             inif.Write("OSD", "fractions", mainwindow.tbxCacheFileSize.Text.ToString());
             inif.Write("OSD", "duration", mainwindow.tbxOSDDuration.Text.ToString());
-            inif.Write("OSD", "level", mainwindow.cboOSDLevel.SelectedItem.ToString());
+            inif.Write("OSD", "level", (mainwindow.cboOSDLevel.SelectedItem ?? string.Empty).ToString());
             inif.Write("OSD", "scale", mainwindow.tbxOSDScale.Text.ToString());
             inif.Write("OSD", "barWidth", mainwindow.tbxOSDBarWidth.Text.ToString());
             inif.Write("OSD", "barHeight", mainwindow.tbxOSDBarHeight.Text.ToString());
-            inif.Write("OSD", "font", mainwindow.cboOSDFont.SelectedItem.ToString());
-            inif.Write("OSD", "fontSize", mainwindow.cboOSDFontSize.SelectedItem.ToString());
+            inif.Write("OSD", "font", (mainwindow.cboOSDFont.SelectedItem ?? string.Empty).ToString());
+            inif.Write("OSD", "fontSize", (mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty).ToString());
 
             selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue);
             selected = (string)(selectedItem.Content);
             inif.Write("OSD", "fontColor", selected);
 
-            inif.Write("OSD", "borderSize", mainwindow.cboOSDFontBorderSize.SelectedItem.ToString());
+            inif.Write("OSD", "borderSize", (mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty).ToString());
 
             selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue);
             selected = (string)(selectedItem.Content);
@@ -1101,19 +1293,51 @@ namespace Glow
             else
                 listFailedImports.Add("General: On Top");
 
-            // OSC
-            string osc = inif.Read("General", "osc");
-            if (mainwindow.cboOSC.Items.Contains(osc))
-                mainwindow.cboOSC.SelectedItem = osc;
-            else
-                listFailedImports.Add("General: OSC");
+            // Geometry X
+            mainwindow.tbxGeometryX.Text = inif.Read("General", "geometryX");
 
-            // Screenshot
-            string screenshot = inif.Read("General", "screenshot");
-            if (mainwindow.cboScreenshot.Items.Contains(screenshot))
-                mainwindow.cboScreenshot.SelectedItem = screenshot;
+            // Geometry Y
+            mainwindow.tbxGeometryX.Text = inif.Read("General", "geometryX");
+
+            // Autofit Width
+            mainwindow.tbxGeometryX.Text = inif.Read("General", "autofitWidth");
+
+            // Autofit Height
+            mainwindow.tbxGeometryX.Text = inif.Read("General", "autofitHeight");
+
+            // Screensaver
+            string screensaver = inif.Read("General", "screensaver");
+            if (mainwindow.cboScreensaver.Items.Contains(screensaver))
+                mainwindow.cboScreensaver.SelectedItem = screensaver;
             else
-                listFailedImports.Add("General: Screenshot");
+                listFailedImports.Add("General: Screensaver");
+
+            // Screenshot Path
+            mainwindow.tbxScreenshotPath.Text = inif.Read("General", "screenshotPath");
+
+            // Screenshot Template
+            string screenshotTemplate = inif.Read("General", "screenshotTemplate");
+            if (mainwindow.cboScreenshotTemplate.Items.Contains(screenshotTemplate))
+                mainwindow.cboScreenshotTemplate.SelectedItem = screenshotTemplate;
+            else
+                listFailedImports.Add("General: Screenshot Template");
+
+            // Screenshot Tag Colorspace
+            string screenshotTagColorspace = inif.Read("General", "screenshotTagColorspace");
+            if (mainwindow.cboScreenshotTagColorspace.Items.Contains(screenshotTagColorspace))
+                mainwindow.cboScreenshotTagColorspace.SelectedItem = screenshotTagColorspace;
+            else
+                listFailedImports.Add("General: Screenshot Tag Colorspace");
+
+            // Screenshot Format
+            string screenshotFormat = inif.Read("General", "screenshotFormat");
+            if (mainwindow.cboScreenshotFormat.Items.Contains(screenshotFormat))
+                mainwindow.cboScreenshotFormat.SelectedItem = screenshotFormat;
+            else
+                listFailedImports.Add("General: Screenshot Format");
+
+            // Screenshot Quality
+            mainwindow.tbxScreenshotQuality.Text = inif.Read("General", "screenshotQuality");
 
             // --------------------------------------------------
             // Video
@@ -1134,6 +1358,13 @@ namespace Glow
                 mainwindow.cboOpenGLPBO.SelectedItem = openglPBO;
             else
                 listFailedImports.Add("Video: OpenGL PBO");
+
+            // OpenGL PBO Format
+            string openglPBOFormat = inif.Read("Video", "openglPBOFormat");
+            if (mainwindow.cboOpenGLPBOFormat.Items.Contains(openglPBOFormat))
+                mainwindow.cboOpenGLPBOFormat.SelectedItem = openglPBOFormat;
+            else
+                listFailedImports.Add("Video: OpenGL PBO Format");
 
             // HW Decoder
             string hwdec = inif.Read("Video", "hwdec");
@@ -1322,10 +1553,10 @@ namespace Glow
             string audioLangOrder = inif.Read("Audio", "languagesOrder");
             string[] arrAudioLangOrder = audioLangOrder.Split(',');
             // recreate the list
-            MainWindow.listAudioLang = new List<string>(arrAudioLangOrder);
+            ViewModel.listAudioLang = new List<string>(arrAudioLangOrder);
             // recreate item sources
-            MainWindow._audioLangItems = new ObservableCollection<string>(MainWindow.listAudioLang);
-            mainwindow.listViewAudioLanguages.ItemsSource = MainWindow._audioLangItems;
+            ViewModel._audioLangItems = new ObservableCollection<string>(ViewModel.listAudioLang);
+            mainwindow.listViewAudioLanguages.ItemsSource = ViewModel._audioLangItems;
 
             // ------------
             // Selected
@@ -1365,8 +1596,36 @@ namespace Glow
             else
                 listFailedImports.Add("Subtitles: Load Files");
 
+            // Subtitles Embedded Fonts
+            string subtitlesEmbeddedFonts = inif.Read("Subtitles", "embeddedFonts");
+            if (mainwindow.cboSubtitlesEmbeddedFonts.Items.Contains(subtitlesEmbeddedFonts))
+                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = subtitlesEmbeddedFonts;
+            else
+                listFailedImports.Add("Subtitles: Embedded Fonts");
+
             // Subtitles Position
             mainwindow.tbxSubtitlePosition.Text = inif.Read("Subtitles", "position");
+
+            // Fix Timing
+            string fixTiming = inif.Read("Subtitles", "fixTiming");
+            if (mainwindow.cboSubtitlesFixTiming.Items.Contains(fixTiming))
+                mainwindow.cboSubtitlesFixTiming.SelectedItem = fixTiming;
+            else
+                listFailedImports.Add("Subtitles: Fix Timing");
+
+            // Margins
+            string useMargins = inif.Read("Subtitles", "useMargins");
+            if (mainwindow.cboSubtitlesMargins.Items.Contains(useMargins))
+                mainwindow.cboSubtitlesMargins.SelectedItem = useMargins;
+            else
+                listFailedImports.Add("Subtitles: Margins");
+
+            // Blend
+            string blend = inif.Read("Subtitles", "blend");
+            if (mainwindow.cboSubtitlesBlend.Items.Contains(blend))
+                mainwindow.cboSubtitlesBlend.SelectedItem = blend;
+            else
+                listFailedImports.Add("Subtitles: Blend");
 
             // Subtitles Font
             string subtitlesfont = inif.Read("Subtitles", "font");
@@ -1452,16 +1711,43 @@ namespace Glow
             else
                 listFailedImports.Add("Subtitles: Shadow Color");
 
-
             // Shadow Offset
             mainwindow.tbxSubtitlesShadowOffset.Text = inif.Read("Subtitles", "shadowOffset");
 
-            // Blend
-            string blend = inif.Read("Subtitles", "blend");
-            if (mainwindow.cboSubtitlesBlend.Items.Contains(blend))
-                mainwindow.cboSubtitlesBlend.SelectedItem = blend;
+            // ASS
+            string subtitlesASS = inif.Read("Subtitles", "ass");
+            if (mainwindow.cboSubtitlesASS.Items.Contains(subtitlesASS))
+                mainwindow.cboSubtitlesASS.SelectedItem = subtitlesASS;
             else
-                listFailedImports.Add("Subtitles: Blend");
+                listFailedImports.Add("Subtitles: ASS");
+
+            // ASS Override
+            string subtitlesASSOverride = inif.Read("Subtitles", "assOverride");
+            if (mainwindow.cboSubtitlesASSOverride.Items.Contains(subtitlesASSOverride))
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = subtitlesASSOverride;
+            else
+                listFailedImports.Add("Subtitles: ASS Override");
+
+            // ASS ForceMargins
+            string subtitlesASSForceMargins = inif.Read("Subtitles", "assForceMargins");
+            if (mainwindow.cboSubtitlesASSForceMargins.Items.Contains(subtitlesASSForceMargins))
+                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = subtitlesASSForceMargins;
+            else
+                listFailedImports.Add("Subtitles: ASS ForceMargins");
+
+            // ASS Hinting
+            string subtitlesASSHinting = inif.Read("Subtitles", "assHinting");
+            if (mainwindow.cboSubtitlesASSHinting.Items.Contains(subtitlesASSHinting))
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = subtitlesASSHinting;
+            else
+                listFailedImports.Add("Subtitles: ASS Hinting");
+
+            // ASS Kerning
+            string subtitlesASSKerning = inif.Read("Subtitles", "assKerning");
+            if (mainwindow.cboSubtitlesASSKerning.Items.Contains(subtitlesASSKerning))
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = subtitlesASSKerning;
+            else
+                listFailedImports.Add("Subtitles: ASS Kerning");
 
             // -------------------------
             // languages
@@ -1473,10 +1759,10 @@ namespace Glow
             string subtitlesLangOrder = inif.Read("Subtitles", "languagesOrder");
             string[] arrSubtitlesLangOrder = subtitlesLangOrder.Split(',');
             // recreate the list
-            MainWindow.listSubtitlesLang = new List<string>(arrSubtitlesLangOrder);
+            ViewModel.listSubtitlesLang = new List<string>(arrSubtitlesLangOrder);
             // recreate item sources
-            MainWindow._subsLangItems = new ObservableCollection<string>(MainWindow.listSubtitlesLang);
-            mainwindow.listViewSubtitlesLanguages.ItemsSource = MainWindow._subsLangItems;
+            ViewModel._subsLangItems = new ObservableCollection<string>(ViewModel.listSubtitlesLang);
+            mainwindow.listViewSubtitlesLanguages.ItemsSource = ViewModel._subsLangItems;
 
             // ------------
             // Selected
@@ -1541,6 +1827,30 @@ namespace Glow
 
             // Cache File Size
             mainwindow.tbxCacheFileSize.Text = inif.Read("Stream", "fileSize");
+
+            // --------------------------------------------------
+            // OSC
+            // --------------------------------------------------
+            // OSC
+            string osc = inif.Read("OSC", "osc");
+            if (mainwindow.cboOSC.Items.Contains(osc))
+                mainwindow.cboOSC.SelectedItem = osc;
+            else
+                listFailedImports.Add("OSC: OSC");
+
+            // OSC Layout
+            string oscLayout = inif.Read("OSC", "oscLayout");
+            if (mainwindow.cboOSCLayout.Items.Contains(oscLayout))
+                mainwindow.cboOSCLayout.SelectedItem = oscLayout;
+            else
+                listFailedImports.Add("OSC: OSC Layout");
+
+            // OSC Seekbar
+            string oscSeekbar = inif.Read("OSC", "oscSeekbar");
+            if (mainwindow.cboOSCSeekbar.Items.Contains(oscSeekbar))
+                mainwindow.cboOSCSeekbar.SelectedItem = oscSeekbar;
+            else
+                listFailedImports.Add("OSC: OSC Seekbar");
 
             // --------------------------------------------------
             // OSD
@@ -1671,7 +1981,9 @@ namespace Glow
             if (listFailedImports.Count() > 0 && listFailedImports != null)
             {
                 var message = string.Join(Environment.NewLine, listFailedImports);
-                MessageBox.Show(message, "Failed To Import", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please set the following and re-save your profile.\n\n" 
+                    + message, 
+                    "Failed To Import", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

@@ -49,7 +49,28 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    
+    
+    <!--/////////////////////////////////////
+        ToolTip
+        /////////////////////////////////////-->
+    <Style TargetType="ToolTip">
 
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding}"
+                         Width="300"
+                         TextWrapping='Wrap' />
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    
     <!--/////////////////////////////////////
         Button Images Black
         /////////////////////////////////////-->

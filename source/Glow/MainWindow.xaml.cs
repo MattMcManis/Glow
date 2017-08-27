@@ -28,10 +28,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Documents;
 using System.Text;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using System.Drawing.Text;
 using System.Drawing;
 
 namespace Glow
@@ -67,65 +64,10 @@ namespace Glow
         public static string profilesDir = appDir + @"profiles\"; //custom ini profiles
 
         // -------------------------
-        // Fonts
-        // -------------------------
-        public static List<string> fonts = new List<string>();
-        public static InstalledFontCollection installedFonts = new InstalledFontCollection();
-        // Bind ComboBox Fonts Items
-        public List<string> FontItems
-        {
-            get { return fonts; }
-            set { fonts = value; }
-        }
-
-        // Font Selected Item
-        public string FontSelectedItem { get; set; }
-
-
-        // -------------------------
-        // Bind Custom Profiles
-        // -------------------------
-        public static List<string> _profilesItems = new List<string>();
-        public List<string> ProfilesItems
-        {
-            get { return _profilesItems; }
-            set { _profilesItems = value; }
-        }
-
-        // Selected Item
-        public string ProfileSelectedItem { get; set; }
-
-
-        // -------------------------
-        // Bind Audio Language Items
-        // -------------------------
-        public static List<string> listAudioLang = Languages.listLanguages;
-
-        public static ObservableCollection<string> _audioLangItems = new ObservableCollection<string>(listAudioLang);
-        public static ObservableCollection<string> AudioLanguageItems
-        {
-            get { return _audioLangItems; }
-            set { _audioLangItems = value; }
-        }
-
-        // -------------------------
-        // Bind Subtitle Language Items
-        // -------------------------
-        public static List<string> listSubtitlesLang = Languages.listLanguages;
-
-        public static ObservableCollection<string> _subsLangItems = new ObservableCollection<string>(listSubtitlesLang);
-        public static ObservableCollection<string> SubtitlesLanguageItems
-        {
-            get { return _subsLangItems; }
-            set { _subsLangItems = value; }
-        }
-
-
-        // -------------------------
         // Variables
         // -------------------------
         // Lock
-        public static bool ready = true;
+        //public static bool ready = true;
 
 
 
@@ -135,8 +77,6 @@ namespace Glow
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = this;
 
             this.MinWidth = 712;
             this.MinHeight = 400;
@@ -154,6 +94,13 @@ namespace Glow
             // -------------------------
             TitleVersion = "Glow ~ mpv Configurator (" + Convert.ToString(currentVersion) + "-" + currentBuildPhase + ")";
             DataContext = this;
+
+            // -------------------------
+            // Control Binding
+            // -------------------------
+            //DataContext = this;
+            ViewModel vm = new ViewModel();
+            DataContext = vm;
 
             // -------------------------
             // Prevent Loading Corrupt App.Config
@@ -215,27 +162,29 @@ namespace Glow
             // --------------------------------------------------
             // Load Fonts
             // --------------------------------------------------
-            foreach (FontFamily font in installedFonts.Families)
+            foreach (FontFamily font in ViewModel.installedFonts.Families)
             {
                 if (!string.IsNullOrEmpty(font.Name)) {
-                    fonts.Add(font.Name);
+                    ViewModel.fonts.Add(font.Name);
                 }
             }
 
             // --------------------------------------------------
             // Control Defaults
             // --------------------------------------------------
+            // Tooltip Duration
+            ToolTipService.ShowDurationProperty.OverrideMetadata(
+                typeof(DependencyObject), new FrameworkPropertyMetadata(Int32.MaxValue));
+            // Profile Preset
+            ViewModel.ProfileSelectedItem = "Default";
             // Font
-            cboProfile.SelectedItem = "Default";
-            FontSelectedItem = "Segoe UI";
+            ViewModel.FontSelectedItem = "Segoe UI";
 
             // --------------------------------------------------
             // Custom Profiles
             // --------------------------------------------------
             // Load Custom INI's
             Profiles.GetCustomProfiles();
-            // Default Selected Item
-            ProfileSelectedItem = ProfilesItems[0];
         }
 
 
@@ -276,16 +225,15 @@ namespace Glow
         }
 
 
-
         // --------------------------------------------------------------------------------------------------------
         /// <summary>
         ///    Methods
         /// </summary>
-        // --------------------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------------------
 
-        /// <summary>
-        ///    Config RichTextBox
-        /// </summary>
+            /// <summary>
+            ///    Config RichTextBox
+            /// </summary>
         public String ConfigRichTextBox()
         {
             // Select All Text
@@ -311,6 +259,115 @@ namespace Glow
         // --------------------------------------------------------------------------------------------------------
 
         // --------------------------------------------------
+        // General Controls
+        // --------------------------------------------------
+
+        /// <summary>
+        ///     Geometry X
+        /// </summary>
+        private void slGeometryX_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slGeometryX.Value = 50;
+        }
+
+        /// <summary>
+        ///     Geometry X
+        /// </summary>
+        private void slGeometryY_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slGeometryY.Value = 50;
+        }
+
+        /// <summary>
+        ///     Autofit Width
+        /// </summary>
+        private void slAutofitWidth_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slAutofitWidth.Value = 100;
+        }
+
+        /// <summary>
+        ///     Autofit Height
+        /// </summary>
+        private void slAutofitHeight_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // return to default
+            slAutofitHeight.Value = 95;
+        }
+
+        /// <summary>
+        ///     Screenshot Label Reset
+        /// </summary>
+        private void lbScreenshotPath_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            tbxScreenshotPath.Text = "";
+        }
+
+        /// <summary>
+        ///     Screenshot Path
+        /// </summary>
+        private void tbxScreenshotPath_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Open Folder Browser
+            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = folderBrowserDialog.ShowDialog();
+
+            // If OK
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                tbxScreenshotPath.Text = folderBrowserDialog.SelectedPath.TrimEnd('\\') + @"\";
+            }
+        }
+
+        /// <summary>
+        ///     Screenshot Format
+        /// </summary>
+        private void cboScreenshotFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Change Quality Slider Maximum
+
+            // jpg
+            if ((string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpg"
+                || (string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpeg")
+            {
+                slScreenshotQuality.Maximum = 100;
+                slScreenshotQuality.Value = 95;
+            }
+                
+            // png
+            else if ((string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "png")
+            {
+                slScreenshotQuality.Maximum = 9;
+                slScreenshotQuality.Value = 7;
+            }     
+
+        }
+
+        /// <summary>
+        ///     Screenshot Quality DoubleClick
+        /// </summary>
+        private void slScreenshotQuality_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // jpg
+            if ((string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpg"
+                || (string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpeg")
+            {
+                // return to default
+                slScreenshotQuality.Value = 95;
+            }
+                
+            // png
+            else if ((string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "png")
+            {
+                // return to default
+                slScreenshotQuality.Value = 7;
+            } 
+        }
+
+        // --------------------------------------------------
         // Video Controls
         // --------------------------------------------------
 
@@ -322,16 +379,38 @@ namespace Glow
             // Enable/Disable OpenGL PBO
 
             // Enabled
-            if ((string)cboVideoDriver.SelectedItem == "opengl"
-                || (string)cboVideoDriver.SelectedItem == "opengl-hq")
+            if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl"
+                || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq")
             {
                 cboOpenGLPBO.IsEnabled = true;
+                cboOpenGLPBO.SelectedItem = "no";
             }
             // Disabled
             else
             {
                 cboOpenGLPBO.SelectedItem = "off";
                 cboOpenGLPBO.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
+        ///    OpenGL PBO
+        /// </summary>
+        private void cboOpenGLPBO_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enable / Disable PBO Formats
+
+            // Enabled
+            if ((string)(cboOpenGLPBO.SelectedItem ?? string.Empty) == "yes")
+            {
+                cboOpenGLPBOFormat.IsEnabled = true;
+                cboOpenGLPBOFormat.SelectedItem = "rgba32f";
+            }
+            // Disabled
+            else
+            {
+                cboOpenGLPBOFormat.SelectedItem = "off";
+                cboOpenGLPBOFormat.IsEnabled = false;
             }
         }
 
@@ -343,7 +422,7 @@ namespace Glow
             // Enable/Disable Gamma
 
             // Enabled
-            if ((string)cboGammaAuto.SelectedItem == "yes")
+            if ((string)(cboGammaAuto.SelectedItem ?? string.Empty) == "yes")
             {
                 // Slider
                 slGamma.Value = 0;
@@ -352,7 +431,7 @@ namespace Glow
                 tbxGamma.IsEnabled = false;
             }
             // Disabled
-            else if ((string)cboGammaAuto.SelectedItem == "no")
+            else if ((string)(cboGammaAuto.SelectedItem ?? string.Empty) == "no")
             {
                 // Slider
                 slGamma.IsEnabled = true;
@@ -369,12 +448,12 @@ namespace Glow
             // Enable/Disable Deband Grain
 
             // Enabled
-            if ((string)cboDeband.SelectedItem == "yes")
+            if ((string)(cboDeband.SelectedItem ?? string.Empty) == "yes")
             {
                 tbxDebandGrain.IsEnabled = true;
             }
             // Disabled
-            else if ((string)cboDeband.SelectedItem == "no")
+            else if ((string)(cboDeband.SelectedItem ?? string.Empty) == "no")
             {
                 tbxDebandGrain.IsEnabled = false;
                 tbxDebandGrain.Text = "";
@@ -390,7 +469,7 @@ namespace Glow
 
             // Off
             // Turn off Scale Antiring
-            if ((string)cboScale.SelectedItem == "off")
+            if ((string)(cboScale.SelectedItem ?? string.Empty) == "off")
             {
                 slScaleAntiring.IsEnabled = false;
                 slScaleAntiring.Value = 0;
@@ -414,7 +493,7 @@ namespace Glow
 
             // Off
             // Turn off Chroma Scale Antiring
-            if ((string)cboChromaScale.SelectedItem == "off")
+            if ((string)(cboChromaScale.SelectedItem ?? string.Empty) == "off")
             {
                 slChromaAntiring.IsEnabled = false;
                 slChromaAntiring.Value = 0;
@@ -438,7 +517,7 @@ namespace Glow
 
             // Off
             // Turn off Downscale Antiring
-            if ((string)cboDownscale.SelectedItem == "off")
+            if ((string)(cboDownscale.SelectedItem ?? string.Empty) == "off")
             {
                 slDownscaleAntiring.IsEnabled = false;
                 slDownscaleAntiring.Value = 0;
@@ -461,7 +540,7 @@ namespace Glow
             // Enable/Disable Hardware Scaling if Software Scaling is on
 
             // Enabled
-            if ((string)cboSoftwareScaler.SelectedItem != "off")
+            if ((string)(cboSoftwareScaler.SelectedItem ?? string.Empty) != "off")
             {
                 // Sigmoid
                 cboSigmoid.IsEnabled = false;
@@ -644,9 +723,9 @@ namespace Glow
 
                 if (selectedIndex > 0)
                 {
-                    var itemToMoveUp = AudioLanguageItems[selectedIndex];
-                    AudioLanguageItems.RemoveAt(selectedIndex);
-                    AudioLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
+                    var itemToMoveUp = ViewModel.AudioLanguageItems[selectedIndex];
+                    ViewModel.AudioLanguageItems.RemoveAt(selectedIndex);
+                    ViewModel.AudioLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
                     this.listViewAudioLanguages.SelectedIndex = selectedIndex - 1;
                 }
             }
@@ -660,11 +739,11 @@ namespace Glow
             {
                 var selectedIndex = this.listViewAudioLanguages.SelectedIndex;
 
-                if (selectedIndex + 1 < AudioLanguageItems.Count)
+                if (selectedIndex + 1 < ViewModel.AudioLanguageItems.Count)
                 {
-                    var itemToMoveDown = AudioLanguageItems[selectedIndex];
-                    AudioLanguageItems.RemoveAt(selectedIndex);
-                    AudioLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
+                    var itemToMoveDown = ViewModel.AudioLanguageItems[selectedIndex];
+                    ViewModel.AudioLanguageItems.RemoveAt(selectedIndex);
+                    ViewModel.AudioLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
                     this.listViewAudioLanguages.SelectedIndex = selectedIndex + 1;
                 }
             }
@@ -689,6 +768,22 @@ namespace Glow
         // --------------------------------------------------
         // Subtitle Controls
         // --------------------------------------------------
+
+        /// <summary>
+        ///    Subtitle Embedded Fonts
+        /// </summary>
+        private void cboSubtitlesEmbeddedFonts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Embedded Fonts Enabled
+            if ((string)(cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "yes")
+                // Disable Custom Font
+                cboSubtitlesFont.IsEnabled = false;
+
+            // Embedded Fonts Disabled
+            else if ((string)(cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "no")
+                // Enable Custom Font
+                cboSubtitlesFont.IsEnabled = true;
+        }
 
         /// <summary>
         ///    Subtitle Shadow Color
@@ -753,9 +848,9 @@ namespace Glow
 
                 if (selectedIndex > 0)
                 {
-                    var itemToMoveUp = SubtitlesLanguageItems[selectedIndex];
-                    SubtitlesLanguageItems.RemoveAt(selectedIndex);
-                    SubtitlesLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
+                    var itemToMoveUp = ViewModel.SubtitlesLanguageItems[selectedIndex];
+                    ViewModel.SubtitlesLanguageItems.RemoveAt(selectedIndex);
+                    ViewModel.SubtitlesLanguageItems.Insert(selectedIndex - 1, itemToMoveUp);
                     this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex - 1;
                 }
             }
@@ -769,11 +864,11 @@ namespace Glow
             {
                 var selectedIndex = this.listViewSubtitlesLanguages.SelectedIndex;
 
-                if (selectedIndex + 1 < SubtitlesLanguageItems.Count)
+                if (selectedIndex + 1 < ViewModel.SubtitlesLanguageItems.Count)
                 {
-                    var itemToMoveDown = SubtitlesLanguageItems[selectedIndex];
-                    SubtitlesLanguageItems.RemoveAt(selectedIndex);
-                    SubtitlesLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
+                    var itemToMoveDown = ViewModel.SubtitlesLanguageItems[selectedIndex];
+                    ViewModel.SubtitlesLanguageItems.RemoveAt(selectedIndex);
+                    ViewModel.SubtitlesLanguageItems.Insert(selectedIndex + 1, itemToMoveDown);
                     this.listViewSubtitlesLanguages.SelectedIndex = selectedIndex + 1;
                 }
             }
@@ -1226,7 +1321,7 @@ namespace Glow
 
                 // Refresh Profiles ComboBox
                 Profiles.GetCustomProfiles();
-                cboProfile.ItemsSource = _profilesItems;
+                cboProfile.ItemsSource = ViewModel._profilesItems;
             }
         }
 
@@ -1283,6 +1378,6 @@ namespace Glow
             rtbConfig.EndChange();
         }
 
-        
+
     }
 }

@@ -78,7 +78,7 @@
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Languages.cs" />
-    <Compile Include="OSD.cs" />
+    <Compile Include="OSCOSD.cs" />
     <Compile Include="Profiles.cs" />
     <Compile Include="Stream.cs" />
     <Compile Include="Subtitles.cs" />
@@ -86,6 +86,7 @@
       <DependentUpon>UpdateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Video.cs" />
+    <Compile Include="ViewModel.cs" />
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,9 +157,6 @@
     <Resource Include="Resources\Images\Icons\title-logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Icons\configure.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Buttons\White\export.png" />
     <Resource Include="Resources\Images\Buttons\White\folder.png" />
     <Resource Include="Resources\Images\Buttons\White\import.png" />
@@ -181,6 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Buttons\White\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icons\settings.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

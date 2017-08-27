@@ -30,7 +30,7 @@
         
         Title="Configure" 
         Height="200" Width="450" 
-        Icon="Resources/Images/Icons/configure.ico"
+        Icon="Resources/Images/Icons/settings.ico"
         Style="{DynamicResource ConfigureWindowStyle}" >
     <Grid >
 

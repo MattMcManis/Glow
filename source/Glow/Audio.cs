@@ -44,7 +44,7 @@ namespace Glow
             // -------------------------
             // Audio Driver
             // -------------------------
-            string driver = "ao=" + mainwindow.cboAudioDriver.SelectedItem.ToString();
+            string driver = "ao=" + (mainwindow.cboAudioDriver.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Languages
@@ -73,7 +73,7 @@ namespace Glow
             // -------------------------
             // Channels
             // -------------------------
-            string channels = "audio-channels=" + mainwindow.cboChannels.SelectedItem.ToString();
+            string channels = "audio-channels=" + (mainwindow.cboChannels.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Volume
@@ -88,7 +88,7 @@ namespace Glow
             // -------------------------
             // Soft Volume
             // -------------------------
-            string softVolume = "softvol=" + mainwindow.cboSoftVolume.SelectedItem.ToString();
+            string softVolume = "softvol=" + (mainwindow.cboSoftVolume.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Soft Volume Max
@@ -98,17 +98,17 @@ namespace Glow
             // -------------------------
             // Normalize
             // -------------------------
-            string normalize = "audio-normalize-downmix=" + mainwindow.cboNormalize.SelectedItem.ToString();
+            string normalize = "audio-normalize-downmix=" + (mainwindow.cboNormalize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Scale Tempo
             // -------------------------
-            string scaleTempo = "audio-pitch-correction=" + mainwindow.cboScaleTempo.SelectedItem.ToString();
+            string scaleTempo = "audio-pitch-correction=" + (mainwindow.cboScaleTempo.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Normalize
             // -------------------------
-            string loadFiles = "audio-file-auto=" + mainwindow.cboAudioLoadFiles.SelectedItem.ToString();
+            string loadFiles = "audio-file-auto=" + (mainwindow.cboAudioLoadFiles.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------

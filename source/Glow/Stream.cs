@@ -45,7 +45,7 @@ namespace Glow
             // -------------------------
             // Demuxer Thread
             // -------------------------
-            string demuxThread = "demuxer-thread=" + mainwindow.cboDemuxerThread.SelectedItem.ToString();
+            string demuxThread = "demuxer-thread=" + (mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Demuxer Buffersize
@@ -68,7 +68,7 @@ namespace Glow
             // -------------------------
             string demuxerMKVSubtitlePreroll = string.Empty;
 
-            if ((string)mainwindow.cboDemuxerMKVSubPreroll.SelectedItem == "yes")
+            if ((string)(mainwindow.cboDemuxerMKVSubPreroll.SelectedItem ?? string.Empty) == "yes")
                 demuxerMKVSubtitlePreroll = "demuxer-mkv-subtitle-preroll";
 
 
@@ -79,7 +79,7 @@ namespace Glow
             // -------------------------
             // Cache
             // -------------------------
-            string cache = "cache=" + mainwindow.cboCache.SelectedItem.ToString();
+            string cache = "cache=" + (mainwindow.cboCache.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Cache Default
@@ -124,7 +124,7 @@ namespace Glow
             // -------------------------
             // Cache File
             // -------------------------
-            string file = "cache-file=" + mainwindow.cboCacheFile.SelectedItem.ToString();
+            string file = "cache-file=" + (mainwindow.cboCacheFile.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Cache File Size

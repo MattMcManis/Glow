@@ -26,30 +26,6 @@ namespace Glow
 {
     public partial class Languages
     {
-        // Languages
-        // For Populating Audio and Subtitle Item Sources
-        public static List<string> listLanguages = new List<string>()
-        {
-            "English",
-            "Arabic",
-            "Bengali",
-            "Chinese",
-            "Dutch",
-            "Finnish",
-            "French",
-            "German",
-            "Hindi",
-            "Italian",
-            "Japanese",
-            "Korean",
-            "Portuguese",
-            "Russian",
-            "Spanish",
-            "Swedish",
-            "Vietnamese",
-        };
-
-
         /// <summary>
         ///    Language Code Converter
         /// </summary>

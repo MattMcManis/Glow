@@ -48,25 +48,45 @@ namespace Glow
             // -------------------------
             // Video Driver
             // -------------------------
-            string driver = "vo=" + mainwindow.cboVideoDriver.SelectedItem.ToString();
+            string driver = string.Empty;
 
-            // special rule
-            if ((string)mainwindow.cboVideoDriver.SelectedItem == "opengl-hq")
+            // only if enabled
+            if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) != "off")
+                driver = "vo=" + (mainwindow.cboVideoDriver.SelectedItem ?? string.Empty).ToString();
+                //string driver = "vo=" + (ViewModel.VideoDriverSelectedItem ?? string.Empty);
+
+            // opengl-hq special rule
+            if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq")
                 driver = "profile=opengl-hq";
 
             // -------------------------
             // OpenGL PBO
             // -------------------------
-            string openglpbo = string.Empty;
+            string openglPBO = string.Empty;
 
             // only if on
-            if ((string)mainwindow.cboOpenGLPBO.SelectedItem == "on")
-                openglpbo = "opengl-pbo";
+            if ((string)(mainwindow.cboOpenGLPBO.SelectedItem ?? string.Empty) == "yes")
+                openglPBO = "opengl-pbo";
+
+            // -------------------------
+            // OpenGL PBO Formats
+            // -------------------------
+            string openglPBOFormat = string.Empty;
+
+            // only if on
+            // only if OpenGL PBO yes
+            if ((string)(mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty) != "off"
+                && (string)(mainwindow.cboOpenGLPBO.SelectedItem ?? string.Empty) == "yes")
+                openglPBOFormat = "opengl-fbo-format=" + (mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Hardware Decoder
             // -------------------------
-            string hwdec = "hwdec=" + mainwindow.cboHWDecoder.SelectedItem.ToString();
+            string hwdec = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboHWDecoder.SelectedItem ?? string.Empty) != "off")
+                hwdec = "hwdec=" + (mainwindow.cboHWDecoder.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -76,27 +96,27 @@ namespace Glow
             // -------------------------
             // Primaries
             // -------------------------
-            string displayPrimaries = "target-prim=" + mainwindow.cboDisplayPrimaries.SelectedItem.ToString();
+            string displayPrimaries = "target-prim=" + (mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Transfer Characteristics
             // -------------------------
-            string displayTransChar = "target-trc=" + mainwindow.cboTransferCharacteristics.SelectedItem.ToString();
+            string displayTransChar = "target-trc=" + (mainwindow.cboTransferCharacteristics.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Color Space
             // -------------------------
-            string colorspace = "format=colormatrix=" + mainwindow.cboColorSpace.SelectedItem.ToString();
+            string colorSpace = "format=colormatrix=" + (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Color Space
             // -------------------------
-            string colorrange = "video-output-levels=" + mainwindow.cboColorRange.SelectedItem.ToString();
+            string colorRange = "video-output-levels=" + (mainwindow.cboColorRange.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Deinterlace
             // -------------------------
-            string deinterlace = "deinterlace=" + mainwindow.cboDeinterlace.SelectedItem.ToString();
+            string deinterlace = "deinterlace=" + (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Video Sync
@@ -104,13 +124,13 @@ namespace Glow
             string videosync = string.Empty;
 
             // only if video sync is on
-            if ((string)mainwindow.cboVideoSync.SelectedItem != "off")
-                videosync = "video-sync=" + mainwindow.cboVideoSync.SelectedItem.ToString();
+            if ((string)(mainwindow.cboVideoSync.SelectedItem ?? string.Empty) != "off")
+                videosync = "video-sync=" + (mainwindow.cboVideoSync.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Framedrop
             // -------------------------
-            string framedrop = "framedrop=" + mainwindow.cboFramedrop.SelectedItem.ToString();
+            string framedrop = "framedrop=" + (mainwindow.cboFramedrop.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -163,7 +183,7 @@ namespace Glow
                 gamma = "gamma=" + mainwindow.tbxGamma.Text.ToString();
 
             // auto
-            if ((string)mainwindow.cboGammaAuto.SelectedItem == "yes")
+            if ((string)(mainwindow.cboGammaAuto.SelectedItem ?? string.Empty) == "yes")
                 gamma = "gamma-auto";
 
             // -------------------------
@@ -171,7 +191,7 @@ namespace Glow
             // -------------------------
             string deband = string.Empty;
 
-            if ((string)mainwindow.cboDeband.SelectedItem == "yes")
+            if ((string)(mainwindow.cboDeband.SelectedItem ?? string.Empty) == "yes")
                 deband = "deband";
 
             // -------------------------
@@ -181,13 +201,13 @@ namespace Glow
 
             // only use if deband is on
             // and deband grain is not empty
-            if ((string)mainwindow.cboDeband.SelectedItem == "yes" && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
+            if ((string)(mainwindow.cboDeband.SelectedItem ?? string.Empty) == "yes" && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
                 debandgrain = "deband-grain=" + mainwindow.tbxDebandGrain.Text.ToString();
 
             // -------------------------
             // Dither
             // -------------------------
-            string dither = "dither-depth=" + mainwindow.cboDither.SelectedItem.ToString();
+            string dither = "dither-depth=" + (mainwindow.cboDither.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -205,7 +225,7 @@ namespace Glow
             // -------------------------
             string sigmoidUpscaling = string.Empty;
 
-            if ((string)mainwindow.cboSigmoid.SelectedItem == "yes")
+            if ((string)(mainwindow.cboSigmoid.SelectedItem ?? string.Empty) == "yes")
 
                 sigmoidUpscaling = "sigmoid-upscaling";
 
@@ -216,10 +236,10 @@ namespace Glow
 
             // scale must be on
             // software scaler must be off
-            if ((string)mainwindow.cboScale.SelectedItem != "off" 
-                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off") 
+            if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off" 
+                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off") 
 
-                scale = "scale=" + mainwindow.cboScale.SelectedItem.ToString();
+                scale = "scale=" + (mainwindow.cboScale.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Scale Antiring
@@ -229,9 +249,9 @@ namespace Glow
             // scale must be on
             // antitring must be above 0
             // software scaler must be off
-            if ((string)mainwindow.cboScale.SelectedItem != "off"
+            if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off"
                 && mainwindow.slScaleAntiring.Value != 0 
-                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
                 scaleAntiring = "scale-antiring=" + mainwindow.tbxScaleAntiring.Text.ToString();
 
             // -------------------------
@@ -241,10 +261,10 @@ namespace Glow
 
             // chrome scale must be on
             // software scaler must be off
-            if ((string)mainwindow.cboChromaScale.SelectedItem != "off"
-                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+            if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off"
+                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                chromascale = "cscale=" + mainwindow.cboChromaScale.SelectedItem.ToString();
+                chromascale = "cscale=" + (mainwindow.cboChromaScale.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Chroma Antiring
@@ -254,9 +274,9 @@ namespace Glow
             // software scaler must be off
             string chromascaleAntiring = string.Empty;
 
-            if ((string)mainwindow.cboChromaScale.SelectedItem != "off"
+            if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off"
                 && mainwindow.slChromaAntiring.Value != 0 
-                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
                 chromascaleAntiring = "cscale-antiring=" + mainwindow.tbxChromaAntiring.Text.ToString();
 
@@ -267,10 +287,10 @@ namespace Glow
 
             // downscale must be on
             // software scaler must be off
-            if ((string)mainwindow.cboDownscale.SelectedItem != "off"
-                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+            if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off"
+                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                downscale = "dscale=" + mainwindow.cboDownscale.SelectedItem.ToString();
+                downscale = "dscale=" + (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Downscale Antiring
@@ -280,9 +300,9 @@ namespace Glow
             // downscale must be on
             // antitring must be above 0
             // software scaler must be off
-            if ((string)mainwindow.cboDownscale.SelectedItem != "off"
+            if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off"
                 && mainwindow.slDownscaleAntiring.Value != 0 
-                && (string)mainwindow.cboSoftwareScaler.SelectedItem == "off")
+                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
                 downscaleAntiring = "dscale-antiring=" + mainwindow.tbxDownscaleAntiring.Text.ToString();
 
             // -------------------------
@@ -291,8 +311,8 @@ namespace Glow
             string softwarescaler = string.Empty;
 
             // software scaler must be off
-            if ((string)mainwindow.cboSoftwareScaler.SelectedItem != "off")
-                softwarescaler = "sws-scaler=" + mainwindow.cboSoftwareScaler.SelectedItem.ToString();
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) != "off")
+                softwarescaler = "sws-scaler=" + (mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -304,14 +324,15 @@ namespace Glow
 
                 // Hardware
                 driver,
-                openglpbo,
+                openglPBO,
+                openglPBOFormat,
                 hwdec,
 
                 // Display
                 displayPrimaries,
                 displayTransChar,
-                colorspace,
-                colorrange,
+                colorSpace,
+                colorRange,
                 deinterlace,
                 videosync,
                 framedrop,

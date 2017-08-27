@@ -25,7 +25,7 @@ using System.Windows.Controls;
 
 namespace Glow
 {
-    public partial class OSD
+    public partial class OSCOSD
     {
         private static ComboBoxItem selectedItem;
         private static string selected;
@@ -40,14 +40,35 @@ namespace Glow
             // --------------------------------------------------
 
             // -------------------------
-            // Title
+            // OSC Title
             // -------------------------
-            string title = "# [ OSD ]";
+            string oscTitle = "# [ OSC ]";
 
             // -------------------------
-            // OSD
+            // OSC On Screen Controller
             // -------------------------
-            string videoOSD = "video-osd=" + mainwindow.cboOSD.SelectedItem.ToString();
+            string oscEnable = "osc=" + (mainwindow.cboOSC.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Layout
+            // -------------------------
+            string oscLayout = "layout=" + (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Layout
+            // -------------------------
+            string oscSeekbar = "seekbarstyle=" + (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString();
+
+
+            // -------------------------
+            // OSD Title
+            // -------------------------
+            string osdTitle = "# [ OSD ]";
+
+            // -------------------------
+            // OSD On Screen Display
+            // -------------------------
+            string videoOSD = "video-osd=" + (mainwindow.cboOSD.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Fractions
@@ -68,7 +89,7 @@ namespace Glow
             // -------------------------
             // Level
             // -------------------------
-            string level = "osd-level=" + mainwindow.cboOSDLevel.SelectedItem.ToString();
+            string level = "osd-level=" + (mainwindow.cboOSDLevel.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -107,34 +128,34 @@ namespace Glow
             // -------------------------
             // Font Name
             // -------------------------
-            string font = "osd-font=" + "\"" + mainwindow.cboOSDFont.SelectedItem.ToString() + "\"";
+            string font = "osd-font=" + "\"" + (mainwindow.cboOSDFont.SelectedItem ?? string.Empty).ToString() + "\"";
 
             // -------------------------
             // Font Size
             // -------------------------
-            string fontSize = "osd-font-size=" + mainwindow.cboOSDFontSize.SelectedItem.ToString();
+            string fontSize = "osd-font-size=" + (mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Font Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue);
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue ?? string.Empty);
             string fontColor = "osd-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Border Size
             // -------------------------
-            string borderSize = "osd-border-size=" + mainwindow.cboOSDFontBorderSize.SelectedItem.ToString();
+            string borderSize = "osd-border-size=" + (mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Border Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue);
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue ?? string.Empty);
             string borderColor = "osd-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
 
             // -------------------------
             // Shadow Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue);
+            selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue ?? string.Empty);
             selected = (string)(selectedItem.Content);
 
             string shadowColor = string.Empty;
@@ -155,9 +176,19 @@ namespace Glow
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listOSD = new List<string>()
+            List<string> listOSC = new List<string>()
             {
-                title,
+                // OSC
+                oscTitle,
+                oscEnable,
+                oscLayout,
+                oscSeekbar,
+            };
+
+            List <string> listOSD = new List<string>()
+            {
+                // OSD
+                osdTitle,
                 videoOSD,
                 fractions,
                 duration,
@@ -181,14 +212,23 @@ namespace Glow
             // -------------------------
             // Join
             // -------------------------
+            // OSC
+            string osc = string.Join("\r\n", listOSC
+                .Where(s => !string.IsNullOrEmpty(s))
+                );
+
+            // OSC
             string osd = string.Join("\r\n", listOSD
                 .Where(s => !string.IsNullOrEmpty(s))
                 );
 
+            // OSC+OSD
+            string osc_osd = string.Join("\r\n\r\n", osc, osd);
+
             // -------------------------
             // Return
             // -------------------------
-            return osd;
+            return osc_osd;
         }
 
     }

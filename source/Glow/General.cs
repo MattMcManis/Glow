@@ -43,7 +43,7 @@ namespace Glow
             // -------------------------
             // Priority
             // -------------------------
-            string priority = "priority=" + mainwindow.cboPriority.SelectedItem.ToString();
+            string priority = "priority=" + (mainwindow.cboPriority.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -55,33 +55,40 @@ namespace Glow
             // -------------------------
             string savePositiOnQuit = string.Empty;
 
-            if ((string)mainwindow.cboSavePositionQuit.SelectedItem == "yes")
+            if ((string)(mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty) == "yes")
                 savePositiOnQuit = "save-position-on-quit";
 
             // -------------------------
             // Keep Open
             // -------------------------
-            string keepOpen = "keep-open=" + mainwindow.cboKeepOpen.SelectedItem.ToString();
+            string keepOpen = "keep-open=" + (mainwindow.cboKeepOpen.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // On Top
             // -------------------------
-            string onTop = "ontop=" + mainwindow.cboOnTop.SelectedItem.ToString();
-
-            // -------------------------
-            // On Screen Display
-            // -------------------------
-            string osc = "osc=" + mainwindow.cboOSC.SelectedItem.ToString();
-
-            // -------------------------
-            // Auto-Fit
-            // -------------------------
-            string autoFit = "autofit-larger=100%x95%";
+            string onTop = "ontop=" + (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Geometry
             // -------------------------
-            string geometry = "geometry=50%:50%";
+            string geometry = "geometry=" + mainwindow.tbxGeometryX.Text.ToString() + "%" + ":" + mainwindow.tbxGeometryY.Text.ToString() + "%";
+
+            // -------------------------
+            // Auto-Fit
+            // -------------------------
+            string autoFit = "autofit-larger=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
+
+            // -------------------------
+            // Screensaver
+            // -------------------------
+            string screensaver = string.Empty;
+
+            // Keep
+            if ((string)(mainwindow.cboScreensaver.SelectedItem ?? string.Empty) == "on")
+                screensaver = "no-stop-screensaver";
+            // Stop
+            else if ((string)(mainwindow.cboScreensaver.SelectedItem ?? string.Empty) == "off")
+                screensaver = "stop-screensaver";
 
             // -------------------------
             // Window Title
@@ -96,9 +103,37 @@ namespace Glow
             // -------------------------
             // Screenshot
             // -------------------------
-            string screenshot = "screenshot-format=" + mainwindow.cboScreenshot.SelectedItem.ToString();
-            string screenshot_template = "screenshot-template=\"%F-%wHh%wMm%wSs\"";
-            string screenshot_tag_colorspace = "screenshot-tag-colorspace=yes";
+            // Path
+            string screenshotPath = string.Empty;
+            // only if not empty
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxScreenshotPath.Text))
+                screenshotPath = "screenshot-directory=" + "\"" + mainwindow.tbxScreenshotPath.Text.ToString() + "\"";
+
+            // Template
+            string screenshotTemplate = string.Empty;
+
+            if ((string)(mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty) == "Playback Time")
+                screenshotTemplate = "screenshot-template=\"%F-%wHh%wMm%wSs%wTt\"";
+            else if ((string)(mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty) == "Date Time")
+                screenshotTemplate = "screenshot-template=\"%F-%ty-%tm-%td_%tH.%tM.%tS.%wT\"";
+            else if ((string)(mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty) == "Numbered")
+                    screenshotTemplate = "screenshot-template=\"%F-%n\"";
+
+            // Tag Colorspace
+            string screenshotTagColorspace = "screenshot-tag-colorspace=" + (mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty).ToString();
+
+            // Format
+            string screenshotFormat = "screenshot-format=" + (mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty).ToString();
+
+            // Qulaity
+            string screenshotQuality = string.Empty;
+            // jpg
+            if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpg"
+                || (string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpeg")
+                screenshotQuality = "screenshot-jpeg-quality=" + mainwindow.tbxScreenshotQuality.Text.ToString();
+            // png
+            else if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "png")
+                screenshotQuality = "screenshot-png-compression=" + mainwindow.tbxScreenshotQuality.Text.ToString();
 
 
             // --------------------------------------------------
@@ -111,12 +146,17 @@ namespace Glow
                 savePositiOnQuit,
                 keepOpen,
                 onTop,
-                autoFit,
                 geometry,
+                autoFit,
+                screensaver,
                 windowTitle,
-                screenshot,
-                screenshot_template,
-                screenshot_tag_colorspace,
+
+                // Screenshot
+                screenshotPath,
+                screenshotTemplate,
+                screenshotTagColorspace,
+                screenshotFormat,
+                screenshotQuality,
             };
 
             // -------------------------
