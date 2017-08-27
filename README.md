@@ -16,11 +16,11 @@ Glow is a configuration file generator for the mpv media player.
 ![Glow](https://raw.githubusercontent.com/MattMcManis/Glow/master/images/glow.png)
 
 ## Downloads
-#### Glow 
+### Glow 
 * https://github.com/MattMcManis/Glow/releases
 * Requires [Microsoft .NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 
-#### mpv
+### mpv
 
 * Site https://mpv.io
 * Builds https://mpv.srsfckn.biz
