@@ -327,12 +327,14 @@ namespace Glow
         /// </summary>
         private void cboScreenshotFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Change Label
             // Change Quality Slider Maximum
 
             // jpg
             if ((string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpg"
                 || (string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpeg")
             {
+                lbScreenshotQuality.Content = "Quality";
                 slScreenshotQuality.Maximum = 100;
                 slScreenshotQuality.Value = 95;
             }
@@ -340,6 +342,7 @@ namespace Glow
             // png
             else if ((string)(cboScreenshotFormat.SelectedItem ?? string.Empty) == "png")
             {
+                lbScreenshotQuality.Content = "Compression";
                 slScreenshotQuality.Maximum = 9;
                 slScreenshotQuality.Value = 7;
             }     
