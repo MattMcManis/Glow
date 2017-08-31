@@ -44,7 +44,65 @@ namespace Glow
             // -------------------------
             // Audio Driver
             // -------------------------
-            string driver = "ao=" + (mainwindow.cboAudioDriver.SelectedItem ?? string.Empty).ToString();
+            string driver = string.Empty;
+
+            if ((string)(mainwindow.cboAudioDriver.SelectedItem ?? string.Empty) != "default")
+                driver = "ao=" + (mainwindow.cboAudioDriver.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Load Files
+            // -------------------------
+            string loadFiles = string.Empty;
+
+            if ((string)(mainwindow.cboAudioLoadFiles.SelectedItem ?? string.Empty) != "default")
+                loadFiles = "audio-file-auto=" + (mainwindow.cboAudioLoadFiles.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Channels
+            // -------------------------
+            string channels = string.Empty;
+
+            if ((string)(mainwindow.cboChannels.SelectedItem ?? string.Empty) != "default")
+                channels = "audio-channels=" + (mainwindow.cboChannels.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Volume
+            // -------------------------
+            string volume = "volume=" + mainwindow.tbxVolume.Text.ToString();
+
+            // -------------------------
+            // Max Volume
+            // -------------------------
+            string volumeMax = "volume-max=" + mainwindow.tbxVolumeMax.Text.ToString();
+
+            // -------------------------
+            // Soft Volume
+            // -------------------------
+            string softVolume = string.Empty;
+
+            if ((string)(mainwindow.cboSoftVolume.SelectedItem ?? string.Empty) != "default")
+                softVolume = "softvol=" + (mainwindow.cboSoftVolume.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Soft Volume Max
+            // -------------------------
+            string softVolumeMax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
+
+            // -------------------------
+            // Normalize
+            // -------------------------
+            string normalize = string.Empty;
+
+            if ((string)(mainwindow.cboNormalize.SelectedItem ?? string.Empty) != "default")
+                normalize = "audio-normalize-downmix=" + (mainwindow.cboNormalize.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Scale Tempo
+            // -------------------------
+            string scaleTempo = string.Empty;
+
+            if ((string)(mainwindow.cboScaleTempo.SelectedItem ?? string.Empty) != "default")
+                scaleTempo = "audio-pitch-correction=" + (mainwindow.cboScaleTempo.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Languages
@@ -63,53 +121,12 @@ namespace Glow
 
                     // Add language code to list
                     listAudioLanguages.Add(language);
-                }   
+                }
             }
 
             string languages = string.Empty;
             if (listAudioLanguages.Count() != 0)
                 languages = "alang=" + string.Join(",", listAudioLanguages.Where(s => !string.IsNullOrEmpty(s)));
-
-            // -------------------------
-            // Channels
-            // -------------------------
-            string channels = "audio-channels=" + (mainwindow.cboChannels.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // Volume
-            // -------------------------
-            string volume = "volume=" + mainwindow.tbxVolume.Text.ToString();
-
-            // -------------------------
-            // Max Volume
-            // -------------------------
-            string volumeMax = "volume-max=" + mainwindow.tbxVolumeMax.Text.ToString();
-
-            // -------------------------
-            // Soft Volume
-            // -------------------------
-            string softVolume = "softvol=" + (mainwindow.cboSoftVolume.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // Soft Volume Max
-            // -------------------------
-            string softVolumeMax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
-
-            // -------------------------
-            // Normalize
-            // -------------------------
-            string normalize = "audio-normalize-downmix=" + (mainwindow.cboNormalize.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // Scale Tempo
-            // -------------------------
-            string scaleTempo = "audio-pitch-correction=" + (mainwindow.cboScaleTempo.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // Normalize
-            // -------------------------
-            string loadFiles = "audio-file-auto=" + (mainwindow.cboAudioLoadFiles.SelectedItem ?? string.Empty).ToString();
-
 
             // --------------------------------------------------
             // Combine
@@ -118,7 +135,7 @@ namespace Glow
             {
                 title,
                 driver,
-                languages,
+                loadFiles,
                 channels,
                 volume,
                 volumeMax,
@@ -126,7 +143,7 @@ namespace Glow
                 softVolumeMax,
                 normalize,
                 scaleTempo,
-                loadFiles,
+                languages,
             };
 
             // -------------------------

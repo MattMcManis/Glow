@@ -39,17 +39,26 @@ namespace Glow
             // -------------------------
             // OSC On Screen Controller
             // -------------------------
-            string oscEnable = "osc=" + (mainwindow.cboOSC.SelectedItem ?? string.Empty).ToString();
+            string oscEnable = string.Empty;
+
+            if ((string)(mainwindow.cboOSC.SelectedItem ?? string.Empty) != "default")
+                oscEnable = "osc=" + (mainwindow.cboOSC.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Layout
             // -------------------------
-            string oscLayout = "osc-layout=" + (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString();
+            string oscLayout = string.Empty;
+
+            if ((string)(mainwindow.cboOSCLayout.SelectedItem ?? string.Empty) != "default")
+                oscLayout = "osc-layout=" + (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Seekbar
             // -------------------------
-            string oscSeekbar = "osc-seekbarstyle=" + (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString();
+            string oscSeekbar = string.Empty;
+
+            if ((string)(mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty) != "default")
+                oscSeekbar = "osc-seekbarstyle=" + (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Script Opts
@@ -60,9 +69,16 @@ namespace Glow
                 oscLayout,
                 oscSeekbar,
             };
-            string oscScriptOpts = "script-opts=" + string.Join(",", listOSCScriptOpts
+
+            // only if list is not empty
+            string oscScriptOpts = string.Empty;
+
+            if (listOSCScriptOpts[0] != string.Empty || listOSCScriptOpts[1] != string.Empty)
+            {
+                oscScriptOpts = "script-opts=" + string.Join(",", listOSCScriptOpts
                 .Where(s => !string.IsNullOrEmpty(s))
-            );
+                );
+            }
 
 
             // --------------------------------------------------

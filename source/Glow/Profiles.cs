@@ -157,46 +157,47 @@ namespace Glow
                 // -------------------------
                 // Audio
                 // -------------------------
-                mainwindow.cboAudioDriver.SelectedItem = "wasapi";
-                mainwindow.cboChannels.SelectedItem = "auto";
+                mainwindow.cboAudioDriver.SelectedItem = "default";
+                mainwindow.cboChannels.SelectedItem = "default";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
+                mainwindow.cboSoftVolume.SelectedItem = "default";
                 mainwindow.slSoftVolumeMax.Value = 150;
-                mainwindow.cboNormalize.SelectedItem = "yes";
-                mainwindow.cboScaleTempo.SelectedItem = "yes";
-                mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                mainwindow.cboNormalize.SelectedItem = "default";
+                mainwindow.cboScaleTempo.SelectedItem = "default";
+                mainwindow.cboAudioLoadFiles.SelectedItem = "default";
                 // deselect all languages
                 mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
                 // -------------------------
-                mainwindow.cboSubtitles.SelectedItem = "yes";
-                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
-                mainwindow.slSubtitlePosition.Value = 95;
-                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
-                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
+                mainwindow.cboSubtitles.SelectedItem = "default";
+                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "default";
+                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "default";
+                mainwindow.slSubtitlePosition.Value = 0;
+                mainwindow.cboSubtitlesFixTiming.SelectedItem = "default";
+                mainwindow.cboSubtitlesMargins.SelectedItem = "default";
+                mainwindow.cboSubtitlesBlend.SelectedItem = "default";
                 // Font
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
+                mainwindow.cboSubtitlesFont.SelectedItem = "default";
+                mainwindow.cboSubtitlesFontSize.SelectedItem = "default";
+                mainwindow.tbxSubtitlesFontColor.Text = ""; //white
                 // Border
-                mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
+                mainwindow.cboSubtitlesBorderSize.SelectedItem = "default";
                 //mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
-                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
+                mainwindow.tbxSubtitlesBorderColor.Text = ""; //dark gray
                 // Shadow
                 //mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
-                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
+                mainwindow.tbxSubtitlesShadowColor.Text = ""; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
 
                 // ASS
-                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
-                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
-                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+                mainwindow.cboSubtitlesASS.SelectedItem = "default";
+                mainwindow.cboSubtitlesASSOverride.SelectedItem = "default";
+                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "default";
+                mainwindow.cboSubtitlesASSHinting.SelectedItem = "default";
+                mainwindow.cboSubtitlesASSKerning.SelectedItem = "default";
 
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
@@ -205,49 +206,50 @@ namespace Glow
                 // Stream
                 // -------------------------
                 // Demuxer
-                mainwindow.cboDemuxerThread.SelectedItem = "no";
-                mainwindow.tbxDemuxerBuffersize.Text = "32768";
-                mainwindow.tbxDemuxerReadahead.Text = "5.0";
-                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                mainwindow.cboDemuxerThread.SelectedItem = "default";
+                mainwindow.tbxDemuxerBuffersize.Text = "";
+                mainwindow.tbxDemuxerReadahead.Text = "";
+                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "default";
                 // Cache
-                mainwindow.cboCache.SelectedItem = "auto";
-                mainwindow.tbxCacheDefault.Text = "100000";
-                mainwindow.tbxCacheInitial.Text = "1024";
-                mainwindow.tbxCacheSeekMin.Text = "1024";
-                mainwindow.tbxCacheBackbuffer.Text = "25000";
-                mainwindow.tbxCacheSeconds.Text = "30";
-                mainwindow.cboCacheFile.SelectedItem = "TMP";
-                mainwindow.tbxCacheFileSize.Text = "1048576";
+                mainwindow.cboCache.SelectedItem = "default";
+                mainwindow.tbxCacheDefault.Text = "";
+                mainwindow.tbxCacheInitial.Text = "";
+                mainwindow.tbxCacheSeekMin.Text = "";
+                mainwindow.tbxCacheBackbuffer.Text = "";
+                mainwindow.tbxCacheSeconds.Text = "";
+                mainwindow.cboCacheFile.SelectedItem = "default";
+                mainwindow.tbxCacheFileSize.Text = "";
 
                 // -------------------------
                 // OSC
                 // -------------------------
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
-                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
+                mainwindow.cboOSC.SelectedItem = "default";
+                mainwindow.cboOSCLayout.SelectedItem = "default";
+                mainwindow.cboOSCSeekbar.SelectedItem = "default";
 
                 // -------------------------
                 // OSD
                 // -------------------------
-                mainwindow.cboOSD.SelectedItem = "yes";
-                mainwindow.cboOSDFractions.SelectedItem = "yes";
-                mainwindow.tbxOSDDuration.Text = "1500";
-                mainwindow.cboOSDLevel.SelectedItem = "1";
-                mainwindow.slOSDScale.Value = 0.5;
+                mainwindow.cboOSD.SelectedItem = "default";
+                mainwindow.cboOSDFractions.SelectedItem = "default";
+                mainwindow.tbxOSDDuration.Text = "";
+                mainwindow.cboOSDLevel.SelectedItem = "default";
+                mainwindow.slOSDScale.Value = 0;
                 // Bar
-                mainwindow.slOSDBarWidth.Value = 95;
-                mainwindow.slOSDBarHeight.Value = 2;
+                mainwindow.slOSDBarWidth.Value = 0;
+                mainwindow.slOSDBarHeight.Value = 0;
                 // Font
-                mainwindow.cboOSDFontSize.SelectedItem = "60";
+                mainwindow.cboOSDFont.SelectedItem = "default";
+                mainwindow.cboOSDFontSize.SelectedItem = "default";
                 //mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
-                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
+                mainwindow.tbxOSDFontColor.Text = ""; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
+                mainwindow.cboOSDFontBorderSize.SelectedItem = "default";
                 //mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
-                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
+                mainwindow.tbxOSDBorderColor.Text = ""; //dark gray
                 // Shadow
                 //mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
-                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
+                mainwindow.tbxOSDShadowColor.Text = ""; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
 
@@ -335,6 +337,7 @@ namespace Glow
                 mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
+                mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
                 mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
@@ -391,6 +394,7 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
+                mainwindow.cboOSDFont.SelectedItem = "Segoe UI";
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
@@ -485,6 +489,7 @@ namespace Glow
                 mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
+                mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
                 mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
@@ -541,6 +546,7 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
+                mainwindow.cboOSDFont.SelectedItem = "Segoe UI";
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
@@ -635,6 +641,7 @@ namespace Glow
                 mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
+                mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
                 mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
@@ -691,6 +698,7 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
+                mainwindow.cboOSDFont.SelectedItem = "Segoe UI";
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
@@ -785,6 +793,7 @@ namespace Glow
                 mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "no";
                 // Font
+                mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
                 mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
@@ -842,6 +851,7 @@ namespace Glow
                 mainwindow.slOSDBarWidth.Value = 95;
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
+                mainwindow.cboOSDFont.SelectedItem = "Segoe UI";
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
                 mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
@@ -929,7 +939,7 @@ namespace Glow
 
                 // -------------------------
                 // Subtitles
-                //// -------------------------
+                // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
                 mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";

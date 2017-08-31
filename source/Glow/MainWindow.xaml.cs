@@ -170,6 +170,9 @@ namespace Glow
                 }
             }
 
+            // Add default to fonts list
+            ViewModel.fonts.Insert(0, "default");
+
             // --------------------------------------------------
             // Control Defaults
             // --------------------------------------------------
@@ -179,7 +182,7 @@ namespace Glow
             // Profile Preset
             ViewModel.ProfileSelectedItem = "Default";
             // Font
-            ViewModel.FontSelectedItem = "Segoe UI";
+            ViewModel.FontSelectedItem = "default";
 
             // --------------------------------------------------
             // Custom Profiles

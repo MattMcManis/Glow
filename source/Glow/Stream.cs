@@ -45,7 +45,10 @@ namespace Glow
             // -------------------------
             // Demuxer Thread
             // -------------------------
-            string demuxThread = "demuxer-thread=" + (mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty).ToString();
+            string demuxThread = string.Empty;
+
+            if ((string)(mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty) != "default")
+                demuxThread = "demuxer-thread=" + (mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Demuxer Buffersize
@@ -79,7 +82,10 @@ namespace Glow
             // -------------------------
             // Cache
             // -------------------------
-            string cache = "cache=" + (mainwindow.cboCache.SelectedItem ?? string.Empty).ToString();
+            string cache = string.Empty;
+
+            if ((string)(mainwindow.cboCache.SelectedItem ?? string.Empty) != "default")
+                cache = "cache=" + (mainwindow.cboCache.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Cache Default
@@ -124,7 +130,10 @@ namespace Glow
             // -------------------------
             // Cache File
             // -------------------------
-            string file = "cache-file=" + (mainwindow.cboCacheFile.SelectedItem ?? string.Empty).ToString();
+            string file = string.Empty;
+
+            if ((string)(mainwindow.cboCacheFile.SelectedItem ?? string.Empty) != "default")
+                file = "cache-file=" + (mainwindow.cboCacheFile.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Cache File Size

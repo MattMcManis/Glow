@@ -49,7 +49,10 @@ namespace Glow
             // -------------------------
             // Subtitles
             // -------------------------
-            string subtitles = "sub=" + (mainwindow.cboSubtitles.SelectedItem ?? string.Empty).ToString();
+            string subtitles = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitles.SelectedItem ?? string.Empty) != "default")
+                subtitles = "sub=" + (mainwindow.cboSubtitles.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Languages
@@ -78,30 +81,91 @@ namespace Glow
             // -------------------------
             // Load Files
             // -------------------------
-            string loadFiles = "sub-auto=" + (mainwindow.cboSubtitlesLoadFiles.SelectedItem ?? string.Empty).ToString();
+            string loadFiles = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesLoadFiles.SelectedItem ?? string.Empty) != "default")
+                loadFiles = "sub-auto=" + (mainwindow.cboSubtitlesLoadFiles.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Position
             // -------------------------
-            string position = "sub-pos=" + mainwindow.tbxSubtitlePosition.Text.ToString();
+            string position = string.Empty;
+
+            if (mainwindow.slSubtitlePosition.Value != 0.0)
+                position = "sub-pos=" + mainwindow.tbxSubtitlePosition.Text.ToString();
 
             // -------------------------
             // Timing
             // -------------------------
-            string fixTiming = "sub-fix-timing=" + (mainwindow.cboSubtitlesFixTiming.SelectedItem ?? string.Empty).ToString();
+            string fixTiming = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesFixTiming.SelectedItem ?? string.Empty) != "default")
+                fixTiming = "sub-fix-timing=" + (mainwindow.cboSubtitlesFixTiming.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Margins
             // -------------------------
             string margins = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesMargins.SelectedItem ?? string.Empty) == "yes")
+            if ((string)(mainwindow.cboSubtitlesMargins.SelectedItem ?? string.Empty) != "default"
+                && (string)(mainwindow.cboSubtitlesMargins.SelectedItem ?? string.Empty) == "yes")
                 margins = "sub-use-margins";
 
-            // --------------------------------------------------
+            // -------------------------
             // Blend
+            // -------------------------
+            string blend = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesBlend.SelectedItem ?? string.Empty) != "default")
+
+                blend = "blend-subtitles=" + (mainwindow.cboSubtitlesBlend.SelectedItem ?? string.Empty).ToString();
+
+
             // --------------------------------------------------
-            string blend = "blend-subtitles=" + (mainwindow.cboSubtitlesBlend.SelectedItem ?? string.Empty).ToString();
+            // ASS Advanced SSA
+            // --------------------------------------------------
+
+            // -------------------------
+            // ASS
+            // -------------------------
+            string ass = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty) == "yes")
+                ass = "sub-ass";
+            else if ((string)(mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty) == "no")
+                ass = "no-sub-ass";
+
+            // -------------------------
+            // ASS Override
+            // -------------------------
+            string assOverride = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesASSOverride.SelectedItem ?? string.Empty) != "default")
+                assOverride = "sub-ass-override=" + (mainwindow.cboSubtitlesASSOverride.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // ASS Force Margins
+            // -------------------------
+            string assForceMargins = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesASSForceMargins.SelectedItem ?? string.Empty) != "default")
+                assForceMargins = "sub-ass-force-margins=" + (mainwindow.cboSubtitlesASSForceMargins.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // ASS Hinting
+            // -------------------------
+            string assHinting = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesASSHinting.SelectedItem ?? string.Empty) != "default")
+                assHinting = "sub-ass-hinting=" + (mainwindow.cboSubtitlesASSHinting.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // ASS Kerning
+            // -------------------------
+            string assKerning = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesASSKerning.SelectedItem ?? string.Empty) != "default")
+                assKerning = "sub-ass-force-style=Kerning=" + (mainwindow.cboSubtitlesASSKerning.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -126,13 +190,18 @@ namespace Glow
             string font = string.Empty;
 
             // only if Embedded Fonts is off
-            if ((string)(mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "no")
+            // and font is not default
+            if ((string)(mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "no"
+                && (string)(mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty) != "default")
                 font = "sub-text-font=" + "\"" + (mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty).ToString() + "\"";
 
             // -------------------------
             // Font Size
             // -------------------------
-            string fontSize = "sub-text-font-size=" + (mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty).ToString();
+            string fontSize = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty) != "default")
+                fontSize = "sub-text-font-size=" + (mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Font Color
@@ -148,7 +217,10 @@ namespace Glow
             // -------------------------
             // Border Size
             // -------------------------
-            string borderSize = "sub-text-border-size=" + (mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty).ToString();
+            string borderSize = string.Empty;
+
+            if ((string)(mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty) != "default")
+                borderSize = "sub-text-border-size=" + (mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Border Color
@@ -189,40 +261,6 @@ namespace Glow
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowColor.Text))
                 shadowOffset = "sub-shadow-offset=" + mainwindow.tbxSubtitlesShadowOffset.Text.ToString();
 
-
-            // --------------------------------------------------
-            // ASS Advanced SSA
-            // --------------------------------------------------
-
-            // -------------------------
-            // ASS
-            // -------------------------
-            string ass = string.Empty;
-            
-            if ((string)(mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty) == "yes")
-                ass = "sub-ass";
-            else if ((string)(mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty) == "no")
-                ass = "no-sub-ass";
-
-            // -------------------------
-            // ASS Override
-            // -------------------------
-            string assOverride = "sub-ass-override=" + (mainwindow.cboSubtitlesASSOverride.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // ASS Force Margins
-            // -------------------------
-            string assForceMargins = "sub-ass-force-margins=" + (mainwindow.cboSubtitlesASSForceMargins.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // ASS Hinting
-            // -------------------------
-            string assHinting = "sub-ass-hinting=" + (mainwindow.cboSubtitlesASSHinting.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // ASS Kerning
-            // -------------------------
-            string assKerning = "sub-ass-force-style=Kerning=" + (mainwindow.cboSubtitlesASSKerning.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------

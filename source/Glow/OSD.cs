@@ -47,15 +47,27 @@ namespace Glow
             // -------------------------
             // OSD On Screen Display
             // -------------------------
-            string videoOSD = "video-osd=" + (mainwindow.cboOSD.SelectedItem ?? string.Empty).ToString();
+            string videoOSD = string.Empty;
+
+            if ((string)(mainwindow.cboOSD.SelectedItem ?? string.Empty) != "default")
+                videoOSD = "video-osd=" + (mainwindow.cboOSD.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Fractions
             // -------------------------
             string fractions = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheFileSize.Text))
+            if ((string)(mainwindow.cboOSD.SelectedItem ?? string.Empty) != "default"
+                && !string.IsNullOrWhiteSpace(mainwindow.tbxCacheFileSize.Text))
                 fractions = "osd-fractions=" + mainwindow.tbxCacheFileSize.Text.ToString();
+
+            // -------------------------
+            // Level
+            // -------------------------
+            string level = string.Empty;
+
+            if ((string)(mainwindow.cboOSDLevel.SelectedItem ?? string.Empty) != "default")
+                level = "osd-level=" + (mainwindow.cboOSDLevel.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Duration
@@ -64,11 +76,6 @@ namespace Glow
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDDuration.Text))
                 duration = "osd-duration=" + mainwindow.tbxOSDDuration.Text.ToString();
-
-            // -------------------------
-            // Level
-            // -------------------------
-            string level = "osd-level=" + (mainwindow.cboOSDLevel.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -80,7 +87,8 @@ namespace Glow
             // -------------------------
             string scale = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDScale.Text))
+            if (mainwindow.slOSDScale.Value != 0.0 
+                && !string.IsNullOrWhiteSpace(mainwindow.tbxOSDScale.Text))
                 scale = "osd-scale=" + mainwindow.tbxOSDScale.Text.ToString();
 
             // -------------------------
@@ -88,7 +96,8 @@ namespace Glow
             // -------------------------
             string barWidth = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarWidth.Text))
+            if (mainwindow.slOSDBarWidth.Value != 0.0
+                && !string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarWidth.Text))
                 barWidth = "osd-bar-w=" + mainwindow.tbxOSDBarWidth.Text.ToString();
 
             // -------------------------
@@ -96,7 +105,8 @@ namespace Glow
             // -------------------------
             string barHeight = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarHeight.Text))
+            if (mainwindow.slOSDBarHeight.Value != 0.0
+                && !string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarHeight.Text))
                 barHeight = "osd-bar-h=" + mainwindow.tbxOSDBarHeight.Text.ToString();
 
 
@@ -107,12 +117,18 @@ namespace Glow
             // -------------------------
             // Font Name
             // -------------------------
-            string font = "osd-font=" + "\"" + (mainwindow.cboOSDFont.SelectedItem ?? string.Empty).ToString() + "\"";
+            string font = string.Empty;
+
+            if ((string)(mainwindow.cboOSDFont.SelectedItem ?? string.Empty) != "default")
+                font = "osd-font=" + "\"" + (mainwindow.cboOSDFont.SelectedItem ?? string.Empty).ToString() + "\"";
 
             // -------------------------
             // Font Size
             // -------------------------
-            string fontSize = "osd-font-size=" + (mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty).ToString();
+            string fontSize = string.Empty;
+
+            if ((string)(mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty) != "default")
+                fontSize = "osd-font-size=" + (mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Font Color
@@ -128,7 +144,10 @@ namespace Glow
             // -------------------------
             // Border Size
             // -------------------------
-            string borderSize = "osd-border-size=" + (mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty).ToString();
+            string borderSize = string.Empty;
+
+            if ((string)(mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty) != "default")
+                borderSize = "osd-border-size=" + (mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Border Color
