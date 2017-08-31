@@ -187,6 +187,60 @@ namespace Glow
             Profiles.GetCustomProfiles();
         }
 
+        /// <summary>
+        ///    Window Loaded
+        /// </summary>
+        public void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            PreviewPickedColors(this);
+        }
+
+        public static void PreviewPickedColors(MainWindow mainwindow)
+        {
+            // -------------------------
+            // Preview OSD/Subtitles Picked Colors
+            // -------------------------
+            System.Drawing.Color color = new System.Drawing.Color();
+            System.Windows.Media.Color mediaColor = new System.Windows.Media.Color();
+            System.Windows.Media.Brush brushPreview;
+
+            // OSD Font Color
+            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDFontColor.Text.ToString());
+            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+            mainwindow.osdFontColorPreview.Fill = brushPreview;
+
+            // OSD Border Color
+            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDBorderColor.Text.ToString());
+            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+            mainwindow.osdBorderColorPreview.Fill = brushPreview;
+
+            // OSD Shadow Color
+            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDShadowColor.Text.ToString());
+            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+            mainwindow.osdShadowColorPreview.Fill = brushPreview;
+
+            // Subtitles Font Color
+            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesFontColor.Text.ToString());
+            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+            mainwindow.subtitlesFontColorPreview.Fill = brushPreview;
+
+            // Subtitles Border Color
+            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesBorderColor.Text.ToString());
+            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+            mainwindow.subtitlesBorderColorPreview.Fill = brushPreview;
+
+            // Subtitles Shadow Color
+            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesShadowColor.Text.ToString());
+            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+            mainwindow.subtitlesShadowColorPreview.Fill = brushPreview;
+        }
+
 
         /// <summary>
         ///     Close / Exit (Method)

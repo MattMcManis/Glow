@@ -29,9 +29,10 @@
         xmlns:settings="clr-namespace:Glow.Properties"
         xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
                 
+        Loaded="Window_Loaded"
         Closing="MainWindow_Closing" 
         UseLayoutRounding="True"
-        Width="712" Height="400"
+        Width="712" Height="744"
     
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
         Icon="Resources/Images/Icons/title-logo.ico"
@@ -392,6 +393,7 @@
                                         Minimum="-100"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slBrightness_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxBrightness"
@@ -420,6 +422,7 @@
                                         Minimum="-100"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slContrast_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxContrast"
@@ -448,6 +451,7 @@
                                         Minimum="-100"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slHue_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxHue"
@@ -476,6 +480,7 @@
                                         Minimum="-100"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slSaturation_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxSaturation"
@@ -504,6 +509,7 @@
                                         Minimum="-100"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slGamma_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxGamma"
@@ -951,6 +957,7 @@
                                         Width="65"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slVolume_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxVolume"
@@ -979,6 +986,7 @@
                                         Width="65"
                                         Maximum="200" 
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slVolumeMax_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxVolumeMax"
@@ -1158,6 +1166,7 @@
                                         Maximum="200" 
                                         MouseDoubleClick="slSoftVolumeMax_MouseDoubleClick"
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxSoftVolumeMax"
                                         Text="{Binding Value, ElementName=slSoftVolumeMax, UpdateSourceTrigger=PropertyChanged}"
@@ -1233,6 +1242,7 @@
                                         Width="65"
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slSubtitlePosition_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
@@ -1407,13 +1417,13 @@
                                         HorizontalAlignment="Right"
                                         Width="31"
                                         VerticalAlignment="Top">
-                                    <Image Style="{DynamicResource ButtonColorPicker}" 
-                                            Width="11" 
-                                            Height="11" 
-                                            Margin="0,-1,0,0"
-                                            Stretch="Fill" 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"/>
+                                    <Ellipse x:Name="subtitlesFontColorPreview" 
+                                             HorizontalAlignment="Left" 
+                                             Width="10"
+                                             Height="10"
+                                             VerticalAlignment="Top"
+                                             Stroke="White">
+                                    </Ellipse>
                                 </Button>
 
                                 <TextBox x:Name="tbxSubtitlesFontColor"
@@ -1505,13 +1515,13 @@
                                         HorizontalAlignment="Right"
                                         Width="31" 
                                         VerticalAlignment="Top">
-                                    <Image Style="{DynamicResource ButtonColorPicker}" 
-                                            Width="11" 
-                                            Height="11" 
-                                            Margin="0,-1,0,0"
-                                            Stretch="Fill" 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"/>
+                                    <Ellipse x:Name="subtitlesBorderColorPreview" 
+                                             HorizontalAlignment="Left" 
+                                             Width="10"
+                                             Height="10"
+                                             VerticalAlignment="Top"
+                                             Stroke="White">
+                                    </Ellipse>
                                 </Button>
                                 <TextBox x:Name="tbxSubtitlesBorderColor"
                                          HorizontalAlignment="Right" 
@@ -1576,13 +1586,13 @@
                                         HorizontalAlignment="Right" 
                                         Width="31" 
                                         VerticalAlignment="Top">
-                                    <Image Style="{DynamicResource ButtonColorPicker}" 
-                                            Width="11" 
-                                            Height="11" 
-                                            Margin="0,-1,0,0"
-                                            Stretch="Fill" 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"/>
+                                    <Ellipse x:Name="subtitlesShadowColorPreview" 
+                                             HorizontalAlignment="Left" 
+                                             Width="10"
+                                             Height="10"
+                                             VerticalAlignment="Top"
+                                             Stroke="White">
+                                    </Ellipse>
                                 </Button>
                                 <TextBox x:Name="tbxSubtitlesShadowColor"
                                          HorizontalAlignment="Right" 
@@ -1965,6 +1975,7 @@
                                         Minimum="0"
                                         Maximum="100"
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slGeometryX_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxGeometryX"
@@ -1993,6 +2004,7 @@
                                         Minimum="0"
                                         Maximum="100"
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slGeometryY_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxGeometryY"
@@ -2021,6 +2033,7 @@
                                         Minimum="0"
                                         Maximum="100"
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slAutofitWidth_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxAutofitWidth"
@@ -2049,6 +2062,7 @@
                                         Minimum="0"
                                         Maximum="100"
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slAutofitHeight_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxAutofitHeight"
@@ -2189,6 +2203,7 @@
                                         Minimum="0"
                                         Maximum="100"
                                         IsSnapToTickEnabled="True"
+                                        IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slScreenshotQuality_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxScreenshotQuality"
@@ -2786,13 +2801,13 @@
                                         FontSize="10"
                                         HorizontalAlignment="Right"
                                         Width="31" VerticalAlignment="Top">
-                                    <Image Style="{DynamicResource ButtonColorPicker}" 
-                                            Width="11" 
-                                            Height="11" 
-                                            Margin="0,-1,0,0"
-                                            Stretch="Fill" 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"/>
+                                    <Ellipse x:Name="osdFontColorPreview" 
+                                             HorizontalAlignment="Left" 
+                                             Width="10"
+                                             Height="10"
+                                             VerticalAlignment="Top"
+                                             Stroke="White">
+                                    </Ellipse>
                                 </Button>
                                 <TextBox x:Name="tbxOSDFontColor"
                                          HorizontalAlignment="Right" 
@@ -2882,13 +2897,13 @@
                                         FontSize="10"
                                         HorizontalAlignment="Right"
                                         Width="31" VerticalAlignment="Top">
-                                    <Image Style="{DynamicResource ButtonColorPicker}" 
-                                            Width="11" 
-                                            Height="11" 
-                                            Margin="0,-1,0,0"
-                                            Stretch="Fill" 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"/>
+                                    <Ellipse x:Name="osdBorderColorPreview" 
+                                             HorizontalAlignment="Left" 
+                                             Width="10"
+                                             Height="10"
+                                             VerticalAlignment="Top"
+                                             Stroke="White">
+                                    </Ellipse>
                                 </Button>
                                 <TextBox x:Name="tbxOSDBorderColor"
                                          HorizontalAlignment="Right" 
@@ -2951,13 +2966,13 @@
                                         FontSize="10" 
                                         HorizontalAlignment="Right" 
                                         Width="31" VerticalAlignment="Top">
-                                    <Image Style="{DynamicResource ButtonColorPicker}" 
-                                            Width="11" 
-                                            Height="11" 
-                                            Margin="0,-1,0,0"
-                                            Stretch="Fill" 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"/>
+                                    <Ellipse x:Name="osdShadowColorPreview" 
+                                             HorizontalAlignment="Left" 
+                                             Width="10"
+                                             Height="10"
+                                             VerticalAlignment="Top"
+                                             Stroke="White">
+                                    </Ellipse>
                                 </Button>
                                 <TextBox x:Name="tbxOSDShadowColor"
                                          HorizontalAlignment="Right" 

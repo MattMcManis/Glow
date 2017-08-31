@@ -194,12 +194,6 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Buttons\Swatches\transparent.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\White\colorpicker.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\Black\colorpicker.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

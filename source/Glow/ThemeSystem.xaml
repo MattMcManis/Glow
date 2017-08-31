@@ -180,7 +180,7 @@
     </Style>
 
     <!-- Color Picker Button -->
-    <Style x:Key="ButtonColorPicker" TargetType="{x:Type Image}">
+    <!--<Style x:Key="ButtonColorPicker" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
         <Setter Property="Source" Value="Resources/Images/Buttons/Black/colorpicker.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
@@ -190,6 +190,6 @@
                 <Setter Property="Opacity" Value="0.6"/>
             </Trigger>
         </Style.Triggers>
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>

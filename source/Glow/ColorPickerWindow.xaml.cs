@@ -23,7 +23,6 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
-using System.Threading;
 using System.Windows.Threading;
 using System.Windows.Input;
 
@@ -34,6 +33,14 @@ namespace Glow
     /// </summary>
     public partial class ColorPickerWindow : Window
     {
+        // Set Spectrum Color based on Slider Value using Hue Filter
+        // Set Shade Base Color using Spectrum Color
+        // Get the Shade Color from Ellipse position, sets the Saturation (X), Luminosity (Y) values
+        // Run Saturation/Luminosity Filters based on X/Y values
+        // Set Preview Color
+        // Preview Color converts to Hex Code Textbox
+        // Typed Hex Code converts to RGB Preview
+
         private MainWindow mainwindow;
 
         private string textBoxKey; // Pass Keyword from MainWindow
@@ -41,7 +48,6 @@ namespace Glow
         //private ColorPickerWindow colorpickerwindow;
 
         public DispatcherTimer shadePickerTimer = new DispatcherTimer(DispatcherPriority.Render);
-        public DispatcherTimer spectrumPickerTimer = new DispatcherTimer(DispatcherPriority.Render);
 
 
         [DllImport("gdi32")]
@@ -53,6 +59,22 @@ namespace Glow
         [DllImport("user32")]
         private static extern int ReleaseDC(int hWnd, int hDC);
 
+        // Spectrum Color
+        System.Drawing.Color spectrumColor;
+
+        // Spectrum Value
+        public static double spectrumValue = 0;
+
+        // Shade Ellipse Canvas Position X/Y
+        public static double ellipseX = 0;
+        public static double ellipseY = 0;
+
+
+        // --------------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///    Methods
+        /// </summary>
+        // --------------------------------------------------------------------------------------------------------
 
         /// <summary>
         ///    Color Picker Window
@@ -68,7 +90,6 @@ namespace Glow
             InitializeComponent();
 
             shadePickerTimer.Tick += new EventHandler(shadePickerTimer_Tick);
-            spectrumPickerTimer.Tick += new EventHandler(spectrumPickerTimer_Tick);
         }
 
 
@@ -96,10 +117,8 @@ namespace Glow
             if (ellipseX == 0 || ellipseY == 0)
             {
                 // Center Middle
-                //double x = shadeCanvas.Height / 2;
-                //double y = shadeCanvas.Width / 2;
-                Canvas.SetLeft(shadePickerElipse, 121.5);
-                Canvas.SetTop(shadePickerElipse, 121.5);
+                Canvas.SetLeft(shadePickerElipse, (shadeCanvas.Height / 2) - 6);
+                Canvas.SetTop(shadePickerElipse, (shadeCanvas.Height / 2) - 6);
             }
             // Load last position
             else
@@ -108,88 +127,33 @@ namespace Glow
                 Canvas.SetTop(shadePickerElipse, ColorPickerWindow.ellipseY);
             }
 
-
             // -------------------------
             // Ellipse Dark Light
             // -------------------------
             // Change Ellipse color based on location
             shadeEllipseDarkLight();
 
+
             // -------------------------
             // Initial Color
             // -------------------------
-            // If null, default Red
-            if (spectrumIntColor == 0)
+            // If null, default
+            if (ColorPickerWindow.spectrumValue == 0)
             {
-                spectrumIntColor = 255;
-
-                spectrumColor = System.Drawing.Color.FromArgb((int)spectrumIntColor);
-
-                SetShadeBaseColor(spectrumColor);
+                GetSpectrumColor();
             }
-            // Load last used color
+            // Load last used color position
             else
             {
-                SetShadeBaseColor(ColorPickerWindow.spectrumColor);
+                slHue.Value = ColorPickerWindow.spectrumValue;
             }
-
+                
 
             // -------------------------
             // Set Color
             // -------------------------
             SetColor(spectrumColor);
         }
-
-
-
-
-
-
-
-        // Shade Ellipse Screen Position X/Y
-        //System.Windows.Point shadeEllipsePosition = new System.Windows.Point(0, 0);
-
-        // Shade Ellipse Canvas Position X/Y
-        public static double ellipseX = 0;
-        public static double ellipseY = 0;
-
-        // Picked Spectrum IntColor
-        public static long spectrumIntColor = 0;
-        public static System.Drawing.Color spectrumColor;
-
-
-
-        /// <summary>
-        ///    Spectrum Position IntColor
-        /// </summary>
-        public void SpectrumPositionIntColor()
-        {
-            // -------------------------
-            // Window Device Context
-            // -------------------------
-            int DC = GetWindowDC(0);
-
-            // -------------------------
-            // Get Color at Mouse Position
-            // -------------------------
-            System.Drawing.Point mouse = System.Windows.Forms.Control.MousePosition;
-
-            // -------------------------
-            // Set IntColor
-            // -------------------------
-            spectrumIntColor = GetPixel(DC, (int)mouse.X, (int)mouse.Y);
-
-            // -------------------------
-            // Release DC
-            // -------------------------
-            ReleaseDC(0, DC);
-
-            // -------------------------
-            // Return
-            // -------------------------
-            //return spectrumIntColor;
-        }
-
 
 
         /// <summary>
@@ -200,19 +164,27 @@ namespace Glow
             // -------------------------
             // Normalize Value
             // -------------------------
+            // Shift value 6 pixels to account for half of ellipse
+            // White corner must be shifted more towards left
+            double modifier = 0;
+            if (Canvas.GetLeft(shadePickerElipse) < 2 && Canvas.GetTop(shadePickerElipse) < 2)
+                modifier = 3;
+            else
+            {
+                modifier = 6;
+            }
+
             // 0-255, -6 to account for ellipse width/height
-            // sat 359
-            // luminosity 220
-            double saturation = (Canvas.GetLeft(shadePickerElipse) - 0) / (246 - 0); //reverse
-            double luminosity = 1 - ((Canvas.GetTop(shadePickerElipse) - 0) / (248 - 0));
+            double saturation = ((Canvas.GetLeft(shadePickerElipse) + modifier) - 0) / (255 - 0);
+            double luminosity = 1 - (((Canvas.GetTop(shadePickerElipse) + modifier) - 0) / (255 - 0)); //reverse value
 
             // -------------------------
             // Filter
             // -------------------------
-            // Desaturate
+            // Saturation
             color = Saturation(color, saturation);
 
-            // Brightness
+            // Luminosity
             color = Luminance(color, luminosity);
 
             // -------------------------
@@ -233,9 +205,8 @@ namespace Glow
         public void ColorPreview(System.Drawing.Color color)
         {
             // Color Preview
-            // Need to check if same value or it reverses itself
             System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(
-                System.Windows.Media.Color.FromArgb(255, color.B, color.G, color.R));
+                System.Windows.Media.Color.FromArgb(255, color.R, color.G, color.B));
 
             colorPreview.Fill = brushPreview;
         }
@@ -249,135 +220,107 @@ namespace Glow
             // Convert RGB to Hex
             // Reversed BGR for hex
             string hex = string.Empty;
-            return hex = pickedColor.B.ToString("X2") + pickedColor.G.ToString("X2") + pickedColor.R.ToString("X2");
+            return hex = pickedColor.R.ToString("X2") + pickedColor.G.ToString("X2") + pickedColor.B.ToString("X2");
         }
-
-
-
-
 
 
         /// <summary>
         ///   Hue Slider
         /// </summary>
-        //private void slHue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        //{
-        //    spectrumColor = Hue(spectrumColor, slHue.Value);
-
-        //    SetColor(spectrumColor);
-
-        //    tbxHue.Text = slHue.Value.ToString();
-        //}
-
-
-
-
-        public Thread thread = null;
-        //public BackgroundWorker worker;
-
-        /// <summary>
-        ///   Color Spectrum
-        /// </summary>
-        public void GetSpectrumColor()
+        private void slHue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Only if mouse is within Spectrum Rectangle
-            if (IsMouseEnteredSpectrum == true)
-            {
-                // -------------------------
-                // Change Shade Base Color
-                // -------------------------
-                SpectrumPositionIntColor();
-                spectrumColor = System.Drawing.Color.FromArgb((int)spectrumIntColor);
-
-                // Base Color
-                // Gradient White to Color
-                SetShadeBaseColor(spectrumColor);
-            }
+            GetSpectrumColor();
         }
 
 
+
         /// <summary>
-        ///   Shade Base Color
+        ///   Get Spectrum Color
         /// </summary>
-        public void SetShadeBaseColor(System.Drawing.Color color)
+        public void GetSpectrumColor()
         {
-            // Base Color
-            // Gradient White to Color
-            System.Windows.Media.LinearGradientBrush baseColor = new System.Windows.Media.LinearGradientBrush();
-            baseColor.StartPoint = new System.Windows.Point(0, 0);
-            baseColor.EndPoint = new System.Windows.Point(1, 0);
-            baseColor.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromArgb(255, 255, 255, 255), 0)); // white
-            baseColor.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromArgb(255, color.B, color.G, color.R), 1)); // base color
+            spectrumValue = slHue.Value;
 
-            colorShade.Fill = baseColor;
+            // Change Hue
+            spectrumColor = Hue(spectrumColor, slHue.Value);
 
+            // Change Base Color
+            SetShadeBaseColor(spectrumColor);
+
+            // Preview Color
             SetColor(spectrumColor);
         }
 
 
+
         /// <summary>
-        ///   Color Spectrum - Held Down (Timer)
+        ///   Set Shade Base Color
         /// </summary>
-        private void spectrumPickerTimer_Tick(object sender, EventArgs e)
-        {
-            GetSpectrumColor();
-        }
-        /// <summary>
-        ///   Color Spectrum - Button Down
-        /// </summary>
-        private void colorSpectrumPicker_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void SetShadeBaseColor(System.Drawing.Color color)
         {
             // -------------------------
-            // Mouse Clicked Once
+            // Shade Base Color
             // -------------------------
-            GetSpectrumColor();
+            // Gradient White to Color
+            System.Windows.Media.LinearGradientBrush brushBaseColor = new System.Windows.Media.LinearGradientBrush();
+            brushBaseColor.StartPoint = new System.Windows.Point(0, 0);
+            brushBaseColor.EndPoint = new System.Windows.Point(1, 0);
+            brushBaseColor.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromArgb(255, 255, 255, 255), 0)); // white
+            brushBaseColor.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B), 1)); // base color
+
+            shadeBase.Fill = brushBaseColor;
 
             // -------------------------
-            // Mouse is Held Down
+            // Set Color
             // -------------------------
-            // Start Timer
-            spectrumPickerTimer.Interval = new TimeSpan(0, 0, 0, 0, 001); //milliseconds
-            spectrumPickerTimer.Start();
+            SetColor(color);
         }
+
+
+
         /// <summary>
-        ///   Color Spectrum - Button Up
+        ///   Get Shade Color
         /// </summary>
-        private void colorSpectrumPicker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        public void GetShadeColor()
         {
-            // Disable Timer
-            spectrumPickerTimer.Stop();
+            // -------------------------
+            // Get Mouse Position on Canvas
+            // -------------------------
+            System.Windows.Point mouse = Mouse.GetPosition(shadeCanvas);
+
+            // Keep Ellipse in bounds of Canvas
+            if (mouse.X < 0)
+                mouse.X = 0;
+            if (mouse.X > shadeCanvas.Width)
+                mouse.X = shadeCanvas.Width;
+            if (mouse.Y < 0)
+                mouse.Y = 0;
+            if (mouse.Y > shadeCanvas.Height)
+                mouse.Y = shadeCanvas.Height;
+
+            // Set Ellipse to Mouse Position
+            // Subtract half of Ellipse width/height to Center
+            Canvas.SetLeft(shadePickerElipse, mouse.X - 6);
+            Canvas.SetTop(shadePickerElipse, mouse.Y - 6);
+
+
+            // -------------------------
+            // Save ellipse Position for Initial Load
+            // -------------------------
+            ellipseX = Canvas.GetLeft(shadePickerElipse);
+            ellipseY = Canvas.GetTop(shadePickerElipse);
+
+            // -------------------------
+            // Ellipse Dark Light
+            // -------------------------
+            // Change Ellipse color based on location
+            shadeEllipseDarkLight();
+
+            // -------------------------
+            // Set Color
+            // -------------------------
+            SetColor(spectrumColor);
         }
-        /// <summary>
-        ///   Color Spectrum - Mouse Enter
-        /// </summary>
-        public bool IsMouseEnteredSpectrum = false;
-        private void colorSpectrum_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            IsMouseEnteredSpectrum = true;
-        }
-        /// <summary>
-        ///   Color Spectrum - Mouse Leave
-        /// </summary>
-        private void colorSpectrum_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            IsMouseEnteredSpectrum = false;
-
-            // Disable Timer
-            spectrumPickerTimer.Stop();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         /// <summary>
@@ -390,7 +333,7 @@ namespace Glow
             // Color Ellipse
             // -------------------------
             // Set Ellipse Left to Black
-            if (Canvas.GetLeft(shadePickerElipse) < 121.5)
+            if (Canvas.GetLeft(shadePickerElipse) < (shadeCanvas.Height / 2.5) - 6)
             {
                 shadePickerElipse.Stroke = new SolidColorBrush(Colors.Black);
             }
@@ -401,8 +344,8 @@ namespace Glow
             }
 
             // Set Ellipse Top/Left Corner to Black
-            if (Canvas.GetTop(shadePickerElipse) < 121.5
-                && Canvas.GetLeft(shadePickerElipse) < 121.5)
+            if (Canvas.GetTop(shadePickerElipse) < (shadeCanvas.Height / 2.5) - 6
+                && Canvas.GetLeft(shadePickerElipse) < (shadeCanvas.Height / 2.5) - 6)
             {
                 shadePickerElipse.Stroke = new SolidColorBrush(Colors.Black);
             }
@@ -413,53 +356,48 @@ namespace Glow
             }
         }
 
+
         /// <summary>
-        ///   Shade Get Color
+        ///   Hex Color Textbox
         /// </summary>
-        public void GetShadeColor()
+        public static System.Drawing.Color ConvertHexToRGB(string hexCode)
         {
-            // Only if mouse is within Shade Rectangle
-            //if (IsMouseButtonUp == false)
-            //{
-                // -------------------------
-                // Get Mouse Position on Canvas
-                // -------------------------
-                System.Windows.Point mouse = Mouse.GetPosition(shadeCanvas);
+            System.Drawing.Color typedColor = new System.Drawing.Color();
 
-                // Keep Ellipse in bounds of Canvas
-                if (mouse.X < 0)
-                    mouse.X = 0;
-                if (mouse.X > shadeCanvas.Width)
-                    mouse.X = shadeCanvas.Width;
-                if (mouse.Y < 0)
-                    mouse.Y = 0;
-                if (mouse.Y > shadeCanvas.Height)
-                    mouse.Y = shadeCanvas.Height;
+            try
+            {
+                if (hexCode.Length == 7)
+                {
+                    System.Windows.Media.Color hexColor = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hexCode);
+                    typedColor = System.Drawing.Color.FromArgb(255, hexColor.R, hexColor.G, hexColor.B);
+                    //ColorPreview(typedColor);
 
-                // Set Ellipse to Mouse Position
-                // Subtract half of Ellipse width/height to Center
-                Canvas.SetLeft(shadePickerElipse, mouse.X - 6);
-                Canvas.SetTop(shadePickerElipse, mouse.Y - 6);
+                    // Set Ellipse Position
+                    //double saturation = typedColor.GetSaturation() * 255;
+                    //double luminosity = (1 - typedColor.GetBrightness()) * 255;
 
+                    //Canvas.SetLeft(shadePickerElipse, saturation - 6);
+                    //Canvas.SetTop(shadePickerElipse, luminosity - 6);
+                }
+            }
+            catch
+            {
 
-                // -------------------------
-                // Save ellipse Position for Initial Load
-                // -------------------------
-                ellipseX = Canvas.GetLeft(shadePickerElipse);
-                ellipseY = Canvas.GetTop(shadePickerElipse);
+            }
 
-                // -------------------------
-                // Ellipse Dark Light
-                // -------------------------
-                // Change Ellipse color based on location
-                shadeEllipseDarkLight();
-
-                // -------------------------
-                // Set Color
-                // -------------------------
-                SetColor(spectrumColor);
-            //}
+            return typedColor;
         }
+
+
+
+
+
+        // --------------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///    Controls
+        /// </summary>
+        // --------------------------------------------------------------------------------------------------------
+
         /// <summary>
         ///   Color Shade - Held Down (Timer)
         /// </summary>
@@ -473,7 +411,7 @@ namespace Glow
         /// </summary>
         private void colorShadePicker_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            IsMouseButtonUp = false;
+            //IsMouseButtonUp = false;
 
             UIElement el = (UIElement)sender;
             el.CaptureMouse();
@@ -506,12 +444,12 @@ namespace Glow
         /// <summary>
         ///   Color Shade - Mouse Enter
         /// </summary>
-        public bool IsMouseEnteredShade = false;
-        public bool IsMouseButtonUp = false;
+        //public bool IsMouseEnteredShade = false;
+        //public bool IsMouseButtonUp = false;
         private void colorShadePicker_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             //if (IsMouseEnteredShade == false)
-                shadePickerTimer.Stop();
+            shadePickerTimer.Stop();
 
             //IsMouseEnteredShade = true;
         }
@@ -532,113 +470,19 @@ namespace Glow
 
 
 
-
-
-
-
-
-
         /// <summary>
-        ///    Saturation
+        ///   Hex TextBox
         /// </summary>
-        // Fix Saturation Luminosity
-        // Ease the Luminosity as it approaches white
-        double InOutQuadBlend(double t)
-        {
-            if (t <= 0.5)
-                return 2.0f * Math.Pow(t, 2);
-            t -= 0.5;
-            return 2.0 * t * (1.0 - t) + 0.5;
-        }
-        double BezierBlend(double t)
-        {
-            return Math.Pow(t, 2) * (3.0 - 2.0 * t);
-        }
-        double ParametricBlend(double t)
-        {
-            double sqt = Math.Pow(t, 2);
-            return sqt / (2.0 * (sqt - t) + 1.0);
-        }
-        public System.Drawing.Color Saturation(System.Drawing.Color color, double saturation)
-        {
-            // Saturation
-            HSLColor hslColor = new HSLColor(color);
-            hslColor.Saturation *= saturation;
-            //hslColor.Saturation *= Math.Max(Math.Min(InOutQuadBlend(saturation), 1), 0);
-            
-
-            // Saturation Luminosity
-            hslColor = new HSLColor(hslColor);
-            //hslColor.Luminosity *= 2 - saturation;
-            hslColor.Luminosity *= 2 - InOutQuadBlend(saturation);
-            //hslColor.Luminosity *= Math.Max(Math.Min(2 - InOutQuadBlend(saturation), 2), 0);
-
-            return hslColor;
-        }
-
-
-        /// <summary>
-        ///    Luminance
-        /// </summary>
-        public System.Drawing.Color Luminance(System.Drawing.Color color, double luminosity)
-        {
-            HSLColor hslColor = new HSLColor(color);
-            hslColor.Luminosity *= luminosity; // 0 to 1
-
-            return hslColor;
-        }
-
-
-        /// <summary>
-        ///    Hue
-        /// </summary>
-        public System.Drawing.Color Hue(System.Drawing.Color color, double hue)
-        {
-            HSLColor hslColor = new HSLColor(color);
-            hslColor.Hue *= hue; // 0 to 1
-
-            return hslColor;
-        }
-
-
-
-
-
-        /// <summary>
-        ///   Hex Color Textbox
-        /// </summary>
-        public void ConvertHexToRGB(string hexCode)
-        {
-            try
-            {
-                if (hexCode.Length == 7)
-                {
-                    System.Windows.Media.Color hexColor = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hexCode);
-                    System.Drawing.Color typedColor = System.Drawing.Color.FromArgb(255, hexColor.B, hexColor.G, hexColor.R);
-                    ColorPreview(typedColor);
-
-                    //// Set Ellipse Position
-                    //double saturation = typedColor.GetSaturation() * 255;
-                    //double luminosity = (1 - typedColor.GetBrightness()) * 255;
-
-                    //Canvas.SetLeft(shadePickerElipse, saturation - 6);
-                    //Canvas.SetTop(shadePickerElipse, luminosity  - 6);
-                }
-            }
-            catch
-            {
-
-            }
-        }
         // Key Up
         private void tbxHexColorCode_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString());
+            ColorPreview(ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString()));
         }
         // Key Down
         private void tbxHexColorCode_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString());
+            ColorPreview(ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString()));
+
         }
 
 
@@ -648,19 +492,6 @@ namespace Glow
         /// </summary>
         private void swatchWhite_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Canvas.SetLeft(shadePickerElipse, -5);
-            //Canvas.SetTop(shadePickerElipse, -5);
-
-            //// -------------------------
-            //// Ellipse Dark Light
-            //// -------------------------
-            //shadeEllipseDarkLight();
-
-            //// -------------------------
-            //// Set
-            //// -------------------------
-            //SetColor(spectrumColor);
-
             string swatch = "FFFFFF";
 
             ConvertHexToRGB("#" + swatch);
@@ -673,19 +504,6 @@ namespace Glow
         /// </summary>
         private void swatchBlack_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Canvas.SetLeft(shadePickerElipse, 248);
-            //Canvas.SetTop(shadePickerElipse, 248);
-
-            //// -------------------------
-            //// Ellipse Dark Light
-            //// -------------------------
-            //shadeEllipseDarkLight();
-
-            //// -------------------------
-            //// Set Color
-            //// -------------------------
-            //SetColor(spectrumColor);
-
             string swatch = "000000";
 
             ConvertHexToRGB("#" + swatch);
@@ -786,14 +604,13 @@ namespace Glow
 
 
 
-
         /// <summary>
         ///   OK Button
         /// </summary>
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             string HexColorCode = tbxHexColorCode.Text.ToString();
-            
+
             // Return Hex Code to TextBox based on Passed Keyword
             if (textBoxKey == "subtitlesFont")
                 mainwindow.tbxSubtitlesFontColor.Text = HexColorCode;
@@ -808,9 +625,85 @@ namespace Glow
             else if (textBoxKey == "osdShadow")
                 mainwindow.tbxOSDShadowColor.Text = HexColorCode;
 
+
+            // Preview Picked Color in MainWindow button
+            MainWindow.PreviewPickedColors(mainwindow);
+
+
             this.Close();
         }
 
+
+
+
+
+
+        // --------------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///    Filters
+        /// </summary>
+        // --------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        ///    Saturation
+        /// </summary>
+        // Fix Saturation Luminosity
+        // Ease the Luminosity as it approaches white
+        double InOutQuadBlend(double t)
+        {
+            if (t <= 0.5)
+                return 2.0 * Math.Pow(t, 2);
+            t -= 0.5;
+            return 2.0 * t * (1.0 - t) + 0.5;
+        }
+        //double BezierBlend(double t)
+        //{
+        //    return Math.Pow(t, 2) * (3.0 - 2.0 * t);
+        //}
+        //double ParametricBlend(double t)
+        //{
+        //    double sqt = Math.Pow(t, 2);
+        //    return sqt / (2.0 * (sqt - t) + 1.0);
+        //}
+        public System.Drawing.Color Saturation(System.Drawing.Color color, double saturation)
+        {
+            // Saturation
+            HSLColor hslColor = new HSLColor(color);
+            hslColor.Saturation *= saturation;
+            //hslColor.Saturation *= Math.Max(Math.Min(InOutQuadBlend(saturation), 1), 0);
+            
+
+            // Saturation Luminosity
+            hslColor = new HSLColor(hslColor);
+            //hslColor.Luminosity *= 2 - saturation;
+            hslColor.Luminosity *= 2 - InOutQuadBlend(saturation);
+            //hslColor.Luminosity *= Math.Max(Math.Min(2 - InOutQuadBlend(saturation), 2), 0);
+
+            return hslColor;
+        }
+
+
+        /// <summary>
+        ///    Luminance
+        /// </summary>
+        public System.Drawing.Color Luminance(System.Drawing.Color color, double luminosity)
+        {
+            HSLColor hslColor = new HSLColor(color);
+            hslColor.Luminosity *= luminosity; // 0-1
+
+            return hslColor;
+        }
+
+
+        /// <summary>
+        ///    Hue
+        /// </summary>
+        public System.Drawing.Color Hue(System.Drawing.Color color, double value)
+        {
+            HSLColor hslColor = new HSLColor(hue: value, saturation: 240, luminosity: 120); //0-240
+
+            return hslColor;
+        }
 
 
 
@@ -953,6 +846,6 @@ namespace Glow
 
         }
 
- 
+
     }
 }

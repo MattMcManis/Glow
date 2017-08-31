@@ -32,14 +32,14 @@
         Loaded="Window_Loaded"
         
         Title="Color Picker" 
-        Height="320" Width="425"
+        Height="318" Width="425"
         
         Style="{DynamicResource ColorPickerWindowStyle}" Icon="Resources/Images/Icons/title-logo.ico">
 
     <Grid>
 
         <Rectangle x:Name="colorPreview" 
-                   Stroke="#FF787878"
+                   Stroke="#FF333333"
                    HorizontalAlignment="Left" 
                    Height="80" 
                    VerticalAlignment="Top"
@@ -65,11 +65,7 @@
                    Width="25"
                    VerticalAlignment="Top"
                    RenderTransformOrigin="0.5,0.5"
-                   Margin="277,12,0,0"
-                   MouseEnter="colorSpectrum_MouseEnter"
-                   MouseLeave="colorSpectrum_MouseLeave"
-                   MouseLeftButtonDown="colorSpectrumPicker_MouseLeftButtonDown"
-                   MouseLeftButtonUp="colorSpectrumPicker_MouseLeftButtonUp">
+                   Margin="277,12,0,0">
             <Rectangle.Fill>
                 <LinearGradientBrush
                     StartPoint="0,0" EndPoint="0,1" 
@@ -85,6 +81,30 @@
             </Rectangle.Fill>
         </Rectangle>
 
+        <!-- Hue Slider -->
+        <Slider x:Name="slHue" 
+                VerticalAlignment="Top" 
+                Minimum="0"
+                Maximum="240"
+                Value="0" 
+                IsMoveToPointEnabled="True"
+                ValueChanged="slHue_ValueChanged" 
+                RenderTransformOrigin="0.5,0.5"
+                Style="{DynamicResource HueSliderStyle}" 
+                Margin="167,122,-35,0"
+                Height="35" 
+                HorizontalAlignment="Left"
+                Width="255">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+
 
         <!-- Shade Canvas -->
         <Canvas x:Name="shadeCanvas" 
@@ -95,35 +115,15 @@
                 ClipToBounds="True" 
                 Margin="12,12,0,0">
 
-            <!-- Color -->
-            <!--<Rectangle x:Name="colorShade" 
+            <!-- Base Color -->
+            <Rectangle x:Name="shadeBase" 
                        HorizontalAlignment="Left"
                        Width="255"
                        Height="255"
                        VerticalAlignment="Top"
-                       Fill="#FFFFFFFF"/>-->
+                       Fill="#FFFFFFFF"/>
 
-            <!-- Color -->
-            <!-- usec to be shadeBrightness-->
-            <Rectangle x:Name="colorShade" 
-                       HorizontalAlignment="Left"
-                       Width="255"
-                       Height="255"
-                       VerticalAlignment="Top"
-                       Fill="#FFFFFFFF">
-                <!--<Rectangle.Fill>
-                    <LinearGradientBrush
-                        StartPoint="0,0" EndPoint="1,0" 
-                        SpreadMethod="Pad" 
-                        ColorInterpolationMode="SRgbLinearInterpolation" >
-                        <GradientStop Color="#FFFFFFFF" Offset="0" />
-                        <GradientStop Color="#FFFFFFFF" Offset="0.02" />
-                        <GradientStop Color="#00FFFFFF" Offset="1" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>-->
-            </Rectangle>
-
-            <!-- Black -->
+            <!-- Black Fade -->
             <Rectangle x:Name="shadeDarkness"
                        HorizontalAlignment="Left"
                        Width="255"
@@ -133,15 +133,6 @@
                        MouseLeave="colorShadePicker_MouseLeave"
                        MouseLeftButtonDown="colorShadePicker_MouseLeftButtonDown" 
                        MouseLeftButtonUp="colorShadePicker_MouseLeftButtonUp">
-                <!--<Rectangle.Fill>
-                    <LinearGradientBrush
-                        StartPoint="0,0" EndPoint="0,1" 
-                        SpreadMethod="Pad" ColorInterpolationMode="SRgbLinearInterpolation" >
-                        <GradientStop Color="#00000000" Offset="0" />
-                        <GradientStop Color="#00000000" Offset="0.02" />
-                        <GradientStop Color="#FF000000" Offset="0.97" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>-->
             </Rectangle>
 
             <!-- Ellipse -->
@@ -160,11 +151,12 @@
         <!-- OK Button -->
         <Button x:Name="btnOK" 
                 HorizontalAlignment="Left"
-                Margin="317,245,0,0"
+                Margin="317,208,0,0"
                 VerticalAlignment="Top"
                 Width="80"
                 Height="22" 
                 Cursor="Hand"
+                Style="{DynamicResource ButtonControlStyle}"
                 Click="btnOK_Click">
             <TextBlock Text="OK" Margin="0,-2,0,0"/>
         </Button>
@@ -211,7 +203,6 @@
                    Cursor="Hand"
                    PreviewMouseDown="swatchBlack_PreviewMouseDown"
                    VerticalAlignment="Top" />
-
         <!-- Yellow -->
         <Rectangle x:Name="swatchYellow" 
                    Fill="#FFFDFD02" 
@@ -255,42 +246,6 @@
                 <ImageBrush ImageSource="Resources/Images/Buttons/Swatches/transparent.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <!--<Rectangle
-            Fill="#FFCCCCCC" 
-            HorizontalAlignment="Left" 
-            Width="5"
-            Height="5" 
-            VerticalAlignment="Top" Margin="380,173,0,0" />
-        <Rectangle
-            Fill="#FFCCCCCC" 
-            HorizontalAlignment="Left" 
-            Width="5"
-            Height="5" 
-            VerticalAlignment="Top" Margin="390,173,0,0" />
-        <Rectangle
-            Fill="#FFCCCCCC" 
-            HorizontalAlignment="Left" 
-            Width="5"
-            Height="5" 
-            Margin="385,178,0,0" 
-            VerticalAlignment="Top" />
-        <Rectangle
-            Fill="#FFCCCCCC" 
-            HorizontalAlignment="Left" 
-            Width="5"
-            Height="5" 
-            Margin="380,183,0,0" 
-            VerticalAlignment="Top" />
-        <Rectangle 
-            Fill="#FFCCCCCC" 
-            HorizontalAlignment="Left" 
-            Width="5"
-            Height="5" 
-            Margin="390,183,0,0" 
-            VerticalAlignment="Top" />-->
-
-        <!-- None -->
-
 
     </Grid>
 
