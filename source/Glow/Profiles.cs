@@ -104,55 +104,55 @@ namespace Glow
                 // -------------------------
                 // General
                 // -------------------------
-                mainwindow.cboPriority.SelectedItem = "normal";
-                mainwindow.cboSavePositionQuit.SelectedItem = "no";
-                mainwindow.cboKeepOpen.SelectedItem = "yes";
-                mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.slGeometryX.Value = 50;
-                mainwindow.slGeometryY.Value = 50;
-                mainwindow.slAutofitWidth.Value = 100;
-                mainwindow.slAutofitHeight.Value = 95;
-                mainwindow.cboScreensaver.SelectedItem = "off";
+                mainwindow.cboPriority.SelectedItem = "default";
+                mainwindow.cboSavePositionQuit.SelectedItem = "default";
+                mainwindow.cboKeepOpen.SelectedItem = "default";
+                mainwindow.cboOnTop.SelectedItem = "default";
+                mainwindow.slGeometryX.Value = 0;
+                mainwindow.slGeometryY.Value = 0;
+                mainwindow.slAutofitWidth.Value = 0;
+                mainwindow.slAutofitHeight.Value = 0;
+                mainwindow.cboScreensaver.SelectedItem = "default";
                 // Screenshot
-                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
-                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
-                mainwindow.cboScreenshotFormat.SelectedItem = "png";
-                mainwindow.slScreenshotQuality.Value = 7; //png compression
+                mainwindow.cboScreenshotTemplate.SelectedItem = "default";
+                mainwindow.cboScreenshotTagColorspace.SelectedItem = "default";
+                mainwindow.cboScreenshotFormat.SelectedItem = "default";
+                mainwindow.slScreenshotQuality.Value = 0;
 
                 // -------------------------
                 // Video
                 // -------------------------
-                mainwindow.cboVideoDriver.SelectedItem = "opengl";
+                mainwindow.cboVideoDriver.SelectedItem = "default";
                 mainwindow.cboOpenGLPBO.SelectedItem = "no";
                 mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
-                mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
+                mainwindow.cboHWDecoder.SelectedItem = "default";
                 // Display
-                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedItem = "auto";
-                mainwindow.cboColorRange.SelectedItem = "auto";
-                mainwindow.cboVideoSync.SelectedItem = "off";
-                mainwindow.cboFramedrop.SelectedItem = "vo";
+                mainwindow.cboDisplayPrimaries.SelectedItem = "default";
+                mainwindow.cboTransferCharacteristics.SelectedItem = "default";
+                mainwindow.cboColorSpace.SelectedItem = "default";
+                mainwindow.cboColorRange.SelectedItem = "default";
+                mainwindow.cboVideoSync.SelectedItem = "default";
+                mainwindow.cboFramedrop.SelectedItem = "default";
                 // Image
                 mainwindow.slBrightness.Value = 0;
                 mainwindow.slContrast.Value = 0;
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "yes";
-                mainwindow.cboDither.SelectedItem = "no";
-                mainwindow.cboDeband.SelectedItem = "no";
+                mainwindow.cboGammaAuto.SelectedItem = "default";
+                mainwindow.cboDither.SelectedItem = "default";
+                mainwindow.cboDeband.SelectedItem = "default";
                 mainwindow.tbxDebandGrain.Text = "";
-                mainwindow.cboDeinterlace.SelectedItem = "auto";
+                mainwindow.cboDeinterlace.SelectedItem = "default";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "yes";
-                mainwindow.cboScale.SelectedItem = "bicubic";
+                mainwindow.cboSigmoid.SelectedItem = "default";
+                mainwindow.cboScale.SelectedItem = "default";
                 mainwindow.slScaleAntiring.Value = 0;
-                mainwindow.cboChromaScale.SelectedItem = "bicubic";
+                mainwindow.cboChromaScale.SelectedItem = "default";
                 mainwindow.slChromaAntiring.Value = 0;
-                mainwindow.cboDownscale.SelectedItem = "bicubic";
+                mainwindow.cboDownscale.SelectedItem = "default";
                 mainwindow.slDownscaleAntiring.Value = 0;
-                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+                mainwindow.cboSoftwareScaler.SelectedItem = "default";
 
                 // -------------------------
                 // Audio

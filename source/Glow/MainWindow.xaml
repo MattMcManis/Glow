@@ -32,15 +32,12 @@
         Loaded="Window_Loaded"
         Closing="MainWindow_Closing" 
         UseLayoutRounding="True"
-        Width="712" Height="400"
+        Width="712" Height="1140"
     
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
         Icon="Resources/Images/Icons/title-logo.ico"
         Style="{DynamicResource WindowStyle}" 
         >
-    <Window.Resources>
-
-    </Window.Resources>
 
     <Grid>
         <Grid Margin="0,0,-1,0">
@@ -538,6 +535,7 @@
                                           HorizontalAlignment="Right"
                                           Width="103"
                                           SelectionChanged="cboGammaAuto_SelectionChanged">
+                                    <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -558,6 +556,7 @@
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right" 
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>no</System:String>
                                     <System:String>auto</System:String>
                                     <System:String>8</System:String>
@@ -579,6 +578,7 @@
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
                                           HorizontalAlignment="Right" 
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -626,6 +626,7 @@
                                         SelectionChanged="cboScale_SelectionChanged" 
                                          HorizontalAlignment="Right" 
                                          Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -646,6 +647,7 @@
                                           SelectionChanged="cboScale_SelectionChanged" 
                                           HorizontalAlignment="Right" 
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>off</System:String>
                                     <System:String>nearest</System:String>
                                     <System:String>linear</System:String>
@@ -715,6 +717,7 @@
                                           SelectionChanged="cboChromaScale_SelectionChanged"
                                           HorizontalAlignment="Right" 
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>off</System:String>
                                     <System:String>nearest</System:String>
                                     <System:String>linear</System:String>
@@ -784,6 +787,7 @@
                                           SelectionChanged="cboDownscale_SelectionChanged" 
                                           HorizontalAlignment="Right"
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>off</System:String>
                                     <System:String>nearest</System:String>
                                     <System:String>linear</System:String>
@@ -853,6 +857,7 @@
                                           SelectionChanged="cboSoftwareScale_SelectionChanged" 
                                           HorizontalAlignment="Right"
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>off</System:String>
                                     <System:String>bilinear</System:String>
                                     <System:String>bicubic</System:String>
@@ -1432,7 +1437,9 @@
                                          Width="67"
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
-                                         Margin="0,498,14,0"/>
+                                         Margin="0,498,14,0" 
+                                         KeyDown="tbxSubtitlesFontColor_KeyDown"
+                                         KeyUp="tbxSubtitlesFontColor_KeyUp"/>
 
                                 <!--<ComboBox x:Name="cboSubtitlesFontColor" 
                                           HorizontalAlignment="Right" 
@@ -1529,7 +1536,9 @@
                                          Width="67"
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
-                                         Margin="0,556,14,0"/>
+                                         Margin="0,556,14,0" 
+                                         KeyDown="tbxSubtitlesBorderColor_KeyDown"
+                                         KeyUp="tbxSubtitlesBorderColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboSubtitlesBorderColor"
                                           HorizontalAlignment="Right"
                                           Margin="0,556,14,0" 
@@ -1600,7 +1609,9 @@
                                          Width="67"
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
-                                         Margin="0,585,14,0"/>
+                                         Margin="0,585,14,0"
+                                         KeyDown="tbxSubtitlesShadowColor_KeyDown"
+                                         KeyUp="tbxSubtitlesShadowColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboSubtitlesShadowColor"
                                           HorizontalAlignment="Right"
                                           Margin="0,585,14,0" 
@@ -1895,6 +1906,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>high</System:String>
                                     <System:String>abovenormal</System:String>
                                     <System:String>normal</System:String>
@@ -1917,6 +1929,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -1936,6 +1949,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -1955,6 +1969,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -2090,6 +2105,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>on</System:String>
                                     <System:String>off</System:String>
                                 </ComboBox>
@@ -2140,6 +2156,7 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
                                     <System:String>Playback Time</System:String>
                                     <System:String>Date Time</System:String>
                                     <System:String>Numbered</System:String>
@@ -2161,6 +2178,7 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -2181,6 +2199,7 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
                                     <System:String>png</System:String>
                                     <System:String>jpg</System:String>
                                     <System:String>jpeg</System:String>
@@ -2815,7 +2834,9 @@
                                          Width="67"
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
-                                         Margin="0,468,14,0"/>
+                                         Margin="0,468,14,0"
+                                         KeyDown="tbxOSDFontColor_KeyDown"
+                                         KeyUp="tbxOSDFontColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboOSDFontColor" 
                                           HorizontalAlignment="Right"
                                           Margin="0,507,14,0" 
@@ -2911,7 +2932,9 @@
                                          Width="67"
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
-                                         Margin="0,527,14,0"/>
+                                         Margin="0,527,14,0"
+                                         KeyDown="tbxOSDBorderColor_KeyDown"
+                                         KeyUp="tbxOSDBorderColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboOSDBorderColor" 
                                           HorizontalAlignment="Right" 
                                           Margin="0,566,14,0" 
@@ -2980,7 +3003,9 @@
                                          Width="67"
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
-                                         Margin="0,556,14,0"/>
+                                         Margin="0,556,14,0"
+                                         KeyDown="tbxOSDShadowColor_KeyDown"
+                                         KeyUp="tbxOSDShadowColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboOSDShadowColor" 
                                           HorizontalAlignment="Right" 
                                           Margin="0,595,14,0" 

@@ -87,8 +87,6 @@ namespace Glow
 
             this.textBoxKey = textBoxKey; // Pass Keyword from MainWindow
 
-            InitializeComponent();
-
             shadePickerTimer.Tick += new EventHandler(shadePickerTimer_Tick);
         }
 
@@ -413,6 +411,9 @@ namespace Glow
         {
             //IsMouseButtonUp = false;
 
+            // -------------------------
+            // Capture Mouse
+            // -------------------------
             UIElement el = (UIElement)sender;
             el.CaptureMouse();
 
@@ -433,10 +434,15 @@ namespace Glow
         /// </summary>
         private void colorShadePicker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            // -------------------------
+            // Release Mouse
+            // -------------------------
             UIElement el = (UIElement)sender;
             el.ReleaseMouseCapture();
 
+            // -------------------------
             // Disable Timer
+            // -------------------------
             shadePickerTimer.Stop();
 
             //Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
@@ -476,13 +482,16 @@ namespace Glow
         // Key Up
         private void tbxHexColorCode_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            MainWindow.AllowOnlyAlphaNumeric(mainwindow, e);
+
             ColorPreview(ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString()));
         }
         // Key Down
         private void tbxHexColorCode_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            ColorPreview(ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString()));
+            MainWindow.AllowOnlyAlphaNumeric(mainwindow, e);
 
+            ColorPreview(ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString()));
         }
 
 
@@ -665,20 +674,29 @@ namespace Glow
         //    double sqt = Math.Pow(t, 2);
         //    return sqt / (2.0 * (sqt - t) + 1.0);
         //}
+
+        //t: current time
+        //b: start value
+        //c: change in value
+        //d: duration
+        double EaseOutCubic(double t, double b, double c, double d)
+        {
+            t /= d;
+            t--;
+            return c * (t * t * t + 1) + b;
+        }
         public System.Drawing.Color Saturation(System.Drawing.Color color, double saturation)
         {
             // Saturation
             HSLColor hslColor = new HSLColor(color);
-            hslColor.Saturation *= saturation;
-            //hslColor.Saturation *= Math.Max(Math.Min(InOutQuadBlend(saturation), 1), 0);
-            
+            //hslColor.Saturation *= saturation;
+            hslColor.Saturation *= EaseOutCubic(1, saturation + 0.13, saturation, 240);
 
             // Saturation Luminosity
             hslColor = new HSLColor(hslColor);
             //hslColor.Luminosity *= 2 - saturation;
             hslColor.Luminosity *= 2 - InOutQuadBlend(saturation);
-            //hslColor.Luminosity *= Math.Max(Math.Min(2 - InOutQuadBlend(saturation), 2), 0);
-
+            
             return hslColor;
         }
 
@@ -707,12 +725,13 @@ namespace Glow
 
 
 
-
-    /*
-     * HSL Color
-     * Copyright Richard Newman
-     * https://richnewman.wordpress.com/about/code-listings-and-diagrams/hslcolor-class/
-     */
+        // --------------------------------------------------------------------------------------------------------
+        /*
+         * HSL Color
+         * Copyright Richard Newman
+         * https://richnewman.wordpress.com/about/code-listings-and-diagrams/hslcolor-class/
+         */
+        // --------------------------------------------------------------------------------------------------------
         public class HSLColor
         {
             // Private data members below are on scale 0-1

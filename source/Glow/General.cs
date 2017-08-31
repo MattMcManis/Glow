@@ -43,7 +43,11 @@ namespace Glow
             // -------------------------
             // Priority
             // -------------------------
-            string priority = "priority=" + (mainwindow.cboPriority.SelectedItem ?? string.Empty).ToString();
+            string priority = string.Empty;
+
+            // must not be default
+            if ((string)(mainwindow.cboPriority.SelectedItem ?? string.Empty) != "default")
+                priority = "priority=" + (mainwindow.cboPriority.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -55,28 +59,45 @@ namespace Glow
             // -------------------------
             string savePositiOnQuit = string.Empty;
 
-            if ((string)(mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty) == "yes")
+            if ((string)(mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty) != "default"
+                && (string)(mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty) == "yes")
                 savePositiOnQuit = "save-position-on-quit";
 
             // -------------------------
             // Keep Open
             // -------------------------
-            string keepOpen = "keep-open=" + (mainwindow.cboKeepOpen.SelectedItem ?? string.Empty).ToString();
+            string keepOpen = string.Empty;
+
+            // must not be default
+            if ((string)(mainwindow.cboKeepOpen.SelectedItem ?? string.Empty) != "default")
+                keepOpen = "keep-open=" + (mainwindow.cboKeepOpen.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // On Top
             // -------------------------
-            string onTop = "ontop=" + (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString();
+            string onTop = string.Empty;
+
+            // must not be default
+            if ((string)(mainwindow.cboOnTop.SelectedItem ?? string.Empty) != "default")
+                onTop = "ontop=" + (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Geometry
             // -------------------------
-            string geometry = "geometry=" + mainwindow.tbxGeometryX.Text.ToString() + "%" + ":" + mainwindow.tbxGeometryY.Text.ToString() + "%";
+            string geometry = string.Empty;
+
+            // if not 0
+            if (mainwindow.slGeometryX.Value != 0 && mainwindow.slGeometryY.Value != 0)
+                geometry = "geometry=" + mainwindow.tbxGeometryX.Text.ToString() + "%" + ":" + mainwindow.tbxGeometryY.Text.ToString() + "%";
 
             // -------------------------
             // Auto-Fit
             // -------------------------
-            string autoFit = "autofit-larger=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
+            string autoFit = string.Empty;
+
+            // if not 0
+            if (mainwindow.slAutofitWidth.Value != 0 && mainwindow.slAutofitHeight.Value != 0)
+                autoFit = "autofit-larger=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
 
             // -------------------------
             // Screensaver
@@ -119,21 +140,38 @@ namespace Glow
             else if ((string)(mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty) == "Numbered")
                     screenshotTemplate = "screenshot-template=\"%F-%n\"";
 
+
             // Tag Colorspace
-            string screenshotTagColorspace = "screenshot-tag-colorspace=" + (mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty).ToString();
+            // must not be default
+            string screenshotTagColorspace = string.Empty;
+
+            if ((string)(mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty) != "default")
+                screenshotTagColorspace = "screenshot-tag-colorspace=" + (mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty).ToString();
+
 
             // Format
-            string screenshotFormat = "screenshot-format=" + (mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty).ToString();
+            string screenshotFormat = string.Empty;
+
+            // must not be default
+            if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) != "default")
+                screenshotFormat = "screenshot-format=" + (mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty).ToString();
+
 
             // Qulaity
             string screenshotQuality = string.Empty;
-            // jpg
-            if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpg"
+
+            // format must not be default
+            if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) != "default")
+            {
+                // jpg
+                if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpg"
                 || (string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpeg")
-                screenshotQuality = "screenshot-jpeg-quality=" + mainwindow.tbxScreenshotQuality.Text.ToString();
-            // png
-            else if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "png")
-                screenshotQuality = "screenshot-png-compression=" + mainwindow.tbxScreenshotQuality.Text.ToString();
+                    screenshotQuality = "screenshot-jpeg-quality=" + mainwindow.tbxScreenshotQuality.Text.ToString();
+                // png
+                else if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "png")
+                    screenshotQuality = "screenshot-png-compression=" + mainwindow.tbxScreenshotQuality.Text.ToString();
+            }
+
 
 
             // --------------------------------------------------

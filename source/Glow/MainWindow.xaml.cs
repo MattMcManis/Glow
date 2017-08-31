@@ -30,6 +30,7 @@ using System.Windows.Documents;
 using System.Text;
 using System.Windows.Controls;
 using System.Drawing;
+using System.Windows.Input;
 
 namespace Glow
 {
@@ -301,6 +302,46 @@ namespace Glow
 
             // Return Text
             return textRange.Text;
+        }
+
+
+        public static void AllowOnlyAlphaNumeric(MainWindow window, System.Windows.Input.KeyEventArgs e)
+        {
+            // Escape closes window
+            if (Key.Escape == e.Key)
+            {
+                window.Close();
+            }
+
+            // Disallow Symbols
+            else if (Keyboard.IsKeyDown(Key.LeftShift) && e.Key >= Key.D0 && e.Key <= Key.D9 ||
+                     Keyboard.IsKeyDown(Key.RightShift) && e.Key >= Key.D0 && e.Key <= Key.D9)
+            {
+                e.Handled = true;
+            }
+
+            // Allow alphanumeric and backspace
+            else if (e.Key >= Key.D0 && e.Key <= Key.D9 ||
+                e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 ||
+                e.Key >= Key.A && e.Key <= Key.Z ||
+                e.Key == Key.Delete ||
+                e.Key == Key.Back)
+            {
+                e.Handled = false;
+
+            }
+
+            // All other keys
+            else
+            {
+                e.Handled = true;
+            }
+
+            // Tab pressed, focus must go to the next control
+            if (e.Key == Key.Tab)
+            {
+                e.Handled = false;
+            }
         }
 
 
@@ -596,8 +637,52 @@ namespace Glow
         {
             // Enable/Disable Hardware Scaling if Software Scaling is on
 
+            // Default (Enabled)
+            if ((string)(cboSoftwareScaler.SelectedItem ?? string.Empty) == "default")
+            {
+                // Sigmoid
+                cboSigmoid.IsEnabled = true;
+                cboSigmoid.SelectedItem = "default";
+
+                // Scale
+                cboScale.IsEnabled = true;
+                slScaleAntiring.IsEnabled = true;
+                tbxScaleAntiring.IsEnabled = true;
+
+                // Chroma
+                cboChromaScale.IsEnabled = true;
+                slChromaAntiring.IsEnabled = true;
+                tbxChromaAntiring.IsEnabled = true;
+
+                // Downscale
+                cboDownscale.IsEnabled = true;
+                slDownscaleAntiring.IsEnabled = true;
+                tbxDownscaleAntiring.IsEnabled = true;
+            }
             // Enabled
-            if ((string)(cboSoftwareScaler.SelectedItem ?? string.Empty) != "off")
+            else if ((string)(cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            {
+                // Sigmoid
+                cboSigmoid.IsEnabled = true;
+                cboSigmoid.SelectedItem = "yes";
+
+                // Scale
+                cboScale.IsEnabled = true;
+                slScaleAntiring.IsEnabled = true;
+                tbxScaleAntiring.IsEnabled = true;
+
+                // Chroma
+                cboChromaScale.IsEnabled = true;
+                slChromaAntiring.IsEnabled = true;
+                tbxChromaAntiring.IsEnabled = true;
+
+                // Downscale
+                cboDownscale.IsEnabled = true;
+                slDownscaleAntiring.IsEnabled = true;
+                tbxDownscaleAntiring.IsEnabled = true;
+            }
+            // Disabled
+            else
             {
                 // Sigmoid
                 cboSigmoid.IsEnabled = false;
@@ -621,28 +706,11 @@ namespace Glow
                 slDownscaleAntiring.Value = 0;
                 tbxDownscaleAntiring.IsEnabled = false;
             }
-            // Disabled
-            else
-            {
-                // Sigmoid
-                cboSigmoid.IsEnabled = true;
-                cboSigmoid.SelectedItem = "yes";
 
-                // Scale
-                cboScale.IsEnabled = true;
-                slScaleAntiring.IsEnabled = true;
-                tbxScaleAntiring.IsEnabled = true;
+            //if ((string)(cboSoftwareScaler.SelectedItem ?? string.Empty) != "default")
+            //{
 
-                // Chroma
-                cboChromaScale.IsEnabled = true;
-                slChromaAntiring.IsEnabled = true;
-                tbxChromaAntiring.IsEnabled = true;
-
-                // Downscale
-                cboDownscale.IsEnabled = true;
-                slDownscaleAntiring.IsEnabled = true;
-                tbxDownscaleAntiring.IsEnabled = true;
-            }
+            //}
         }
 
         /// <summary>
@@ -850,6 +918,18 @@ namespace Glow
         {
             OpenColorPickerWindow("subtitlesFont");
         }
+        /// <summary>
+        ///     Subtitles Font Color TextBox
+        /// </summary>
+        private void tbxSubtitlesFontColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+        private void tbxSubtitlesFontColor_KeyUp(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+        
 
         /// <summary>
         ///    Subtitle Border Color Button
@@ -860,11 +940,35 @@ namespace Glow
         }
 
         /// <summary>
+        ///     Subtitles Border Color TextBox
+        /// </summary>
+        private void tbxSubtitlesBorderColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+        private void tbxSubtitlesBorderColor_KeyUp(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+
+        /// <summary>
         ///    Subtitle Shadow Color Button
         /// </summary>
         private void btnSubtitleShadowColor_Click(object sender, RoutedEventArgs e)
         {
             OpenColorPickerWindow("subtitlesShadow");
+        }
+
+        /// <summary>
+        ///     Subtitles Shadow Color TextBox
+        /// </summary>
+        private void tbxSubtitlesShadowColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+        private void tbxSubtitlesShadowColor_KeyUp(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
         }
 
 
@@ -977,7 +1081,7 @@ namespace Glow
         // OSD Controls
         // --------------------------------------------------
         /// <summary>
-        ///    OSD Font
+        ///    OSD Font Button
         /// </summary>
         private void btnOSDFontColor_Click(object sender, RoutedEventArgs e)
         {
@@ -985,7 +1089,19 @@ namespace Glow
         }
 
         /// <summary>
-        ///    OSD Border
+        ///     OSD Font Color TextBox
+        /// </summary>
+        private void tbxOSDFontColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+        private void tbxOSDFontColor_KeyUp(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+
+        /// <summary>
+        ///    OSD Border Button
         /// </summary>
         private void btnOSDBorderColor_Click(object sender, RoutedEventArgs e)
         {
@@ -993,11 +1109,35 @@ namespace Glow
         }
 
         /// <summary>
-        ///    OSD Shadow
+        ///     OSD Font Color TextBox
+        /// </summary>
+        private void tbxOSDBorderColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+        private void tbxOSDBorderColor_KeyUp(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+
+        /// <summary>
+        ///    OSD Shadow Button
         /// </summary>
         private void btnOSDShadowColor_Click(object sender, RoutedEventArgs e)
         {
             OpenColorPickerWindow("osdShadow");
+        }
+
+        /// <summary>
+        ///     OSD Shadow Color TextBox
+        /// </summary>
+        private void tbxOSDShadowColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
+        }
+        private void tbxOSDShadowColor_KeyUp(object sender, KeyEventArgs e)
+        {
+            AllowOnlyAlphaNumeric(this, e);
         }
 
         /// <summary>

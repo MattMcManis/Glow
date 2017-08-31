@@ -34,7 +34,8 @@
         Title="Color Picker" 
         Height="318" Width="425"
         
-        Style="{DynamicResource ColorPickerWindowStyle}" Icon="Resources/Images/Icons/title-logo.ico">
+        Style="{DynamicResource ColorPickerWindowStyle}" 
+        Icon="Resources/Images/Icons/title-logo.ico">
 
     <Grid>
 
@@ -139,8 +140,8 @@
             <Ellipse x:Name="shadePickerElipse" 
                      Width="12"
                      Height="12" 
-                     Canvas.Left="119" 
-                     Canvas.Top="119"
+                     Canvas.Left="121.5" 
+                     Canvas.Top="121.5"
                      Stroke="#FFCCCCCC"
                      IsHitTestVisible="False"/>
 

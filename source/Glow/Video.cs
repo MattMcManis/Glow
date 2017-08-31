@@ -232,7 +232,11 @@ namespace Glow
             // -------------------------
             // Dither
             // -------------------------
-            string dither = "dither-depth=" + (mainwindow.cboDither.SelectedItem ?? string.Empty).ToString();
+            string dither = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboDither.SelectedItem ?? string.Empty) != "default")
+                dither = "dither-depth=" + (mainwindow.cboDither.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------
@@ -242,8 +246,16 @@ namespace Glow
             // -------------------------
             // Resize Only
             // -------------------------
-            // always on
-            string scalerResizeOnly = "scaler-resizes-only";
+            string scalerResizeOnly = string.Empty;
+
+            // only if scalers are not default
+            if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "default"
+                && (string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "default"
+                && (string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "default"
+                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) != "default")
+
+                // else always on
+                scalerResizeOnly = "scaler-resizes-only";
 
             // -------------------------
             // Sigmoid Upscaling
@@ -259,84 +271,105 @@ namespace Glow
             // -------------------------
             string scale = string.Empty;
 
+            // software scaler must be default or off
             // scale must be on
-            // software scaler must be off
-            if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off" 
-                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off") 
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
+                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                scale = "scale=" + (mainwindow.cboScale.SelectedItem ?? string.Empty).ToString();
+                if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "default"
+                    && (string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off" ) 
+
+                    scale = "scale=" + (mainwindow.cboScale.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Scale Antiring
             // -------------------------
             string scaleAntiring = string.Empty;
 
+            // software scaler must be default or off
             // scale must be on
             // antitring must be above 0
-            // software scaler must be off
-            if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off"
-                && mainwindow.slScaleAntiring.Value != 0 
-                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
-                scaleAntiring = "scale-antiring=" + mainwindow.tbxScaleAntiring.Text.ToString();
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
+                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+
+                if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off"
+                    && mainwindow.slScaleAntiring.Value != 0)
+
+                    scaleAntiring = "scale-antiring=" + mainwindow.tbxScaleAntiring.Text.ToString();
 
             // -------------------------
             // Chroma Scale
             // -------------------------
             string chromascale = string.Empty;
 
+            // software scaler must be default or off
+            // must not be default
             // chrome scale must be on
-            // software scaler must be off
-            if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off"
-                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
+                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                chromascale = "cscale=" + (mainwindow.cboChromaScale.SelectedItem ?? string.Empty).ToString();
+                if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "default"
+                    && (string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off")
+
+                    chromascale = "cscale=" + (mainwindow.cboChromaScale.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Chroma Antiring
             // -------------------------
+            // software scaler must be default or off
             // chrome scale must be on
             // antitring must be above 0
-            // software scaler must be off
             string chromascaleAntiring = string.Empty;
 
-            if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off"
-                && mainwindow.slChromaAntiring.Value != 0 
-                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
+                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                chromascaleAntiring = "cscale-antiring=" + mainwindow.tbxChromaAntiring.Text.ToString();
+                if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off"
+                    && mainwindow.slChromaAntiring.Value != 0)
+
+                    chromascaleAntiring = "cscale-antiring=" + mainwindow.tbxChromaAntiring.Text.ToString();
 
             // -------------------------
             // Downscale
             // -------------------------
             string downscale = string.Empty;
 
+            // software scaler must be default or off
+            // must not be default
             // downscale must be on
-            // software scaler must be off
-            if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off"
-                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
+                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                downscale = "dscale=" + (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString();
+                if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "default"
+                    && (string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off")
+
+                    downscale = "dscale=" + (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Downscale Antiring
             // -------------------------
             string downscaleAntiring = string.Empty;
 
+            // software scaler must be default or off
             // downscale must be on
             // antitring must be above 0
-            // software scaler must be off
-            if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off"
-                && mainwindow.slDownscaleAntiring.Value != 0 
-                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
-                downscaleAntiring = "dscale-antiring=" + mainwindow.tbxDownscaleAntiring.Text.ToString();
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
+                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+
+                if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off"
+                    && mainwindow.slDownscaleAntiring.Value != 0)
+
+                    downscaleAntiring = "dscale-antiring=" + mainwindow.tbxDownscaleAntiring.Text.ToString();
 
             // -------------------------
             // Software Scaler
             // -------------------------
             string softwarescaler = string.Empty;
 
-            // software scaler must be off
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) != "off")
+            // must not be default of off
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) != "default"
+                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) != "off")
+
                 softwarescaler = "sws-scaler=" + (mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty).ToString();
 
 
