@@ -419,17 +419,28 @@ namespace Glow
         public void GetShadeColor()
         {
             // Only if mouse is within Shade Rectangle
-            if (IsMouseEnteredShade == true)
-            {
+            //if (IsMouseButtonUp == false)
+            //{
                 // -------------------------
                 // Get Mouse Position on Canvas
                 // -------------------------
                 System.Windows.Point mouse = Mouse.GetPosition(shadeCanvas);
 
+                // Keep Ellipse in bounds of Canvas
+                if (mouse.X < 0)
+                    mouse.X = 0;
+                if (mouse.X > shadeCanvas.Width)
+                    mouse.X = shadeCanvas.Width;
+                if (mouse.Y < 0)
+                    mouse.Y = 0;
+                if (mouse.Y > shadeCanvas.Height)
+                    mouse.Y = shadeCanvas.Height;
+
                 // Set Ellipse to Mouse Position
                 // Subtract half of Ellipse width/height to Center
                 Canvas.SetLeft(shadePickerElipse, mouse.X - 6);
                 Canvas.SetTop(shadePickerElipse, mouse.Y - 6);
+
 
                 // -------------------------
                 // Save ellipse Position for Initial Load
@@ -447,7 +458,7 @@ namespace Glow
                 // Set Color
                 // -------------------------
                 SetColor(spectrumColor);
-            }
+            //}
         }
         /// <summary>
         ///   Color Shade - Held Down (Timer)
@@ -462,6 +473,11 @@ namespace Glow
         /// </summary>
         private void colorShadePicker_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            IsMouseButtonUp = false;
+
+            UIElement el = (UIElement)sender;
+            el.CaptureMouse();
+
             // -------------------------
             // Mouse Clicked Once
             // -------------------------
@@ -479,6 +495,9 @@ namespace Glow
         /// </summary>
         private void colorShadePicker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            UIElement el = (UIElement)sender;
+            el.ReleaseMouseCapture();
+
             // Disable Timer
             shadePickerTimer.Stop();
 
@@ -488,19 +507,25 @@ namespace Glow
         ///   Color Shade - Mouse Enter
         /// </summary>
         public bool IsMouseEnteredShade = false;
+        public bool IsMouseButtonUp = false;
         private void colorShadePicker_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            IsMouseEnteredShade = true;
+            //if (IsMouseEnteredShade == false)
+                shadePickerTimer.Stop();
+
+            //IsMouseEnteredShade = true;
         }
         /// <summary>
         ///   Color Shade - Mouse Leave
         /// </summary>
         private void colorShadePicker_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            IsMouseEnteredShade = false;
+            //ReleaseMouseCapture();
+
+            //IsMouseEnteredShade = false;
 
             // Disable Timer
-            shadePickerTimer.Stop();
+            //shadePickerTimer.Stop();
 
             //Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
         }

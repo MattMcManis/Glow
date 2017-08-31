@@ -96,27 +96,47 @@ namespace Glow
             // -------------------------
             // Primaries
             // -------------------------
-            string displayPrimaries = "target-prim=" + (mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty).ToString();
+            string displayPrimaries = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty) != "default")
+                displayPrimaries = "target-prim=" + (mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Transfer Characteristics
             // -------------------------
-            string displayTransChar = "target-trc=" + (mainwindow.cboTransferCharacteristics.SelectedItem ?? string.Empty).ToString();
+            string displayTransChar = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboTransferCharacteristics.SelectedItem ?? string.Empty) != "default")
+                displayTransChar = "target-trc=" + (mainwindow.cboTransferCharacteristics.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Color Space
             // -------------------------
-            string colorSpace = "format=colormatrix=" + (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString();
+            string colorSpace = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboColorSpace.SelectedItem ?? string.Empty) != "default")
+                colorSpace = "format=colormatrix=" + (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Color Space
             // -------------------------
-            string colorRange = "video-output-levels=" + (mainwindow.cboColorRange.SelectedItem ?? string.Empty).ToString();
+            string colorRange = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboColorRange.SelectedItem ?? string.Empty) != "default")
+                colorRange = "video-output-levels=" + (mainwindow.cboColorRange.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Deinterlace
             // -------------------------
-            string deinterlace = "deinterlace=" + (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString();
+            string deinterlace = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboDeinterlace.SelectedItem ?? string.Empty) != "default")
+                deinterlace = "deinterlace=" + (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Video Sync
@@ -124,13 +144,18 @@ namespace Glow
             string videosync = string.Empty;
 
             // only if video sync is on
-            if ((string)(mainwindow.cboVideoSync.SelectedItem ?? string.Empty) != "off")
+            if ((string)(mainwindow.cboVideoSync.SelectedItem ?? string.Empty) != "default" 
+                    && (string)(mainwindow.cboVideoSync.SelectedItem ?? string.Empty) != "off")
                 videosync = "video-sync=" + (mainwindow.cboVideoSync.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Framedrop
             // -------------------------
-            string framedrop = "framedrop=" + (mainwindow.cboFramedrop.SelectedItem ?? string.Empty).ToString();
+            string framedrop = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboFramedrop.SelectedItem ?? string.Empty) != "default")
+                framedrop = "framedrop=" + (mainwindow.cboFramedrop.SelectedItem ?? string.Empty).ToString();
 
 
             // --------------------------------------------------

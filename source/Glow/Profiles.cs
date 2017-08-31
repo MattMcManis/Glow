@@ -129,8 +129,8 @@ namespace Glow
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedIndex = 0;
-                mainwindow.cboColorRange.SelectedIndex = 0;
+                mainwindow.cboColorSpace.SelectedItem = "auto";
+                mainwindow.cboColorRange.SelectedItem = "auto";
                 mainwindow.cboVideoSync.SelectedItem = "off";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
@@ -284,8 +284,8 @@ namespace Glow
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedIndex = 0;
-                mainwindow.cboColorRange.SelectedIndex = 0;
+                mainwindow.cboColorSpace.SelectedItem = "auto";
+                mainwindow.cboColorRange.SelectedItem = "auto";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
@@ -434,8 +434,8 @@ namespace Glow
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedIndex = 0;
-                mainwindow.cboColorRange.SelectedIndex = 0;
+                mainwindow.cboColorSpace.SelectedItem = "auto";
+                mainwindow.cboColorRange.SelectedItem = "auto";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
@@ -584,8 +584,8 @@ namespace Glow
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedIndex = 0;
-                mainwindow.cboColorRange.SelectedIndex = 0;
+                mainwindow.cboColorSpace.SelectedItem = "auto";
+                mainwindow.cboColorRange.SelectedItem = "auto";
                 mainwindow.cboVideoSync.SelectedItem = "";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
@@ -734,8 +734,8 @@ namespace Glow
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedIndex = 0;
-                mainwindow.cboColorRange.SelectedIndex = 0;
+                mainwindow.cboColorSpace.SelectedItem = "auto";
+                mainwindow.cboColorRange.SelectedItem = "auto";
                 mainwindow.cboVideoSync.SelectedItem = "";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
@@ -885,8 +885,8 @@ namespace Glow
                 // Display
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedIndex = 0;
-                mainwindow.cboColorRange.SelectedIndex = 0;
+                mainwindow.cboColorSpace.SelectedItem = "auto";
+                mainwindow.cboColorRange.SelectedItem = "auto";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image

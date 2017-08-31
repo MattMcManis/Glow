@@ -201,6 +201,7 @@
                                     ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>auto</System:String>
                                     <System:String>bt.470m</System:String>
                                     <System:String>bt.601-525</System:String>
@@ -231,6 +232,7 @@
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>auto</System:String>
                                     <System:String>bt.1886</System:String>
                                     <System:String>srgb</System:String>
@@ -261,6 +263,7 @@
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>auto</System:String>
                                     <System:String>bt.601</System:String>
                                     <System:String>bt.709</System:String>
@@ -284,6 +287,7 @@
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
+                                    <System:String>default</System:String>
                                     <System:String>auto</System:String>
                                     <System:String>limited</System:String>
                                     <System:String>full</System:String>
@@ -304,6 +308,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>auto</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -324,6 +329,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>off</System:String>
                                     <System:String>display-resample</System:String>
                                     <System:String>display-resample-vdrop</System:String>
@@ -350,6 +356,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>no</System:String>
                                     <System:String>vo</System:String>
                                     <System:String>decoder</System:String>
