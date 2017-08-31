@@ -95,7 +95,7 @@ namespace Glow
         // -------------------------
         public static List<string> _videoDriver_Items = new List<string>()
         {
-            "off",
+            "default",
             "opengl",
             "opengl-hq",
             "direct3d",
@@ -114,7 +114,7 @@ namespace Glow
         // -------------------------
         public static List<string> _openglPBO_Items = new List<string>()
         {
-            "off",
+            "default",
             "yes",
             "no",
         };
@@ -130,7 +130,7 @@ namespace Glow
         // -------------------------
         public static List<string> _hwDecoder_Items = new List<string>()
         {
-            "off",
+            "default",
             "no",
             "yes",
             "auto-copy",

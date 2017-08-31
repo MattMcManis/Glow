@@ -25,7 +25,7 @@ using System.Windows.Controls;
 
 namespace Glow
 {
-    public partial class OSCOSD
+    public partial class OSD
     {
         private static ComboBoxItem selectedItem;
         private static string selected;
@@ -38,40 +38,6 @@ namespace Glow
             // --------------------------------------------------
             // Main
             // --------------------------------------------------
-
-            // -------------------------
-            // OSC Title
-            // -------------------------
-            string oscTitle = "## OSC ##";
-
-            // -------------------------
-            // OSC On Screen Controller
-            // -------------------------
-            string oscEnable = "osc=" + (mainwindow.cboOSC.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // Layout
-            // -------------------------
-            string oscLayout = "osc-layout=" + (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // Seekbar
-            // -------------------------
-            string oscSeekbar = "osc-seekbarstyle=" + (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString();
-
-            // -------------------------
-            // Script Opts
-            // -------------------------
-            // Join Layout, Seekbar
-            List<string> listOSCScriptOpts = new List<string>()
-            {
-                oscLayout,
-                oscSeekbar,
-            };
-            string oscScriptOpts = "script-opts=" + string.Join(",", listOSCScriptOpts
-                .Where(s => !string.IsNullOrEmpty(s))
-            );
-
 
             // -------------------------
             // OSD Title
@@ -151,8 +117,13 @@ namespace Glow
             // -------------------------
             // Font Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue ?? string.Empty);
-            string fontColor = "osd-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
+            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue ?? string.Empty);
+            //string fontColor = "osd-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
+            string fontColor = string.Empty;
+
+            // only if not empty
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDFontColor.Text))
+                fontColor = "osd-color=" + "\"" + "#FF" + mainwindow.tbxOSDFontColor.Text + "\"";
 
             // -------------------------
             // Border Size
@@ -162,40 +133,44 @@ namespace Glow
             // -------------------------
             // Border Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue ?? string.Empty);
-            string borderColor = "osd-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
+            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue ?? string.Empty);
+            //string borderColor = "osd-border-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
+            string borderColor = string.Empty;
+
+            // only if not empty
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBorderColor.Text))
+                borderColor = "osd-border-color=" + "\"" + "#FF" + mainwindow.tbxOSDBorderColor.Text + "\"";
 
             // -------------------------
             // Shadow Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue ?? string.Empty);
-            selected = (string)(selectedItem.Content);
-
             string shadowColor = string.Empty;
 
-            if (selected != "None")
-            {
-                shadowColor = "osd-shadow-color=" + "\"" + "#33" + ColorPicker.HexColor(selectedItem) + "\"";
-            }
+            // only if not empty
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDShadowColor.Text))
+                shadowColor = "osd-shadow-color=" + "\"" + "#33" + mainwindow.tbxOSDShadowColor.Text + "\"";
+            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue ?? string.Empty);
+            //selected = (string)(selectedItem.Content);
+
+            //string shadowColor = string.Empty;
+
+            //if (selected != "None")
+            //{
+            //    shadowColor = "osd-shadow-color=" + "\"" + "#33" + ColorConverter.HexColor(selectedItem) + "\"";
+            //}
 
             // -------------------------
             // Shadow Offset
             // -------------------------
             string shadowOffset = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDShadowOffset.Text))
+            // only if shadow color is on
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDShadowColor.Text))
                 shadowOffset = "osd-shadow-offset=" + mainwindow.tbxOSDShadowOffset.Text.ToString();
 
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listOSC = new List<string>()
-            {
-                // OSC
-                oscTitle,
-                oscEnable,
-                oscScriptOpts,
-            };
 
             List <string> listOSD = new List<string>()
             {
@@ -224,23 +199,15 @@ namespace Glow
             // -------------------------
             // Join
             // -------------------------
-            // OSC
-            string osc = string.Join("\r\n", listOSC
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
-
-            // OSC
+            // OSD
             string osd = string.Join("\r\n", listOSD
                 .Where(s => !string.IsNullOrEmpty(s))
                 );
 
-            // OSC+OSD
-            string osc_osd = string.Join("\r\n\r\n", osc, osd);
-
             // -------------------------
             // Return
             // -------------------------
-            return osc_osd;
+            return osd;
         }
 
     }

@@ -788,33 +788,59 @@ namespace Glow
                 cboSubtitlesFont.IsEnabled = true;
         }
 
+
+        /// <summary>
+        ///     Subtitle Font Color Button
+        /// </summary>
+        private void btnSubtitleFontColor_Click(object sender, RoutedEventArgs e)
+        {
+            OpenColorPickerWindow("subtitlesFont");
+        }
+
+        /// <summary>
+        ///    Subtitle Border Color Button
+        /// </summary>
+        private void btnSubtitleBorderColor_Click(object sender, RoutedEventArgs e)
+        {
+            OpenColorPickerWindow("subtitlesBorder");
+        }
+
+        /// <summary>
+        ///    Subtitle Shadow Color Button
+        /// </summary>
+        private void btnSubtitleShadowColor_Click(object sender, RoutedEventArgs e)
+        {
+            OpenColorPickerWindow("subtitlesShadow");
+        }
+
+
         /// <summary>
         ///    Subtitle Shadow Color
         /// </summary>
-        private void cboSubtitleShadowColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Get Selected Item
-            ComboBoxItem selectedItem = (ComboBoxItem)(cboSubtitlesShadowColor.SelectedValue);
-            string selected = (string)(selectedItem.Content);
+        //private void cboSubtitleShadowColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    // Get Selected Item
+        //    ComboBoxItem selectedItem = (ComboBoxItem)(cboSubtitlesShadowColor.SelectedValue);
+        //    string selected = (string)(selectedItem.Content);
 
-            // Disable
-            if (selected == "None")
-            {
-                // slider
-                slSubtitlesShadowOffset.IsEnabled = false;
-                // textbox
-                tbxSubtitlesShadowOffset.IsEnabled = false;
-                tbxSubtitlesShadowOffset.Text = "0.00";
-            }
-            // Enable
-            else
-            {
-                // slider
-                slSubtitlesShadowOffset.IsEnabled = true;
-                // textbox
-                tbxSubtitlesShadowOffset.IsEnabled = true;
-            }
-        }
+        //    // Disable
+        //    if (selected == "None")
+        //    {
+        //        // slider
+        //        slSubtitlesShadowOffset.IsEnabled = false;
+        //        // textbox
+        //        tbxSubtitlesShadowOffset.IsEnabled = false;
+        //        tbxSubtitlesShadowOffset.Text = "0.00";
+        //    }
+        //    // Enable
+        //    else
+        //    {
+        //        // slider
+        //        slSubtitlesShadowOffset.IsEnabled = true;
+        //        // textbox
+        //        tbxSubtitlesShadowOffset.IsEnabled = true;
+        //    }
+        //}
 
         /// <summary>
         ///     Subtitle Position DoubleClick
@@ -896,35 +922,58 @@ namespace Glow
         // --------------------------------------------------
         // OSD Controls
         // --------------------------------------------------
+        /// <summary>
+        ///    OSD Font
+        /// </summary>
+        private void btnOSDFontColor_Click(object sender, RoutedEventArgs e)
+        {
+            OpenColorPickerWindow("osdFont");
+        }
+
+        /// <summary>
+        ///    OSD Border
+        /// </summary>
+        private void btnOSDBorderColor_Click(object sender, RoutedEventArgs e)
+        {
+            OpenColorPickerWindow("osdBorder");
+        }
 
         /// <summary>
         ///    OSD Shadow
         /// </summary>
-        private void cboOSDFontShadowColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnOSDShadowColor_Click(object sender, RoutedEventArgs e)
         {
-            // Get Selected Item
-            ComboBoxItem selectedItem = (ComboBoxItem)(cboOSDShadowColor.SelectedValue);
-            string selected = (string)(selectedItem.Content);
-
-            // Disable
-            if (selected == "None")
-            {
-                // slider
-                slOSDShadowOffset.IsEnabled = false;
-                tbxOSDShadowOffset.IsEnabled = false;
-                // textbox
-                tbxOSDShadowOffset.Text = "0.00";
-            }
-            // Enable
-            else
-            {
-                // slider
-                slOSDShadowOffset.IsEnabled = true;
-                // textbox
-                tbxOSDShadowOffset.IsEnabled = true;
-            }
-
+            OpenColorPickerWindow("osdShadow");
         }
+
+        /// <summary>
+        ///    OSD Shadow
+        /// </summary>
+        //private void cboOSDFontShadowColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    // Get Selected Item
+        //    ComboBoxItem selectedItem = (ComboBoxItem)(cboOSDShadowColor.SelectedValue);
+        //    string selected = (string)(selectedItem.Content);
+
+        //    // Disable
+        //    if (selected == "None")
+        //    {
+        //        // slider
+        //        slOSDShadowOffset.IsEnabled = false;
+        //        tbxOSDShadowOffset.IsEnabled = false;
+        //        // textbox
+        //        tbxOSDShadowOffset.Text = "0.00";
+        //    }
+        //    // Enable
+        //    else
+        //    {
+        //        // slider
+        //        slOSDShadowOffset.IsEnabled = true;
+        //        // textbox
+        //        tbxOSDShadowOffset.IsEnabled = true;
+        //    }
+
+        //}
 
         /// <summary>
         ///     OSD Scale DoubleClick
@@ -1246,6 +1295,43 @@ namespace Glow
                 }
             }
         }
+
+
+        /// <summary>
+        ///     Subtitle Color Picker
+        /// </summary>
+        private Boolean IsColorPickerWindowOpened = false;
+
+        /// <summary>
+        ///     Open Color Picker Window
+        /// </summary>
+        // Passing the TextBox Keyword will identify which TextBox to return the number to
+        public void OpenColorPickerWindow(string textBoxKey)
+        {
+            // Detect which screen we're on
+            var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
+            var thisScreen = allScreens.SingleOrDefault(s => this.Left >= s.WorkingArea.Left && this.Left < s.WorkingArea.Right);
+
+            // Start Window
+            ColorPickerWindow colorPickerWindow = new ColorPickerWindow(this, textBoxKey);
+
+            // Keep Window on Top
+            colorPickerWindow.Owner = GetWindow(this);
+
+            // Only allow 1 Window instance
+            if (IsColorPickerWindowOpened) return;
+            colorPickerWindow.ContentRendered += delegate { IsColorPickerWindowOpened = true; };
+            colorPickerWindow.Closed += delegate { IsColorPickerWindowOpened = false; };
+
+            // Position Relative to MainWindow
+            colorPickerWindow.Left = Math.Max((this.Left + (this.Width - colorPickerWindow.Width) / 2), thisScreen.WorkingArea.Left);
+            colorPickerWindow.Top = Math.Max((this.Top + (this.Height - colorPickerWindow.Height) / 2), thisScreen.WorkingArea.Top);
+
+            // Open Window
+            colorPickerWindow.ShowDialog();
+        }
+
+
 
 
         /// <summary>

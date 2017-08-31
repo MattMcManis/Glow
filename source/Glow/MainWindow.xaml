@@ -1094,7 +1094,7 @@
                                         Margin="0,310,14,0" 
                                         HorizontalAlignment="Right" 
                                         Width="22"
-                                        Style="{DynamicResource ButtonLanguageStyle}">
+                                        Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="▴" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- Item Down -->
@@ -1106,7 +1106,7 @@
                                         Cursor="Hand" 
                                         Click="buttonAudioLanguageDown_Click"
                                         Margin="0,337,14,0"
-                                        Style="{DynamicResource ButtonLanguageStyle}">
+                                        Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="▾" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- Select All -->
@@ -1118,7 +1118,7 @@
                                         Cursor="Hand"
                                         Click="buttonAudioLanguageSelectAll_Click" 
                                         Margin="0,364,14,0"
-                                        Style="{DynamicResource ButtonLanguageStyle}">
+                                        Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="+" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- Deselect All -->
@@ -1130,7 +1130,7 @@
                                         Cursor="Hand"
                                         Click="buttonAudioLanguageDeselectAll_Click"
                                         Margin="0,391,14,0"
-                                        Style="{DynamicResource ButtonLanguageStyle}">
+                                        Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="-" Margin="0,0,0,0"/>
                                 </Button>
 
@@ -1168,7 +1168,7 @@
                 </TabItem>
 
                 <!-- Subtitle Tab -->
-                <TabItem Header="Subtitle" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Subtitles" Style="{DynamicResource TabItemStyle}">
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0">
                             <Grid Margin="0,0,0,130">
@@ -1307,6 +1307,8 @@
                                     FontWeight="Bold"
                                     Style="{DynamicResource LabelTitleStyle}"/>
 
+
+
                                 <!-- Subtitles Embedded Fonts -->
                                 <Label Content="Embedded" 
                                        HorizontalAlignment="Left" 
@@ -1321,7 +1323,8 @@
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboSubtitlesEmbeddedFonts_SelectionChanged">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboSubtitlesEmbeddedFonts_SelectionChanged">
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -1334,6 +1337,9 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
+
+
+
                                 <ComboBox x:Name="cboSubtitlesFont"
                                           ItemsSource="{Binding FontItems}" 
                                           SelectedItem="{Binding FontSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -1383,28 +1389,70 @@
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesFontColor" 
+
+                                <Button x:Name="btnSubtitleFontColor" 
+                                        Height="22" 
+                                        Margin="0,498,86,0"
+                                        Cursor="Hand"
+                                        Style="{DynamicResource ButtonControlStyle}"
+                                        Click="btnSubtitleFontColor_Click" 
+                                        FontSize="10"
+                                        HorizontalAlignment="Right"
+                                        Width="31"
+                                        VerticalAlignment="Top">
+                                    <Image Style="{DynamicResource ButtonColorPicker}" 
+                                            Width="11" 
+                                            Height="11" 
+                                            Margin="0,-1,0,0"
+                                            Stretch="Fill" 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                                </Button>
+
+                                <TextBox x:Name="tbxSubtitlesFontColor"
+                                         HorizontalAlignment="Right" 
+                                         VerticalAlignment="Top" 
+                                         Width="67"
+                                         Height="22"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         Margin="0,498,14,0"/>
+
+                                <!--<ComboBox x:Name="cboSubtitlesFontColor" 
                                           HorizontalAlignment="Right" 
-                                          Margin="0,498,14,0"
+                                          Margin="0,384,0,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <!-- White -->
+                                    -->
+                                <!-- White -->
+                                <!--
                                     <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    <!-- Gray -->
+                                    -->
+                                <!-- Gray -->
+                                <!--
                                     <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    <!-- Dark Gray -->
+                                    -->
+                                <!-- Dark Gray -->
+                                <!--
                                     <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    <!-- Black -->
+                                    -->
+                                <!-- Black -->
+                                <!--
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                    <!-- Yellow -->
+                                    -->
+                                <!-- Yellow -->
+                                <!--
                                     <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
-                                    <!-- Blue -->
+                                    -->
+                                <!-- Blue -->
+                                <!--
                                     <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
-                                    <!-- Pink -->
+                                    -->
+                                <!-- Pink -->
+                                <!--
                                     <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
-                                </ComboBox>
+                                </ComboBox>-->
 
                                 <!-- Border Size -->
                                 <Label Content="Border Size"
@@ -1440,28 +1488,67 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesBorderColor"
+                                <Button x:Name="btnSubtitleBorderColor" 
+                                        Height="22" 
+                                        Margin="0,556,86,0"
+                                        Cursor="Hand"
+                                        Style="{DynamicResource ButtonControlStyle}"
+                                        Click="btnSubtitleBorderColor_Click" 
+                                        FontSize="10" 
+                                        HorizontalAlignment="Right"
+                                        Width="31" 
+                                        VerticalAlignment="Top">
+                                    <Image Style="{DynamicResource ButtonColorPicker}" 
+                                            Width="11" 
+                                            Height="11" 
+                                            Margin="0,-1,0,0"
+                                            Stretch="Fill" 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                                </Button>
+                                <TextBox x:Name="tbxSubtitlesBorderColor"
+                                         HorizontalAlignment="Right" 
+                                         VerticalAlignment="Top" 
+                                         Width="67"
+                                         Height="22"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         Margin="0,556,14,0"/>
+                                <!--<ComboBox x:Name="cboSubtitlesBorderColor"
                                           HorizontalAlignment="Right"
                                           Margin="0,556,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <!-- White -->
+                                    -->
+                                <!-- White -->
+                                <!--
                                     <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    <!-- Gray -->
+                                    -->
+                                <!-- Gray -->
+                                <!--
                                     <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    <!-- Dark Gray -->
+                                    -->
+                                <!-- Dark Gray -->
+                                <!--
                                     <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    <!-- Black -->
+                                    -->
+                                <!-- Black -->
+                                <!--
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                    <!-- Yellow -->
+                                    -->
+                                <!-- Yellow -->
+                                <!--
                                     <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
-                                    <!-- Blue -->
+                                    -->
+                                <!-- Blue -->
+                                <!--
                                     <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
-                                    <!-- Pink -->
+                                    -->
+                                <!-- Pink -->
+                                <!--
                                     <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
-                                </ComboBox>
+                                </ComboBox>-->
 
 
                                 <!-- Subtitle Shadow Color -->
@@ -1472,7 +1559,32 @@
                                        VerticalAlignment="Top" 
                                        Width="78"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesShadowColor"
+                                <Button x:Name="btnSubtitleShadowColor" 
+                                        Height="22" 
+                                        Margin="0,585,86,0"
+                                        Cursor="Hand"
+                                        Style="{DynamicResource ButtonControlStyle}"
+                                        Click="btnSubtitleShadowColor_Click" 
+                                        FontSize="10"
+                                        HorizontalAlignment="Right" 
+                                        Width="31" 
+                                        VerticalAlignment="Top">
+                                    <Image Style="{DynamicResource ButtonColorPicker}" 
+                                            Width="11" 
+                                            Height="11" 
+                                            Margin="0,-1,0,0"
+                                            Stretch="Fill" 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                                </Button>
+                                <TextBox x:Name="tbxSubtitlesShadowColor"
+                                         HorizontalAlignment="Right" 
+                                         VerticalAlignment="Top" 
+                                         Width="67"
+                                         Height="22"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         Margin="0,585,14,0"/>
+                                <!--<ComboBox x:Name="cboSubtitlesShadowColor"
                                           HorizontalAlignment="Right"
                                           Margin="0,585,14,0" 
                                           VerticalAlignment="Top" 
@@ -1480,17 +1592,27 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
                                           SelectionChanged="cboSubtitleShadowColor_SelectionChanged">
-                                    <!-- None -->
+                                    -->
+                                <!-- None -->
+                                <!--
                                     <ComboBoxItem Background="Transparent" Foreground="Black" Content="None"/>
-                                    <!-- White -->
+                                    -->
+                                <!-- White -->
+                                <!--
                                     <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    <!-- Gray -->
+                                    -->
+                                <!-- Gray -->
+                                <!--
                                     <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    <!-- Dark Gray -->
+                                    -->
+                                <!-- Dark Gray -->
+                                <!--
                                     <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    <!-- Black -->
+                                    -->
+                                <!-- Black -->
+                                <!--
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                </ComboBox>
+                                </ComboBox>-->
 
                                 <!-- Subtitle Shadow Offset -->
                                 <Label Content="Shadow Offset" 
@@ -1687,7 +1809,7 @@
                                         Margin="0,680,14,0" 
                                         HorizontalAlignment="Right" 
                                         Width="22"
-                                        Style="{DynamicResource ButtonLanguageStyle}">
+                                        Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="▴" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- List Down -->
@@ -1699,7 +1821,7 @@
                                         Cursor="Hand" 
                                         Click="buttonSubtitleLanguageDown_Click"
                                         Margin="0,707,14,0"
-                                        Style="{DynamicResource ButtonLanguageStyle}">
+                                        Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="▾" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- Select All -->
@@ -1711,7 +1833,7 @@
                                         Cursor="Hand" 
                                         Click="buttonSubtitleLanguageSelectAll_Click"
                                         Margin="0,734,14,0"
-                                        Style="{DynamicResource ButtonLanguageStyle}">
+                                        Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="+" Margin="0,0,0,0"/>
                                 </Button>
                                 <!-- Deselect All -->
@@ -1723,7 +1845,7 @@
                                         Cursor="Hand" 
                                         Click="buttonSubtitleLanguageDeselectAll_Click" 
                                         Margin="0,761,14,-11"
-                                        Style="{DynamicResource ButtonLanguageStyle}">
+                                        Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="-" Margin="0,0,0,0"/>
                                 </Button>
 
@@ -1995,7 +2117,8 @@
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
                                     <System:String>Playback Time</System:String>
                                     <System:String>Date Time</System:String>
                                     <System:String>Numbered</System:String>
@@ -2333,11 +2456,11 @@
                                 <!--/////////////////////////////////////
                                     OSC
                                 /////////////////////////////////////-->
-                                <Label Content="OSC" 
+                                <Label Content="On-Screen Controller" 
                                        HorizontalAlignment="Left" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
-                                       Width="75" 
+                                       Width="126" 
                                        FontWeight="Bold"
                                        Margin="10,10,0,0"
                                        Style="{DynamicResource LabelTitleStyle}"/>
@@ -2407,26 +2530,26 @@
                                     OSD
                                 /////////////////////////////////////-->
 
-                                <Label Content="OSD" 
+                                <Label Content="On-Screen Display" 
                                        HorizontalAlignment="Left" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
-                                       Width="75" 
+                                       Width="126" 
                                        FontWeight="Bold"
-                                       Margin="10,137,0,0"
+                                       Margin="10,224,0,0"
                                        Style="{DynamicResource LabelTitleStyle}"/>
 
                                 <!-- OSD -->
                                 <Label Content="OSD" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,167,0,0" 
+                                       Margin="10,254,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSD" 
                                           HorizontalAlignment="Right"
-                                          Margin="0,164,14,0" 
+                                          Margin="0,251,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2438,14 +2561,14 @@
                                 <!-- OSD Fractions -->
                                 <Label Content="Fractions" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,196,0,0" 
+                                       Margin="10,283,0,0" 
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSDFractions"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,193,14,0"
+                                          Margin="0,280,14,0"
                                           VerticalAlignment="Top"
                                           Width="103" 
                                           Height="22"
@@ -2458,14 +2581,14 @@
                                 <!-- OSD Duration -->
                                 <Label Content="Duration" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,225,0,0"
+                                       Margin="10,312,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxOSDDuration"
                                          HorizontalAlignment="Right"
-                                         Margin="0,222,14,0" 
+                                         Margin="0,309,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103" 
                                          Height="22"
@@ -2474,14 +2597,14 @@
                                 <!-- OSD Level -->
                                 <Label Content="Level"
                                        HorizontalAlignment="Left" 
-                                       Margin="10,254,0,0" 
+                                       Margin="10,341,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSDLevel"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,251,14,0" 
+                                          Margin="0,338,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103" 
                                           Height="22"
@@ -2493,30 +2616,17 @@
                                     <System:String>3</System:String>
                                 </ComboBox>
 
-
-                                <!--/////////////////////////////////////
-                                    Controls
-                                /////////////////////////////////////-->
-                                <Label Content="Controls" 
-                                       HorizontalAlignment="Left" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top"
-                                       Width="75" 
-                                       FontWeight="Bold"
-                                       Margin="10,294,0,0"
-                                       Style="{DynamicResource LabelTitleStyle}"/>
-
                                 <!-- OSD Scale -->
                                 <Label Content="Scale"
                                        HorizontalAlignment="Left" 
-                                       Margin="10,324,0,0" 
+                                       Margin="10,126,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slOSDScale" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,322,52,0" 
+                                        Margin="0,124,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0.1"
@@ -2527,7 +2637,7 @@
                                         Text="{Binding Value, ElementName=slOSDScale, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,321,14,0" 
+                                        Margin="0,123,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2536,14 +2646,14 @@
                                 <!-- Bar Width -->
                                 <Label Content="Bar Width" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,353,0,0" 
+                                       Margin="10,155,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slOSDBarWidth" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,351,52,0" 
+                                        Margin="0,153,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0.1"
@@ -2555,7 +2665,7 @@
                                         Text="{Binding Value, ElementName=slOSDBarWidth, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,350,14,0"
+                                        Margin="0,152,14,0"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
                                         Width="33"
@@ -2564,14 +2674,14 @@
                                 <!-- Bar Height -->
                                 <Label Content="Bar Height" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,382,0,0" 
+                                       Margin="10,184,0,0" 
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slOSDBarHeight" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,380,52,0" 
+                                        Margin="0,182,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0.1"
@@ -2583,7 +2693,7 @@
                                         Text="{Binding Value, ElementName=slOSDBarHeight, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,379,14,0" 
+                                        Margin="0,181,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right"
                                         Width="33"
@@ -2599,13 +2709,13 @@
                                        VerticalAlignment="Top"
                                        Width="75" 
                                        FontWeight="Bold"
-                                       Margin="10,422,0,0"
+                                       Margin="10,383,0,0"
                                        Style="{DynamicResource LabelTitleStyle}"/>
 
                                 <!-- OSD Font -->
                                 <Label Content="Font" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,452,0,0" 
+                                       Margin="10,413,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -2614,7 +2724,7 @@
                                           ItemsSource="{Binding FontItems}" 
                                           SelectedItem="{Binding FontSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                           HorizontalAlignment="Right" 
-                                          Margin="0,449,14,0"
+                                          Margin="0,410,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2623,14 +2733,14 @@
                                 <!-- OSD Font Size -->
                                 <Label Content="Font Size"
                                        HorizontalAlignment="Left"
-                                       Margin="10,481,0,0"
+                                       Margin="10,442,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSDFontSize"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,478,14,0" 
+                                          Margin="0,439,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103" 
                                           Height="22"
@@ -2655,12 +2765,36 @@
                                 <!-- OSD Font Color -->
                                 <Label Content="Font Color"
                                        HorizontalAlignment="Left"
-                                       Margin="10,510,0,0"
+                                       Margin="10,471,0,0"
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDFontColor" 
+                                <Button x:Name="btnOSDFontColor" 
+                                        Height="22" 
+                                        Margin="0,468,86,0"
+                                        Cursor="Hand"
+                                        Style="{DynamicResource ButtonControlStyle}"
+                                        Click="btnOSDFontColor_Click" 
+                                        FontSize="10"
+                                        HorizontalAlignment="Right"
+                                        Width="31" VerticalAlignment="Top">
+                                    <Image Style="{DynamicResource ButtonColorPicker}" 
+                                            Width="11" 
+                                            Height="11" 
+                                            Margin="0,-1,0,0"
+                                            Stretch="Fill" 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                                </Button>
+                                <TextBox x:Name="tbxOSDFontColor"
+                                         HorizontalAlignment="Right" 
+                                         VerticalAlignment="Top" 
+                                         Width="67"
+                                         Height="22"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         Margin="0,468,14,0"/>
+                                <!--<ComboBox x:Name="cboOSDFontColor" 
                                           HorizontalAlignment="Right"
                                           Margin="0,507,14,0" 
                                           VerticalAlignment="Top" 
@@ -2668,33 +2802,47 @@
                                           Height="22"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <!-- White -->
+                                    -->
+                                <!-- White -->
+                                <!--
                                     <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    <!-- Gray -->
+                                    -->
+                                <!-- Gray -->
+                                <!--
                                     <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    <!-- Dark Gray -->
+                                    -->
+                                <!-- Dark Gray -->
+                                <!--
                                     <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    <!-- Black -->
+                                    -->
+                                <!-- Black -->
+                                <!--
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                    <!-- Yellow -->
+                                    -->
+                                <!-- Yellow -->
+                                <!--
                                     <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
-                                    <!-- Blue -->
+                                    -->
+                                <!-- Blue -->
+                                <!--
                                     <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
-                                    <!-- Pink -->
+                                    -->
+                                <!-- Pink -->
+                                <!--
                                     <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
-                                </ComboBox>
+                                </ComboBox>-->
 
                                 <!-- OSD Border Size -->
                                 <Label Content="Border Size" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,540,0,0" 
+                                       Margin="10,501,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSDFontBorderSize" 
                                           HorizontalAlignment="Right"
-                                          Margin="0,537,14,0" 
+                                          Margin="0,498,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2713,43 +2861,105 @@
                                 <!-- OSD Border Color -->
                                 <Label Content="Border Color" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,569,0,0" 
+                                       Margin="10,530,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDBorderColor" 
+                                <Button x:Name="btnOSDBorderColor" 
+                                        Height="22" 
+                                        Margin="0,527,86,0"
+                                        Cursor="Hand"
+                                        Style="{DynamicResource ButtonControlStyle}"
+                                        Click="btnOSDBorderColor_Click" 
+                                        FontSize="10"
+                                        HorizontalAlignment="Right"
+                                        Width="31" VerticalAlignment="Top">
+                                    <Image Style="{DynamicResource ButtonColorPicker}" 
+                                            Width="11" 
+                                            Height="11" 
+                                            Margin="0,-1,0,0"
+                                            Stretch="Fill" 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                                </Button>
+                                <TextBox x:Name="tbxOSDBorderColor"
+                                         HorizontalAlignment="Right" 
+                                         VerticalAlignment="Top" 
+                                         Width="67"
+                                         Height="22"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         Margin="0,527,14,0"/>
+                                <!--<ComboBox x:Name="cboOSDBorderColor" 
                                           HorizontalAlignment="Right" 
                                           Margin="0,566,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <!-- White -->
+                                    -->
+                                <!-- White -->
+                                <!--
                                     <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    <!-- Gray -->
+                                    -->
+                                <!-- Gray -->
+                                <!--
                                     <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    <!-- Dark Gray -->
+                                    -->
+                                <!-- Dark Gray -->
+                                <!--
                                     <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    <!-- Black -->
+                                    -->
+                                <!-- Black -->
+                                <!--
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                    <!-- Yellow -->
+                                    -->
+                                <!-- Yellow -->
+                                <!--
                                     <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
-                                    <!-- Blue -->
+                                    -->
+                                <!-- Blue -->
+                                <!--
                                     <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
-                                    <!-- Pink -->
+                                    -->
+                                <!-- Pink -->
+                                <!--
                                     <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
-                                </ComboBox>
+                                </ComboBox>-->
 
                                 <!-- Shadow Color -->
                                 <Label Content="Shadow Color" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,598,0,0" 
+                                       Margin="10,559,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="78"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDShadowColor" 
+                                <Button x:Name="btnOSDShadowColor" 
+                                        Height="22" 
+                                        Margin="0,556,86,0"
+                                        Cursor="Hand"
+                                        Style="{DynamicResource ButtonControlStyle}"
+                                        Click="btnOSDShadowColor_Click" 
+                                        FontSize="10" 
+                                        HorizontalAlignment="Right" 
+                                        Width="31" VerticalAlignment="Top">
+                                    <Image Style="{DynamicResource ButtonColorPicker}" 
+                                            Width="11" 
+                                            Height="11" 
+                                            Margin="0,-1,0,0"
+                                            Stretch="Fill" 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                                </Button>
+                                <TextBox x:Name="tbxOSDShadowColor"
+                                         HorizontalAlignment="Right" 
+                                         VerticalAlignment="Top" 
+                                         Width="67"
+                                         Height="22"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         Margin="0,556,14,0"/>
+                                <!--<ComboBox x:Name="cboOSDShadowColor" 
                                           HorizontalAlignment="Right" 
                                           Margin="0,595,14,0" 
                                           VerticalAlignment="Top" 
@@ -2757,28 +2967,38 @@
                                           SelectionChanged="cboOSDFontShadowColor_SelectionChanged"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <!-- None -->
+                                    -->
+                                <!-- None -->
+                                <!--
                                     <ComboBoxItem Background="Transparent" Foreground="Black" Content="None"/>
-                                    <!-- White -->
+                                    -->
+                                <!-- White -->
+                                <!--
                                     <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    <!-- Gray -->
+                                    -->
+                                <!-- Gray -->
+                                <!--
                                     <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    <!-- Dark Gray -->
+                                    -->
+                                <!-- Dark Gray -->
+                                <!--
                                     <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    <!-- Black -->
+                                    -->
+                                <!-- Black -->
+                                <!--
                                     <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                </ComboBox>
+                                </ComboBox>-->
 
                                 <!-- Shadow Offset -->
                                 <Label Content="Shadow Offset" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,627,0,0"
+                                       Margin="10,588,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="78"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slOSDShadowOffset"
-                                        Margin="0,625,52,0" 
+                                        Margin="0,586,52,0" 
                                         VerticalAlignment="Top"
                                         Maximum="5"
                                         HorizontalAlignment="Right" 
@@ -2790,7 +3010,7 @@
                                         Text="{Binding Value, ElementName=slOSDShadowOffset, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,624,14,0" 
+                                        Margin="0,585,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"

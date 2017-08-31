@@ -69,7 +69,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Audio.cs" />
-    <Compile Include="ColorPicker.cs" />
+    <Compile Include="ColorConverter.cs" />
+    <Compile Include="ColorPickerWindow.xaml.cs">
+      <DependentUpon>ColorPickerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OSC.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -78,7 +82,7 @@
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Languages.cs" />
-    <Compile Include="OSCOSD.cs" />
+    <Compile Include="OSD.cs" />
     <Compile Include="Profiles.cs" />
     <Compile Include="Stream.cs" />
     <Compile Include="Subtitles.cs" />
@@ -87,6 +91,10 @@
     </Compile>
     <Compile Include="Video.cs" />
     <Compile Include="ViewModel.cs" />
+    <Page Include="ColorPickerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -182,6 +190,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\settings.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\Swatches\transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\White\colorpicker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\Black\colorpicker.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -42,7 +42,8 @@ namespace Glow
                 Audio.AudioConfig(mainwindow),
                 Subtitles.SubtitleConfig(mainwindow),
                 Stream.StreamConfig(mainwindow),
-                OSCOSD.OSDConfig(mainwindow),
+                OSC.OSCConfig(mainwindow),
+                OSD.OSDConfig(mainwindow),
                 Extensions.ExtensionsConfig(mainwindow)
             };
 

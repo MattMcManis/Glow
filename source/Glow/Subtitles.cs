@@ -137,8 +137,13 @@ namespace Glow
             // -------------------------
             // Font Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesFontColor.SelectedValue ?? string.Empty);
-            string fontColor = "sub-text-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
+            //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesFontColor.SelectedValue ?? string.Empty);
+            //string fontColor = "sub-text-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
+            string fontColor = string.Empty;
+
+            // only if not empty
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesFontColor.Text))
+                fontColor = "sub-text-color=" + "\"" + "#FF" + mainwindow.tbxSubtitlesFontColor.Text + "\"";
 
             // -------------------------
             // Border Size
@@ -148,29 +153,40 @@ namespace Glow
             // -------------------------
             // Border Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue ?? string.Empty);
-            string borderColor = "sub-text-border-color=" + "\"" + "#FF" + ColorPicker.HexColor(selectedItem) + "\"";
+            //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue ?? string.Empty);
+            //string borderColor = "sub-text-border-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
+            string borderColor = string.Empty;
+
+            // only if not empty
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesBorderColor.Text))
+                borderColor = "sub-text-border-color=" + "\"" + "#FF" + mainwindow.tbxSubtitlesBorderColor.Text + "\"";
 
             // -------------------------
             // Shadow Color
             // -------------------------
-            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue ?? string.Empty);
-            selected = (string)(selectedItem.Content);
-
             string shadowColor = string.Empty;
 
-            if (selected != "None")
-            {
-                shadowColor = "sub-text-shadow-color=" + "\"" + "#33" + ColorPicker.HexColor(selectedItem) + "\"";
-            }
-                
+            // only if not empty
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowColor.Text))
+                shadowColor = "sub-text-shadow-color=" + "\"" + "#33" + mainwindow.tbxSubtitlesShadowColor.Text + "\"";
+            //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue ?? string.Empty);
+            //selected = (string)(selectedItem.Content);
+
+            //string shadowColor = string.Empty;
+
+            //if (selected != "None")
+            //{
+            //    shadowColor = "sub-text-shadow-color=" + "\"" + "#33" + ColorConverter.HexColor(selectedItem) + "\"";
+            //}
+
 
             // -------------------------
             // Shadow Offset
             // -------------------------
             string shadowOffset = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowOffset.Text))
+            // only if shadow color is on
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowColor.Text))
                 shadowOffset = "sub-shadow-offset=" + mainwindow.tbxSubtitlesShadowOffset.Text.ToString();
 
 

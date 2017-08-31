@@ -51,7 +51,7 @@ namespace Glow
             string driver = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) != "off")
+            if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) != "default")
                 driver = "vo=" + (mainwindow.cboVideoDriver.SelectedItem ?? string.Empty).ToString();
                 //string driver = "vo=" + (ViewModel.VideoDriverSelectedItem ?? string.Empty);
 
@@ -85,7 +85,7 @@ namespace Glow
             string hwdec = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboHWDecoder.SelectedItem ?? string.Empty) != "off")
+            if ((string)(mainwindow.cboHWDecoder.SelectedItem ?? string.Empty) != "default")
                 hwdec = "hwdec=" + (mainwindow.cboHWDecoder.SelectedItem ?? string.Empty).ToString();
 
 

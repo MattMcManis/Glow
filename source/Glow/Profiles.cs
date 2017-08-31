@@ -181,12 +181,14 @@ namespace Glow
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                //mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
+                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
+                //mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
+                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
 
                 // ASS
@@ -237,12 +239,15 @@ namespace Glow
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                //mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
+                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.cboOSDBorderColor.SelectedIndex = 2; //dark gray
+                //mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
+                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboOSDShadowColor.SelectedIndex = 3; //dark gray
+                //mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
+                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
 
@@ -331,12 +336,12 @@ namespace Glow
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
 
                 // ASS
@@ -387,12 +392,12 @@ namespace Glow
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.cboOSDBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboOSDShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
 
@@ -481,12 +486,12 @@ namespace Glow
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
 
                 // ASS
@@ -537,12 +542,12 @@ namespace Glow
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.cboOSDBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboOSDShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
 
@@ -631,12 +636,12 @@ namespace Glow
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
 
                 // ASS
@@ -687,12 +692,12 @@ namespace Glow
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.cboOSDBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboOSDShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
 
@@ -781,12 +786,13 @@ namespace Glow
                 mainwindow.cboSubtitlesBlend.SelectedItem = "no";
                 // Font
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 0; //none
+                //mainwindow.cboSubtitlesShadowColor.SelectedIndex = 0; //none
+                mainwindow.tbxSubtitlesShadowColor.Text = ""; //none
                 mainwindow.slSubtitlesShadowOffset.Value = 0;
 
                 // ASS
@@ -837,12 +843,12 @@ namespace Glow
                 mainwindow.slOSDBarHeight.Value = 2;
                 // Font
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.cboOSDBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboOSDShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
 
@@ -934,12 +940,12 @@ namespace Glow
                 // Font
                 mainwindow.cboSubtitlesFont.SelectedItem = "Noto Sans";
                 mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.cboSubtitlesFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.cboSubtitlesBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboSubtitlesShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
                 mainwindow.slSubtitlesShadowOffset.Value = 1.25;
 
                 // ASS
@@ -991,12 +997,12 @@ namespace Glow
                 // Font
                 mainwindow.cboOSDFont.SelectedItem = "Noto Sans";
                 mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.cboOSDFontColor.SelectedIndex = 0; //white
+                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.cboOSDBorderColor.SelectedIndex = 2; //dark gray
+                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.cboOSDShadowColor.SelectedIndex = 3; //dark gray
+                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
             }
 
@@ -1166,22 +1172,25 @@ namespace Glow
             inif.Write("Subtitles", "fontSize", (mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty).ToString());
 
             // Font Color
-            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesFontColor.SelectedValue);
-            selected = (string)(selectedItem.Content);
-            inif.Write("Subtitles", "fontColor", selected);
+            inif.Write("Subtitles", "fontColor", mainwindow.tbxSubtitlesFontColor.Text.ToString());
+            //selectedItem = (ComboBoxItem)(mainwindow.tbxSubtitlesFontColor.SelectedValue);
+            //selected = (string)(selectedItem.Content);
+            //inif.Write("Subtitles", "fontColor", selected);
 
             // Border Size
             inif.Write("Subtitles", "borderSize", (mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty).ToString());
 
             // Border Color
-            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue);
-            selected = (string)(selectedItem.Content);
-            inif.Write("Subtitles", "borderColor", selected);
+            inif.Write("Subtitles", "borderColor", mainwindow.tbxSubtitlesBorderColor.Text.ToString());
+            //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue);
+            //selected = (string)(selectedItem.Content);
+            //inif.Write("Subtitles", "borderColor", selected);
 
             // Shadow Color
-            selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue);
-            selected = (string)(selectedItem.Content);
-            inif.Write("Subtitles", "shadowColor", selected);
+            inif.Write("Subtitles", "shadowColor", mainwindow.tbxSubtitlesShadowColor.Text.ToString());
+            //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue);
+            //selected = (string)(selectedItem.Content);
+            //inif.Write("Subtitles", "shadowColor", selected);
 
             // Shadow Offset
             inif.Write("Subtitles", "shadowOffset", mainwindow.tbxSubtitlesShadowOffset.Text.ToString());
@@ -1230,19 +1239,22 @@ namespace Glow
             inif.Write("OSD", "font", (mainwindow.cboOSDFont.SelectedItem ?? string.Empty).ToString());
             inif.Write("OSD", "fontSize", (mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty).ToString());
 
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue);
-            selected = (string)(selectedItem.Content);
-            inif.Write("OSD", "fontColor", selected);
+            inif.Write("OSD", "fontColor", mainwindow.tbxOSDFontColor.Text.ToString());
+            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue);
+            //selected = (string)(selectedItem.Content);
+            //inif.Write("OSD", "fontColor", selected);
 
             inif.Write("OSD", "borderSize", (mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty).ToString());
 
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue);
-            selected = (string)(selectedItem.Content);
-            inif.Write("OSD", "borderColor", selected);
+            inif.Write("OSD", "borderColor", mainwindow.tbxOSDBorderColor.Text.ToString());
+            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue);
+            //selected = (string)(selectedItem.Content);
+            //inif.Write("OSD", "borderColor", selected);
 
-            selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue);
-            selected = (string)(selectedItem.Content);
-            inif.Write("OSD", "shadowColor", selected);
+            inif.Write("OSD", "shadowColor", mainwindow.tbxOSDShadowColor.Text.ToString());
+            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue);
+            //selected = (string)(selectedItem.Content);
+            //inif.Write("OSD", "shadowColor", selected);
 
             inif.Write("OSD", "shadowOffset", mainwindow.tbxOSDShadowOffset.Text.ToString());
         }
@@ -1642,45 +1654,47 @@ namespace Glow
                 listFailedImports.Add("Subtitles: Font Size");
 
             // Font Color
+            mainwindow.tbxSubtitlesFontColor.Text = inif.Read("Subtitles", "fontColor");
             // add combobox items to temp list
             // convert items to string
-            List<string> listSubtitlesFontColor = new List<string>();
-            foreach (var item in mainwindow.cboSubtitlesFontColor.Items)
-            {
-                ComboBoxItem currentItem = (ComboBoxItem)(item);
-                string current = (string)(currentItem.Content);
-                listSubtitlesFontColor.Add(current);
-            }
-            // read ini color
-            string subtitlesFontColor = inif.Read("Subtitles", "fontColor");
-            // if temp list contains color
-            if (listSubtitlesFontColor.Contains(subtitlesFontColor))
-                mainwindow.cboSubtitlesFontColor.SelectedItem = mainwindow.cboSubtitlesFontColor.Items
-                    .OfType<ComboBoxItem>()
-                    .FirstOrDefault(x => x.Content.ToString() == subtitlesFontColor);
-            else
-                listFailedImports.Add("Subtitles: Font Color");
+            //List<string> listSubtitlesFontColor = new List<string>();
+            //foreach (var item in mainwindow.tbxSubtitlesFontColor.Items)
+            //{
+            //    ComboBoxItem currentItem = (ComboBoxItem)(item);
+            //    string current = (string)(currentItem.Content);
+            //    listSubtitlesFontColor.Add(current);
+            //}
+            //// read ini color
+            //string subtitlesFontColor = inif.Read("Subtitles", "fontColor");
+            //// if temp list contains color
+            //if (listSubtitlesFontColor.Contains(subtitlesFontColor))
+            //    mainwindow.tbxSubtitlesFontColor.SelectedItem = mainwindow.tbxSubtitlesFontColor.Items
+            //        .OfType<ComboBoxItem>()
+            //        .FirstOrDefault(x => x.Content.ToString() == subtitlesFontColor);
+            //else
+            //    listFailedImports.Add("Subtitles: Font Color");
 
 
             // Border Color
+            mainwindow.tbxSubtitlesBorderColor.Text = inif.Read("Subtitles", "borderColor");
             // add combobox items to temp list
             // convert items to string
-            List<string> listSubtitlesBorderColor = new List<string>();
-            foreach (var item in mainwindow.cboSubtitlesBorderColor.Items)
-            {
-                ComboBoxItem currentItem = (ComboBoxItem)(item);
-                string current = (string)(currentItem.Content);
-                listSubtitlesBorderColor.Add(current);
-            }
-            // read ini color
-            string subtitlesBorderColor = inif.Read("Subtitles", "borderColor");
-            // if temp list contains color
-            if (listSubtitlesBorderColor.Contains(subtitlesBorderColor))
-                mainwindow.cboSubtitlesBorderColor.SelectedItem = mainwindow.cboSubtitlesBorderColor.Items
-                    .OfType<ComboBoxItem>()
-                    .FirstOrDefault(x => x.Content.ToString() == subtitlesBorderColor);
-            else
-                listFailedImports.Add("Subtitles: Border Color");
+            //List<string> listSubtitlesBorderColor = new List<string>();
+            //foreach (var item in mainwindow.cboSubtitlesBorderColor.Items)
+            //{
+            //    ComboBoxItem currentItem = (ComboBoxItem)(item);
+            //    string current = (string)(currentItem.Content);
+            //    listSubtitlesBorderColor.Add(current);
+            //}
+            //// read ini color
+            //string subtitlesBorderColor = inif.Read("Subtitles", "borderColor");
+            //// if temp list contains color
+            //if (listSubtitlesBorderColor.Contains(subtitlesBorderColor))
+            //    mainwindow.cboSubtitlesBorderColor.SelectedItem = mainwindow.cboSubtitlesBorderColor.Items
+            //        .OfType<ComboBoxItem>()
+            //        .FirstOrDefault(x => x.Content.ToString() == subtitlesBorderColor);
+            //else
+            //    listFailedImports.Add("Subtitles: Border Color");
 
 
             // Border Size
@@ -1692,24 +1706,25 @@ namespace Glow
 
 
             // Shadow Color
+            mainwindow.tbxSubtitlesShadowColor.Text = inif.Read("Subtitles", "shadowColor");
             // add combobox items to temp list
             // convert items to string
-            List<string> listSubtitlesShadowColor = new List<string>();
-            foreach (var item in mainwindow.cboSubtitlesShadowColor.Items)
-            {
-                ComboBoxItem currentItem = (ComboBoxItem)(item);
-                string current = (string)(currentItem.Content);
-                listSubtitlesShadowColor.Add(current);
-            }
-            // read ini color
-            string subtitlesShadowColor = inif.Read("Subtitles", "shadowColor");
-            // if temp list contains color
-            if (listSubtitlesShadowColor.Contains(subtitlesShadowColor))
-                mainwindow.cboSubtitlesShadowColor.SelectedItem = mainwindow.cboSubtitlesShadowColor.Items
-                    .OfType<ComboBoxItem>()
-                    .FirstOrDefault(x => x.Content.ToString() == subtitlesShadowColor);
-            else
-                listFailedImports.Add("Subtitles: Shadow Color");
+            //List<string> listSubtitlesShadowColor = new List<string>();
+            //foreach (var item in mainwindow.cboSubtitlesShadowColor.Items)
+            //{
+            //    ComboBoxItem currentItem = (ComboBoxItem)(item);
+            //    string current = (string)(currentItem.Content);
+            //    listSubtitlesShadowColor.Add(current);
+            //}
+            //// read ini color
+            //string subtitlesShadowColor = inif.Read("Subtitles", "shadowColor");
+            //// if temp list contains color
+            //if (listSubtitlesShadowColor.Contains(subtitlesShadowColor))
+            //    mainwindow.cboSubtitlesShadowColor.SelectedItem = mainwindow.cboSubtitlesShadowColor.Items
+            //        .OfType<ComboBoxItem>()
+            //        .FirstOrDefault(x => x.Content.ToString() == subtitlesShadowColor);
+            //else
+            //    listFailedImports.Add("Subtitles: Shadow Color");
 
             // Shadow Offset
             mainwindow.tbxSubtitlesShadowOffset.Text = inif.Read("Subtitles", "shadowOffset");
@@ -1901,24 +1916,25 @@ namespace Glow
 
 
             // Font Color
+            mainwindow.tbxOSDFontColor.Text = inif.Read("OSD", "fontColor");
             // add combobox items to temp list
             // convert items to string
-            List<string> listOSDFontColor = new List<string>();
-            foreach (var item in mainwindow.cboOSDFontColor.Items)
-            {
-                ComboBoxItem currentItem = (ComboBoxItem)(item);
-                string current = (string)(currentItem.Content);
-                listOSDFontColor.Add(current);
-            }
-            // read ini color
-            string osdFontColor = inif.Read("OSD", "fontColor");
-            // if temp list contains color
-            if (listOSDFontColor.Contains(osdFontColor))
-                mainwindow.cboOSDFontColor.SelectedItem = mainwindow.cboOSDFontColor.Items
-                    .OfType<ComboBoxItem>()
-                    .FirstOrDefault(x => x.Content.ToString() == osdFontColor);
-            else
-                listFailedImports.Add("OSD: Font Color");
+            //List<string> listOSDFontColor = new List<string>();
+            //foreach (var item in mainwindow.cboOSDFontColor.Items)
+            //{
+            //    ComboBoxItem currentItem = (ComboBoxItem)(item);
+            //    string current = (string)(currentItem.Content);
+            //    listOSDFontColor.Add(current);
+            //}
+            //// read ini color
+            //string osdFontColor = inif.Read("OSD", "fontColor");
+            //// if temp list contains color
+            //if (listOSDFontColor.Contains(osdFontColor))
+            //    mainwindow.cboOSDFontColor.SelectedItem = mainwindow.cboOSDFontColor.Items
+            //        .OfType<ComboBoxItem>()
+            //        .FirstOrDefault(x => x.Content.ToString() == osdFontColor);
+            //else
+            //    listFailedImports.Add("OSD: Font Color");
 
 
             // Border Size
@@ -1930,45 +1946,47 @@ namespace Glow
 
 
             // Border Color
+            mainwindow.tbxOSDBorderColor.Text = inif.Read("OSD", "borderColor");
             // add combobox items to temp list
             // convert items to string
-            List<string> listOSDBorderColor = new List<string>();
-            foreach (var item in mainwindow.cboOSDBorderColor.Items)
-            {
-                ComboBoxItem currentItem = (ComboBoxItem)(item);
-                string current = (string)(currentItem.Content);
-                listOSDBorderColor.Add(current);
-            }
-            // read ini color
-            string osdBorderColor = inif.Read("OSD", "borderColor");
-            // if temp list contains color
-            if (listOSDBorderColor.Contains(osdBorderColor))
-                mainwindow.cboOSDBorderColor.SelectedItem = mainwindow.cboOSDBorderColor.Items
-                    .OfType<ComboBoxItem>()
-                    .FirstOrDefault(x => x.Content.ToString() == osdBorderColor);
-            else
-                listFailedImports.Add("OSD: Border Color");
+            //List<string> listOSDBorderColor = new List<string>();
+            //foreach (var item in mainwindow.cboOSDBorderColor.Items)
+            //{
+            //    ComboBoxItem currentItem = (ComboBoxItem)(item);
+            //    string current = (string)(currentItem.Content);
+            //    listOSDBorderColor.Add(current);
+            //}
+            //// read ini color
+            //string osdBorderColor = inif.Read("OSD", "borderColor");
+            //// if temp list contains color
+            //if (listOSDBorderColor.Contains(osdBorderColor))
+            //    mainwindow.cboOSDBorderColor.SelectedItem = mainwindow.cboOSDBorderColor.Items
+            //        .OfType<ComboBoxItem>()
+            //        .FirstOrDefault(x => x.Content.ToString() == osdBorderColor);
+            //else
+            //    listFailedImports.Add("OSD: Border Color");
 
 
             // Shadow Color
+            mainwindow.tbxOSDShadowColor.Text = inif.Read("OSD", "shadowColor");
             // add combobox items to temp list
             // convert items to string
-            List<string> listOSDShadowColor = new List<string>();
-            // read ini color
-            foreach (var item in mainwindow.cboOSDShadowColor.Items)
-            {
-                ComboBoxItem currentItem = (ComboBoxItem)(item);
-                string current = (string)(currentItem.Content);
-                listOSDShadowColor.Add(current);
-            }
-            // if temp list contains color
-            string osdShadowColor = inif.Read("OSD", "shadowColor");
-            if (listOSDShadowColor.Contains(osdShadowColor))
-                mainwindow.cboOSDShadowColor.SelectedItem = mainwindow.cboOSDShadowColor.Items
-                    .OfType<ComboBoxItem>()
-                    .FirstOrDefault(x => x.Content.ToString() == osdShadowColor);
-            else
-                listFailedImports.Add("OSD: Shadow Color");
+            //List<string> listOSDShadowColor = new List<string>();
+            //// read ini color
+            //foreach (var item in mainwindow.cboOSDShadowColor.Items)
+            //{
+            //    ComboBoxItem currentItem = (ComboBoxItem)(item);
+            //    string current = (string)(currentItem.Content);
+            //    listOSDShadowColor.Add(current);
+            //}
+            //// if temp list contains color
+            //string osdShadowColor = inif.Read("OSD", "shadowColor");
+            //if (listOSDShadowColor.Contains(osdShadowColor))
+            //    mainwindow.cboOSDShadowColor.SelectedItem = mainwindow.cboOSDShadowColor.Items
+            //        .OfType<ComboBoxItem>()
+            //        .FirstOrDefault(x => x.Content.ToString() == osdShadowColor);
+            //else
+            //    listFailedImports.Add("OSD: Shadow Color");
 
 
             // Shadow Offset

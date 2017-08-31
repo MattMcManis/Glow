@@ -24,7 +24,7 @@ using System.Windows.Controls;
 
 namespace Glow
 {
-    public partial class ColorPicker
+    public partial class ColorConverter
     {
         /// <summary>
         ///    Hex Color Converter

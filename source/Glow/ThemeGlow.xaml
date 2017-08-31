@@ -102,6 +102,30 @@
         </Style.Triggers>
     </Style>
 
+    <!-- Color Picker Window Style -->
+    <SolidColorBrush x:Key="ColorPickerWindow.Static.Background" Color="#FF9C9C9C"/>
+
+    <Style x:Key="ColorPickerWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource ColorPickerWindow.Static.Background}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <AdornerDecorator>
+                            <ContentPresenter/>
+                        </AdornerDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 
     <!-- Update Window Style -->
     <!--<SolidColorBrush x:Key="UpdateWindow.Static.Background" Color="#000000"/>-->
@@ -1426,8 +1450,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <SolidColorBrush x:Key="SliderThumb.Track.Border" Color="#FF222124"/>
-    <SolidColorBrush x:Key="SliderThumb.Track.Background" Color="#FF222124"/>
+    <SolidColorBrush x:Key="SliderThumb.Track.Border" Color="#FF302f32"/>
+    <SolidColorBrush x:Key="SliderThumb.Track.Background" Color="#FF302f32"/>
     <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -1929,25 +1953,25 @@
         Button Languages
         /////////////////////////////////////-->
 
-    <SolidColorBrush x:Key="ButtonLang.Static.Foreground" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="ButtonLang.Static.Background" Color="#FF302f32"/>
-    <SolidColorBrush x:Key="ButtonLang.Static.Border" Color="#FF020f31"/>
+    <SolidColorBrush x:Key="ButtonControl.Static.Foreground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ButtonControl.Static.Background" Color="#FF302f32"/>
+    <SolidColorBrush x:Key="ButtonControl.Static.Border" Color="#FF302f32"/>
     
-    <SolidColorBrush x:Key="ButtonLang.MouseOver.Background" Color="#FF111111"/>
-    <SolidColorBrush x:Key="ButtonLang.MouseOver.Border" Color="#FFfff69c"/>
+    <SolidColorBrush x:Key="ButtonControl.MouseOver.Background" Color="#FF111111"/>
+    <SolidColorBrush x:Key="ButtonControl.MouseOver.Border" Color="#FFfff69c"/>
 
-    <SolidColorBrush x:Key="ButtonLang.Pressed.Background" Color="#FFfff69c"/>
-    <SolidColorBrush x:Key="ButtonLang.Pressed.Border" Color="#FFfff69c"/>
+    <SolidColorBrush x:Key="ButtonControl.Pressed.Background" Color="#FFfff69c"/>
+    <SolidColorBrush x:Key="ButtonControl.Pressed.Border" Color="#FFfff69c"/>
     
-    <SolidColorBrush x:Key="ButtonLang.Disabled.Background" Color="#FFF4F4F4"/>
-    <SolidColorBrush x:Key="ButtonLang.Disabled.Border" Color="#FFADB2B5"/>
-    <SolidColorBrush x:Key="ButtonLang.Disabled.Foreground" Color="#FF838383"/>
+    <SolidColorBrush x:Key="ButtonControl.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="ButtonControl.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="ButtonControl.Disabled.Foreground" Color="#FF838383"/>
 
-    <Style x:Key="ButtonLanguageStyle" TargetType="{x:Type Button}">
+    <Style x:Key="ButtonControlStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource ButtonLang.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource ButtonLang.Static.Border}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ButtonLang.Static.Foreground}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonControl.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonControl.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonControl.Static.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -1972,17 +1996,17 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonLang.MouseOver.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonLang.MouseOver.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonControl.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonControl.MouseOver.Border}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonLang.Pressed.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonLang.Pressed.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonControl.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonControl.Pressed.Border}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonLang.Disabled.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonLang.Disabled.Border}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource ButtonLang.Disabled.Foreground}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonControl.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ButtonControl.Disabled.Border}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource ButtonControl.Disabled.Foreground}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -2118,5 +2142,11 @@
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
+    <!-- Color Picker Button -->
+    <Style x:Key="ButtonColorPicker" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="Resources/Images/Buttons/White/colorpicker.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
 
 </ResourceDictionary>
