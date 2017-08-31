@@ -494,7 +494,7 @@ namespace Glow
         {
             string swatch = "FFFFFF";
 
-            ConvertHexToRGB("#" + swatch);
+            ColorPreview(ConvertHexToRGB("#" + swatch));
 
             tbxHexColorCode.Text = swatch;
         }
@@ -506,7 +506,7 @@ namespace Glow
         {
             string swatch = "000000";
 
-            ConvertHexToRGB("#" + swatch);
+            ColorPreview(ConvertHexToRGB("#" + swatch));
 
             tbxHexColorCode.Text = swatch;
         }
@@ -541,7 +541,7 @@ namespace Glow
 
             string swatch = "FFB0B0";
 
-            ConvertHexToRGB("#" + swatch);
+            ColorPreview(ConvertHexToRGB("#" + swatch));
 
             tbxHexColorCode.Text = swatch;
         }
@@ -553,7 +553,7 @@ namespace Glow
         {
             string swatch = "A9A9A9";
 
-            ConvertHexToRGB("#" + swatch);
+            ColorPreview(ConvertHexToRGB("#" + swatch));
 
             tbxHexColorCode.Text = swatch;
         }
@@ -565,7 +565,7 @@ namespace Glow
         {
             string swatch = "262626";
 
-            ConvertHexToRGB("#" + swatch);
+            ColorPreview(ConvertHexToRGB("#" + swatch));
 
             tbxHexColorCode.Text = swatch;
         }
@@ -577,7 +577,7 @@ namespace Glow
         {
             string swatch = "FDFD02";
 
-            ConvertHexToRGB("#" + swatch);
+            ColorPreview(ConvertHexToRGB("#" + swatch));
 
             tbxHexColorCode.Text = swatch;
         }
@@ -589,7 +589,7 @@ namespace Glow
         {
             string swatch = "9AAFE4";
 
-            ConvertHexToRGB("#" + swatch);
+            ColorPreview(ConvertHexToRGB("#" + swatch));
 
             tbxHexColorCode.Text = swatch;
         }
