@@ -103,6 +103,7 @@ namespace Glow
             // Screensaver
             // -------------------------
             string screensaver = string.Empty;
+            // empty if default
 
             // Keep
             if ((string)(mainwindow.cboScreensaver.SelectedItem ?? string.Empty) == "on")
@@ -114,7 +115,15 @@ namespace Glow
             // -------------------------
             // Window Title
             // -------------------------
-            string windowTitle = "title=\"${filename}\"";
+            string windowTitle = string.Empty;           
+            // empty if default
+
+            // Filename
+            if ((string)(mainwindow.cboWindowTitle.SelectedItem ?? string.Empty) == "Filename")
+                windowTitle = "title=\"${filename}\"";
+            // Media Title
+            else if ((string)(mainwindow.cboWindowTitle.SelectedItem ?? string.Empty) == "Media Title")
+                windowTitle = "title=\"${media-title}\"";
 
 
             // --------------------------------------------------

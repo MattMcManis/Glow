@@ -40,17 +40,6 @@ namespace Glow
         /// </summary>
         public static void GetCustomProfiles()
         {
-            // Presets
-            List<string> _presetsItems = new List<string>()
-            {
-                "Default",
-                "Ultra",
-                "High",
-                "Medium",
-                "Low",
-                "Debug",
-            };
-
             // User Custom Profiles Full Path
             if (Directory.Exists(MainWindow.profilesDir))
             {
@@ -79,9 +68,9 @@ namespace Glow
 
             // Join Presets and Profiles Lists
             //_presetsItems.AddRange(_customProfilesItems);
-            _presetsItems.AddRange(listCustomProfilesNames);
+            ViewModel._presetsItems.AddRange(listCustomProfilesNames);
             // Populate ComboBox
-            ViewModel._profilesItems = _presetsItems.ToList();
+            ViewModel._profilesItems = ViewModel._presetsItems.ToList();
 
             // Clear Temp Lists
             //listCustomProfilesPaths.Clear();
@@ -113,6 +102,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 0;
                 mainwindow.slAutofitHeight.Value = 0;
                 mainwindow.cboScreensaver.SelectedItem = "default";
+                mainwindow.cboWindowTitle.SelectedItem = "default";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "default";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "default";
@@ -159,10 +149,10 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboAudioDriver.SelectedItem = "default";
                 mainwindow.cboChannels.SelectedItem = "default";
-                mainwindow.slVolume.Value = 100;
-                mainwindow.slVolumeMax.Value = 150;
+                mainwindow.slVolume.Value = 0;
+                mainwindow.slVolumeMax.Value = 0;
                 mainwindow.cboSoftVolume.SelectedItem = "default";
-                mainwindow.slSoftVolumeMax.Value = 150;
+                mainwindow.slSoftVolumeMax.Value = 0;
                 mainwindow.cboNormalize.SelectedItem = "default";
                 mainwindow.cboScaleTempo.SelectedItem = "default";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "default";
@@ -210,6 +200,9 @@ namespace Glow
                 mainwindow.tbxDemuxerBuffersize.Text = "";
                 mainwindow.tbxDemuxerReadahead.Text = "";
                 mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "default";
+                // YouTube
+                mainwindow.cboYouTubeDL.SelectedItem = "default";
+                mainwindow.cboYouTubeQuality.SelectedItem = "default";
                 // Cache
                 mainwindow.cboCache.SelectedItem = "default";
                 mainwindow.tbxCacheDefault.Text = "";
@@ -251,6 +244,16 @@ namespace Glow
                 //mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.tbxOSDShadowColor.Text = ""; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
+
+                // -------------------------
+                // Extensions
+                // -------------------------
+                mainwindow.cboExtMKV.SelectedItem = "default";
+                mainwindow.cboExtMP4.SelectedItem = "default";
+                mainwindow.cboExtWebM.SelectedItem = "default";
+                mainwindow.cboExtGIF.SelectedItem = "default";
+                mainwindow.cboExtJPG.SelectedItem = "default";
+                mainwindow.cboExtPNG.SelectedItem = "default";
             }
 
             // -------------------------
@@ -270,6 +273,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
+                mainwindow.cboWindowTitle.SelectedItem = "default";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -365,6 +369,9 @@ namespace Glow
                 mainwindow.tbxDemuxerBuffersize.Text = "32768";
                 mainwindow.tbxDemuxerReadahead.Text = "5.0";
                 mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                // YouTube
+                mainwindow.cboYouTubeDL.SelectedItem = "yes";
+                mainwindow.cboYouTubeQuality.SelectedItem = "best";
                 // Cache
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
@@ -403,6 +410,16 @@ namespace Glow
                 // Shadow
                 mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
+
+                // -------------------------
+                // Extensions
+                // -------------------------
+                mainwindow.cboExtMKV.SelectedItem = "default";
+                mainwindow.cboExtMP4.SelectedItem = "default";
+                mainwindow.cboExtWebM.SelectedItem = "loop";
+                mainwindow.cboExtGIF.SelectedItem = "loop";
+                mainwindow.cboExtJPG.SelectedItem = "pause";
+                mainwindow.cboExtPNG.SelectedItem = "pause";
             }
 
             // -------------------------
@@ -422,6 +439,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
+                mainwindow.cboWindowTitle.SelectedItem = "default";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -517,6 +535,9 @@ namespace Glow
                 mainwindow.tbxDemuxerBuffersize.Text = "32768";
                 mainwindow.tbxDemuxerReadahead.Text = "5.0";
                 mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                // YouTube
+                mainwindow.cboYouTubeDL.SelectedItem = "yes";
+                mainwindow.cboYouTubeQuality.SelectedItem = "best";
                 // Cache
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
@@ -555,6 +576,16 @@ namespace Glow
                 // Shadow
                 mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
+
+                // -------------------------
+                // Extensions
+                // -------------------------
+                mainwindow.cboExtMKV.SelectedItem = "default";
+                mainwindow.cboExtMP4.SelectedItem = "default";
+                mainwindow.cboExtWebM.SelectedItem = "loop";
+                mainwindow.cboExtGIF.SelectedItem = "loop";
+                mainwindow.cboExtJPG.SelectedItem = "pause";
+                mainwindow.cboExtPNG.SelectedItem = "pause";
             }
 
             // -------------------------
@@ -574,6 +605,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
+                mainwindow.cboWindowTitle.SelectedItem = "default";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -669,6 +701,9 @@ namespace Glow
                 mainwindow.tbxDemuxerBuffersize.Text = "32768";
                 mainwindow.tbxDemuxerReadahead.Text = "5.0";
                 mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                // YouTube
+                mainwindow.cboYouTubeDL.SelectedItem = "yes";
+                mainwindow.cboYouTubeQuality.SelectedItem = "good";
                 // Cache
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
@@ -707,6 +742,16 @@ namespace Glow
                 // Shadow
                 mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
+
+                // -------------------------
+                // Extensions
+                // -------------------------
+                mainwindow.cboExtMKV.SelectedItem = "default";
+                mainwindow.cboExtMP4.SelectedItem = "default";
+                mainwindow.cboExtWebM.SelectedItem = "loop";
+                mainwindow.cboExtGIF.SelectedItem = "loop";
+                mainwindow.cboExtJPG.SelectedItem = "pause";
+                mainwindow.cboExtPNG.SelectedItem = "pause";
             }
 
             // -------------------------
@@ -726,6 +771,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
+                mainwindow.cboWindowTitle.SelectedItem = "default";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -822,6 +868,9 @@ namespace Glow
                 mainwindow.tbxDemuxerBuffersize.Text = "32768";
                 mainwindow.tbxDemuxerReadahead.Text = "";
                 mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "no";
+                // YouTube
+                mainwindow.cboYouTubeDL.SelectedItem = "yes";
+                mainwindow.cboYouTubeQuality.SelectedItem = "worst";
                 // Cache
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
@@ -860,6 +909,16 @@ namespace Glow
                 // Shadow
                 mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
+
+                // -------------------------
+                // Extensions
+                // -------------------------
+                mainwindow.cboExtMKV.SelectedItem = "default";
+                mainwindow.cboExtMP4.SelectedItem = "default";
+                mainwindow.cboExtWebM.SelectedItem = "loop";
+                mainwindow.cboExtGIF.SelectedItem = "loop";
+                mainwindow.cboExtJPG.SelectedItem = "pause";
+                mainwindow.cboExtPNG.SelectedItem = "pause";
             }
 
             // -------------------------
@@ -879,6 +938,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
+                mainwindow.cboWindowTitle.SelectedItem = "default";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -976,6 +1036,9 @@ namespace Glow
                 mainwindow.tbxDemuxerBuffersize.Text = "32768";
                 mainwindow.tbxDemuxerReadahead.Text = "5.0";
                 mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                // YouTube
+                mainwindow.cboYouTubeDL.SelectedItem = "yes";
+                mainwindow.cboYouTubeQuality.SelectedItem = "best";
                 // Cache
                 mainwindow.cboCache.SelectedItem = "auto";
                 mainwindow.tbxCacheDefault.Text = "100000";
@@ -1014,6 +1077,16 @@ namespace Glow
                 // Shadow
                 mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
                 mainwindow.slOSDShadowOffset.Value = 1.25;
+
+                // -------------------------
+                // Extensions
+                // -------------------------
+                mainwindow.cboExtMKV.SelectedItem = "default";
+                mainwindow.cboExtMP4.SelectedItem = "default";
+                mainwindow.cboExtWebM.SelectedItem = "loop";
+                mainwindow.cboExtGIF.SelectedItem = "loop";
+                mainwindow.cboExtJPG.SelectedItem = "pause";
+                mainwindow.cboExtPNG.SelectedItem = "pause";
             }
 
             // -------------------------
@@ -1048,8 +1121,8 @@ namespace Glow
         public static void ExportProfile(MainWindow mainwindow, string input)
         {
             // Selected Item
-            ComboBoxItem selectedItem = null;
-            string selected = string.Empty;
+            //ComboBoxItem selectedItem = null;
+            //string selected = string.Empty;
 
             // Export's ini file path
             // Get from Save Dialog Path
@@ -1070,6 +1143,8 @@ namespace Glow
             inif.Write("General", "autofitWidth", mainwindow.tbxAutofitWidth.Text.ToString());
             inif.Write("General", "autofitHeight", mainwindow.tbxAutofitHeight.Text.ToString());
             inif.Write("General", "screensaver", (mainwindow.cboScreensaver.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "windowTitle", (mainwindow.cboWindowTitle.SelectedItem ?? string.Empty).ToString());
+            // Screenshot
             inif.Write("General", "screenshotPath", mainwindow.tbxScreenshotPath.Text.ToString());
             inif.Write("General", "screenshotTemplate", (mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty).ToString());
             inif.Write("General", "screenshotTagColorspace", (mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty).ToString());
@@ -1216,10 +1291,15 @@ namespace Glow
             // --------------------------------------------------
             // Stream
             // --------------------------------------------------
+            // Demuxer
             inif.Write("Stream", "demuxThread", (mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty).ToString());
             inif.Write("Stream", "demuxerBufferSize", mainwindow.tbxDemuxerBuffersize.Text.ToString());
             inif.Write("Stream", "demuxerReadAhead", mainwindow.tbxDemuxerReadahead.Text.ToString());
             inif.Write("Stream", "demuxerMKVSubtitlePreroll", (mainwindow.cboDemuxerMKVSubPreroll.SelectedItem ?? string.Empty).ToString());
+            // YouTube
+            inif.Write("Stream", "youtubedl", (mainwindow.cboYouTubeDL.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Stream", "youTubeQuality", (mainwindow.cboYouTubeQuality.SelectedItem ?? string.Empty).ToString());
+            // Cache
             inif.Write("Stream", "cache", (mainwindow.cboCache.SelectedItem ?? string.Empty).ToString());
             inif.Write("Stream", "cacheDefault", mainwindow.tbxCacheDefault.Text.ToString());
             inif.Write("Stream", "initial", mainwindow.tbxCacheInitial.Text.ToString());
@@ -1267,6 +1347,16 @@ namespace Glow
             //inif.Write("OSD", "shadowColor", selected);
 
             inif.Write("OSD", "shadowOffset", mainwindow.tbxOSDShadowOffset.Text.ToString());
+
+            // --------------------------------------------------
+            // Extensions
+            // --------------------------------------------------
+            inif.Write("Extensions", "mkv", (mainwindow.cboExtMKV.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Extensions", "mp4", (mainwindow.cboExtMP4.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Extensions", "webm", (mainwindow.cboExtWebM.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Extensions", "gif", (mainwindow.cboExtGIF.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Extensions", "jpg", (mainwindow.cboExtJPG.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Extensions", "png", (mainwindow.cboExtPNG.SelectedItem ?? string.Empty).ToString());
         }
 
 
@@ -1333,6 +1423,13 @@ namespace Glow
                 mainwindow.cboScreensaver.SelectedItem = screensaver;
             else
                 listFailedImports.Add("General: Screensaver");
+
+            // Window Title
+            string windowTitle = inif.Read("General", "windowTitle");
+            if (mainwindow.cboWindowTitle.Items.Contains(windowTitle))
+                mainwindow.cboWindowTitle.SelectedItem = windowTitle;
+            else
+                listFailedImports.Add("General: Window Title");
 
             // Screenshot Path
             mainwindow.tbxScreenshotPath.Text = inif.Read("General", "screenshotPath");
@@ -1829,6 +1926,22 @@ namespace Glow
             // Demuxer MKV Subtitle Preroll
             mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = inif.Read("Stream", "demuxerMKVSubtitlePreroll");
 
+
+            // youtube-dl
+            string youtubedl = inif.Read("Stream", "youtubedl");
+            if (mainwindow.cboYouTubeDL.Items.Contains(youtubedl))
+                mainwindow.cboYouTubeDL.SelectedItem = youtubedl;
+            else
+                listFailedImports.Add("Stream: youtube-dl");
+
+            // YouTube Quality
+            string youTubeQuality = inif.Read("Stream", "youTubeQuality");
+            if (mainwindow.cboYouTubeQuality.Items.Contains(youTubeQuality))
+                mainwindow.cboYouTubeQuality.SelectedItem = youTubeQuality;
+            else
+                listFailedImports.Add("Stream: YouTube Quality");
+
+
             // Cache
             string cache = inif.Read("Stream", "cache");
             if (mainwindow.cboCache.Items.Contains(cache))
@@ -2013,6 +2126,51 @@ namespace Glow
                     + message, 
                     "Failed To Import", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+
+            // --------------------------------------------------
+            // Extensions
+            // --------------------------------------------------
+            // MKV
+            string mkv = inif.Read("Extensions", "mkv");
+            if (mainwindow.cboExtMKV.Items.Contains(mkv))
+                mainwindow.cboExtMKV.SelectedItem = mkv;
+            else
+                listFailedImports.Add("Extensions: mkv");
+
+            // MP4
+            string mp4 = inif.Read("Extensions", "mp4");
+            if (mainwindow.cboExtMP4.Items.Contains(mp4))
+                mainwindow.cboExtMP4.SelectedItem = mp4;
+            else
+                listFailedImports.Add("Extensions: mp4");
+
+            // WebM
+            string webm = inif.Read("Extensions", "webm");
+            if (mainwindow.cboExtWebM.Items.Contains(webm))
+                mainwindow.cboExtWebM.SelectedItem = webm;
+            else
+                listFailedImports.Add("Extensions: webm");
+
+            // GIF
+            string gif = inif.Read("Extensions", "gif");
+            if (mainwindow.cboExtGIF.Items.Contains(gif))
+                mainwindow.cboExtGIF.SelectedItem = gif;
+            else
+                listFailedImports.Add("Extensions: gif");
+
+            // JPG
+            string jpg = inif.Read("Extensions", "jpg");
+            if (mainwindow.cboExtJPG.Items.Contains(jpg))
+                mainwindow.cboExtJPG.SelectedItem = jpg;
+            else
+                listFailedImports.Add("Extensions: jpg");
+
+            // PNG
+            string png = inif.Read("Extensions", "png");
+            if (mainwindow.cboExtPNG.Items.Contains(png))
+                mainwindow.cboExtPNG.SelectedItem = png;
+            else
+                listFailedImports.Add("Extensions: png");
         }
 
 

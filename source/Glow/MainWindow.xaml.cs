@@ -196,53 +196,140 @@ namespace Glow
         /// </summary>
         public void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            PreviewPickedColors(this);
+            PreviewOSDFontColor(this);
+            PreviewOSDBorderColor(this);
+            PreviewOSDShadowColor(this);
+            PreviewSubtitlesFontColor(this);
+            PreviewSubtitlesBorderColor(this);
+            PreviewSubtitlesShadowColor(this);
         }
 
-        public static void PreviewPickedColors(MainWindow mainwindow)
+
+        /// <summary>
+        ///    Preview OSD Font Color
+        /// </summary>
+        public static void PreviewOSDFontColor(MainWindow mainwindow)
         {
-            // -------------------------
-            // Preview OSD/Subtitles Picked Colors
-            // -------------------------
-            System.Drawing.Color color = new System.Drawing.Color();
-            System.Windows.Media.Color mediaColor = new System.Windows.Media.Color();
-            System.Windows.Media.Brush brushPreview;
+            if (mainwindow.tbxOSDFontColor.Text.ToString().Length == 6)
+            {
+                try
+                {
+                    System.Drawing.Color color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDFontColor.Text.ToString());
+                    System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+                    System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+                    mainwindow.osdFontColorPreview.Fill = brushPreview;
+                }
+                catch
+                {
 
-            // OSD Font Color
-            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDFontColor.Text.ToString());
-            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
-            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
-            mainwindow.osdFontColorPreview.Fill = brushPreview;
+                }
+            }
 
-            // OSD Border Color
-            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDBorderColor.Text.ToString());
-            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
-            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
-            mainwindow.osdBorderColorPreview.Fill = brushPreview;
+        }
 
-            // OSD Shadow Color
-            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDShadowColor.Text.ToString());
-            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
-            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
-            mainwindow.osdShadowColorPreview.Fill = brushPreview;
+        /// <summary>
+        ///    Preview OSD Border Color
+        /// </summary>
+        public static void PreviewOSDBorderColor(MainWindow mainwindow)
+        {
+            if (mainwindow.tbxOSDBorderColor.Text.ToString().Length == 6)
+            {
+                try
+                {
+                    System.Drawing.Color color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDBorderColor.Text.ToString());
+                    System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+                    System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+                    mainwindow.osdBorderColorPreview.Fill = brushPreview;
+                }
+                catch
+                {
 
-            // Subtitles Font Color
-            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesFontColor.Text.ToString());
-            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
-            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
-            mainwindow.subtitlesFontColorPreview.Fill = brushPreview;
+                }
+            }
+        }
 
-            // Subtitles Border Color
-            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesBorderColor.Text.ToString());
-            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
-            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
-            mainwindow.subtitlesBorderColorPreview.Fill = brushPreview;
+        /// <summary>
+        ///    Preview OSD Shadow Color
+        /// </summary>
+        public static void PreviewOSDShadowColor(MainWindow mainwindow)
+        {
+            if (mainwindow.tbxOSDShadowColor.Text.ToString().Length == 6)
+            {
+                try
+                {
+                    System.Drawing.Color color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDShadowColor.Text.ToString());
+                    System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+                    System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+                    mainwindow.osdShadowColorPreview.Fill = brushPreview;
+                }
+                catch
+                {
 
-            // Subtitles Shadow Color
-            color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesShadowColor.Text.ToString());
-            mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
-            brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
-            mainwindow.subtitlesShadowColorPreview.Fill = brushPreview;
+                }
+            }
+        }
+
+        /// <summary>
+        ///    Preview Subtitle Font Color
+        /// </summary>
+        public static void PreviewSubtitlesFontColor(MainWindow mainwindow)
+        {
+            if (mainwindow.tbxSubtitlesFontColor.Text.ToString().Length == 6)
+            {
+                try
+                {
+                    System.Drawing.Color color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesFontColor.Text.ToString());
+                    System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+                    System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+                    mainwindow.subtitlesFontColorPreview.Fill = brushPreview;
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        /// <summary>
+        ///    Preview Subtitle Border Color
+        /// </summary>
+        public static void PreviewSubtitlesBorderColor(MainWindow mainwindow)
+        {
+            if (mainwindow.tbxSubtitlesBorderColor.Text.ToString().Length == 6)
+            {
+                try
+                {
+                    System.Drawing.Color color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesBorderColor.Text.ToString());
+                    System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+                    System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+                    mainwindow.subtitlesBorderColorPreview.Fill = brushPreview;
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        /// <summary>
+        ///    Preview Subtitle Shadow Color
+        /// </summary>
+        public static void PreviewSubtitlesShadowColor(MainWindow mainwindow)
+        {
+            if (mainwindow.tbxSubtitlesShadowColor.Text.ToString().Length == 6)
+            {
+                try
+                {
+                    System.Drawing.Color color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxSubtitlesShadowColor.Text.ToString());
+                    System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+                    System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+                    mainwindow.subtitlesShadowColorPreview.Fill = brushPreview;
+                }
+                catch
+                {
+
+                }
+            }
         }
 
 
@@ -323,10 +410,22 @@ namespace Glow
                 e.Handled = true;
             }
 
-            // Allow alphanumeric and backspace
+            // Allow alphanumeric A-Z, 0-9
+            // Ctrl Shortcuts
+            // Backspace, Delete
             else if (e.Key >= Key.D0 && e.Key <= Key.D9 ||
                 e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 ||
-                e.Key >= Key.A && e.Key <= Key.Z ||
+                e.Key >= Key.A && e.Key <= Key.F ||
+                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.Z ||
+                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.Z ||
+                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.A ||
+                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.A ||
+                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.X ||
+                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.X ||
+                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.C ||
+                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.C ||
+                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.V ||
+                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.V ||
                 e.Key == Key.Delete ||
                 e.Key == Key.Back)
             {
@@ -924,6 +1023,10 @@ namespace Glow
         /// <summary>
         ///     Subtitles Font Color TextBox
         /// </summary>
+        private void tbxSubtitlesFontColor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PreviewSubtitlesFontColor(this);
+        }
         private void tbxSubtitlesFontColor_KeyDown(object sender, KeyEventArgs e)
         {
             AllowOnlyAlphaNumeric(this, e);
@@ -941,10 +1044,13 @@ namespace Glow
         {
             OpenColorPickerWindow("subtitlesBorder");
         }
-
         /// <summary>
         ///     Subtitles Border Color TextBox
         /// </summary>
+        private void tbxSubtitlesBorderColor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PreviewSubtitlesBorderColor(this);
+        }
         private void tbxSubtitlesBorderColor_KeyDown(object sender, KeyEventArgs e)
         {
             AllowOnlyAlphaNumeric(this, e);
@@ -954,6 +1060,7 @@ namespace Glow
             AllowOnlyAlphaNumeric(this, e);
         }
 
+
         /// <summary>
         ///    Subtitle Shadow Color Button
         /// </summary>
@@ -961,10 +1068,13 @@ namespace Glow
         {
             OpenColorPickerWindow("subtitlesShadow");
         }
-
         /// <summary>
         ///     Subtitles Shadow Color TextBox
         /// </summary>
+        private void tbxSubtitlesShadowColor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PreviewSubtitlesShadowColor(this);
+        }
         private void tbxSubtitlesShadowColor_KeyDown(object sender, KeyEventArgs e)
         {
             AllowOnlyAlphaNumeric(this, e);
@@ -1094,6 +1204,10 @@ namespace Glow
         /// <summary>
         ///     OSD Font Color TextBox
         /// </summary>
+        private void tbxOSDFontColor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PreviewOSDFontColor(this);
+        }
         private void tbxOSDFontColor_KeyDown(object sender, KeyEventArgs e)
         {
             AllowOnlyAlphaNumeric(this, e);
@@ -1102,6 +1216,7 @@ namespace Glow
         {
             AllowOnlyAlphaNumeric(this, e);
         }
+
 
         /// <summary>
         ///    OSD Border Button
@@ -1114,6 +1229,10 @@ namespace Glow
         /// <summary>
         ///     OSD Font Color TextBox
         /// </summary>
+        private void tbxOSDBorderColor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PreviewOSDBorderColor(this);
+        }
         private void tbxOSDBorderColor_KeyDown(object sender, KeyEventArgs e)
         {
             AllowOnlyAlphaNumeric(this, e);
@@ -1122,6 +1241,7 @@ namespace Glow
         {
             AllowOnlyAlphaNumeric(this, e);
         }
+
 
         /// <summary>
         ///    OSD Shadow Button
@@ -1134,6 +1254,10 @@ namespace Glow
         /// <summary>
         ///     OSD Shadow Color TextBox
         /// </summary>
+        private void tbxOSDShadowColor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PreviewOSDShadowColor(this);
+        }
         private void tbxOSDShadowColor_KeyDown(object sender, KeyEventArgs e)
         {
             AllowOnlyAlphaNumeric(this, e);
@@ -1663,7 +1787,6 @@ namespace Glow
             p.Inlines.Add(new Run(Generate.GenerateConfig(this)));
             rtbConfig.EndChange();
         }
-
 
     }
 }

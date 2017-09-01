@@ -41,17 +41,44 @@ namespace Glow
             string title = "## EXTENSIONS ##";
 
             // -------------------------
+            // MKV
+            // -------------------------
+            string mkv = string.Empty;
+
+            if ((string)(mainwindow.cboExtMKV.SelectedItem ?? string.Empty) == "loop")
+                mkv = "[extension.mkv]"
+                        +"\r\n"
+                        + "loop-file=inf";
+
+            // -------------------------
             // MP4
             // -------------------------
             string mp4 = string.Empty;
-            //string mp4 = "[extension.mp4]";
-            //            + "\r\n"
-            //            + "loop-file=inf";
+
+            if ((string)(mainwindow.cboExtMP4.SelectedItem ?? string.Empty) == "loop")
+                mp4 = "[extension.mp4]"
+                        + "\r\n"
+                        + "loop-file=inf";
 
             // -------------------------
             // WebM
             // -------------------------
-            string webm = "[extension.webm]"
+            string webm = string.Empty;
+
+            if ((string)(mainwindow.cboExtWebM.SelectedItem ?? string.Empty) == "loop")
+                webm = "[extension.webm]"
+                        + "\r\n"
+                        + "cache=no"
+                        + "\r\n"
+                        + "loop-file=inf";
+
+            // -------------------------
+            // GIF
+            // -------------------------
+            string gif = string.Empty;
+
+            if ((string)(mainwindow.cboExtGIF.SelectedItem ?? string.Empty) == "loop")
+                gif = "[extension.gif]"
                         + "\r\n"
                         + "cache=no"
                         + "\r\n"
@@ -60,7 +87,10 @@ namespace Glow
             // -------------------------
             // JPG
             // -------------------------
-            string jpg = "[extension.jpg]"
+            string jpg = string.Empty;
+
+            if ((string)(mainwindow.cboExtJPG.SelectedItem ?? string.Empty) == "pause")
+                jpg = "[extension.jpg]"
                         + "\r\n"
                         + "cache=no"
                         + "\r\n"
@@ -69,20 +99,14 @@ namespace Glow
             // -------------------------
             // PNG
             // -------------------------
-            string png = "[extension.png]"
+            string png = string.Empty;
+
+            if ((string)(mainwindow.cboExtPNG.SelectedItem ?? string.Empty) == "pause")
+                png = "[extension.png]"
                         + "\r\n"
                         + "cache=no"
                         + "\r\n"
                         + "pause";
-
-            // -------------------------
-            // GIF
-            // -------------------------
-            string gif = "[extension.gif]"
-                        + "\r\n"
-                        + "cache=no"
-                        + "\r\n"
-                        + "loop-file=inf";
 
 
             // --------------------------------------------------
@@ -91,11 +115,12 @@ namespace Glow
             List<string> listExtensions = new List<string>()
             {
                 title,
+                mkv,
                 mp4,
                 webm,
+                gif,
                 jpg,
                 png,
-                gif
             };
 
             // -------------------------

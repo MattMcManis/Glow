@@ -68,12 +68,18 @@ namespace Glow
             // -------------------------
             // Volume
             // -------------------------
-            string volume = "volume=" + mainwindow.tbxVolume.Text.ToString();
+            string volume = string.Empty;
+
+            if (mainwindow.slVolume.Value != 0)
+                volume = "volume=" + mainwindow.tbxVolume.Text.ToString();
 
             // -------------------------
             // Max Volume
             // -------------------------
-            string volumeMax = "volume-max=" + mainwindow.tbxVolumeMax.Text.ToString();
+            string volumeMax = string.Empty;
+
+            if (mainwindow.slVolumeMax.Value != 0)
+                volumeMax = "volume-max=" + mainwindow.tbxVolumeMax.Text.ToString();
 
             // -------------------------
             // Soft Volume
@@ -86,7 +92,10 @@ namespace Glow
             // -------------------------
             // Soft Volume Max
             // -------------------------
-            string softVolumeMax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
+            string softVolumeMax = string.Empty;
+
+            if (mainwindow.slSoftVolumeMax.Value != 0)
+                softVolumeMax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
 
             // -------------------------
             // Normalize

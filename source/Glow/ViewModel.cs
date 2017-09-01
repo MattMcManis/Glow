@@ -23,6 +23,19 @@ namespace Glow
 
         public static string FontSelectedItem { get; set; }
 
+        // -------------------------
+        // Presets
+        // -------------------------
+        // Presets
+        public static List<string> _presetsItems = new List<string>()
+        {
+            "Default",
+            "Ultra",
+            "High",
+            "Medium",
+            "Low",
+            //"Debug",
+        };
 
         // -------------------------
         // Custom Profiles

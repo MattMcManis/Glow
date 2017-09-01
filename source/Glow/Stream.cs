@@ -21,8 +21,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Glow
 {
@@ -73,6 +71,36 @@ namespace Glow
 
             if ((string)(mainwindow.cboDemuxerMKVSubPreroll.SelectedItem ?? string.Empty) == "yes")
                 demuxerMKVSubtitlePreroll = "demuxer-mkv-subtitle-preroll";
+
+
+            // --------------------------------------------------
+            // YouTube
+            // --------------------------------------------------
+
+            // -------------------------
+            // youtube-dl
+            // -------------------------
+            string youtubedl = string.Empty;
+            // ignore default
+
+            if ((string)(mainwindow.cboYouTubeDL.SelectedItem ?? string.Empty) == "yes")
+                youtubedl = "ytdl=yes";
+
+            // -------------------------
+            // Quality
+            // -------------------------
+            string youTubeQuality = string.Empty;
+            // ignore default
+
+            // Best
+            if ((string)(mainwindow.cboYouTubeQuality.SelectedItem ?? string.Empty) == "best")
+                youTubeQuality = "ytdl-format=bestvideo[ext=mp4][width<=1920][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4]/best";
+            // Good
+            else if ((string)(mainwindow.cboYouTubeQuality.SelectedItem ?? string.Empty) == "good")
+                youTubeQuality = "ytdl-format=bestvideo[ext=webm][height<=?720]";
+            // Worst
+            else if ((string)(mainwindow.cboYouTubeQuality.SelectedItem ?? string.Empty) == "worst")
+                youTubeQuality = "ytdl-format=worst";
 
 
             // --------------------------------------------------
@@ -146,9 +174,9 @@ namespace Glow
             // -------------------------
             // YouTube
             // -------------------------
-            string youTube = "ytdl=yes"
-                            + "\r\n"
-                            + "ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/bestaudio)/best";
+            //string youTube = "ytdl=yes"
+            //                + "\r\n"
+            //                + "ytdl-format=(bestvideo[ext=webm]/bestvideo[fps=60])+(bestaudio[acodec=opus]/bestaudio)/best";
 
 
             // --------------------------------------------------
@@ -164,6 +192,10 @@ namespace Glow
                 demuxerReadAhead,
                 demuxerMKVSubtitlePreroll,
 
+                // YouTube
+                youtubedl,
+                youTubeQuality,
+
                 // Cache
                 cache,
                 cacheDefault,
@@ -173,7 +205,6 @@ namespace Glow
                 seconds,
                 file,
                 fileSize,
-                youTube,
             };
 
             // -------------------------

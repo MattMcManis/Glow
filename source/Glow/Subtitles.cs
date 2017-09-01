@@ -28,8 +28,8 @@ namespace Glow
     public partial class Subtitles
     {
         // Selected Item
-        private static ComboBoxItem selectedItem;
-        private static string selected;
+        //private static ComboBoxItem selectedItem;
+        //private static string selected;
 
 
         /// <summary>

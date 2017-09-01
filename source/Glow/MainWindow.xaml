@@ -1451,6 +1451,8 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,498,14,0" 
+                                         MaxLength="6"
+                                         TextChanged="tbxSubtitlesFontColor_TextChanged"
                                          KeyDown="tbxSubtitlesFontColor_KeyDown"
                                          KeyUp="tbxSubtitlesFontColor_KeyUp"/>
 
@@ -1551,6 +1553,8 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,556,14,0" 
+                                         MaxLength="6"
+                                         TextChanged="tbxSubtitlesBorderColor_TextChanged"
                                          KeyDown="tbxSubtitlesBorderColor_KeyDown"
                                          KeyUp="tbxSubtitlesBorderColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboSubtitlesBorderColor"
@@ -1624,6 +1628,8 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,585,14,0"
+                                         MaxLength="6"
+                                         TextChanged="tbxSubtitlesShadowColor_TextChanged"
                                          KeyDown="tbxSubtitlesShadowColor_KeyDown"
                                          KeyUp="tbxSubtitlesShadowColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboSubtitlesShadowColor"
@@ -1907,9 +1913,8 @@
                 <!-- General -->
                 <TabItem Header="General" Style="{DynamicResource TabItemStyle}">
                     <Grid Background="Transparent">
-                        <ScrollViewer Margin="0,0,0,0">
-                            <Grid Margin="0,0,0,30">
-
+                        <ScrollViewer>
+                            <Grid Margin="0,0,0,25">
                                 <!-- Priority -->
                                 <Label Content="Priority"
                                        HorizontalAlignment="Left" 
@@ -2129,6 +2134,26 @@
                                     <System:String>off</System:String>
                                 </ComboBox>
 
+                                <!-- Window Title -->
+                                <Label Content="Window Title" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,274,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboWindowTitle" 
+                                          HorizontalAlignment="Right" 
+                                          Margin="0,271,14,0" 
+                                          VerticalAlignment="Top"
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
+                                    <System:String>Filename</System:String>
+                                    <System:String>Media Title</System:String>
+                                </ComboBox>
+
                                 <!-- Screenshot -->
                                 <Label Content="Screenshot" 
                                        HorizontalAlignment="Left" 
@@ -2136,13 +2161,13 @@
                                        VerticalAlignment="Top"
                                        Width="75" 
                                        FontWeight="Bold"
-                                       Style="{DynamicResource LabelTitleStyle}" Margin="10,285,0,0"/>
+                                       Style="{DynamicResource LabelTitleStyle}" Margin="10,314,0,0"/>
 
                                 <!-- Screenshot Path -->
                                 <Label x:Name="lbScreenshotPath"
                                         Content="Path" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,314,0,0"
+                                       Margin="10,343,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2151,7 +2176,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxScreenshotPath"
                                          HorizontalAlignment="Right" 
-                                         Margin="0,311,14,0" 
+                                         Margin="0,340,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103"
                                          Height="22"
@@ -2162,14 +2187,14 @@
                                 <!-- Screenshot Template -->
                                 <Label Content="Template" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,343,0,0"
+                                       Margin="10,372,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTemplate"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,340,14,0" 
+                                          Margin="0,369,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2184,14 +2209,14 @@
                                 <!-- Screenshot Tag Colorspace -->
                                 <Label Content="Tag Colorspace" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,372,0,0"
+                                       Margin="10,401,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="90"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTagColorspace"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,369,14,0" 
+                                          Margin="0,398,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2205,14 +2230,14 @@
                                 <!-- Screenshot Format -->
                                 <Label Content="Format" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,401,0,0"
+                                       Margin="10,430,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotFormat"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,398,14,0" 
+                                          Margin="0,427,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2228,14 +2253,14 @@
                                 <Label x:Name="lbScreenshotQuality"
                                        Content="Quality" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,431,0,0"
+                                       Margin="10,460,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slScreenshotQuality" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,428,52,0" 
+                                        Margin="0,457,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -2248,11 +2273,142 @@
                                         Text="{Binding Value, ElementName=slScreenshotQuality, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,427,14,0" 
+                                        Margin="0,456,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
                                         Style="{DynamicResource TextBoxStyle}"/>
+
+
+                                <!-- Extensions -->
+                                <Label Content="Extensions" 
+                                       HorizontalAlignment="Left" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top"
+                                       Width="75" 
+                                       FontWeight="Bold"
+                                       Style="{DynamicResource LabelTitleStyle}" 
+                                       Margin="10,499,0,0"/>
+
+                                <!-- mkv -->
+                                <Label Content="mkv" 
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,529,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboExtMKV"
+                                          HorizontalAlignment="Right" 
+                                          Margin="0,526,14,0" 
+                                          VerticalAlignment="Top" 
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
+                                    <System:String>loop</System:String>
+                                </ComboBox>
+
+                                <!-- mp4 -->
+                                <Label Content="mp4" 
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,558,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboExtMP4"
+                                          HorizontalAlignment="Right" 
+                                          Margin="0,555,14,0" 
+                                          VerticalAlignment="Top" 
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
+                                    <System:String>loop</System:String>
+                                </ComboBox>
+
+                                <!-- webm -->
+                                <Label Content="webm" 
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,587,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboExtWebM"
+                                          HorizontalAlignment="Right" 
+                                          Margin="0,584,14,0" 
+                                          VerticalAlignment="Top" 
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
+                                    <System:String>loop</System:String>
+                                </ComboBox>
+
+                                <!-- gif -->
+                                <Label Content="gif" 
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,616,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboExtGIF"
+                                          HorizontalAlignment="Right" 
+                                          Margin="0,613,14,0" 
+                                          VerticalAlignment="Top" 
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
+                                    <System:String>loop</System:String>
+                                </ComboBox>
+
+                                <!-- jpg -->
+                                <Label Content="jpg" 
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,645,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboExtJPG"
+                                          HorizontalAlignment="Right" 
+                                          Margin="0,642,14,0" 
+                                          VerticalAlignment="Top" 
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
+                                    <System:String>pause</System:String>
+                                </ComboBox>
+
+                                <!-- png -->
+                                <Label Content="png" 
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,674,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboExtPNG"
+                                          HorizontalAlignment="Right" 
+                                          Margin="0,671,14,0" 
+                                          VerticalAlignment="Top" 
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                    <System:String>default</System:String>
+                                    <System:String>pause</System:String>
+                                </ComboBox>
 
 
                             </Grid>
@@ -2360,20 +2516,20 @@
                                        VerticalAlignment="Top"
                                        Width="75" 
                                        FontWeight="Bold"
-                                       Margin="10,166,0,0"
+                                       Margin="10,265,0,0"
                                        Style="{DynamicResource LabelTitleStyle}"/>
 
                                 <!-- Cache -->
                                 <Label Content="Cache"
                                        HorizontalAlignment="Left" 
-                                       Margin="10,196,0,0" 
+                                       Margin="10,295,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboCache"
                                           HorizontalAlignment="Right"
-                                          Margin="0,193,14,0"
+                                          Margin="0,292,14,0"
                                           VerticalAlignment="Top" Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
@@ -2386,14 +2542,14 @@
                                 <!-- Cache Default -->
                                 <Label Content="Default" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,225,0,0" 
+                                       Margin="10,324,0,0" 
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheDefault" 
                                          HorizontalAlignment="Right"
-                                         Margin="0,222,14,0"
+                                         Margin="0,321,14,0"
                                          VerticalAlignment="Top"
                                          Width="103" 
                                          Height="22"
@@ -2403,14 +2559,14 @@
                                 <!-- Cache Initial -->
                                 <Label Content="Initial" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,254,0,0" 
+                                       Margin="10,353,0,0" 
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheInitial" 
                                          HorizontalAlignment="Right" 
-                                         Margin="0,251,14,0"
+                                         Margin="0,350,14,0"
                                          VerticalAlignment="Top" 
                                          Width="103"
                                          Height="22"
@@ -2420,14 +2576,14 @@
                                 <!-- Cache Seek Min -->
                                 <Label Content="Seek Min" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,283,0,0" 
+                                       Margin="10,382,0,0" 
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheSeekMin" 
                                          HorizontalAlignment="Right"
-                                         Margin="0,280,14,0" 
+                                         Margin="0,379,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103" 
                                          Height="22"
@@ -2437,14 +2593,14 @@
                                 <!-- Cache Backbuffer -->
                                 <Label Content="Backbuffer"
                                        HorizontalAlignment="Left" 
-                                       Margin="10,312,0,0" 
+                                       Margin="10,411,0,0" 
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheBackbuffer"
                                          HorizontalAlignment="Right"
-                                         Margin="0,309,14,0" 
+                                         Margin="0,408,14,0" 
                                          VerticalAlignment="Top"
                                          Width="103"
                                          Height="22"
@@ -2454,14 +2610,14 @@
                                 <!-- Cache Seconds -->
                                 <Label Content="Seconds" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,341,0,0" 
+                                       Margin="10,440,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheSeconds" 
                                          HorizontalAlignment="Right"
-                                         Margin="0,338,14,0" 
+                                         Margin="0,437,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103"
                                          Height="22"
@@ -2471,14 +2627,14 @@
                                 <!-- Cache File -->
                                 <Label Content="File" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,370,0,0" 
+                                       Margin="10,469,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboCacheFile" 
                                           HorizontalAlignment="Right"
-                                          Margin="0,367,14,0"
+                                          Margin="0,466,14,0"
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2490,20 +2646,70 @@
                                 <!-- Cache File Size -->
                                 <Label Content="File Size" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,399,0,0" 
+                                       Margin="10,498,0,0" 
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheFileSize" 
                                          HorizontalAlignment="Right" 
-                                         Margin="0,396,14,0" 
+                                         Margin="0,495,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103" 
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}"/>
 
 
+                                <!--/////////////////////////////////////
+                                    YouTube
+                                /////////////////////////////////////-->
+                                <Label Content="YouTube" 
+                                       HorizontalAlignment="Left" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top"
+                                       Width="75" 
+                                       FontWeight="Bold"
+                                       Margin="10,166,0,0"
+                                       Style="{DynamicResource LabelTitleStyle}"/>
+
+                                <!-- youtube-dl -->
+                                <Label Content="youtube-dl"
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,196,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboYouTubeDL"
+                                          HorizontalAlignment="Right"
+                                          Margin="0,193,14,0"
+                                          VerticalAlignment="Top" Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Quality -->
+                                <Label Content="Quality"
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,225,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboYouTubeQuality"
+                                          HorizontalAlignment="Right"
+                                          Margin="0,222,14,0"
+                                          VerticalAlignment="Top" Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
+                                    <System:String>best</System:String>
+                                    <System:String>good</System:String>
+                                    <System:String>worst</System:String>
+                                </ComboBox>
 
                             </Grid>
                         </ScrollViewer>
@@ -2864,6 +3070,8 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,468,14,0"
+                                         MaxLength="6"
+                                         TextChanged="tbxOSDFontColor_TextChanged"
                                          KeyDown="tbxOSDFontColor_KeyDown"
                                          KeyUp="tbxOSDFontColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboOSDFontColor" 
@@ -2963,6 +3171,8 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,527,14,0"
+                                         MaxLength="6"
+                                         TextChanged="tbxOSDBorderColor_TextChanged"
                                          KeyDown="tbxOSDBorderColor_KeyDown"
                                          KeyUp="tbxOSDBorderColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboOSDBorderColor" 
@@ -3034,6 +3244,8 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,556,14,0"
+                                         MaxLength="6"
+                                         TextChanged="tbxOSDShadowColor_TextChanged"
                                          KeyDown="tbxOSDShadowColor_KeyDown"
                                          KeyUp="tbxOSDShadowColor_KeyUp"/>
                                 <!--<ComboBox x:Name="cboOSDShadowColor" 

@@ -50,14 +50,14 @@ namespace Glow
         public DispatcherTimer shadePickerTimer = new DispatcherTimer(DispatcherPriority.Render);
 
 
-        [DllImport("gdi32")]
-        private static extern int GetPixel(int hdc, int nXPos, int nYPos);
+        //[DllImport("gdi32")]
+        //private static extern int GetPixel(int hdc, int nXPos, int nYPos);
 
-        [DllImport("user32")]
-        private static extern int GetWindowDC(int hwnd);
+        //[DllImport("user32")]
+        //private static extern int GetWindowDC(int hwnd);
 
-        [DllImport("user32")]
-        private static extern int ReleaseDC(int hWnd, int hDC);
+        //[DllImport("user32")]
+        //private static extern int ReleaseDC(int hWnd, int hDC);
 
         // Spectrum Color
         System.Drawing.Color spectrumColor;
@@ -183,7 +183,7 @@ namespace Glow
             color = Saturation(color, saturation);
 
             // Luminosity
-            color = Luminance(color, luminosity);
+            color = Luminosity(color, luminosity);
 
             // -------------------------
             // Preview
@@ -621,23 +621,44 @@ namespace Glow
             string HexColorCode = tbxHexColorCode.Text.ToString();
 
             // Return Hex Code to TextBox based on Passed Keyword
-            if (textBoxKey == "subtitlesFont")
-                mainwindow.tbxSubtitlesFontColor.Text = HexColorCode;
-            else if (textBoxKey == "subtitlesBorder")
-                mainwindow.tbxSubtitlesBorderColor.Text = HexColorCode;
-            else if (textBoxKey == "subtitlesShadow")
-                mainwindow.tbxSubtitlesShadowColor.Text = HexColorCode;
-            else if (textBoxKey == "osdFont")
+            if (textBoxKey == "osdFont")
+            {
                 mainwindow.tbxOSDFontColor.Text = HexColorCode;
+                MainWindow.PreviewOSDFontColor(mainwindow);
+            }
+
             else if (textBoxKey == "osdBorder")
+            {
                 mainwindow.tbxOSDBorderColor.Text = HexColorCode;
+                MainWindow.PreviewOSDBorderColor(mainwindow);
+            }
+
             else if (textBoxKey == "osdShadow")
+            {
                 mainwindow.tbxOSDShadowColor.Text = HexColorCode;
+                MainWindow.PreviewOSDShadowColor(mainwindow);
+            }
 
-
+            else if (textBoxKey == "subtitlesFont")
+            {
+                mainwindow.tbxSubtitlesFontColor.Text = HexColorCode;
+                MainWindow.PreviewSubtitlesFontColor(mainwindow);
+            }
+                
+            else if (textBoxKey == "subtitlesBorder")
+            {
+                mainwindow.tbxSubtitlesBorderColor.Text = HexColorCode;
+                MainWindow.PreviewSubtitlesBorderColor(mainwindow);
+            }
+                
+            else if (textBoxKey == "subtitlesShadow")
+            {
+                mainwindow.tbxSubtitlesShadowColor.Text = HexColorCode;
+                MainWindow.PreviewSubtitlesShadowColor(mainwindow);
+            }
+                              
             // Preview Picked Color in MainWindow button
-            MainWindow.PreviewPickedColors(mainwindow);
-
+            //MainWindow.PreviewPickedColors(mainwindow);
 
             this.Close();
         }
@@ -689,22 +710,22 @@ namespace Glow
         {
             // Saturation
             HSLColor hslColor = new HSLColor(color);
-            //hslColor.Saturation *= saturation;
+            hslColor.Saturation *= saturation;
             hslColor.Saturation *= EaseOutCubic(1, saturation + 0.13, saturation, 240);
 
             // Saturation Luminosity
             hslColor = new HSLColor(hslColor);
             //hslColor.Luminosity *= 2 - saturation;
             hslColor.Luminosity *= 2 - InOutQuadBlend(saturation);
-            
+
             return hslColor;
         }
 
 
         /// <summary>
-        ///    Luminance
+        ///    Luminanosity
         /// </summary>
-        public System.Drawing.Color Luminance(System.Drawing.Color color, double luminosity)
+        public System.Drawing.Color Luminosity(System.Drawing.Color color, double luminosity)
         {
             HSLColor hslColor = new HSLColor(color);
             hslColor.Luminosity *= luminosity; // 0-1
