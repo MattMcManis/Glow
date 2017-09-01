@@ -273,7 +273,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "default";
+                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -439,7 +439,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "default";
+                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -605,7 +605,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "default";
+                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -771,7 +771,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "default";
+                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
@@ -938,7 +938,7 @@ namespace Glow
                 mainwindow.slAutofitWidth.Value = 100;
                 mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "default";
+                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
                 // Screenshot
                 mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
                 mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
