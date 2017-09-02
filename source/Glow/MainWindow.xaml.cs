@@ -786,6 +786,11 @@ namespace Glow
                 tbxDebandGrain.IsEnabled = false;
                 tbxDebandGrain.Text = "";
             }
+            else if ((string)(cboDeband.SelectedItem ?? string.Empty) == "default")
+            {
+                tbxDebandGrain.IsEnabled = false;
+                tbxDebandGrain.Text = "";
+            }
         }
 
         /// <summary>
