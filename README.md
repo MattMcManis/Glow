@@ -43,9 +43,10 @@ https://github.com/rossy/mpv-install/blob/master/README.md
 ## Guide
 
 1. Start with Default or choose a Preset, Ultra, High, Medium, Low.
-2. Generate a configuration and press Save. 
-3. Glow will automatically find or create the correct config directory.
-4. Save your custom user profiles to ini files.
+2. Selecting option as default will exclude from config, falling back to mpv default.
+3. Generate a configuration and press Save. 
+4. Glow will automatically find or create the correct config directory.
+5. Save your custom user profiles to ini files.
 
 ## Troubleshooting
 
