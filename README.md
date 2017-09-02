@@ -1,6 +1,6 @@
 ![https://github.com/MattMcManis/Glow](https://raw.githubusercontent.com/MattMcManis/Glow/master/images/glow-logo.png)
 
-# Glow
+## Glow
 mpv Configurator for Windows
 
 * [Overview](#overview)
