@@ -133,9 +133,8 @@ namespace Glow
             // --------------------------------------------------
 
             // -------------------------
-            // Screenshot
-            // -------------------------
             // Path
+            // -------------------------
             string screenshotPath = string.Empty;
             // only if not empty
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxScreenshotPath.Text))
@@ -152,7 +151,9 @@ namespace Glow
                     screenshotTemplate = "screenshot-template=\"%F-%n\"";
 
 
+            // -------------------------
             // Tag Colorspace
+            // -------------------------
             // must not be default
             string screenshotTagColorspace = string.Empty;
 
@@ -160,15 +161,18 @@ namespace Glow
                 screenshotTagColorspace = "screenshot-tag-colorspace=" + (mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty).ToString();
 
 
+            // -------------------------
             // Format
+            // -------------------------
             string screenshotFormat = string.Empty;
 
             // must not be default
             if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) != "default")
                 screenshotFormat = "screenshot-format=" + (mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty).ToString();
 
-
+            // -------------------------
             // Qulaity
+            // -------------------------
             string screenshotQuality = string.Empty;
 
             // format must not be default
