@@ -53,7 +53,6 @@ namespace Glow
             // only if enabled
             if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) != "default")
                 driver = "vo=" + (mainwindow.cboVideoDriver.SelectedItem ?? string.Empty).ToString();
-                //string driver = "vo=" + (ViewModel.VideoDriverSelectedItem ?? string.Empty);
 
             // opengl-hq special rule
             if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq")
@@ -75,7 +74,8 @@ namespace Glow
 
             // only if on
             // only if OpenGL PBO yes
-            if ((string)(mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty) != "off"
+            if ((string)(mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty) != "default"
+                && (string)(mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty) != "off"
                 && (string)(mainwindow.cboOpenGLPBO.SelectedItem ?? string.Empty) == "yes")
                 openglPBOFormat = "opengl-fbo-format=" + (mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty).ToString();
 
@@ -92,6 +92,22 @@ namespace Glow
             // --------------------------------------------------
             // Display
             // --------------------------------------------------
+
+            // -------------------------
+            // ICC Profile Path
+            // -------------------------
+            string iccProfile = string.Empty;
+
+            // auto
+            if ((string)(mainwindow.cboICCProfile.SelectedItem ?? string.Empty) == "auto")
+                iccProfile = "icc-profile-auto";
+            // Select
+            else if (mainwindow.cboICCProfile.IsEditable)
+                iccProfile = "icc-profile=" + "\"" + (mainwindow.cboICCProfile.SelectedItem ?? string.Empty).ToString() + "\"";
+            //string iccProfilePath = string.Empty;
+            //// only if not empty
+            //if (!string.IsNullOrWhiteSpace(mainwindow.tbxICCProfilePath.Text))
+            //    iccProfilePath = "icc-profile=" + "\"" + mainwindow.tbxICCProfilePath.Text.ToString() + "\"";
 
             // -------------------------
             // Primaries
@@ -118,10 +134,10 @@ namespace Glow
 
             // only if enabled
             if ((string)(mainwindow.cboColorSpace.SelectedItem ?? string.Empty) != "default")
-                colorSpace = "format=colormatrix=" + (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString();
+                colorSpace = "format=default:colormatrix=" + (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
-            // Color Space
+            // Color Range
             // -------------------------
             string colorRange = string.Empty;
 
@@ -137,6 +153,15 @@ namespace Glow
             // only if enabled
             if ((string)(mainwindow.cboDeinterlace.SelectedItem ?? string.Empty) != "default")
                 deinterlace = "deinterlace=" + (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Interpolation
+            // -------------------------
+            string interpolation = string.Empty;
+
+            // only if enabled
+            if ((string)(mainwindow.cboDeinterlace.SelectedItem ?? string.Empty) == "yes")
+                interpolation = "interpolation";
 
             // -------------------------
             // Video Sync
@@ -208,8 +233,8 @@ namespace Glow
                 gamma = "gamma=" + mainwindow.tbxGamma.Text.ToString();
 
             // auto
-            if ((string)(mainwindow.cboGammaAuto.SelectedItem ?? string.Empty) == "yes")
-                gamma = "gamma-auto";
+            //if ((string)(mainwindow.cboGammaAuto.SelectedItem ?? string.Empty) == "yes")
+            //    gamma = "gamma-auto";
 
             // -------------------------
             // Deband
@@ -292,7 +317,8 @@ namespace Glow
             if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
                 || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off"
+                if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "default"
+                    && (string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off"
                     && mainwindow.slScaleAntiring.Value != 0)
 
                     scaleAntiring = "scale-antiring=" + mainwindow.tbxScaleAntiring.Text.ToString();
@@ -324,7 +350,8 @@ namespace Glow
             if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
                 || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off"
+                if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "default"
+                    && (string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off"
                     && mainwindow.slChromaAntiring.Value != 0)
 
                     chromascaleAntiring = "cscale-antiring=" + mainwindow.tbxChromaAntiring.Text.ToString();
@@ -356,10 +383,44 @@ namespace Glow
             if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
                 || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
 
-                if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off"
+                if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "default"
+                    && (string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off"
                     && mainwindow.slDownscaleAntiring.Value != 0)
 
                     downscaleAntiring = "dscale-antiring=" + mainwindow.tbxDownscaleAntiring.Text.ToString();
+
+            // -------------------------
+            // Inerpolation Scale
+            // -------------------------
+            string tscale = string.Empty;
+
+            // software scaler must be default or off
+            // must not be default
+            // inerpolation acale must be on
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
+                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+
+                if ((string)(mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty) != "default"
+                    && (string)(mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty) != "off")
+
+                    tscale = "tscale=" + (mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty).ToString();
+
+            // -------------------------
+            // Inerpolation Antiring
+            // -------------------------
+            string tscaleAntiring = string.Empty;
+
+            // software scaler must be default or off
+            // downscale must be on
+            // antitring must be above 0
+            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
+                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+
+                if ((string)(mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty) != "default"
+                    && (string)(mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty) != "off"
+                    && mainwindow.slInterpolationAntiring.Value != 0)
+
+                    tscaleAntiring = "tscale-antiring=" + mainwindow.tbxInterpolationAntiring.Text.ToString();
 
             // -------------------------
             // Software Scaler
@@ -387,11 +448,14 @@ namespace Glow
                 hwdec,
 
                 // Display
+                //iccProfilePath,
+                iccProfile,
                 displayPrimaries,
                 displayTransChar,
                 colorSpace,
                 colorRange,
                 deinterlace,
+                interpolation,
                 videosync,
                 framedrop,
 
@@ -414,6 +478,8 @@ namespace Glow
                 chromascaleAntiring,
                 downscale,
                 downscaleAntiring,
+                tscale,
+                tscaleAntiring,
                 softwarescaler,
             };
 

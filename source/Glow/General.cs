@@ -78,8 +78,9 @@ namespace Glow
             string onTop = string.Empty;
 
             // must not be default
-            if ((string)(mainwindow.cboOnTop.SelectedItem ?? string.Empty) != "default")
-                onTop = "ontop=" + (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString();
+            if ((string)(mainwindow.cboOnTop.SelectedItem ?? string.Empty) == "yes")
+                onTop = "ontop";
+                //onTop = "ontop" + (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Geometry
@@ -97,7 +98,8 @@ namespace Glow
 
             // if not 0
             if (mainwindow.slAutofitWidth.Value != 0 && mainwindow.slAutofitHeight.Value != 0)
-                autoFit = "autofit-larger=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
+                //autoFit = "autofit-larger=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
+                autoFit = "autofit" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
 
             // -------------------------
             // Screensaver

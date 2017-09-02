@@ -30,7 +30,7 @@
         xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
                 
         Loaded="Window_Loaded"
-        Closing="MainWindow_Closing" 
+        Closing="Window_Closing" 
         UseLayoutRounding="True"
         Width="712" Height="400"
     
@@ -48,7 +48,9 @@
                         Width="245" 
                         Style="{DynamicResource TabControlStyle}">
 
-                <!-- Video Tab -->
+                <!--/////////////////////////////////////
+                    Video Tab
+                /////////////////////////////////////-->
                 <TabItem Header="Video" Style="{DynamicResource TabItemStyle}">
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0" Template="{DynamicResource ScrollViewerControlTemplate}">
@@ -61,7 +63,7 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
-                                       ToolTipService.InitialShowDelay="1000" 
+                                       ToolTipService.InitialShowDelay="100" 
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Specify the video output backend to be used. See VIDEO OUTPUT DRIVERS for details and descriptions of available drivers."
                                        Style="{DynamicResource LabelStyle}"/>
@@ -116,7 +118,7 @@
                                        Width="75"
                                        ToolTipService.InitialShowDelay="1000" 
                                        ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip=""
+                                       ToolTip="Selects the internal format of textures used for FBOs. The format can influence performance and quality of the video output. fmt can be one of: rgb8, rgb10, rgb10_a2, rgb16, rgb16f, rgb32f, rgba12, rgba16, rgba16f, rgba32f. Default: auto, which maps to rgba16 on desktop GL, and rgba16f or rgb10_a2 on GLES (e.g. ANGLE), unless GL_EXT_texture_norm16 is available."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOpenGLPBOFormat" 
                                           HorizontalAlignment="Right" 
@@ -125,6 +127,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                    <System:String>default</System:String>
                                     <System:String>off</System:String>
                                     <System:String>rgb8</System:String>
                                     <System:String>rgb10</System:String>
@@ -184,19 +187,60 @@
                                     FontWeight="Bold"
                                     Style="{DynamicResource LabelTitleStyle}"/>
 
+                                <!-- ICC Profile -->
+                                <Label x:Name="lbICCProfilePath"
+                                       Content="ICC Profile"
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,167,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Load an ICC profile and use it to transform video RGB to screen output. Needs LittleCMS 2 support compiled in. This option overrides the  --target-prim, --target-trc and --icc-profile-auto options."
+                                       Cursor="Hand"
+                                       PreviewMouseDown="lbICCProfilePath_PreviewMouseDown"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <!--<TextBox x:Name="tbxICCProfilePath"
+                                         HorizontalAlignment="Right" 
+                                         Margin="0,132,14,0" 
+                                         VerticalAlignment="Top" 
+                                         Width="103"
+                                         Height="22"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         PreviewMouseDown="tbxICCProfilePath_PreviewMouseDown">
+                                </TextBox>-->
+                                <ComboBox x:Name="cboICCProfile" 
+                                          Text=""
+                                          Margin="0,164,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right"
+                                          Width="103" 
+                                 
+                                          SelectionChanged="cboICCProfile_SelectionChanged">
+                                    <System:String>default</System:String>
+                                    <System:String>auto</System:String>
+                                    <System:String>select</System:String>
+                                </ComboBox>
+
                                 <!-- Primaries -->
                                 <Label Content="Primaries" 
-                                    HorizontalAlignment="Left"
-                                    Margin="10,170,0,0" 
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top"
-                                    Width="75"
-                                    Style="{DynamicResource LabelStyle}"/>
+                                       HorizontalAlignment="Left"
+                                       Margin="10,196,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top"
+                                       Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Specifies the primaries of the display. Video colors will be adapted to this colorspace when ICC color management is not being used."
+                                       Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDisplayPrimaries" 
-                                    Margin="0,167,14,0" 
-                                    VerticalAlignment="Top"
-                                    Style="{DynamicResource ComboBoxStyle}"
-                                    ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          Margin="0,193,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
                                     <System:String>default</System:String>
@@ -218,13 +262,16 @@
                                 <!-- Transfer Characteristics -->
                                 <Label Content="Characteristics" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,199,0,0" 
+                                       Margin="10,225,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="83"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Specifies the transfer characteristics (gamma) of the display. Video colors will be adjusted to this curve when ICC color management is not being used."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboTransferCharacteristics"
-                                          Margin="0,196,14,0" 
+                                          Margin="0,222,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -249,13 +296,16 @@
                                 <!-- Color Space -->
                                 <Label Content="Color Space" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,228,0,0" 
+                                       Margin="10,254,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip=""
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboColorSpace" 
-                                          Margin="0,225,14,0" 
+                                          Margin="0,251,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -273,13 +323,16 @@
                                 <!-- Color Range -->
                                 <Label Content="Color Range"
                                        HorizontalAlignment="Left"
-                                       Margin="10,257,0,0"
+                                       Margin="10,283,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="RGB color levels used with YUV to RGB conversion. Normally, output devices such as PC monitors use full range color levels. However, some TVs and video monitors expect studio RGB levels. Providing full range output to a device expecting studio level input results in crushed blacks and whites, the reverse in dim gray blacks and dim whites."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboColorRange"
-                                          Margin="0,254,14,0"
+                                          Margin="0,280,14,0"
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -294,14 +347,17 @@
                                 <!-- Deinterlace -->
                                 <Label Content="Deinterlace" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,286,0,0" 
+                                       Margin="10,312,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Enable or disable interlacing (default: auto, which usually means no). Interlaced video shows ugly comb-like artifacts, which are visible on fast movement. Enabling this typically inserts the yadif video filter in order to deinterlace the video, or lets the video output apply deinterlacing if supported."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDeinterlace" 
                                           HorizontalAlignment="Right"
-                                          Margin="0,283,14,0" 
+                                          Margin="0,309,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -312,17 +368,43 @@
                                     <System:String>no</System:String>
                                 </ComboBox>
 
-                                <!-- Vsync -->
-                                <Label Content="Video Sync" 
+                                <!-- Interpolation -->
+                                <Label Content="Interpolation" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,315,0,0" 
+                                       Margin="10,341,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Reduce stuttering caused by mismatches in the video fps and display refresh rate (also known as judder)."
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboInterpolation" 
+                                          HorizontalAlignment="Right"
+                                          Margin="0,338,14,0" 
+                                          VerticalAlignment="Top" 
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboInterpolation_SelectionChanged">
+                                    <System:String>default</System:String>
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
+                                <!-- Vsync -->
+                                <Label Content="Video Sync" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,370,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="How the player synchronizes audio and video. If you use this option, you usually want to set it to display-resample to enable a timing mode that tries to not skip or repeat frames when for example playing 24fps video on a 24Hz screen."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboVideoSync" 
                                           HorizontalAlignment="Right"
-                                          Margin="0,312,14,0" 
+                                          Margin="0,367,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -342,14 +424,17 @@
                                 <!-- Framedrop -->
                                 <Label Content="Framedrop" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,344,0,0" 
+                                       Margin="10,399,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Skip displaying some frames to maintain A/V sync on slow systems, or playing high framerate video on video outputs that have an upper framerate limit."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboFramedrop"
                                           HorizontalAlignment="Right"
-                                          Margin="0,341,14,0"
+                                          Margin="0,396,14,0"
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -367,7 +452,7 @@
                                 /////////////////////////////////////-->
                                 <Label Content="Image" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,383,0,0"
+                                       Margin="10,438,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75" 
@@ -377,14 +462,17 @@
                                 <!-- Brightness-->
                                 <Label Content="Brightness" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,413,0,0" 
+                                        Margin="10,468,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
+                                        ToolTipService.InitialShowDelay="100" 
+                                        ToolTipService.ShowOnDisabled="True" 
+                                        ToolTip="Adjust the brightness of the video signal (default: 0). Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slBrightness" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,411,52,0" 
+                                        Margin="0,466,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -397,7 +485,7 @@
                                         Text="{Binding Value, ElementName=slBrightness, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,410,14,0"
+                                        Margin="0,465,14,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -406,14 +494,17 @@
                                 <!-- Contrast-->
                                 <Label Content="Contrast" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,442,0,0" 
+                                        Margin="10,497,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
+                                        ToolTipService.InitialShowDelay="100" 
+                                        ToolTipService.ShowOnDisabled="True" 
+                                        ToolTip="Adjust the contrast of the video signal (default: 0). Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slContrast" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,440,52,0" 
+                                        Margin="0,495,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -426,7 +517,7 @@
                                         Text="{Binding Value, ElementName=slContrast, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,439,14,0"
+                                        Margin="0,494,14,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -435,14 +526,17 @@
                                 <!-- Hue -->
                                 <Label Content="Hue" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,471,0,0" 
+                                        Margin="10,526,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
+                                        ToolTipService.InitialShowDelay="100" 
+                                        ToolTipService.ShowOnDisabled="True" 
+                                        ToolTip="Adjust the hue of the video signal (default: 0). You can get a colored negative of the image with this option. Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slHue" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,469,52,0" 
+                                        Margin="0,524,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -455,7 +549,7 @@
                                         Text="{Binding Value, ElementName=slHue, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,468,14,0"
+                                        Margin="0,523,14,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -464,14 +558,17 @@
                                 <!-- Saturation-->
                                 <Label Content="Saturation" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,500,0,0" 
+                                        Margin="10,555,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
+                                        ToolTipService.InitialShowDelay="100" 
+                                        ToolTipService.ShowOnDisabled="True" 
+                                        ToolTip="Adjust the saturation of the video signal (default: 0). You can get grayscale output with this option. Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slSaturation" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,498,52,0" 
+                                        Margin="0,553,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -484,7 +581,7 @@
                                          Text="{Binding Value, ElementName=slSaturation, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,497,14,0"
+                                         Margin="0,552,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -493,14 +590,17 @@
                                 <!-- Gamma -->
                                 <Label Content="Gamma" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,529,0,0" 
+                                        Margin="10,584,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
+                                        ToolTipService.InitialShowDelay="100" 
+                                        ToolTipService.ShowOnDisabled="True" 
+                                        ToolTip="Adjust the gamma of the video signal (default: 0). Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slGamma" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,527,52,0" 
+                                        Margin="0,582,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -513,44 +613,25 @@
                                         Text="{Binding Value, ElementName=slGamma, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,526,14,0"
+                                        Margin="0,581,14,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
                                         Style="{DynamicResource TextBoxStyle}"/>
 
-                                <!-- Gamma Auto -->
-                                <Label Content="Gamma Auto" 
-                                        HorizontalAlignment="Left"
-                                        Margin="10,558,0,0" 
-                                        Padding="0, 0, 0, 6"
-                                        VerticalAlignment="Top" 
-                                        Width="75"
-                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboGammaAuto"
-                                        Margin="0,555,14,0" 
-                                        VerticalAlignment="Top"
-                                        Style="{DynamicResource ComboBoxStyle}"
-                                        ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          HorizontalAlignment="Right"
-                                          Width="103"
-                                          SelectionChanged="cboGammaAuto_SelectionChanged">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
-                                </ComboBox>
-
-
                                 <!-- Dithering -->
                                 <Label Content="Dither" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,645,0,0" 
+                                       Margin="10,671,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set dither target depth to N. Default: no."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDither"
-                                          Margin="0,642,14,0" 
+                                          Margin="0,668,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -565,13 +646,16 @@
                                 <!-- Deband -->
                                 <Label Content="Deband" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,587,0,0"
+                                       Margin="10,613,0,0"
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Enable the debanding algorithm. This greatly reduces the amount of visible banding, blocking and other quantization artifacts, at the expensive of very slightly blurring some of the finest details. In practice, it's virtually always an improvement - the only reason to disable it would be for performance."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDeband" 
-                                          Margin="0,584,14,0"
+                                          Margin="0,610,14,0"
                                           VerticalAlignment="Top"
                                           SelectionChanged="cboDeband_SelectionChanged"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -586,13 +670,16 @@
                                 <!-- Deband Grain -->
                                 <Label Content="Deband Grain" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,616,0,0" 
+                                       Margin="10,642,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Add some extra noise to the image. This significantly helps cover up remaining quantization artifacts. Higher numbers add more noise. (Default 48)"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxDebandGrain"
-                                         Margin="0,613,14,0" 
+                                         Margin="0,639,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103" Height="22"
                                          Style="{DynamicResource TextBoxStyle}"
@@ -604,7 +691,7 @@
                                     /////////////////////////////////////-->
                                 <Label Content="Scaling" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,685,0,0"
+                                       Margin="10,711,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75" FontWeight="Bold"
@@ -613,13 +700,16 @@
                                 <!-- Sigmoid -->
                                 <Label Content="Sigmoid"
                                        HorizontalAlignment="Left"
-                                       Margin="10,715,0,0" 
+                                       Margin="10,741,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="When upscaling, use a sigmoidal color transform to avoid emphasizing ringing artifacts. This also implies --linear-scaling."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSigmoid"
-                                        Margin="0,712,14,0" 
+                                        Margin="0,738,14,0" 
                                         VerticalAlignment="Top"
                                         Style="{DynamicResource ComboBoxStyle}"
                                         ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -634,13 +724,16 @@
                                 <!-- Scale -->
                                 <Label Content="Scale"
                                        HorizontalAlignment="Left"
-                                       Margin="10,744,0,0" 
+                                       Margin="10,770,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="The filter function to use when upscaling video."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScale"
-                                          Margin="0,741,14,0" 
+                                          Margin="0,767,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -675,27 +768,28 @@
                                 <!-- Scale Antiring -->
                                 <Label Content="Antiring" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,773,0,0" 
+                                       Margin="10,799,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
                                        Style="{DynamicResource LabelStyle}"/>
-
                                 <Slider x:Name="slScaleAntiring" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,771,52,0" 
+                                        Margin="0,797,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
                                         Maximum="1" 
                                         MouseDoubleClick="slScaleAntiring_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
-
                                 <TextBox x:Name="tbxScaleAntiring"
                                          Text="{Binding Value, ElementName=slScaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,770,14,0"
+                                         Margin="0,796,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -704,13 +798,16 @@
                                 <!-- Chroma Scale -->
                                 <Label Content="Chroma"
                                        HorizontalAlignment="Left" 
-                                       Margin="10,802,0,0" 
+                                       Margin="10,828,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="As --scale, but for interpolating chroma information. If the image is not subsampled, this option is ignored entirely."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboChromaScale" 
-                                          Margin="0,799,14,0" 
+                                          Margin="0,825,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -745,27 +842,28 @@
                                 <!-- Chroma Antiring -->
                                 <Label Content="Antiring" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,831,0,0" 
+                                       Margin="10,857,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
                                        Style="{DynamicResource LabelStyle}"/>
-
                                 <Slider x:Name="slChromaAntiring" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,829,52,0" 
+                                        Margin="0,855,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
                                         Maximum="1" 
                                         MouseDoubleClick="slChromaAntiring_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
-
                                 <TextBox x:Name="tbxChromaAntiring"
                                          Text="{Binding Value, ElementName=slChromaAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,828,14,0"
+                                         Margin="0,854,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -774,13 +872,16 @@
                                 <!-- Downscale -->
                                 <Label Content="Downscale" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,860,0,0" 
+                                       Margin="10,886,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Like --scale, but apply these filters on downscaling instead. If this option is unset, the filter implied by --scale will be applied."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDownscale" 
-                                          Margin="0,857,14,0" 
+                                          Margin="0,883,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -815,27 +916,97 @@
                                 <!-- Downscale Antiring -->
                                 <Label Content="Antiring" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,889,0,0" 
+                                       Margin="10,915,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
                                        Style="{DynamicResource LabelStyle}"/>
-
                                 <Slider x:Name="slDownscaleAntiring" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,887,52,0" 
+                                        Margin="0,913,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
                                         Maximum="1" 
                                         MouseDoubleClick="cboDownscaleAntiring_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
-
                                 <TextBox x:Name="tbxDownscaleAntiring"
                                          Text="{Binding Value, ElementName=slDownscaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,886,14,0"
+                                         Margin="0,912,14,0"
+                                         HorizontalAlignment="Right"
+                                         Width="33" 
+                                         VerticalAlignment="Top"
+                                         Style="{DynamicResource TextBoxStyle}"/>
+
+                                <!-- Interpolation Scale -->
+                                <Label Content="Interpolation" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,944,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="The filter used for interpolating the temporal axis (frames). This is only used if --interpolation is enabled. The only valid choices for  --tscale are separable convolution filters (use --tscale=help to get a list). The default is mitchell."
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboInterpolationScale" 
+                                          Margin="0,941,14,0" 
+                                          VerticalAlignment="Top"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right"
+                                          Width="103">
+                                    <System:String>default</System:String>
+                                    <System:String>off</System:String>
+                                    <System:String>nearest</System:String>
+                                    <System:String>linear</System:String>
+                                    <System:String>bicubic</System:String>
+                                    <System:String>box</System:String>
+                                    <System:String>triangle</System:String>
+                                    <System:String>gaussian</System:String>
+                                    <System:String>lanczos</System:String>
+                                    <System:String>robidoux</System:String>
+                                    <System:String>robidouxsharp</System:String>
+                                    <System:String>ginseng</System:String>
+                                    <System:String>mitchell</System:String>
+                                    <System:String>catmull_rom</System:String>
+                                    <System:String>spline16</System:String>
+                                    <System:String>spline36</System:String>
+                                    <System:String>spline64</System:String>
+                                    <System:String>sinc</System:String>
+                                    <System:String>oversample</System:String>
+                                </ComboBox>
+
+                                <!-- Interpolation Antiring -->
+                                <Label Content="Antiring" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,973,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <Slider x:Name="slInterpolationAntiring" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,971,52,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="65"
+                                        Minimum="0"
+                                        Maximum="1" 
+                                        MouseDoubleClick="slInterpolationAntiring_MouseDoubleClick"
+                                        Style="{DynamicResource SliderStyle}"/>
+                                <TextBox x:Name="tbxInterpolationAntiring"
+                                         Text="{Binding Value, ElementName=slInterpolationAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,970,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -844,13 +1015,16 @@
                                 <!-- Software Scale -->
                                 <Label Content="Software"
                                        HorizontalAlignment="Left"
-                                       Margin="10,918,0,0" 
+                                       Margin="10,1002,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Specify the software scaler algorithm to be used with --vf=scale. This also affects video output drivers which lack hardware acceleration, e.g. x11. See also --vf=scale."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSoftwareScaler"
-                                          Margin="0,915,14,0" 
+                                          Margin="0,999,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
@@ -872,7 +1046,9 @@
                     </Grid>
                 </TabItem>
 
-                <!-- Audio Tab -->
+                <!--/////////////////////////////////////
+                    Audio Tab
+                /////////////////////////////////////-->
                 <TabItem Header="Audio" Style="{DynamicResource TabItemStyle}">
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0">
@@ -885,6 +1061,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Audio output drivers to be used."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboAudioDriver"
                                           HorizontalAlignment="Right"
@@ -912,6 +1091,9 @@
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Load additional audio files matching the video filename. The parameter specifies how external audio files are matched. exact is enabled by default."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboAudioLoadFiles" 
                                           HorizontalAlignment="Right"
@@ -934,6 +1116,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Control which audio channels are output (e.g. surround vs. stereo). There are the following possibilities:"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboChannels"
                                           HorizontalAlignment="Right"
@@ -957,6 +1142,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the startup volume. 0 means silence, 100 means no volume reduction or amplification. Negative values can be passed for compatibility, but are treated as 0."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slVolume" 
                                         HorizontalAlignment="Right"
@@ -985,6 +1173,9 @@
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the maximum amplification level in percent (default: 130). A value of 130 will allow you to adjust the volume up to about double the normal level."
                                        Style="{DynamicResource LabelStyle}"/>
 
                                 <Slider x:Name="slVolumeMax" 
@@ -1014,6 +1205,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Deprecated/unfunctional. Before mpv 0.18.1, this used to control whether to use the volume controls of the audio output driver or the internal mpv volume filter."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSoftVolume" 
                                           HorizontalAlignment="Right" 
@@ -1030,14 +1224,17 @@
                                 <!-- Normalize -->
                                 <Label Content="Normalize"
                                        HorizontalAlignment="Left"
-                                       Margin="10,216,0,0" 
+                                       Margin="10,187,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Enable/disable normalization if surround audio is downmixed to stereo (default: no). If this is disabled, downmix can cause clipping. If it's enabled, the output might be too silent. It depends on the source audio. Technically, this changes the normalize suboption of the lavrresample audio filter, which performs the downmixing. If downmix happens outside of mpv for some reason, this has no effect."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboNormalize" 
                                           HorizontalAlignment="Right" 
-                                          Margin="0,213,14,0" 
+                                          Margin="0,184,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -1050,14 +1247,17 @@
                                 <!-- Scale Tempo -->
                                 <Label Content="Scale Tempo" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,245,0,0"
+                                       Margin="10,216,0,0"
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="If this is enabled (default), playing with a speed different from normal automatically inserts the scaletempo audio filter. For details, see audio filter section."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScaleTempo" 
                                           HorizontalAlignment="Right" 
-                                          Margin="0,242,14,0" 
+                                          Margin="0,213,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -1071,7 +1271,7 @@
                                 <!-- Audio Languages -->
                                 <Label Content="Language Priority"
                                        HorizontalAlignment="Left"
-                                       Margin="10,286,0,0" 
+                                       Margin="10,257,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="155"
@@ -1079,7 +1279,7 @@
                                        Style="{DynamicResource LabelTitleStyle}"/>
                                 <ListView x:Name="listViewAudioLanguages" 
                                           Height="200" 
-                                          Margin="10,310,42,0"
+                                          Margin="10,281,42,0"
                                           VerticalAlignment="Top"
                                           BorderThickness="0"
                                           ItemsSource="{Binding AudioLanguageItems}"
@@ -1117,7 +1317,7 @@
                                         Height="22" 
                                         Cursor="Hand" 
                                         Click="buttonAudioLanguageUp_Click" 
-                                        Margin="0,310,14,0" 
+                                        Margin="0,281,14,0" 
                                         HorizontalAlignment="Right" 
                                         Width="22"
                                         Style="{DynamicResource ButtonControlStyle}">
@@ -1131,7 +1331,7 @@
                                         Height="22" 
                                         Cursor="Hand" 
                                         Click="buttonAudioLanguageDown_Click"
-                                        Margin="0,337,14,0"
+                                        Margin="0,308,14,0"
                                         Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="▾" Margin="0,0,0,0"/>
                                 </Button>
@@ -1143,7 +1343,7 @@
                                         Height="22" 
                                         Cursor="Hand"
                                         Click="buttonAudioLanguageSelectAll_Click" 
-                                        Margin="0,364,14,0"
+                                        Margin="0,335,14,0"
                                         Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="+" Margin="0,0,0,0"/>
                                 </Button>
@@ -1155,18 +1355,21 @@
                                         Height="22"
                                         Cursor="Hand"
                                         Click="buttonAudioLanguageDeselectAll_Click"
-                                        Margin="0,391,14,0"
+                                        Margin="0,362,14,0"
                                         Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="-" Margin="0,0,0,0"/>
                                 </Button>
 
                                 <!-- Soft Volume Max -->
-                                <Label Content="Soft Vol Max"
+                                <!--<Label Content="Soft Vol Max"
                                        HorizontalAlignment="Left" 
                                        Margin="10,187,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip=""
                                        Style="{DynamicResource LabelStyle}"/>
 
                                 <Slider x:Name="slSoftVolumeMax" 
@@ -1187,14 +1390,16 @@
                                         HorizontalAlignment="Right" 
                                         Width="33" 
                                         VerticalAlignment="Top"
-                                        Style="{DynamicResource TextBoxStyle}"/>
+                                        Style="{DynamicResource TextBoxStyle}"/>-->
 
                             </Grid>
                         </ScrollViewer>
                     </Grid>
                 </TabItem>
 
-                <!-- Subtitle Tab -->
+                <!--/////////////////////////////////////
+                    Subtitles Tab
+                /////////////////////////////////////-->
                 <TabItem Header="Subtitles" Style="{DynamicResource TabItemStyle}">
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0">
@@ -1910,7 +2115,9 @@
                     </Grid>
                 </TabItem>
 
-                <!-- General -->
+                <!--/////////////////////////////////////
+                    General Tab
+                /////////////////////////////////////-->
                 <TabItem Header="General" Style="{DynamicResource TabItemStyle}">
                     <Grid Background="Transparent">
                         <ScrollViewer>
@@ -1922,6 +2129,9 @@
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="(Windows only.) Set process priority for mpv according to the predefined priorities available under Windows."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboPriority" 
                                           Margin="0,10,14,0" 
@@ -1945,6 +2155,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Always save the current playback position on quit. When this file is played again later, the player will seek to the old playback position on start. This does not happen if playback of a file is stopped in any other way than quitting. For example, going to the next file in the playlist will not save the position, and start playback at beginning the next time the file is played."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSavePositionQuit" 
                                           HorizontalAlignment="Right"
@@ -1965,6 +2178,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Do not terminate when playing or seeking beyond the end of the file, and there is not next file to be played (and --loop is not used). Instead, pause the player. When trying to seek beyond end of the file, the player will attempt to seek to the last frame."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboKeepOpen" 
                                           HorizontalAlignment="Right" 
@@ -1985,6 +2201,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Makes the player window stay on top of other windows. On Windows, if combined with fullscreen mode, this causes mpv to be treated as exclusive fullscreen window that bypasses the Desktop Window Manager."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOnTop" 
                                           HorizontalAlignment="Right" 
@@ -2005,6 +2224,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Adjust the initial window position or size. W and H set the window size in pixels. x and y set the window position, measured in pixels from the top-left corner of the screen to the top-left corner of the image being displayed. If a percentage sign (%) is given after the argument, it turns the value into a percentage of the screen size in that direction."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slGeometryX" 
                                         HorizontalAlignment="Right"
@@ -2034,6 +2256,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Adjust the initial window position or size. W and H set the window size in pixels. x and y set the window position, measured in pixels from the top-left corner of the screen to the top-left corner of the image being displayed. If a percentage sign (%) is given after the argument, it turns the value into a percentage of the screen size in that direction."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slGeometryY" 
                                         HorizontalAlignment="Right"
@@ -2063,6 +2288,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the initial window size to a maximum size specified by WxH, without changing the window's aspect ratio. The size is measured in pixels, or if a number is followed by a percentage sign (%), in percents of the screen size. This option never changes the aspect ratio of the window. If the aspect ratio mismatches, the window's size is reduced until it fits into the specified size."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slAutofitWidth" 
                                         HorizontalAlignment="Right"
@@ -2092,6 +2320,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the initial window size to a maximum size specified by WxH, without changing the window's aspect ratio. The size is measured in pixels, or if a number is followed by a percentage sign (%), in percents of the screen size. This option never changes the aspect ratio of the window. If the aspect ratio mismatches, the window's size is reduced until it fits into the specified size."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slAutofitHeight" 
                                         HorizontalAlignment="Right"
@@ -2121,6 +2352,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Turns off the screensaver (or screen blanker and similar mechanisms) at startup and turns it on again on exit (default: yes). The screensaver is always re-enabled when the player is paused."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreensaver" 
                                           HorizontalAlignment="Right" 
@@ -2141,6 +2375,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the window title. This is used for the video window, and if possible, also sets the audio stream title."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboWindowTitle" 
                                           HorizontalAlignment="Right" 
@@ -2171,6 +2408,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Store screenshots in this directory. This path is joined with the filename generated by  --screenshot-template. If the template filename is already absolute, the directory is ignored. If the directory does not exist, it is created on the first screenshot. If it is not a directory, an error is generated when trying to write a screenshot."
                                        Cursor="Hand"
                                        PreviewMouseDown="lbScreenshotPath_PreviewMouseDown"
                                        Style="{DynamicResource LabelStyle}"/>
@@ -2191,6 +2431,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Specify the filename template used to save screenshots. The template specifies the filename without file extension, and can contain format specifiers, which will be substituted when taking a screenshot. By default, the template is mpv-shot%n, which results in filenames like  mpv-shot0012.png for example."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTemplate"
                                           HorizontalAlignment="Right" 
@@ -2213,6 +2456,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="90"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Tag screenshots with the appropriate colorspace. Note that not all formats are supported."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTagColorspace"
                                           HorizontalAlignment="Right" 
@@ -2234,6 +2480,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the image file type used for saving screenshots."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotFormat"
                                           HorizontalAlignment="Right" 
@@ -2257,6 +2506,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="JPEG: Higher means better quality. PNG: Higher means better compression."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slScreenshotQuality" 
                                         HorizontalAlignment="Right"
@@ -2416,7 +2668,9 @@
                     </Grid>
                 </TabItem>
 
-                <!-- Stream -->
+                <!--/////////////////////////////////////
+                    Stream Tab
+                /////////////////////////////////////-->
                 <TabItem Header="Stream" Style="{DynamicResource TabItemStyle}">
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0">
@@ -2716,7 +2970,9 @@
                     </Grid>
                 </TabItem>
 
-                <!-- On Screen Display -->
+                <!--/////////////////////////////////////
+                    Display Tab
+                /////////////////////////////////////-->
                 <TabItem Header="Display" Style="{DynamicResource TabItemStyle}">
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0">

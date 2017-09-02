@@ -113,14 +113,16 @@ namespace Glow
                 // Video
                 // -------------------------
                 mainwindow.cboVideoDriver.SelectedItem = "default";
-                mainwindow.cboOpenGLPBO.SelectedItem = "no";
+                mainwindow.cboOpenGLPBO.SelectedItem = "default";
                 mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "default";
                 // Display
+                mainwindow.cboICCProfile.SelectedItem = "default";
                 mainwindow.cboDisplayPrimaries.SelectedItem = "default";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "default";
                 mainwindow.cboColorSpace.SelectedItem = "default";
                 mainwindow.cboColorRange.SelectedItem = "default";
+                mainwindow.cboInterpolation.SelectedItem = "default";
                 mainwindow.cboVideoSync.SelectedItem = "default";
                 mainwindow.cboFramedrop.SelectedItem = "default";
                 // Image
@@ -129,7 +131,7 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "default";
+                //mainwindow.cboGammaAuto.SelectedItem = "default";
                 mainwindow.cboDither.SelectedItem = "default";
                 mainwindow.cboDeband.SelectedItem = "default";
                 mainwindow.tbxDebandGrain.Text = "";
@@ -142,6 +144,8 @@ namespace Glow
                 mainwindow.slChromaAntiring.Value = 0;
                 mainwindow.cboDownscale.SelectedItem = "default";
                 mainwindow.slDownscaleAntiring.Value = 0;
+                mainwindow.cboInterpolationScale.SelectedItem = "default";
+                mainwindow.slInterpolationAntiring.Value = 0;
                 mainwindow.cboSoftwareScaler.SelectedItem = "default";
 
                 // -------------------------
@@ -152,7 +156,7 @@ namespace Glow
                 mainwindow.slVolume.Value = 0;
                 mainwindow.slVolumeMax.Value = 0;
                 mainwindow.cboSoftVolume.SelectedItem = "default";
-                mainwindow.slSoftVolumeMax.Value = 0;
+                //mainwindow.slSoftVolumeMax.Value = 0;
                 mainwindow.cboNormalize.SelectedItem = "default";
                 mainwindow.cboScaleTempo.SelectedItem = "default";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "default";
@@ -288,10 +292,12 @@ namespace Glow
                 mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
+                mainwindow.cboICCProfile.SelectedItem = "default";
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
                 mainwindow.cboColorSpace.SelectedItem = "auto";
                 mainwindow.cboColorRange.SelectedItem = "auto";
+                mainwindow.cboInterpolation.SelectedItem = "yes";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
@@ -300,7 +306,7 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "yes";
+                //mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "8";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "80";
@@ -313,6 +319,8 @@ namespace Glow
                 mainwindow.slChromaAntiring.Value = 1;
                 mainwindow.cboDownscale.SelectedItem = "mitchell";
                 mainwindow.slDownscaleAntiring.Value = 1;
+                mainwindow.cboInterpolationScale.SelectedItem = "mitchell";
+                mainwindow.slInterpolationAntiring.Value = 1;
                 mainwindow.cboSoftwareScaler.SelectedItem = "off";
 
                 // -------------------------
@@ -323,7 +331,7 @@ namespace Glow
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
-                mainwindow.slSoftVolumeMax.Value = 150;
+                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -454,10 +462,12 @@ namespace Glow
                 mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
+                mainwindow.cboICCProfile.SelectedItem = "default";
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
                 mainwindow.cboColorSpace.SelectedItem = "auto";
                 mainwindow.cboColorRange.SelectedItem = "auto";
+                mainwindow.cboInterpolation.SelectedItem = "yes";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
@@ -466,7 +476,7 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "yes";
+                //mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "8";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "80";
@@ -479,6 +489,8 @@ namespace Glow
                 mainwindow.slChromaAntiring.Value = 0.5;
                 mainwindow.cboDownscale.SelectedItem = "mitchell";
                 mainwindow.slDownscaleAntiring.Value = 0;
+                mainwindow.cboInterpolationScale.SelectedItem = "mitchell";
+                mainwindow.slInterpolationAntiring.Value = 0;
                 mainwindow.cboSoftwareScaler.SelectedItem = "off";
 
                 // -------------------------
@@ -489,7 +501,7 @@ namespace Glow
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
-                mainwindow.slSoftVolumeMax.Value = 150;
+                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -620,11 +632,13 @@ namespace Glow
                 mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
+                mainwindow.cboICCProfile.SelectedItem = "default";
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
                 mainwindow.cboColorSpace.SelectedItem = "auto";
                 mainwindow.cboColorRange.SelectedItem = "auto";
-                mainwindow.cboVideoSync.SelectedItem = "";
+                mainwindow.cboInterpolation.SelectedItem = "default";
+                mainwindow.cboVideoSync.SelectedItem = "default";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
                 mainwindow.slBrightness.Value = 0;
@@ -632,7 +646,7 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "yes";
+                //mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "auto";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "";
@@ -645,6 +659,8 @@ namespace Glow
                 mainwindow.slChromaAntiring.Value = 0;
                 mainwindow.cboDownscale.SelectedItem = "mitchell";
                 mainwindow.slDownscaleAntiring.Value = 0;
+                mainwindow.cboInterpolationScale.SelectedItem = "default";
+                mainwindow.slInterpolationAntiring.Value = 0;
                 mainwindow.cboSoftwareScaler.SelectedItem = "off";
 
                 // -------------------------
@@ -655,7 +671,7 @@ namespace Glow
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
-                mainwindow.slSoftVolumeMax.Value = 150;
+                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -786,11 +802,13 @@ namespace Glow
                 mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
+                mainwindow.cboICCProfile.SelectedItem = "default";
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
                 mainwindow.cboColorSpace.SelectedItem = "auto";
                 mainwindow.cboColorRange.SelectedItem = "auto";
-                mainwindow.cboVideoSync.SelectedItem = "";
+                mainwindow.cboInterpolation.SelectedItem = "default";
+                mainwindow.cboVideoSync.SelectedItem = "default";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
                 mainwindow.slBrightness.Value = 0;
@@ -798,7 +816,7 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "no";
+                //mainwindow.cboGammaAuto.SelectedItem = "no";
                 mainwindow.cboDither.SelectedItem = "no";
                 mainwindow.cboDeband.SelectedItem = "no";
                 mainwindow.tbxDebandGrain.Text = "";
@@ -811,6 +829,8 @@ namespace Glow
                 mainwindow.slChromaAntiring.Value = 0;
                 mainwindow.cboDownscale.SelectedItem = "bilinear";
                 mainwindow.slDownscaleAntiring.Value = 0;
+                mainwindow.cboInterpolationScale.SelectedItem = "default";
+                mainwindow.slInterpolationAntiring.Value = 0;
                 mainwindow.cboSoftwareScaler.SelectedItem = "off";
 
                 // -------------------------
@@ -821,7 +841,7 @@ namespace Glow
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
-                mainwindow.slSoftVolumeMax.Value = 150;
+                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -953,10 +973,12 @@ namespace Glow
                 mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
+                mainwindow.cboICCProfile.SelectedItem = "default";
                 mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
                 mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
                 mainwindow.cboColorSpace.SelectedItem = "auto";
                 mainwindow.cboColorRange.SelectedItem = "auto";
+                mainwindow.cboInterpolation.SelectedItem = "yes";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
                 // Image
@@ -965,7 +987,7 @@ namespace Glow
                 mainwindow.slHue.Value = 0;
                 mainwindow.slSaturation.Value = 0;
                 mainwindow.slGamma.Value = 0;
-                mainwindow.cboGammaAuto.SelectedItem = "yes";
+                //mainwindow.cboGammaAuto.SelectedItem = "yes";
                 mainwindow.cboDither.SelectedItem = "8";
                 mainwindow.cboDeband.SelectedItem = "yes";
                 mainwindow.tbxDebandGrain.Text = "80";
@@ -978,6 +1000,8 @@ namespace Glow
                 mainwindow.slChromaAntiring.Value = 1;
                 mainwindow.cboDownscale.SelectedItem = "mitchell";
                 mainwindow.slDownscaleAntiring.Value = 1;
+                mainwindow.cboInterpolationScale.SelectedItem = "default";
+                mainwindow.slInterpolationAntiring.Value = 0;
                 mainwindow.cboSoftwareScaler.SelectedItem = "off";
 
                 // -------------------------
@@ -988,7 +1012,7 @@ namespace Glow
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
                 mainwindow.cboSoftVolume.SelectedItem = "yes";
-                mainwindow.slSoftVolumeMax.Value = 150;
+                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -1160,10 +1184,13 @@ namespace Glow
             inif.Write("Video", "openglPBOFormat", (mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "hwdec", (mainwindow.cboHWDecoder.SelectedItem ?? string.Empty).ToString());
             // Display
+            //inif.Write("Video", "iccProfilePath", mainwindow.tbxICCProfilePath.Text.ToString());
+            inif.Write("Video", "iccProfile", (mainwindow.cboICCProfile.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "displayPrimaries", (mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "colorSpace", (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "colorRange", (mainwindow.cboColorRange.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "deinterlace", (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "interpolation", (mainwindow.cboInterpolation.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "videoSync", (mainwindow.cboVideoSync.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "frameDrop", (mainwindow.cboFramedrop.SelectedItem ?? string.Empty).ToString());
             // Image
@@ -1172,7 +1199,7 @@ namespace Glow
             inif.Write("Video", "hue", mainwindow.tbxHue.Text.ToString());
             inif.Write("Video", "saturation", mainwindow.tbxSaturation.Text.ToString());
             inif.Write("Video", "gamma", mainwindow.tbxGamma.Text.ToString());
-            inif.Write("Video", "gammaAuto", (mainwindow.cboGammaAuto.SelectedItem ?? string.Empty).ToString());
+            //inif.Write("Video", "gammaAuto", (mainwindow.cboGammaAuto.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "deband", (mainwindow.cboDeband.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "debandGrain", mainwindow.tbxDebandGrain.Text.ToString());
             inif.Write("Video", "dither", (mainwindow.cboDither.SelectedItem ?? string.Empty).ToString());
@@ -1184,6 +1211,8 @@ namespace Glow
             inif.Write("Video", "chromaScaleAntiring", mainwindow.tbxChromaAntiring.Text.ToString());
             inif.Write("Video", "downscale", (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "downscaleAntiring", mainwindow.tbxDownscaleAntiring.Text.ToString());
+            inif.Write("Video", "interpolationScale", (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "interpolationAntiring", mainwindow.tbxDownscaleAntiring.Text.ToString());
             inif.Write("Video", "softwareScaler", (mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty).ToString());
 
             // --------------------------------------------------
@@ -1217,7 +1246,7 @@ namespace Glow
             inif.Write("Audio", "volume", mainwindow.tbxVolume.Text.ToString());
             inif.Write("Audio", "volumeMax", mainwindow.tbxVolumeMax.Text.ToString());
             inif.Write("Audio", "softVolume", (mainwindow.cboSoftVolume.SelectedItem ?? string.Empty).ToString());
-            inif.Write("Audio", "softVolumeMax", mainwindow.tbxSoftVolumeMax.Text.ToString());
+            //inif.Write("Audio", "softVolumeMax", mainwindow.tbxSoftVolumeMax.Text.ToString());
             inif.Write("Audio", "normalize", (mainwindow.cboNormalize.SelectedItem ?? string.Empty).ToString());
             inif.Write("Audio", "scaleTempo", (mainwindow.cboScaleTempo.SelectedItem ?? string.Empty).ToString());
             inif.Write("Audio", "loadFiles", (mainwindow.cboAudioLoadFiles.SelectedItem ?? string.Empty).ToString());
@@ -1495,6 +1524,23 @@ namespace Glow
             // -------------------------
             // Display
             // -------------------------
+
+            // ICC Profile
+            string iccProfile = inif.Read("Video", "iccProfile");
+            if (iccProfile != "default" && iccProfile != "auto" && iccProfile != "select")
+            {
+                mainwindow.cboICCProfile.Items.Add(iccProfile);
+                mainwindow.cboICCProfile.SelectedItem = iccProfile;
+                mainwindow.cboICCProfile.IsEditable = true;
+            }
+                
+
+            if (mainwindow.cboICCProfile.Items.Contains(iccProfile))
+                mainwindow.cboICCProfile.SelectedItem = iccProfile;
+            else
+                listFailedImports.Add("Video: Display Primaries");
+            //mainwindow.tbxICCProfilePath.Text = inif.Read("Video", "iccProfilePath");
+
             // Display Primaries
             string displayPrimaries = inif.Read("Video", "displayPrimaries");
             if (mainwindow.cboDisplayPrimaries.Items.Contains(displayPrimaries))
@@ -1523,6 +1569,13 @@ namespace Glow
             else
                 listFailedImports.Add("Video: Deinterlace");
 
+            // Interpolation
+            string interpolation = inif.Read("Video", "interpolation");
+            if (mainwindow.cboInterpolation.Items.Contains(interpolation))
+                mainwindow.cboInterpolation.SelectedItem = interpolation;
+            else
+                listFailedImports.Add("Video: Interpolation");
+
             // Video Sync
             string videoSync = inif.Read("Video", "videoSync");
             if (mainwindow.cboVideoSync.Items.Contains(videoSync))
@@ -1547,11 +1600,11 @@ namespace Glow
             mainwindow.tbxGamma.Text = inif.Read("Video", "gamma");
 
             // Gamma Auto
-            string gammaAuto = inif.Read("Video", "gammaAuto");
-            if (mainwindow.cboGammaAuto.Items.Contains(gammaAuto))
-                mainwindow.cboGammaAuto.SelectedItem = gammaAuto;
-            else
-                listFailedImports.Add("Video: Gamma Auto");
+            //string gammaAuto = inif.Read("Video", "gammaAuto");
+            //if (mainwindow.cboGammaAuto.Items.Contains(gammaAuto))
+            //    mainwindow.cboGammaAuto.SelectedItem = gammaAuto;
+            //else
+            //    listFailedImports.Add("Video: Gamma Auto");
 
             // Deband
             string deband = inif.Read("Video", "deband");
@@ -1610,6 +1663,16 @@ namespace Glow
             // Downscale Antiring
             mainwindow.tbxDownscaleAntiring.Text = inif.Read("Video", "downscaleAntiring");
 
+            // Interpolation Scale
+            string tscale = inif.Read("Video", "interpolationScale");
+            if (mainwindow.cboInterpolationScale.Items.Contains(tscale))
+                mainwindow.cboInterpolationScale.SelectedItem = tscale;
+            else
+                listFailedImports.Add("Video: Interpolation Scale");
+
+            // Interpolation Antiring
+            mainwindow.tbxInterpolationAntiring.Text = inif.Read("Video", "interpolationScale");
+
             // Software Scaler
             string softwareScaler = inif.Read("Video", "softwareScaler");
             if (mainwindow.cboSoftwareScaler.Items.Contains(softwareScaler))
@@ -1646,7 +1709,7 @@ namespace Glow
                 listFailedImports.Add("Audio: Soft Volume");
 
             // Soft Volume Max
-            mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");
+            //mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");
 
             // Normalize
             string normalize = inif.Read("Audio", "normalize");

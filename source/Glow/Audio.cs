@@ -92,10 +92,10 @@ namespace Glow
             // -------------------------
             // Soft Volume Max
             // -------------------------
-            string softVolumeMax = string.Empty;
+            //string softVolumeMax = string.Empty;
 
-            if (mainwindow.slSoftVolumeMax.Value != 0)
-                softVolumeMax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
+            //if (mainwindow.slSoftVolumeMax.Value != 0)
+            //    softVolumeMax = "softvol-max=" + mainwindow.tbxSoftVolumeMax.Text.ToString();
 
             // -------------------------
             // Normalize
@@ -149,7 +149,7 @@ namespace Glow
                 volume,
                 volumeMax,
                 softVolume,
-                softVolumeMax,
+                //softVolumeMax,
                 normalize,
                 scaleTempo,
                 languages,

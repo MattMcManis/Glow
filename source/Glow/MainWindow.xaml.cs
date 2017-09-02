@@ -344,10 +344,8 @@ namespace Glow
         }
 
         // Save Window Position, Width, Height
-        void MainWindow_Closing(object sender, CancelEventArgs e)
+        void Window_Closing(object sender, CancelEventArgs e)
         {
-            //Settings.Default.Save();
-
             if (WindowState == WindowState.Maximized)
             {
                 // Use the RestoreBounds as the current values will be 0, 0 and the size of the screen
@@ -367,6 +365,11 @@ namespace Glow
             }
 
             Settings.Default.Save();
+
+            // Exit
+            e.Cancel = true;
+            System.Windows.Forms.Application.ExitThread();
+            Environment.Exit(0);
         }
 
 
@@ -577,19 +580,72 @@ namespace Glow
         private void cboVideoDriver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Enable/Disable OpenGL PBO
+            // Enable/Disable Scaling
 
             // Enabled
-            if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl"
+            if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "default"
+                || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl"
                 || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq")
             {
+                // PBO On
                 cboOpenGLPBO.IsEnabled = true;
-                cboOpenGLPBO.SelectedItem = "no";
+                cboOpenGLPBO.SelectedItem = "default";
+
+                // Scaling On
+                cboSigmoid.IsEnabled = true;
+                cboSigmoid.SelectedItem = "default";
+                // Scale
+                cboScale.IsEnabled = true;
+                cboScale.SelectedItem = "default";
+                slScaleAntiring.IsEnabled = true;
+                tbxScaleAntiring.IsEnabled = true;
+                // Chroma Scale
+                cboChromaScale.IsEnabled = true;
+                cboChromaScale.SelectedItem = "default";
+                slChromaAntiring.IsEnabled = true;
+                tbxChromaAntiring.IsEnabled = true;
+                // Downscale
+                cboDownscale.IsEnabled = true;
+                cboDownscale.SelectedItem = "default";
+                slDownscaleAntiring.IsEnabled = true;
+                tbxDownscaleAntiring.IsEnabled = true;
+                // Interpolation Scale
+                cboInterpolationScale.IsEnabled = true;
+                cboInterpolationScale.SelectedItem = "default";
+                slInterpolationAntiring.IsEnabled = true;
+                tbxInterpolationAntiring.IsEnabled = true;
+
             }
             // Disabled
             else
             {
+                // PBO Off
                 cboOpenGLPBO.SelectedItem = "off";
                 cboOpenGLPBO.IsEnabled = false;
+
+                // Scaling Off
+                cboSigmoid.IsEnabled = false;
+                cboSigmoid.SelectedItem = "no";
+                // Scale
+                cboScale.IsEnabled = false;
+                cboScale.SelectedItem = "off";
+                slScaleAntiring.IsEnabled = false;
+                tbxScaleAntiring.IsEnabled = false;
+                // Chroma Scale
+                cboChromaScale.IsEnabled = false;
+                cboChromaScale.SelectedItem = "off";
+                slChromaAntiring.IsEnabled = false;
+                tbxChromaAntiring.IsEnabled = false;
+                // Downscale
+                cboDownscale.IsEnabled = false;
+                cboDownscale.SelectedItem = "off";
+                slDownscaleAntiring.IsEnabled = false;
+                tbxDownscaleAntiring.IsEnabled = false;
+                // Interpolation Scale
+                cboInterpolationScale.IsEnabled = false;
+                cboInterpolationScale.SelectedItem = "off";
+                slInterpolationAntiring.IsEnabled = false;
+                tbxInterpolationAntiring.IsEnabled = false;
             }
         }
 
@@ -604,7 +660,7 @@ namespace Glow
             if ((string)(cboOpenGLPBO.SelectedItem ?? string.Empty) == "yes")
             {
                 cboOpenGLPBOFormat.IsEnabled = true;
-                cboOpenGLPBOFormat.SelectedItem = "rgba32f";
+                cboOpenGLPBOFormat.SelectedItem = "default";
             }
             // Disabled
             else
@@ -615,30 +671,102 @@ namespace Glow
         }
 
         /// <summary>
+        ///     Interpolation
+        /// </summary>
+        private void cboInterpolation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((string)(cboInterpolation.SelectedItem ?? string.Empty) == "yes")
+                cboVideoSync.SelectedItem = "display-resample";
+            else
+                cboVideoSync.SelectedItem = "default";
+        }
+
+        /// <summary>
         ///    Gamma Auto
         /// </summary>
-        private void cboGammaAuto_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Enable/Disable Gamma
+        //private void cboGammaAuto_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    // Enable/Disable Gamma
 
-            // Enabled
-            if ((string)(cboGammaAuto.SelectedItem ?? string.Empty) == "yes")
+        //    // Enabled
+        //    if ((string)(cboGammaAuto.SelectedItem ?? string.Empty) == "yes")
+        //    {
+        //        // Slider
+        //        slGamma.Value = 0;
+        //        slGamma.IsEnabled = false;
+        //        // TextBox
+        //        tbxGamma.IsEnabled = false;
+        //    }
+        //    // Disabled
+        //    else if ((string)(cboGammaAuto.SelectedItem ?? string.Empty) == "no")
+        //    {
+        //        // Slider
+        //        slGamma.IsEnabled = true;
+        //        // TextBox
+        //        tbxGamma.IsEnabled = true;
+        //    }
+        //}
+
+        /// <summary>
+        ///     ICC Profile Path
+        /// </summary>
+        private void lbICCProfilePath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Clear
+            //tbxICCProfilePath.Text = "";
+
+            if (cboICCProfile.IsEditable == true)
+                cboICCProfile.Text = "";
+        }
+        private void cboICCProfile_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Custom ComboBox Editable
+            if ((string)cboICCProfile.SelectedItem == "select")
             {
-                // Slider
-                slGamma.Value = 0;
-                slGamma.IsEnabled = false;
-                // TextBox
-                tbxGamma.IsEnabled = false;
+                cboICCProfile.IsEditable = true;
+
+                // Clear Text
+                //cboICCProfile.SelectedIndex = -1;
+
+                // Open 'Select File'
+                Microsoft.Win32.OpenFileDialog selectFile = new Microsoft.Win32.OpenFileDialog();
+                selectFile.RestoreDirectory = true;
+                // Show save file dialog box
+                Nullable<bool> result = selectFile.ShowDialog();
+
+                // Process dialog box
+                if (result == true)
+                {
+                    cboICCProfile.Items.Add(selectFile.FileName);
+                    cboICCProfile.SelectedItem = selectFile.FileName;
+                    cboICCProfile.IsEditable = true;
+                }
             }
-            // Disabled
-            else if ((string)(cboGammaAuto.SelectedItem ?? string.Empty) == "no")
+
+            // Other Items Disable Editable
+            else if ((string)cboICCProfile.SelectedItem != "select"
+                && !string.IsNullOrEmpty((string)cboICCProfile.SelectedItem))
             {
-                // Slider
-                slGamma.IsEnabled = true;
-                // TextBox
-                tbxGamma.IsEnabled = true;
+                //cboICCProfile.Items[cboICCProfile.SelectedIndex] = "select";
+                cboICCProfile.IsEditable = false;
             }
         }
+        //private void tbxICCProfilePath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    // Open 'Select File'
+        //    Microsoft.Win32.OpenFileDialog selectFile = new Microsoft.Win32.OpenFileDialog();
+
+        //    selectFile.RestoreDirectory = true;
+
+        //    // Show save file dialog box
+        //    Nullable<bool> result = selectFile.ShowDialog();
+
+        //    // Process dialog box
+        //    if (result == true)
+        //    {
+        //        tbxICCProfilePath.Text = selectFile.FileName;
+        //    }
+        //}
 
         /// <summary>
         ///    Deband
@@ -766,7 +894,7 @@ namespace Glow
             {
                 // Sigmoid
                 cboSigmoid.IsEnabled = true;
-                cboSigmoid.SelectedItem = "yes";
+                cboSigmoid.SelectedItem = "default";
 
                 // Scale
                 cboScale.IsEnabled = true;
@@ -887,7 +1015,14 @@ namespace Glow
             slDownscaleAntiring.Value = 0;
         }
 
-
+        /// <summary>
+        ///     Video Interpolation Antiring
+        /// </summary>
+        private void slInterpolationAntiring_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // return to default
+            slInterpolationAntiring.Value = 0;
+        }
 
         // --------------------------------------------------
         // Audio Controls
@@ -914,11 +1049,11 @@ namespace Glow
         /// <summary>
         ///     Soft Volume Max Slider DoubleClick
         /// </summary>
-        private void slSoftVolumeMax_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            // return to default
-            slSoftVolumeMax.Value = 150;
-        }
+        //private void slSoftVolumeMax_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        //{
+        //    // return to default
+        //    slSoftVolumeMax.Value = 150;
+        //}
 
         /// <summary>
         ///    Audio Languages
@@ -1787,6 +1922,7 @@ namespace Glow
             p.Inlines.Add(new Run(Generate.GenerateConfig(this)));
             rtbConfig.EndChange();
         }
+
 
     }
 }
