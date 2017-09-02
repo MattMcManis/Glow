@@ -180,7 +180,7 @@
                                     /////////////////////////////////////-->
                                 <Label Content="Display" 
                                     HorizontalAlignment="Left" 
-                                    Margin="10,140,0,0"
+                                    Margin="10,141,0,0"
                                     Padding="0,0,0,6" 
                                     VerticalAlignment="Top" 
                                     Width="75" 
@@ -191,7 +191,7 @@
                                 <Label x:Name="lbICCProfilePath"
                                        Content="ICC Profile"
                                        HorizontalAlignment="Left" 
-                                       Margin="10,167,0,0"
+                                       Margin="10,170,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -212,7 +212,7 @@
                                 </TextBox>-->
                                 <ComboBox x:Name="cboICCProfile" 
                                           Text=""
-                                          Margin="0,164,14,0" 
+                                          Margin="0,167,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -228,7 +228,7 @@
                                 <!-- Primaries -->
                                 <Label Content="Primaries" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,196,0,0" 
+                                       Margin="10,199,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -237,7 +237,7 @@
                                        ToolTip="Specifies the primaries of the display. Video colors will be adapted to this colorspace when ICC color management is not being used."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDisplayPrimaries" 
-                                          Margin="0,193,14,0" 
+                                          Margin="0,196,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -262,7 +262,7 @@
                                 <!-- Transfer Characteristics -->
                                 <Label Content="Characteristics" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,225,0,0" 
+                                       Margin="10,228,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="83"
@@ -271,7 +271,7 @@
                                        ToolTip="Specifies the transfer characteristics (gamma) of the display. Video colors will be adjusted to this curve when ICC color management is not being used."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboTransferCharacteristics"
-                                          Margin="0,222,14,0" 
+                                          Margin="0,225,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -296,7 +296,7 @@
                                 <!-- Color Space -->
                                 <Label Content="Color Space" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,254,0,0" 
+                                       Margin="10,257,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -305,7 +305,7 @@
                                        ToolTip=""
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboColorSpace" 
-                                          Margin="0,251,14,0" 
+                                          Margin="0,254,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -323,7 +323,7 @@
                                 <!-- Color Range -->
                                 <Label Content="Color Range"
                                        HorizontalAlignment="Left"
-                                       Margin="10,283,0,0"
+                                       Margin="10,286,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -332,7 +332,7 @@
                                        ToolTip="RGB color levels used with YUV to RGB conversion. Normally, output devices such as PC monitors use full range color levels. However, some TVs and video monitors expect studio RGB levels. Providing full range output to a device expecting studio level input results in crushed blacks and whites, the reverse in dim gray blacks and dim whites."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboColorRange"
-                                          Margin="0,280,14,0"
+                                          Margin="0,283,14,0"
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -347,7 +347,7 @@
                                 <!-- Deinterlace -->
                                 <Label Content="Deinterlace" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,312,0,0" 
+                                       Margin="10,315,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -357,7 +357,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDeinterlace" 
                                           HorizontalAlignment="Right"
-                                          Margin="0,309,14,0" 
+                                          Margin="0,312,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -371,7 +371,7 @@
                                 <!-- Interpolation -->
                                 <Label Content="Interpolation" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,341,0,0" 
+                                       Margin="10,344,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -381,7 +381,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboInterpolation" 
                                           HorizontalAlignment="Right"
-                                          Margin="0,338,14,0" 
+                                          Margin="0,341,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -394,7 +394,7 @@
                                 <!-- Vsync -->
                                 <Label Content="Video Sync" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,370,0,0" 
+                                       Margin="10,373,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -404,7 +404,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboVideoSync" 
                                           HorizontalAlignment="Right"
-                                          Margin="0,367,14,0" 
+                                          Margin="0,370,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -424,7 +424,7 @@
                                 <!-- Framedrop -->
                                 <Label Content="Framedrop" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,399,0,0" 
+                                       Margin="10,402,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -434,7 +434,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboFramedrop"
                                           HorizontalAlignment="Right"
-                                          Margin="0,396,14,0"
+                                          Margin="0,399,14,0"
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -452,7 +452,7 @@
                                 /////////////////////////////////////-->
                                 <Label Content="Image" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,438,0,0"
+                                       Margin="10,443,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75" 
@@ -462,7 +462,7 @@
                                 <!-- Brightness-->
                                 <Label Content="Brightness" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,468,0,0" 
+                                        Margin="10,473,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
@@ -472,7 +472,7 @@
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slBrightness" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,466,52,0" 
+                                        Margin="0,471,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -485,7 +485,7 @@
                                         Text="{Binding Value, ElementName=slBrightness, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,465,14,0"
+                                        Margin="0,470,14,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -494,7 +494,7 @@
                                 <!-- Contrast-->
                                 <Label Content="Contrast" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,497,0,0" 
+                                        Margin="10,502,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
@@ -504,7 +504,7 @@
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slContrast" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,495,52,0" 
+                                        Margin="0,500,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -517,7 +517,7 @@
                                         Text="{Binding Value, ElementName=slContrast, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,494,14,0"
+                                        Margin="0,499,14,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -526,7 +526,7 @@
                                 <!-- Hue -->
                                 <Label Content="Hue" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,526,0,0" 
+                                        Margin="10,531,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
@@ -536,7 +536,7 @@
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slHue" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,524,52,0" 
+                                        Margin="0,529,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -549,7 +549,7 @@
                                         Text="{Binding Value, ElementName=slHue, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,523,14,0"
+                                        Margin="0,528,14,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -558,7 +558,7 @@
                                 <!-- Saturation-->
                                 <Label Content="Saturation" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,555,0,0" 
+                                        Margin="10,560,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
@@ -568,7 +568,7 @@
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slSaturation" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,553,52,0" 
+                                        Margin="0,558,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -581,7 +581,7 @@
                                          Text="{Binding Value, ElementName=slSaturation, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,552,14,0"
+                                         Margin="0,557,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -590,7 +590,7 @@
                                 <!-- Gamma -->
                                 <Label Content="Gamma" 
                                         HorizontalAlignment="Left"
-                                        Margin="10,584,0,0" 
+                                        Margin="10,589,0,0" 
                                         Padding="0,0,0,6" 
                                         VerticalAlignment="Top" 
                                         Width="75"
@@ -600,7 +600,7 @@
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slGamma" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,582,52,0" 
+                                        Margin="0,587,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="-100"
@@ -613,7 +613,7 @@
                                         Text="{Binding Value, ElementName=slGamma, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,581,14,0"
+                                        Margin="0,586,14,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -622,7 +622,7 @@
                                 <!-- Dithering -->
                                 <Label Content="Dither" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,671,0,0" 
+                                       Margin="10,676,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -631,7 +631,7 @@
                                        ToolTip="Set dither target depth to N. Default: no."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDither"
-                                          Margin="0,668,14,0" 
+                                          Margin="0,673,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -646,7 +646,7 @@
                                 <!-- Deband -->
                                 <Label Content="Deband" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,613,0,0"
+                                       Margin="10,618,0,0"
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -655,7 +655,7 @@
                                        ToolTip="Enable the debanding algorithm. This greatly reduces the amount of visible banding, blocking and other quantization artifacts, at the expensive of very slightly blurring some of the finest details. In practice, it's virtually always an improvement - the only reason to disable it would be for performance."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDeband" 
-                                          Margin="0,610,14,0"
+                                          Margin="0,615,14,0"
                                           VerticalAlignment="Top"
                                           SelectionChanged="cboDeband_SelectionChanged"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -670,7 +670,7 @@
                                 <!-- Deband Grain -->
                                 <Label Content="Deband Grain" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,642,0,0" 
+                                       Margin="10,647,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -679,7 +679,7 @@
                                        ToolTip="Add some extra noise to the image. This significantly helps cover up remaining quantization artifacts. Higher numbers add more noise. (Default 48)"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxDebandGrain"
-                                         Margin="0,639,14,0" 
+                                         Margin="0,644,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103" Height="22"
                                          Style="{DynamicResource TextBoxStyle}"
@@ -691,7 +691,7 @@
                                     /////////////////////////////////////-->
                                 <Label Content="Scaling" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,711,0,0"
+                                       Margin="10,717,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75" FontWeight="Bold"
@@ -700,7 +700,7 @@
                                 <!-- Sigmoid -->
                                 <Label Content="Sigmoid"
                                        HorizontalAlignment="Left"
-                                       Margin="10,741,0,0" 
+                                       Margin="10,747,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -709,7 +709,7 @@
                                        ToolTip="When upscaling, use a sigmoidal color transform to avoid emphasizing ringing artifacts. This also implies --linear-scaling."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSigmoid"
-                                        Margin="0,738,14,0" 
+                                        Margin="0,744,14,0" 
                                         VerticalAlignment="Top"
                                         Style="{DynamicResource ComboBoxStyle}"
                                         ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -724,7 +724,7 @@
                                 <!-- Scale -->
                                 <Label Content="Scale"
                                        HorizontalAlignment="Left"
-                                       Margin="10,770,0,0" 
+                                       Margin="10,776,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -733,7 +733,7 @@
                                        ToolTip="The filter function to use when upscaling video."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScale"
-                                          Margin="0,767,14,0" 
+                                          Margin="0,773,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -768,7 +768,7 @@
                                 <!-- Scale Antiring -->
                                 <Label Content="Antiring" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,799,0,0" 
+                                       Margin="10,805,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -778,7 +778,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slScaleAntiring" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,797,52,0" 
+                                        Margin="0,803,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -789,7 +789,7 @@
                                          Text="{Binding Value, ElementName=slScaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,796,14,0"
+                                         Margin="0,802,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -798,7 +798,7 @@
                                 <!-- Chroma Scale -->
                                 <Label Content="Chroma"
                                        HorizontalAlignment="Left" 
-                                       Margin="10,828,0,0" 
+                                       Margin="10,834,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -807,7 +807,7 @@
                                        ToolTip="As --scale, but for interpolating chroma information. If the image is not subsampled, this option is ignored entirely."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboChromaScale" 
-                                          Margin="0,825,14,0" 
+                                          Margin="0,831,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -842,7 +842,7 @@
                                 <!-- Chroma Antiring -->
                                 <Label Content="Antiring" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,857,0,0" 
+                                       Margin="10,863,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -852,7 +852,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slChromaAntiring" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,855,52,0" 
+                                        Margin="0,861,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -863,7 +863,7 @@
                                          Text="{Binding Value, ElementName=slChromaAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,854,14,0"
+                                         Margin="0,860,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -872,7 +872,7 @@
                                 <!-- Downscale -->
                                 <Label Content="Downscale" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,886,0,0" 
+                                       Margin="10,892,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -881,7 +881,7 @@
                                        ToolTip="Like --scale, but apply these filters on downscaling instead. If this option is unset, the filter implied by --scale will be applied."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDownscale" 
-                                          Margin="0,883,14,0" 
+                                          Margin="0,889,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -916,7 +916,7 @@
                                 <!-- Downscale Antiring -->
                                 <Label Content="Antiring" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,915,0,0" 
+                                       Margin="10,921,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -926,7 +926,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slDownscaleAntiring" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,913,52,0" 
+                                        Margin="0,919,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -937,7 +937,7 @@
                                          Text="{Binding Value, ElementName=slDownscaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,912,14,0"
+                                         Margin="0,918,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -946,7 +946,7 @@
                                 <!-- Interpolation Scale -->
                                 <Label Content="Interpolation" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,944,0,0" 
+                                       Margin="10,950,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -955,7 +955,7 @@
                                        ToolTip="The filter used for interpolating the temporal axis (frames). This is only used if --interpolation is enabled. The only valid choices for  --tscale are separable convolution filters (use --tscale=help to get a list). The default is mitchell."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboInterpolationScale" 
-                                          Margin="0,941,14,0" 
+                                          Margin="0,947,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
@@ -985,7 +985,7 @@
                                 <!-- Interpolation Antiring -->
                                 <Label Content="Antiring" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,973,0,0" 
+                                       Margin="10,979,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -995,7 +995,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slInterpolationAntiring" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,971,52,0" 
+                                        Margin="0,977,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -1006,7 +1006,7 @@
                                          Text="{Binding Value, ElementName=slInterpolationAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
-                                         Margin="0,970,14,0"
+                                         Margin="0,976,14,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -1015,7 +1015,7 @@
                                 <!-- Software Scale -->
                                 <Label Content="Software"
                                        HorizontalAlignment="Left"
-                                       Margin="10,1002,0,0" 
+                                       Margin="10,1008,0,0" 
                                        Padding="0, 0, 0, 6"
                                        VerticalAlignment="Top"
                                        Width="75"
@@ -1024,7 +1024,7 @@
                                        ToolTip="Specify the software scaler algorithm to be used with --vf=scale. This also affects video output drivers which lack hardware acceleration, e.g. x11. See also --vf=scale."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSoftwareScaler"
-                                          Margin="0,999,14,0" 
+                                          Margin="0,1005,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
