@@ -99,7 +99,7 @@ namespace Glow
             // if not 0
             if (mainwindow.slAutofitWidth.Value != 0 && mainwindow.slAutofitHeight.Value != 0)
                 //autoFit = "autofit-larger=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
-                autoFit = "autofit" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
+                autoFit = "autofit=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
 
             // -------------------------
             // Screensaver

@@ -1438,13 +1438,13 @@ namespace Glow
             mainwindow.tbxGeometryX.Text = inif.Read("General", "geometryX");
 
             // Geometry Y
-            mainwindow.tbxGeometryX.Text = inif.Read("General", "geometryX");
+            mainwindow.tbxGeometryY.Text = inif.Read("General", "geometryY");
 
             // Autofit Width
-            mainwindow.tbxGeometryX.Text = inif.Read("General", "autofitWidth");
+            mainwindow.tbxAutofitWidth.Text = inif.Read("General", "autofitWidth");
 
             // Autofit Height
-            mainwindow.tbxGeometryX.Text = inif.Read("General", "autofitHeight");
+            mainwindow.tbxAutofitHeight.Text = inif.Read("General", "autofitHeight");
 
             // Screensaver
             string screensaver = inif.Read("General", "screensaver");
