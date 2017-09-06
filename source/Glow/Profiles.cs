@@ -1414,9 +1414,13 @@ namespace Glow
             // --------------------------------------------------
             // Settings
             // --------------------------------------------------
-            Settings.Default["mpvDir"] = inif.Read("Settings", "mpvDir");
-            Settings.Default["configDir"] = inif.Read("Settings", "configDir");
-            Settings.Default["profilesDir"] = inif.Read("Settings", "profilesDir");
+            MainWindow.mpvDir = inif.Read("Settings", "mpvDir");
+            MainWindow.configDir = inif.Read("Settings", "configDir");
+            MainWindow.profilesDir = inif.Read("Settings", "profilesDir");
+
+            Settings.Default["mpvDir"] = MainWindow.mpvDir;
+            Settings.Default["configDir"] = MainWindow.configDir;
+            Settings.Default["profilesDir"] = MainWindow.profilesDir;
             Settings.Default.Save();
 
             // --------------------------------------------------
