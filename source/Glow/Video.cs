@@ -251,7 +251,8 @@ namespace Glow
 
             // only use if deband is on
             // and deband grain is not empty
-            if ((string)(mainwindow.cboDeband.SelectedItem ?? string.Empty) == "yes" && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
+            if ((string)(mainwindow.cboDeband.SelectedItem ?? string.Empty) == "yes" 
+                && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
                 debandgrain = "deband-grain=" + mainwindow.tbxDebandGrain.Text.ToString();
 
             // -------------------------

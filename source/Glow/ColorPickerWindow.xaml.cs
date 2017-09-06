@@ -173,17 +173,19 @@ namespace Glow
             }
 
             // 0-255, -6 to account for ellipse width/height
-            double saturation = ((Canvas.GetLeft(shadePickerElipse) + modifier) - 0) / (255 - 0);
-            double luminosity = 1 - (((Canvas.GetTop(shadePickerElipse) + modifier) - 0) / (255 - 0)); //reverse value
+            // Saturation
+            double x = ((Canvas.GetLeft(shadePickerElipse) + modifier) - 0) / (240 - 0);
+            // Luminosity
+            double y = 1 - (((Canvas.GetTop(shadePickerElipse) + modifier) - 0) / (240 - 0)); //reverse value
 
             // -------------------------
             // Filter
             // -------------------------
             // Saturation
-            color = Saturation(color, saturation);
+            color = Saturation(color, x);
 
             // Luminosity
-            color = Luminosity(color, luminosity);
+            color = Luminosity(color, y);
 
             // -------------------------
             // Preview
@@ -679,56 +681,45 @@ namespace Glow
         /// </summary>
         // Fix Saturation Luminosity
         // Ease the Luminosity as it approaches white
-        double InOutQuadBlend(double t)
-        {
-            if (t <= 0.5)
-                return 2.0 * Math.Pow(t, 2);
-            t -= 0.5;
-            return 2.0 * t * (1.0 - t) + 0.5;
-        }
-        //double BezierBlend(double t)
-        //{
-        //    return Math.Pow(t, 2) * (3.0 - 2.0 * t);
-        //}
-        //double ParametricBlend(double t)
-        //{
-        //    double sqt = Math.Pow(t, 2);
-        //    return sqt / (2.0 * (sqt - t) + 1.0);
-        //}
 
         //t: current time
         //b: start value
         //c: change in value
         //d: duration
+        double LinearTween(double t, double b, double c, double d)
+        {
+            return c * t / d + b;
+        }
         double EaseOutCubic(double t, double b, double c, double d)
         {
             t /= d;
             t--;
             return c * (t * t * t + 1) + b;
         }
-        public System.Drawing.Color Saturation(System.Drawing.Color color, double saturation)
+        public System.Drawing.Color Saturation(System.Drawing.Color color, double x)
         {
             // Saturation
+            // 240 <--------> 0
             HSLColor hslColor = new HSLColor(color);
-            hslColor.Saturation *= saturation;
-            hslColor.Saturation *= EaseOutCubic(1, saturation + 0.13, saturation, 240);
+            hslColor.Saturation *= x;
+            hslColor.Saturation *= LinearTween(0, x + 0.085, 1, 1);
 
             // Saturation Luminosity
-            hslColor = new HSLColor(hslColor);
-            //hslColor.Luminosity *= 2 - saturation;
-            hslColor.Luminosity *= 2 - InOutQuadBlend(saturation);
+            // 240 <--------> 120
+            hslColor.Luminosity *= 1 - (EaseOutCubic(0, (x - 0.0667), 1, 1) / 2);
 
             return hslColor;
         }
 
 
         /// <summary>
-        ///    Luminanosity
+        ///    Luminosity
         /// </summary>
-        public System.Drawing.Color Luminosity(System.Drawing.Color color, double luminosity)
+        public System.Drawing.Color Luminosity(System.Drawing.Color color, double y)
         {
+            // 240 ^--------v 0
             HSLColor hslColor = new HSLColor(color);
-            hslColor.Luminosity *= luminosity; // 0-1
+            hslColor.Luminosity *= y * 2;
 
             return hslColor;
         }
@@ -739,7 +730,8 @@ namespace Glow
         /// </summary>
         public System.Drawing.Color Hue(System.Drawing.Color color, double value)
         {
-            HSLColor hslColor = new HSLColor(hue: value, saturation: 240, luminosity: 120); //0-240
+            // 240 ^--------v 0
+            HSLColor hslColor = new HSLColor(hue: value, saturation: 240, luminosity: 120);
 
             return hslColor;
         }

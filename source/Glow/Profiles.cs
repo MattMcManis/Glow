@@ -18,6 +18,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
+using Glow.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -1156,6 +1157,13 @@ namespace Glow
             INIFile inif = new INIFile(input);
 
             // --------------------------------------------------
+            // Settings
+            // --------------------------------------------------
+            inif.Write("Settings", "mpvDir", MainWindow.mpvDir);
+            inif.Write("Settings", "configDir", MainWindow.configDir);
+            inif.Write("Settings", "profilesDir", MainWindow.profilesDir);
+
+            // --------------------------------------------------
             // General
             // --------------------------------------------------
             inif.Write("General", "priority", (mainwindow.cboPriority.SelectedItem ?? string.Empty).ToString());
@@ -1402,6 +1410,14 @@ namespace Glow
             List<string> listFailedImports = new List<string>();
 
             INIFile inif = new INIFile(input);
+
+            // --------------------------------------------------
+            // Settings
+            // --------------------------------------------------
+            Settings.Default["mpvDir"] = inif.Read("Settings", "mpvDir");
+            Settings.Default["configDir"] = inif.Read("Settings", "configDir");
+            Settings.Default["profilesDir"] = inif.Read("Settings", "profilesDir");
+            Settings.Default.Save();
 
             // --------------------------------------------------
             // General
