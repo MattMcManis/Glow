@@ -73,6 +73,9 @@
     <Compile Include="ColorPickerWindow.xaml.cs">
       <DependentUpon>ColorPickerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FailedImportWindow.xaml.cs">
+      <DependentUpon>FailedImportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OSC.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -92,6 +95,10 @@
     <Compile Include="Video.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="ColorPickerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FailedImportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

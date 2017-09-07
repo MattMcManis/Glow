@@ -26,15 +26,13 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace Glow
 {
     public partial class Profiles
     {
         public static List<string> listCustomProfilesPaths = new List<string>();
-        //public static List<string> listCustomProfilesNames = new List<string>();
+        public static string failedImportMessage;
 
         /// <summary>
         ///    Scan PC Custom Profiles
@@ -2198,18 +2196,6 @@ namespace Glow
             // Shadow Offset
             mainwindow.tbxOSDShadowOffset.Text = inif.Read("OSD", "shadowOffset");
 
-
-            // --------------------------------------------------
-            // Failed Imports
-            // --------------------------------------------------
-            if (listFailedImports.Count() > 0 && listFailedImports != null)
-            {
-                var message = string.Join(Environment.NewLine, listFailedImports);
-                MessageBox.Show("Please set the following and re-save your profile.\n\n" 
-                    + message, 
-                    "Failed To Import", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-
             // --------------------------------------------------
             // Extensions
             // --------------------------------------------------
@@ -2254,6 +2240,32 @@ namespace Glow
                 mainwindow.cboExtPNG.SelectedItem = png;
             else
                 listFailedImports.Add("Extensions: png");
+
+
+            // --------------------------------------------------
+            // Failed Imports
+            // --------------------------------------------------
+            if (listFailedImports.Count() > 0 && listFailedImports != null)
+            {
+                failedImportMessage = string.Join(Environment.NewLine, listFailedImports);
+                //MessageBox.Show("Please set the following and re-save your profile.\n\n"
+                //    + message,
+                //    "Failed To Import", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Detect which screen we're on
+                var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
+                var thisScreen = allScreens.SingleOrDefault(s => mainwindow.Left >= s.WorkingArea.Left && mainwindow.Left < s.WorkingArea.Right);
+
+                // Start Window
+                FailedImportWindow failedimportwindow = new FailedImportWindow();
+
+                // Position Relative to MainWindow
+                failedimportwindow.Left = Math.Max((mainwindow.Left + (mainwindow.Width - failedimportwindow.Width) / 2), thisScreen.WorkingArea.Left);
+                failedimportwindow.Top = Math.Max((mainwindow.Top + (mainwindow.Height - failedimportwindow.Height) / 2), thisScreen.WorkingArea.Top);
+
+                // Open Window
+                failedimportwindow.Show();
+            }
         }
 
 

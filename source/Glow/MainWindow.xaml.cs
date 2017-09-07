@@ -1921,8 +1921,8 @@ namespace Glow
             // Write Config to RichTextBox
             Paragraph p = new Paragraph();
             p.LineHeight = 2;
-
             rtbConfig.Document = new FlowDocument(p);
+
             rtbConfig.BeginChange();
             p.Inlines.Add(new Run(Generate.GenerateConfig(this)));
             rtbConfig.EndChange();

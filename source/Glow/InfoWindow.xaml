@@ -25,10 +25,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-        ResizeMode="CanMinimize" UseLayoutRounding="True"
+        ResizeMode="CanMinimize" 
+        UseLayoutRounding="True"
         Title="Info" 
         Height="335" Width="445" 
-        Style="{DynamicResource InfoWindowStyle}" Icon="Resources/Images/Icons/title-logo.ico" 
+        Icon="Resources/Images/Icons/title-logo.ico"
+        Style="{DynamicResource InfoWindowStyle}"  
         >
     <Window.Resources>
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
@@ -79,8 +81,18 @@
     </Window.Resources>
     <Grid>
         <TextBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 VerticalAlignment="Top"
+                 Width="409" 
+                 Padding="6" 
+                 IsReadOnly="True"
                  Style="{DynamicResource TextBoxStyle}"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="272" Margin="10,10,0,0" TextWrapping="Wrap" TextAlignment="Justify" 
-                 Text="Glow is a configuration file generator for the mpv media player.&#xA;&#xA;Glow&#xA;Copyright © 2017 Matt McManis&#xA;github.com/MattMcManis/Glow&#xA;glowmpv.github.io&#xA;&#xA;This program is free software: you can redistribute it and/or modify&#xA;it under the terms of the GNU General Public License as published by&#xA;the Free Software Foundation, either version 3 of the License, or&#xA;(at your option) any later version.&#xA;&#xA;This program is distributed in the hope that it will be useful,&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xA;GNU General Public License for more details.&#xA;&#xA;You should have received a copy of the GNU General Public License&#xA;along with this program.  If not, see http://www.gnu.org/licenses/." VerticalAlignment="Top" Width="409" Padding="6" IsReadOnly="True" />
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                 HorizontalAlignment="Left" 
+                 Height="272" 
+                 Margin="10,10,0,0" 
+                 TextWrapping="Wrap"
+                 TextAlignment="Justify" 
+                 Text="Glow is a configuration file generator for the mpv media player.&#xA;&#xA;Glow&#xA;Copyright © 2017 Matt McManis&#xA;github.com/MattMcManis/Glow&#xA;glowmpv.github.io&#xA;&#xA;This program is free software: you can redistribute it and/or modify&#xA;it under the terms of the GNU General Public License as published by&#xA;the Free Software Foundation, either version 3 of the License, or&#xA;(at your option) any later version.&#xA;&#xA;This program is distributed in the hope that it will be useful,&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xA;GNU General Public License for more details.&#xA;&#xA;You should have received a copy of the GNU General Public License&#xA;along with this program.  If not, see http://www.gnu.org/licenses/." 
+                 />
     </Grid>
 </Window>

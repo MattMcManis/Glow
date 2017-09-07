@@ -1,0 +1,31 @@
+﻿<Window x:Class="Glow.FailedImportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        
+        Loaded="Window_Loaded"
+        
+        ResizeMode="CanMinimize" 
+        UseLayoutRounding="True"
+        Title="Failed to Import" 
+        Height="335" Width="400" 
+        Icon="Resources/Images/Icons/title-logo.ico"
+        Style="{DynamicResource InfoWindowStyle}" >
+    <Grid>
+        <RichTextBox x:Name="rtbFailedImport" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 Style="{DynamicResource RichTextBoxStyle}"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                 HorizontalAlignment="Left" 
+                 Height="272" 
+                 Margin="10,10,0,0"
+                 VerticalAlignment="Top" 
+                 Width="364"
+                 Padding="6"
+                 IsReadOnly="True"/>
+
+    </Grid>
+</Window>
