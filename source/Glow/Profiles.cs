@@ -1217,8 +1217,8 @@ namespace Glow
             inif.Write("Video", "chromaScaleAntiring", mainwindow.tbxChromaAntiring.Text.ToString());
             inif.Write("Video", "downscale", (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "downscaleAntiring", mainwindow.tbxDownscaleAntiring.Text.ToString());
-            inif.Write("Video", "interpolationScale", (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString());
-            inif.Write("Video", "interpolationAntiring", mainwindow.tbxDownscaleAntiring.Text.ToString());
+            inif.Write("Video", "interpolationScale", (mainwindow.cboInterpolation.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "interpolationAntiring", mainwindow.tbxInterpolationAntiring.Text.ToString());
             inif.Write("Video", "softwareScaler", (mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty).ToString());
 
             // --------------------------------------------------
@@ -1689,7 +1689,7 @@ namespace Glow
                 listFailedImports.Add("Video: Interpolation Scale");
 
             // Interpolation Antiring
-            mainwindow.tbxInterpolationAntiring.Text = inif.Read("Video", "interpolationScale");
+            mainwindow.tbxInterpolationAntiring.Text = inif.Read("Video", "interpolationAntiring");
 
             // Software Scaler
             string softwareScaler = inif.Read("Video", "softwareScaler");
