@@ -1217,7 +1217,7 @@ namespace Glow
             inif.Write("Video", "chromaScaleAntiring", mainwindow.tbxChromaAntiring.Text.ToString());
             inif.Write("Video", "downscale", (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "downscaleAntiring", mainwindow.tbxDownscaleAntiring.Text.ToString());
-            inif.Write("Video", "interpolationScale", (mainwindow.cboInterpolation.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "interpolationScale", (mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "interpolationAntiring", mainwindow.tbxInterpolationAntiring.Text.ToString());
             inif.Write("Video", "softwareScaler", (mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty).ToString());
 
