@@ -21,7 +21,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 
 namespace Glow
 {
@@ -289,7 +288,6 @@ namespace Glow
             string sigmoidUpscaling = string.Empty;
 
             if ((string)(mainwindow.cboSigmoid.SelectedItem ?? string.Empty) == "yes")
-
                 sigmoidUpscaling = "sigmoid-upscaling";
 
             // -------------------------

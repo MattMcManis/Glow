@@ -899,7 +899,7 @@ namespace Glow
             {
                 // Sigmoid
                 cboSigmoid.IsEnabled = true;
-                cboSigmoid.SelectedItem = "default";
+                //cboSigmoid.SelectedItem = "default";
 
                 // Scale
                 cboScale.IsEnabled = true;
@@ -1333,6 +1333,59 @@ namespace Glow
         // --------------------------------------------------
         // OSD Controls
         // --------------------------------------------------
+        /// <summary>
+        ///     OSD
+        /// </summary>
+        private void cboOSD_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Disabling OSD disables its options           
+            if ((string)(cboOSD.SelectedItem ?? string.Empty) == "no")
+            {
+                // Fractions
+                cboOSDFractions.SelectedItem = "default";
+                // Duration
+                tbxOSDDuration.Text = "";
+                // Level
+                cboOSDLevel.SelectedItem = "default";
+            }
+        }
+
+        /// <summary>
+        ///     OSD Fractions
+        /// </summary>
+        private void cboOSDFractions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enables OSD
+            if ((string)(cboOSDFractions.SelectedItem ?? string.Empty) == "yes")
+            {
+                cboOSD.SelectedItem = "yes";
+            }
+        }
+
+        /// <summary>
+        ///     OSD Duration
+        /// </summary>
+        private void tbxOSDDuration_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Enables OSD
+            if (tbxOSDDuration.Text != string.Empty)
+            {
+                cboOSD.SelectedItem = "yes";
+            }
+        }
+
+        /// <summary>
+        ///     OSD Level
+        /// </summary>
+        private void cboOSDLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enables OSD
+            if ((string)(cboOSDLevel.SelectedItem ?? string.Empty) != "default")
+            {
+                cboOSD.SelectedItem = "yes";
+            }
+        }
+
         /// <summary>
         ///    OSD Font Button
         /// </summary>
@@ -1927,7 +1980,5 @@ namespace Glow
             p.Inlines.Add(new Run(Generate.GenerateConfig(this)));
             rtbConfig.EndChange();
         }
-
-
     }
 }

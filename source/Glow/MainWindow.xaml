@@ -218,7 +218,6 @@
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103" 
-                                 
                                           SelectionChanged="cboICCProfile_SelectionChanged">
                                     <System:String>default</System:String>
                                     <System:String>auto</System:String>
@@ -302,7 +301,7 @@
                                        Width="75"
                                        ToolTipService.InitialShowDelay="100" 
                                        ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip=""
+                                       ToolTip="Restricts the color space for the next filter without doing any conversion. Use together with the scale filter for a real conversion."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboColorSpace" 
                                           Margin="0,254,14,0" 
@@ -385,7 +384,8 @@
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboInterpolation_SelectionChanged">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          SelectionChanged="cboInterpolation_SelectionChanged">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -709,11 +709,10 @@
                                        ToolTip="When upscaling, use a sigmoidal color transform to avoid emphasizing ringing artifacts. This also implies --linear-scaling."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSigmoid"
-                                        Margin="0,744,14,0" 
-                                        VerticalAlignment="Top"
-                                        Style="{DynamicResource ComboBoxStyle}"
-                                        ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                        SelectionChanged="cboScale_SelectionChanged" 
+                                         Margin="0,744,14,0" 
+                                         VerticalAlignment="Top"
+                                         Style="{DynamicResource ComboBoxStyle}"
+                                         ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                          HorizontalAlignment="Right" 
                                          Width="103">
                                     <System:String>default</System:String>
@@ -1417,7 +1416,9 @@
                                           Margin="0,10,14,0"
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" HorizontalAlignment="Right" Width="103">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          HorizontalAlignment="Right" 
+                                          Width="103">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -1430,6 +1431,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Load additional subtitle files matching the video filename. The parameter specifies how external subtitle files are matched. exact is enabled by default."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesLoadFiles" 
                                           HorizontalAlignment="Right"
@@ -1452,6 +1456,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Specify the position of subtitles on the screen. The value is the vertical position of the subtitle in % of the screen height."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slSubtitlePosition" 
                                         HorizontalAlignment="Right"
@@ -1481,6 +1488,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Adjust subtitle timing is to remove minor gaps or overlaps between subtitles (if the difference is smaller than 210 ms, the gap or overlap is removed)."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesFixTiming"
                                           HorizontalAlignment="Right"
@@ -1501,6 +1511,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Enables placing toptitles and subtitles in black borders when they are available, if the subtitles are in a plain text format (or ASS if  --sub-ass-override is set high enough)."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesMargins"
                                           HorizontalAlignment="Right"
@@ -1521,6 +1534,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Blend subtitles directly onto upscaled video frames, before interpolation and/or color management."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesBlend"
                                           HorizontalAlignment="Right"
@@ -1545,8 +1561,6 @@
                                     FontWeight="Bold"
                                     Style="{DynamicResource LabelTitleStyle}"/>
 
-
-
                                 <!-- Subtitles Embedded Fonts -->
                                 <Label Content="Embedded" 
                                        HorizontalAlignment="Left" 
@@ -1554,6 +1568,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="90"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Use fonts embedded in Matroska container files and ASS scripts (default: enabled). These fonts can be used for SSA/ASS subtitle rendering."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesEmbeddedFonts" 
                                           HorizontalAlignment="Right"
@@ -1576,9 +1593,6 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-
-
-
                                 <ComboBox x:Name="cboSubtitlesFont"
                                           ItemsSource="{Binding FontItems}" 
                                           SelectedItem="{Binding FontSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -1901,13 +1915,13 @@
                                      SubStation Alpha
                                     /////////////////////////////////////-->
                                 <Label Content="SSA/ASS" 
-                                    HorizontalAlignment="Left" 
-                                    Margin="10,198,0,0"
-                                    Padding="0,0,0,6" 
-                                    VerticalAlignment="Top" 
-                                    Width="75" 
-                                    FontWeight="Bold"
-                                    Style="{DynamicResource LabelTitleStyle}"/>
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,198,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75" 
+                                       FontWeight="Bold"
+                                       Style="{DynamicResource LabelTitleStyle}"/>
 
                                 <!-- ASS -->
                                 <Label Content="ASS" 
@@ -1916,6 +1930,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Render ASS subtitles natively."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesASS" 
                                           HorizontalAlignment="Right"
@@ -1936,6 +1953,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Control whether user style overrides should be applied. Note that all of these overrides try to be somewhat smart about figuring out whether or not a subtitle is considered a &quot;sign&quot;."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesASSOverride" 
                                           HorizontalAlignment="Right"
@@ -1959,6 +1979,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="90"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Enables placing toptitles and subtitles in black borders when they are available, if the subtitles are in the ASS format."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesASSForceMargins" 
                                           HorizontalAlignment="Right"
@@ -1979,6 +2002,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set font hinting type."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesASSHinting" 
                                           HorizontalAlignment="Right"
@@ -2001,6 +2027,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Override some style or script info parameters."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesASSKerning" 
                                           HorizontalAlignment="Right"
@@ -2715,6 +2744,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="78"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Size of the stream read buffer allocated for libavformat in bytes (default: 32768). Lowering the size could lower latency. Note that libavformat might reallocate the buffer internally, or not fully use all of it."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxDemuxerBuffersize" 
                                          HorizontalAlignment="Right" 
@@ -2731,6 +2763,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="If --demuxer-thread is enabled, this controls how much the demuxer should buffer ahead in seconds (default: 1). As long as no packet has a timestamp difference higher than the readahead amount relative to the last packet returned to the decoder, the demuxer keeps reading."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxDemuxerReadahead" 
                                          HorizontalAlignment="Right" 
@@ -2747,6 +2782,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="78"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Try harder to show embedded soft subtitles when seeking somewhere. Enabling this option makes the demuxer start reading data a bit before the seek target, so that subtitles appear correctly."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDemuxerMKVSubPreroll" 
                                           HorizontalAlignment="Right" 
@@ -2780,6 +2818,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the size of the cache in kilobytes, disable it with no, or automatically enable it if needed with auto (default: auto). With auto, the cache will usually be enabled for network streams, using the size set by --cache-default. With yes, the cache will always be enabled with the size set by  --cache-default (unless the stream cannot be cached, or --cache-default disables caching)."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboCache"
                                           HorizontalAlignment="Right"
@@ -2800,6 +2841,9 @@
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Set the size of the cache in kilobytes (default: 75000 KB). Using no will not automatically enable the cache e.g. when playing from a network stream. Note that using --cache will always override this option."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheDefault" 
                                          HorizontalAlignment="Right"
@@ -2817,6 +2861,9 @@
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Playback will start when the cache has been filled up with this many kilobytes of data (default: 0)."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheInitial" 
                                          HorizontalAlignment="Right" 
@@ -2834,6 +2881,9 @@
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="If a seek is to be made to a position within [kBytes] of the cache size from the current position, mpv will wait for the cache to be filled to this position rather than performing a stream seek (default: 500)."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheSeekMin" 
                                          HorizontalAlignment="Right"
@@ -2851,6 +2901,9 @@
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Size of the cache back buffer (default: 75000 KB). This will add to the total cache size, and reserved the amount for seeking back. The reserved amount will not be used for readahead, and instead preserves already read data to enable fast seeking back."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheBackbuffer"
                                          HorizontalAlignment="Right"
@@ -2868,6 +2921,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="How many seconds of audio/video to prefetch if the cache is active. This overrides the  --demuxer-readahead-secs option if and only if the cache is enabled and the value is larger. (Default: 10.)"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheSeconds" 
                                          HorizontalAlignment="Right"
@@ -2885,6 +2941,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Create a cache file on the filesystem."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboCacheFile" 
                                           HorizontalAlignment="Right"
@@ -2904,6 +2963,9 @@
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Maximum size of the file created with --cache-file. For read accesses above this size, the cache is simply not used."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxCacheFileSize" 
                                          HorizontalAlignment="Right" 
@@ -2933,6 +2995,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Enable the youtube-dl hook-script. It will look at the input URL, and will play the video located on the website. This works with many streaming sites, not just the one that the script is named after. This requires a recent version of youtube-dl to be installed on the system. (Enabled by default, except when the client API / libmpv is used.)"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboYouTubeDL"
                                           HorizontalAlignment="Right"
@@ -2952,6 +3017,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Video format/quality that is directly passed to youtube-dl. The possible values are specific to the website and the video, for a given url the available formats can be found with the command youtube-dl --list-formats URL. See youtube-dl's documentation for available aliases. (Default: youtube-dl's default, currently bestvideo+bestaudio/best)"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboYouTubeQuality"
                                           HorizontalAlignment="Right"
@@ -3039,6 +3107,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip=""
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSCSeekbar" 
                                           HorizontalAlignment="Right" 
@@ -3081,7 +3152,7 @@
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboOSD_SelectionChanged">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -3094,6 +3165,9 @@
                                        Padding="0,0,0,6"
                                        VerticalAlignment="Top"
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Show OSD times with fractions of seconds (in millisecond precision). Useful to see the exact timestamp of a video frame."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSDFractions"
                                           HorizontalAlignment="Right" 
@@ -3102,7 +3176,7 @@
                                           Width="103" 
                                           Height="22"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboOSDFractions_SelectionChanged">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -3122,7 +3196,7 @@
                                          VerticalAlignment="Top" 
                                          Width="103" 
                                          Height="22"
-                                         Style="{DynamicResource TextBoxStyle}"/>
+                                         Style="{DynamicResource TextBoxStyle}" TextChanged="tbxOSDDuration_TextChanged"/>
 
                                 <!-- OSD Level -->
                                 <Label Content="Level"
@@ -3131,6 +3205,9 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Specifies which mode the OSD should start in."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSDLevel"
                                           HorizontalAlignment="Right" 
@@ -3139,7 +3216,7 @@
                                           Width="103" 
                                           Height="22"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboOSDLevel_SelectionChanged">
                                     <System:String>default</System:String>
                                     <System:String>0</System:String>
                                     <System:String>1</System:String>
@@ -3154,6 +3231,7 @@
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slOSDScale" 
                                         HorizontalAlignment="Right"

@@ -21,7 +21,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace Glow
 {
@@ -57,16 +56,17 @@ namespace Glow
             // -------------------------
             string fractions = string.Empty;
 
-            if ((string)(mainwindow.cboOSD.SelectedItem ?? string.Empty) != "default"
-                && !string.IsNullOrWhiteSpace(mainwindow.tbxCacheFileSize.Text))
-                fractions = "osd-fractions=" + mainwindow.tbxCacheFileSize.Text.ToString();
+            if ((string)(mainwindow.cboOSD.SelectedItem ?? string.Empty) != "no"
+                && (string)(mainwindow.cboOSDFractions.SelectedItem ?? string.Empty) != "default")
+                fractions = "osd-fractions=" + (mainwindow.cboOSDFractions.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Level
             // -------------------------
             string level = string.Empty;
 
-            if ((string)(mainwindow.cboOSDLevel.SelectedItem ?? string.Empty) != "default")
+            if ((string)(mainwindow.cboOSD.SelectedItem ?? string.Empty) != "no"
+                && (string)(mainwindow.cboOSDLevel.SelectedItem ?? string.Empty) != "default")
                 level = "osd-level=" + (mainwindow.cboOSDLevel.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------

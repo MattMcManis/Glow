@@ -66,10 +66,9 @@ namespace Glow
             }
 
             // Join Presets and Profiles Lists
-            //_presetsItems.AddRange(_customProfilesItems);
             ViewModel._presetsItems.AddRange(listCustomProfilesNames);
             // Populate ComboBox
-            ViewModel._profilesItems = ViewModel._presetsItems.ToList();
+            ViewModel._profilesItems = ViewModel._presetsItems.Distinct().ToList();
 
             // Clear Temp Lists
             //listCustomProfilesPaths.Clear();
@@ -1193,6 +1192,7 @@ namespace Glow
             //inif.Write("Video", "iccProfilePath", mainwindow.tbxICCProfilePath.Text.ToString());
             inif.Write("Video", "iccProfile", (mainwindow.cboICCProfile.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "displayPrimaries", (mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty).ToString());
+            inif.Write("Video", "transferCharacteristics", (mainwindow.cboTransferCharacteristics.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "colorSpace", (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "colorRange", (mainwindow.cboColorRange.SelectedItem ?? string.Empty).ToString());
             inif.Write("Video", "deinterlace", (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString());
@@ -1355,7 +1355,7 @@ namespace Glow
             // OSD
             // --------------------------------------------------
             inif.Write("OSD", "videoOSD", (mainwindow.cboOSD.SelectedItem ?? string.Empty).ToString());
-            inif.Write("OSD", "fractions", mainwindow.tbxCacheFileSize.Text.ToString());
+            inif.Write("OSD", "fractions", (mainwindow.cboOSDFractions.SelectedItem ?? string.Empty).ToString());
             inif.Write("OSD", "duration", mainwindow.tbxOSDDuration.Text.ToString());
             inif.Write("OSD", "level", (mainwindow.cboOSDLevel.SelectedItem ?? string.Empty).ToString());
             inif.Write("OSD", "scale", mainwindow.tbxOSDScale.Text.ToString());
@@ -1565,6 +1565,13 @@ namespace Glow
                 mainwindow.cboDisplayPrimaries.SelectedItem = displayPrimaries;
             else
                 listFailedImports.Add("Video: Display Primaries");
+
+            // Transfer Characteristics
+            string transferCharacteristics = inif.Read("Video", "transferCharacteristics");
+            if (mainwindow.cboTransferCharacteristics.Items.Contains(transferCharacteristics))
+                mainwindow.cboTransferCharacteristics.SelectedItem = transferCharacteristics;
+            else
+                listFailedImports.Add("Video: Transfer Characteristics");
 
             // Color Space
             string colorSpace = inif.Read("Video", "colorSpace");
@@ -2082,7 +2089,11 @@ namespace Glow
                 listFailedImports.Add("OSD: OSD");
 
             // Fractions
-            mainwindow.tbxCacheFileSize.Text = inif.Read("OSD", "fractions");
+            string osdFractions = inif.Read("OSD", "fractions");
+            if (mainwindow.cboOSDFractions.Items.Contains(osdFractions))
+                mainwindow.cboOSDFractions.SelectedItem = osdFractions;
+            else
+                listFailedImports.Add("OSD: Fractions");
 
             // Duration
             mainwindow.tbxOSDDuration.Text = inif.Read("OSD", "duration");
