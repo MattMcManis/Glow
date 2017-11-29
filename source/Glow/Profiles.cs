@@ -1736,12 +1736,19 @@ namespace Glow
             // Soft Volume Max
             //mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");
 
-            // Normalize
+            // Scale Tempo
             string normalize = inif.Read("Audio", "normalize");
             if (mainwindow.cboNormalize.Items.Contains(normalize))
                 mainwindow.cboNormalize.SelectedItem = normalize;
             else
                 listFailedImports.Add("Audio: Normalize");
+
+            // Scale Tempo
+            string scaleTempo = inif.Read("Audio", "scaleTempo");
+            if (mainwindow.cboScaleTempo.Items.Contains(scaleTempo))
+                mainwindow.cboScaleTempo.SelectedItem = scaleTempo;
+            else
+                listFailedImports.Add("Audio: Scale Tempo");
 
             // Load Files
             string AudioLoadFiles = inif.Read("Audio", "loadFiles");
@@ -1955,7 +1962,7 @@ namespace Glow
             // ASS Kerning
             string subtitlesASSKerning = inif.Read("Subtitles", "assKerning");
             if (mainwindow.cboSubtitlesASSKerning.Items.Contains(subtitlesASSKerning))
-                mainwindow.cboSubtitlesASSHinting.SelectedItem = subtitlesASSKerning;
+                mainwindow.cboSubtitlesASSKerning.SelectedItem = subtitlesASSKerning;
             else
                 listFailedImports.Add("Subtitles: ASS Kerning");
 
