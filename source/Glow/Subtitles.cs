@@ -52,7 +52,7 @@ namespace Glow
             string subtitles = string.Empty;
 
             if ((string)(mainwindow.cboSubtitles.SelectedItem ?? string.Empty) != "default")
-                subtitles = "sub=" + (mainwindow.cboSubtitles.SelectedItem ?? string.Empty).ToString();
+                subtitles = "sub";
 
             // -------------------------
             // Languages
@@ -193,7 +193,7 @@ namespace Glow
             // and font is not default
             if ((string)(mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "no"
                 && (string)(mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty) != "default")
-                font = "sub-text-font=" + "\"" + (mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty).ToString() + "\"";
+                font = "sub-font=" + "\"" + (mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty).ToString() + "\"";
 
             // -------------------------
             // Font Size
@@ -201,7 +201,7 @@ namespace Glow
             string fontSize = string.Empty;
 
             if ((string)(mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty) != "default")
-                fontSize = "sub-text-font-size=" + (mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty).ToString();
+                fontSize = "sub-font-size=" + (mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Font Color
@@ -212,7 +212,7 @@ namespace Glow
 
             // only if not empty
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesFontColor.Text))
-                fontColor = "sub-text-color=" + "\"" + "#FF" + mainwindow.tbxSubtitlesFontColor.Text + "\"";
+                fontColor = "sub-color=" + "\"" + "#FF" + mainwindow.tbxSubtitlesFontColor.Text + "\"";
 
             // -------------------------
             // Border Size
@@ -220,7 +220,7 @@ namespace Glow
             string borderSize = string.Empty;
 
             if ((string)(mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty) != "default")
-                borderSize = "sub-text-border-size=" + (mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty).ToString();
+                borderSize = "sub-border-size=" + (mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Border Color
@@ -231,7 +231,7 @@ namespace Glow
 
             // only if not empty
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesBorderColor.Text))
-                borderColor = "sub-text-border-color=" + "\"" + "#FF" + mainwindow.tbxSubtitlesBorderColor.Text + "\"";
+                borderColor = "sub-border-color=" + "\"" + "#FF" + mainwindow.tbxSubtitlesBorderColor.Text + "\"";
 
             // -------------------------
             // Shadow Color
@@ -240,7 +240,7 @@ namespace Glow
 
             // only if not empty
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowColor.Text))
-                shadowColor = "sub-text-shadow-color=" + "\"" + "#33" + mainwindow.tbxSubtitlesShadowColor.Text + "\"";
+                shadowColor = "sub-shadow-color=" + "\"" + "#33" + mainwindow.tbxSubtitlesShadowColor.Text + "\"";
             //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue ?? string.Empty);
             //selected = (string)(selectedItem.Content);
 

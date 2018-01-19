@@ -585,7 +585,9 @@ namespace Glow
             // Enabled
             if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "default"
                 || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl"
-                || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq")
+                || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq"
+                || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "vulkan"
+                || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "d3d11")
             {
                 // PBO On
                 cboOpenGLPBO.IsEnabled = true;

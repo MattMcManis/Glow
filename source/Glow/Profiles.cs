@@ -270,10 +270,6 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.slGeometryX.Value = 50;
-                mainwindow.slGeometryY.Value = 50;
-                mainwindow.slAutofitWidth.Value = 100;
-                mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
                 mainwindow.cboWindowTitle.SelectedItem = "Media Title";
                 // Screenshot
@@ -285,16 +281,10 @@ namespace Glow
                 // -------------------------
                 // Video
                 // -------------------------
-                mainwindow.cboVideoDriver.SelectedItem = "opengl-hq";
-                mainwindow.cboOpenGLPBO.SelectedItem = "no";
-                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
+                mainwindow.cboVideoDriver.SelectedItem = "d3d11";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
                 mainwindow.cboICCProfile.SelectedItem = "default";
-                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedItem = "auto";
-                mainwindow.cboColorRange.SelectedItem = "auto";
                 mainwindow.cboInterpolation.SelectedItem = "yes";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
@@ -341,14 +331,13 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
                 mainwindow.slSubtitlePosition.Value = 95;
                 mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
                 mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
+                mainwindow.cboSubtitlesFontSize.SelectedItem = "48";
                 mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";

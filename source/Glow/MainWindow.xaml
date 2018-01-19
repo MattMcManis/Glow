@@ -79,9 +79,8 @@
                                           Width="103">
                                     <!--<System:String>opengl</System:String>
                                     <System:String>opengl-hq</System:String>
-                                    <System:String>direct3d</System:String>
-                                    <System:String>sdl</System:String>
-                                    <System:String>vaapi</System:String>-->
+                                    <System:String>d3d11</System:String>
+                                    <System:String>vulkan</System:String>-->
                                 </ComboBox>
 
                                 <!-- OpenGL PBO -->
