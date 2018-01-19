@@ -51,7 +51,7 @@ namespace Glow
 
             // only if enabled
             if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) != "default")
-                driver = "vo=" + (mainwindow.cboVideoDriver.SelectedItem ?? string.Empty).ToString();
+                driver = "gpu-api=" + (mainwindow.cboVideoDriver.SelectedItem ?? string.Empty).ToString();
 
             // opengl-hq special rule
             if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq")
@@ -159,7 +159,7 @@ namespace Glow
             string interpolation = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboDeinterlace.SelectedItem ?? string.Empty) == "yes")
+            if ((string)(mainwindow.cboInterpolation.SelectedItem ?? string.Empty) == "yes")
                 interpolation = "interpolation";
 
             // -------------------------

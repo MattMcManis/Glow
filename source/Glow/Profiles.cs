@@ -153,8 +153,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "default";
                 mainwindow.slVolume.Value = 0;
                 mainwindow.slVolumeMax.Value = 0;
-                mainwindow.cboSoftVolume.SelectedItem = "default";
-                //mainwindow.slSoftVolumeMax.Value = 0;
                 mainwindow.cboNormalize.SelectedItem = "default";
                 mainwindow.cboScaleTempo.SelectedItem = "default";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "default";
@@ -318,8 +316,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
-                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -487,8 +483,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
-                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -657,8 +651,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
-                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -827,8 +819,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
-                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -998,7 +988,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
                 //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
@@ -1240,7 +1229,6 @@ namespace Glow
             inif.Write("Audio", "channels", (mainwindow.cboChannels.SelectedItem ?? string.Empty).ToString());
             inif.Write("Audio", "volume", mainwindow.tbxVolume.Text.ToString());
             inif.Write("Audio", "volumeMax", mainwindow.tbxVolumeMax.Text.ToString());
-            inif.Write("Audio", "softVolume", (mainwindow.cboSoftVolume.SelectedItem ?? string.Empty).ToString());
             //inif.Write("Audio", "softVolumeMax", mainwindow.tbxSoftVolumeMax.Text.ToString());
             inif.Write("Audio", "normalize", (mainwindow.cboNormalize.SelectedItem ?? string.Empty).ToString());
             inif.Write("Audio", "scaleTempo", (mainwindow.cboScaleTempo.SelectedItem ?? string.Empty).ToString());
@@ -1714,13 +1702,6 @@ namespace Glow
             // Volume
             mainwindow.tbxVolume.Text = inif.Read("Audio", "volume");
             mainwindow.tbxVolumeMax.Text = inif.Read("Audio", "volumeMax");
-
-            // Soft Volume
-            string softVolume = inif.Read("Audio", "softVolume");
-            if (mainwindow.cboSoftVolume.Items.Contains(softVolume))
-                mainwindow.cboSoftVolume.SelectedItem = softVolume;
-            else
-                listFailedImports.Add("Audio: Soft Volume");
 
             // Soft Volume Max
             //mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");

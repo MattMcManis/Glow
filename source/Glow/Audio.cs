@@ -81,13 +81,6 @@ namespace Glow
             if (mainwindow.slVolumeMax.Value != 0)
                 volumeMax = "volume-max=" + mainwindow.tbxVolumeMax.Text.ToString();
 
-            // -------------------------
-            // Soft Volume
-            // -------------------------
-            string softVolume = string.Empty;
-
-            if ((string)(mainwindow.cboSoftVolume.SelectedItem ?? string.Empty) != "default")
-                softVolume = "softvol=" + (mainwindow.cboSoftVolume.SelectedItem ?? string.Empty).ToString();
 
             // -------------------------
             // Soft Volume Max
@@ -148,7 +141,7 @@ namespace Glow
                 channels,
                 volume,
                 volumeMax,
-                softVolume,
+                //softVolume,
                 //softVolumeMax,
                 normalize,
                 scaleTempo,
