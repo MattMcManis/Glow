@@ -111,9 +111,8 @@ namespace Glow
             "default",
             "opengl",
             "opengl-hq",
-            "direct3d",
-            "sdl",
-            "vaapi",
+            "vulkan",
+            "d3d11"
         };
         public static List<string> VideoDriverItems
         {

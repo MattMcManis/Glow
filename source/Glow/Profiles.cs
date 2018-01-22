@@ -153,8 +153,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "default";
                 mainwindow.slVolume.Value = 0;
                 mainwindow.slVolumeMax.Value = 0;
-                mainwindow.cboSoftVolume.SelectedItem = "default";
-                //mainwindow.slSoftVolumeMax.Value = 0;
                 mainwindow.cboNormalize.SelectedItem = "default";
                 mainwindow.cboScaleTempo.SelectedItem = "default";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "default";
@@ -270,10 +268,6 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.slGeometryX.Value = 50;
-                mainwindow.slGeometryY.Value = 50;
-                mainwindow.slAutofitWidth.Value = 100;
-                mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
                 mainwindow.cboWindowTitle.SelectedItem = "Media Title";
                 // Screenshot
@@ -285,16 +279,10 @@ namespace Glow
                 // -------------------------
                 // Video
                 // -------------------------
-                mainwindow.cboVideoDriver.SelectedItem = "opengl-hq";
-                mainwindow.cboOpenGLPBO.SelectedItem = "no";
-                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
+                mainwindow.cboVideoDriver.SelectedItem = "d3d11";
                 mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
                 // Display
                 mainwindow.cboICCProfile.SelectedItem = "default";
-                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedItem = "auto";
-                mainwindow.cboColorRange.SelectedItem = "auto";
                 mainwindow.cboInterpolation.SelectedItem = "yes";
                 mainwindow.cboVideoSync.SelectedItem = "display-resample";
                 mainwindow.cboFramedrop.SelectedItem = "vo";
@@ -328,8 +316,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
-                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -341,14 +327,13 @@ namespace Glow
                 // -------------------------
                 mainwindow.cboSubtitles.SelectedItem = "yes";
                 mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
                 mainwindow.slSubtitlePosition.Value = 95;
                 mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
                 mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
                 mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
                 // Font
                 mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
+                mainwindow.cboSubtitlesFontSize.SelectedItem = "48";
                 mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
                 // Border
                 mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
@@ -498,8 +483,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
-                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -668,8 +651,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
-                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -838,8 +819,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
-                //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
                 mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
@@ -1009,7 +988,6 @@ namespace Glow
                 mainwindow.cboChannels.SelectedItem = "auto";
                 mainwindow.slVolume.Value = 100;
                 mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboSoftVolume.SelectedItem = "yes";
                 //mainwindow.slSoftVolumeMax.Value = 150;
                 mainwindow.cboNormalize.SelectedItem = "yes";
                 mainwindow.cboScaleTempo.SelectedItem = "yes";
@@ -1251,7 +1229,6 @@ namespace Glow
             inif.Write("Audio", "channels", (mainwindow.cboChannels.SelectedItem ?? string.Empty).ToString());
             inif.Write("Audio", "volume", mainwindow.tbxVolume.Text.ToString());
             inif.Write("Audio", "volumeMax", mainwindow.tbxVolumeMax.Text.ToString());
-            inif.Write("Audio", "softVolume", (mainwindow.cboSoftVolume.SelectedItem ?? string.Empty).ToString());
             //inif.Write("Audio", "softVolumeMax", mainwindow.tbxSoftVolumeMax.Text.ToString());
             inif.Write("Audio", "normalize", (mainwindow.cboNormalize.SelectedItem ?? string.Empty).ToString());
             inif.Write("Audio", "scaleTempo", (mainwindow.cboScaleTempo.SelectedItem ?? string.Empty).ToString());
@@ -1725,13 +1702,6 @@ namespace Glow
             // Volume
             mainwindow.tbxVolume.Text = inif.Read("Audio", "volume");
             mainwindow.tbxVolumeMax.Text = inif.Read("Audio", "volumeMax");
-
-            // Soft Volume
-            string softVolume = inif.Read("Audio", "softVolume");
-            if (mainwindow.cboSoftVolume.Items.Contains(softVolume))
-                mainwindow.cboSoftVolume.SelectedItem = softVolume;
-            else
-                listFailedImports.Add("Audio: Soft Volume");
 
             // Soft Volume Max
             //mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");
