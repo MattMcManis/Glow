@@ -1447,7 +1447,7 @@
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxSubtitlePosition"
-                                         Text="{Binding Value, ElementName=slSubtitlePosition, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                                         Text="{Binding Value, ElementName=slSubtitlePosition, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,68,14,0" 
