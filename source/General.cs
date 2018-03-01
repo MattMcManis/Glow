@@ -127,6 +127,15 @@ namespace Glow
             else if ((string)(mainwindow.cboWindowTitle.SelectedItem ?? string.Empty) == "Media Title")
                 windowTitle = "title=\"${media-title}\"";
 
+            // -------------------------
+            // Log
+            // -------------------------
+            // Log Path
+            string logPath = string.Empty;
+            // only if not empty
+            if (!string.IsNullOrWhiteSpace(mainwindow.tbxLogPath.Text))
+                logPath = "log-file=" + "\"" + mainwindow.tbxLogPath.Text.ToString() + "log.txt\"";
+
 
             // --------------------------------------------------
             // Screenshot
@@ -203,6 +212,7 @@ namespace Glow
                 autoFit,
                 screensaver,
                 windowTitle,
+                logPath,
 
                 // Screenshot
                 screenshotPath,

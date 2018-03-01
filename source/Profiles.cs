@@ -1151,6 +1151,7 @@ namespace Glow
             inif.Write("General", "autofitHeight", mainwindow.tbxAutofitHeight.Text.ToString());
             inif.Write("General", "screensaver", (mainwindow.cboScreensaver.SelectedItem ?? string.Empty).ToString());
             inif.Write("General", "windowTitle", (mainwindow.cboWindowTitle.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "logPath", mainwindow.tbxLogPath.Text.ToString());
             // Screenshot
             inif.Write("General", "screenshotPath", mainwindow.tbxScreenshotPath.Text.ToString());
             inif.Write("General", "screenshotTemplate", (mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty).ToString());
@@ -1454,6 +1455,9 @@ namespace Glow
                 mainwindow.cboWindowTitle.SelectedItem = windowTitle;
             else
                 listFailedImports.Add("General: Window Title");
+
+            // Log Path
+            mainwindow.tbxLogPath.Text = inif.Read("General", "logPath");
 
             // Screenshot Path
             mainwindow.tbxScreenshotPath.Text = inif.Read("General", "screenshotPath");

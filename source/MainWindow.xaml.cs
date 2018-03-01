@@ -499,6 +499,31 @@ namespace Glow
         }
 
         /// <summary>
+        ///     Log Label Reset
+        /// </summary>
+        private void lbLogPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            tbxLogPath.Text = "";
+        }
+
+        /// <summary>
+        ///     Log Path
+        /// </summary>
+        private void tbxLogPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            // Open Folder Browser
+            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = folderBrowserDialog.ShowDialog();
+
+            // If OK
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                tbxLogPath.Text = folderBrowserDialog.SelectedPath.TrimEnd('\\') + @"\";
+            }
+        }
+
+        /// <summary>
         ///     Screenshot Label Reset
         /// </summary>
         private void lbScreenshotPath_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

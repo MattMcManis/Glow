@@ -2395,6 +2395,30 @@
                                     <System:String>Media Title</System:String>
                                 </ComboBox>
 
+                                <!-- Log Path -->
+                                <Label x:Name="lbLogPath"
+                                       Content="Log Path" 
+                                       HorizontalAlignment="Left" 
+                                       Margin="10,303,0,0"
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="75"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Opens the given path for writing, and print log messages to it. Existing files will be truncated."
+                                       Cursor="Hand"
+                                       PreviewMouseDown="lbLogPath_PreviewMouseDown"
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <TextBox x:Name="tbxLogPath"
+                                         HorizontalAlignment="Right" 
+                                         Margin="0,300,14,0" 
+                                         VerticalAlignment="Top" 
+                                         Width="103"
+                                         Height="22"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         PreviewMouseDown="tbxLogPath_PreviewMouseDown">
+                                </TextBox>
+
                                 <!-- Screenshot -->
                                 <Label Content="Screenshot" 
                                        HorizontalAlignment="Left" 
@@ -2402,13 +2426,13 @@
                                        VerticalAlignment="Top"
                                        Width="75" 
                                        FontWeight="Bold"
-                                       Style="{DynamicResource LabelTitleStyle}" Margin="10,314,0,0"/>
+                                       Style="{DynamicResource LabelTitleStyle}" Margin="10,343,0,0"/>
 
                                 <!-- Screenshot Path -->
                                 <Label x:Name="lbScreenshotPath"
                                         Content="Path" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,343,0,0"
+                                       Margin="10,372,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2420,7 +2444,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxScreenshotPath"
                                          HorizontalAlignment="Right" 
-                                         Margin="0,340,14,0" 
+                                         Margin="0,369,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103"
                                          Height="22"
@@ -2431,7 +2455,7 @@
                                 <!-- Screenshot Template -->
                                 <Label Content="Template" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,372,0,0"
+                                       Margin="10,401,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2441,7 +2465,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTemplate"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,369,14,0" 
+                                          Margin="0,398,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2456,7 +2480,7 @@
                                 <!-- Screenshot Tag Colorspace -->
                                 <Label Content="Tag Colorspace" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,401,0,0"
+                                       Margin="10,430,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="90"
@@ -2466,7 +2490,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTagColorspace"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,398,14,0" 
+                                          Margin="0,427,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2480,7 +2504,7 @@
                                 <!-- Screenshot Format -->
                                 <Label Content="Format" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,430,0,0"
+                                       Margin="10,459,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2490,7 +2514,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotFormat"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,427,14,0" 
+                                          Margin="0,456,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2506,7 +2530,7 @@
                                 <Label x:Name="lbScreenshotQuality"
                                        Content="Quality" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,460,0,0"
+                                       Margin="10,489,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2516,7 +2540,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slScreenshotQuality" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,457,52,0" 
+                                        Margin="0,486,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -2529,7 +2553,7 @@
                                         Text="{Binding Value, ElementName=slScreenshotQuality, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,456,14,0" 
+                                        Margin="0,485,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2544,19 +2568,19 @@
                                        Width="75" 
                                        FontWeight="Bold"
                                        Style="{DynamicResource LabelTitleStyle}" 
-                                       Margin="10,499,0,0"/>
+                                       Margin="10,528,0,0"/>
 
                                 <!-- mkv -->
                                 <Label Content="mkv" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,529,0,0"
+                                       Margin="10,558,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtMKV"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,526,14,0" 
+                                          Margin="0,555,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2569,14 +2593,14 @@
                                 <!-- mp4 -->
                                 <Label Content="mp4" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,558,0,0"
+                                       Margin="10,587,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtMP4"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,555,14,0" 
+                                          Margin="0,584,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2589,14 +2613,14 @@
                                 <!-- webm -->
                                 <Label Content="webm" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,587,0,0"
+                                       Margin="10,616,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtWebM"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,584,14,0" 
+                                          Margin="0,613,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2609,14 +2633,14 @@
                                 <!-- gif -->
                                 <Label Content="gif" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,616,0,0"
+                                       Margin="10,645,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtGIF"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,613,14,0" 
+                                          Margin="0,642,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2629,14 +2653,14 @@
                                 <!-- jpg -->
                                 <Label Content="jpg" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,645,0,0"
+                                       Margin="10,674,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtJPG"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,642,14,0" 
+                                          Margin="0,671,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2649,14 +2673,14 @@
                                 <!-- png -->
                                 <Label Content="png" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,674,0,0"
+                                       Margin="10,703,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtPNG"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,671,14,0" 
+                                          Margin="0,700,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
