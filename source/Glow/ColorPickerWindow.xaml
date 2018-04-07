@@ -1,0 +1,253 @@
+﻿<!-- 
+    Glow
+    Copyright (C) 2017, 2018 Matt McManis
+    http://github.com/MattMcManis/Glow
+    http://glowmpv.github.io
+    mattmcmanis@outlook.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.If not, see<http://www.gnu.org/licenses/> . 
+ -->
+<Window x:Class="Glow.ColorPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:my="clr-namespace:Glow"
+        
+        ResizeMode="CanMinimize" 
+        UseLayoutRounding="True"
+        Loaded="Window_Loaded"
+        
+        Title="Color Picker" 
+        Height="318" Width="425"
+        
+        Style="{DynamicResource ColorPickerWindowStyle}" 
+        Icon="Resources/Images/Icons/title-logo.ico">
+
+    <Grid>
+
+        <Rectangle x:Name="colorPreview" 
+                   Stroke="#FF333333"
+                   HorizontalAlignment="Left" 
+                   Height="80" 
+                   VerticalAlignment="Top"
+                   Width="80" 
+                   Margin="317,12,0,0"/>
+
+        <TextBox x:Name="tbxHexColorCode" 
+                 HorizontalAlignment="Left"
+                 Height="23" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top"
+                 MaxLength="6"
+                 Width="80" 
+                 PreviewKeyUp="tbxHexColorCode_PreviewKeyUp"
+                 PreviewKeyDown="tbxHexColorCode_PreviewKeyDown"
+                 Margin="317,109,0,0"
+                 Padding="2"/>
+
+        <!-- Color Spectrum -->
+        <Rectangle x:Name="colorSpectrum" 
+                   HorizontalAlignment="Left"
+                   Height="255"
+                   Width="25"
+                   VerticalAlignment="Top"
+                   RenderTransformOrigin="0.5,0.5"
+                   Margin="277,12,0,0">
+            <Rectangle.Fill>
+                <LinearGradientBrush
+                    StartPoint="0,0" EndPoint="0,1" 
+                    SpreadMethod="Pad" ColorInterpolationMode="SRgbLinearInterpolation" >
+                    <GradientStop Color="#FFFF0000" Offset="0" />
+                    <GradientStop Color="#FFFFFF00" Offset="0.17" />
+                    <GradientStop Color="#FF00FF00" Offset="0.35" />
+                    <GradientStop Color="#FF00FFFF" Offset="0.5" />
+                    <GradientStop Color="#FF0000FF" Offset="0.66" />
+                    <GradientStop Color="#FFFF00FF" Offset="0.83" />
+                    <GradientStop Color="#FFFF0000" Offset="1" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <!-- Hue Slider -->
+        <Slider x:Name="slHue" 
+                VerticalAlignment="Top" 
+                Minimum="0"
+                Maximum="240"
+                Value="0" 
+                IsMoveToPointEnabled="True"
+                ValueChanged="slHue_ValueChanged" 
+                RenderTransformOrigin="0.5,0.5"
+                Style="{DynamicResource HueSliderStyle}" 
+                Margin="167,122,-35,0"
+                Height="35" 
+                HorizontalAlignment="Left"
+                Width="255">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+
+
+        <!-- Shade Canvas -->
+        <Canvas x:Name="shadeCanvas" 
+                HorizontalAlignment="Left"
+                Height="255" 
+                Width="255" 
+                VerticalAlignment="Top"
+                ClipToBounds="True" 
+                Margin="12,12,0,0">
+
+            <!-- Base Color -->
+            <Rectangle x:Name="shadeBase" 
+                       HorizontalAlignment="Left"
+                       Width="255"
+                       Height="255"
+                       VerticalAlignment="Top"
+                       Fill="#FFFFFFFF"/>
+
+            <!-- Black Fade -->
+            <Rectangle x:Name="shadeDarkness"
+                       HorizontalAlignment="Left"
+                       Width="255"
+                       Height="255"
+                       VerticalAlignment="Top"
+                       MouseEnter="colorShadePicker_MouseEnter"
+                       MouseLeave="colorShadePicker_MouseLeave"
+                       MouseLeftButtonDown="colorShadePicker_MouseLeftButtonDown" 
+                       MouseLeftButtonUp="colorShadePicker_MouseLeftButtonUp">
+            </Rectangle>
+
+            <!-- Ellipse -->
+            <Ellipse x:Name="shadePickerElipse" 
+                     Width="12"
+                     Height="12" 
+                     Canvas.Left="121.5" 
+                     Canvas.Top="121.5"
+                     Stroke="#FFCCCCCC"
+                     IsHitTestVisible="False"/>
+
+        </Canvas>
+
+
+
+        <!-- OK Button -->
+        <Button x:Name="btnOK" 
+                HorizontalAlignment="Left"
+                Margin="317,208,0,0"
+                VerticalAlignment="Top"
+                Width="80"
+                Height="22" 
+                Cursor="Hand"
+                Style="{DynamicResource ButtonControlStyle}"
+                Click="btnOK_Click">
+            <TextBlock Text="OK" Margin="0,-2,0,0"/>
+        </Button>
+
+
+        <!-- Color Swatches -->
+        <!-- White -->
+        <Rectangle x:Name="swatchWhite" 
+                   Fill="#FFFFFFFF" 
+                   HorizontalAlignment="Left" 
+                   Width="15"
+                   Height="15" 
+                   Margin="317,153,0,0" 
+                   VerticalAlignment="Top"
+                   Cursor="Hand"
+                   PreviewMouseDown="swatchWhite_PreviewMouseDown"/>
+        <!-- Gray -->
+        <Rectangle x:Name="swatchGray" 
+                   Fill="#FFA9A9A9" 
+                   HorizontalAlignment="Left" 
+                   Width="15"
+                   Height="15" 
+                   Margin="338,153,0,0" 
+                   VerticalAlignment="Top" 
+                   Cursor="Hand"
+                   PreviewMouseDown="swatchGray_PreviewMouseDown"/>
+        <!-- Dark Gray -->
+        <Rectangle x:Name="swatchDarkGray" 
+                   Fill="#FF262626" 
+                   HorizontalAlignment="Left" 
+                   Width="15"
+                   Height="15" 
+                   Margin="359,153,0,0" 
+                   VerticalAlignment="Top" 
+                   Cursor="Hand"
+                   PreviewMouseDown="swatchDarkGray_PreviewMouseDown"/>
+        <!-- Black -->
+        <Rectangle x:Name="swatchBlack"
+                   Fill="#FF000000" 
+                   HorizontalAlignment="Left" 
+                   Width="15"
+                   Height="15" 
+                   Margin="380,153,0,0" 
+                   Cursor="Hand"
+                   PreviewMouseDown="swatchBlack_PreviewMouseDown"
+                   VerticalAlignment="Top" />
+        <!-- Yellow -->
+        <Rectangle x:Name="swatchYellow" 
+                   Fill="#FFFDFD02" 
+                   HorizontalAlignment="Left" 
+                   Width="15"
+                   Height="15" 
+                   Margin="317,173,0,0" 
+                   VerticalAlignment="Top"
+                   Cursor="Hand"
+                   PreviewMouseDown="swatchYellow_PreviewMouseDown"/>
+        <!-- Blue -->
+        <Rectangle x:Name="swatchBlue" 
+                   Fill="#FF9AAFE4" 
+                   HorizontalAlignment="Left" 
+                   Width="15"
+                   Height="15" 
+                   Margin="338,173,0,0" 
+                   VerticalAlignment="Top"
+                   Cursor="Hand"
+                   PreviewMouseDown="swatchBlue_PreviewMouseDown"/>
+        <!-- Pink -->
+        <Rectangle x:Name="swatchPink" 
+                   Fill="#FFFFB0B0" 
+                   HorizontalAlignment="Left" 
+                   Width="15"
+                   Height="15" 
+                   Margin="359,173,0,0" 
+                   VerticalAlignment="Top"
+                   Cursor="Hand"
+                   PreviewMouseDown="swatchPink_PreviewMouseDown"/>
+        <!-- None -->
+        <Rectangle x:Name="swatchNone" 
+                   HorizontalAlignment="Left" 
+                   Width="15"
+                   Height="15" 
+                   VerticalAlignment="Top" 
+                   Margin="380,173,0,0"
+                   Cursor="Hand"
+                   PreviewMouseDown="swatchNone_PreviewMouseDown">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Resources/Images/Buttons/Swatches/transparent.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+    </Grid>
+
+</Window>

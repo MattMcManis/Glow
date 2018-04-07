@@ -1,0 +1,219 @@
+﻿<!-- 
+    Glow
+    Copyright (C) 2017, 2018 Matt McManis
+    http://github.com/MattMcManis/Glow
+    http://glowmpv.github.io
+    mattmcmanis@outlook.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.If not, see<http://www.gnu.org/licenses/> . 
+ -->
+<Window x:Class="Glow.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        ResizeMode="CanMinimize" 
+        UseLayoutRounding="True"
+        
+        Title="Configure" 
+        Height="200" Width="450" 
+        Icon="Resources/Images/Icons/settings.ico"
+        Style="{DynamicResource ConfigureWindowStyle}" >
+    <Grid >
+
+        <!-- mpv Path TextBox -->
+        <Label Content="mpv Path" 
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="10,12,0,0" 
+               VerticalAlignment="Top" 
+               Height="26" 
+               ToolTip="Path to mpv.exe"/>
+        <TextBox x:Name="textBoxMpvPath"
+                 Style="{DynamicResource TextBoxStyle}"
+                 HorizontalAlignment="Left" 
+                 Height="20" 
+                 Margin="95,15,0,0" 
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="297" 
+                 IsReadOnly="True" 
+                 ToolTip="Path to mpv.exe" 
+                 PreviewMouseDown="textBoxMpvPath_PreviewMouseDown"/>
+        <!-- mpv Path Revert Button -->
+        <Button x:Name="buttonMpvPathRevert" 
+                HorizontalAlignment="Left"
+                Margin="397,13,0,0"
+                VerticalAlignment="Top"
+                Width="23" 
+                Height="23"
+                Cursor="Hand" 
+                ToolTip="Revert to Auto" 
+                Click="buttonMpvPathRevert_Click" 
+                Style="{DynamicResource ButtonRevertStyle}">
+            <Image Style="{DynamicResource ButtonRevertArrow}" 
+                   Width="9" 
+                   Height="11"
+                   Stretch="Fill" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Margin="1,0,0,0"/>
+        </Button>
+
+
+        <!-- Config Path TextBox -->
+        <Label Content="Config Path"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left" 
+               Margin="10,45,0,0" 
+               VerticalAlignment="Top" 
+               Height="26" 
+               ToolTip="Path to config file"/>
+        <TextBox x:Name="textBoxConfigPath"
+                 Style="{DynamicResource TextBoxStyle}"
+                 HorizontalAlignment="Left" 
+                 Height="20"
+                 Margin="95,48,0,0" 
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top" 
+                 Width="297" 
+                 IsReadOnly="True" 
+                 ToolTip="Path to mpv config file"
+                 PreviewMouseDown="textBoxConfigPath_PreviewMouseDown"/>
+        <!-- Config Path Revert Button -->
+        <Button x:Name="buttonConfigPathRevert"
+                HorizontalAlignment="Left" 
+                Margin="397,46,0,0" 
+                VerticalAlignment="Top"
+                Width="23"
+                Height="23"
+                Cursor="Hand" 
+                ToolTip="Revert to Auto" 
+                Click="buttonConfigPathRevert_Click"
+                Style="{DynamicResource ButtonRevertStyle}">
+            <Image Style="{DynamicResource ButtonRevertArrow}" 
+                   Width="9" 
+                   Height="11"
+                   Stretch="Fill" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Margin="1,0,0,0"/>
+        </Button>
+
+
+        <!-- Profiles path -->
+        <Label Content="Profiles Path"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left" 
+               Margin="10,78,0,0" 
+               VerticalAlignment="Top" 
+               Height="26" 
+               ToolTip="Path to INI Profiles"/>
+        <TextBox x:Name="textBoxProfilesPath"
+                Style="{DynamicResource TextBoxStyle}"
+                HorizontalAlignment="Left" 
+                Height="20"
+                Margin="95,81,0,0" 
+                TextWrapping="Wrap"
+                VerticalAlignment="Top" 
+                Width="297" 
+                IsReadOnly="True" 
+                ToolTip="Path to INI Profiles"
+                 PreviewMouseDown="textBoxProfilesPath_PreviewMouseDown"/>
+        <!-- Profiles Path Revert Button -->
+        <Button x:Name="buttonProfilesPathRevert"
+            HorizontalAlignment="Left" 
+            Margin="397,79,0,0" 
+            VerticalAlignment="Top"
+            Width="23"
+            Height="23"
+            Cursor="Hand" 
+            ToolTip="Revert to Auto" 
+            Click="buttonProfilesPathRevert_Click"
+            Style="{DynamicResource ButtonRevertStyle}">
+            <Image Style="{DynamicResource ButtonRevertArrow}" 
+                   Width="9" 
+                   Height="11"
+                   Stretch="Fill" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Margin="1,0,0,0"/>
+        </Button>
+
+
+        <!-- Temp Settings -->
+        <Label x:Name="labelSavedSettings" 
+               Style="{DynamicResource LabelStyle}"
+               Content="Settings" 
+               HorizontalAlignment="Left" 
+               Margin="243,117,0,0"
+               VerticalAlignment="Top" 
+               Height="26" Width="56" />
+
+        <!-- Reset Saved Settigns Button -->
+        <Button x:Name="buttonClearAllSavedSettings" 
+                HorizontalAlignment="Left" 
+                Margin="304,119,0,0" 
+                VerticalAlignment="Top" 
+                Width="55"
+                Background="{x:Null}" 
+                Height="23" 
+                ToolTip="Reset the Saved Settings to Default." 
+                Cursor="Hand"
+                Style="{DynamicResource ButtonStyle}"
+                Click="buttonClearAllSavedSettings_Click">
+            <TextBlock Text="Reset" Margin="0,-1,0,0"/>
+        </Button>
+
+        <!-- Delete Saved Settigns Button -->
+        <Button x:Name="buttonDeleteSettings" 
+                HorizontalAlignment="Left"
+                Margin="365,119,0,0" 
+                VerticalAlignment="Top" 
+                Width="55" 
+                Background="{x:Null}" 
+                Height="23"
+                ToolTip="Delete the Settings File in AppData."
+                Cursor="Hand"
+                Style="{DynamicResource ButtonStyle}"
+                Click="buttonDeleteSettings_Click">
+            <TextBlock Text="Delete" Margin="0,-1,0,0"/>
+        </Button>
+
+
+        <!-- Theme -->
+        <Label 
+            Style="{DynamicResource LabelStyle}" 
+            Content="Theme" 
+            HorizontalAlignment="Left" 
+            Margin="90,117,0,0" 
+            VerticalAlignment="Top"
+            Height="26" />
+        <ComboBox x:Name="cboTheme"
+                  HorizontalAlignment="Left" 
+                  Margin="141,120,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="75" 
+                  IsTextSearchEnabled="False"
+                  Style="{DynamicResource ComboBoxStyle}"
+                  ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
+                  SelectionChanged="themeSelect_SelectionChanged">
+            <System:String>Glow</System:String>
+            <System:String>System</System:String>
+        </ComboBox>
+
+    </Grid>
+</Window>
