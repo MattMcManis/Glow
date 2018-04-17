@@ -10,11 +10,15 @@ mpv Configurator for Windows
 * [Troubleshooting](#troubleshooting)
 * [Build](#build)
 
+&nbsp;
+
 ## Overview
 
 Glow is a configuration file generator for the mpv media player.
 
 ![Glow](https://raw.githubusercontent.com/MattMcManis/Glow/master/images/glow.png)
+
+&nbsp;
 
 ## Downloads
 ### Glow 
@@ -27,6 +31,8 @@ Glow is a configuration file generator for the mpv media player.
 * GitHub https://github.com/mpv-player/mpv
 * Builds https://mpv.srsfckn.biz
 * Keyboard Shortcuts  https://mpv.io/manual/master/#keyboard-control
+
+&nbsp;
 
 ## Installation
 
@@ -41,6 +47,8 @@ https://github.com/rossy/mpv-install/blob/master/README.md
 2. Download the [mpv install bat file](https://github.com/rossy/mpv-install/archive/master.zip), and run it as Administrator from the same folder as `mpv.exe`
 3. After your file associations have been set, openining a video or audio file will automatically launch mpv.
 
+&nbsp;
+
 ## Guide
 
 1. Start with Default or choose a Preset, Ultra, High, Medium, Low.
@@ -48,6 +56,8 @@ https://github.com/rossy/mpv-install/blob/master/README.md
 3. Generate a configuration and press Save. 
 4. Glow will automatically find or create the correct config directory.
 5. Save your custom user profiles to ini files.
+
+&nbsp;
 
 ## Troubleshooting
 
@@ -57,6 +67,7 @@ If mpv crashes or displays artifacts, change or remove the following:
 * OpenGL PBO
 * HW Decoder
 
+&nbsp;
 
 ## Build
 Visual Studio 2015
@@ -64,3 +75,9 @@ Visual Studio 2015
 WPF, C#, XAML
 <br />
 Visual C++ 19.0 Compiler
+
+&nbsp;
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VTUE7KQ8RS3DN) 
+
+Thank you for donating to help further development on this software.
