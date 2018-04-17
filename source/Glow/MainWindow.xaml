@@ -1318,11 +1318,11 @@
                                         Height="22" 
                                         Cursor="Hand" 
                                         Click="buttonAudioLanguageUp_Click" 
-                                        Margin="0,281,14,0" 
+                                        Margin="0,252,14,0" 
                                         HorizontalAlignment="Right" 
                                         Width="22"
                                         Style="{DynamicResource ButtonControlStyle}">
-                                    <TextBlock Text="▴" Margin="0,0,0,0"/>
+                                    <TextBlock Text="▴" Margin="0,-2,0,0"/>
                                 </Button>
                                 <!-- Item Down -->
                                 <Button x:Name="buttonAudioLanguageDown" 
@@ -1332,9 +1332,9 @@
                                         Height="22" 
                                         Cursor="Hand" 
                                         Click="buttonAudioLanguageDown_Click"
-                                        Margin="0,308,14,0"
+                                        Margin="0,279,14,0"
                                         Style="{DynamicResource ButtonControlStyle}">
-                                    <TextBlock Text="▾" Margin="0,0,0,0"/>
+                                    <TextBlock Text="▾" Margin="0,-1,0,0"/>
                                 </Button>
                                 <!-- Select All -->
                                 <Button x:Name="buttonAudioLanguageSelectAll" 
@@ -1344,9 +1344,9 @@
                                         Height="22" 
                                         Cursor="Hand"
                                         Click="buttonAudioLanguageSelectAll_Click" 
-                                        Margin="0,335,14,0"
+                                        Margin="0,306,14,0"
                                         Style="{DynamicResource ButtonControlStyle}">
-                                    <TextBlock Text="+" Margin="0,0,0,0"/>
+                                    <TextBlock Text="+" Margin="0,-2,0,0"/>
                                 </Button>
                                 <!-- Deselect All -->
                                 <Button x:Name="buttonAudioLanguageDeselectAll" 
@@ -1356,9 +1356,9 @@
                                         Height="22"
                                         Cursor="Hand"
                                         Click="buttonAudioLanguageDeselectAll_Click"
-                                        Margin="0,362,14,0"
+                                        Margin="0,333,14,0"
                                         Style="{DynamicResource ButtonControlStyle}">
-                                    <TextBlock Text="-" Margin="0,0,0,0"/>
+                                    <TextBlock Text="-" Margin="0,-2,0,0"/>
                                 </Button>
 
                                 <!-- Soft Volume Max -->
@@ -1677,43 +1677,6 @@
                                          KeyDown="tbxSubtitlesFontColor_KeyDown"
                                          KeyUp="tbxSubtitlesFontColor_KeyUp"/>
 
-                                <!--<ComboBox x:Name="cboSubtitlesFontColor" 
-                                          HorizontalAlignment="Right" 
-                                          Margin="0,384,0,0"
-                                          VerticalAlignment="Top" 
-                                          Width="103"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    -->
-                                <!-- White -->
-                                <!--
-                                    <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    -->
-                                <!-- Gray -->
-                                <!--
-                                    <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    -->
-                                <!-- Dark Gray -->
-                                <!--
-                                    <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    -->
-                                <!-- Black -->
-                                <!--
-                                    <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                    -->
-                                <!-- Yellow -->
-                                <!--
-                                    <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
-                                    -->
-                                <!-- Blue -->
-                                <!--
-                                    <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
-                                    -->
-                                <!-- Pink -->
-                                <!--
-                                    <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
-                                </ComboBox>-->
-
                                 <!-- Border Size -->
                                 <Label Content="Border Size"
                                        HorizontalAlignment="Left" 
@@ -1778,43 +1741,6 @@
                                          TextChanged="tbxSubtitlesBorderColor_TextChanged"
                                          KeyDown="tbxSubtitlesBorderColor_KeyDown"
                                          KeyUp="tbxSubtitlesBorderColor_KeyUp"/>
-                                <!--<ComboBox x:Name="cboSubtitlesBorderColor"
-                                          HorizontalAlignment="Right"
-                                          Margin="0,556,14,0" 
-                                          VerticalAlignment="Top"
-                                          Width="103"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    -->
-                                <!-- White -->
-                                <!--
-                                    <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    -->
-                                <!-- Gray -->
-                                <!--
-                                    <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    -->
-                                <!-- Dark Gray -->
-                                <!--
-                                    <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    -->
-                                <!-- Black -->
-                                <!--
-                                    <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                    -->
-                                <!-- Yellow -->
-                                <!--
-                                    <ComboBoxItem Background="#FFfdfd02" Foreground="Black" Content="Yellow"/>
-                                    -->
-                                <!-- Blue -->
-                                <!--
-                                    <ComboBoxItem Background="#FF9aafe4" Foreground="Black" Content="Blue"/>
-                                    -->
-                                <!-- Pink -->
-                                <!--
-                                    <ComboBoxItem Background="#FFffb0b0" Foreground="Black" Content="Pink"/>
-                                </ComboBox>-->
-
 
                                 <!-- Subtitle Shadow Color -->
                                 <Label Content="Shadow Color" 
@@ -1853,35 +1779,6 @@
                                          TextChanged="tbxSubtitlesShadowColor_TextChanged"
                                          KeyDown="tbxSubtitlesShadowColor_KeyDown"
                                          KeyUp="tbxSubtitlesShadowColor_KeyUp"/>
-                                <!--<ComboBox x:Name="cboSubtitlesShadowColor"
-                                          HorizontalAlignment="Right"
-                                          Margin="0,585,14,0" 
-                                          VerticalAlignment="Top" 
-                                          Width="103" 
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
-                                          SelectionChanged="cboSubtitleShadowColor_SelectionChanged">
-                                    -->
-                                <!-- None -->
-                                <!--
-                                    <ComboBoxItem Background="Transparent" Foreground="Black" Content="None"/>
-                                    -->
-                                <!-- White -->
-                                <!--
-                                    <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    -->
-                                <!-- Gray -->
-                                <!--
-                                    <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    -->
-                                <!-- Dark Gray -->
-                                <!--
-                                    <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    -->
-                                <!-- Black -->
-                                <!--
-                                    <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                </ComboBox>-->
 
                                 <!-- Subtitle Shadow Offset -->
                                 <Label Content="Shadow Offset" 
@@ -2099,7 +1996,7 @@
                                         HorizontalAlignment="Right" 
                                         Width="22"
                                         Style="{DynamicResource ButtonControlStyle}">
-                                    <TextBlock Text="▴" Margin="0,0,0,0"/>
+                                    <TextBlock Text="▴" Margin="0,-2,0,0"/>
                                 </Button>
                                 <!-- List Down -->
                                 <Button x:Name="buttonSubtitleLanguageDown" 
@@ -2111,7 +2008,7 @@
                                         Click="buttonSubtitleLanguageDown_Click"
                                         Margin="0,707,14,0"
                                         Style="{DynamicResource ButtonControlStyle}">
-                                    <TextBlock Text="▾" Margin="0,0,0,0"/>
+                                    <TextBlock Text="▾" Margin="0,-1,0,0"/>
                                 </Button>
                                 <!-- Select All -->
                                 <Button x:Name="buttonSubtitleLanguageSelectAll" 
@@ -2123,7 +2020,7 @@
                                         Click="buttonSubtitleLanguageSelectAll_Click"
                                         Margin="0,734,14,0"
                                         Style="{DynamicResource ButtonControlStyle}">
-                                    <TextBlock Text="+" Margin="0,0,0,0"/>
+                                    <TextBlock Text="+" Margin="0,-2,0,0"/>
                                 </Button>
                                 <!-- Deselect All -->
                                 <Button x:Name="buttonSubtitleLanguageDeselectAll" 
@@ -2135,7 +2032,7 @@
                                         Click="buttonSubtitleLanguageDeselectAll_Click" 
                                         Margin="0,761,14,-11"
                                         Style="{DynamicResource ButtonControlStyle}">
-                                    <TextBlock Text="-" Margin="0,0,0,0"/>
+                                    <TextBlock Text="-" Margin="0,-2,0,0"/>
                                 </Button>
 
 
@@ -2153,6 +2050,10 @@
                     <Grid Background="Transparent">
                         <ScrollViewer>
                             <Grid Margin="0,0,0,25">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35*"/>
+                                    <ColumnDefinition Width="39*"/>
+                                </Grid.ColumnDefinitions>
                                 <!-- Priority -->
                                 <Label Content="Priority"
                                        HorizontalAlignment="Left" 
@@ -2170,7 +2071,7 @@
                                           HorizontalAlignment="Right"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>high</System:String>
                                     <System:String>abovenormal</System:String>
@@ -2196,7 +2097,7 @@
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -2219,7 +2120,7 @@
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -2242,7 +2143,7 @@
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -2269,7 +2170,7 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slGeometryX_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}"/>
+                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
                                 <TextBox x:Name="tbxGeometryX"
                                         Text="{Binding Value, ElementName=slGeometryX, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
@@ -2278,7 +2179,7 @@
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
-                                        Style="{DynamicResource TextBoxStyle}"/>
+                                        Style="{DynamicResource TextBoxStyle}" Grid.Column="1"/>
 
                                 <!-- Geometry Y -->
                                 <Label Content="Geometry Y" 
@@ -2301,7 +2202,7 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slGeometryY_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}"/>
+                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
                                 <TextBox x:Name="tbxGeometryY"
                                         Text="{Binding Value, ElementName=slGeometryY, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
@@ -2310,7 +2211,7 @@
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
-                                        Style="{DynamicResource TextBoxStyle}"/>
+                                        Style="{DynamicResource TextBoxStyle}" Grid.Column="1"/>
 
                                 <!-- Autofit W -->
                                 <Label Content="Autofit Width" 
@@ -2333,7 +2234,7 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slAutofitWidth_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}"/>
+                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
                                 <TextBox x:Name="tbxAutofitWidth"
                                         Text="{Binding Value, ElementName=slAutofitWidth, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
@@ -2342,7 +2243,7 @@
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
-                                        Style="{DynamicResource TextBoxStyle}"/>
+                                        Style="{DynamicResource TextBoxStyle}" Grid.Column="1"/>
 
                                 <!-- Autofit H -->
                                 <Label Content="Autofit Height" 
@@ -2365,7 +2266,7 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slAutofitHeight_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}"/>
+                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
                                 <TextBox x:Name="tbxAutofitHeight"
                                         Text="{Binding Value, ElementName=slAutofitHeight, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
@@ -2374,7 +2275,7 @@
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
-                                        Style="{DynamicResource TextBoxStyle}"/>
+                                        Style="{DynamicResource TextBoxStyle}" Grid.Column="1"/>
 
                                 <!-- Screensaver -->
                                 <Label Content="Screensaver" 
@@ -2393,7 +2294,7 @@
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>on</System:String>
                                     <System:String>off</System:String>
@@ -2416,7 +2317,7 @@
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>Filename</System:String>
                                     <System:String>Media Title</System:String>
@@ -2443,7 +2344,7 @@
                                          Width="103"
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
-                                         PreviewMouseDown="tbxLogPath_PreviewMouseDown">
+                                         PreviewMouseDown="tbxLogPath_PreviewMouseDown" Grid.Column="1">
                                 </TextBox>
 
                                 <!-- Screenshot -->
@@ -2476,7 +2377,7 @@
                                          Width="103"
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
-                                         PreviewMouseDown="tbxScreenshotPath_PreviewMouseDown">
+                                         PreviewMouseDown="tbxScreenshotPath_PreviewMouseDown" Grid.Column="1">
                                 </TextBox>
 
                                 <!-- Screenshot Template -->
@@ -2497,7 +2398,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>Playback Time</System:String>
                                     <System:String>Date Time</System:String>
@@ -2522,7 +2423,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -2546,7 +2447,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>png</System:String>
                                     <System:String>jpg</System:String>
@@ -2575,7 +2476,7 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slScreenshotQuality_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}"/>
+                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
                                 <TextBox x:Name="tbxScreenshotQuality"
                                         Text="{Binding Value, ElementName=slScreenshotQuality, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
@@ -2584,7 +2485,7 @@
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
-                                        Style="{DynamicResource TextBoxStyle}"/>
+                                        Style="{DynamicResource TextBoxStyle}" Grid.Column="1"/>
 
 
                                 <!-- Extensions -->
@@ -2612,7 +2513,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>loop</System:String>
                                 </ComboBox>
@@ -2632,7 +2533,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>loop</System:String>
                                 </ComboBox>
@@ -2652,7 +2553,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>loop</System:String>
                                 </ComboBox>
@@ -2672,7 +2573,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>loop</System:String>
                                 </ComboBox>
@@ -2692,7 +2593,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>pause</System:String>
                                 </ComboBox>
@@ -2712,7 +2613,7 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged">
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
                                     <System:String>default</System:String>
                                     <System:String>pause</System:String>
                                 </ComboBox>
@@ -3608,35 +3509,6 @@
                                          TextChanged="tbxOSDShadowColor_TextChanged"
                                          KeyDown="tbxOSDShadowColor_KeyDown"
                                          KeyUp="tbxOSDShadowColor_KeyUp"/>
-                                <!--<ComboBox x:Name="cboOSDShadowColor" 
-                                          HorizontalAlignment="Right" 
-                                          Margin="0,595,14,0" 
-                                          VerticalAlignment="Top" 
-                                          Width="103"
-                                          SelectionChanged="cboOSDFontShadowColor_SelectionChanged"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    -->
-                                <!-- None -->
-                                <!--
-                                    <ComboBoxItem Background="Transparent" Foreground="Black" Content="None"/>
-                                    -->
-                                <!-- White -->
-                                <!--
-                                    <ComboBoxItem Background="White" Foreground="Black" Content="White"/>
-                                    -->
-                                <!-- Gray -->
-                                <!--
-                                    <ComboBoxItem Background="Gray" Foreground="White" Content="Gray"/>
-                                    -->
-                                <!-- Dark Gray -->
-                                <!--
-                                    <ComboBoxItem Background="#FF262626" Foreground="White" Content="Dark Gray"/>
-                                    -->
-                                <!-- Black -->
-                                <!--
-                                    <ComboBoxItem Background="Black" Foreground="White" Content="Black"/>
-                                </ComboBox>-->
 
                                 <!-- Shadow Offset -->
                                 <Label Content="Shadow Offset" 
@@ -3811,17 +3683,7 @@
                 <TextBlock Text="Save" Margin="0,-2,0,0"/>
             </Button>
 
-
-
             <!-- Presets -->
-            <!--<Label Content="Preset" 
-                   Margin="0,0,217,14"
-                   Height="26"
-                   VerticalAlignment="Bottom" 
-                   HorizontalAlignment="Right" 
-                   Width="43"
-                   Style="{DynamicResource LabelStyle}"/>-->
-
             <ComboBox x:Name="cboProfile" 
                       ItemsSource="{Binding ProfilesItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding ProfileSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -3865,7 +3727,7 @@
                     VerticalAlignment="Center"/>
             </Button>
 
-            <!-- Export ini -->
+            <!-- Import ini -->
             <Button x:Name="buttonImport" 
                     HorizontalAlignment="Right"
                     Margin="0,0,151,16" 
