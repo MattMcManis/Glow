@@ -29,7 +29,7 @@ Glow is a configuration file generator for the mpv media player.
 
 * Site https://mpv.io
 * GitHub https://github.com/mpv-player/mpv
-* Builds https://mpv.srsfckn.biz
+* Builds https://mpv.srsfckn.biz, https://sourceforge.net/projects/mpv-player-windows/files/
 * Keyboard Shortcuts  https://mpv.io/manual/master/#keyboard-control
 
 &nbsp;
