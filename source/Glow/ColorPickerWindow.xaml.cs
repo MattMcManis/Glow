@@ -145,7 +145,7 @@ namespace Glow
             {
                 slHue.Value = ColorPickerWindow.spectrumValue;
             }
-                
+
 
             // -------------------------
             // Set Color
@@ -646,19 +646,19 @@ namespace Glow
                 mainwindow.tbxSubtitlesFontColor.Text = HexColorCode;
                 MainWindow.PreviewSubtitlesFontColor(mainwindow);
             }
-                
+
             else if (textBoxKey == "subtitlesBorder")
             {
                 mainwindow.tbxSubtitlesBorderColor.Text = HexColorCode;
                 MainWindow.PreviewSubtitlesBorderColor(mainwindow);
             }
-                
+
             else if (textBoxKey == "subtitlesShadow")
             {
                 mainwindow.tbxSubtitlesShadowColor.Text = HexColorCode;
                 MainWindow.PreviewSubtitlesShadowColor(mainwindow);
             }
-                              
+
             // Preview Picked Color in MainWindow button
             //MainWindow.PreviewPickedColors(mainwindow);
 

@@ -2149,10 +2149,34 @@
                                     <System:String>no</System:String>
                                 </ComboBox>
 
+                                <!-- Window Border -->
+                                <Label Content="Window Border" 
+                                       HorizontalAlignment="Left"
+                                       Margin="10,129,0,0" 
+                                       Padding="0,0,0,6" 
+                                       VerticalAlignment="Top" 
+                                       Width="90"
+                                       ToolTipService.InitialShowDelay="100" 
+                                       ToolTipService.ShowOnDisabled="True" 
+                                       ToolTip="Play video with window border and decorations. Since this is on by default, use --no-border to disable the standard window decorations."
+                                       Style="{DynamicResource LabelStyle}"/>
+                                <ComboBox x:Name="cboBorder" 
+                                          HorizontalAlignment="Right" 
+                                          Margin="0,126,14,0" 
+                                          VerticalAlignment="Top"
+                                          Width="103"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          Grid.Column="1">
+                                    <System:String>default</System:String>
+                                    <System:String>yes</System:String>
+                                    <System:String>no</System:String>
+                                </ComboBox>
+
                                 <!-- Geometry X -->
                                 <Label Content="Geometry X" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,129,0,0" 
+                                       Margin="10,159,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2162,7 +2186,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slGeometryX" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,127,52,0" 
+                                        Margin="0,158,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -2175,7 +2199,7 @@
                                         Text="{Binding Value, ElementName=slGeometryX, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,126,14,0" 
+                                        Margin="0,157,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2184,7 +2208,7 @@
                                 <!-- Geometry Y -->
                                 <Label Content="Geometry Y" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,158,0,0" 
+                                       Margin="10,189,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2194,7 +2218,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slGeometryY" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,156,52,0" 
+                                        Margin="0,187,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -2207,7 +2231,7 @@
                                         Text="{Binding Value, ElementName=slGeometryY, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,155,14,0" 
+                                        Margin="0,186,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2216,7 +2240,7 @@
                                 <!-- Autofit W -->
                                 <Label Content="Autofit Width" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,187,0,0" 
+                                       Margin="10,218,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2226,7 +2250,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slAutofitWidth" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,185,52,0" 
+                                        Margin="0,216,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -2239,7 +2263,7 @@
                                         Text="{Binding Value, ElementName=slAutofitWidth, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,184,14,0" 
+                                        Margin="0,215,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2248,7 +2272,7 @@
                                 <!-- Autofit H -->
                                 <Label Content="Autofit Height" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,216,0,0" 
+                                       Margin="10,247,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2258,7 +2282,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slAutofitHeight" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,214,52,0" 
+                                        Margin="0,245,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -2271,7 +2295,7 @@
                                         Text="{Binding Value, ElementName=slAutofitHeight, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,213,14,0" 
+                                        Margin="0,244,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2280,7 +2304,7 @@
                                 <!-- Screensaver -->
                                 <Label Content="Screensaver" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,245,0,0" 
+                                       Margin="10,276,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2290,7 +2314,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreensaver" 
                                           HorizontalAlignment="Right" 
-                                          Margin="0,242,14,0" 
+                                          Margin="0,273,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2303,7 +2327,7 @@
                                 <!-- Window Title -->
                                 <Label Content="Window Title" 
                                        HorizontalAlignment="Left"
-                                       Margin="10,274,0,0" 
+                                       Margin="10,305,0,0" 
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2313,7 +2337,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboWindowTitle" 
                                           HorizontalAlignment="Right" 
-                                          Margin="0,271,14,0" 
+                                          Margin="0,302,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2327,7 +2351,7 @@
                                 <Label x:Name="lbLogPath"
                                        Content="Log Path" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,303,0,0"
+                                       Margin="10,334,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2339,7 +2363,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxLogPath"
                                          HorizontalAlignment="Right" 
-                                         Margin="0,300,14,0" 
+                                         Margin="0,331,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103"
                                          Height="22"
@@ -2354,13 +2378,13 @@
                                        VerticalAlignment="Top"
                                        Width="75" 
                                        FontWeight="Bold"
-                                       Style="{DynamicResource LabelTitleStyle}" Margin="10,343,0,0"/>
+                                       Style="{DynamicResource LabelTitleStyle}" Margin="10,374,0,0"/>
 
                                 <!-- Screenshot Path -->
                                 <Label x:Name="lbScreenshotPath"
                                         Content="Path" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,372,0,0"
+                                       Margin="10,403,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2372,7 +2396,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxScreenshotPath"
                                          HorizontalAlignment="Right" 
-                                         Margin="0,369,14,0" 
+                                         Margin="0,400,14,0" 
                                          VerticalAlignment="Top" 
                                          Width="103"
                                          Height="22"
@@ -2383,7 +2407,7 @@
                                 <!-- Screenshot Template -->
                                 <Label Content="Template" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,401,0,0"
+                                       Margin="10,432,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2393,7 +2417,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTemplate"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,398,14,0" 
+                                          Margin="0,429,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2408,7 +2432,7 @@
                                 <!-- Screenshot Tag Colorspace -->
                                 <Label Content="Tag Colorspace" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,430,0,0"
+                                       Margin="10,461,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="90"
@@ -2418,7 +2442,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTagColorspace"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,427,14,0" 
+                                          Margin="0,458,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2432,7 +2456,7 @@
                                 <!-- Screenshot Format -->
                                 <Label Content="Format" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,459,0,0"
+                                       Margin="10,490,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2442,7 +2466,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotFormat"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,456,14,0" 
+                                          Margin="0,487,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2458,7 +2482,7 @@
                                 <Label x:Name="lbScreenshotQuality"
                                        Content="Quality" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,489,0,0"
+                                       Margin="10,520,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
@@ -2468,7 +2492,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slScreenshotQuality" 
                                         HorizontalAlignment="Right"
-                                        Margin="0,486,52,0" 
+                                        Margin="0,517,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
@@ -2481,7 +2505,7 @@
                                         Text="{Binding Value, ElementName=slScreenshotQuality, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
-                                        Margin="0,485,14,0" 
+                                        Margin="0,516,14,0" 
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2496,19 +2520,19 @@
                                        Width="75" 
                                        FontWeight="Bold"
                                        Style="{DynamicResource LabelTitleStyle}" 
-                                       Margin="10,528,0,0"/>
+                                       Margin="10,559,0,0"/>
 
                                 <!-- mkv -->
                                 <Label Content="mkv" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,558,0,0"
+                                       Margin="10,589,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtMKV"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,555,14,0" 
+                                          Margin="0,586,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2521,14 +2545,14 @@
                                 <!-- mp4 -->
                                 <Label Content="mp4" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,587,0,0"
+                                       Margin="10,618,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtMP4"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,584,14,0" 
+                                          Margin="0,615,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2541,14 +2565,14 @@
                                 <!-- webm -->
                                 <Label Content="webm" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,616,0,0"
+                                       Margin="10,647,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtWebM"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,613,14,0" 
+                                          Margin="0,644,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2561,14 +2585,14 @@
                                 <!-- gif -->
                                 <Label Content="gif" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,645,0,0"
+                                       Margin="10,676,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtGIF"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,642,14,0" 
+                                          Margin="0,673,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2581,14 +2605,14 @@
                                 <!-- jpg -->
                                 <Label Content="jpg" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,674,0,0"
+                                       Margin="10,705,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtJPG"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,671,14,0" 
+                                          Margin="0,702,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -2601,14 +2625,14 @@
                                 <!-- png -->
                                 <Label Content="png" 
                                        HorizontalAlignment="Left" 
-                                       Margin="10,703,0,0"
+                                       Margin="10,734,0,0"
                                        Padding="0,0,0,6" 
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtPNG"
                                           HorizontalAlignment="Right" 
-                                          Margin="0,700,14,0" 
+                                          Margin="0,731,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"

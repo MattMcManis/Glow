@@ -95,6 +95,7 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "default";
                 mainwindow.cboKeepOpen.SelectedItem = "default";
                 mainwindow.cboOnTop.SelectedItem = "default";
+                mainwindow.cboBorder.SelectedItem = "default";
                 mainwindow.slGeometryX.Value = 0;
                 mainwindow.slGeometryY.Value = 0;
                 mainwindow.slAutofitWidth.Value = 0;
@@ -269,6 +270,10 @@ namespace Glow
                 mainwindow.cboSavePositionQuit.SelectedItem = "no";
                 mainwindow.cboKeepOpen.SelectedItem = "yes";
                 mainwindow.cboOnTop.SelectedItem = "no";
+                mainwindow.slGeometryX.Value = 50;
+                mainwindow.slGeometryY.Value = 50;
+                mainwindow.slAutofitWidth.Value = 100;
+                mainwindow.slAutofitHeight.Value = 95;
                 mainwindow.cboScreensaver.SelectedItem = "off";
                 mainwindow.cboWindowTitle.SelectedItem = "Media Title";
                 // Screenshot
@@ -1155,6 +1160,7 @@ namespace Glow
             inif.Write("General", "savePositiOnQuit", (mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty).ToString());
             inif.Write("General", "keepOpen", (mainwindow.cboKeepOpen.SelectedItem ?? string.Empty).ToString());
             inif.Write("General", "onTop", (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString());
+            inif.Write("General", "border", (mainwindow.cboBorder.SelectedItem ?? string.Empty).ToString());
             inif.Write("General", "geometryX", mainwindow.tbxGeometryX.Text.ToString());
             inif.Write("General", "geometryY", mainwindow.tbxGeometryY.Text.ToString());
             inif.Write("General", "autofitWidth", mainwindow.tbxAutofitWidth.Text.ToString());
@@ -1440,6 +1446,13 @@ namespace Glow
                 mainwindow.cboOnTop.SelectedItem = onTop;
             else
                 listFailedImports.Add("General: On Top");
+
+            // Border
+            string border = inif.Read("General", "border");
+            if (mainwindow.cboBorder.Items.Contains(border))
+                mainwindow.cboBorder.SelectedItem = border;
+            else
+                listFailedImports.Add("General: Border");
 
             // Geometry X
             mainwindow.tbxGeometryX.Text = inif.Read("General", "geometryX");
