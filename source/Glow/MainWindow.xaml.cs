@@ -607,45 +607,58 @@ namespace Glow
             // Enable/Disable OpenGL PBO
             // Enable/Disable Scaling
 
-            // Enabled
+            // Default
+            if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "default")
+            {
+                // Scaling On
+                cboSigmoid.SelectedItem = "default";
+                // Scale
+                cboScale.SelectedItem = "default";
+                // Chroma Scale
+                cboChromaScale.SelectedItem = "default";
+                // Downscale
+                cboDownscale.SelectedItem = "default";
+                // Interpolation Scale
+                cboInterpolationScale.SelectedItem = "default";
+            }
 
-                if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "default"
-                    || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "gpu"
-                    || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl"
-                    || (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq"
-                    //|| (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "direct3d"
-                    //|| (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "vaapi"
-                    //|| (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "caca"
-                    )
-                {
+            // Enabled
+            if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "default" ||
+                (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "gpu" ||
+                (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl" ||
+                (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq"
+                //(string)(cboVideoDriver.SelectedItem ?? string.Empty) == "direct3d"
+                //(string)(cboVideoDriver.SelectedItem ?? string.Empty) == "vaapi"
+                //(string)(cboVideoDriver.SelectedItem ?? string.Empty) == "caca"
+                )
+            {
                 // PBO On
                 cboOpenGLPBO.IsEnabled = true;
                 cboOpenGLPBO.SelectedItem = "default";
 
                 // Scaling On
                 cboSigmoid.IsEnabled = true;
-                cboSigmoid.SelectedItem = "default";
+                //cboSigmoid.SelectedItem = "default";
                 // Scale
                 cboScale.IsEnabled = true;
-                cboScale.SelectedItem = "default";
+                //cboScale.SelectedItem = "default";
                 slScaleAntiring.IsEnabled = true;
                 tbxScaleAntiring.IsEnabled = true;
                 // Chroma Scale
                 cboChromaScale.IsEnabled = true;
-                cboChromaScale.SelectedItem = "default";
+                //cboChromaScale.SelectedItem = "default";
                 slChromaAntiring.IsEnabled = true;
                 tbxChromaAntiring.IsEnabled = true;
                 // Downscale
                 cboDownscale.IsEnabled = true;
-                cboDownscale.SelectedItem = "default";
+                //cboDownscale.SelectedItem = "default";
                 slDownscaleAntiring.IsEnabled = true;
                 tbxDownscaleAntiring.IsEnabled = true;
                 // Interpolation Scale
                 cboInterpolationScale.IsEnabled = true;
-                cboInterpolationScale.SelectedItem = "default";
+                //cboInterpolationScale.SelectedItem = "default";
                 slInterpolationAntiring.IsEnabled = true;
                 tbxInterpolationAntiring.IsEnabled = true;
-
             }
             // Disabled
             else
