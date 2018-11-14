@@ -145,7 +145,7 @@ namespace Glow
             string backBuffer = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheBackbuffer.Text))
-                backBuffer = "cache-backBuffer=" + mainwindow.tbxCacheBackbuffer.Text.ToString();
+                backBuffer = "cache-backbuffer=" + mainwindow.tbxCacheBackbuffer.Text.ToString();
 
             // -------------------------
             // Second

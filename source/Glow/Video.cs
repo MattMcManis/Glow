@@ -29,7 +29,7 @@ namespace Glow
         /// <summary>
         ///    Video Config
         /// </summary>
-        public static String VideoConfig(MainWindow mainwindow)
+        public static String VideoConfig(MainWindow mainwindow, ViewModel vm)
         {
             // --------------------------------------------------
             // Main
@@ -50,13 +50,13 @@ namespace Glow
             string driver = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) != "default"
-                && (string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) != "opengl-hq")
-                driver = "vo=" + (mainwindow.cboVideoDriver.SelectedItem ?? string.Empty).ToString();
+            if (vm.VideoDriver_SelectedItem != "default" && 
+                vm.VideoDriver_SelectedItem != "gpu-hq")
+                driver = "vo=" + vm.VideoDriver_SelectedItem;
 
             // opengl-hq special rule
-            if ((string)(mainwindow.cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq")
-                driver = "profile=opengl-hq";
+            if (vm.VideoDriver_SelectedItem == "gpu-hq")
+                driver = "profile=gpu-hq";
 
             // -------------------------
             // Video Driver API
@@ -64,8 +64,8 @@ namespace Glow
             string driverAPI = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboVideoDriverAPI.SelectedItem ?? string.Empty) != "default")
-                driverAPI = "gpu-api=" + (mainwindow.cboVideoDriverAPI.SelectedItem ?? string.Empty).ToString();
+            if (vm.VideoDriverAPI_SelectedItem != "default")
+                driverAPI = "gpu-api=" + vm.VideoDriverAPI_SelectedItem;
 
             // -------------------------
             // OpenGL PBO

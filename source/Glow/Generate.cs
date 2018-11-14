@@ -29,7 +29,7 @@ namespace Glow
         /// <summary>
         ///    Generate Config
         /// </summary>
-        public static String GenerateConfig(MainWindow mainwindow)
+        public static String GenerateConfig(MainWindow mainwindow, ViewModel vm)
         {
             // -------------------------
             // Config
@@ -38,7 +38,7 @@ namespace Glow
             List<string> listConfig = new List<string>()
             {
                 General.GeneralConfig(mainwindow),
-                Video.VideoConfig(mainwindow),
+                Video.VideoConfig(mainwindow, vm),
                 Audio.AudioConfig(mainwindow),
                 Subtitles.SubtitleConfig(mainwindow),
                 Stream.StreamConfig(mainwindow),

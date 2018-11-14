@@ -18,13 +18,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.If not, see<http://www.gnu.org/licenses/> . 
  -->
-<Window x:Class="Glow.SettingsWindow"
+<Window x:Class="Glow.ConfigureWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
         ResizeMode="CanMinimize" 
         UseLayoutRounding="True"
         
@@ -43,6 +44,7 @@
                Height="26" 
                ToolTip="Path to mpv.exe"/>
         <TextBox x:Name="textBoxMpvPath"
+                 Text="{Binding mpvPath_Text, Mode=TwoWay}"
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
                  Height="20" 
@@ -81,8 +83,9 @@
                Margin="10,45,0,0" 
                VerticalAlignment="Top" 
                Height="26" 
-               ToolTip="Path to config file"/>
+               ToolTip="Path to mpv config file"/>
         <TextBox x:Name="textBoxConfigPath"
+                 Text="{Binding mpvConfigPath_Text, Mode=TwoWay}"
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
                  Height="20"
@@ -123,27 +126,28 @@
                Height="26" 
                ToolTip="Path to INI Profiles"/>
         <TextBox x:Name="textBoxProfilesPath"
-                Style="{DynamicResource TextBoxStyle}"
-                HorizontalAlignment="Left" 
-                Height="20"
-                Margin="95,81,0,0" 
-                TextWrapping="Wrap"
-                VerticalAlignment="Top" 
-                Width="297" 
-                IsReadOnly="True" 
-                ToolTip="Path to INI Profiles"
+                 Text="{Binding ProfilesPath_Text, Mode=TwoWay}"
+                 Style="{DynamicResource TextBoxStyle}"
+                 HorizontalAlignment="Left" 
+                 Height="20"
+                 Margin="95,81,0,0" 
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top" 
+                 Width="297" 
+                 IsReadOnly="True" 
+                 ToolTip="Path to INI Profiles"
                  PreviewMouseDown="textBoxProfilesPath_PreviewMouseDown"/>
         <!-- Profiles Path Revert Button -->
         <Button x:Name="buttonProfilesPathRevert"
-            HorizontalAlignment="Left" 
-            Margin="397,79,0,0" 
-            VerticalAlignment="Top"
-            Width="23"
-            Height="23"
-            Cursor="Hand" 
-            ToolTip="Revert to Auto" 
-            Click="buttonProfilesPathRevert_Click"
-            Style="{DynamicResource ButtonRevertStyle}">
+                HorizontalAlignment="Left" 
+                Margin="397,79,0,0" 
+                VerticalAlignment="Top"
+                Width="23"
+                Height="23"
+                Cursor="Hand" 
+                ToolTip="Revert to Auto" 
+                Click="buttonProfilesPathRevert_Click"
+                Style="{DynamicResource ButtonRevertStyle}">
             <Image Style="{DynamicResource ButtonRevertArrow}" 
                    Width="9" 
                    Height="11"
@@ -159,14 +163,14 @@
                Style="{DynamicResource LabelStyle}"
                Content="Settings" 
                HorizontalAlignment="Left" 
-               Margin="243,117,0,0"
+               Margin="308,117,0,0"
                VerticalAlignment="Top" 
-               Height="26" Width="56" />
+               Height="26" Width="55" />
 
         <!-- Reset Saved Settigns Button -->
         <Button x:Name="buttonClearAllSavedSettings" 
                 HorizontalAlignment="Left" 
-                Margin="304,119,0,0" 
+                Margin="515,120,-126,0" 
                 VerticalAlignment="Top" 
                 Width="55"
                 Background="{x:Null}" 
@@ -193,26 +197,55 @@
             <TextBlock Text="Delete" Margin="0,-1,0,0"/>
         </Button>
 
+        <!-- Update Toggle  -->
+        <Label Content="Update Check" 
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left" 
+               Margin="10,117,0,0"
+               VerticalAlignment="Top" 
+               Height="26" 
+               ToolTip="Path to Save Log" Width="90"/>
+        <ToggleButton x:Name="tglUpdateAutoCheck"
+                      Style="{DynamicResource ToggleButton}"
+                      IsChecked="{Binding UpdateAutoCheck_IsChecked}"
+                      IsEnabled="{Binding UpdateAutoCheck_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Cursor="Hand" 
+                      HorizontalAlignment="Left" 
+                      VerticalAlignment="Top" 
+                      ToolTip="Automatically check for updates at startup." 
+                      Width="58" 
+                      Height="22" 
+                      Checked="tglUpdateAutoCheck_Checked"
+                      Unchecked="tglUpdateAutoCheck_Unchecked" 
+                      Margin="100,119,0,0">
+            <TextBlock x:Name="tblkUpdatesAutoCheck" 
+                       Text="{Binding UpdateAutoCheck_Text, Mode=TwoWay}"
+                       Margin="0,-2,0,0" />
+        </ToggleButton>
+
 
         <!-- Theme -->
-        <Label 
-            Style="{DynamicResource LabelStyle}" 
-            Content="Theme" 
-            HorizontalAlignment="Left" 
-            Margin="90,117,0,0" 
-            VerticalAlignment="Top"
-            Height="26" />
+        <Label Style="{DynamicResource LabelStyle}" 
+               Content="Theme" 
+               HorizontalAlignment="Left" 
+               Margin="169,117,0,0" 
+               VerticalAlignment="Top"
+               Height="26" />
         <ComboBox x:Name="cboTheme"
+                  ItemsSource="{Binding Theme_Items}"
+                  SelectedIndex="{Binding Theme_SelectedIndex}"
+                  SelectedItem="{Binding Theme_SelectedItem}"
+                  IsEnabled="{Binding Theme_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   HorizontalAlignment="Left" 
-                  Margin="141,120,0,0" 
+                  Margin="219,119,0,0" 
                   VerticalAlignment="Top" 
-                  Width="75" 
+                  Width="76" 
                   IsTextSearchEnabled="False"
                   Style="{DynamicResource ComboBoxStyle}"
                   ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
                   SelectionChanged="themeSelect_SelectionChanged">
-            <System:String>Glow</System:String>
-            <System:String>System</System:String>
+            <!--<System:String>Glow</System:String>
+            <System:String>System</System:String>-->
         </ComboBox>
 
     </Grid>

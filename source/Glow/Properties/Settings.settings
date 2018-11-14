@@ -20,7 +20,7 @@
     <Setting Name="mpvDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="configDir" Type="System.String" Scope="User">
+    <Setting Name="mpvConfigDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="profilesDir" Type="System.String" Scope="User">

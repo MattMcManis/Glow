@@ -171,7 +171,7 @@ namespace Glow
                     // Extract
                     "$shell = new-object -com shell.application;",
                     "$zip = $shell.NameSpace('" + tempDir + "Glow.zip');",
-                    "foreach ($item in $zip.items()) {$shell.Namespace('" + MainWindow.appDir + "').CopyHere($item, 0x14)};",
+                    "foreach ($item in $zip.items()) {$shell.Namespace('" + Paths.appDir + "').CopyHere($item, 0x14)};",
                     // Delete Temp
                     "Write-Host \"`nDeleting Temp File\";",
                     "del " + "\"" + tempDir + "Glow.zip" + "\";",
@@ -179,7 +179,7 @@ namespace Glow
                     "Write-Host \"`nUpdate Complete. Relaunching Glow.\";",
                     "timeout 3;",
                     // Relaunch Glow
-                    "& '" + MainWindow.appDir + "Glow.exe'",
+                    "& '" + Paths.appDir + "Glow.exe'",
                 };
 
                 // Join List with Spaces

@@ -49,6 +49,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -77,8 +78,9 @@
       <DependentUpon>FailedImportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="OSC.cs" />
-    <Compile Include="SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    <Compile Include="Paths.cs" />
+    <Compile Include="ConfigureWindow.xaml.cs">
+      <DependentUpon>ConfigureWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="InfoWindow.xaml.cs">
@@ -102,7 +104,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsWindow.xaml">
+    <Page Include="ConfigureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,11 +23,11 @@ namespace Glow
 
             rtbFailedImport.BeginChange();
             p.Inlines.Add(new Run("Please set the following and re-save your profile.\n\n"));
-            p.Inlines.Add(new Run(Profiles.failedImportMessage));
+            p.Inlines.Add(new Run(ConfigureWindow.failedImportMessage));
             rtbFailedImport.EndChange();
 
             // clear
-            Profiles.failedImportMessage = string.Empty;
+            ConfigureWindow.failedImportMessage = string.Empty;
         }
     }
 }

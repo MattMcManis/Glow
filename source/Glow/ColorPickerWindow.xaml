@@ -25,6 +25,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
         xmlns:my="clr-namespace:Glow"
         
         ResizeMode="CanMinimize" 
@@ -152,7 +153,7 @@
         <!-- OK Button -->
         <Button x:Name="btnOK" 
                 HorizontalAlignment="Left"
-                Margin="317,208,0,0"
+                Margin="317,214,0,0"
                 VerticalAlignment="Top"
                 Width="80"
                 Height="22" 
@@ -162,6 +163,18 @@
             <TextBlock Text="OK" Margin="0,-2,0,0"/>
         </Button>
 
+        <!-- Clear Button -->
+        <Button x:Name="btnClear" 
+                HorizontalAlignment="Left"
+                Margin="317,245,0,0"
+                VerticalAlignment="Top"
+                Width="80"
+                Height="22" 
+                Cursor="Hand"
+                Style="{DynamicResource ButtonControlStyle}"
+                Click="btnClear_Click">
+            <TextBlock Text="Clear" Margin="0,-2,0,0"/>
+        </Button>
 
         <!-- Color Swatches -->
         <!-- White -->

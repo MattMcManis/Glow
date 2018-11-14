@@ -25,14 +25,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
         xmlns:my="clr-namespace:Glow"
         xmlns:settings="clr-namespace:Glow.Properties"
-        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
                 
         Loaded="Window_Loaded"
         Closing="Window_Closing" 
         UseLayoutRounding="True"
-        Width="712" Height="400"
+        Width="712" 
+        Height="400"
     
         Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
         Icon="Resources/Images/Icons/title-logo.ico"
@@ -68,8 +69,10 @@
                                        ToolTip="Specify the video output backend to be used. See VIDEO OUTPUT DRIVERS for details and descriptions of available drivers."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboVideoDriver" 
-                                          ItemsSource="{Binding VideoDriverItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                          SelectedItem="{Binding VideoDriverSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding VideoDriver_Items}"
+                                          SelectedIndex="{Binding VideoDriver_SelectedIndex}"
+                                          SelectedItem="{Binding VideoDriver_SelectedItem}"
+                                          IsEnabled="{Binding VideoDriver_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,10,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -95,8 +98,10 @@
                                        ToolTip="Specify the video output backend to be used. See VIDEO OUTPUT DRIVERS for details and descriptions of available drivers."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboVideoDriverAPI" 
-                                          ItemsSource="{Binding VideoDriverAPIItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                          SelectedItem="{Binding VideoDriverAPISelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding VideoDriverAPI_Items}"
+                                          SelectedIndex="{Binding VideoDriverAPI_SelectedIndex}"
+                                          SelectedItem="{Binding VideoDriverAPI_SelectedItem}"
+                                          IsEnabled="{Binding VideoDriverAPI_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,39,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -122,8 +127,10 @@
                                        ToolTip="Enable use of PBOs. On some drivers this can be faster, especially if the source video size is huge (e.g. so called &quot;4K&quot; video). On other drivers it might be slower or cause latency issues."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOpenGLPBO" 
-                                          ItemsSource="{Binding OpenGLPBOItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                          SelectedItem="{Binding OpenGLPBOSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding OpenGLPBO_Items}"
+                                          SelectedIndex="{Binding OpenGLPBO_SelectedIndex}"
+                                          SelectedItem="{Binding OpenGLPBO_SelectedItem}"
+                                          IsEnabled="{Binding OpenGLPBO_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,68,14,0" 
                                           VerticalAlignment="Top" 
@@ -147,13 +154,17 @@
                                        ToolTip="Selects the internal format of textures used for FBOs. The format can influence performance and quality of the video output. fmt can be one of: rgb8, rgb10, rgb10_a2, rgb16, rgb16f, rgb32f, rgba12, rgba16, rgba16f, rgba32f. Default: auto, which maps to rgba16 on desktop GL, and rgba16f or rgb10_a2 on GLES (e.g. ANGLE), unless GL_EXT_texture_norm16 is available."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOpenGLPBOFormat" 
+                                          ItemsSource="{Binding OpenGLPBOFormat_Items}"
+                                          SelectedIndex="{Binding OpenGLPBOFormat_SelectedIndex}"
+                                          SelectedItem="{Binding OpenGLPBOFormat_SelectedItem}"
+                                          IsEnabled="{Binding OpenGLPBOFormat_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,97,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
+                                    <!--<System:String>default</System:String>
                                     <System:String>off</System:String>
                                     <System:String>rgb8</System:String>
                                     <System:String>rgb10</System:String>
@@ -164,7 +175,7 @@
                                     <System:String>rgba12</System:String>
                                     <System:String>rgba16</System:String>
                                     <System:String>rgba16f</System:String>
-                                    <System:String>rgba32f</System:String>
+                                    <System:String>rgba32f</System:String>-->
                                 </ComboBox>
 
                                 <!-- Hardware Decoder -->
@@ -179,8 +190,10 @@
                                        ToolTip="Specify the hardware video decoding API that should be used if possible. Whether hardware decoding is actually done depends on the video codec. If hardware decoding is not possible, mpv will fall back on software decoding."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboHWDecoder" 
-                                          ItemsSource="{Binding HWDecoderItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                          SelectedItem="{Binding HWDecoderSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding HWDecoder_Items}"
+                                          SelectedIndex="{Binding HWDecoder_SelectedIndex}"
+                                          SelectedItem="{Binding HWDecoder_SelectedItem}"
+                                          IsEnabled="{Binding HWDecoder_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,126,14,0" 
                                           VerticalAlignment="Top" 
@@ -237,7 +250,10 @@
                                          PreviewMouseDown="tbxICCProfilePath_PreviewMouseDown">
                                 </TextBox>-->
                                 <ComboBox x:Name="cboICCProfile" 
-                                          Text=""
+                                          ItemsSource="{Binding ICCProfile_Items}"
+                                          SelectedIndex="{Binding ICCProfile_SelectedIndex}"
+                                          SelectedItem="{Binding ICCProfile_SelectedItem}"
+                                          IsEnabled="{Binding ICCProfile_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,196,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -245,9 +261,9 @@
                                           HorizontalAlignment="Right"
                                           Width="103" 
                                           SelectionChanged="cboICCProfile_SelectionChanged">
-                                    <System:String>default</System:String>
+                                    <!--<System:String>default</System:String>
                                     <System:String>auto</System:String>
-                                    <System:String>select</System:String>
+                                    <System:String>select</System:String>-->
                                 </ComboBox>
 
                                 <!-- Primaries -->
@@ -337,7 +353,6 @@
                                           HorizontalAlignment="Right"
                                           Width="103">
                                     <System:String>default</System:String>
-                                    <System:String>auto</System:String>
                                     <System:String>bt.601</System:String>
                                     <System:String>bt.709</System:String>
                                     <System:String>bt.2020-ncl</System:String>
@@ -364,7 +379,6 @@
                                           HorizontalAlignment="Right"
                                           Width="103">
                                     <System:String>default</System:String>
-                                    <System:String>auto</System:String>
                                     <System:String>limited</System:String>
                                     <System:String>full</System:String>
                                 </ComboBox>
@@ -388,7 +402,6 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
                                     <System:String>default</System:String>
-                                    <System:String>auto</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
                                 </ComboBox>
@@ -512,6 +525,7 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,499,14,0"
+                                        Padding="1,1,0,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -544,6 +558,7 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,528,14,0"
+                                        Padding="1,1,0,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -576,6 +591,7 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,557,14,0"
+                                        Padding="1,1,0,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -608,6 +624,7 @@
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,586,14,0"
+                                         Padding="1,1,0,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -640,6 +657,7 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,615,14,0"
+                                        Padding="1,1,0,0"
                                         HorizontalAlignment="Right"
                                         Width="33" 
                                         VerticalAlignment="Top"
@@ -706,6 +724,7 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxDebandGrain"
                                          Margin="0,673,14,0" 
+                                         Padding="1,1,0,0"
                                          VerticalAlignment="Top" 
                                          Width="103" Height="22"
                                          Style="{DynamicResource TextBoxStyle}"
@@ -815,6 +834,7 @@
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,831,14,0"
+                                         Padding="1,1,0,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -889,6 +909,7 @@
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,889,14,0"
+                                         Padding="1,1,0,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -963,6 +984,7 @@
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,947,14,0"
+                                         Padding="1,1,0,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -1032,6 +1054,7 @@
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,1005,14,0"
+                                         Padding="1,1,0,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -1185,6 +1208,7 @@
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,97,14,0"
+                                         Padding="1,1,0,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -1213,14 +1237,15 @@
                                         MouseDoubleClick="slVolumeMax_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxVolumeMax"
-                                        Text="{Binding Value, ElementName=slVolumeMax, UpdateSourceTrigger=PropertyChanged}"
-                                        Height="22" 
-                                        TextWrapping="Wrap" 
-                                        Margin="0,126,14,0" 
-                                        HorizontalAlignment="Right"
-                                        Width="33"
-                                        VerticalAlignment="Top"
-                                        Style="{DynamicResource TextBoxStyle}"/>
+                                         Text="{Binding Value, ElementName=slVolumeMax, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,126,14,0" 
+                                         Padding="1,1,0,0"
+                                         HorizontalAlignment="Right"
+                                         Width="33"
+                                         VerticalAlignment="Top"
+                                         Style="{DynamicResource TextBoxStyle}"/>
 
                                 <!-- Normalize -->
                                 <Label Content="Normalize"
@@ -1420,7 +1445,7 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right" 
-                                          Width="103">
+                                          Width="103" SelectionChanged="cboSubtitles_SelectionChanged">
                                     <System:String>default</System:String>
                                     <System:String>yes</System:String>
                                     <System:String>no</System:String>
@@ -1478,6 +1503,7 @@
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,68,14,0" 
+                                         Padding="1,1,0,0"
                                          HorizontalAlignment="Right"
                                          Width="33" 
                                          VerticalAlignment="Top"
@@ -1596,8 +1622,10 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitlesFont"
-                                          ItemsSource="{Binding FontItems}" 
-                                          SelectedItem="{Binding FontSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                          ItemsSource="{Binding Fonts_Items}"
+                                          SelectedIndex="{Binding Fonts_SelectedIndex}"
+                                          SelectedItem="{Binding Fonts_SelectedItem}"
+                                          IsEnabled="{Binding Fonts_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,440,14,0"
                                           VerticalAlignment="Top"
@@ -1672,6 +1700,7 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,498,14,0" 
+                                         Padding="1,1,0,0"
                                          MaxLength="6"
                                          TextChanged="tbxSubtitlesFontColor_TextChanged"
                                          KeyDown="tbxSubtitlesFontColor_KeyDown"
@@ -1737,6 +1766,7 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,556,14,0" 
+                                         Padding="1,1,0,0"
                                          MaxLength="6"
                                          TextChanged="tbxSubtitlesBorderColor_TextChanged"
                                          KeyDown="tbxSubtitlesBorderColor_KeyDown"
@@ -1775,6 +1805,7 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,614,14,0"
+                                         Padding="1,1,0,0"
                                          MaxLength="6"
                                          TextChanged="tbxSubtitlesShadowColor_TextChanged"
                                          KeyDown="tbxSubtitlesShadowColor_KeyDown"
@@ -2200,10 +2231,12 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,157,14,0" 
+                                        Padding="1,1,0,0"
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
-                                        Style="{DynamicResource TextBoxStyle}" Grid.Column="1"/>
+                                        Style="{DynamicResource TextBoxStyle}" 
+                                        Grid.Column="1"/>
 
                                 <!-- Geometry Y -->
                                 <Label Content="Geometry Y" 
@@ -2232,6 +2265,7 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,186,14,0" 
+                                        Padding="1,1,0,0"
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2264,6 +2298,7 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,215,14,0" 
+                                        Padding="1,1,0,0"
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2296,6 +2331,7 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,244,14,0" 
+                                        Padding="1,1,0,0"
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -2364,6 +2400,7 @@
                                 <TextBox x:Name="tbxLogPath"
                                          HorizontalAlignment="Right" 
                                          Margin="0,331,14,0" 
+                                         Padding="1,1,0,0"
                                          VerticalAlignment="Top" 
                                          Width="103"
                                          Height="22"
@@ -2397,6 +2434,7 @@
                                 <TextBox x:Name="tbxScreenshotPath"
                                          HorizontalAlignment="Right" 
                                          Margin="0,400,14,0" 
+                                         Padding="1,1,0,0"
                                          VerticalAlignment="Top" 
                                          Width="103"
                                          Height="22"
@@ -2506,6 +2544,7 @@
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,516,14,0" 
+                                        Padding="1,1,0,0"
                                         VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Width="33"
@@ -3144,6 +3183,7 @@
                                 <TextBox x:Name="tbxOSDDuration"
                                          HorizontalAlignment="Right"
                                          Margin="0,310,14,0" 
+                                         Padding="1,1,0,0"
                                          VerticalAlignment="Top" 
                                          Width="103" 
                                          Height="22"
@@ -3281,8 +3321,10 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSDFont" 
-                                          ItemsSource="{Binding FontItems}" 
-                                          SelectedItem="{Binding FontSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                          ItemsSource="{Binding Fonts_Items}"
+                                          SelectedIndex="{Binding Fonts_SelectedIndex}"
+                                          SelectedItem="{Binding Fonts_SelectedItem}"
+                                          IsEnabled="{Binding Fonts_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,411,14,0"
                                           VerticalAlignment="Top" 
@@ -3355,6 +3397,7 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,469,14,0"
+                                         Padding="1,1,0,0"
                                          MaxLength="6"
                                          TextChanged="tbxOSDFontColor_TextChanged"
                                          KeyDown="tbxOSDFontColor_KeyDown"
@@ -3456,6 +3499,7 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,528,14,0"
+                                         Padding="1,1,0,0"
                                          MaxLength="6"
                                          TextChanged="tbxOSDBorderColor_TextChanged"
                                          KeyDown="tbxOSDBorderColor_KeyDown"
@@ -3529,6 +3573,7 @@
                                          Height="22"
                                          Style="{DynamicResource TextBoxStyle}" 
                                          Margin="0,586,14,0"
+                                         Padding="1,1,0,0"
                                          MaxLength="6"
                                          TextChanged="tbxOSDShadowColor_TextChanged"
                                          KeyDown="tbxOSDShadowColor_KeyDown"
@@ -3709,8 +3754,10 @@
 
             <!-- Presets -->
             <ComboBox x:Name="cboProfile" 
-                      ItemsSource="{Binding ProfilesItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding ProfileSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Profiles_Items}"
+                      SelectedIndex="{Binding Profiles_SelectedIndex}"
+                      SelectedItem="{Binding Profiles_SelectedItem}"
+                      IsEnabled="{Binding Profiles_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="0,0,181,16"
                       Width="75" 
                       Height="22" 

@@ -49,10 +49,10 @@ namespace Glow
             // -------------------------
             // Subtitles
             // -------------------------
-            string subtitles = string.Empty;
+            //string subtitles = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitles.SelectedItem ?? string.Empty) != "default")
-                subtitles = "sub";
+            //if ((string)(mainwindow.cboSubtitles.SelectedItem ?? string.Empty) != "default")
+            //    subtitles = "sub";
 
             // -------------------------
             // Languages
@@ -270,7 +270,7 @@ namespace Glow
             {
                 title,
                 languages,
-                subtitles,
+                //subtitles,
                 loadFiles,
                 position,
                 fixTiming,

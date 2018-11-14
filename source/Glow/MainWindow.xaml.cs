@@ -31,11 +31,16 @@ using System.Text;
 using System.Windows.Controls;
 using System.Drawing;
 using System.Windows.Input;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace Glow
 {
     public partial class MainWindow : Window
     {
+        // View Model
+        public ViewModel vm = new ViewModel();
+
         // -------------------------
         // Version
         // -------------------------
@@ -53,23 +58,6 @@ namespace Glow
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
         }
-
-        // -------------------------
-        // System
-        // -------------------------
-        // Paths
-        public static string appDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\') + @"\"; //Glow.exe directory
-        public static string userDir = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%").TrimEnd('\\') + @"\";
-        public static string mpvDir = string.Empty;
-        public static string configDir = userDir + @"AppData\Roaming\mpv\"; //mpv config directory
-        public static string profilesDir = appDir + @"profiles\"; //custom ini profiles
-
-        // -------------------------
-        // Variables
-        // -------------------------
-        // Lock
-        //public static bool ready = true;
-
 
 
         /// <summary>
@@ -94,71 +82,60 @@ namespace Glow
             // Title + Version
             // -------------------------
             TitleVersion = "Glow ~ mpv Configurator (" + Convert.ToString(currentVersion) + "-" + currentBuildPhase + ")";
-            DataContext = this;
 
-            // -------------------------
-            // Control Binding
-            // -------------------------
-            //DataContext = this;
-            ViewModel vm = new ViewModel();
+            // -----------------------------------------------------------------
+            /// <summary>
+            ///     Control Binding
+            /// </summary>
+            // -----------------------------------------------------------------
             DataContext = vm;
-
-            // -------------------------
-            // Prevent Loading Corrupt App.Config
-            // -------------------------
-            try
-            {
-                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                string filename = ex.Filename;
-
-                if (File.Exists(filename) == true)
-                {
-                    File.Delete(filename);
-                    Settings.Default.Upgrade();
-                }
-                else
-                {
-
-                }
-            }
 
             // --------------------------------------------------
             // Load Saved Settings
             // --------------------------------------------------
-            // Window Position
-            // First time use
-            if (Convert.ToDouble(Settings.Default["Left"]) == 0 && Convert.ToDouble(Settings.Default["Top"]) == 0)
+
+            // -------------------------
+            // Import Config INI
+            // -------------------------
+            // config.ini settings
+            if (File.Exists(Paths.configINIFile))
             {
-                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                ConfigureWindow.ImportConfig(this, vm);
             }
-            // Load Saved
+            // Defaults
             else
-            { 
-                this.Top = Settings.Default.Top;
-                this.Left = Settings.Default.Left;
-                this.Height = Settings.Default.Height;
-                this.Width = Settings.Default.Width;
-
-                if (Settings.Default.Maximized)
-                {
-                    WindowState = WindowState.Maximized;
-                }
+            {
+                ConfigureWindow.LoadDefaults(this, vm);
             }
 
-            SettingsWindow Settingswindow = new SettingsWindow(this);
+            // -------------------------
+            // Window Position
+            // -------------------------
+            if (this.Top == 0 &&
+                this.Left == 0)
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
 
-            // Theme
-            SettingsWindow.LoadTheme(Settingswindow);
-            // mpv Path
-            SettingsWindow.LoadMpvPath(Settingswindow);
-            // Config Path
-            SettingsWindow.LoadConfigPath(Settingswindow);
-            // Profiles Path
-            SettingsWindow.LoadProfilesPath(Settingswindow);
-
+            // -------------------------
+            // Load Theme
+            // -------------------------
+            try
+            {
+                //Configure.theme = vm.Theme_SelectedItem.Replace(" ", string.Empty);
+                App.Current.Resources.MergedDictionaries.Clear();
+                App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
+                {
+                    Source = new Uri("Theme" + vm.Theme_SelectedItem.Replace(" ", string.Empty) + ".xaml", UriKind.RelativeOrAbsolute)
+                });
+            }
+            catch
+            {
+                MessageBox.Show("Could not load theme.",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
 
             // --------------------------------------------------
             // Load Fonts
@@ -166,12 +143,14 @@ namespace Glow
             foreach (FontFamily font in ViewModel.installedFonts.Families)
             {
                 if (!string.IsNullOrEmpty(font.Name)) {
-                    ViewModel.fonts.Add(font.Name);
+                    //ViewModel.fonts.Add(font.Name);
+                    vm.Fonts_Items.Add(font.Name);
                 }
             }
 
             // Add default to fonts list
-            ViewModel.fonts.Insert(0, "default");
+            vm.Fonts_Items.Insert(0, "default");
+            //ViewModel.fonts.Insert(0, "default");
 
             // --------------------------------------------------
             // Control Defaults
@@ -179,16 +158,18 @@ namespace Glow
             // Tooltip Duration
             ToolTipService.ShowDurationProperty.OverrideMetadata(
                 typeof(DependencyObject), new FrameworkPropertyMetadata(Int32.MaxValue));
+
             // Profile Preset
-            ViewModel.ProfileSelectedItem = "Default";
+            //vm.Profiles_SelectedItem = "Default";
+            //ViewModel.ProfileSelectedItem = "Default";
             // Font
-            ViewModel.FontSelectedItem = "default";
+            //ViewModel.FontSelectedItem = "default";
 
             // --------------------------------------------------
             // Custom Profiles
             // --------------------------------------------------
             // Load Custom INI's
-            Profiles.GetCustomProfiles();
+            Profiles.GetCustomProfiles(vm);
         }
 
         /// <summary>
@@ -196,6 +177,50 @@ namespace Glow
         /// </summary>
         public void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // -------------------------
+            // Create Profiles folder if missing
+            // -------------------------
+            //if (!Directory.Exists(vm.ProfilesPath_Text))
+            //{
+            //    // Yes/No Dialog Confirmation
+            //    //
+            //    MessageBoxResult resultExport = MessageBox.Show("Profiles Folder does not exist. Automatically create it?",
+            //                                                    "Directory Not Found",
+            //                                                    MessageBoxButton.YesNo,
+            //                                                    MessageBoxImage.Information);
+            //    switch (resultExport)
+            //    {
+            //        // Create
+            //        case MessageBoxResult.Yes:
+            //            try
+            //            {
+            //                Directory.CreateDirectory(vm.ProfilesPath_Text);
+            //            }
+            //            catch
+            //            {
+            //                MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.",
+            //                                "Error",
+            //                                MessageBoxButton.OK,
+            //                                MessageBoxImage.Error);
+            //            }
+            //            break;
+            //        // Use Default
+            //        case MessageBoxResult.No:
+            //            break;
+            //    }
+            //}
+
+            // -------------------------
+            // Check for Available Updates
+            // -------------------------
+            Task.Factory.StartNew(() =>
+            {
+                UpdateAvailableCheck();
+            });
+
+            // -------------------------
+            // Load Text Color Previews 
+            // -------------------------
             PreviewOSDFontColor(this);
             PreviewOSDBorderColor(this);
             PreviewOSDShadowColor(this);
@@ -204,18 +229,162 @@ namespace Glow
             PreviewSubtitlesShadowColor(this);
         }
 
+        /// <summary>
+        ///     Check For Internet Connection
+        /// </summary>
+        [System.Runtime.InteropServices.DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
+
+        public static bool CheckForInternetConnection()
+        {
+            int desc;
+            return InternetGetConnectedState(out desc, 0);
+        }
+
+        /// <summary>
+        ///    Update Available Check
+        /// </summary>
+        public void UpdateAvailableCheck()
+        {
+            if (CheckForInternetConnection() == true)
+            {
+                if (vm.UpdateAutoCheck_IsChecked == true)
+                {
+                    ServicePointManager.Expect100Continue = true;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                    WebClient wc = new WebClient();
+                    // UserAgent Header
+                    wc.Headers.Add(HttpRequestHeader.UserAgent, "Glow ~ mpv Configurator (https://github.com/MattMcManis/Glow)" + " v" + MainWindow.currentVersion + "-" + MainWindow.currentBuildPhase + " Self-Update");
+                    //wc.Headers.Add("Accept-Encoding", "gzip,deflate"); //error
+
+                    wc.Proxy = null;
+
+                    // -------------------------
+                    // Parse GitHub .version file
+                    // -------------------------
+                    string parseLatestVersion = string.Empty;
+
+                    try
+                    {
+                        parseLatestVersion = wc.DownloadString("https://raw.githubusercontent.com/MattMcManis/Glow/master/.version");
+                    }
+                    catch
+                    {
+                        return;
+                    }
+
+                    // -------------------------
+                    // Split Version & Build Phase by dash
+                    // -------------------------
+                    if (!string.IsNullOrEmpty(parseLatestVersion)) //null check
+                    {
+                        try
+                        {
+                            // Split Version and Build Phase
+                            splitVersionBuildPhase = Convert.ToString(parseLatestVersion).Split('-');
+
+                            // Set Version Number
+                            latestVersion = new Version(splitVersionBuildPhase[0]); //number
+                            latestBuildPhase = splitVersionBuildPhase[1]; //alpha
+                        }
+                        catch
+                        {
+                            return;
+                        }
+
+                        // Check if Stellar is the Latest Version
+                        // Update Available
+                        if (latestVersion > currentVersion)
+                        {
+                            //updateAvailable = " ~ Update Available: " + "(" + Convert.ToString(latestVersion) + "-" + latestBuildPhase + ")";
+
+                            Dispatcher.Invoke(new Action(delegate
+                            {
+                                TitleVersion = "Glow ~ mpv Configurator (" + Convert.ToString(currentVersion) + "-" + currentBuildPhase + ")"
+                                            + " ~ Update Available: " + "(" + Convert.ToString(latestVersion) + "-" + latestBuildPhase + ")";
+                            }));
+                        }
+                        // Update Not Available
+                        else if (latestVersion <= currentVersion)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+
+            // Internet Connection Failed
+            else
+            {
+                MessageBox.Show("Could not detect Internet Connection.",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+
+                return;
+            }
+        }
+
+
+        /// <summary>
+        ///    Open New Window
+        /// </summary>
+        //private Boolean IsWindowOpened = false;
+        //public void OpenWindow(Window window)
+        //{
+        //    // Detect which screen we're on
+        //    var allScreens = System.Windows.Forms.Screen.AllScreens.ToList();
+        //    var thisScreen = allScreens.SingleOrDefault(s => this.Left >= s.WorkingArea.Left && this.Left < s.WorkingArea.Right);
+
+        //    // Start Window
+        //    window = new Window();
+
+        //    // Keep Window on Top
+        //    window.Owner = GetWindow(this);
+
+        //    // Only allow 1 Window instance
+        //    if (IsWindowOpened) return;
+        //    window.ContentRendered += delegate { IsWindowOpened = true; };
+        //    window.Closed += delegate { IsWindowOpened = false; };
+
+        //    // Position Relative to MainWindow
+        //    window.Left = Math.Max((this.Left + (this.Width - window.Width) / 2), thisScreen.WorkingArea.Left);
+        //    window.Top = Math.Max((this.Top + (this.Height - window.Height) / 2), thisScreen.WorkingArea.Top);
+
+        //    // Open Window
+        //    window.ShowDialog();
+        //}
+
 
         /// <summary>
         ///    Preview OSD Font Color
         /// </summary>
         public static void PreviewOSDFontColor(MainWindow mainwindow)
         {
+            // Color
             if (mainwindow.tbxOSDFontColor.Text.ToString().Length == 6)
             {
                 try
                 {
                     System.Drawing.Color color = ColorPickerWindow.ConvertHexToRGB("#" + mainwindow.tbxOSDFontColor.Text.ToString());
                     System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+                    System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
+                    mainwindow.osdFontColorPreview.Fill = brushPreview;
+                }
+                catch
+                {
+
+                }
+            }
+
+            // Transparent
+            else
+            {
+                try
+                {
+                    System.Drawing.Color color = ColorPickerWindow.ConvertHexToRGB("#000000");
+                    System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(0, color.R, color.G, color.B);
                     System.Windows.Media.Brush brushPreview = new System.Windows.Media.SolidColorBrush(mediaColor);
                     mainwindow.osdFontColorPreview.Fill = brushPreview;
                 }
@@ -343,28 +512,42 @@ namespace Glow
             Application.Current.Shutdown();
         }
 
-        // Save Window Position, Width, Height
         void Window_Closing(object sender, CancelEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
+            // -------------------------
+            // Export Config INI
+            // -------------------------
+            // Overwrite only if changes made
+            if (File.Exists(Paths.configINIFile))
             {
-                // Use the RestoreBounds as the current values will be 0, 0 and the size of the screen
-                Settings.Default.Top = RestoreBounds.Top;
-                Settings.Default.Left = RestoreBounds.Left;
-                Settings.Default.Height = RestoreBounds.Height;
-                Settings.Default.Width = RestoreBounds.Width;
-                Settings.Default.Maximized = true;
-            }
-            else
-            {
-                Settings.Default.Top = this.Top;
-                Settings.Default.Left = this.Left;
-                Settings.Default.Height = this.Height;
-                Settings.Default.Width = this.Width;
-                Settings.Default.Maximized = false;
+                ConfigureWindow.INIFile inif = new ConfigureWindow.INIFile(Paths.configINIFile);
+
+                double? top = Convert.ToDouble(inif.Read("Main Window", "Window_Position_Top"));
+                double? left = Convert.ToDouble(inif.Read("Main Window", "Window_Position_Left"));
+                double? width = Convert.ToDouble(inif.Read("Main Window", "Window_Width"));
+                double? height = Convert.ToDouble(inif.Read("Main Window", "Window_Height"));
+
+                if (// Main Window
+                    this.Top != top ||
+                    this.Left != left ||
+                    this.Width != width ||
+                    this.Height != height ||
+                    vm.mpvPath_Text != inif.Read("Main Window", "mpvPath_Text") ||
+                    vm.mpvConfigPath_Text != inif.Read("Main Window", "mpvConfigPath_Text") ||
+                    vm.ProfilesPath_Text != inif.Read("Main Window", "ProfilesPath_Text") ||
+                    vm.Theme_SelectedItem != inif.Read("Configure Window", "Theme_SelectedItem") ||
+                    vm.UpdateAutoCheck_IsChecked != Convert.ToBoolean(inif.Read("Configure Window", "UpdateAutoCheck_IsChecked").ToLower())
+                    )
+                {
+                    ConfigureWindow.ExportConfig(this, vm);
+                }
             }
 
-            Settings.Default.Save();
+            // Export Defaults & Currently Selected
+            else if (!File.Exists(Paths.configINIFile))
+            {
+                ConfigureWindow.ExportConfig(this, vm);
+            }
 
             // Exit
             e.Cancel = true;
@@ -377,11 +560,11 @@ namespace Glow
         /// <summary>
         ///    Methods
         /// </summary>
-            // --------------------------------------------------------------------------------------------------------
+        // --------------------------------------------------------------------------------------------------------
 
-            /// <summary>
-            ///    Config RichTextBox
-            /// </summary>
+        /// <summary>
+        ///    Config RichTextBox
+        /// </summary>
         public String ConfigRichTextBox()
         {
             // Select All Text
@@ -608,8 +791,10 @@ namespace Glow
             // Enable/Disable Scaling
 
             // Default
-            if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "default")
+            if (vm.VideoDriver_SelectedItem == "default")
             {
+                // Video Driver API
+                vm.VideoDriverAPI_SelectedItem = "default";
                 // Scaling On
                 cboSigmoid.SelectedItem = "default";
                 // Scale
@@ -623,10 +808,11 @@ namespace Glow
             }
 
             // Enabled
-            if ((string)(cboVideoDriver.SelectedItem ?? string.Empty) == "default" ||
-                (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "gpu" ||
-                (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl" ||
-                (string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq"
+            if (vm.VideoDriver_SelectedItem == "default" ||
+                vm.VideoDriver_SelectedItem == "gpu" ||
+                vm.VideoDriver_SelectedItem == "gpu-hq"
+                //(string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl" || // old
+                //(string)(cboVideoDriver.SelectedItem ?? string.Empty) == "opengl-hq" // old
                 //(string)(cboVideoDriver.SelectedItem ?? string.Empty) == "direct3d"
                 //(string)(cboVideoDriver.SelectedItem ?? string.Empty) == "vaapi"
                 //(string)(cboVideoDriver.SelectedItem ?? string.Empty) == "caca"
@@ -703,8 +889,9 @@ namespace Glow
             // Enable/Disable Scaling
 
             // Enabled
-            if ((string)(cboVideoDriverAPI.SelectedItem ?? string.Empty) == "default"
-                || (string)(cboVideoDriverAPI.SelectedItem ?? string.Empty) == "opengl"
+            if (vm.VideoDriverAPI_SelectedItem == "default" ||
+                vm.VideoDriver_SelectedItem == "gpu"
+                //(string)(cboVideoDriverAPI.SelectedItem ?? string.Empty) == "opengl" // old
                 //|| (string)(cboVideoDriverAPI.SelectedItem ?? string.Empty) == "vulkan"
                 //|| (string)(cboVideoDriverAPI.SelectedItem ?? string.Empty) == "d3d11"
                 )
@@ -1259,6 +1446,21 @@ namespace Glow
         // --------------------------------------------------
 
         /// <summary>
+        ///     Subtitles
+        /// </summary>
+        private void cboSubtitles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Embedded Fonts Enabled
+            if ((string)(cboSubtitles.SelectedItem ?? string.Empty) == "yes")
+                // Disable Custom Font
+                cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
+            else if ((string)(cboSubtitles.SelectedItem ?? string.Empty) == "no")
+                cboSubtitlesLoadFiles.SelectedItem = "no";
+            else
+                cboSubtitlesLoadFiles.SelectedItem = "default";
+        }
+
+        /// <summary>
         ///    Subtitle Embedded Fonts
         /// </summary>
         private void cboSubtitlesEmbeddedFonts_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1696,7 +1898,7 @@ namespace Glow
             var thisScreen = allScreens.SingleOrDefault(s => this.Left >= s.WorkingArea.Left && this.Left < s.WorkingArea.Right);
 
             // Start Window
-            SettingsWindow settingswindow = new SettingsWindow(this);
+            ConfigureWindow settingswindow = new ConfigureWindow(this, vm);
 
             // Keep Window on Top
             settingswindow.Owner = GetWindow(this);
@@ -1734,7 +1936,12 @@ namespace Glow
                 }
                 catch
                 {
-                    MessageBox.Show("GitHub version file not found.");
+                    MessageBox.Show("GitHub version file not found.",
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+
+                    return;
                 }
 
 
@@ -1753,7 +1960,12 @@ namespace Glow
                     }
                     catch
                     {
-                        MessageBox.Show("Error reading version.");
+                        MessageBox.Show("Error reading version.",
+                                       "Error",
+                                       MessageBoxButton.OK,
+                                       MessageBoxImage.Error);
+
+                        return;
                     }
 
                     // Debug
@@ -1801,23 +2013,44 @@ namespace Glow
                     // Update Not Available
                     else if (latestVersion <= currentVersion)
                     {
-                        MessageBox.Show("This version is up to date.");
+                        MessageBox.Show("This version is up to date.",
+                                       "Notice",
+                                       MessageBoxButton.OK,
+                                       MessageBoxImage.Information);
+
+                        return;
                     }
                     // Unknown
                     else // null
                     {
-                        MessageBox.Show("Could not find download. Try updating manually.");
+                        MessageBox.Show("Could not find download. Try updating manually.",
+                                        "Error",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
+
+                        return;
                     }
                 }
                 // Version is Null
                 else
                 {
-                    MessageBox.Show("GitHub version file returned empty.");
+                    MessageBox.Show("GitHub version file returned empty.",
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+
+                    return;
+
                 }
             }
             else
             {
-                MessageBox.Show("Could not detect Internet Connection.");
+                MessageBox.Show("Could not detect Internet Connection.",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+
+                return;
             }
         }
 
@@ -1827,24 +2060,30 @@ namespace Glow
         private void buttonConfigDir_Click(object sender, RoutedEventArgs e)
         {
             // Check if Config Directory exists
-            bool exists = Directory.Exists(configDir);
+            //bool exists = Directory.Exists(vm.mpvConfigPath_Text);
             // If not, create it
-            if (!exists)
+            if (!Directory.Exists(vm.mpvConfigPath_Text))
             {
                 // Yes/No Dialog Confirmation
                 //
-                MessageBoxResult resultOpen = MessageBox.Show("Config Folder does not exist. Automatically reate it?", "Directory Not Found", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                MessageBoxResult resultOpen = MessageBox.Show("Config Folder does not exist. Automatically reate it?", 
+                                                              "Directory Not Found", 
+                                                              MessageBoxButton.YesNo, 
+                                                              MessageBoxImage.Information);
                 switch (resultOpen)
                 {
                     // Create
                     case MessageBoxResult.Yes:
                         try
                         {
-                            Directory.CreateDirectory(configDir);
+                            Directory.CreateDirectory(vm.mpvConfigPath_Text);
                         }
                         catch
                         {
-                            MessageBox.Show("Could not create Config folder. May require Administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Could not create Config folder. May require Administrator privileges.", 
+                                            "Error", 
+                                            MessageBoxButton.OK, 
+                                            MessageBoxImage.Error);
                         }
                         break;
                     // Use Default
@@ -1859,7 +2098,11 @@ namespace Glow
             //Directory.CreateDirectory(configDir);
 
             // Open Directory
-            Process.Start("explorer.exe", configDir);
+            if (Directory.Exists(vm.mpvConfigPath_Text))
+            {
+                Process.Start("explorer.exe", vm.mpvConfigPath_Text);
+            }
+                
         }
 
 
@@ -1878,24 +2121,32 @@ namespace Glow
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             // Check if Config Directory exists
-            bool exists = Directory.Exists(configDir);
+            bool exists = Directory.Exists(vm.mpvConfigPath_Text);
             // If not, create it
             if (!exists)
             {
                 // Yes/No Dialog Confirmation
                 //
-                MessageBoxResult resultSave = MessageBox.Show("Config Folder does not exist. Automatically create it?", "Directory Not Found", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                MessageBoxResult resultSave = MessageBox.Show(
+                    "Config Folder does not exist. Automatically create it?", 
+                    "Directory Not Found", 
+                    MessageBoxButton.YesNo, 
+                    MessageBoxImage.Information);
                 switch (resultSave)
                 {
                     // Create
                     case MessageBoxResult.Yes:
                         try
                         {
-                            Directory.CreateDirectory(configDir);
+                            Directory.CreateDirectory(vm.mpvConfigPath_Text);
                         }
                         catch
                         {
-                            MessageBox.Show("Could not create Config folder. May require Administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(
+                                "Could not create Config folder. May require Administrator privileges.", 
+                                "Error", 
+                                MessageBoxButton.OK, 
+                                MessageBoxImage.Error);
                         }
                         break;
                     // Use Default
@@ -1907,7 +2158,7 @@ namespace Glow
             // Open 'Save File'
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
 
-            saveFile.InitialDirectory = configDir;
+            saveFile.InitialDirectory = vm.mpvConfigPath_Text;
             saveFile.RestoreDirectory = true;
             saveFile.Filter = "Config Files (*.conf)|*.conf";
             saveFile.DefaultExt = "";
@@ -1927,7 +2178,10 @@ namespace Glow
                 }
                 catch
                 {
-                    MessageBox.Show("Error Saving Config to " + "\"" + configDir + "\"" + ". May require Administrator Privileges.");
+                    MessageBox.Show("Problem Saving Config to " + "\"" + vm.mpvConfigPath_Text + "\"" + ". May require Administrator Privileges.",
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
                 }
             }
         }
@@ -1975,7 +2229,9 @@ namespace Glow
         /// </summary>
         private void cboProfile_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Profiles.Profile(this);
+            Profiles.Profile(this, vm);
+
+            //MessageBox.Show(vm.Profiles_SelectedItem); //deubg
         }
 
         /// <summary>
@@ -1984,24 +2240,30 @@ namespace Glow
         private void buttonExport_Click(object sender, RoutedEventArgs e)
         {
             // Check if Profiles Directory exists
-            bool exists = Directory.Exists(profilesDir);
+            //bool exists = Directory.Exists(vm.ProfilesPath_Text);
             // If not, create it
-            if (!exists)
+            if (!Directory.Exists(vm.ProfilesPath_Text))
             {
                 // Yes/No Dialog Confirmation
                 //
-                MessageBoxResult resultExport = MessageBox.Show("Profiles Folder does not exist. Automatically create it?", "Directory Not Found", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                MessageBoxResult resultExport = MessageBox.Show("Profiles Folder does not exist. Automatically create it?", 
+                                                                "Directory Not Found", 
+                                                                MessageBoxButton.YesNo, 
+                                                                MessageBoxImage.Information);
                 switch (resultExport)
                 {
                     // Create
                     case MessageBoxResult.Yes:
                         try
                         {
-                            Directory.CreateDirectory(profilesDir);
+                            Directory.CreateDirectory(vm.ProfilesPath_Text);
                         }
                         catch
                         {
-                            MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.", 
+                                            "Error", 
+                                            MessageBoxButton.OK, 
+                                            MessageBoxImage.Error);
                         }
                         break;
                     // Use Default
@@ -2014,7 +2276,7 @@ namespace Glow
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
 
             // Defaults
-            saveFile.InitialDirectory = profilesDir;
+            saveFile.InitialDirectory = vm.ProfilesPath_Text;
             saveFile.RestoreDirectory = true;
             saveFile.Filter = "Initialization Files (*.ini)|*.ini";
             saveFile.DefaultExt = "";
@@ -2042,11 +2304,14 @@ namespace Glow
                 }
 
                 // Export ini file
-                Profiles.ExportProfile(this, input);
+                Profiles.ExportProfile(this, vm, input);
 
                 // Refresh Profiles ComboBox
-                Profiles.GetCustomProfiles();
-                cboProfile.ItemsSource = ViewModel._profilesItems;
+                Profiles.GetCustomProfiles(vm);
+
+                //ViewModel vm = this.DataContext as ViewModel;
+                cboProfile.ItemsSource = vm.Profiles_Items;
+                //cboProfile.ItemsSource = ViewModel._profilesItems;
             }
         }
 
@@ -2064,7 +2329,7 @@ namespace Glow
             Microsoft.Win32.OpenFileDialog selectFile = new Microsoft.Win32.OpenFileDialog();
 
             // Defaults
-            selectFile.InitialDirectory = profilesDir;
+            selectFile.InitialDirectory = vm.ProfilesPath_Text;
             selectFile.RestoreDirectory = true;
             selectFile.Filter = "ini file (*.ini)|*.ini";
 
@@ -2083,7 +2348,7 @@ namespace Glow
                 //string input = Path.Combine(inputDir, inputFileName);
 
                 // Import ini file
-                Profiles.ImportProfile(this, input);
+                Profiles.ImportProfile(this, vm, input);
             }
         }
 
@@ -2099,8 +2364,10 @@ namespace Glow
             rtbConfig.Document = new FlowDocument(p);
 
             rtbConfig.BeginChange();
-            p.Inlines.Add(new Run(Generate.GenerateConfig(this)));
+            p.Inlines.Add(new Run(Generate.GenerateConfig(this, vm)));
             rtbConfig.EndChange();
         }
+
+
     }
 }

@@ -666,6 +666,55 @@ namespace Glow
         }
 
 
+        /// <summary>
+        ///   Clear Color Button
+        /// </summary>
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            string HexColorCode = tbxHexColorCode.Text.ToString();
+
+            // Return Hex Code to TextBox based on Passed Keyword
+            if (textBoxKey == "osdFont")
+            {
+                mainwindow.tbxOSDFontColor.Text = string.Empty;
+                MainWindow.PreviewOSDFontColor(mainwindow);
+            }
+
+            else if (textBoxKey == "osdBorder")
+            {
+                mainwindow.tbxOSDBorderColor.Text = string.Empty;
+                MainWindow.PreviewOSDBorderColor(mainwindow);
+            }
+
+            else if (textBoxKey == "osdShadow")
+            {
+                mainwindow.tbxOSDShadowColor.Text = string.Empty;
+                MainWindow.PreviewOSDShadowColor(mainwindow);
+            }
+
+            else if (textBoxKey == "subtitlesFont")
+            {
+                mainwindow.tbxSubtitlesFontColor.Text = string.Empty;
+                MainWindow.PreviewSubtitlesFontColor(mainwindow);
+            }
+
+            else if (textBoxKey == "subtitlesBorder")
+            {
+                mainwindow.tbxSubtitlesBorderColor.Text = string.Empty;
+                MainWindow.PreviewSubtitlesBorderColor(mainwindow);
+            }
+
+            else if (textBoxKey == "subtitlesShadow")
+            {
+                mainwindow.tbxSubtitlesShadowColor.Text = string.Empty;
+                MainWindow.PreviewSubtitlesShadowColor(mainwindow);
+            }
+
+            // Preview Picked Color in MainWindow button
+            //MainWindow.PreviewPickedColors(mainwindow);
+
+            this.Close();
+        }
 
 
 
@@ -735,7 +784,6 @@ namespace Glow
 
             return hslColor;
         }
-
     }
 
 

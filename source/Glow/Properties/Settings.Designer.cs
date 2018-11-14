@@ -98,12 +98,12 @@ namespace Glow.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string configDir {
+        public string mpvConfigDir {
             get {
-                return ((string)(this["configDir"]));
+                return ((string)(this["mpvConfigDir"]));
             }
             set {
-                this["configDir"] = value;
+                this["mpvConfigDir"] = value;
             }
         }
         
