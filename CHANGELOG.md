@@ -2,6 +2,17 @@
 
 Glow mpv Configurator
 
+## [beta]
+
+## [1.0.0.0] - Dec 14, 2020
+### Changed
+- Program rebuilt with MVVM
+- Changed `Config` directory to `%AppData%`
+- Changed `config.ini` to `glow.conf`
+- Changed Custom Presets directory to `%AppData%`
+- Changed Custom `Profiles` to Custom `Presets`
+
+
 ## [alpha]
 
 ## [0.0.7.2] - Nov 14, 2018
