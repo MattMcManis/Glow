@@ -66,6 +66,7 @@ namespace ViewModel
             OSD_FontColor_Text = string.Empty;
             OSD_FontBorderSize_SelectedItem = "default";
             OSD_BorderColor_Text = string.Empty;
+            OSD_ShadowOffset_Value = 0;
             OSD_ShadowColor_Text = string.Empty;
         }
 
