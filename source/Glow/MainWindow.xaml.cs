@@ -151,7 +151,7 @@ namespace Glow
             // Presets
             // --------------------------------------------------
             // Load Custom Preset INI's
-            Presets.GetCustomPresets();
+            Presets.LoadCustomPresets();
 
             // -------------------------
             // glow.conf actions to read
@@ -1209,7 +1209,7 @@ namespace Glow
             saveFile.InitialDirectory = VM.ConfigureView.PresetsPath_Text;
             saveFile.RestoreDirectory = true;
             saveFile.Filter = "Initialization Files (*.ini)|*.ini";
-            saveFile.DefaultExt = "";
+            saveFile.DefaultExt = "ini";
             saveFile.FileName = "preset.ini";
 
             // Show save file dialog box
@@ -1219,29 +1219,41 @@ namespace Glow
             if (saveFile.ShowDialog() == true)
             {
                 // Set Input Dir, Name, Ext
-                string inputDir = Path.GetDirectoryName(saveFile.FileName).TrimEnd('\\') + @"\";
+                string presetDir = Path.GetDirectoryName(saveFile.FileName).TrimEnd('\\') + @"\";
                 //string inputFileName = Path.GetFileName(saveFile.FileName);
-                string inputFileName = Path.GetFileNameWithoutExtension(saveFile.FileName);
-                string inputExt = Path.GetExtension(saveFile.FileName);
-                string input = inputDir + inputFileName + inputExt;
-                //string input = Path.Combine(inputDir, inputFileName);
+                string presetFileName = Path.GetFileNameWithoutExtension(saveFile.FileName);
+                string presetExt = Path.GetExtension(saveFile.FileName);
+                //string preset = presetDir + presetFileName + presetExt;
+                string preset = Path.Combine(presetDir, presetFileName + presetExt);
 
                 // Overwriting doesn't work properly with INI Writer
                 // Delete File instead before saving new
-                if (File.Exists(input))
+                if (File.Exists(preset))
                 {
-                    File.Delete(input);
+                    try
+                    {
+                        File.Delete(preset);
+                    }
+                    catch
+                    {
+
+                    }
                 }
 
                 // Export ini file
-                Presets.ExportPreset(this, input);
+                Presets.ExportPreset(this, preset);
+
+                Presets.PresetsReset();
 
                 // Refresh Presets ComboBox
-                Presets.GetCustomPresets();
+                Presets.LoadCustomPresets();
 
                 //ViewModel vm = this.DataContext as ViewModel;
                 //VM.ConfigureView.Preset_ItemsSource = VM.ConfigureView.Presets_Items;
                 //cboPreset_ItemsSource = ViewModel._presetsItems;
+
+                // Select the Preset
+                VM.MainView.Presets_SelectedItem = presetFileName;
             }
         }
 
@@ -1294,32 +1306,38 @@ namespace Glow
                             }
                             catch
                             {
-                                MessageBox.Show("Could not delete Preset. May be missing or requires Administrator Privileges.",
+                                MessageBox.Show("Could not delete Custom Preset. May be missing or requires Administrator Privileges.",
                                                 "Error",
                                                 MessageBoxButton.OK,
                                                 MessageBoxImage.Error);
                             }
 
                             // Set the Index
-                            var selectedIndex = VM.MainView.Presets_SelectedIndex;
+                            //var selectedIndex = VM.MainView.Presets_SelectedIndex;
 
-                            // Select Default Item
-                            VM.MainView.Presets_SelectedItem = "Preset";
+                            //// Select Default Item
+                            //VM.MainView.Presets_SelectedItem = "Default";
 
                             // Delete from Items Source
                             // (needs to be after SelectedItem change to prevent error reloading)
-                            try
-                            {
-                                VM.MainView.Presets_Items.RemoveAt(selectedIndex);
-                            }
-                            catch
-                            {
+                            //try
+                            //{
+                            //    VM.MainView.Presets_Items.RemoveAt(VM.MainView.Presets_SelectedIndex/*selectedIndex*/);
+                            //}
+                            //catch
+                            //{
 
-                            }
+                            //}
+
+                            // Presets Reset
+                            Presets.PresetsReset();
+
+                            // Select Default Item
+                            VM.MainView.Presets_SelectedItem = "Default";
 
                             // Load Custom Presets
                             // Refresh Presets ComboBox
-                            Presets.GetCustomPresets();
+                            Presets.LoadCustomPresets();
                         }
                         else
                         {
@@ -1349,7 +1367,7 @@ namespace Glow
                 MessageBox.Show("This is not a Custom Preset.",
                                 "Notice",
                                 MessageBoxButton.OK,
-                                MessageBoxImage.Information);
+                                MessageBoxImage.Warning);
             }
         }
 
@@ -1387,7 +1405,7 @@ namespace Glow
             {
                 // Reload Presets ComboBox Custom Presets after any manual changes may have been made
                 // such as deleting an .ini through the dialog box
-                Presets.GetCustomPresets();
+                Presets.LoadCustomPresets();
             }
         }
 
