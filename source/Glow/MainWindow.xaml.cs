@@ -729,53 +729,41 @@ namespace Glow
         /// </summary>
         public static void AllowOnlyAlphaNumeric(KeyEventArgs e)
         {
-            // Escape closes window
-            //if (Key.Escape == e.Key)
-            //{
-            //    window.Close();
-            //}
-
             // Disallow Symbols
-            /*else */
-            if (Keyboard.IsKeyDown(Key.LeftShift) && e.Key >= Key.D0 && e.Key <= Key.D9 ||
-            Keyboard.IsKeyDown(Key.RightShift) && e.Key >= Key.D0 && e.Key <= Key.D9)
+            if ((Keyboard.IsKeyDown(Key.LeftShift) && e.Key >= Key.D0 && e.Key <= Key.D9) ||
+                (Keyboard.IsKeyDown(Key.RightShift) && e.Key >= Key.D0 && e.Key <= Key.D9) ||
+                (Keyboard.IsKeyDown(Key.LeftShift) && e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) ||
+                (Keyboard.IsKeyDown(Key.RightShift) && e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                )
             {
                 e.Handled = true;
             }
 
-            // Allow alphanumeric A-Z, 0-9
-            // Ctrl Shortcuts
-            // Backspace, Delete
+            // Allow Numbers, Letters, Ctrl Shortcuts
             else if (e.Key >= Key.D0 && e.Key <= Key.D9 ||
                 e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 ||
-                e.Key >= Key.A && e.Key <= Key.F ||
-                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.Z ||
-                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.Z ||
-                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.A ||
-                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.A ||
-                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.X ||
-                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.X ||
-                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.C ||
-                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.C ||
-                Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.V ||
-                Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.V ||
+                e.Key >= Key.A && e.Key <= Key.Z ||
+                (Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.Z) ||
+                (Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.Z) ||
+                (Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.A) ||
+                (Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.A) ||
+                (Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.X) ||
+                (Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.X) ||
+                (Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.C) ||
+                (Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.C) ||
+                (Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.V) ||
+                (Keyboard.IsKeyDown(Key.RightCtrl) && e.Key == Key.V) ||
                 e.Key == Key.Delete ||
-                e.Key == Key.Back)
+                e.Key == Key.Back
+                )
             {
                 e.Handled = false;
-
             }
 
             // All other keys
             else
             {
                 e.Handled = true;
-            }
-
-            // Tab pressed, focus must go to the next control
-            if (e.Key == Key.Tab)
-            {
-                e.Handled = false;
             }
         }
 
