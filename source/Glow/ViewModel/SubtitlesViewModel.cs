@@ -68,6 +68,7 @@ namespace ViewModel
             FontColor_Text = string.Empty;
             BorderSize_SelectedItem = "default";
             BorderColor_Text = string.Empty;
+            ShadowOffset_Value = 0;
             ShadowColor_Text = string.Empty;
         }
 
