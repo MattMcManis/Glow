@@ -72,7 +72,7 @@ namespace Generate
             // -------------------------
             string volume = string.Empty;
 
-            if (VM.AudioView.Volume_Value != 0)
+            if (VM.AudioView.Volume_Value != 100)
                 volume = "volume=" + VM.AudioView.Volume_Value/*Volume_Text*/;
 
             // -------------------------
@@ -80,7 +80,7 @@ namespace Generate
             // -------------------------
             string volumeMax = string.Empty;
 
-            if (VM.AudioView.VolumeMax_Value != 0)
+            if (VM.AudioView.VolumeMax_Value != 100)
                 volumeMax = "volume-max=" + VM.AudioView.VolumeMax_Value/*VolumeMax_Text*/;
 
 
