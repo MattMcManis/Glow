@@ -190,7 +190,8 @@ namespace Glow
         /// </summary>
         private void buttonProfilesPathRevert_Click(object sender, RoutedEventArgs e)
         {
-            VM.ConfigureView.ProfilesPath_Text = MainWindow.appRootDir + @"profiles\";
+            VM.ConfigureView.ProfilesPath_Text = MainWindow.glowConfDir + @"profiles\";
+            //VM.ConfigureView.ProfilesPath_Text = MainWindow.appRootDir + @"profiles\";
         }
 
 
@@ -217,13 +218,13 @@ namespace Glow
         /// </summary>
         private void themeSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Configure.theme = VM.ConfigureView.Theme_SelectedItem;
+            //Configure.theme = VM.ConfigureView.Theme_SelectedItem;
 
             // Change Theme Resource
             App.Current.Resources.MergedDictionaries.Clear();
             App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
             {
-                Source = new Uri("Themes/" + "Theme" + Configure.theme + ".xaml", UriKind.RelativeOrAbsolute)
+                Source = new Uri("Themes/" + "Theme" + VM.ConfigureView.Theme_SelectedItem/*Configure.theme*/ + ".xaml", UriKind.RelativeOrAbsolute)
             });
         }
 
@@ -264,50 +265,90 @@ namespace Glow
         /// </summary>
         private void buttonDeleteSettings_Click(object sender, RoutedEventArgs e)
         {
-            string appDataPath = MainWindow.appDataRoamingDir + @"Glow\";
+            // Show Yes No Window
+            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
+                "Delete " + MainWindow.glowConfFile, "Delete Directory Confirm", 
+                System.Windows.Forms.MessageBoxButtons.YesNo);
 
-            // Check if Directory Exists
-            if (Directory.Exists(appDataPath))
+            // Yes
+            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
-                // Show Yes No Window
-                System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
-                    "Delete " + appDataPath, "Delete Directory Confirm", System.Windows.Forms.MessageBoxButtons.YesNo);
-                // Yes
-                if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+                if (File.Exists(Path.Combine(MainWindow.glowConfFile)))
                 {
-                    using (Process delete = new Process())
+                    try
                     {
-                        delete.StartInfo.UseShellExecute = false;
-                        delete.StartInfo.CreateNoWindow = false;
-                        delete.StartInfo.RedirectStandardOutput = true;
-                        delete.StartInfo.FileName = "cmd.exe";
-                        delete.StartInfo.Arguments = "/c RD /Q /S " + "\"" + appDataPath;
-                        delete.Start();
-                        delete.WaitForExit();
-                        //delete.Close();
+                        File.Delete(MainWindow.glowConfFile);
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show(ex.ToString(),
+                                        "Error",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
                     }
 
-                    //Directory.Delete(appDataPath);
+                    // Set Defaults
+                    VM.ConfigureView.mpvPath_Text = string.Empty;
+                    VM.ConfigureView.mpvConfigPath_Text = MainWindow.mpvConfigDir;
+                    VM.ConfigureView.ProfilesPath_Text = MainWindow.glowConfDir + @"profiles\";
+                    VM.ConfigureView.UpdateAutoCheck_IsChecked = true;
+                    VM.ConfigureView.Theme_SelectedItem = "Glow";
 
                     // Restart Program
                     Process.Start(Application.ResourceAssembly.Location);
                     Application.Current.Shutdown();
                 }
-                // No
-                else if (dialogResult == System.Windows.Forms.DialogResult.No)
-                {
-                    //do nothing
-                }
+            }
+            // No
+            else if (dialogResult == System.Windows.Forms.DialogResult.No)
+            {
+                //do nothing
             }
 
-            // If Glow Folder Not Found
-            else
-            {
-                MessageBox.Show("No Previous Settings Found.",
-                                "Notice",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Warning);
-            }
+            //string appDataPath = MainWindow.appDataRoamingDir + @"Glow\";
+
+            //// Check if Directory Exists
+            //if (Directory.Exists(appDataPath))
+            //{
+            //    // Show Yes No Window
+            //    System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
+            //        "Delete " + appDataPath, "Delete Directory Confirm", System.Windows.Forms.MessageBoxButtons.YesNo);
+            //    // Yes
+            //    if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+            //    {
+            //        using (Process delete = new Process())
+            //        {
+            //            delete.StartInfo.UseShellExecute = false;
+            //            delete.StartInfo.CreateNoWindow = false;
+            //            delete.StartInfo.RedirectStandardOutput = true;
+            //            delete.StartInfo.FileName = "cmd.exe";
+            //            delete.StartInfo.Arguments = "/c RD /Q /S " + "\"" + appDataPath;
+            //            delete.Start();
+            //            delete.WaitForExit();
+            //            //delete.Close();
+            //        }
+
+            //        //Directory.Delete(appDataPath);
+
+            //        // Restart Program
+            //        Process.Start(Application.ResourceAssembly.Location);
+            //        Application.Current.Shutdown();
+            //    }
+            //    // No
+            //    else if (dialogResult == System.Windows.Forms.DialogResult.No)
+            //    {
+            //        //do nothing
+            //    }
+            //}
+
+            //// If Glow Folder Not Found
+            //else
+            //{
+            //    MessageBox.Show("No Previous Settings Found.",
+            //                    "Notice",
+            //                    MessageBoxButton.OK,
+            //                    MessageBoxImage.Warning);
+            //}
         }
 
         private void labelSavedSettings_PreviewMouseDown(object sender, MouseButtonEventArgs e)

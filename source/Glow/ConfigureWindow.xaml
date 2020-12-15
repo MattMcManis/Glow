@@ -45,12 +45,12 @@
     <Window.DataContext>
         <local:VM/>
     </Window.DataContext>
-    
+
     <Grid >
 
         <!-- mpv Path TextBox -->
         <Label x:Name="lblmpvPath" 
-               Content="mpv Path" 
+               Content="mpv.exe Path" 
                Style="{DynamicResource LabelStyle}"
                HorizontalAlignment="Left"
                Margin="10,12,0,0" 
@@ -65,10 +65,10 @@
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
                  Height="20" 
-                 Margin="95,15,0,0" 
+                 Margin="100,15,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
-                 Width="297" 
+                 Width="292" 
                  IsReadOnly="True" 
                  ToolTip="Path to mpv.exe" 
                  PreviewMouseDown="textBoxMpvPath_PreviewMouseDown"/>
@@ -93,9 +93,9 @@
         </Button>
 
 
-        <!-- Config Path TextBox -->
+        <!-- mpv Conf Path TextBox -->
         <Label x:Name="lblConfigPath"
-               Content="Config Path"
+               Content="mpv.conf Path"
                Style="{DynamicResource LabelStyle}"
                HorizontalAlignment="Left" 
                Margin="10,45,0,0" 
@@ -110,11 +110,12 @@
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
                  Height="20"
-                 Margin="95,48,0,0" 
+                 Margin="100,48,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top" 
-                 Width="297" 
+                 Width="292" 
                  IsReadOnly="True" 
+                 PreviewMouseDown="textBoxConfigPath_PreviewMouseDown"
                  ToolTip="Path to mpv config file"
                  />
         <!-- Config Path Revert Button -->
@@ -155,10 +156,10 @@
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
                  Height="20"
-                 Margin="95,81,0,0" 
+                 Margin="100,81,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top" 
-                 Width="297" 
+                 Width="292" 
                  IsReadOnly="True" 
                  ToolTip="Path to INI Profiles"
                  PreviewMouseDown="textBoxProfilesPath_PreviewMouseDown"/>
@@ -196,7 +197,7 @@
                Width="55" />
 
         <!-- Reset Saved Settigns Button -->
-        <Button x:Name="buttonClearAllSavedSettings" 
+        <!--<Button x:Name="buttonClearAllSavedSettings" 
                 HorizontalAlignment="Left" 
                 Margin="515,120,-126,0" 
                 VerticalAlignment="Top" 
@@ -208,9 +209,9 @@
                 Style="{DynamicResource ButtonStyle}"
                 Click="buttonClearAllSavedSettings_Click">
             <TextBlock Text="Reset" Margin="0,-1,0,0"/>
-        </Button>
+        </Button>-->
 
-        <!-- Delete Saved Settigns Button -->
+        <!-- Delete/Reset Saved Settigns Button -->
         <Button x:Name="buttonDeleteSettings" 
                 HorizontalAlignment="Left"
                 Margin="365,119,0,0" 
@@ -222,7 +223,7 @@
                 Cursor="Hand"
                 Style="{DynamicResource ButtonStyle}"
                 Click="buttonDeleteSettings_Click">
-            <TextBlock Text="Delete" Margin="0,-1,0,0"/>
+            <TextBlock Text="Reset" Margin="0,-1,0,0"/>
         </Button>
 
         <!-- Update Toggle  -->

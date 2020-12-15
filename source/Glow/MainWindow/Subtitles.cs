@@ -18,24 +18,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
-using System;
-using System.IO;
 using System.Windows;
-using System.Configuration;
-using Glow.Properties;
-using System.Diagnostics;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows.Documents;
-using System.Text;
 using System.Windows.Controls;
-using System.Drawing;
 using System.Windows.Input;
-using System.Threading.Tasks;
-using System.Net;
 using ViewModel;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Glow

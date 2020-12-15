@@ -30,7 +30,7 @@ namespace Generate
         /// <summary>
         ///    Generate Config
         /// </summary>
-        public static String Config(/*MainWindow mainwindow*/)
+        public static String Config()
         {
             // -------------------------
             // Config

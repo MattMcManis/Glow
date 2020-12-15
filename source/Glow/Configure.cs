@@ -32,7 +32,7 @@ namespace Glow
 {
     public class Configure
     {
-        public static string theme;
+        //public static string theme;
 
         /// <summary>
         /// Config File Reader

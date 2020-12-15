@@ -29,15 +29,10 @@ namespace Generate
 {
     public class Subtitles
     {
-        // Selected Item
-        //private static ComboBoxItem selectedItem;
-        //private static string selected;
-
-
         /// <summary>
         ///    Subtitle Config
         /// </summary>
-        public static String Config(/*MainWindow mainwindow*/)
+        public static String Config()
         {
             // --------------------------------------------------
             // Main

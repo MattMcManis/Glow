@@ -31,7 +31,7 @@ namespace Generate
         /// <summary>
         ///    Stream Config
         /// </summary>
-        public static String Config(/*MainWindow mainwindow*/)
+        public static String Config()
         {
             // -------------------------
             // Title

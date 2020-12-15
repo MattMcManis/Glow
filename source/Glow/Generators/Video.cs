@@ -31,7 +31,7 @@ namespace Generate
         /// <summary>
         ///    Video Config
         /// </summary>
-        public static String Config(/*MainWindow mainwindow*/)
+        public static String Config()
         {
             // --------------------------------------------------
             // Main

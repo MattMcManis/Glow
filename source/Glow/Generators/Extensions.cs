@@ -31,7 +31,7 @@ namespace Generate
         /// <summary>
         ///    Extensions Config
         /// </summary>
-        public static String Config(/*MainWindow mainwindow*/)
+        public static String Config()
         {
             // --------------------------------------------------
             // Main
@@ -49,7 +49,7 @@ namespace Generate
 
             if (VM.GeneralView.ExtMKV_SelectedItem == "loop")
                 mkv = "[extension.mkv]"
-                        +"\r\n"
+                        + "\r\n"
                         + "loop-file=inf";
 
             // -------------------------

@@ -68,7 +68,7 @@ namespace Glow
                 // Add Name to List
                 // Prevent adding duplicate
                 // Ignore Desktop.ini
-                if (!listCustomProfilesNames.Contains(profileName) && 
+                if (!listCustomProfilesNames.Contains(profileName) &&
                     !string.Equals(profileName, "desktop", StringComparison.CurrentCultureIgnoreCase))
                 {
                     listCustomProfilesNames.Add(profileName);

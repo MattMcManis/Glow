@@ -31,7 +31,7 @@ namespace Generate
         /// <summary>
         ///    General Config
         /// </summary>
-        public static String Config(/*MainWindow mainwindow*/)
+        public static String Config()
         {
             // --------------------------------------------------
             // Main
@@ -128,7 +128,7 @@ namespace Generate
             // -------------------------
             // Window Title
             // -------------------------
-            string windowTitle = string.Empty;           
+            string windowTitle = string.Empty;
             // empty if default
 
             // Filename
@@ -168,7 +168,7 @@ namespace Generate
             else if (VM.GeneralView.ScreenshotTemplate_SelectedItem == "Date Time")
                 screenshotTemplate = "screenshot-template=\"%F-%ty-%tm-%td_%tH.%tM.%tS.%wT\"";
             else if (VM.GeneralView.ScreenshotTemplate_SelectedItem == "Numbered")
-                    screenshotTemplate = "screenshot-template=\"%F-%n\"";
+                screenshotTemplate = "screenshot-template=\"%F-%n\"";
 
 
             // -------------------------
@@ -206,7 +206,6 @@ namespace Generate
                 else if (VM.GeneralView.ScreenshotFormat_SelectedItem == "png")
                     screenshotQuality = "screenshot-png-compression=" + VM.GeneralView.ScreenshotQuality_Value;//VM.GeneralView.ScreenshotQuality_Text;
             }
-
 
 
             // --------------------------------------------------

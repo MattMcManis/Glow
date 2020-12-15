@@ -32,7 +32,7 @@ namespace Generate
         /// <summary>
         ///    Audio Config
         /// </summary>
-        public static String Config(/*MainWindow mainwindow*/)
+        public static String Config()
         {
             // --------------------------------------------------
             // Main
@@ -158,5 +158,5 @@ namespace Generate
                               );
         }
 
-     }
+    }
 }

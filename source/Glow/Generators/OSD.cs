@@ -34,7 +34,7 @@ namespace Generate
         /// <summary>
         ///    OSD Config
         /// </summary>
-        public static String Config(/*MainWindow mainwindow*/)
+        public static String Config()
         {
             // --------------------------------------------------
             // Main
@@ -58,7 +58,7 @@ namespace Generate
             // -------------------------
             string fractions = string.Empty;
 
-            if (VM.DisplayView.OSD_SelectedItem != "no" && 
+            if (VM.DisplayView.OSD_SelectedItem != "no" &&
                 VM.DisplayView.OSD_Fractions_SelectedItem != "default")
                 fractions = "osd-fractions=" + VM.DisplayView.OSD_Fractions_SelectedItem;
 
@@ -67,7 +67,7 @@ namespace Generate
             // -------------------------
             string level = string.Empty;
 
-            if (VM.DisplayView.OSD_SelectedItem != "no" && 
+            if (VM.DisplayView.OSD_SelectedItem != "no" &&
                 VM.DisplayView.OSD_Level_SelectedItem != "default")
                 level = "osd-level=" + VM.DisplayView.OSD_Level_SelectedItem;
 
@@ -162,7 +162,7 @@ namespace Generate
             // Combine
             // --------------------------------------------------
 
-            List <string> listOSD = new List<string>()
+            List<string> listOSD = new List<string>()
             {
                 // OSD
                 osdTitle,

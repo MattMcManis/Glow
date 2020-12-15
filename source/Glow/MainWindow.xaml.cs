@@ -267,7 +267,7 @@ namespace Glow
             try
             {
                 // Default
-                if (string.IsNullOrEmpty(Configure.theme))
+                if (string.IsNullOrEmpty(VM.ConfigureView.Theme_SelectedItem/*Configure.theme*/))
                 {
                     VM.ConfigureView.Theme_SelectedItem = "Glow";
                 }
@@ -278,7 +278,7 @@ namespace Glow
                     App.Current.Resources.MergedDictionaries.Clear();
                     App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
                     {
-                        Source = new Uri("Themes/" + "Theme" + Configure.theme + ".xaml", UriKind.RelativeOrAbsolute)
+                        Source = new Uri("Themes/" + "Theme" + VM.ConfigureView.Theme_SelectedItem/*Configure.theme*/ + ".xaml", UriKind.RelativeOrAbsolute)
                     });
                 }
             }
@@ -367,7 +367,7 @@ namespace Glow
             }
         }
 
-    
+
         /// <summary>
         /// Window Closing
         /// </summary>
@@ -464,8 +464,8 @@ namespace Glow
                 VM.ConfigureView.mpvPath_Text != conf.Read("Settings", "mpvPath_Text") ||
                 VM.ConfigureView.mpvConfigPath_Text != conf.Read("Settings", "mpvConfigPath_Text") ||
                 VM.ConfigureView.ProfilesPath_Text != conf.Read("Settings", "ProfilesPath_Text") ||
-                VM.ConfigureView.Theme_SelectedItem != conf.Read("Settings", "Theme_SelectedItem") //||
-                //VM.ConfigureView.UpdateAutoCheck_IsChecked != settings_UpdateAutoCheck_IsChecked // problem
+                VM.ConfigureView.Theme_SelectedItem != conf.Read("Settings", "Theme_SelectedItem") ||
+                VM.ConfigureView.UpdateAutoCheck_IsChecked != settings_UpdateAutoCheck_IsChecked // problem
                 )
             {
                 // -------------------------
@@ -744,8 +744,9 @@ namespace Glow
             //}
 
             // Disallow Symbols
-            /*else */if (Keyboard.IsKeyDown(Key.LeftShift) && e.Key >= Key.D0 && e.Key <= Key.D9 ||
-                     Keyboard.IsKeyDown(Key.RightShift) && e.Key >= Key.D0 && e.Key <= Key.D9)
+            /*else */
+            if (Keyboard.IsKeyDown(Key.LeftShift) && e.Key >= Key.D0 && e.Key <= Key.D9 ||
+            Keyboard.IsKeyDown(Key.RightShift) && e.Key >= Key.D0 && e.Key <= Key.D9)
             {
                 e.Handled = true;
             }
@@ -1071,9 +1072,9 @@ namespace Glow
                 // Yes/No Dialog Confirmation
                 //
                 MessageBoxResult resultSave = MessageBox.Show(
-                    "Config Folder does not exist. Automatically create it?", 
-                    "Directory Not Found", 
-                    MessageBoxButton.YesNo, 
+                    "Config Folder does not exist. Automatically create it?",
+                    "Directory Not Found",
+                    MessageBoxButton.YesNo,
                     MessageBoxImage.Information);
                 switch (resultSave)
                 {
@@ -1086,9 +1087,9 @@ namespace Glow
                         catch
                         {
                             MessageBox.Show(
-                                "Could not create Config folder. May require Administrator privileges.", 
-                                "Error", 
-                                MessageBoxButton.OK, 
+                                "Could not create Config folder. May require Administrator privileges.",
+                                "Error",
+                                MessageBoxButton.OK,
                                 MessageBoxImage.Error);
                         }
                         break;
@@ -1183,9 +1184,9 @@ namespace Glow
             {
                 // Yes/No Dialog Confirmation
                 //
-                MessageBoxResult resultExport = MessageBox.Show("Profiles Folder does not exist. Automatically create it?", 
-                                                                "Directory Not Found", 
-                                                                MessageBoxButton.YesNo, 
+                MessageBoxResult resultExport = MessageBox.Show("Profiles Folder does not exist. Automatically create it?",
+                                                                "Directory Not Found",
+                                                                MessageBoxButton.YesNo,
                                                                 MessageBoxImage.Information);
                 switch (resultExport)
                 {
@@ -1197,9 +1198,9 @@ namespace Glow
                         }
                         catch
                         {
-                            MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.", 
-                                            "Error", 
-                                            MessageBoxButton.OK, 
+                            MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.",
+                                            "Error",
+                                            MessageBoxButton.OK,
                                             MessageBoxImage.Error);
                         }
                         break;
