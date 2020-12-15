@@ -34,22 +34,44 @@ namespace Glow
         public static List<string> listCustomPresetsPaths = new List<string>();
 
         /// <summary>
-        ///    Scan PC Custom Presets
+        /// Presets Reset
         /// </summary>
-        public static void GetCustomPresets()
+        public static void PresetsReset()
         {
             listCustomPresetsPaths.Clear();
             listCustomPresetsPaths.TrimExcess();
             VM.MainView.Presets_Items.Clear();
-            VM.MainView.Presets_Items.TrimExcess();
-            VM.MainView.Presets_Items = Main.presets_Default_Items;
+
+            // Set Default Presets (Ultra, High, Medium, Low)
+            VM.MainView.Presets_Items = new ObservableCollection<string>(Main.presets_Default_Items);
+        }
+
+
+        /// <summary>
+        ///    Scan PC Custom Presets
+        /// </summary>
+        public static void LoadCustomPresets()
+        {
+            //listCustomPresetsPaths.Clear();
+            //listCustomPresetsPaths.TrimExcess();
+            //VM.MainView.Presets_Items.Clear();
+
+            //// Set Default Presets (Ultra, High, Medium, Low)
+            //VM.MainView.Presets_Items = new ObservableCollection<string>(Main.presets_Default_Items);
+
+            // Check if Custom Presets Path is valid
+            if (MainWindow.IsValidPath(VM.ConfigureView.PresetsPath_Text) == false)
+            {
+                return;
+            }
 
             // User Custom Presets Full Path
             if (Directory.Exists(VM.ConfigureView.PresetsPath_Text))
             {
                 listCustomPresetsPaths = Directory.GetFiles(VM.ConfigureView.PresetsPath_Text, "*.ini")
-                                          .Select(Path.GetFullPath)
-                                          .ToList();
+                                                  .Select(Path.GetFullPath)
+                                                  .OrderByDescending(x => x)
+                                                  .ToList();
 
                 //MessageBox.Show(VM.ConfigureView.PresetsPath_Text); //debug
                 //MessageBox.Show(string.Join("\n", listCustomPresetsPaths)); //debug
@@ -66,27 +88,38 @@ namespace Glow
 
             // Get Names from Full Paths
             List<string> listCustomPresetsNames = new List<string>();
-            foreach (string path in listCustomPresetsPaths)
-            {
-                // Get Name from Path
-                string presetName = Path.GetFileNameWithoutExtension(path);
 
-                // Add Name to List
-                // Prevent adding duplicate
-                // Ignore Desktop.ini
-                if (!listCustomPresetsNames.Contains(presetName) &&
-                    !string.Equals(presetName, "desktop", StringComparison.CurrentCultureIgnoreCase))
+            try
+            {
+                foreach (string path in listCustomPresetsPaths)
                 {
-                    listCustomPresetsNames.Add(presetName);
+                    // Get Name from Path
+                    string presetName = Path.GetFileNameWithoutExtension(path);
+
+                    // Add Name to List
+                    // Prevent adding duplicate
+                    // Ignore Desktop.ini
+                    if (!listCustomPresetsNames.Contains(presetName) &&
+                        !string.Equals(presetName, "desktop", StringComparison.CurrentCultureIgnoreCase) &&
+                        !string.Equals(presetName, "ntuser", StringComparison.OrdinalIgnoreCase)
+                        )
+                    {
+                        //listCustomPresetsNames.Add(presetName);
+                        VM.MainView.Presets_Items.Add(presetName);
+                    }
                 }
+            }
+            catch
+            {
+
             }
 
             // Join Presets and Presets Lists
             //ViewModel._PresetsItems.AddRange(listCustomPresetsNames);
-            VM.MainView.Presets_Items.AddRange(listCustomPresetsNames);
+            //VM.MainView.Presets_Items.AddRange(listCustomPresetsNames);
             // Populate ComboBox
             //ViewModel._PresetsItems = ViewModel._PresetsItems.Distinct().ToList();
-            VM.MainView.Presets_Items = VM.MainView.Presets_Items.Distinct().ToList();
+            //VM.MainView.Presets_Items = VM.MainView.Presets_Items.Distinct().ToList();
 
             // Clear Temp Lists
             //listCustomPresetsPaths.Clear();
@@ -2347,15 +2380,15 @@ namespace Glow
             }
 
             // Preset ini file does not exist
-            else
-            {
-                MessageBox.Show("Custom Preset does not exist.",
-                                "Notice",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Warning);
+            //else
+            //{
+            //    MessageBox.Show("Custom Preset does not exist.",
+            //                    "Notice",
+            //                    MessageBoxButton.OK,
+            //                    MessageBoxImage.Warning);
 
-                return;
-            }
+            //    return;
+            //}
 
 
         }
