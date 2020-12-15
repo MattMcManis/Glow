@@ -1693,15 +1693,15 @@
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxShadowOffset"
-                                        Text="{Binding ShadowOffset_Text, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                                         Text="{Binding Value, ElementName=slShadowOffset, UpdateSourceTrigger=PropertyChanged}"
                                          IsEnabled="{Binding ShadowOffset_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        Height="22" 
-                                        TextWrapping="Wrap" 
-                                        Margin="0,585,14,0" 
-                                        VerticalAlignment="Top" 
-                                        HorizontalAlignment="Right"
-                                        Width="33"
-                                        Style="{DynamicResource TextBoxStyle}"/>
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,585,14,0" 
+                                         VerticalAlignment="Top" 
+                                         HorizontalAlignment="Right"
+                                         Width="33"
+                                         Style="{DynamicResource TextBoxStyle}"/>
 
 
 
