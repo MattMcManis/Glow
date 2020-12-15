@@ -22,7 +22,7 @@ namespace Glow
             rtbFailedImport.Document = new FlowDocument(p);
 
             rtbFailedImport.BeginChange();
-            p.Inlines.Add(new Run("Please set the following and re-save your profile.\n\n"));
+            p.Inlines.Add(new Run("Please set the following and re-save your preset.\n\n"));
             p.Inlines.Add(new Run(ConfigureWindow.failedImportMessage));
             rtbFailedImport.EndChange();
 

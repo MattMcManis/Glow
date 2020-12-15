@@ -115,21 +115,21 @@ namespace Generate
 
             // Add Each Language In Priority Order from the top to Audio Languages List
             // Regardless of Order checked in
-            //foreach (string item in mainwindow.listViewAudioLanguages_Items)
-            //{
-            //    // If list contains a checked item
-            //    if (mainwindow.listViewAudioLanguages_SelectedItems.Contains(item))
-            //    {
-            //        // Convert Selected Language (e.g. English) into (eng,en,enUS,en-US)
-            //        string language = Languages.LanguageCode(item);
+            foreach (string item in VM.AudioView.LanguagePriority_ListView_Items/*mainwindow.listViewAudioLanguages_Items*/)
+            {
+                // If list contains a checked item
+                if (/*mainwindow.listViewAudioLanguages_SelectedItems*/VM.AudioView.LanguagePriority_ListView_SelectedItems.Contains(item))
+                {
+                    // Convert Selected Language (e.g. English) into (eng,en,enUS,en-US)
+                    //string language = Languages.LanguageCode(item);
 
-            //        // Add language code to list
-            //        listAudioLanguages.Add(language);
-            //    }
-            //}
+                    // Add language code to list
+                    listAudioLanguages.Add(Languages.LanguageCode(item)/*language*/);
+                }
+            }
 
             string languages = string.Empty;
-            if (listAudioLanguages.Count() != 0)
+            if (listAudioLanguages != null && listAudioLanguages.Count > 0)
                 languages = "alang=" + string.Join(",", listAudioLanguages.Where(s => !string.IsNullOrEmpty(s)));
 
             // --------------------------------------------------

@@ -77,20 +77,21 @@ namespace Glow
         public readonly static string downloadDir = userProfile + @"Downloads\"; // C:\Users\Example\Downloads\
 
         // Conf
-        public readonly static string confAppRootPath = appRootDir + "glow.conf";
-        public readonly static string confAppDataLocalPath = appDataLocalDir + @"Glow\glow.conf";
-        public readonly static string confAppDataRoamingPath = appDataRoamingDir + @"Glow\glow.conf";
-        public static string glowConfDir = appDataRoamingDir + @"Glow\";
-        public static string glowConfFile = Path.Combine(glowConfDir, "glow.conf");
+        //public readonly static string confAppRootPath = appRootDir + "glow.conf";
+        //public readonly static string confAppDataLocalPath = appDataLocalDir + @"Glow\glow.conf";
+        //public readonly static string confAppDataRoamingPath = appDataRoamingDir + @"Glow\glow.conf";
+        public readonly static string glowConfDir = appDataRoamingDir + @"Glow\"; // %AppData%\Glow\
+        public readonly static string glowConfFile = Path.Combine(glowConfDir, "glow.conf"); // %AppData%\Glow\glow.conf
 
         // Log
-        public readonly static string logAppRootPath = appRootDir + "glow.log";
-        public readonly static string logAppDataLocalPath = appDataLocalDir + @"Glow\glow.log";
-        public readonly static string logAppDataRoamingPath = appDataRoamingDir + @"Glow\glow.log";
+        //public readonly static string logAppRootPath = appRootDir + "glow.log";
+        //public readonly static string logAppDataLocalPath = appDataLocalDir + @"Glow\glow.log";
+        //public readonly static string logAppDataRoamingPath = appDataRoamingDir + @"Glow\glow.log";
+        public readonly static string glowLogFile = Path.Combine(glowConfDir, "glow.log"); // %AppData%\Glow\glow.log
 
-        // Profiles
-        public static string profilesDir = glowConfDir + @"profiles\"; // Custom User ini profiles
-        //public static string profilesDir = appRootDir + @"profiles\"; // Custom User ini profiles
+        // Presets
+        public static string presetsDir = glowConfDir + @"presets\"; // Custom User ini presets
+        //public static string presetsDir = appRootDir + @"presets\"; // Custom User ini presets // old
 
         // Programs
         public static string mpvDir = string.Empty; // mpv.exe path
@@ -115,15 +116,6 @@ namespace Glow
 
             MinWidth = VM.MainView.Window_Width;
             MinHeight = VM.MainView.Window_Height;
-
-            // -------------------------
-            // Window Position
-            // -------------------------
-            // Center on first run, before first glow.conf has been created
-            //if (this.Top == 0 && this.Left == 0)
-            //{
-            //    WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //}
 
             // -------------------------
             // Title + Version
@@ -156,10 +148,10 @@ namespace Glow
                 typeof(DependencyObject), new FrameworkPropertyMetadata(Int32.MaxValue));
 
             // --------------------------------------------------
-            // Profiles
+            // Presets
             // --------------------------------------------------
-            // Load Custom Profile INI's
-            Profiles.GetCustomProfiles();
+            // Load Custom Preset INI's
+            Presets.GetCustomPresets();
 
             // -------------------------
             // glow.conf actions to read
@@ -228,11 +220,11 @@ namespace Glow
                         VM.ConfigureView.mpvConfigPath_Text = mpvConfigPath_Text;
                     }
 
-                    // Profiles Path
-                    string profilesPath_Text = Configure.ConfigFile.conf.Read("Settings", "ProfilesPath_Text");
-                    if (!string.IsNullOrWhiteSpace(profilesPath_Text))
+                    // Presets Path
+                    string presetsPath_Text = Configure.ConfigFile.conf.Read("Settings", "PresetsPath_Text");
+                    if (!string.IsNullOrWhiteSpace(presetsPath_Text))
                     {
-                        VM.ConfigureView.ProfilesPath_Text = profilesPath_Text;
+                        VM.ConfigureView.PresetsPath_Text = presetsPath_Text;
                     }
 
                     // Theme
@@ -348,8 +340,8 @@ namespace Glow
                         Configure.ConfigFile.conf.Write("Settings", "mpvPath_Text", VM.ConfigureView.mpvPath_Text);
                         // mpv Config Path
                         Configure.ConfigFile.conf.Write("Settings", "mpvConfigPath_Text", VM.ConfigureView.mpvConfigPath_Text);
-                        // Profiles Path
-                        Configure.ConfigFile.conf.Write("Settings", "ProfilesPath_Text", VM.ConfigureView.ProfilesPath_Text);
+                        // Presets Path
+                        Configure.ConfigFile.conf.Write("Settings", "PresetsPath_Text", VM.ConfigureView.PresetsPath_Text);
                         // Theme
                         Configure.ConfigFile.conf.Write("Settings", "Theme_SelectedItem", VM.ConfigureView.Theme_SelectedItem);
                         // Updates
@@ -463,7 +455,7 @@ namespace Glow
 
                 VM.ConfigureView.mpvPath_Text != conf.Read("Settings", "mpvPath_Text") ||
                 VM.ConfigureView.mpvConfigPath_Text != conf.Read("Settings", "mpvConfigPath_Text") ||
-                VM.ConfigureView.ProfilesPath_Text != conf.Read("Settings", "ProfilesPath_Text") ||
+                VM.ConfigureView.PresetsPath_Text != conf.Read("Settings", "PresetsPath_Text") ||
                 VM.ConfigureView.Theme_SelectedItem != conf.Read("Settings", "Theme_SelectedItem") ||
                 VM.ConfigureView.UpdateAutoCheck_IsChecked != settings_UpdateAutoCheck_IsChecked // problem
                 )
@@ -508,8 +500,8 @@ namespace Glow
                         // mpv Config Path
                         Configure.ConfigFile.conf.Write("Settings", "mpvConfigPath_Text", VM.ConfigureView.mpvConfigPath_Text);
 
-                        // Profiles Path
-                        Configure.ConfigFile.conf.Write("Settings", "ProfilesPath_Text", VM.ConfigureView.ProfilesPath_Text);
+                        // Presets Path
+                        Configure.ConfigFile.conf.Write("Settings", "PresetsPath_Text", VM.ConfigureView.PresetsPath_Text);
 
                         // Theme
                         Configure.ConfigFile.conf.Write("Settings", "Theme_SelectedItem", VM.ConfigureView.Theme_SelectedItem);
@@ -1166,11 +1158,11 @@ namespace Glow
         /// <summary>
         ///    Preset
         /// </summary>
-        private void cboProfile_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cboPreset_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Profiles.Profile(this);
+            Presets.Preset(this);
 
-            //MessageBox.Show(vm.Profiles_SelectedItem); //deubg
+            //MessageBox.Show(vm.Presets_SelectedItem); //deubg
         }
 
         /// <summary>
@@ -1178,13 +1170,13 @@ namespace Glow
         /// </summary>
         private void buttonExport_Click(object sender, RoutedEventArgs e)
         {
-            // Check if Profiles Directory exists
+            // Check if Presets Directory exists
             // If not, create it
-            if (!Directory.Exists(VM.ConfigureView.ProfilesPath_Text))
+            if (!Directory.Exists(VM.ConfigureView.PresetsPath_Text))
             {
                 // Yes/No Dialog Confirmation
                 //
-                MessageBoxResult resultExport = MessageBox.Show("Profiles Folder does not exist. Automatically create it?",
+                MessageBoxResult resultExport = MessageBox.Show("Presets Folder does not exist. Automatically create it?",
                                                                 "Directory Not Found",
                                                                 MessageBoxButton.YesNo,
                                                                 MessageBoxImage.Information);
@@ -1194,11 +1186,11 @@ namespace Glow
                     case MessageBoxResult.Yes:
                         try
                         {
-                            Directory.CreateDirectory(VM.ConfigureView.ProfilesPath_Text);
+                            Directory.CreateDirectory(VM.ConfigureView.PresetsPath_Text);
                         }
                         catch
                         {
-                            MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.",
+                            MessageBox.Show("Could not create Presets folder. May require Administrator privileges.",
                                             "Error",
                                             MessageBoxButton.OK,
                                             MessageBoxImage.Error);
@@ -1214,11 +1206,11 @@ namespace Glow
             Microsoft.Win32.SaveFileDialog saveFile = new Microsoft.Win32.SaveFileDialog();
 
             // Defaults
-            saveFile.InitialDirectory = VM.ConfigureView.ProfilesPath_Text;
+            saveFile.InitialDirectory = VM.ConfigureView.PresetsPath_Text;
             saveFile.RestoreDirectory = true;
             saveFile.Filter = "Initialization Files (*.ini)|*.ini";
             saveFile.DefaultExt = "";
-            saveFile.FileName = "profile.ini";
+            saveFile.FileName = "preset.ini";
 
             // Show save file dialog box
             //Nullable<bool> result = saveFile.ShowDialog();
@@ -1242,14 +1234,122 @@ namespace Glow
                 }
 
                 // Export ini file
-                Profiles.ExportProfile(this, input);
+                Presets.ExportPreset(this, input);
 
-                // Refresh Profiles ComboBox
-                Profiles.GetCustomProfiles();
+                // Refresh Presets ComboBox
+                Presets.GetCustomPresets();
 
                 //ViewModel vm = this.DataContext as ViewModel;
-                //VM.ConfigureView.Profile_ItemsSource = VM.ConfigureView.Profiles_Items;
-                //cboProfile_ItemsSource = ViewModel._profilesItems;
+                //VM.ConfigureView.Preset_ItemsSource = VM.ConfigureView.Presets_Items;
+                //cboPreset_ItemsSource = ViewModel._presetsItems;
+            }
+        }
+
+        /// <summary>
+        /// Delete Preset - Button
+        /// </summary>
+        private void btnDeletePreset_Click(object sender, RoutedEventArgs e)
+        {
+            // -------------------------
+            // Set Preset Dir, Name, Ext
+            // -------------------------
+            string presetsDir = Path.GetDirectoryName(VM.ConfigureView.PresetsPath_Text).TrimEnd('\\') + @"\";
+            string presetFileName = Path.GetFileNameWithoutExtension(VM.MainView.Presets_SelectedItem);
+            string presetExt = Path.GetExtension(".ini");
+            string preset = Path.Combine(presetsDir, presetFileName + presetExt);
+            //string preset = presetsDir + presetFileName + presetExt;
+
+            // -------------------------
+            // Get Selected Preset Type
+            // -------------------------
+            //string type = VM.MainView.Presets_Items.FirstOrDefault(item => item.Name == VM.MainView.Presets_SelectedItem)?.Type;
+
+            // -------------------------
+            // Delete
+            // -------------------------
+            if (VM.MainView.Presets_SelectedItem != "Default" &&
+                VM.MainView.Presets_SelectedItem != "Ultra" &&
+                VM.MainView.Presets_SelectedItem != "High" &&
+                VM.MainView.Presets_SelectedItem != "Medium" &&
+                VM.MainView.Presets_SelectedItem != "Low"
+                )
+            {
+                // Yes/No Dialog Confirmation
+                //
+                MessageBoxResult resultExport = MessageBox.Show("Delete " + presetFileName + "?",
+                                                                "Delete Confirm",
+                                                                MessageBoxButton.YesNo,
+                                                                MessageBoxImage.Information);
+                switch (resultExport)
+                {
+                    // Yes
+                    case MessageBoxResult.Yes:
+
+                        // Delete
+                        if (File.Exists(preset))
+                        {
+                            try
+                            {
+                                File.Delete(preset);
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Could not delete Preset. May be missing or requires Administrator Privileges.",
+                                                "Error",
+                                                MessageBoxButton.OK,
+                                                MessageBoxImage.Error);
+                            }
+
+                            // Set the Index
+                            var selectedIndex = VM.MainView.Presets_SelectedIndex;
+
+                            // Select Default Item
+                            VM.MainView.Presets_SelectedItem = "Preset";
+
+                            // Delete from Items Source
+                            // (needs to be after SelectedItem change to prevent error reloading)
+                            try
+                            {
+                                VM.MainView.Presets_Items.RemoveAt(selectedIndex);
+                            }
+                            catch
+                            {
+
+                            }
+
+                            // Load Custom Presets
+                            // Refresh Presets ComboBox
+                            Presets.GetCustomPresets();
+                        }
+                        else
+                        {
+                            MessageBox.Show("The Custom Preset does not exist.",
+                                            "Notice",
+                                            MessageBoxButton.OK,
+                                            MessageBoxImage.Warning);
+                        }
+
+                        break;
+
+                    // No
+                    case MessageBoxResult.No:
+                        MessageBox.Show("Only Custom Presets can be deleted.",
+                                        "Notice",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Warning);
+                        break;
+                }
+            }
+
+            // -------------------------
+            // Not Custom
+            // -------------------------
+            else
+            {
+                MessageBox.Show("This is not a Custom Preset.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
             }
         }
 
@@ -1261,13 +1361,13 @@ namespace Glow
         {
             // Check if presets directory exists
             // If not, create it
-            //Directory.CreateDirectory(profilesDir);
+            //Directory.CreateDirectory(presetsDir);
 
             // Open 'Select File'
             Microsoft.Win32.OpenFileDialog selectFile = new Microsoft.Win32.OpenFileDialog();
 
             // Defaults
-            selectFile.InitialDirectory = VM.ConfigureView.ProfilesPath_Text;
+            selectFile.InitialDirectory = VM.ConfigureView.PresetsPath_Text;
             selectFile.RestoreDirectory = true;
             selectFile.Filter = "ini file (*.ini)|*.ini";
 
@@ -1281,13 +1381,13 @@ namespace Glow
                 string input = inputDir + inputFileName + inputExt;
 
                 // Import ini file
-                Profiles.ImportProfile(this, input);
+                Presets.ImportPreset(this, input);
             }
             else
             {
-                // Reload Presets ComboBox Custom Profiles after any manual changes may have been made
+                // Reload Presets ComboBox Custom Presets after any manual changes may have been made
                 // such as deleting an .ini through the dialog box
-                Profiles.GetCustomProfiles();
+                Presets.GetCustomPresets();
             }
         }
 
@@ -1306,10 +1406,6 @@ namespace Glow
             p.Inlines.Add(new Run(Generate.Generator.Config()));
             rtbConfig.EndChange();
         }
-
-        private void cboScreenshotTagColorspace_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
+
 }

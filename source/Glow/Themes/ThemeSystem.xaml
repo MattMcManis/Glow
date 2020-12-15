@@ -140,6 +140,19 @@
         </Style.Triggers>
     </Style>
 
+    <!-- Delete Button -->
+    <Style x:Key="ButtonDelete" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/delete.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Opacity" Value="0.8"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" Value="0.6"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <!-- Import Button -->
     <Style x:Key="ButtonImport" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>

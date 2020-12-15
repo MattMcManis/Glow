@@ -96,7 +96,7 @@ namespace Glow
             else
             {
                 // PBO Off
-                VM.VideoView.OpenGLPBO_SelectedItem = "off";
+                VM.VideoView.OpenGLPBO_SelectedItem = "default";
                 VM.VideoView.OpenGLPBO_IsEnabled = false;
 
                 // Scaling Off
@@ -175,7 +175,7 @@ namespace Glow
             else
             {
                 // PBO Off
-                VM.VideoView.OpenGLPBO_SelectedItem = "off";
+                VM.VideoView.OpenGLPBO_SelectedItem = "default";
                 VM.VideoView.OpenGLPBO_IsEnabled = false;
 
                 // Scaling Off

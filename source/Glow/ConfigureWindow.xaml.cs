@@ -105,8 +105,8 @@ namespace Glow
                         VM.ConfigureView.mpvConfigPath_Text = folderBrowserDialog.SelectedPath.TrimEnd('\\') + @"\";
                         break;
 
-                    case "profilesPath":
-                        VM.ConfigureView.ProfilesPath_Text = folderBrowserDialog.SelectedPath.TrimEnd('\\') + @"\";
+                    case "presetsPath":
+                        VM.ConfigureView.PresetsPath_Text = folderBrowserDialog.SelectedPath.TrimEnd('\\') + @"\";
                         break;
                 }
             }
@@ -168,30 +168,30 @@ namespace Glow
 
 
         /// <summary>
-        ///    Profiles Path
+        ///    Presets Path
         /// </summary>
-        private void textBoxProfilesPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void textBoxPresetsPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             // Folder Browser
-            SettingsSelectPath("profilesPath");
+            SettingsSelectPath("presetsPath");
         }
-        private void lblProfilesPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void lblPresetsPath_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(VM.ConfigureView.ProfilesPath_Text))
+            if (string.IsNullOrWhiteSpace(VM.ConfigureView.PresetsPath_Text))
             {
                 return;
             }
 
-            Process.Start("explorer.exe", VM.ConfigureView.ProfilesPath_Text);
+            Process.Start("explorer.exe", VM.ConfigureView.PresetsPath_Text);
         }
 
         /// <summary>
-        ///    Revert Profiles Path
+        ///    Revert Presets Path
         /// </summary>
-        private void buttonProfilesPathRevert_Click(object sender, RoutedEventArgs e)
+        private void buttonPresetsPathRevert_Click(object sender, RoutedEventArgs e)
         {
-            VM.ConfigureView.ProfilesPath_Text = MainWindow.glowConfDir + @"profiles\";
-            //VM.ConfigureView.ProfilesPath_Text = MainWindow.appRootDir + @"profiles\";
+            VM.ConfigureView.PresetsPath_Text = MainWindow.glowConfDir + @"presets\";
+            //VM.ConfigureView.PresetsPath_Text = MainWindow.appRootDir + @"presets\";
         }
 
 
@@ -242,9 +242,9 @@ namespace Glow
             //Paths.configDir = Paths.userDir + @"AppData\Roaming\mpv\";
             //textBoxConfigPath_Text = Paths.configDir;
 
-            //// Revert Profiles Path
-            //Paths.profilesDir = Paths.appDir + @"profiles\";
-            //textBoxProfilesPath_Text = Paths.profilesDir;
+            //// Revert Presets Path
+            //Paths.presetsDir = Paths.appDir + @"presets\";
+            //textBoxPresetsPath_Text = Paths.presetsDir;
 
             //// Save Current Window Location
             //// Prevents MainWindow from moving to Top 0 Left 0 while running
@@ -290,7 +290,7 @@ namespace Glow
                     // Set Defaults
                     VM.ConfigureView.mpvPath_Text = string.Empty;
                     VM.ConfigureView.mpvConfigPath_Text = MainWindow.mpvConfigDir;
-                    VM.ConfigureView.ProfilesPath_Text = MainWindow.glowConfDir + @"profiles\";
+                    VM.ConfigureView.PresetsPath_Text = MainWindow.glowConfDir + @"presets\";
                     VM.ConfigureView.UpdateAutoCheck_IsChecked = true;
                     VM.ConfigureView.Theme_SelectedItem = "Glow";
 

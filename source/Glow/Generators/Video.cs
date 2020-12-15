@@ -116,10 +116,10 @@ namespace Generate
             // Select
             else if (VM.VideoView.ICCProfile_IsEditable)
                 iccProfile = "icc-profile=" + "\"" + VM.VideoView.ICCProfile_SelectedItem + "\"";
-            //string iccProfilePath = string.Empty;
+            //string ICCProfilePath = string.Empty;
             //// only if not empty
             //if (!string.IsNullOrWhiteSpace(VM.VideoView.ICCProfilePath_Text))
-            //    iccProfilePath = "icc-profile=" + "\"" + VM.VideoView.ICCProfilePath_Text + "\"";
+            //    ICCProfilePath = "icc-profile=" + "\"" + VM.VideoView.ICCProfilePath_Text + "\"";
 
             // -------------------------
             // Primaries
@@ -461,7 +461,7 @@ namespace Generate
                 hwdec,
 
                 // Display
-                //iccProfilePath,
+                //ICCProfilePath,
                 iccProfile,
                 displayPrimaries,
                 displayTransChar,

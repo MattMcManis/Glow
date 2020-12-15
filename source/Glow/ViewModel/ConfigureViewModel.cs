@@ -52,7 +52,7 @@ namespace ViewModel
             // -------------------------
             mpvPath_Text = string.Empty;
             mpvConfigPath_Text = MainWindow.mpvConfigDir;
-            ProfilesPath_Text = MainWindow.profilesDir;
+            PresetsPath_Text = MainWindow.presetsDir;
             UpdateAutoCheck_IsChecked = true;
             Theme_SelectedItem = "Glow";
         }
@@ -135,39 +135,39 @@ namespace ViewModel
 
 
         // -------------------------
-        // Profiles Path
+        // Presets Path
         // -------------------------
         // Text
-        private string _ProfilesPath_Text;
-        public string ProfilesPath_Text
+        private string _PresetsPath_Text;
+        public string PresetsPath_Text
         {
-            get { return _ProfilesPath_Text; }
+            get { return _PresetsPath_Text; }
             set
             {
-                if (_ProfilesPath_Text == value)
+                if (_PresetsPath_Text == value)
                 {
                     return;
                 }
 
-                _ProfilesPath_Text = value;
-                OnPropertyChanged("ProfilesPath_Text");
+                _PresetsPath_Text = value;
+                OnPropertyChanged("PresetsPath_Text");
             }
         }
 
         // Controls Enable
-        private bool _ProfilesPath_IsEnabled = true;
-        public bool ProfilesPath_IsEnabled
+        private bool _PresetsPath_IsEnabled = true;
+        public bool PresetsPath_IsEnabled
         {
-            get { return _ProfilesPath_IsEnabled; }
+            get { return _PresetsPath_IsEnabled; }
             set
             {
-                if (_ProfilesPath_IsEnabled == value)
+                if (_PresetsPath_IsEnabled == value)
                 {
                     return;
                 }
 
-                _ProfilesPath_IsEnabled = value;
-                OnPropertyChanged("ProfilesPath_IsEnabled");
+                _PresetsPath_IsEnabled = value;
+                OnPropertyChanged("PresetsPath_IsEnabled");
             }
         }
 
@@ -191,7 +191,7 @@ namespace ViewModel
         }
 
         // -------------------------
-        // Profiles Path
+        // Presets Path
         // -------------------------
         // Text
         private string _UpdateAutoCheck_Text;

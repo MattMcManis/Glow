@@ -54,26 +54,23 @@ namespace Generate
             // -------------------------
             // Languages
             // -------------------------
-            List<string> listSubtitlesLanguages = new List<string>();
+            List<string> listSubtitleLanguages = new List<string>();
 
             // Add Each Language In Priority Order from the top to Audio Languages List
             // Regardless of Order checked in
-            //foreach (string item in mainwindow.listViewSubtitlesLanguages_Items)
-            //{
-            //    // If list contains a checked item
-            //    if (mainwindow.listViewSubtitlesLanguages_SelectedItems.Contains(item))
-            //    {
-            //        // Convert Selected Language (e.g. English) into (eng,en,enUS,en-US)
-            //        string language = Languages.LanguageCode(item);
-
-            //        // Add language code to list
-            //        listSubtitlesLanguages.Add(language);
-            //    }
-            //}
+            foreach (string item in VM.SubtitlesView.LanguagePriority_ListView_Items)
+            {
+                // If list contains a checked item
+                if (VM.SubtitlesView.LanguagePriority_ListView_SelectedItems.Contains(item))
+                {
+                    // Add language code to list
+                    listSubtitleLanguages.Add(Languages.LanguageCode(item));
+                }
+            }
 
             string languages = string.Empty;
-            if (listSubtitlesLanguages.Count() != 0)
-                languages = "slang=" + string.Join(",", listSubtitlesLanguages.Where(s => !string.IsNullOrEmpty(s)));
+            if (listSubtitleLanguages != null && listSubtitleLanguages.Count > 0)
+                languages = "slang=" + string.Join(",", listSubtitleLanguages.Where(s => !string.IsNullOrEmpty(s)));
 
             // -------------------------
             // Load Files

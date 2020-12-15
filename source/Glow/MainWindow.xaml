@@ -2361,7 +2361,6 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotTagColorspace_SelectionChanged"
                                           Grid.Column="1">
                                 </ComboBox>
 
@@ -3508,38 +3507,39 @@
             </Button>
 
             <!-- Presets -->
-            <ComboBox x:Name="cboProfile" 
+            <ComboBox x:Name="cboPreset" 
                       DataContext="{Binding MainView}"
-                      ItemsSource="{Binding Profiles_Items}"
-                      SelectedItem="{Binding Profiles_SelectedItem}"
-                      IsEnabled="{Binding Profiles_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="0,0,181,16"
+                      ItemsSource="{Binding Presets_Items}"
+                      SelectedItem="{Binding Presets_SelectedItem}"
+                      SelectedIndex="{Binding Presets_SelectedIndex}"
+                      IsEnabled="{Binding Presets_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="0,0,199,16"
                       Width="75" 
                       Height="22" 
                       VerticalAlignment="Bottom"
                       HorizontalAlignment="Right" 
                       ToolTipService.InitialShowDelay="1000" 
                       ToolTipService.ShowOnDisabled="True" 
-                      ToolTip="Profile"
-                      SelectionChanged="cboProfile_SelectionChanged"
+                      ToolTip="Preset"
+                      SelectionChanged="cboPreset_SelectionChanged"
                       Style="{DynamicResource ComboBoxStyle}"
                       ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
             </ComboBox>
 
-            <!-- Export ini -->
-            <Button x:Name="buttonExport"
-                    Margin="0,0,122,16" 
-                    Width="22" Height="22"
+            <!-- Delete ini -->
+            <Button x:Name="btnDelete" 
+                    HorizontalAlignment="Right"
+                    Margin="0,0,170,16" 
                     VerticalAlignment="Bottom" 
-                    HorizontalAlignment="Right" 
+                    Width="22" Height="22"
                     Cursor="Hand" 
                     ToolTipService.InitialShowDelay="1000" 
                     ToolTipService.ShowOnDisabled="True" 
-                    ToolTip="Save Profile"
-                    Click="buttonExport_Click"
+                    ToolTip="Import Preset"
+                    Click="btnDeletePreset_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
-                <Image Style="{DynamicResource ButtonExport}" 
-                    Width="11" 
+                <Image Style="{DynamicResource ButtonDelete}" 
+                    Width="9" 
                     Height="11" 
                     Margin="0,-1,0,0"
                     Stretch="Fill" 
@@ -3550,17 +3550,38 @@
             <!-- Import ini -->
             <Button x:Name="buttonImport" 
                     HorizontalAlignment="Right"
-                    Margin="0,0,151,16" 
+                    Margin="0,0,141,16" 
                     VerticalAlignment="Bottom" 
                     Width="22" Height="22"
                     Cursor="Hand" 
                     ToolTipService.InitialShowDelay="1000" 
                     ToolTipService.ShowOnDisabled="True" 
-                    ToolTip="Import Profile"
+                    ToolTip="Import Preset"
                     Click="buttonImport_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
                 <Image Style="{DynamicResource ButtonImport}" 
                     Width="9" 
+                    Height="11" 
+                    Margin="0,-1,0,0"
+                    Stretch="Fill" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"/>
+            </Button>
+
+            <!-- Export ini -->
+            <Button x:Name="buttonExport"
+                    Margin="0,0,112,16" 
+                    Width="22" Height="22"
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" 
+                    Cursor="Hand" 
+                    ToolTipService.InitialShowDelay="1000" 
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip="Save Preset"
+                    Click="buttonExport_Click"
+                    Style="{DynamicResource ButtonSmallStyle}">
+                <Image Style="{DynamicResource ButtonExport}" 
+                    Width="11" 
                     Height="11" 
                     Margin="0,-1,0,0"
                     Stretch="Fill" 

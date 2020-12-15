@@ -95,7 +95,7 @@
     </Compile>
     <Compile Include="Languages.cs" />
     <Compile Include="Generators\OSD.cs" />
-    <Compile Include="Profiles.cs" />
+    <Compile Include="Presets.cs" />
     <Compile Include="Generators\Stream.cs" />
     <Compile Include="Generators\Subtitles.cs" />
     <Compile Include="MainWindow\Subtitles.cs" />
@@ -222,6 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\info.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\White\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\Black\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

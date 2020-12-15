@@ -53,7 +53,7 @@ namespace ViewModel
             Window_Width = 712;
             Window_Height = 400;
 
-            Profiles_SelectedItem = "Default";
+            Presets_SelectedItem = "Default";
         }
 
 
@@ -239,7 +239,7 @@ namespace ViewModel
         // Presets
         // -------------------------
         // Item Source
-        public List<string> _Presets_Items = new List<string>()
+        public static List<string> presets_Default_Items = new List<string>()
         {
             "Default",
             "Ultra",
@@ -249,6 +249,9 @@ namespace ViewModel
             // Debug
         };
 
+        // Item Source
+        public List<string> _Presets_Items = new List<string>();
+
         public List<string> Presets_Items
         {
             get { return _Presets_Items; }
@@ -256,6 +259,23 @@ namespace ViewModel
             {
                 _Presets_Items = value;
                 OnPropertyChanged("Presets_Items");
+            }
+        }
+
+        // Selected Index
+        private int _Presets_SelectedIndex { get; set; }
+        public int Presets_SelectedIndex
+        {
+            get { return _Presets_SelectedIndex; }
+            set
+            {
+                if (_Presets_SelectedIndex == value)
+                {
+                    return;
+                }
+
+                _Presets_SelectedIndex = value;
+                OnPropertyChanged("Preset_SelectedIndex");
             }
         }
 
@@ -296,51 +316,51 @@ namespace ViewModel
 
 
         // -------------------------
-        // Custom Profiles
+        // Custom Presets
         // -------------------------
         //// Item Source
-        //public static List<string> _Profiles_Items = new List<string>();
-        //public List<string> Profiles_Items
+        //public static List<string> _Presets_Items = new List<string>();
+        //public List<string> Presets_Items
         //{
-        //    get { return _Profiles_Items; }
+        //    get { return _Presets_Items; }
         //    set
         //    {
-        //        _Profiles_Items = value;
-        //        OnPropertyChanged("Profiles_Items");
+        //        _Presets_Items = value;
+        //        OnPropertyChanged("Presets_Items");
         //    }
         //}
 
         //// Selected Item
-        //private string _Profiles_SelectedItem { get; set; }
-        //public string Profiles_SelectedItem
+        //private string _Presets_SelectedItem { get; set; }
+        //public string Presets_SelectedItem
         //{
-        //    get { return _Profiles_SelectedItem; }
+        //    get { return _Presets_SelectedItem; }
         //    set
         //    {
-        //        if (_Profiles_SelectedItem == value)
+        //        if (_Presets_SelectedItem == value)
         //        {
         //            return;
         //        }
 
-        //        _Profiles_SelectedItem = value;
-        //        OnPropertyChanged("Profiles_SelectedItem");
+        //        _Presets_SelectedItem = value;
+        //        OnPropertyChanged("Presets_SelectedItem");
         //    }
         //}
 
         //// Controls Enable
-        //private bool _Profiles_IsEnabled = true;
-        //public bool Profiles_IsEnabled
+        //private bool _Presets_IsEnabled = true;
+        //public bool Presets_IsEnabled
         //{
-        //    get { return _Profiles_IsEnabled; }
+        //    get { return _Presets_IsEnabled; }
         //    set
         //    {
-        //        if (_Profiles_IsEnabled == value)
+        //        if (_Presets_IsEnabled == value)
         //        {
         //            return;
         //        }
 
-        //        _Profiles_IsEnabled = value;
-        //        OnPropertyChanged("Profiles_IsEnabled");
+        //        _Presets_IsEnabled = value;
+        //        OnPropertyChanged("Presets_IsEnabled");
         //    }
         //}
 
@@ -371,56 +391,73 @@ namespace ViewModel
 
 
         // -------------------------
-        // Profiles
+        // Presets
         // -------------------------
-        // Item Source
-        private List<string> _Profiles_Items = new List<string>()
-        {
-            //
-        };
-        public List<string> Profiles_Items
-        {
-            get { return _Profiles_Items; }
-            set
-            {
-                _Profiles_Items = value;
-                OnPropertyChanged("Profiles_Items");
-            }
-        }
+        //// Item Source
+        //private List<string> _Presets_Items = new List<string>()
+        //{
+        //    //
+        //};
+        //public List<string> Presets_Items
+        //{
+        //    get { return _Presets_Items; }
+        //    set
+        //    {
+        //        _Presets_Items = value;
+        //        OnPropertyChanged("Presets_Items");
+        //    }
+        //}
 
-        // Selected Item
-        private string _Profiles_SelectedItem { get; set; }
-        public string Profiles_SelectedItem
-        {
-            get { return _Profiles_SelectedItem; }
-            set
-            {
-                if (_Profiles_SelectedItem == value)
-                {
-                    return;
-                }
+        //// Selected Index
+        //private int _Presets_SelectedIndex { get; set; }
+        //public int Presets_SelectedIndex
+        //{
+        //    get { return _Presets_SelectedIndex; }
+        //    set
+        //    {
+        //        if (_Presets_SelectedIndex == value)
+        //        {
+        //            return;
+        //        }
 
-                _Profiles_SelectedItem = value;
-                OnPropertyChanged("Profiles_SelectedItem");
-            }
-        }
+        //        _Presets_SelectedIndex = value;
+        //        OnPropertyChanged("Preset_SelectedIndex");
+        //    }
+        //}
 
-        // Controls Enable
-        private bool _Profiles_IsEnabled = true;
-        public bool Profiles_IsEnabled
-        {
-            get { return _Profiles_IsEnabled; }
-            set
-            {
-                if (_Profiles_IsEnabled == value)
-                {
-                    return;
-                }
+        //// Selected Item
+        //private string _Presets_SelectedItem { get; set; }
+        //public string Presets_SelectedItem
+        //{
+        //    get { return _Presets_SelectedItem; }
+        //    set
+        //    {
+        //        if (_Presets_SelectedItem == value)
+        //        {
+        //            return;
+        //        }
 
-                _Profiles_IsEnabled = value;
-                OnPropertyChanged("Profiles_IsEnabled");
-            }
-        }
+        //        _Presets_SelectedItem = value;
+        //        OnPropertyChanged("Presets_SelectedItem");
+        //    }
+        //}
+
+        //// Controls Enable
+        //private bool _Presets_IsEnabled = true;
+        //public bool Presets_IsEnabled
+        //{
+        //    get { return _Presets_IsEnabled; }
+        //    set
+        //    {
+        //        if (_Presets_IsEnabled == value)
+        //        {
+        //            return;
+        //        }
+
+        //        _Presets_IsEnabled = value;
+        //        OnPropertyChanged("Presets_IsEnabled");
+        //    }
+        //}
 
 
     }

@@ -139,20 +139,20 @@
         </Button>
 
 
-        <!-- Profiles path -->
-        <Label x:Name="lblProfilesPath"
-               Content="Profiles Path"
+        <!-- Presets path -->
+        <Label x:Name="lblPresetsPath"
+               Content="Presets Path"
                Style="{DynamicResource LabelStyle}"
                HorizontalAlignment="Left" 
                Margin="10,78,0,0" 
                VerticalAlignment="Top" 
                Height="26" 
                Cursor="Hand"
-               PreviewMouseDown="lblProfilesPath_PreviewMouseDown"
-               ToolTip="Path to INI Profiles"/>
-        <TextBox x:Name="textBoxProfilesPath"
+               PreviewMouseDown="lblPresetsPath_PreviewMouseDown"
+               ToolTip="Path to INI Presets"/>
+        <TextBox x:Name="textBoxPresetsPath"
                  DataContext="{Binding ConfigureView}"
-                 Text="{Binding ProfilesPath_Text, Mode=TwoWay}"
+                 Text="{Binding PresetsPath_Text, Mode=TwoWay}"
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
                  Height="20"
@@ -161,10 +161,10 @@
                  VerticalAlignment="Top" 
                  Width="292" 
                  IsReadOnly="True" 
-                 ToolTip="Path to INI Profiles"
-                 PreviewMouseDown="textBoxProfilesPath_PreviewMouseDown"/>
-        <!-- Profiles Path Revert Button -->
-        <Button x:Name="buttonProfilesPathRevert"
+                 ToolTip="Path to INI Presets"
+                 PreviewMouseDown="textBoxPresetsPath_PreviewMouseDown"/>
+        <!-- Presets Path Revert Button -->
+        <Button x:Name="buttonPresetsPathRevert"
                 HorizontalAlignment="Left" 
                 Margin="397,79,0,0" 
                 VerticalAlignment="Top"
@@ -172,7 +172,7 @@
                 Height="23"
                 Cursor="Hand" 
                 ToolTip="Revert to Auto" 
-                Click="buttonProfilesPathRevert_Click"
+                Click="buttonPresetsPathRevert_Click"
                 Style="{DynamicResource ButtonRevertStyle}">
             <Image Style="{DynamicResource ButtonRevertArrow}" 
                    Width="9" 

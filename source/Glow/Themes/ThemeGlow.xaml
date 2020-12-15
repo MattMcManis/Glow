@@ -2493,6 +2493,13 @@
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
+    <!-- Delete Button -->
+    <Style x:Key="ButtonDelete" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/delete.png"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+    
     <!-- Import Button -->
     <Style x:Key="ButtonImport" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>

@@ -29,77 +29,82 @@ using ViewModel;
 
 namespace Glow
 {
-    public partial class Profiles
+    public partial class Presets
     {
-        public static List<string> listCustomProfilesPaths = new List<string>();
+        public static List<string> listCustomPresetsPaths = new List<string>();
 
         /// <summary>
-        ///    Scan PC Custom Profiles
+        ///    Scan PC Custom Presets
         /// </summary>
-        public static void GetCustomProfiles()
+        public static void GetCustomPresets()
         {
-            // User Custom Profiles Full Path
-            if (Directory.Exists(VM.ConfigureView.ProfilesPath_Text))
+            listCustomPresetsPaths.Clear();
+            listCustomPresetsPaths.TrimExcess();
+            VM.MainView.Presets_Items.Clear();
+            VM.MainView.Presets_Items.TrimExcess();
+            VM.MainView.Presets_Items = Main.presets_Default_Items;
+
+            // User Custom Presets Full Path
+            if (Directory.Exists(VM.ConfigureView.PresetsPath_Text))
             {
-                listCustomProfilesPaths = Directory.GetFiles(VM.ConfigureView.ProfilesPath_Text, "*.ini")
+                listCustomPresetsPaths = Directory.GetFiles(VM.ConfigureView.PresetsPath_Text, "*.ini")
                                           .Select(Path.GetFullPath)
                                           .ToList();
 
-                //MessageBox.Show(VM.ConfigureView.ProfilesPath_Text); //debug
-                //MessageBox.Show(string.Join("\n", listCustomProfilesPaths)); //debug
+                //MessageBox.Show(VM.ConfigureView.PresetsPath_Text); //debug
+                //MessageBox.Show(string.Join("\n", listCustomPresetsPaths)); //debug
             }
 
-            // Profiles path does not exist
+            // Presets path does not exist
             else
             {
                 // Load Default
-                VM.ConfigureView.ProfilesPath_Text = MainWindow.profilesDir;
+                VM.ConfigureView.PresetsPath_Text = MainWindow.presetsDir;
 
-                //MessageBox.Show(VM.ConfigureView.ProfilesPath_Text); //debug
+                //MessageBox.Show(VM.ConfigureView.PresetsPath_Text); //debug
             }
 
             // Get Names from Full Paths
-            List<string> listCustomProfilesNames = new List<string>();
-            foreach (string path in listCustomProfilesPaths)
+            List<string> listCustomPresetsNames = new List<string>();
+            foreach (string path in listCustomPresetsPaths)
             {
                 // Get Name from Path
-                string profileName = Path.GetFileNameWithoutExtension(path);
+                string presetName = Path.GetFileNameWithoutExtension(path);
 
                 // Add Name to List
                 // Prevent adding duplicate
                 // Ignore Desktop.ini
-                if (!listCustomProfilesNames.Contains(profileName) &&
-                    !string.Equals(profileName, "desktop", StringComparison.CurrentCultureIgnoreCase))
+                if (!listCustomPresetsNames.Contains(presetName) &&
+                    !string.Equals(presetName, "desktop", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    listCustomProfilesNames.Add(profileName);
+                    listCustomPresetsNames.Add(presetName);
                 }
-
             }
 
-            // Join Presets and Profiles Lists
-            //ViewModel._PresetsItems.AddRange(listCustomProfilesNames);
-            VM.MainView.Presets_Items.AddRange(listCustomProfilesNames);
+            // Join Presets and Presets Lists
+            //ViewModel._PresetsItems.AddRange(listCustomPresetsNames);
+            VM.MainView.Presets_Items.AddRange(listCustomPresetsNames);
             // Populate ComboBox
-            //ViewModel._ProfilesItems = ViewModel._PresetsItems.Distinct().ToList();
-            VM.MainView.Profiles_Items = VM.MainView.Presets_Items.Distinct().ToList();
+            //ViewModel._PresetsItems = ViewModel._PresetsItems.Distinct().ToList();
+            VM.MainView.Presets_Items = VM.MainView.Presets_Items.Distinct().ToList();
 
             // Clear Temp Lists
-            //listCustomProfilesPaths.Clear();
-            //listCustomProfilesPaths.TrimExcess();
-            //listCustomProfilesNames.Clear();
-            //listCustomProfilesNames.TrimExcess();
+            //listCustomPresetsPaths.Clear();
+            //listCustomPresetsPaths.TrimExcess();
+            //listCustomPresetsNames.Clear();
+            //listCustomPresetsNames.TrimExcess();
         }
 
 
         /// <summary>
-        ///     Profile
+        ///     Preset
         /// </summary>
-        public static void Profile(MainWindow mainwindow)
+        public static void Preset(MainWindow mainwindow)
         {
             // -------------------------
             // Default
             // -------------------------
-            if (VM.MainView.Profiles_SelectedItem == "Default")
+            if (VM.MainView.Presets_SelectedItem == "Default")
             {
                 // -------------------------
                 // General
@@ -275,7 +280,7 @@ namespace Glow
             // -------------------------
             // Ultra
             // -------------------------
-            else if (VM.MainView.Profiles_SelectedItem == "Ultra")
+            else if (VM.MainView.Presets_SelectedItem == "Ultra")
             {
                 // -------------------------
                 // General
@@ -446,7 +451,7 @@ namespace Glow
             // -------------------------
             // High
             // -------------------------
-            else if (VM.MainView.Profiles_SelectedItem == "High")
+            else if (VM.MainView.Presets_SelectedItem == "High")
             {
                 // -------------------------
                 // General
@@ -620,7 +625,7 @@ namespace Glow
             // -------------------------
             // Medium
             // -------------------------
-            else if (VM.MainView.Profiles_SelectedItem == "Medium")
+            else if (VM.MainView.Presets_SelectedItem == "Medium")
             {
                 // -------------------------
                 // General
@@ -794,7 +799,7 @@ namespace Glow
             // -------------------------
             // Low
             // -------------------------
-            else if (VM.MainView.Profiles_SelectedItem == "Low")
+            else if (VM.MainView.Presets_SelectedItem == "Low")
             {
                 // -------------------------
                 // General
@@ -969,7 +974,7 @@ namespace Glow
             // -------------------------
             // Debug
             // -------------------------
-            else if (VM.MainView.Profiles_SelectedItem == "Debug")
+            else if (VM.MainView.Presets_SelectedItem == "Debug")
             {
                 // -------------------------
                 // General
@@ -1145,25 +1150,25 @@ namespace Glow
             }
 
             // -------------------------
-            // User Custom Profile
+            // User Custom Preset
             // -------------------------
             else
             {
-                // Get Profile INI Path
+                // Get Preset INI Path
                 string input = string.Empty;
-                foreach (string path in listCustomProfilesPaths)
+                foreach (string path in listCustomPresetsPaths)
                 {
                     string filename = Path.GetFileNameWithoutExtension(path);
 
-                    if (VM.MainView.Profiles_SelectedItem == filename)
+                    if (VM.MainView.Presets_SelectedItem == filename)
                     {
                         input = path;
                         break;
                     }
                 }
 
-                // Import profile INI file
-                ImportProfile(mainwindow, input);
+                // Import Custom Preset INI file
+                ImportPreset(mainwindow, input);
             }
 
         }
@@ -1171,25 +1176,25 @@ namespace Glow
 
 
         /// <summary>
-        ///    Export Profile
+        ///    Export Preset
         /// </summary>
-        public static void ExportProfile(MainWindow mainwindow, string profile)
+        public static void ExportPreset(MainWindow mainwindow, string preset)
         {
-            // Check if Profile Directory exists
-            if (Directory.Exists(VM.ConfigureView.ProfilesPath_Text))
+            // Check if Preset Directory exists
+            if (Directory.Exists(VM.ConfigureView.PresetsPath_Text))
             {
                 // Start INI File Write
-                Configure.ConfigFile inif = new Configure.ConfigFile(profile);
+                Configure.ConfigFile inif = new Configure.ConfigFile(preset);
 
                 // --------------------------------------------------
                 // Settings
                 // --------------------------------------------------
                 //inif.Write("Settings", "mpvDir", Paths.mpvDir);
                 //inif.Write("Settings", "configDir", Paths.mpvConfigDir);
-                //inif.Write("Settings", "profilesDir", Paths.profilesDir);
+                //inif.Write("Settings", "presetsDir", Paths.presetsDir);
                 //inif.Write("Settings", "mpvDir", VM.ConfigureView.mpvPath_Text);
                 //inif.Write("Settings", "configDir", VM.ConfigureView.mpvConfigPath_Text);
-                //inif.Write("Settings", "profilesDir", VM.ConfigureView.ProfilesPath_Text);
+                //inif.Write("Settings", "presetsDir", VM.ConfigureView.PresetsPath_Text);
 
                 // --------------------------------------------------
                 // General
@@ -1224,8 +1229,8 @@ namespace Glow
                 inif.Write("Video", "openglPBOFormat", VM.VideoView.OpenGLPBOFormat_SelectedItem);
                 inif.Write("Video", "hwdec", VM.VideoView.HWDecoder_SelectedItem);
                 // Display
-                //inif.Write("Video", "iccProfilePath", vm.ICCProfilePath_Text);
-                inif.Write("Video", "iccProfile", VM.VideoView.ICCProfile_SelectedItem);
+                //inif.Write("Video", "ICCProfilePath", vm.ICCProfilePath_Text);
+                inif.Write("Video", "ICCProfile", VM.VideoView.ICCProfile_SelectedItem);
                 inif.Write("Video", "displayPrimaries", VM.VideoView.DisplayPrimaries_SelectedItem);
                 inif.Write("Video", "transferCharacteristics", VM.VideoView.TransferCharacteristics_SelectedItem);
                 inif.Write("Video", "colorSpace", VM.VideoView.ColorSpace_SelectedItem);
@@ -1428,12 +1433,12 @@ namespace Glow
                 inif.Write("Extensions", "png", VM.GeneralView.ExtPNG_SelectedItem);
             }
 
-            // Create Profiles Directory if does not exist
+            // Create Presets Directory if does not exist
             else
             {
                 // Yes/No Dialog Confirmation
                 //
-                MessageBoxResult resultExport = MessageBox.Show("Profiles Folder does not exist. Automatically create it?",
+                MessageBoxResult resultExport = MessageBox.Show("Presets Folder does not exist. Automatically create it?",
                                                                 "Directory Not Found",
                                                                 MessageBoxButton.YesNo,
                                                                 MessageBoxImage.Information);
@@ -1443,11 +1448,11 @@ namespace Glow
                     case MessageBoxResult.Yes:
                         try
                         {
-                            Directory.CreateDirectory(VM.ConfigureView.ProfilesPath_Text);
+                            Directory.CreateDirectory(VM.ConfigureView.PresetsPath_Text);
                         }
                         catch
                         {
-                            MessageBox.Show("Could not create Profiles folder. May require Administrator privileges.",
+                            MessageBox.Show("Could not create Presets folder. May require Administrator privileges.",
                                             "Error",
                                             MessageBoxButton.OK,
                                             MessageBoxImage.Error);
@@ -1462,9 +1467,9 @@ namespace Glow
 
 
         /// <summary>
-        ///    Import Profile
+        ///    Import Preset
         /// </summary>
-        public static void ImportProfile(MainWindow mainwindow, string profile)
+        public static void ImportPreset(MainWindow mainwindow, string preset)
         {
             // If control failed to imported, add to list
             List<string> listFailedImports = new List<string>();
@@ -1473,11 +1478,11 @@ namespace Glow
             Configure.ConfigFile inif = null;
 
             // -------------------------
-            // Check if Profile ini file exists
+            // Check if Preset ini file exists
             // -------------------------
-            if (File.Exists(profile))
+            if (File.Exists(preset))
             {
-                inif = new Configure.ConfigFile(profile);
+                inif = new Configure.ConfigFile(preset);
 
                 // --------------------------------------------------
                 // General
@@ -1618,20 +1623,20 @@ namespace Glow
                 // Display
                 // -------------------------
 
-                // ICC Profile
-                string iccProfile = inif.Read("Video", "iccProfile");
-                if (iccProfile != "default" && iccProfile != "auto" && iccProfile != "select")
+                // ICC Preset
+                string ICCProfile = inif.Read("Video", "ICCProfile");
+                if (ICCProfile != "default" && ICCProfile != "auto" && ICCProfile != "select")
                 {
-                    VM.VideoView.ICCProfile_Items.Add(iccProfile);
-                    VM.VideoView.ICCProfile_SelectedItem = iccProfile;
+                    VM.VideoView.ICCProfile_Items.Add(ICCProfile);
+                    VM.VideoView.ICCProfile_SelectedItem = ICCProfile;
                     VM.VideoView.ICCProfile_IsEditable = true;
                 }
 
-                if (VM.VideoView.ICCProfile_Items.Contains(iccProfile))
-                    VM.VideoView.ICCProfile_SelectedItem = iccProfile;
+                if (VM.VideoView.ICCProfile_Items.Contains(ICCProfile))
+                    VM.VideoView.ICCProfile_SelectedItem = ICCProfile;
                 else
                     listFailedImports.Add("Video: Display Primaries");
-                //vm.ICCProfilePath_Text = inif.Read("Video", "iccProfilePath");
+                //vm.ICCProfilePath_Text = inif.Read("Video", "ICCProfilePath");
 
                 // Display Primaries
                 string displayPrimaries = inif.Read("Video", "displayPrimaries");
@@ -2341,13 +2346,13 @@ namespace Glow
                 }
             }
 
-            // Profile ini file does not exist
+            // Preset ini file does not exist
             else
             {
-                MessageBox.Show("Profile does not exist.",
-                                "Error",
+                MessageBox.Show("Custom Preset does not exist.",
+                                "Notice",
                                 MessageBoxButton.OK,
-                                MessageBoxImage.Error);
+                                MessageBoxImage.Warning);
 
                 return;
             }
