@@ -53,6 +53,7 @@ namespace ViewModel
             Window_Width = 712;
             Window_Height = 400;
 
+            Presets_Items = new ObservableCollection<string>(Main.presets_Default_Items);
             Presets_SelectedItem = "Default";
         }
 
@@ -250,9 +251,9 @@ namespace ViewModel
         };
 
         // Item Source
-        public List<string> _Presets_Items = new List<string>();
+        public ObservableCollection<string> _Presets_Items = new ObservableCollection<string>();
 
-        public List<string> Presets_Items
+        public ObservableCollection<string> Presets_Items
         {
             get { return _Presets_Items; }
             set
