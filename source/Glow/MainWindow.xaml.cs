@@ -1095,7 +1095,7 @@ namespace Glow
                 try
                 {
                     // Save document
-                    File.WriteAllText(saveFile.FileName, ConfigRichTextBox(), Encoding.Unicode);
+                    File.WriteAllText(saveFile.FileName, ConfigRichTextBox(), Encoding.UTF8);
                 }
                 catch
                 {
