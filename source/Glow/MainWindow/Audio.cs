@@ -43,7 +43,7 @@ namespace Glow
         private void slVolumeMax_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // return to default
-            VM.AudioView.VolumeMax_Value = 150;
+            VM.AudioView.VolumeMax_Value = 100;
         }
 
         /// <summary>
@@ -85,9 +85,9 @@ namespace Glow
             for (var i = 0; i < VM.AudioView.LanguagePriority_ListView_Items.Count; i++)
             {
                 if (listViewAudioLanguages.SelectedItems//VM.AudioView.LanguagePriority_ListView_SelectedItems
-                                    .Cast<string>()
-                                    .ToList()
-                                    .Contains(VM.AudioView.LanguagePriority_ListView_Items[i]))
+                                          .Cast<string>()
+                                          .ToList()
+                                          .Contains(VM.AudioView.LanguagePriority_ListView_Items[i]))
                 {
                     VM.AudioView.LanguagePriority_ListView_SelectedItems.Add(VM.AudioView.LanguagePriority_ListView_Items[i]);
                 }
@@ -97,7 +97,7 @@ namespace Glow
             VM.AudioView.LanguagePriority_ListView_SelectedItems = VM.AudioView.LanguagePriority_ListView_SelectedItems
                                                                    .Distinct()
                                                                    .ToList();
-            //MessageBox.Show(string.Join("\n", lstvLanguagePriority.SelectedItems.Cast<string>().ToList())); //debug
+            //MessageBox.Show(string.Join("\n", listViewAudioLanguages.SelectedItems.Cast<string>().ToList())); //debug
         }
 
         /// <summary>
