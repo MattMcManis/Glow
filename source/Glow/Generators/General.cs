@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -18,18 +18,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
+using Glow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViewModel;
 
-namespace Glow
+namespace Generate
 {
-    public partial class General
+    public class General
     {
         /// <summary>
         ///    General Config
         /// </summary>
-        public static String GeneralConfig(MainWindow mainwindow)
+        public static String Config(/*MainWindow mainwindow*/)
         {
             // --------------------------------------------------
             // Main
@@ -46,8 +48,8 @@ namespace Glow
             string priority = string.Empty;
 
             // must not be default
-            if ((string)(mainwindow.cboPriority.SelectedItem ?? string.Empty) != "default")
-                priority = "priority=" + (mainwindow.cboPriority.SelectedItem ?? string.Empty).ToString();
+            if (VM.GeneralView.Priority_SelectedItem != "default")
+                priority = "priority=" + VM.GeneralView.Priority_SelectedItem;
 
 
             // --------------------------------------------------
@@ -59,8 +61,8 @@ namespace Glow
             // -------------------------
             string savePositiOnQuit = string.Empty;
 
-            if ((string)(mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty) != "default"
-                && (string)(mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty) == "yes")
+            if (VM.GeneralView.SavePositionQuit_SelectedItem != "default" &&
+                VM.GeneralView.SavePositionQuit_SelectedItem == "yes")
                 savePositiOnQuit = "save-position-on-quit";
 
             // -------------------------
@@ -69,8 +71,8 @@ namespace Glow
             string keepOpen = string.Empty;
 
             // must not be default
-            if ((string)(mainwindow.cboKeepOpen.SelectedItem ?? string.Empty) != "default")
-                keepOpen = "keep-open=" + (mainwindow.cboKeepOpen.SelectedItem ?? string.Empty).ToString();
+            if (VM.GeneralView.KeepOpen_SelectedItem != "default")
+                keepOpen = "keep-open=" + VM.GeneralView.KeepOpen_SelectedItem;
 
             // -------------------------
             // On Top
@@ -78,9 +80,9 @@ namespace Glow
             string onTop = string.Empty;
 
             // must not be default
-            if ((string)(mainwindow.cboOnTop.SelectedItem ?? string.Empty) == "yes")
+            if (VM.GeneralView.OnTop_SelectedItem == "yes")
                 onTop = "ontop";
-            //onTop = "ontop" + (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString();
+            //onTop = "ontop" + (VM.GeneralView.OnTop_SelectedItem;
 
             // -------------------------
             // Border
@@ -88,8 +90,8 @@ namespace Glow
             string border = string.Empty;
 
             // must not be default
-            if ((string)(mainwindow.cboBorder.SelectedItem ?? string.Empty) != "default")
-                border = "border=" + (mainwindow.cboBorder.SelectedItem ?? string.Empty).ToString();
+            if (VM.GeneralView.WindowBorder_SelectedItem != "default")
+                border = "border=" + VM.GeneralView.WindowBorder_SelectedItem;
 
             // -------------------------
             // Geometry
@@ -97,8 +99,8 @@ namespace Glow
             string geometry = string.Empty;
 
             // if not 0
-            if (mainwindow.slGeometryX.Value != 0 && mainwindow.slGeometryY.Value != 0)
-                geometry = "geometry=" + mainwindow.tbxGeometryX.Text.ToString() + "%" + ":" + mainwindow.tbxGeometryY.Text.ToString() + "%";
+            if (VM.GeneralView.GeometryX_Value != 0 && VM.GeneralView.GeometryY_Value != 0)
+                geometry = "geometry=" + VM.GeneralView.GeometryX_Value/*GeometryX_Text*/ + "%" + ":" + VM.GeneralView.GeometryY_Value/*GeometryY_Text*/ + "%";
 
             // -------------------------
             // Auto-Fit
@@ -106,9 +108,9 @@ namespace Glow
             string autoFit = string.Empty;
 
             // if not 0
-            if (mainwindow.slAutofitWidth.Value != 0 && mainwindow.slAutofitHeight.Value != 0)
-                //autoFit = "autofit-larger=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + ":" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
-                autoFit = "autofit-larger=" + mainwindow.tbxAutofitWidth.Text.ToString() + "%" + "x" + mainwindow.tbxAutofitHeight.Text.ToString() + "%";
+            if (VM.GeneralView.AutofitWidth_Value != 0 && VM.GeneralView.AutofitHeight_Value != 0)
+                //autoFit = "autofit-larger=" + VM.GeneralView.AutofitWidth_Text + "%" + ":" + VM.GeneralView.AutofitHeight_Text + "%";
+                autoFit = "autofit-larger=" + VM.GeneralView.AutofitWidth_Value/*AutofitWidth_Text*/ + "%" + "x" + VM.GeneralView.AutofitHeight_Value/*AutofitHeight_Text*/ + "%";
 
             // -------------------------
             // Screensaver
@@ -117,10 +119,10 @@ namespace Glow
             // empty if default
 
             // Keep
-            if ((string)(mainwindow.cboScreensaver.SelectedItem ?? string.Empty) == "on")
+            if (VM.GeneralView.Screensaver_SelectedItem == "on")
                 screensaver = "no-stop-screensaver";
             // Stop
-            else if ((string)(mainwindow.cboScreensaver.SelectedItem ?? string.Empty) == "off")
+            else if (VM.GeneralView.Screensaver_SelectedItem == "off")
                 screensaver = "stop-screensaver";
 
             // -------------------------
@@ -130,10 +132,10 @@ namespace Glow
             // empty if default
 
             // Filename
-            if ((string)(mainwindow.cboWindowTitle.SelectedItem ?? string.Empty) == "Filename")
+            if (VM.GeneralView.WindowTitle_SelectedItem == "Filename")
                 windowTitle = "title=\"${filename}\"";
             // Media Title
-            else if ((string)(mainwindow.cboWindowTitle.SelectedItem ?? string.Empty) == "Media Title")
+            else if (VM.GeneralView.WindowTitle_SelectedItem == "Media Title")
                 windowTitle = "title=\"${media-title}\"";
 
             // -------------------------
@@ -142,8 +144,8 @@ namespace Glow
             // Log Path
             string logPath = string.Empty;
             // only if not empty
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxLogPath.Text))
-                logPath = "log-file=" + "\"" + mainwindow.tbxLogPath.Text.ToString() + "log.txt\"";
+            if (!string.IsNullOrWhiteSpace(VM.GeneralView.LogPath_Text))
+                logPath = "log-file=" + "\"" + VM.GeneralView.LogPath_Text + "log.txt\"";
 
 
             // --------------------------------------------------
@@ -155,17 +157,17 @@ namespace Glow
             // -------------------------
             string screenshotPath = string.Empty;
             // only if not empty
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxScreenshotPath.Text))
-                screenshotPath = "screenshot-directory=" + "\"" + mainwindow.tbxScreenshotPath.Text.ToString() + "\"";
+            if (!string.IsNullOrWhiteSpace(VM.GeneralView.ScreenshotPath_Text))
+                screenshotPath = "screenshot-directory=" + "\"" + VM.GeneralView.ScreenshotPath_Text + "\"";
 
             // Template
             string screenshotTemplate = string.Empty;
 
-            if ((string)(mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty) == "Playback Time")
+            if (VM.GeneralView.ScreenshotTemplate_SelectedItem == "Playback Time")
                 screenshotTemplate = "screenshot-template=\"%F-%wHh%wMm%wSs%wTt\"";
-            else if ((string)(mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty) == "Date Time")
+            else if (VM.GeneralView.ScreenshotTemplate_SelectedItem == "Date Time")
                 screenshotTemplate = "screenshot-template=\"%F-%ty-%tm-%td_%tH.%tM.%tS.%wT\"";
-            else if ((string)(mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty) == "Numbered")
+            else if (VM.GeneralView.ScreenshotTemplate_SelectedItem == "Numbered")
                     screenshotTemplate = "screenshot-template=\"%F-%n\"";
 
 
@@ -175,8 +177,8 @@ namespace Glow
             // must not be default
             string screenshotTagColorspace = string.Empty;
 
-            if ((string)(mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty) != "default")
-                screenshotTagColorspace = "screenshot-tag-colorspace=" + (mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty).ToString();
+            if (VM.GeneralView.ScreenshotTagColorspace_SelectedItem != "default")
+                screenshotTagColorspace = "screenshot-tag-colorspace=" + VM.GeneralView.ScreenshotTagColorspace_SelectedItem;
 
 
             // -------------------------
@@ -185,8 +187,8 @@ namespace Glow
             string screenshotFormat = string.Empty;
 
             // must not be default
-            if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) != "default")
-                screenshotFormat = "screenshot-format=" + (mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty).ToString();
+            if (VM.GeneralView.ScreenshotFormat_SelectedItem != "default")
+                screenshotFormat = "screenshot-format=" + VM.GeneralView.ScreenshotFormat_SelectedItem;
 
             // -------------------------
             // Qulaity
@@ -194,15 +196,15 @@ namespace Glow
             string screenshotQuality = string.Empty;
 
             // format must not be default
-            if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) != "default")
+            if (VM.GeneralView.ScreenshotFormat_SelectedItem != "default")
             {
                 // jpg
-                if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpg"
-                || (string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "jpeg")
-                    screenshotQuality = "screenshot-jpeg-quality=" + mainwindow.tbxScreenshotQuality.Text.ToString();
+                if (VM.GeneralView.ScreenshotFormat_SelectedItem == "jpg" ||
+                    VM.GeneralView.ScreenshotFormat_SelectedItem == "jpeg")
+                    screenshotQuality = "screenshot-jpeg-quality=" + VM.GeneralView.ScreenshotQuality_Value;//VM.GeneralView.ScreenshotQuality_Text;
                 // png
-                else if ((string)(mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty) == "png")
-                    screenshotQuality = "screenshot-png-compression=" + mainwindow.tbxScreenshotQuality.Text.ToString();
+                else if (VM.GeneralView.ScreenshotFormat_SelectedItem == "png")
+                    screenshotQuality = "screenshot-png-compression=" + VM.GeneralView.ScreenshotQuality_Value;//VM.GeneralView.ScreenshotQuality_Text;
             }
 
 
@@ -235,14 +237,10 @@ namespace Glow
             // -------------------------
             // Join
             // -------------------------
-            string general = string.Join("\r\n", listGeneral
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
-
-            // -------------------------
-            // Return
-            // -------------------------
-            return general;
+            return string.Join("\r\n", listGeneral
+                                       .Where(s => !string.IsNullOrEmpty(s))
+                               );
         }
+
     }
 }

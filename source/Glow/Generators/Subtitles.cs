@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -18,14 +18,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
+using Glow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using ViewModel;
 
-namespace Glow
+namespace Generate
 {
-    public partial class Subtitles
+    public class Subtitles
     {
         // Selected Item
         //private static ComboBoxItem selectedItem;
@@ -35,7 +37,7 @@ namespace Glow
         /// <summary>
         ///    Subtitle Config
         /// </summary>
-        public static String SubtitleConfig(MainWindow mainwindow)
+        public static String Config(/*MainWindow mainwindow*/)
         {
             // --------------------------------------------------
             // Main
@@ -51,7 +53,7 @@ namespace Glow
             // -------------------------
             //string subtitles = string.Empty;
 
-            //if ((string)(mainwindow.cboSubtitles.SelectedItem ?? string.Empty) != "default")
+            //if (VM.SubtitlesView.Subtitles_SelectedItem != "default")
             //    subtitles = "sub";
 
             // -------------------------
@@ -61,18 +63,18 @@ namespace Glow
 
             // Add Each Language In Priority Order from the top to Audio Languages List
             // Regardless of Order checked in
-            foreach (string item in mainwindow.listViewSubtitlesLanguages.Items)
-            {
-                // If list contains a checked item
-                if (mainwindow.listViewSubtitlesLanguages.SelectedItems.Contains(item))
-                {
-                    // Convert Selected Language (e.g. English) into (eng,en,enUS,en-US)
-                    string language = Languages.LanguageCode(item);
+            //foreach (string item in mainwindow.listViewSubtitlesLanguages_Items)
+            //{
+            //    // If list contains a checked item
+            //    if (mainwindow.listViewSubtitlesLanguages_SelectedItems.Contains(item))
+            //    {
+            //        // Convert Selected Language (e.g. English) into (eng,en,enUS,en-US)
+            //        string language = Languages.LanguageCode(item);
 
-                    // Add language code to list
-                    listSubtitlesLanguages.Add(language);
-                }
-            }
+            //        // Add language code to list
+            //        listSubtitlesLanguages.Add(language);
+            //    }
+            //}
 
             string languages = string.Empty;
             if (listSubtitlesLanguages.Count() != 0)
@@ -83,32 +85,32 @@ namespace Glow
             // -------------------------
             string loadFiles = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesLoadFiles.SelectedItem ?? string.Empty) != "default")
-                loadFiles = "sub-auto=" + (mainwindow.cboSubtitlesLoadFiles.SelectedItem ?? string.Empty).ToString();
+            if (VM.SubtitlesView.LoadFiles_SelectedItem != "default")
+                loadFiles = "sub-auto=" + VM.SubtitlesView.LoadFiles_SelectedItem;
 
             // -------------------------
             // Position
             // -------------------------
             string position = string.Empty;
 
-            if (mainwindow.slSubtitlePosition.Value != 0.0)
-                position = "sub-pos=" + mainwindow.tbxSubtitlePosition.Text.ToString();
+            if (VM.SubtitlesView.Position_Value != 0.0)
+                position = "sub-pos=" + VM.SubtitlesView.Position_Value/*Position_Text*/;
 
             // -------------------------
             // Timing
             // -------------------------
             string fixTiming = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesFixTiming.SelectedItem ?? string.Empty) != "default")
-                fixTiming = "sub-fix-timing=" + (mainwindow.cboSubtitlesFixTiming.SelectedItem ?? string.Empty).ToString();
+            if (VM.SubtitlesView.FixTiming_SelectedItem != "default")
+                fixTiming = "sub-fix-timing=" + VM.SubtitlesView.FixTiming_SelectedItem;
 
             // -------------------------
             // Margins
             // -------------------------
             string margins = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesMargins.SelectedItem ?? string.Empty) != "default"
-                && (string)(mainwindow.cboSubtitlesMargins.SelectedItem ?? string.Empty) == "yes")
+            if (VM.SubtitlesView.Margins_SelectedItem != "default" &&
+                VM.SubtitlesView.Margins_SelectedItem == "yes")
                 margins = "sub-use-margins";
 
             // -------------------------
@@ -116,9 +118,9 @@ namespace Glow
             // -------------------------
             string blend = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesBlend.SelectedItem ?? string.Empty) != "default")
+            if (VM.SubtitlesView.Blend_SelectedItem != "default")
 
-                blend = "blend-subtitles=" + (mainwindow.cboSubtitlesBlend.SelectedItem ?? string.Empty).ToString();
+                blend = "blend-subtitles=" + VM.SubtitlesView.Blend_SelectedItem;
 
 
             // --------------------------------------------------
@@ -130,9 +132,9 @@ namespace Glow
             // -------------------------
             string ass = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty) == "yes")
+            if (VM.SubtitlesView.ASS_SelectedItem == "yes")
                 ass = "sub-ass";
-            else if ((string)(mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty) == "no")
+            else if (VM.SubtitlesView.ASS_SelectedItem == "no")
                 ass = "no-sub-ass";
 
             // -------------------------
@@ -140,32 +142,32 @@ namespace Glow
             // -------------------------
             string assOverride = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesASSOverride.SelectedItem ?? string.Empty) != "default")
-                assOverride = "sub-ass-override=" + (mainwindow.cboSubtitlesASSOverride.SelectedItem ?? string.Empty).ToString();
+            if (VM.SubtitlesView.ASSOverride_SelectedItem != "default")
+                assOverride = "sub-ass-override=" + VM.SubtitlesView.ASSOverride_SelectedItem;
 
             // -------------------------
             // ASS Force Margins
             // -------------------------
             string assForceMargins = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesASSForceMargins.SelectedItem ?? string.Empty) != "default")
-                assForceMargins = "sub-ass-force-margins=" + (mainwindow.cboSubtitlesASSForceMargins.SelectedItem ?? string.Empty).ToString();
+            if (VM.SubtitlesView.ASSForceMargins_SelectedItem != "default")
+                assForceMargins = "sub-ass-force-margins=" + VM.SubtitlesView.ASSForceMargins_SelectedItem;
 
             // -------------------------
             // ASS Hinting
             // -------------------------
             string assHinting = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesASSHinting.SelectedItem ?? string.Empty) != "default")
-                assHinting = "sub-ass-hinting=" + (mainwindow.cboSubtitlesASSHinting.SelectedItem ?? string.Empty).ToString();
+            if (VM.SubtitlesView.ASSHinting_SelectedItem != "default")
+                assHinting = "sub-ass-hinting=" + VM.SubtitlesView.ASSHinting_SelectedItem;
 
             // -------------------------
             // ASS Kerning
             // -------------------------
             string assKerning = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesASSKerning.SelectedItem ?? string.Empty) != "default")
-                assKerning = "sub-ass-force-style=Kerning=" + (mainwindow.cboSubtitlesASSKerning.SelectedItem ?? string.Empty).ToString();
+            if (VM.SubtitlesView.ASSKerning_SelectedItem != "default")
+                assKerning = "sub-ass-force-style=Kerning=" + VM.SubtitlesView.ASSKerning_SelectedItem;
 
 
             // --------------------------------------------------
@@ -178,10 +180,10 @@ namespace Glow
             string embeddedFonts = string.Empty;
 
             // yes
-            if ((string)(mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "yes")
+            if (VM.SubtitlesView.EmbeddedFonts_SelectedItem == "yes")
                 embeddedFonts = "embeddedfonts";
             // no
-            else if ((string)(mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "no")
+            else if (VM.SubtitlesView.EmbeddedFonts_SelectedItem == "no")
                 embeddedFonts = "no-embeddedfonts";
 
             // -------------------------
@@ -191,47 +193,47 @@ namespace Glow
 
             // only if Embedded Fonts is off
             // and font is not default
-            if ((string)(mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty) == "no"
-                && (string)(mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty) != "default")
-                font = "sub-font=" + "\"" + (mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty).ToString() + "\"";
+            if (VM.SubtitlesView.EmbeddedFonts_SelectedItem == "no"
+                && VM.SubtitlesView.Font_SelectedItem != "default")
+                font = "sub-font=" + "\"" + VM.SubtitlesView.Font_SelectedItem + "\"";
 
             // -------------------------
             // Font Size
             // -------------------------
             string fontSize = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty) != "default")
-                fontSize = "sub-font-size=" + (mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty).ToString();
+            if (VM.SubtitlesView.FontSize_SelectedItem != "default")
+                fontSize = "sub-font-size=" + VM.SubtitlesView.FontSize_SelectedItem;
 
             // -------------------------
             // Font Color
             // -------------------------
-            //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesFontColor.SelectedValue ?? string.Empty);
+            //selectedItem = (ComboBoxItem)(VM.SubtitlesView.FontColor.SelectedValue;
             //string fontColor = "sub-text-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
             string fontColor = string.Empty;
 
             // only if not empty
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesFontColor.Text))
-                fontColor = "sub-color=" + "\"" + "#FF" + mainwindow.tbxSubtitlesFontColor.Text + "\"";
+            if (!string.IsNullOrWhiteSpace(VM.SubtitlesView.FontColor_Text))
+                fontColor = "sub-color=" + "\"" + "#FF" + VM.SubtitlesView.FontColor_Text + "\"";
 
             // -------------------------
             // Border Size
             // -------------------------
             string borderSize = string.Empty;
 
-            if ((string)(mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty) != "default")
-                borderSize = "sub-border-size=" + (mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty).ToString();
+            if (VM.SubtitlesView.BorderSize_SelectedItem != "default")
+                borderSize = "sub-border-size=" + VM.SubtitlesView.BorderSize_SelectedItem;
 
             // -------------------------
             // Border Color
             // -------------------------
-            //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue ?? string.Empty);
+            //selectedItem = (ComboBoxItem)(VM.SubtitlesView.BorderColor.SelectedValue;
             //string borderColor = "sub-text-border-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
             string borderColor = string.Empty;
 
             // only if not empty
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesBorderColor.Text))
-                borderColor = "sub-border-color=" + "\"" + "#FF" + mainwindow.tbxSubtitlesBorderColor.Text + "\"";
+            if (!string.IsNullOrWhiteSpace(VM.SubtitlesView.BorderColor_Text))
+                borderColor = "sub-border-color=" + "\"" + "#FF" + VM.SubtitlesView.BorderColor_Text + "\"";
 
             // -------------------------
             // Shadow Color
@@ -239,9 +241,9 @@ namespace Glow
             string shadowColor = string.Empty;
 
             // only if not empty
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowColor.Text))
-                shadowColor = "sub-shadow-color=" + "\"" + "#33" + mainwindow.tbxSubtitlesShadowColor.Text + "\"";
-            //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue ?? string.Empty);
+            if (!string.IsNullOrWhiteSpace(VM.SubtitlesView.ShadowColor_Text))
+                shadowColor = "sub-shadow-color=" + "\"" + "#33" + VM.SubtitlesView.ShadowColor_Text + "\"";
+            //selectedItem = (ComboBoxItem)(VM.SubtitlesView.ShadowColor.SelectedValue;
             //selected = (string)(selectedItem.Content);
 
             //string shadowColor = string.Empty;
@@ -258,8 +260,9 @@ namespace Glow
             string shadowOffset = string.Empty;
 
             // only if shadow color is on
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxSubtitlesShadowColor.Text))
-                shadowOffset = "sub-shadow-offset=" + mainwindow.tbxSubtitlesShadowOffset.Text.ToString();
+            //if (!string.IsNullOrWhiteSpace(VM.SubtitlesView.ShadowColor_Text))
+            if (VM.SubtitlesView.ShadowOffset_Value != 0)
+                shadowOffset = "sub-shadow-offset=" + VM.SubtitlesView.ShadowOffset_Value/*ShadowOffset_Text*/;
 
 
 
@@ -298,14 +301,9 @@ namespace Glow
             // -------------------------
             // Join
             // -------------------------
-            string subtitle = string.Join("\r\n", listSubtitle
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
-
-            // -------------------------
-            // Return
-            // -------------------------
-            return subtitle;
+            return string.Join("\r\n", listSubtitle
+                                       .Where(s => !string.IsNullOrEmpty(s))
+                              );
         }
 
     }

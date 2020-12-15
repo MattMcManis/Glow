@@ -1,6 +1,6 @@
 ﻿<!-- 
     Glow
-    Copyright (C) 2017, 2018 Matt McManis
+    Copyright (C) 2017-2020 Matt McManis
     http://github.com/MattMcManis/Glow
     http://glowmpv.github.io
     mattmcmanis@outlook.com
@@ -23,27 +23,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
-        ResizeMode="CanMinimize" 
-        UseLayoutRounding="True"
-        
-        Title="Configure" 
-        Height="200" Width="450" 
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+        xmlns:my="clr-namespace:Glow"
+        xmlns:local="clr-namespace:ViewModel"
+        xmlns:settings="clr-namespace:Glow.Properties"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
         Icon="Resources/Images/Icons/settings.ico"
-        Style="{DynamicResource ConfigureWindowStyle}" >
+        RenderOptions.BitmapScalingMode="Fant"
+        UseLayoutRounding="True"
+        ResizeMode="CanMinimize" 
+        Width="450"
+        Height="200"
+        Title="Configure"
+        Style="{DynamicResource ConfigureWindowStyle}"        
+        >
+
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
+    
     <Grid >
 
         <!-- mpv Path TextBox -->
-        <Label Content="mpv Path" 
+        <Label x:Name="lblmpvPath" 
+               Content="mpv Path" 
                Style="{DynamicResource LabelStyle}"
                HorizontalAlignment="Left"
                Margin="10,12,0,0" 
                VerticalAlignment="Top" 
                Height="26" 
+               Cursor="Hand"
+               PreviewMouseDown="lblMpvPath_PreviewMouseDown"
                ToolTip="Path to mpv.exe"/>
         <TextBox x:Name="textBoxMpvPath"
+                 DataContext="{Binding ConfigureView}"
                  Text="{Binding mpvPath_Text, Mode=TwoWay}"
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
@@ -77,14 +94,18 @@
 
 
         <!-- Config Path TextBox -->
-        <Label Content="Config Path"
+        <Label x:Name="lblConfigPath"
+               Content="Config Path"
                Style="{DynamicResource LabelStyle}"
                HorizontalAlignment="Left" 
                Margin="10,45,0,0" 
                VerticalAlignment="Top" 
                Height="26" 
+               Cursor="Hand"
+               PreviewMouseDown="lblConfigPath_PreviewMouseDown"
                ToolTip="Path to mpv config file"/>
         <TextBox x:Name="textBoxConfigPath"
+                 DataContext="{Binding ConfigureView}"
                  Text="{Binding mpvConfigPath_Text, Mode=TwoWay}"
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
@@ -95,7 +116,7 @@
                  Width="297" 
                  IsReadOnly="True" 
                  ToolTip="Path to mpv config file"
-                 PreviewMouseDown="textBoxConfigPath_PreviewMouseDown"/>
+                 />
         <!-- Config Path Revert Button -->
         <Button x:Name="buttonConfigPathRevert"
                 HorizontalAlignment="Left" 
@@ -118,14 +139,18 @@
 
 
         <!-- Profiles path -->
-        <Label Content="Profiles Path"
+        <Label x:Name="lblProfilesPath"
+               Content="Profiles Path"
                Style="{DynamicResource LabelStyle}"
                HorizontalAlignment="Left" 
                Margin="10,78,0,0" 
                VerticalAlignment="Top" 
                Height="26" 
+               Cursor="Hand"
+               PreviewMouseDown="lblProfilesPath_PreviewMouseDown"
                ToolTip="Path to INI Profiles"/>
         <TextBox x:Name="textBoxProfilesPath"
+                 DataContext="{Binding ConfigureView}"
                  Text="{Binding ProfilesPath_Text, Mode=TwoWay}"
                  Style="{DynamicResource TextBoxStyle}"
                  HorizontalAlignment="Left" 
@@ -165,7 +190,10 @@
                HorizontalAlignment="Left" 
                Margin="308,117,0,0"
                VerticalAlignment="Top" 
-               Height="26" Width="55" />
+               Cursor="Hand"
+               PreviewMouseDown="labelSavedSettings_PreviewMouseDown"
+               Height="26" 
+               Width="55" />
 
         <!-- Reset Saved Settigns Button -->
         <Button x:Name="buttonClearAllSavedSettings" 
@@ -206,6 +234,7 @@
                Height="26" 
                ToolTip="Path to Save Log" Width="90"/>
         <ToggleButton x:Name="tglUpdateAutoCheck"
+                      DataContext="{Binding ConfigureView}"
                       Style="{DynamicResource ToggleButton}"
                       IsChecked="{Binding UpdateAutoCheck_IsChecked}"
                       IsEnabled="{Binding UpdateAutoCheck_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -232,6 +261,7 @@
                VerticalAlignment="Top"
                Height="26" />
         <ComboBox x:Name="cboTheme"
+                  DataContext="{Binding ConfigureView}"
                   ItemsSource="{Binding Theme_Items}"
                   SelectedIndex="{Binding Theme_SelectedIndex}"
                   SelectedItem="{Binding Theme_SelectedItem}"

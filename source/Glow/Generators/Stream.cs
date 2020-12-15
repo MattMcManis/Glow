@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -18,18 +18,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
+using Glow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViewModel;
 
-namespace Glow
+namespace Generate
 {
-    public partial class Stream
+    public class Stream
     {
         /// <summary>
         ///    Stream Config
         /// </summary>
-        public static String StreamConfig(MainWindow mainwindow)
+        public static String Config(/*MainWindow mainwindow*/)
         {
             // -------------------------
             // Title
@@ -45,31 +47,31 @@ namespace Glow
             // -------------------------
             string demuxThread = string.Empty;
 
-            if ((string)(mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty) != "default")
-                demuxThread = "demuxer-thread=" + (mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty).ToString();
+            if (VM.StreamView.DemuxerThread_SelectedItem != "default")
+                demuxThread = "demuxer-thread=" + VM.StreamView.DemuxerThread_SelectedItem;
 
             // -------------------------
             // Demuxer Buffersize
             // -------------------------
             string demuxerBufferSize = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxDemuxerBuffersize.Text))
-                demuxerBufferSize = "demuxer-lavf-buffersize=" + mainwindow.tbxDemuxerBuffersize.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(VM.StreamView.DemuxerBuffersize_Text))
+                demuxerBufferSize = "demuxer-lavf-buffersize=" + VM.StreamView.DemuxerBuffersize_Text;
 
             // -------------------------
             // Demuxer Readahead
             // -------------------------
             string demuxerReadAhead = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxDemuxerReadahead.Text))
-                demuxerReadAhead = "demuxer-readahead-secs=" + mainwindow.tbxDemuxerReadahead.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(VM.StreamView.DemuxerReadahead_Text))
+                demuxerReadAhead = "demuxer-readahead-secs=" + VM.StreamView.DemuxerReadahead_Text;
 
             // -------------------------
             // Demuxer MKV Subtitle Preroll
             // -------------------------
             string demuxerMKVSubtitlePreroll = string.Empty;
 
-            if ((string)(mainwindow.cboDemuxerMKVSubPreroll.SelectedItem ?? string.Empty) == "yes")
+            if (VM.StreamView.DemuxerMKVSubPreroll_SelectedItem == "yes")
                 demuxerMKVSubtitlePreroll = "demuxer-mkv-subtitle-preroll";
 
 
@@ -83,7 +85,7 @@ namespace Glow
             string youtubedl = string.Empty;
             // ignore default
 
-            if ((string)(mainwindow.cboYouTubeDL.SelectedItem ?? string.Empty) == "yes")
+            if (VM.StreamView.YouTubeDL_SelectedItem == "yes")
                 youtubedl = "ytdl=yes";
 
             // -------------------------
@@ -93,13 +95,13 @@ namespace Glow
             // ignore default
 
             // Best
-            if ((string)(mainwindow.cboYouTubeQuality.SelectedItem ?? string.Empty) == "best")
+            if (VM.StreamView.YouTubeDLQuality_SelectedItem == "best")
                 youTubeQuality = "ytdl-format=bestvideo[ext=mp4][width<=1920][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4]/best";
             // Good
-            else if ((string)(mainwindow.cboYouTubeQuality.SelectedItem ?? string.Empty) == "good")
+            else if (VM.StreamView.YouTubeDLQuality_SelectedItem == "good")
                 youTubeQuality = "ytdl-format=bestvideo[ext=webm][height<=?720]";
             // Worst
-            else if ((string)(mainwindow.cboYouTubeQuality.SelectedItem ?? string.Empty) == "worst")
+            else if (VM.StreamView.YouTubeDLQuality_SelectedItem == "worst")
                 youTubeQuality = "ytdl-format=worst";
 
 
@@ -112,64 +114,64 @@ namespace Glow
             // -------------------------
             string cache = string.Empty;
 
-            if ((string)(mainwindow.cboCache.SelectedItem ?? string.Empty) != "default")
-                cache = "cache=" + (mainwindow.cboCache.SelectedItem ?? string.Empty).ToString();
+            if (VM.StreamView.Cache_SelectedItem != "default")
+                cache = "cache=" + VM.StreamView.Cache_SelectedItem;
 
             // -------------------------
             // Cache Default
             // -------------------------
             string cacheDefault = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheDefault.Text))
-                cacheDefault = "cache-default=" + mainwindow.tbxCacheDefault.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(VM.StreamView.CacheDefault_Text))
+                cacheDefault = "cache-default=" + VM.StreamView.CacheDefault_Text;
 
             // -------------------------
             // Cache Initial
             // -------------------------
             string initial = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheInitial.Text))
-                initial = "cache-initial=" + mainwindow.tbxCacheInitial.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(VM.StreamView.CacheInitial_Text))
+                initial = "cache-initial=" + VM.StreamView.CacheInitial_Text;
 
             // -------------------------
             // Cache Seek Min
             // -------------------------
             string seekMin = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheSeekMin.Text))
-                seekMin = "cache-seek-min=" + mainwindow.tbxCacheSeekMin.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(VM.StreamView.CacheSeekMin_Text))
+                seekMin = "cache-seek-min=" + VM.StreamView.CacheSeekMin_Text;
 
             // -------------------------
             // Cache Backbuffer
             // -------------------------
             string backBuffer = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheBackbuffer.Text))
-                backBuffer = "cache-backbuffer=" + mainwindow.tbxCacheBackbuffer.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(VM.StreamView.CacheBackbuffer_Text))
+                backBuffer = "cache-backbuffer=" + VM.StreamView.CacheBackbuffer_Text;
 
             // -------------------------
             // Second
             // -------------------------
             string seconds = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheSeconds.Text))
-                seconds = "cache-secs=" + mainwindow.tbxCacheSeconds.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(VM.StreamView.CacheSeconds_Text))
+                seconds = "cache-secs=" + VM.StreamView.CacheSeconds_Text;
 
             // -------------------------
             // Cache File
             // -------------------------
             string file = string.Empty;
 
-            if ((string)(mainwindow.cboCacheFile.SelectedItem ?? string.Empty) != "default")
-                file = "cache-file=" + (mainwindow.cboCacheFile.SelectedItem ?? string.Empty).ToString();
+            if (VM.StreamView.CacheFile_SelectedItem != "default")
+                file = "cache-file=" + VM.StreamView.CacheFile_SelectedItem;
 
             // -------------------------
             // Cache File Size
             // -------------------------
             string fileSize = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxCacheFileSize.Text))
-                fileSize = "cache-file-size=" + mainwindow.tbxCacheFileSize.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(VM.StreamView.CacheFileSize_Text))
+                fileSize = "cache-file-size=" + VM.StreamView.CacheFileSize_Text;
 
             // -------------------------
             // YouTube
@@ -198,26 +200,21 @@ namespace Glow
 
                 // Cache
                 cache,
-                cacheDefault,
-                initial,
-                seekMin,
-                backBuffer,
-                seconds,
-                file,
-                fileSize,
+                //cacheDefault,
+                //initial,
+                //seekMin,
+                //backBuffer,
+                //seconds,
+                //file,
+                //fileSize
             };
 
             // -------------------------
             // Join
             // -------------------------
-            string stream = string.Join("\r\n", listStream
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
-
-            // -------------------------
-            // Return
-            // -------------------------
-            return stream;
+            return string.Join("\r\n", listStream
+                                       .Where(s => !string.IsNullOrEmpty(s))
+                              );
         }
     }
 }

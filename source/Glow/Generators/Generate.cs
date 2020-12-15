@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -21,15 +21,16 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViewModel;
 
-namespace Glow
+namespace Generate
 {
-    public partial class Generate
+    public class Generator
     {
         /// <summary>
         ///    Generate Config
         /// </summary>
-        public static String GenerateConfig(MainWindow mainwindow, ViewModel vm)
+        public static String Config(/*MainWindow mainwindow*/)
         {
             // -------------------------
             // Config
@@ -37,24 +38,19 @@ namespace Glow
             // Combine
             List<string> listConfig = new List<string>()
             {
-                General.GeneralConfig(mainwindow),
-                Video.VideoConfig(mainwindow, vm),
-                Audio.AudioConfig(mainwindow),
-                Subtitles.SubtitleConfig(mainwindow),
-                Stream.StreamConfig(mainwindow),
-                OSC.OSCConfig(mainwindow),
-                OSD.OSDConfig(mainwindow),
-                Extensions.ExtensionsConfig(mainwindow)
+                General.Config(),
+                Video.Config(),
+                Audio.Config(),
+                Subtitles.Config(),
+                Stream.Config(),
+                OSC.Config(),
+                OSD.Config(),
+                Extensions.Config()
             };
 
-            string config = string.Join("\r\n\r\n", listConfig
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
-
-            // -------------------------
-            // Return
-            // -------------------------
-            return config;
+            return string.Join("\r\n\r\n", listConfig
+                                          .Where(s => !string.IsNullOrEmpty(s))
+                              );
         }
     }
 }

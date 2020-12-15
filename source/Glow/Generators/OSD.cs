@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -18,13 +18,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
+using Glow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViewModel;
 
-namespace Glow
+namespace Generate
 {
-    public partial class OSD
+    public class OSD
     {
         //private static ComboBoxItem selectedItem;
         //private static string selected;
@@ -32,7 +34,7 @@ namespace Glow
         /// <summary>
         ///    OSD Config
         /// </summary>
-        public static String OSDConfig(MainWindow mainwindow)
+        public static String Config(/*MainWindow mainwindow*/)
         {
             // --------------------------------------------------
             // Main
@@ -48,66 +50,34 @@ namespace Glow
             // -------------------------
             string videoOSD = string.Empty;
 
-            if ((string)(mainwindow.cboOSD.SelectedItem ?? string.Empty) != "default")
-                videoOSD = "video-osd=" + (mainwindow.cboOSD.SelectedItem ?? string.Empty).ToString();
+            if (VM.DisplayView.OSD_SelectedItem != "default")
+                videoOSD = "video-osd=" + VM.DisplayView.OSD_SelectedItem;
 
             // -------------------------
             // Fractions
             // -------------------------
             string fractions = string.Empty;
 
-            if ((string)(mainwindow.cboOSD.SelectedItem ?? string.Empty) != "no"
-                && (string)(mainwindow.cboOSDFractions.SelectedItem ?? string.Empty) != "default")
-                fractions = "osd-fractions=" + (mainwindow.cboOSDFractions.SelectedItem ?? string.Empty).ToString();
+            if (VM.DisplayView.OSD_SelectedItem != "no" && 
+                VM.DisplayView.OSD_Fractions_SelectedItem != "default")
+                fractions = "osd-fractions=" + VM.DisplayView.OSD_Fractions_SelectedItem;
 
             // -------------------------
             // Level
             // -------------------------
             string level = string.Empty;
 
-            if ((string)(mainwindow.cboOSD.SelectedItem ?? string.Empty) != "no"
-                && (string)(mainwindow.cboOSDLevel.SelectedItem ?? string.Empty) != "default")
-                level = "osd-level=" + (mainwindow.cboOSDLevel.SelectedItem ?? string.Empty).ToString();
+            if (VM.DisplayView.OSD_SelectedItem != "no" && 
+                VM.DisplayView.OSD_Level_SelectedItem != "default")
+                level = "osd-level=" + VM.DisplayView.OSD_Level_SelectedItem;
 
             // -------------------------
             // Duration
             // -------------------------
             string duration = string.Empty;
 
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDDuration.Text))
-                duration = "osd-duration=" + mainwindow.tbxOSDDuration.Text.ToString();
-
-
-            // --------------------------------------------------
-            // Controls
-            // --------------------------------------------------
-
-            // -------------------------
-            // Scale
-            // -------------------------
-            string scale = string.Empty;
-
-            if (mainwindow.slOSDScale.Value != 0.0 
-                && !string.IsNullOrWhiteSpace(mainwindow.tbxOSDScale.Text))
-                scale = "osd-scale=" + mainwindow.tbxOSDScale.Text.ToString();
-
-            // -------------------------
-            // Bar Width
-            // -------------------------
-            string barWidth = string.Empty;
-
-            if (mainwindow.slOSDBarWidth.Value != 0.0
-                && !string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarWidth.Text))
-                barWidth = "osd-bar-w=" + mainwindow.tbxOSDBarWidth.Text.ToString();
-
-            // -------------------------
-            // Bar Height
-            // -------------------------
-            string barHeight = string.Empty;
-
-            if (mainwindow.slOSDBarHeight.Value != 0.0
-                && !string.IsNullOrWhiteSpace(mainwindow.tbxOSDBarHeight.Text))
-                barHeight = "osd-bar-h=" + mainwindow.tbxOSDBarHeight.Text.ToString();
+            if (!string.IsNullOrEmpty(VM.DisplayView.OSD_Duration_Text))
+                duration = "osd-duration=" + VM.DisplayView.OSD_Duration_Text;
 
 
             // --------------------------------------------------
@@ -119,46 +89,46 @@ namespace Glow
             // -------------------------
             string font = string.Empty;
 
-            if ((string)(mainwindow.cboOSDFont.SelectedItem ?? string.Empty) != "default")
-                font = "osd-font=" + "\"" + (mainwindow.cboOSDFont.SelectedItem ?? string.Empty).ToString() + "\"";
+            if (VM.DisplayView.OSD_Font_SelectedItem != "default")
+                font = "osd-font=" + "\"" + VM.DisplayView.OSD_Font_SelectedItem + "\"";
 
             // -------------------------
             // Font Size
             // -------------------------
             string fontSize = string.Empty;
 
-            if ((string)(mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty) != "default")
-                fontSize = "osd-font-size=" + (mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty).ToString();
+            if (VM.DisplayView.OSD_FontSize_SelectedItem != "default")
+                fontSize = "osd-font-size=" + VM.DisplayView.OSD_FontSize_SelectedItem;
 
             // -------------------------
             // Font Color
             // -------------------------
-            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue ?? string.Empty);
+            //selectedItem = (ComboBoxItem)(VM.DisplayView.OSD_FontColor.SelectedValue;
             //string fontColor = "osd-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
             string fontColor = string.Empty;
 
             // only if not empty
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDFontColor.Text))
-                fontColor = "osd-color=" + "\"" + "#FF" + mainwindow.tbxOSDFontColor.Text + "\"";
+            if (!string.IsNullOrEmpty(VM.DisplayView.OSD_FontColor_Text))
+                fontColor = "osd-color=" + "\"" + "#FF" + VM.DisplayView.OSD_FontColor_Text + "\"";
 
             // -------------------------
             // Border Size
             // -------------------------
             string borderSize = string.Empty;
 
-            if ((string)(mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty) != "default")
-                borderSize = "osd-border-size=" + (mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty).ToString();
+            if (VM.DisplayView.OSD_FontBorderSize_SelectedItem != "default")
+                borderSize = "osd-border-size=" + VM.DisplayView.OSD_FontBorderSize_SelectedItem;
 
             // -------------------------
             // Border Color
             // -------------------------
-            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue ?? string.Empty);
+            //selectedItem = (ComboBoxItem)(VM.DisplayView.OSDBorderColor.SelectedValue;
             //string borderColor = "osd-border-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
             string borderColor = string.Empty;
 
             // only if not empty
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDBorderColor.Text))
-                borderColor = "osd-border-color=" + "\"" + "#FF" + mainwindow.tbxOSDBorderColor.Text + "\"";
+            if (!string.IsNullOrEmpty(VM.DisplayView.OSD_BorderColor_Text))
+                borderColor = "osd-border-color=" + "\"" + "#FF" + VM.DisplayView.OSD_BorderColor_Text + "\"";
 
             // -------------------------
             // Shadow Color
@@ -166,9 +136,9 @@ namespace Glow
             string shadowColor = string.Empty;
 
             // only if not empty
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDShadowColor.Text))
-                shadowColor = "osd-shadow-color=" + "\"" + "#33" + mainwindow.tbxOSDShadowColor.Text + "\"";
-            //selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue ?? string.Empty);
+            if (!string.IsNullOrEmpty(VM.DisplayView.OSD_ShadowColor_Text))
+                shadowColor = "osd-shadow-color=" + "\"" + "#33" + VM.DisplayView.OSD_ShadowColor_Text + "\"";
+            //selectedItem = (ComboBoxItem)(VM.DisplayView.OSDShadowColor.SelectedValue;
             //selected = (string)(selectedItem.Content);
 
             //string shadowColor = string.Empty;
@@ -184,8 +154,9 @@ namespace Glow
             string shadowOffset = string.Empty;
 
             // only if shadow color is on
-            if (!string.IsNullOrWhiteSpace(mainwindow.tbxOSDShadowColor.Text))
-                shadowOffset = "osd-shadow-offset=" + mainwindow.tbxOSDShadowOffset.Text.ToString();
+            //if (!string.IsNullOrEmpty(VM.DisplayView.OSD_ShadowColor_Text))
+            if (VM.DisplayView.OSD_ShadowOffset_Value != 0)
+                shadowOffset = "osd-shadow-offset=" + VM.DisplayView.OSD_ShadowOffset_Value/*OSD_ShadowOffset_Text*/;
 
             // --------------------------------------------------
             // Combine
@@ -199,11 +170,6 @@ namespace Glow
                 fractions,
                 duration,
                 level,
-
-                // Controls
-                scale,
-                barWidth,
-                barHeight,
 
                 // Text
                 font,
@@ -219,14 +185,9 @@ namespace Glow
             // Join
             // -------------------------
             // OSD
-            string osd = string.Join("\r\n", listOSD
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
-
-            // -------------------------
-            // Return
-            // -------------------------
-            return osd;
+            return string.Join("\r\n", listOSD
+                                       .Where(s => !string.IsNullOrEmpty(s))
+                              );
         }
 
     }

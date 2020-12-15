@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -25,6 +25,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using ViewModel;
 
 namespace Glow
 {
@@ -35,29 +36,26 @@ namespace Glow
         /// <summary>
         ///    Scan PC Custom Profiles
         /// </summary>
-        public static void GetCustomProfiles(ViewModel vm)
+        public static void GetCustomProfiles()
         {
             // User Custom Profiles Full Path
-            if (Directory.Exists(vm.ProfilesPath_Text))
+            if (Directory.Exists(VM.ConfigureView.ProfilesPath_Text))
             {
-                listCustomProfilesPaths = Directory.GetFiles(vm.ProfilesPath_Text, "*.ini")
-                    .Select(Path.GetFullPath)
-                    .ToList();
+                listCustomProfilesPaths = Directory.GetFiles(VM.ConfigureView.ProfilesPath_Text, "*.ini")
+                                          .Select(Path.GetFullPath)
+                                          .ToList();
+
+                //MessageBox.Show(VM.ConfigureView.ProfilesPath_Text); //debug
+                //MessageBox.Show(string.Join("\n", listCustomProfilesPaths)); //debug
             }
 
             // Profiles path does not exist
             else
             {
-                //MessageBox.Show(vm.ProfilesPath_Text); //debug
-
-                // Reset path to Default
-                //MessageBox.Show("Profiles directory does not exist. Resetting to default.",
-                //                "Error",
-                //                MessageBoxButton.OK,
-                //                MessageBoxImage.Warning);
-
                 // Load Default
-                vm.ProfilesPath_Text = Paths.profilesDir;
+                VM.ConfigureView.ProfilesPath_Text = MainWindow.profilesDir;
+
+                //MessageBox.Show(VM.ConfigureView.ProfilesPath_Text); //debug
             }
 
             // Get Names from Full Paths
@@ -70,8 +68,8 @@ namespace Glow
                 // Add Name to List
                 // Prevent adding duplicate
                 // Ignore Desktop.ini
-                if (!listCustomProfilesNames.Contains(profileName) 
-                    && !string.Equals(profileName, "desktop", StringComparison.CurrentCultureIgnoreCase))
+                if (!listCustomProfilesNames.Contains(profileName) && 
+                    !string.Equals(profileName, "desktop", StringComparison.CurrentCultureIgnoreCase))
                 {
                     listCustomProfilesNames.Add(profileName);
                 }
@@ -80,10 +78,10 @@ namespace Glow
 
             // Join Presets and Profiles Lists
             //ViewModel._PresetsItems.AddRange(listCustomProfilesNames);
-            vm.Presets_Items.AddRange(listCustomProfilesNames);
+            VM.MainView.Presets_Items.AddRange(listCustomProfilesNames);
             // Populate ComboBox
             //ViewModel._ProfilesItems = ViewModel._PresetsItems.Distinct().ToList();
-            vm.Profiles_Items = vm.Presets_Items.Distinct().ToList();
+            VM.MainView.Profiles_Items = VM.MainView.Presets_Items.Distinct().ToList();
 
             // Clear Temp Lists
             //listCustomProfilesPaths.Clear();
@@ -96,116 +94,115 @@ namespace Glow
         /// <summary>
         ///     Profile
         /// </summary>
-        public static void Profile(MainWindow mainwindow, ViewModel vm)
+        public static void Profile(MainWindow mainwindow)
         {
             // -------------------------
             // Default
             // -------------------------
-            if (vm.Profiles_SelectedItem == "Default")
+            if (VM.MainView.Profiles_SelectedItem == "Default")
             {
                 // -------------------------
                 // General
                 // -------------------------
-                mainwindow.cboPriority.SelectedItem = "default";
-                mainwindow.cboSavePositionQuit.SelectedItem = "default";
-                mainwindow.cboKeepOpen.SelectedItem = "default";
-                mainwindow.cboOnTop.SelectedItem = "default";
-                mainwindow.cboBorder.SelectedItem = "default";
-                mainwindow.slGeometryX.Value = 0;
-                mainwindow.slGeometryY.Value = 0;
-                mainwindow.slAutofitWidth.Value = 0;
-                mainwindow.slAutofitHeight.Value = 0;
-                mainwindow.cboScreensaver.SelectedItem = "default";
-                mainwindow.cboWindowTitle.SelectedItem = "default";
+                VM.GeneralView.Priority_SelectedItem = "default";
+                VM.GeneralView.SavePositionQuit_SelectedItem = "default";
+                VM.GeneralView.KeepOpen_SelectedItem = "default";
+                VM.GeneralView.OnTop_SelectedItem = "default";
+                VM.GeneralView.WindowBorder_SelectedItem = "default";
+                VM.GeneralView.GeometryX_Value = 0;
+                VM.GeneralView.GeometryY_Value = 0;
+                VM.GeneralView.AutofitWidth_Value = 0;
+                VM.GeneralView.AutofitHeight_Value = 0;
+                VM.GeneralView.Screensaver_SelectedItem = "default";
+                VM.GeneralView.WindowTitle_SelectedItem = "default";
                 // Screenshot
-                mainwindow.cboScreenshotTemplate.SelectedItem = "default";
-                mainwindow.cboScreenshotTagColorspace.SelectedItem = "default";
-                mainwindow.cboScreenshotFormat.SelectedItem = "default";
-                mainwindow.slScreenshotQuality.Value = 0;
+                VM.GeneralView.ScreenshotTemplate_SelectedItem = "default";
+                VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "default";
+                VM.GeneralView.ScreenshotFormat_SelectedItem = "default";
+                VM.GeneralView.ScreenshotQuality_Value = 0;
 
                 // -------------------------
                 // Video
                 // -------------------------
-                vm.VideoDriver_SelectedItem = "default";
-                //mainwindow.cboVideoDriver.SelectedItem = "default";
-                mainwindow.cboVideoDriverAPI.SelectedItem = "default";
-                mainwindow.cboOpenGLPBO.SelectedItem = "default";
-                mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
-                mainwindow.cboHWDecoder.SelectedItem = "default";
+                VM.VideoView.VideoDriver_SelectedItem = "default";
+                //VM.VideoView.VideoDriver_SelectedItem = "default";
+                VM.VideoView.VideoDriverAPI_SelectedItem = "default";
+                VM.VideoView.OpenGLPBO_SelectedItem = "default";
+                VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                VM.VideoView.HWDecoder_SelectedItem = "default";
                 // Display
-                mainwindow.cboICCProfile.SelectedItem = "default";
-                mainwindow.cboDisplayPrimaries.SelectedItem = "default";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "default";
-                mainwindow.cboColorSpace.SelectedItem = "default";
-                mainwindow.cboColorRange.SelectedItem = "default";
-                mainwindow.cboInterpolation.SelectedItem = "default";
-                mainwindow.cboVideoSync.SelectedItem = "default";
-                mainwindow.cboFramedrop.SelectedItem = "default";
+                VM.VideoView.ICCProfile_SelectedItem = "default";
+                VM.VideoView.DisplayPrimaries_SelectedItem = "default";
+                VM.VideoView.TransferCharacteristics_SelectedItem = "default";
+                VM.VideoView.ColorSpace_SelectedItem = "default";
+                VM.VideoView.ColorRange_SelectedItem = "default";
+                VM.VideoView.Interpolation_SelectedItem = "default";
+                VM.VideoView.VideoSync_SelectedItem = "default";
+                VM.VideoView.Framedrop_SelectedItem = "default";
                 // Image
-                mainwindow.slBrightness.Value = 0;
-                mainwindow.slContrast.Value = 0;
-                mainwindow.slHue.Value = 0;
-                mainwindow.slSaturation.Value = 0;
-                mainwindow.slGamma.Value = 0;
-                //mainwindow.cboGammaAuto.SelectedItem = "default";
-                mainwindow.cboDither.SelectedItem = "default";
-                mainwindow.cboDeband.SelectedItem = "default";
-                mainwindow.tbxDebandGrain.Text = "";
-                mainwindow.cboDeinterlace.SelectedItem = "default";
+                VM.VideoView.Brightness_Value = 0;
+                VM.VideoView.Contrast_Value = 0;
+                VM.VideoView.Hue_Value = 0;
+                VM.VideoView.Saturation_Value = 0;
+                VM.VideoView.Gamma_Value = 0;
+                VM.VideoView.Dither_SelectedItem = "default";
+                VM.VideoView.Deband_SelectedItem = "default";
+                VM.VideoView.DebandGrain_Text = "";
+                VM.VideoView.Deinterlace_SelectedItem = "default";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "default";
-                mainwindow.cboScale.SelectedItem = "default";
-                mainwindow.slScaleAntiring.Value = 0;
-                mainwindow.cboChromaScale.SelectedItem = "default";
-                mainwindow.slChromaAntiring.Value = 0;
-                mainwindow.cboDownscale.SelectedItem = "default";
-                mainwindow.slDownscaleAntiring.Value = 0;
-                mainwindow.cboInterpolationScale.SelectedItem = "default";
-                mainwindow.slInterpolationAntiring.Value = 0;
-                mainwindow.cboSoftwareScaler.SelectedItem = "default";
+                VM.VideoView.Sigmoid_SelectedItem = "default";
+                VM.VideoView.Scale_SelectedItem = "default";
+                VM.VideoView.ScaleAntiring_Value = 0;
+                VM.VideoView.ChromaScale_SelectedItem = "default";
+                VM.VideoView.ChromaAntiring_Value = 0;
+                VM.VideoView.Downscale_SelectedItem = "default";
+                VM.VideoView.DownscaleAntiring_Value = 0;
+                VM.VideoView.InterpolationScale_SelectedItem = "default";
+                VM.VideoView.InterpolationScaleAntiring_Value = 0;
+                VM.VideoView.SoftwareScaler_SelectedItem = "default";
 
                 // -------------------------
                 // Audio
                 // -------------------------
-                mainwindow.cboAudioDriver.SelectedItem = "default";
-                mainwindow.cboChannels.SelectedItem = "default";
-                mainwindow.slVolume.Value = 0;
-                mainwindow.slVolumeMax.Value = 0;
-                mainwindow.cboNormalize.SelectedItem = "default";
-                mainwindow.cboScaleTempo.SelectedItem = "default";
-                mainwindow.cboAudioLoadFiles.SelectedItem = "default";
+                VM.AudioView.AudioDriver_SelectedItem = "default";
+                VM.AudioView.Channels_SelectedItem = "default";
+                VM.AudioView.Volume_Value = 0;
+                VM.AudioView.VolumeMax_Value = 0;
+                VM.AudioView.Normalize_SelectedItem = "default";
+                VM.AudioView.ScaleTempo_SelectedItem = "default";
+                VM.AudioView.AudioLoadFiles_SelectedItem = "default";
                 // deselect all languages
                 mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
                 // -------------------------
-                mainwindow.cboSubtitles.SelectedItem = "default";
-                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "default";
-                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "default";
-                mainwindow.slSubtitlePosition.Value = 0;
-                mainwindow.cboSubtitlesFixTiming.SelectedItem = "default";
-                mainwindow.cboSubtitlesMargins.SelectedItem = "default";
-                mainwindow.cboSubtitlesBlend.SelectedItem = "default";
+                VM.SubtitlesView.Subtitles_SelectedItem = "default";
+                VM.SubtitlesView.LoadFiles_SelectedItem = "default";
+                VM.SubtitlesView.EmbeddedFonts_SelectedItem = "default";
+                VM.SubtitlesView.Position_Value = 0;
+                VM.SubtitlesView.FixTiming_SelectedItem = "default";
+                VM.SubtitlesView.Margins_SelectedItem = "default";
+                VM.SubtitlesView.Blend_SelectedItem = "default";
                 // Font
-                mainwindow.cboSubtitlesFont.SelectedItem = "default";
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "default";
-                mainwindow.tbxSubtitlesFontColor.Text = ""; //white
+                VM.SubtitlesView.Font_SelectedItem = "default";
+                VM.SubtitlesView.FontSize_SelectedItem = "default";
+                VM.SubtitlesView.FontColor_Text = ""; //white
                 // Border
-                mainwindow.cboSubtitlesBorderSize.SelectedItem = "default";
-                //mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
-                mainwindow.tbxSubtitlesBorderColor.Text = ""; //dark gray
+                VM.SubtitlesView.BorderSize_SelectedItem = "default";
+                //VM.SubtitlesView.BorderColor_Text = "262626"; //dark gray
+                VM.SubtitlesView.BorderColor_Text = ""; //dark gray
                 // Shadow
-                //mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
-                mainwindow.tbxSubtitlesShadowColor.Text = ""; //dark gray
-                mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                //VM.SubtitlesView.ShadowColor_Text = "262626"; //dark gray
+                VM.SubtitlesView.ShadowColor_Text = ""; //dark gray
+                VM.SubtitlesView.ShadowOffset_Value = 0;
 
                 // ASS
-                mainwindow.cboSubtitlesASS.SelectedItem = "default";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "default";
-                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "default";
-                mainwindow.cboSubtitlesASSHinting.SelectedItem = "default";
-                mainwindow.cboSubtitlesASSKerning.SelectedItem = "default";
+                VM.SubtitlesView.ASS_SelectedItem = "default";
+                VM.SubtitlesView.ASSOverride_SelectedItem = "default";
+                VM.SubtitlesView.ASSForceMargins_SelectedItem = "default";
+                VM.SubtitlesView.ASSHinting_SelectedItem = "default";
+                VM.SubtitlesView.ASSKerning_SelectedItem = "default";
 
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
@@ -214,172 +211,173 @@ namespace Glow
                 // Stream
                 // -------------------------
                 // Demuxer
-                mainwindow.cboDemuxerThread.SelectedItem = "default";
-                mainwindow.tbxDemuxerBuffersize.Text = "";
-                mainwindow.tbxDemuxerReadahead.Text = "";
-                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "default";
+                VM.StreamView.DemuxerThread_SelectedItem = "default";
+                VM.StreamView.DemuxerBuffersize_Text = "";
+                VM.StreamView.DemuxerReadahead_Text = "";
+                VM.StreamView.DemuxerMKVSubPreroll_SelectedItem = "default";
                 // YouTube
-                mainwindow.cboYouTubeDL.SelectedItem = "default";
-                mainwindow.cboYouTubeQuality.SelectedItem = "default";
+                VM.StreamView.YouTubeDL_SelectedItem = "default";
+                VM.StreamView.YouTubeDLQuality_SelectedItem = "default";
                 // Cache
-                mainwindow.cboCache.SelectedItem = "default";
-                mainwindow.tbxCacheDefault.Text = "";
-                mainwindow.tbxCacheInitial.Text = "";
-                mainwindow.tbxCacheSeekMin.Text = "";
-                mainwindow.tbxCacheBackbuffer.Text = "";
-                mainwindow.tbxCacheSeconds.Text = "";
-                mainwindow.cboCacheFile.SelectedItem = "default";
-                mainwindow.tbxCacheFileSize.Text = "";
+                VM.StreamView.Cache_SelectedItem = "default";
+                VM.StreamView.CacheDefault_Text = "";
+                VM.StreamView.CacheInitial_Text = "";
+                VM.StreamView.CacheSeekMin_Text = "";
+                VM.StreamView.CacheBackbuffer_Text = "";
+                VM.StreamView.CacheSeconds_Text = "";
+                VM.StreamView.CacheFile_SelectedItem = "default";
+                VM.StreamView.CacheFileSize_Text = "";
 
                 // -------------------------
                 // OSC
                 // -------------------------
-                mainwindow.cboOSC.SelectedItem = "default";
-                mainwindow.cboOSCLayout.SelectedItem = "default";
-                mainwindow.cboOSCSeekbar.SelectedItem = "default";
+                VM.DisplayView.OSC_SelectedItem = "default";
+                VM.DisplayView.OSC_Layout_SelectedItem = "default";
+                VM.DisplayView.OSC_Seekbar_SelectedItem = "default";
 
                 // -------------------------
                 // OSD
                 // -------------------------
-                mainwindow.cboOSD.SelectedItem = "default";
-                mainwindow.cboOSDFractions.SelectedItem = "default";
-                mainwindow.tbxOSDDuration.Text = "";
-                mainwindow.cboOSDLevel.SelectedItem = "default";
-                mainwindow.slOSDScale.Value = 0;
+                VM.DisplayView.OSD_SelectedItem = "default";
+                VM.DisplayView.OSD_Fractions_SelectedItem = "default";
+                VM.DisplayView.OSD_Duration_Text = "";
+                VM.DisplayView.OSD_Level_SelectedItem = "default";
+                VM.DisplayView.OSC_Scale_Value = 0;
                 // Bar
-                mainwindow.slOSDBarWidth.Value = 0;
-                mainwindow.slOSDBarHeight.Value = 0;
+                VM.DisplayView.OSC_BarWidth_Value = 0;
+                VM.DisplayView.OSC_BarHeight_Value = 0;
                 // Font
-                mainwindow.cboOSDFont.SelectedItem = "default";
-                mainwindow.cboOSDFontSize.SelectedItem = "default";
-                //mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
-                mainwindow.tbxOSDFontColor.Text = ""; //white
+                VM.DisplayView.OSD_Font_SelectedItem = "default";
+                VM.DisplayView.OSD_FontSize_SelectedItem = "default";
+                //VM.DisplayView.OSD_FontColor_Text = "FFFFFF"; //white
+                VM.DisplayView.OSD_FontColor_Text = ""; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "default";
-                //mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
-                mainwindow.tbxOSDBorderColor.Text = ""; //dark gray
+                VM.DisplayView.OSD_FontBorderSize_SelectedItem = "default";
+                //VM.DisplayView.OSD_BorderColor_Text = "262626"; //dark gray
+                VM.DisplayView.OSD_BorderColor_Text = ""; //dark gray
                 // Shadow
-                //mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
-                mainwindow.tbxOSDShadowColor.Text = ""; //dark gray
-                mainwindow.slOSDShadowOffset.Value = 1.25;
+                //VM.DisplayView.OSD_ShadowColor_Text = "262626"; //dark gray
+                VM.DisplayView.OSD_ShadowColor_Text = ""; //dark gray
+                VM.DisplayView.OSD_ShadowOffset_Value = 0;
+                //VM.DisplayView.OSD_ShadowOffset_Value = 1.25;
 
                 // -------------------------
                 // Extensions
                 // -------------------------
-                mainwindow.cboExtMKV.SelectedItem = "default";
-                mainwindow.cboExtMP4.SelectedItem = "default";
-                mainwindow.cboExtWebM.SelectedItem = "default";
-                mainwindow.cboExtGIF.SelectedItem = "default";
-                mainwindow.cboExtJPG.SelectedItem = "default";
-                mainwindow.cboExtPNG.SelectedItem = "default";
+                VM.GeneralView.ExtMKV_SelectedItem = "default";
+                VM.GeneralView.ExtMP4_SelectedItem = "default";
+                VM.GeneralView.ExtWebM_SelectedItem = "default";
+                VM.GeneralView.ExtGIF_SelectedItem = "default";
+                VM.GeneralView.ExtJPG_SelectedItem = "default";
+                VM.GeneralView.ExtPNG_SelectedItem = "default";
             }
 
             // -------------------------
             // Ultra
             // -------------------------
-            else if (vm.Profiles_SelectedItem == "Ultra")
+            else if (VM.MainView.Profiles_SelectedItem == "Ultra")
             {
                 // -------------------------
                 // General
                 // -------------------------
-                mainwindow.cboPriority.SelectedItem = "high";
-                mainwindow.cboSavePositionQuit.SelectedItem = "no";
-                mainwindow.cboKeepOpen.SelectedItem = "yes";
-                mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.slGeometryX.Value = 50;
-                mainwindow.slGeometryY.Value = 50;
-                mainwindow.slAutofitWidth.Value = 100;
-                mainwindow.slAutofitHeight.Value = 95;
-                mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
+                VM.GeneralView.Priority_SelectedItem = "high";
+                VM.GeneralView.SavePositionQuit_SelectedItem = "no";
+                VM.GeneralView.KeepOpen_SelectedItem = "yes";
+                VM.GeneralView.OnTop_SelectedItem = "no";
+                VM.GeneralView.GeometryX_Value = 50;
+                VM.GeneralView.GeometryY_Value = 50;
+                VM.GeneralView.AutofitWidth_Value = 100;
+                VM.GeneralView.AutofitHeight_Value = 95;
+                VM.GeneralView.Screensaver_SelectedItem = "off";
+                VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
                 // Screenshot
-                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
-                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
-                mainwindow.cboScreenshotFormat.SelectedItem = "png";
-                mainwindow.slScreenshotQuality.Value = 7; //png compression
+                VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
+                VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
+                VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
+                VM.GeneralView.ScreenshotQuality_Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
-                vm.VideoDriver_SelectedItem = "gpu-hq";
-                vm.VideoDriverAPI_SelectedItem = "default";
-                vm.OpenGLPBO_SelectedItem = "default";
-                vm.OpenGLPBOFormat_SelectedItem = "off";
-                vm.HWDecoder_SelectedItem = "auto-copy";
-                //mainwindow.cboVideoDriver.SelectedItem = "opengl-hq";
-                //mainwindow.cboVideoDriverAPI.SelectedItem = "default";
-                //mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
+                VM.VideoView.VideoDriver_SelectedItem = "gpu-hq";
+                VM.VideoView.VideoDriverAPI_SelectedItem = "default";
+                VM.VideoView.OpenGLPBO_SelectedItem = "default";
+                VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
+                //VM.VideoView.VideoDriver_SelectedItem = "opengl-hq";
+                //VM.VideoView.VideoDriverAPI_SelectedItem = "default";
+                //VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
                 // Display
-                mainwindow.cboICCProfile.SelectedItem = "default";
-                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedItem = "default";
-                mainwindow.cboColorRange.SelectedItem = "auto";
-                mainwindow.cboInterpolation.SelectedItem = "yes";
-                mainwindow.cboVideoSync.SelectedItem = "display-resample";
-                mainwindow.cboFramedrop.SelectedItem = "vo";
+                VM.VideoView.ICCProfile_SelectedItem = "default";
+                VM.VideoView.DisplayPrimaries_SelectedItem = "auto";
+                VM.VideoView.TransferCharacteristics_SelectedItem = "auto";
+                VM.VideoView.ColorSpace_SelectedItem = "default";
+                VM.VideoView.ColorRange_SelectedItem = "default";
+                VM.VideoView.Interpolation_SelectedItem = "yes";
+                VM.VideoView.VideoSync_SelectedItem = "display-resample";
+                VM.VideoView.Framedrop_SelectedItem = "vo";
                 // Image
-                mainwindow.slBrightness.Value = 0;
-                mainwindow.slContrast.Value = 0;
-                mainwindow.slHue.Value = 0;
-                mainwindow.slSaturation.Value = 0;
-                mainwindow.slGamma.Value = 0;
-                //mainwindow.cboGammaAuto.SelectedItem = "yes";
-                mainwindow.cboDither.SelectedItem = "8";
-                mainwindow.cboDeband.SelectedItem = "yes";
-                mainwindow.tbxDebandGrain.Text = "80";
-                mainwindow.cboDeinterlace.SelectedItem = "default";
+                VM.VideoView.Brightness_Value = 0;
+                VM.VideoView.Contrast_Value = 0;
+                VM.VideoView.Hue_Value = 0;
+                VM.VideoView.Saturation_Value = 0;
+                VM.VideoView.Gamma_Value = 0;
+                //vm.GammaAuto_SelectedItem = "yes";
+                VM.VideoView.Dither_SelectedItem = "8";
+                VM.VideoView.Deband_SelectedItem = "yes";
+                VM.VideoView.DebandGrain_Text = "80";
+                VM.VideoView.Deinterlace_SelectedItem = "default";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "yes";
-                mainwindow.cboScale.SelectedItem = "spline36";
-                mainwindow.slScaleAntiring.Value = 1;
-                mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
-                mainwindow.slChromaAntiring.Value = 1;
-                mainwindow.cboDownscale.SelectedItem = "mitchell";
-                mainwindow.slDownscaleAntiring.Value = 1;
-                mainwindow.cboInterpolationScale.SelectedItem = "mitchell";
-                mainwindow.slInterpolationAntiring.Value = 1;
-                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+                VM.VideoView.Sigmoid_SelectedItem = "yes";
+                VM.VideoView.Scale_SelectedItem = "spline36";
+                VM.VideoView.ScaleAntiring_Value = 1;
+                VM.VideoView.ChromaScale_SelectedItem = "ewa_lanczossoft";
+                VM.VideoView.ChromaAntiring_Value = 1;
+                VM.VideoView.Downscale_SelectedItem = "mitchell";
+                VM.VideoView.DownscaleAntiring_Value = 1;
+                VM.VideoView.InterpolationScale_SelectedItem = "mitchell";
+                VM.VideoView.InterpolationScaleAntiring_Value = 1;
+                VM.VideoView.SoftwareScaler_SelectedItem = "off";
 
                 // -------------------------
                 // Audio
                 // -------------------------
-                mainwindow.cboAudioDriver.SelectedItem = "wasapi";
-                mainwindow.cboChannels.SelectedItem = "auto";
-                mainwindow.slVolume.Value = 100;
-                mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboNormalize.SelectedItem = "yes";
-                mainwindow.cboScaleTempo.SelectedItem = "yes";
-                mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                VM.AudioView.AudioDriver_SelectedItem = "wasapi";
+                VM.AudioView.Channels_SelectedItem = "auto";
+                VM.AudioView.Volume_Value = 100;
+                VM.AudioView.VolumeMax_Value = 150;
+                VM.AudioView.Normalize_SelectedItem = "yes";
+                VM.AudioView.ScaleTempo_SelectedItem = "yes";
+                VM.AudioView.AudioLoadFiles_SelectedItem = "fuzzy";
                 // deselect all languages
                 mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
                 // -------------------------
-                mainwindow.cboSubtitles.SelectedItem = "yes";
-                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.slSubtitlePosition.Value = 95;
-                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
-                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
+                VM.SubtitlesView.Subtitles_SelectedItem = "yes";
+                VM.SubtitlesView.LoadFiles_SelectedItem = "fuzzy";
+                VM.SubtitlesView.Position_Value = 95;
+                VM.SubtitlesView.FixTiming_SelectedItem = "yes";
+                VM.SubtitlesView.Margins_SelectedItem = "yes";
+                VM.SubtitlesView.Blend_SelectedItem = "yes";
                 // Font
-                mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "48";
-                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
+                VM.SubtitlesView.Font_SelectedItem = "Segoe UI";
+                VM.SubtitlesView.FontSize_SelectedItem = "48";
+                VM.SubtitlesView.FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
+                VM.SubtitlesView.BorderSize_SelectedItem = "2";
+                VM.SubtitlesView.BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
-                mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                VM.SubtitlesView.ShadowColor_Text = "262626"; //dark gray
+                VM.SubtitlesView.ShadowOffset_Value = 1.25;
 
                 // ASS
-                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
-                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
-                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+                VM.SubtitlesView.ASS_SelectedItem = "yes";
+                VM.SubtitlesView.ASSOverride_SelectedItem = "force";
+                VM.SubtitlesView.ASSForceMargins_SelectedItem = "yes";
+                VM.SubtitlesView.ASSHinting_SelectedItem = "none";
+                VM.SubtitlesView.ASSKerning_SelectedItem = "yes";
 
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
@@ -388,172 +386,172 @@ namespace Glow
                 // Stream
                 // -------------------------
                 // Demuxer
-                mainwindow.cboDemuxerThread.SelectedItem = "no";
-                mainwindow.tbxDemuxerBuffersize.Text = "32768";
-                mainwindow.tbxDemuxerReadahead.Text = "5.0";
-                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                VM.StreamView.DemuxerThread_SelectedItem = "no";
+                VM.StreamView.DemuxerBuffersize_Text = "32768";
+                VM.StreamView.DemuxerReadahead_Text = "5.0";
+                VM.StreamView.DemuxerMKVSubPreroll_SelectedItem = "yes";
                 // YouTube
-                mainwindow.cboYouTubeDL.SelectedItem = "yes";
-                mainwindow.cboYouTubeQuality.SelectedItem = "best";
+                VM.StreamView.YouTubeDL_SelectedItem = "yes";
+                VM.StreamView.YouTubeDLQuality_SelectedItem = "best";
                 // Cache
-                mainwindow.cboCache.SelectedItem = "auto";
-                mainwindow.tbxCacheDefault.Text = "100000";
-                mainwindow.tbxCacheInitial.Text = "1024";
-                mainwindow.tbxCacheSeekMin.Text = "1024";
-                mainwindow.tbxCacheBackbuffer.Text = "25000";
-                mainwindow.tbxCacheSeconds.Text = "30";
-                mainwindow.cboCacheFile.SelectedItem = "TMP";
-                mainwindow.tbxCacheFileSize.Text = "1048576";
+                VM.StreamView.Cache_SelectedItem = "auto";
+                VM.StreamView.CacheDefault_Text = "100000";
+                VM.StreamView.CacheInitial_Text = "1024";
+                VM.StreamView.CacheSeekMin_Text = "1024";
+                VM.StreamView.CacheBackbuffer_Text = "25000";
+                VM.StreamView.CacheSeconds_Text = "30";
+                VM.StreamView.CacheFile_SelectedItem = "TMP";
+                VM.StreamView.CacheFileSize_Text = "1048576";
 
                 // -------------------------
                 // OSC
                 // -------------------------
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
-                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
+                VM.DisplayView.OSC_SelectedItem = "yes";
+                VM.DisplayView.OSC_Layout_SelectedItem = "bottombar";
+                VM.DisplayView.OSC_Seekbar_SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
                 // -------------------------
-                mainwindow.cboOSD.SelectedItem = "yes";
-                mainwindow.cboOSDFractions.SelectedItem = "yes";
-                mainwindow.tbxOSDDuration.Text = "1500";
-                mainwindow.cboOSDLevel.SelectedItem = "1";
-                mainwindow.slOSDScale.Value = 0.5;
+                VM.DisplayView.OSD_SelectedItem = "yes";
+                VM.DisplayView.OSD_Fractions_SelectedItem = "yes";
+                VM.DisplayView.OSD_Duration_Text = "1500";
+                VM.DisplayView.OSD_Level_SelectedItem = "1";
+                VM.DisplayView.OSC_Scale_Value = 0.5;
                 // Bar
-                mainwindow.slOSDBarWidth.Value = 95;
-                mainwindow.slOSDBarHeight.Value = 2;
+                VM.DisplayView.OSC_BarWidth_Value = 95;
+                VM.DisplayView.OSC_BarHeight_Value = 2;
                 // Font
-                mainwindow.cboOSDFont.SelectedItem = "Segoe UI";
-                mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
+                VM.DisplayView.OSD_Font_SelectedItem = "Segoe UI";
+                VM.DisplayView.OSD_FontSize_SelectedItem = "60";
+                VM.DisplayView.OSD_FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
+                VM.DisplayView.OSD_FontBorderSize_SelectedItem = "1";
+                VM.DisplayView.OSD_BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
-                mainwindow.slOSDShadowOffset.Value = 1.25;
+                VM.DisplayView.OSD_ShadowColor_Text = "262626"; //dark gray
+                VM.DisplayView.OSD_ShadowOffset_Value = 1.25;
 
                 // -------------------------
                 // Extensions
                 // -------------------------
-                mainwindow.cboExtMKV.SelectedItem = "default";
-                mainwindow.cboExtMP4.SelectedItem = "default";
-                mainwindow.cboExtWebM.SelectedItem = "loop";
-                mainwindow.cboExtGIF.SelectedItem = "loop";
-                mainwindow.cboExtJPG.SelectedItem = "pause";
-                mainwindow.cboExtPNG.SelectedItem = "pause";
+                VM.GeneralView.ExtMKV_SelectedItem = "default";
+                VM.GeneralView.ExtMP4_SelectedItem = "default";
+                VM.GeneralView.ExtWebM_SelectedItem = "loop";
+                VM.GeneralView.ExtGIF_SelectedItem = "loop";
+                VM.GeneralView.ExtJPG_SelectedItem = "pause";
+                VM.GeneralView.ExtPNG_SelectedItem = "pause";
             }
 
             // -------------------------
             // High
             // -------------------------
-            else if (vm.Profiles_SelectedItem == "High")
+            else if (VM.MainView.Profiles_SelectedItem == "High")
             {
                 // -------------------------
                 // General
                 // -------------------------
-                mainwindow.cboPriority.SelectedItem = "high";
-                mainwindow.cboSavePositionQuit.SelectedItem = "no";
-                mainwindow.cboKeepOpen.SelectedItem = "yes";
-                mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.slGeometryX.Value = 50;
-                mainwindow.slGeometryY.Value = 50;
-                mainwindow.slAutofitWidth.Value = 100;
-                mainwindow.slAutofitHeight.Value = 95;
-                mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
+                VM.GeneralView.Priority_SelectedItem = "high";
+                VM.GeneralView.SavePositionQuit_SelectedItem = "no";
+                VM.GeneralView.KeepOpen_SelectedItem = "yes";
+                VM.GeneralView.OnTop_SelectedItem = "no";
+                VM.GeneralView.GeometryX_Value = 50;
+                VM.GeneralView.GeometryY_Value = 50;
+                VM.GeneralView.AutofitWidth_Value = 100;
+                VM.GeneralView.AutofitHeight_Value = 95;
+                VM.GeneralView.Screensaver_SelectedItem = "off";
+                VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
                 // Screenshot
-                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
-                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
-                mainwindow.cboScreenshotFormat.SelectedItem = "png";
-                mainwindow.slScreenshotQuality.Value = 7; //png compression
+                VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
+                VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
+                VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
+                VM.GeneralView.ScreenshotQuality_Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
-                vm.VideoDriver_SelectedItem = "gpu";
-                vm.VideoDriverAPI_SelectedItem = "default";
-                vm.OpenGLPBO_SelectedItem = "no";
-                vm.OpenGLPBOFormat_SelectedItem = "off";
-                vm.HWDecoder_SelectedItem = "auto-copy";
-                //mainwindow.cboVideoDriver.SelectedItem = "opengl";
-                //mainwindow.cboVideoDriverAPI.SelectedItem = "opengl";
-                //mainwindow.cboOpenGLPBO.SelectedItem = "no";
-                //mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
-                //mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
+                VM.VideoView.VideoDriver_SelectedItem = "gpu";
+                VM.VideoView.VideoDriverAPI_SelectedItem = "default";
+                VM.VideoView.OpenGLPBO_SelectedItem = "no";
+                VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
+                //VM.VideoView.VideoDriver_SelectedItem = "opengl";
+                //VM.VideoView.VideoDriverAPI_SelectedItem = "opengl";
+                //VM.VideoView.OpenGLPBO_SelectedItem = "no";
+                //VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                //VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
                 // Display
-                mainwindow.cboICCProfile.SelectedItem = "default";
-                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedItem = "default";
-                mainwindow.cboColorRange.SelectedItem = "auto";
-                mainwindow.cboInterpolation.SelectedItem = "yes";
-                mainwindow.cboVideoSync.SelectedItem = "display-resample";
-                mainwindow.cboFramedrop.SelectedItem = "vo";
+                VM.VideoView.ICCProfile_SelectedItem = "default";
+                VM.VideoView.DisplayPrimaries_SelectedItem = "auto";
+                VM.VideoView.TransferCharacteristics_SelectedItem = "auto";
+                VM.VideoView.ColorSpace_SelectedItem = "default";
+                VM.VideoView.ColorRange_SelectedItem = "default";
+                VM.VideoView.Interpolation_SelectedItem = "yes";
+                VM.VideoView.VideoSync_SelectedItem = "display-resample";
+                VM.VideoView.Framedrop_SelectedItem = "vo";
                 // Image
-                mainwindow.slBrightness.Value = 0;
-                mainwindow.slContrast.Value = 0;
-                mainwindow.slHue.Value = 0;
-                mainwindow.slSaturation.Value = 0;
-                mainwindow.slGamma.Value = 0;
-                //mainwindow.cboGammaAuto.SelectedItem = "yes";
-                mainwindow.cboDither.SelectedItem = "8";
-                mainwindow.cboDeband.SelectedItem = "yes";
-                mainwindow.tbxDebandGrain.Text = "80";
-                mainwindow.cboDeinterlace.SelectedItem = "default";
+                VM.VideoView.Brightness_Value = 0;
+                VM.VideoView.Contrast_Value = 0;
+                VM.VideoView.Hue_Value = 0;
+                VM.VideoView.Saturation_Value = 0;
+                VM.VideoView.Gamma_Value = 0;
+                //vm.GammaAuto_SelectedItem = "yes";
+                VM.VideoView.Dither_SelectedItem = "8";
+                VM.VideoView.Deband_SelectedItem = "yes";
+                VM.VideoView.DebandGrain_Text = "80";
+                VM.VideoView.Deinterlace_SelectedItem = "default";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "yes";
-                mainwindow.cboScale.SelectedItem = "ewa_lanczossharp";
-                mainwindow.slScaleAntiring.Value = 0.5;
-                mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
-                mainwindow.slChromaAntiring.Value = 0.5;
-                mainwindow.cboDownscale.SelectedItem = "mitchell";
-                mainwindow.slDownscaleAntiring.Value = 0;
-                mainwindow.cboInterpolationScale.SelectedItem = "mitchell";
-                mainwindow.slInterpolationAntiring.Value = 0;
-                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+                VM.VideoView.Sigmoid_SelectedItem = "yes";
+                VM.VideoView.Scale_SelectedItem = "ewa_lanczossharp";
+                VM.VideoView.ScaleAntiring_Value = 0.5;
+                VM.VideoView.ChromaScale_SelectedItem = "ewa_lanczossoft";
+                VM.VideoView.ChromaAntiring_Value = 0.5;
+                VM.VideoView.Downscale_SelectedItem = "mitchell";
+                VM.VideoView.DownscaleAntiring_Value = 0;
+                VM.VideoView.InterpolationScale_SelectedItem = "mitchell";
+                VM.VideoView.InterpolationScaleAntiring_Value = 0;
+                VM.VideoView.SoftwareScaler_SelectedItem = "off";
 
                 // -------------------------
                 // Audio
                 // -------------------------
-                mainwindow.cboAudioDriver.SelectedItem = "wasapi";
-                mainwindow.cboChannels.SelectedItem = "auto";
-                mainwindow.slVolume.Value = 100;
-                mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboNormalize.SelectedItem = "yes";
-                mainwindow.cboScaleTempo.SelectedItem = "yes";
-                mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                VM.AudioView.AudioDriver_SelectedItem = "wasapi";
+                VM.AudioView.Channels_SelectedItem = "auto";
+                VM.AudioView.Volume_Value = 100;
+                VM.AudioView.VolumeMax_Value = 150;
+                VM.AudioView.Normalize_SelectedItem = "yes";
+                VM.AudioView.ScaleTempo_SelectedItem = "yes";
+                VM.AudioView.AudioLoadFiles_SelectedItem = "fuzzy";
                 // deselect all languages
                 mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
                 // -------------------------
-                mainwindow.cboSubtitles.SelectedItem = "yes";
-                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
-                mainwindow.slSubtitlePosition.Value = 95;
-                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
-                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
+                VM.SubtitlesView.Subtitles_SelectedItem = "yes";
+                VM.SubtitlesView.LoadFiles_SelectedItem = "fuzzy";
+                VM.SubtitlesView.EmbeddedFonts_SelectedItem = "no";
+                VM.SubtitlesView.Position_Value = 95;
+                VM.SubtitlesView.FixTiming_SelectedItem = "yes";
+                VM.SubtitlesView.Margins_SelectedItem = "yes";
+                VM.SubtitlesView.Blend_SelectedItem = "yes";
                 // Font
-                mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
+                VM.SubtitlesView.Font_SelectedItem = "Segoe UI";
+                VM.SubtitlesView.FontSize_SelectedItem = "44";
+                VM.SubtitlesView.FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
+                VM.SubtitlesView.BorderSize_SelectedItem = "2";
+                VM.SubtitlesView.BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
-                mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                VM.SubtitlesView.ShadowColor_Text = "262626"; //dark gray
+                VM.SubtitlesView.ShadowOffset_Value = 1.25;
 
                 // ASS
-                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
-                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
-                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+                VM.SubtitlesView.ASS_SelectedItem = "yes";
+                VM.SubtitlesView.ASSOverride_SelectedItem = "force";
+                VM.SubtitlesView.ASSForceMargins_SelectedItem = "yes";
+                VM.SubtitlesView.ASSHinting_SelectedItem = "none";
+                VM.SubtitlesView.ASSKerning_SelectedItem = "yes";
 
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
@@ -562,172 +560,172 @@ namespace Glow
                 // Stream
                 // -------------------------
                 // Demuxer
-                mainwindow.cboDemuxerThread.SelectedItem = "no";
-                mainwindow.tbxDemuxerBuffersize.Text = "32768";
-                mainwindow.tbxDemuxerReadahead.Text = "5.0";
-                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                VM.StreamView.DemuxerThread_SelectedItem = "no";
+                VM.StreamView.DemuxerBuffersize_Text = "32768";
+                VM.StreamView.DemuxerReadahead_Text = "5.0";
+                VM.StreamView.DemuxerMKVSubPreroll_SelectedItem = "yes";
                 // YouTube
-                mainwindow.cboYouTubeDL.SelectedItem = "yes";
-                mainwindow.cboYouTubeQuality.SelectedItem = "best";
+                VM.StreamView.YouTubeDL_SelectedItem = "yes";
+                VM.StreamView.YouTubeDLQuality_SelectedItem = "best";
                 // Cache
-                mainwindow.cboCache.SelectedItem = "auto";
-                mainwindow.tbxCacheDefault.Text = "100000";
-                mainwindow.tbxCacheInitial.Text = "1024";
-                mainwindow.tbxCacheSeekMin.Text = "1024";
-                mainwindow.tbxCacheBackbuffer.Text = "25000";
-                mainwindow.tbxCacheSeconds.Text = "30";
-                mainwindow.cboCacheFile.SelectedItem = "TMP";
-                mainwindow.tbxCacheFileSize.Text = "1048576";
+                VM.StreamView.Cache_SelectedItem = "auto";
+                VM.StreamView.CacheDefault_Text = "100000";
+                VM.StreamView.CacheInitial_Text = "1024";
+                VM.StreamView.CacheSeekMin_Text = "1024";
+                VM.StreamView.CacheBackbuffer_Text = "25000";
+                VM.StreamView.CacheSeconds_Text = "30";
+                VM.StreamView.CacheFile_SelectedItem = "TMP";
+                VM.StreamView.CacheFileSize_Text = "1048576";
 
                 // -------------------------
                 // OSC
                 // -------------------------
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
-                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
+                VM.DisplayView.OSC_SelectedItem = "yes";
+                VM.DisplayView.OSC_Layout_SelectedItem = "bottombar";
+                VM.DisplayView.OSC_Seekbar_SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
                 // -------------------------
-                mainwindow.cboOSD.SelectedItem = "yes";
-                mainwindow.cboOSDFractions.SelectedItem = "yes";
-                mainwindow.tbxOSDDuration.Text = "1500";
-                mainwindow.cboOSDLevel.SelectedItem = "1";
-                mainwindow.slOSDScale.Value = 0.5;
+                VM.DisplayView.OSD_SelectedItem = "yes";
+                VM.DisplayView.OSD_Fractions_SelectedItem = "yes";
+                VM.DisplayView.OSD_Duration_Text = "1500";
+                VM.DisplayView.OSD_Level_SelectedItem = "1";
+                VM.DisplayView.OSC_Scale_Value = 0.5;
                 // Bar
-                mainwindow.slOSDBarWidth.Value = 95;
-                mainwindow.slOSDBarHeight.Value = 2;
+                VM.DisplayView.OSC_BarWidth_Value = 95;
+                VM.DisplayView.OSC_BarHeight_Value = 2;
                 // Font
-                mainwindow.cboOSDFont.SelectedItem = "Segoe UI";
-                mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
+                VM.DisplayView.OSD_Font_SelectedItem = "Segoe UI";
+                VM.DisplayView.OSD_FontSize_SelectedItem = "60";
+                VM.DisplayView.OSD_FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
+                VM.DisplayView.OSD_FontBorderSize_SelectedItem = "1";
+                VM.DisplayView.OSD_BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
-                mainwindow.slOSDShadowOffset.Value = 1.25;
+                VM.DisplayView.OSD_ShadowColor_Text = "262626"; //dark gray
+                VM.DisplayView.OSD_ShadowOffset_Value = 1.25;
 
                 // -------------------------
                 // Extensions
                 // -------------------------
-                mainwindow.cboExtMKV.SelectedItem = "default";
-                mainwindow.cboExtMP4.SelectedItem = "default";
-                mainwindow.cboExtWebM.SelectedItem = "loop";
-                mainwindow.cboExtGIF.SelectedItem = "loop";
-                mainwindow.cboExtJPG.SelectedItem = "pause";
-                mainwindow.cboExtPNG.SelectedItem = "pause";
+                VM.GeneralView.ExtMKV_SelectedItem = "default";
+                VM.GeneralView.ExtMP4_SelectedItem = "default";
+                VM.GeneralView.ExtWebM_SelectedItem = "loop";
+                VM.GeneralView.ExtGIF_SelectedItem = "loop";
+                VM.GeneralView.ExtJPG_SelectedItem = "pause";
+                VM.GeneralView.ExtPNG_SelectedItem = "pause";
             }
 
             // -------------------------
             // Medium
             // -------------------------
-            else if (vm.Profiles_SelectedItem == "Medium")
+            else if (VM.MainView.Profiles_SelectedItem == "Medium")
             {
                 // -------------------------
                 // General
                 // -------------------------
-                mainwindow.cboPriority.SelectedItem = "abovenormal";
-                mainwindow.cboSavePositionQuit.SelectedItem = "no";
-                mainwindow.cboKeepOpen.SelectedItem = "yes";
-                mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.slGeometryX.Value = 50;
-                mainwindow.slGeometryY.Value = 50;
-                mainwindow.slAutofitWidth.Value = 100;
-                mainwindow.slAutofitHeight.Value = 95;
-                mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
+                VM.GeneralView.Priority_SelectedItem = "abovenormal";
+                VM.GeneralView.SavePositionQuit_SelectedItem = "no";
+                VM.GeneralView.KeepOpen_SelectedItem = "yes";
+                VM.GeneralView.OnTop_SelectedItem = "no";
+                VM.GeneralView.GeometryX_Value = 50;
+                VM.GeneralView.GeometryY_Value = 50;
+                VM.GeneralView.AutofitWidth_Value = 100;
+                VM.GeneralView.AutofitHeight_Value = 95;
+                VM.GeneralView.Screensaver_SelectedItem = "off";
+                VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
                 // Screenshot
-                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
-                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
-                mainwindow.cboScreenshotFormat.SelectedItem = "png";
-                mainwindow.slScreenshotQuality.Value = 7; //png compression
+                VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
+                VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
+                VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
+                VM.GeneralView.ScreenshotQuality_Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
-                vm.VideoDriver_SelectedItem = "gpu";
-                vm.VideoDriverAPI_SelectedItem = "default";
-                vm.OpenGLPBO_SelectedItem = "no";
-                vm.OpenGLPBOFormat_SelectedItem = "off";
-                vm.HWDecoder_SelectedItem = "auto-copy";
-                //mainwindow.cboVideoDriver.SelectedItem = "opengl";
-                //mainwindow.cboVideoDriverAPI.SelectedItem = "opengl";
-                //mainwindow.cboOpenGLPBO.SelectedItem = "no";
-                //mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
-                //mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
+                VM.VideoView.VideoDriver_SelectedItem = "gpu";
+                VM.VideoView.VideoDriverAPI_SelectedItem = "default";
+                VM.VideoView.OpenGLPBO_SelectedItem = "no";
+                VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
+                //VM.VideoView.VideoDriver_SelectedItem = "opengl";
+                //VM.VideoView.VideoDriverAPI_SelectedItem = "opengl";
+                //VM.VideoView.OpenGLPBO_SelectedItem = "no";
+                //VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                //VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
                 // Display
-                mainwindow.cboICCProfile.SelectedItem = "default";
-                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedItem = "default";
-                mainwindow.cboColorRange.SelectedItem = "auto";
-                mainwindow.cboInterpolation.SelectedItem = "default";
-                mainwindow.cboVideoSync.SelectedItem = "default";
-                mainwindow.cboFramedrop.SelectedItem = "vo";
+                VM.VideoView.ICCProfile_SelectedItem = "default";
+                VM.VideoView.DisplayPrimaries_SelectedItem = "auto";
+                VM.VideoView.TransferCharacteristics_SelectedItem = "auto";
+                VM.VideoView.ColorSpace_SelectedItem = "default";
+                VM.VideoView.ColorRange_SelectedItem = "default";
+                VM.VideoView.Interpolation_SelectedItem = "default";
+                VM.VideoView.VideoSync_SelectedItem = "default";
+                VM.VideoView.Framedrop_SelectedItem = "vo";
                 // Image
-                mainwindow.slBrightness.Value = 0;
-                mainwindow.slContrast.Value = 0;
-                mainwindow.slHue.Value = 0;
-                mainwindow.slSaturation.Value = 0;
-                mainwindow.slGamma.Value = 0;
-                //mainwindow.cboGammaAuto.SelectedItem = "yes";
-                mainwindow.cboDither.SelectedItem = "auto";
-                mainwindow.cboDeband.SelectedItem = "yes";
-                mainwindow.tbxDebandGrain.Text = "";
-                mainwindow.cboDeinterlace.SelectedItem = "default";
+                VM.VideoView.Brightness_Value = 0;
+                VM.VideoView.Contrast_Value = 0;
+                VM.VideoView.Hue_Value = 0;
+                VM.VideoView.Saturation_Value = 0;
+                VM.VideoView.Gamma_Value = 0;
+                //vm.GammaAuto_SelectedItem = "yes";
+                VM.VideoView.Dither_SelectedItem = "auto";
+                VM.VideoView.Deband_SelectedItem = "yes";
+                VM.VideoView.DebandGrain_Text = "";
+                VM.VideoView.Deinterlace_SelectedItem = "default";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "yes";
-                mainwindow.cboScale.SelectedItem = "lanczos";
-                mainwindow.slScaleAntiring.Value = 0;
-                mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
-                mainwindow.slChromaAntiring.Value = 0;
-                mainwindow.cboDownscale.SelectedItem = "mitchell";
-                mainwindow.slDownscaleAntiring.Value = 0;
-                mainwindow.cboInterpolationScale.SelectedItem = "default";
-                mainwindow.slInterpolationAntiring.Value = 0;
-                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+                VM.VideoView.Sigmoid_SelectedItem = "yes";
+                VM.VideoView.Scale_SelectedItem = "lanczos";
+                VM.VideoView.ScaleAntiring_Value = 0;
+                VM.VideoView.ChromaScale_SelectedItem = "ewa_lanczossoft";
+                VM.VideoView.ChromaAntiring_Value = 0;
+                VM.VideoView.Downscale_SelectedItem = "mitchell";
+                VM.VideoView.DownscaleAntiring_Value = 0;
+                VM.VideoView.InterpolationScale_SelectedItem = "default";
+                VM.VideoView.InterpolationScaleAntiring_Value = 0;
+                VM.VideoView.SoftwareScaler_SelectedItem = "off";
 
                 // -------------------------
                 // Audio
                 // -------------------------
-                mainwindow.cboAudioDriver.SelectedItem = "wasapi";
-                mainwindow.cboChannels.SelectedItem = "auto";
-                mainwindow.slVolume.Value = 100;
-                mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboNormalize.SelectedItem = "yes";
-                mainwindow.cboScaleTempo.SelectedItem = "yes";
-                mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                VM.AudioView.AudioDriver_SelectedItem = "wasapi";
+                VM.AudioView.Channels_SelectedItem = "auto";
+                VM.AudioView.Volume_Value = 100;
+                VM.AudioView.VolumeMax_Value = 150;
+                VM.AudioView.Normalize_SelectedItem = "yes";
+                VM.AudioView.ScaleTempo_SelectedItem = "yes";
+                VM.AudioView.AudioLoadFiles_SelectedItem = "fuzzy";
                 // deselect all languages
                 mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
                 // -------------------------
-                mainwindow.cboSubtitles.SelectedItem = "yes";
-                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
-                mainwindow.slSubtitlePosition.Value = 95;
-                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
-                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
+                VM.SubtitlesView.Subtitles_SelectedItem = "yes";
+                VM.SubtitlesView.LoadFiles_SelectedItem = "fuzzy";
+                VM.SubtitlesView.EmbeddedFonts_SelectedItem = "no";
+                VM.SubtitlesView.Position_Value = 95;
+                VM.SubtitlesView.FixTiming_SelectedItem = "yes";
+                VM.SubtitlesView.Margins_SelectedItem = "yes";
+                VM.SubtitlesView.Blend_SelectedItem = "yes";
                 // Font
-                mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
+                VM.SubtitlesView.Font_SelectedItem = "Segoe UI";
+                VM.SubtitlesView.FontSize_SelectedItem = "44";
+                VM.SubtitlesView.FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
+                VM.SubtitlesView.BorderSize_SelectedItem = "2";
+                VM.SubtitlesView.BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
-                mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                VM.SubtitlesView.ShadowColor_Text = "262626"; //dark gray
+                VM.SubtitlesView.ShadowOffset_Value = 1.25;
 
                 // ASS
-                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
-                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
-                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+                VM.SubtitlesView.ASS_SelectedItem = "yes";
+                VM.SubtitlesView.ASSOverride_SelectedItem = "force";
+                VM.SubtitlesView.ASSForceMargins_SelectedItem = "yes";
+                VM.SubtitlesView.ASSHinting_SelectedItem = "none";
+                VM.SubtitlesView.ASSKerning_SelectedItem = "yes";
 
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
@@ -736,173 +734,173 @@ namespace Glow
                 // Stream
                 // -------------------------
                 // Demuxer
-                mainwindow.cboDemuxerThread.SelectedItem = "no";
-                mainwindow.tbxDemuxerBuffersize.Text = "32768";
-                mainwindow.tbxDemuxerReadahead.Text = "5.0";
-                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                VM.StreamView.DemuxerThread_SelectedItem = "no";
+                VM.StreamView.DemuxerBuffersize_Text = "32768";
+                VM.StreamView.DemuxerReadahead_Text = "5.0";
+                VM.StreamView.DemuxerMKVSubPreroll_SelectedItem = "yes";
                 // YouTube
-                mainwindow.cboYouTubeDL.SelectedItem = "yes";
-                mainwindow.cboYouTubeQuality.SelectedItem = "good";
+                VM.StreamView.YouTubeDL_SelectedItem = "yes";
+                VM.StreamView.YouTubeDLQuality_SelectedItem = "good";
                 // Cache
-                mainwindow.cboCache.SelectedItem = "auto";
-                mainwindow.tbxCacheDefault.Text = "100000";
-                mainwindow.tbxCacheInitial.Text = "1024";
-                mainwindow.tbxCacheSeekMin.Text = "1024";
-                mainwindow.tbxCacheBackbuffer.Text = "25000";
-                mainwindow.tbxCacheSeconds.Text = "30";
-                mainwindow.cboCacheFile.SelectedItem = "TMP";
-                mainwindow.tbxCacheFileSize.Text = "1048576";
+                VM.StreamView.Cache_SelectedItem = "auto";
+                VM.StreamView.CacheDefault_Text = "100000";
+                VM.StreamView.CacheInitial_Text = "1024";
+                VM.StreamView.CacheSeekMin_Text = "1024";
+                VM.StreamView.CacheBackbuffer_Text = "25000";
+                VM.StreamView.CacheSeconds_Text = "30";
+                VM.StreamView.CacheFile_SelectedItem = "TMP";
+                VM.StreamView.CacheFileSize_Text = "1048576";
 
                 // -------------------------
                 // OSC
                 // -------------------------
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
-                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
+                VM.DisplayView.OSC_SelectedItem = "yes";
+                VM.DisplayView.OSC_Layout_SelectedItem = "bottombar";
+                VM.DisplayView.OSC_Seekbar_SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
                 // -------------------------
-                mainwindow.cboOSD.SelectedItem = "yes";
-                mainwindow.cboOSDFractions.SelectedItem = "yes";
-                mainwindow.tbxOSDDuration.Text = "1500";
-                mainwindow.cboOSDLevel.SelectedItem = "1";
-                mainwindow.slOSDScale.Value = 0.5;
+                VM.DisplayView.OSD_SelectedItem = "yes";
+                VM.DisplayView.OSD_Fractions_SelectedItem = "yes";
+                VM.DisplayView.OSD_Duration_Text = "1500";
+                VM.DisplayView.OSD_Level_SelectedItem = "1";
+                VM.DisplayView.OSC_Scale_Value = 0.5;
                 // Bar
-                mainwindow.slOSDBarWidth.Value = 95;
-                mainwindow.slOSDBarHeight.Value = 2;
+                VM.DisplayView.OSC_BarWidth_Value = 95;
+                VM.DisplayView.OSC_BarHeight_Value = 2;
                 // Font
-                mainwindow.cboOSDFont.SelectedItem = "Segoe UI";
-                mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
+                VM.DisplayView.OSD_Font_SelectedItem = "Segoe UI";
+                VM.DisplayView.OSD_FontSize_SelectedItem = "60";
+                VM.DisplayView.OSD_FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
+                VM.DisplayView.OSD_FontBorderSize_SelectedItem = "1";
+                VM.DisplayView.OSD_BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
-                mainwindow.slOSDShadowOffset.Value = 1.25;
+                VM.DisplayView.OSD_ShadowColor_Text = "262626"; //dark gray
+                VM.DisplayView.OSD_ShadowOffset_Value = 1.25;
 
                 // -------------------------
                 // Extensions
                 // -------------------------
-                mainwindow.cboExtMKV.SelectedItem = "default";
-                mainwindow.cboExtMP4.SelectedItem = "default";
-                mainwindow.cboExtWebM.SelectedItem = "loop";
-                mainwindow.cboExtGIF.SelectedItem = "loop";
-                mainwindow.cboExtJPG.SelectedItem = "pause";
-                mainwindow.cboExtPNG.SelectedItem = "pause";
+                VM.GeneralView.ExtMKV_SelectedItem = "default";
+                VM.GeneralView.ExtMP4_SelectedItem = "default";
+                VM.GeneralView.ExtWebM_SelectedItem = "loop";
+                VM.GeneralView.ExtGIF_SelectedItem = "loop";
+                VM.GeneralView.ExtJPG_SelectedItem = "pause";
+                VM.GeneralView.ExtPNG_SelectedItem = "pause";
             }
 
             // -------------------------
             // Low
             // -------------------------
-            else if (vm.Profiles_SelectedItem == "Low")
+            else if (VM.MainView.Profiles_SelectedItem == "Low")
             {
                 // -------------------------
                 // General
                 // -------------------------
-                mainwindow.cboPriority.SelectedItem = "normal";
-                mainwindow.cboSavePositionQuit.SelectedItem = "no";
-                mainwindow.cboKeepOpen.SelectedItem = "yes";
-                mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.slGeometryX.Value = 50;
-                mainwindow.slGeometryY.Value = 50;
-                mainwindow.slAutofitWidth.Value = 100;
-                mainwindow.slAutofitHeight.Value = 95;
-                mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
+                VM.GeneralView.Priority_SelectedItem = "normal";
+                VM.GeneralView.SavePositionQuit_SelectedItem = "no";
+                VM.GeneralView.KeepOpen_SelectedItem = "yes";
+                VM.GeneralView.OnTop_SelectedItem = "no";
+                VM.GeneralView.GeometryX_Value = 50;
+                VM.GeneralView.GeometryY_Value = 50;
+                VM.GeneralView.AutofitWidth_Value = 100;
+                VM.GeneralView.AutofitHeight_Value = 95;
+                VM.GeneralView.Screensaver_SelectedItem = "off";
+                VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
                 // Screenshot
-                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
-                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
-                mainwindow.cboScreenshotFormat.SelectedItem = "png";
-                mainwindow.slScreenshotQuality.Value = 7; //png compression
+                VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
+                VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
+                VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
+                VM.GeneralView.ScreenshotQuality_Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
-                vm.VideoDriver_SelectedItem = "gpu";
-                vm.VideoDriverAPI_SelectedItem = "default";
-                vm.OpenGLPBO_SelectedItem = "no";
-                vm.OpenGLPBOFormat_SelectedItem = "off";
-                vm.HWDecoder_SelectedItem = "auto-copy";
-                //mainwindow.cboVideoDriver.SelectedItem = "opengl";
-                //mainwindow.cboVideoDriverAPI.SelectedItem = "opengl";
-                //mainwindow.cboOpenGLPBO.SelectedItem = "no";
-                //mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
-                //mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
+                VM.VideoView.VideoDriver_SelectedItem = "gpu";
+                VM.VideoView.VideoDriverAPI_SelectedItem = "default";
+                VM.VideoView.OpenGLPBO_SelectedItem = "no";
+                VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
+                //VM.VideoView.VideoDriver_SelectedItem = "opengl";
+                //VM.VideoView.VideoDriverAPI_SelectedItem = "opengl";
+                //VM.VideoView.OpenGLPBO_SelectedItem = "no";
+                //VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                //VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
                 // Display
-                mainwindow.cboICCProfile.SelectedItem = "default";
-                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedItem = "default";
-                mainwindow.cboColorRange.SelectedItem = "auto";
-                mainwindow.cboInterpolation.SelectedItem = "default";
-                mainwindow.cboVideoSync.SelectedItem = "default";
-                mainwindow.cboFramedrop.SelectedItem = "vo";
+                VM.VideoView.ICCProfile_SelectedItem = "default";
+                VM.VideoView.DisplayPrimaries_SelectedItem = "auto";
+                VM.VideoView.TransferCharacteristics_SelectedItem = "auto";
+                VM.VideoView.ColorSpace_SelectedItem = "default";
+                VM.VideoView.ColorRange_SelectedItem = "default";
+                VM.VideoView.Interpolation_SelectedItem = "default";
+                VM.VideoView.VideoSync_SelectedItem = "default";
+                VM.VideoView.Framedrop_SelectedItem = "vo";
                 // Image
-                mainwindow.slBrightness.Value = 0;
-                mainwindow.slContrast.Value = 0;
-                mainwindow.slHue.Value = 0;
-                mainwindow.slSaturation.Value = 0;
-                mainwindow.slGamma.Value = 0;
-                //mainwindow.cboGammaAuto.SelectedItem = "no";
-                mainwindow.cboDither.SelectedItem = "no";
-                mainwindow.cboDeband.SelectedItem = "no";
-                mainwindow.tbxDebandGrain.Text = "";
-                mainwindow.cboDeinterlace.SelectedItem = "default";
+                VM.VideoView.Brightness_Value = 0;
+                VM.VideoView.Contrast_Value = 0;
+                VM.VideoView.Hue_Value = 0;
+                VM.VideoView.Saturation_Value = 0;
+                VM.VideoView.Gamma_Value = 0;
+                //vm.GammaAuto_SelectedItem = "no";
+                VM.VideoView.Dither_SelectedItem = "no";
+                VM.VideoView.Deband_SelectedItem = "no";
+                VM.VideoView.DebandGrain_Text = "";
+                VM.VideoView.Deinterlace_SelectedItem = "default";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "no";
-                mainwindow.cboScale.SelectedItem = "bilinear";
-                mainwindow.slScaleAntiring.Value = 0;
-                mainwindow.cboChromaScale.SelectedItem = "bilinear";
-                mainwindow.slChromaAntiring.Value = 0;
-                mainwindow.cboDownscale.SelectedItem = "bilinear";
-                mainwindow.slDownscaleAntiring.Value = 0;
-                mainwindow.cboInterpolationScale.SelectedItem = "default";
-                mainwindow.slInterpolationAntiring.Value = 0;
-                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+                VM.VideoView.Sigmoid_SelectedItem = "no";
+                VM.VideoView.Scale_SelectedItem = "bilinear";
+                VM.VideoView.ScaleAntiring_Value = 0;
+                VM.VideoView.ChromaScale_SelectedItem = "bilinear";
+                VM.VideoView.ChromaAntiring_Value = 0;
+                VM.VideoView.Downscale_SelectedItem = "bilinear";
+                VM.VideoView.DownscaleAntiring_Value = 0;
+                VM.VideoView.InterpolationScale_SelectedItem = "default";
+                VM.VideoView.InterpolationScaleAntiring_Value = 0;
+                VM.VideoView.SoftwareScaler_SelectedItem = "off";
 
                 // -------------------------
                 // Audio
                 // -------------------------
-                mainwindow.cboAudioDriver.SelectedItem = "wasapi";
-                mainwindow.cboChannels.SelectedItem = "auto";
-                mainwindow.slVolume.Value = 100;
-                mainwindow.slVolumeMax.Value = 150;
-                mainwindow.cboNormalize.SelectedItem = "yes";
-                mainwindow.cboScaleTempo.SelectedItem = "yes";
-                mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                VM.AudioView.AudioDriver_SelectedItem = "wasapi";
+                VM.AudioView.Channels_SelectedItem = "auto";
+                VM.AudioView.Volume_Value = 100;
+                VM.AudioView.VolumeMax_Value = 150;
+                VM.AudioView.Normalize_SelectedItem = "yes";
+                VM.AudioView.ScaleTempo_SelectedItem = "yes";
+                VM.AudioView.AudioLoadFiles_SelectedItem = "fuzzy";
                 // deselect all languages
                 mainwindow.listViewAudioLanguages.SelectedIndex = -1;
 
                 // -------------------------
                 // Subtitles
                 // -------------------------
-                mainwindow.cboSubtitles.SelectedItem = "yes";
-                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
-                mainwindow.slSubtitlePosition.Value = 95;
-                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
-                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesBlend.SelectedItem = "no";
+                VM.SubtitlesView.Subtitles_SelectedItem = "yes";
+                VM.SubtitlesView.LoadFiles_SelectedItem = "fuzzy";
+                VM.SubtitlesView.EmbeddedFonts_SelectedItem = "no";
+                VM.SubtitlesView.Position_Value = 95;
+                VM.SubtitlesView.FixTiming_SelectedItem = "yes";
+                VM.SubtitlesView.Margins_SelectedItem = "yes";
+                VM.SubtitlesView.Blend_SelectedItem = "no";
                 // Font
-                mainwindow.cboSubtitlesFont.SelectedItem = "Segoe UI";
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
+                VM.SubtitlesView.Font_SelectedItem = "Segoe UI";
+                VM.SubtitlesView.FontSize_SelectedItem = "44";
+                VM.SubtitlesView.FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
+                VM.SubtitlesView.BorderSize_SelectedItem = "2";
+                VM.SubtitlesView.BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                //mainwindow.cboSubtitlesShadowColor.SelectedIndex = 0; //none
-                mainwindow.tbxSubtitlesShadowColor.Text = ""; //none
-                mainwindow.slSubtitlesShadowOffset.Value = 0;
+                //vm.ShadowColor.SelectedIndex = 0; //none
+                VM.SubtitlesView.ShadowColor_Text = ""; //none
+                VM.SubtitlesView.ShadowOffset_Value = 0;
 
                 // ASS
-                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
-                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
-                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+                VM.SubtitlesView.ASS_SelectedItem = "yes";
+                VM.SubtitlesView.ASSOverride_SelectedItem = "force";
+                VM.SubtitlesView.ASSForceMargins_SelectedItem = "yes";
+                VM.SubtitlesView.ASSHinting_SelectedItem = "none";
+                VM.SubtitlesView.ASSKerning_SelectedItem = "yes";
 
                 // deselect all languages
                 mainwindow.listViewSubtitlesLanguages.SelectedIndex = -1;
@@ -911,238 +909,239 @@ namespace Glow
                 // Stream
                 // -------------------------
                 // Demuxer
-                mainwindow.cboDemuxerThread.SelectedItem = "no";
-                mainwindow.tbxDemuxerBuffersize.Text = "32768";
-                mainwindow.tbxDemuxerReadahead.Text = "";
-                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "no";
+                VM.StreamView.DemuxerThread_SelectedItem = "no";
+                VM.StreamView.DemuxerBuffersize_Text = "32768";
+                VM.StreamView.DemuxerReadahead_Text = "";
+                VM.StreamView.DemuxerMKVSubPreroll_SelectedItem = "no";
                 // YouTube
-                mainwindow.cboYouTubeDL.SelectedItem = "yes";
-                mainwindow.cboYouTubeQuality.SelectedItem = "worst";
+                VM.StreamView.YouTubeDL_SelectedItem = "yes";
+                VM.StreamView.YouTubeDLQuality_SelectedItem = "worst";
                 // Cache
-                mainwindow.cboCache.SelectedItem = "auto";
-                mainwindow.tbxCacheDefault.Text = "100000";
-                mainwindow.tbxCacheInitial.Text = "1024";
-                mainwindow.tbxCacheSeekMin.Text = "1024";
-                mainwindow.tbxCacheBackbuffer.Text = "25000";
-                mainwindow.tbxCacheSeconds.Text = "30";
-                mainwindow.cboCacheFile.SelectedItem = "TMP";
-                mainwindow.tbxCacheFileSize.Text = "1048576";
+                VM.StreamView.Cache_SelectedItem = "auto";
+                VM.StreamView.CacheDefault_Text = "100000";
+                VM.StreamView.CacheInitial_Text = "1024";
+                VM.StreamView.CacheSeekMin_Text = "1024";
+                VM.StreamView.CacheBackbuffer_Text = "25000";
+                VM.StreamView.CacheSeconds_Text = "30";
+                VM.StreamView.CacheFile_SelectedItem = "TMP";
+                VM.StreamView.CacheFileSize_Text = "1048576";
 
                 // -------------------------
                 // OSC
                 // -------------------------
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
-                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
+                VM.DisplayView.OSC_SelectedItem = "yes";
+                VM.DisplayView.OSC_Layout_SelectedItem = "bottombar";
+                VM.DisplayView.OSC_Seekbar_SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
                 // -------------------------
-                mainwindow.cboOSD.SelectedItem = "yes";
-                mainwindow.cboOSDFractions.SelectedItem = "yes";
-                mainwindow.tbxOSDDuration.Text = "1500";
-                mainwindow.cboOSDLevel.SelectedItem = "1";
-                mainwindow.slOSDScale.Value = 0.5;
+                VM.DisplayView.OSD_SelectedItem = "yes";
+                VM.DisplayView.OSD_Fractions_SelectedItem = "yes";
+                VM.DisplayView.OSD_Duration_Text = "1500";
+                VM.DisplayView.OSD_Level_SelectedItem = "1";
+                VM.DisplayView.OSC_Scale_Value = 0.5;
                 // Bar
-                mainwindow.slOSDBarWidth.Value = 95;
-                mainwindow.slOSDBarHeight.Value = 2;
+                VM.DisplayView.OSC_BarWidth_Value = 95;
+                VM.DisplayView.OSC_BarHeight_Value = 2;
                 // Font
-                mainwindow.cboOSDFont.SelectedItem = "Segoe UI";
-                mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
+                VM.DisplayView.OSD_Font_SelectedItem = "Segoe UI";
+                VM.DisplayView.OSD_FontSize_SelectedItem = "60";
+                VM.DisplayView.OSD_FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
+                VM.DisplayView.OSD_FontBorderSize_SelectedItem = "1";
+                VM.DisplayView.OSD_BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
-                mainwindow.slOSDShadowOffset.Value = 1.25;
+                VM.DisplayView.OSD_ShadowColor_Text = "262626"; //dark gray
+                VM.DisplayView.OSD_ShadowOffset_Value = 1.25;
 
                 // -------------------------
                 // Extensions
                 // -------------------------
-                mainwindow.cboExtMKV.SelectedItem = "default";
-                mainwindow.cboExtMP4.SelectedItem = "default";
-                mainwindow.cboExtWebM.SelectedItem = "loop";
-                mainwindow.cboExtGIF.SelectedItem = "loop";
-                mainwindow.cboExtJPG.SelectedItem = "pause";
-                mainwindow.cboExtPNG.SelectedItem = "pause";
+                VM.GeneralView.ExtMKV_SelectedItem = "default";
+                VM.GeneralView.ExtMP4_SelectedItem = "default";
+                VM.GeneralView.ExtWebM_SelectedItem = "loop";
+                VM.GeneralView.ExtGIF_SelectedItem = "loop";
+                VM.GeneralView.ExtJPG_SelectedItem = "pause";
+                VM.GeneralView.ExtPNG_SelectedItem = "pause";
             }
 
             // -------------------------
             // Debug
             // -------------------------
-            else if (vm.Profiles_SelectedItem == "Debug")
+            else if (VM.MainView.Profiles_SelectedItem == "Debug")
             {
                 // -------------------------
                 // General
                 // -------------------------
-                mainwindow.cboPriority.SelectedItem = "high";
-                mainwindow.cboSavePositionQuit.SelectedItem = "no";
-                mainwindow.cboKeepOpen.SelectedItem = "yes";
-                mainwindow.cboOnTop.SelectedItem = "no";
-                mainwindow.slGeometryX.Value = 50;
-                mainwindow.slGeometryY.Value = 50;
-                mainwindow.slAutofitWidth.Value = 100;
-                mainwindow.slAutofitHeight.Value = 95;
-                mainwindow.cboScreensaver.SelectedItem = "off";
-                mainwindow.cboWindowTitle.SelectedItem = "Media Title";
+                VM.GeneralView.Priority_SelectedItem = "high";
+                VM.GeneralView.SavePositionQuit_SelectedItem = "no";
+                VM.GeneralView.KeepOpen_SelectedItem = "yes";
+                VM.GeneralView.OnTop_SelectedItem = "no";
+                VM.GeneralView.GeometryX_Value = 50;
+                VM.GeneralView.GeometryY_Value = 50;
+                VM.GeneralView.AutofitWidth_Value = 100;
+                VM.GeneralView.AutofitHeight_Value = 95;
+                VM.GeneralView.Screensaver_SelectedItem = "off";
+                VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
                 // Screenshot
-                mainwindow.cboScreenshotTemplate.SelectedItem = "Playback Time";
-                mainwindow.cboScreenshotTagColorspace.SelectedItem = "no";
-                mainwindow.cboScreenshotFormat.SelectedItem = "png";
-                mainwindow.slScreenshotQuality.Value = 7; //png compression
+                VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
+                VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
+                VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
+                VM.GeneralView.ScreenshotQuality_Value = 7; //png compression
 
                 // -------------------------
                 // Video
                 // -------------------------
-                vm.VideoDriver_SelectedItem = "gpu";
-                vm.VideoDriverAPI_SelectedItem = "default";
-                vm.OpenGLPBO_SelectedItem = "no";
-                vm.OpenGLPBOFormat_SelectedItem = "off";
-                vm.HWDecoder_SelectedItem = "auto-copy";
-                //mainwindow.cboVideoDriver.SelectedItem = "opengl";
-                //mainwindow.cboVideoDriverAPI.SelectedItem = "opengl";
-                //mainwindow.cboOpenGLPBO.SelectedItem = "no";
-                //mainwindow.cboOpenGLPBOFormat.SelectedItem = "off";
-                //mainwindow.cboHWDecoder.SelectedItem = "auto-copy";
+                VM.VideoView.VideoDriver_SelectedItem = "gpu";
+                VM.VideoView.VideoDriverAPI_SelectedItem = "default";
+                VM.VideoView.OpenGLPBO_SelectedItem = "no";
+                VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
+                //VM.VideoView.VideoDriver_SelectedItem = "opengl";
+                //VM.VideoView.VideoDriverAPI_SelectedItem = "opengl";
+                //VM.VideoView.OpenGLPBO_SelectedItem = "no";
+                //VM.VideoView.OpenGLPBOFormat_SelectedItem = "off";
+                //VM.VideoView.HWDecoder_SelectedItem = "auto-copy";
                 // Display
-                mainwindow.cboICCProfile.SelectedItem = "default";
-                mainwindow.cboDisplayPrimaries.SelectedItem = "auto";
-                mainwindow.cboTransferCharacteristics.SelectedItem = "auto";
-                mainwindow.cboColorSpace.SelectedItem = "default";
-                mainwindow.cboColorRange.SelectedItem = "auto";
-                mainwindow.cboInterpolation.SelectedItem = "yes";
-                mainwindow.cboVideoSync.SelectedItem = "display-resample";
-                mainwindow.cboFramedrop.SelectedItem = "vo";
+                VM.VideoView.ICCProfile_SelectedItem = "default";
+                VM.VideoView.DisplayPrimaries_SelectedItem = "auto";
+                VM.VideoView.TransferCharacteristics_SelectedItem = "auto";
+                VM.VideoView.ColorSpace_SelectedItem = "default";
+                VM.VideoView.ColorRange_SelectedItem = "default";
+                VM.VideoView.Interpolation_SelectedItem = "yes";
+                VM.VideoView.VideoSync_SelectedItem = "display-resample";
+                VM.VideoView.Framedrop_SelectedItem = "vo";
                 // Image
-                mainwindow.slBrightness.Value = 0;
-                mainwindow.slContrast.Value = 0;
-                mainwindow.slHue.Value = 0;
-                mainwindow.slSaturation.Value = 0;
-                mainwindow.slGamma.Value = 0;
-                //mainwindow.cboGammaAuto.SelectedItem = "yes";
-                mainwindow.cboDither.SelectedItem = "8";
-                mainwindow.cboDeband.SelectedItem = "yes";
-                mainwindow.tbxDebandGrain.Text = "80";
-                mainwindow.cboDeinterlace.SelectedItem = "default";
+                VM.VideoView.Brightness_Value = 0;
+                VM.VideoView.Contrast_Value = 0;
+                VM.VideoView.Hue_Value = 0;
+                VM.VideoView.Saturation_Value = 0;
+                VM.VideoView.Gamma_Value = 0;
+                //vm.GammaAuto_SelectedItem = "yes";
+                VM.VideoView.Dither_SelectedItem = "8";
+                VM.VideoView.Deband_SelectedItem = "yes";
+                VM.VideoView.DebandGrain_Text = "80";
+                VM.VideoView.Deinterlace_SelectedItem = "default";
                 // Scaling
-                mainwindow.cboSigmoid.SelectedItem = "yes";
-                mainwindow.cboScale.SelectedItem = "spline36";
-                mainwindow.slScaleAntiring.Value = 1;
-                mainwindow.cboChromaScale.SelectedItem = "ewa_lanczossoft";
-                mainwindow.slChromaAntiring.Value = 1;
-                mainwindow.cboDownscale.SelectedItem = "mitchell";
-                mainwindow.slDownscaleAntiring.Value = 1;
-                mainwindow.cboInterpolationScale.SelectedItem = "default";
-                mainwindow.slInterpolationAntiring.Value = 0;
-                mainwindow.cboSoftwareScaler.SelectedItem = "off";
+                VM.VideoView.Sigmoid_SelectedItem = "yes";
+                VM.VideoView.Scale_SelectedItem = "spline36";
+                VM.VideoView.ScaleAntiring_Value = 1;
+                VM.VideoView.ChromaScale_SelectedItem = "ewa_lanczossoft";
+                VM.VideoView.ChromaAntiring_Value = 1;
+                VM.VideoView.Downscale_SelectedItem = "mitchell";
+                VM.VideoView.DownscaleAntiring_Value = 1;
+                VM.VideoView.InterpolationScale_SelectedItem = "default";
+                VM.VideoView.InterpolationScaleAntiring_Value = 0;
+                VM.VideoView.SoftwareScaler_SelectedItem = "off";
 
                 // -------------------------
                 // Audio
                 // -------------------------
-                mainwindow.cboAudioDriver.SelectedItem = "wasapi";
-                mainwindow.cboChannels.SelectedItem = "auto";
-                mainwindow.slVolume.Value = 100;
-                mainwindow.slVolumeMax.Value = 150;
-                //mainwindow.slSoftVolumeMax.Value = 150;
-                mainwindow.cboNormalize.SelectedItem = "yes";
-                mainwindow.cboScaleTempo.SelectedItem = "yes";
-                mainwindow.cboAudioLoadFiles.SelectedItem = "fuzzy";
+                VM.AudioView.AudioDriver_SelectedItem = "wasapi";
+                VM.AudioView.Channels_SelectedItem = "auto";
+                VM.AudioView.Volume_Value = 100;
+                VM.AudioView.VolumeMax_Value = 150;
+                //vm.SoftVolumeMax_Value = 150;
+                VM.AudioView.Normalize_SelectedItem = "yes";
+                VM.AudioView.ScaleTempo_SelectedItem = "yes";
+                VM.AudioView.AudioLoadFiles_SelectedItem = "fuzzy";
                 //Language
-                mainwindow.listViewAudioLanguages.SelectedItems.Add("English");
-                mainwindow.listViewAudioLanguages.SelectedItems.Add("Japanese");
+                //mainwindow.listViewAudioLanguages_SelectedItems.Add("English");
+                //mainwindow.listViewAudioLanguages_SelectedItems.Add("Japanese");
 
 
                 // -------------------------
                 // Subtitles
                 // -------------------------
-                mainwindow.cboSubtitles.SelectedItem = "yes";
-                mainwindow.cboSubtitlesLoadFiles.SelectedItem = "fuzzy";
-                mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = "no";
-                mainwindow.slSubtitlePosition.Value = 95;
-                mainwindow.cboSubtitlesFixTiming.SelectedItem = "yes";
-                mainwindow.cboSubtitlesMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesBlend.SelectedItem = "yes";
+                VM.SubtitlesView.Subtitles_SelectedItem = "yes";
+                VM.SubtitlesView.LoadFiles_SelectedItem = "fuzzy";
+                VM.SubtitlesView.EmbeddedFonts_SelectedItem = "no";
+                VM.SubtitlesView.Position_Value = 95;
+                VM.SubtitlesView.FixTiming_SelectedItem = "yes";
+                VM.SubtitlesView.Margins_SelectedItem = "yes";
+                VM.SubtitlesView.Blend_SelectedItem = "yes";
                 // Font
-                mainwindow.cboSubtitlesFont.SelectedItem = "Noto Sans";
-                mainwindow.cboSubtitlesFontSize.SelectedItem = "44";
-                mainwindow.tbxSubtitlesFontColor.Text = "FFFFFF"; //white
+                VM.SubtitlesView.Font_SelectedItem = "Noto Sans";
+                VM.SubtitlesView.FontSize_SelectedItem = "44";
+                VM.SubtitlesView.FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboSubtitlesBorderSize.SelectedItem = "2";
-                mainwindow.tbxSubtitlesBorderColor.Text = "262626"; //dark gray
+                VM.SubtitlesView.BorderSize_SelectedItem = "2";
+                VM.SubtitlesView.BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxSubtitlesShadowColor.Text = "262626"; //dark gray
-                mainwindow.slSubtitlesShadowOffset.Value = 1.25;
+                VM.SubtitlesView.ShadowColor_Text = "262626"; //dark gray
+                VM.SubtitlesView.ShadowOffset_Value = 1.25;
 
                 // ASS
-                mainwindow.cboSubtitlesASS.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSOverride.SelectedItem = "force";
-                mainwindow.cboSubtitlesASSForceMargins.SelectedItem = "yes";
-                mainwindow.cboSubtitlesASSHinting.SelectedItem = "none";
-                mainwindow.cboSubtitlesASSKerning.SelectedItem = "yes";
+                VM.SubtitlesView.ASS_SelectedItem = "yes";
+                VM.SubtitlesView.ASSOverride_SelectedItem = "force";
+                VM.SubtitlesView.ASSForceMargins_SelectedItem = "yes";
+                VM.SubtitlesView.ASSHinting_SelectedItem = "none";
+                VM.SubtitlesView.ASSKerning_SelectedItem = "yes";
 
                 //Language
-                mainwindow.listViewSubtitlesLanguages.SelectedItems.Add("English");
+                //mainwindow.listViewSubtitlesLanguages_SelectedItems.Add("English");
+                VM.SubtitlesView.LanguagePriority_ListView_SelectedItems.Add("English");
 
                 // -------------------------
                 // Stream
                 // -------------------------
                 // Demuxer
-                mainwindow.cboDemuxerThread.SelectedItem = "yes";
-                mainwindow.tbxDemuxerBuffersize.Text = "32768";
-                mainwindow.tbxDemuxerReadahead.Text = "5.0";
-                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = "yes";
+                VM.StreamView.DemuxerThread_SelectedItem = "yes";
+                VM.StreamView.DemuxerBuffersize_Text = "32768";
+                VM.StreamView.DemuxerReadahead_Text = "5.0";
+                VM.StreamView.DemuxerMKVSubPreroll_SelectedItem = "yes";
                 // YouTube
-                mainwindow.cboYouTubeDL.SelectedItem = "yes";
-                mainwindow.cboYouTubeQuality.SelectedItem = "best";
+                VM.StreamView.YouTubeDL_SelectedItem = "yes";
+                VM.StreamView.YouTubeDLQuality_SelectedItem = "best";
                 // Cache
-                mainwindow.cboCache.SelectedItem = "auto";
-                mainwindow.tbxCacheDefault.Text = "100000";
-                mainwindow.tbxCacheInitial.Text = "1024";
-                mainwindow.tbxCacheSeekMin.Text = "1024";
-                mainwindow.tbxCacheBackbuffer.Text = "25000";
-                mainwindow.tbxCacheSeconds.Text = "30";
-                mainwindow.cboCacheFile.SelectedItem = "TMP";
-                mainwindow.tbxCacheFileSize.Text = "1048576";
+                VM.StreamView.Cache_SelectedItem = "auto";
+                VM.StreamView.CacheDefault_Text = "100000";
+                VM.StreamView.CacheInitial_Text = "1024";
+                VM.StreamView.CacheSeekMin_Text = "1024";
+                VM.StreamView.CacheBackbuffer_Text = "25000";
+                VM.StreamView.CacheSeconds_Text = "30";
+                VM.StreamView.CacheFile_SelectedItem = "TMP";
+                VM.StreamView.CacheFileSize_Text = "1048576";
 
                 // -------------------------
                 // OSC
                 // -------------------------
-                mainwindow.cboOSC.SelectedItem = "yes";
-                mainwindow.cboOSCLayout.SelectedItem = "bottombar";
-                mainwindow.cboOSCSeekbar.SelectedItem = "bar";
+                VM.DisplayView.OSC_SelectedItem = "yes";
+                VM.DisplayView.OSC_Layout_SelectedItem = "bottombar";
+                VM.DisplayView.OSC_Seekbar_SelectedItem = "bar";
 
                 // -------------------------
                 // OSD
                 // -------------------------
-                mainwindow.cboOSD.SelectedItem = "yes";
-                mainwindow.cboOSDFractions.SelectedItem = "yes";
-                mainwindow.tbxOSDDuration.Text = "1500";
-                mainwindow.cboOSDLevel.SelectedItem = "1";
-                mainwindow.slOSDScale.Value = 0.5;
+                VM.DisplayView.OSD_SelectedItem = "yes";
+                VM.DisplayView.OSD_Fractions_SelectedItem = "yes";
+                VM.DisplayView.OSD_Duration_Text = "1500";
+                VM.DisplayView.OSD_Level_SelectedItem = "1";
+                VM.DisplayView.OSC_Scale_Value = 0.5;
                 // Bar
-                mainwindow.slOSDBarWidth.Value = 95;
-                mainwindow.slOSDBarHeight.Value = 2;
+                VM.DisplayView.OSC_BarWidth_Value = 95;
+                VM.DisplayView.OSC_BarHeight_Value = 2;
                 // Font
-                mainwindow.cboOSDFont.SelectedItem = "Noto Sans";
-                mainwindow.cboOSDFontSize.SelectedItem = "60";
-                mainwindow.tbxOSDFontColor.Text = "FFFFFF"; //white
+                VM.DisplayView.OSD_Font_SelectedItem = "Noto Sans";
+                VM.DisplayView.OSD_FontSize_SelectedItem = "60";
+                VM.DisplayView.OSD_FontColor_Text = "FFFFFF"; //white
                 // Border
-                mainwindow.cboOSDFontBorderSize.SelectedItem = "1";
-                mainwindow.tbxOSDBorderColor.Text = "262626"; //dark gray
+                VM.DisplayView.OSD_FontBorderSize_SelectedItem = "1";
+                VM.DisplayView.OSD_BorderColor_Text = "262626"; //dark gray
                 // Shadow
-                mainwindow.tbxOSDShadowColor.Text = "262626"; //dark gray
-                mainwindow.slOSDShadowOffset.Value = 1.25;
+                VM.DisplayView.OSD_ShadowColor_Text = "262626"; //dark gray
+                VM.DisplayView.OSD_ShadowOffset_Value = 1.25;
 
                 // -------------------------
                 // Extensions
                 // -------------------------
-                mainwindow.cboExtMKV.SelectedItem = "default";
-                mainwindow.cboExtMP4.SelectedItem = "default";
-                mainwindow.cboExtWebM.SelectedItem = "loop";
-                mainwindow.cboExtGIF.SelectedItem = "loop";
-                mainwindow.cboExtJPG.SelectedItem = "pause";
-                mainwindow.cboExtPNG.SelectedItem = "pause";
+                VM.GeneralView.ExtMKV_SelectedItem = "default";
+                VM.GeneralView.ExtMP4_SelectedItem = "default";
+                VM.GeneralView.ExtWebM_SelectedItem = "loop";
+                VM.GeneralView.ExtGIF_SelectedItem = "loop";
+                VM.GeneralView.ExtJPG_SelectedItem = "pause";
+                VM.GeneralView.ExtPNG_SelectedItem = "pause";
             }
 
             // -------------------------
@@ -1156,7 +1155,7 @@ namespace Glow
                 {
                     string filename = Path.GetFileNameWithoutExtension(path);
 
-                    if (vm.Profiles_SelectedItem == filename)
+                    if (VM.MainView.Profiles_SelectedItem == filename)
                     {
                         input = path;
                         break;
@@ -1164,7 +1163,7 @@ namespace Glow
                 }
 
                 // Import profile INI file
-                ImportProfile(mainwindow, vm, input);
+                ImportProfile(mainwindow, input);
             }
 
         }
@@ -1174,13 +1173,13 @@ namespace Glow
         /// <summary>
         ///    Export Profile
         /// </summary>
-        public static void ExportProfile(MainWindow mainwindow, ViewModel vm, string profile)
+        public static void ExportProfile(MainWindow mainwindow, string profile)
         {
             // Check if Profile Directory exists
-            if (Directory.Exists(vm.ProfilesPath_Text))
+            if (Directory.Exists(VM.ConfigureView.ProfilesPath_Text))
             {
                 // Start INI File Write
-                ConfigureWindow.INIFile inif = new ConfigureWindow.INIFile(profile);
+                Configure.ConfigFile inif = new Configure.ConfigFile(profile);
 
                 // --------------------------------------------------
                 // Settings
@@ -1188,79 +1187,79 @@ namespace Glow
                 //inif.Write("Settings", "mpvDir", Paths.mpvDir);
                 //inif.Write("Settings", "configDir", Paths.mpvConfigDir);
                 //inif.Write("Settings", "profilesDir", Paths.profilesDir);
-                inif.Write("Settings", "mpvDir", vm.mpvPath_Text);
-                inif.Write("Settings", "configDir", vm.mpvConfigPath_Text);
-                inif.Write("Settings", "profilesDir", vm.ProfilesPath_Text);
+                //inif.Write("Settings", "mpvDir", VM.ConfigureView.mpvPath_Text);
+                //inif.Write("Settings", "configDir", VM.ConfigureView.mpvConfigPath_Text);
+                //inif.Write("Settings", "profilesDir", VM.ConfigureView.ProfilesPath_Text);
 
                 // --------------------------------------------------
                 // General
                 // --------------------------------------------------
-                inif.Write("General", "priority", (mainwindow.cboPriority.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "savePositiOnQuit", (mainwindow.cboSavePositionQuit.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "keepOpen", (mainwindow.cboKeepOpen.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "onTop", (mainwindow.cboOnTop.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "border", (mainwindow.cboBorder.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "geometryX", mainwindow.tbxGeometryX.Text.ToString());
-                inif.Write("General", "geometryY", mainwindow.tbxGeometryY.Text.ToString());
-                inif.Write("General", "autofitWidth", mainwindow.tbxAutofitWidth.Text.ToString());
-                inif.Write("General", "autofitHeight", mainwindow.tbxAutofitHeight.Text.ToString());
-                inif.Write("General", "screensaver", (mainwindow.cboScreensaver.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "windowTitle", (mainwindow.cboWindowTitle.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "logPath", mainwindow.tbxLogPath.Text.ToString());
+                inif.Write("General", "priority", VM.GeneralView.Priority_SelectedItem);
+                inif.Write("General", "savePositiOnQuit", VM.GeneralView.SavePositionQuit_SelectedItem);
+                inif.Write("General", "keepOpen", VM.GeneralView.KeepOpen_SelectedItem);
+                inif.Write("General", "onTop", VM.GeneralView.OnTop_SelectedItem);
+                inif.Write("General", "border", VM.GeneralView.WindowBorder_SelectedItem);
+                inif.Write("General", "geometryX", VM.GeneralView.GeometryX_Text);
+                inif.Write("General", "geometryY", VM.GeneralView.GeometryY_Text);
+                inif.Write("General", "autofitWidth", VM.GeneralView.AutofitWidth_Text);
+                inif.Write("General", "autofitHeight", VM.GeneralView.AutofitHeight_Text);
+                inif.Write("General", "screensaver", VM.GeneralView.Screensaver_SelectedItem);
+                inif.Write("General", "windowTitle", VM.GeneralView.WindowTitle_SelectedItem);
+                inif.Write("General", "logPath", VM.GeneralView.LogPath_Text);
                 // Screenshot
-                inif.Write("General", "screenshotPath", mainwindow.tbxScreenshotPath.Text.ToString());
-                inif.Write("General", "screenshotTemplate", (mainwindow.cboScreenshotTemplate.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "screenshotTagColorspace", (mainwindow.cboScreenshotTagColorspace.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "screenshotFormat", (mainwindow.cboScreenshotFormat.SelectedItem ?? string.Empty).ToString());
-                inif.Write("General", "screenshotQuality", mainwindow.tbxScreenshotQuality.Text.ToString());
+                inif.Write("General", "screenshotPath", VM.GeneralView.ScreenshotPath_Text);
+                inif.Write("General", "screenshotTemplate", VM.GeneralView.ScreenshotTemplate_SelectedItem);
+                inif.Write("General", "screenshotTagColorspace", VM.GeneralView.ScreenshotTagColorspace_SelectedItem);
+                inif.Write("General", "screenshotFormat", VM.GeneralView.ScreenshotFormat_SelectedItem);
+                inif.Write("General", "screenshotQuality", VM.GeneralView.ScreenshotQuality_Text);
 
                 // --------------------------------------------------
                 // Video
                 // --------------------------------------------------
                 // Hardware
-                inif.Write("Video", "videoDriver", vm.VideoDriver_SelectedItem);
-                //inif.Write("Video", "videoDriver", (mainwindow.cboVideoDriver.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "videoDriverAPI", (mainwindow.cboVideoDriverAPI.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "openglPBO", (mainwindow.cboOpenGLPBO.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "openglPBOFormat", (mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "hwdec", (mainwindow.cboHWDecoder.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Video", "videoDriver", VM.VideoView.VideoDriver_SelectedItem);
+                //inif.Write("Video", "videoDriver", (VM.VideoView.VideoDriver_SelectedItem);
+                inif.Write("Video", "videoDriverAPI", VM.VideoView.VideoDriverAPI_SelectedItem);
+                inif.Write("Video", "openglPBO", VM.VideoView.OpenGLPBO_SelectedItem);
+                inif.Write("Video", "openglPBOFormat", VM.VideoView.OpenGLPBOFormat_SelectedItem);
+                inif.Write("Video", "hwdec", VM.VideoView.HWDecoder_SelectedItem);
                 // Display
-                //inif.Write("Video", "iccProfilePath", mainwindow.tbxICCProfilePath.Text.ToString());
-                inif.Write("Video", "iccProfile", (mainwindow.cboICCProfile.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "displayPrimaries", (mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "transferCharacteristics", (mainwindow.cboTransferCharacteristics.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "colorSpace", (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "colorRange", (mainwindow.cboColorRange.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "deinterlace", (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "interpolation", (mainwindow.cboInterpolation.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "videoSync", (mainwindow.cboVideoSync.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "frameDrop", (mainwindow.cboFramedrop.SelectedItem ?? string.Empty).ToString());
+                //inif.Write("Video", "iccProfilePath", vm.ICCProfilePath_Text);
+                inif.Write("Video", "iccProfile", VM.VideoView.ICCProfile_SelectedItem);
+                inif.Write("Video", "displayPrimaries", VM.VideoView.DisplayPrimaries_SelectedItem);
+                inif.Write("Video", "transferCharacteristics", VM.VideoView.TransferCharacteristics_SelectedItem);
+                inif.Write("Video", "colorSpace", VM.VideoView.ColorSpace_SelectedItem);
+                inif.Write("Video", "colorRange", VM.VideoView.ColorRange_SelectedItem);
+                inif.Write("Video", "deinterlace", VM.VideoView.Deinterlace_SelectedItem);
+                inif.Write("Video", "interpolation", VM.VideoView.Interpolation_SelectedItem);
+                inif.Write("Video", "videoSync", VM.VideoView.VideoSync_SelectedItem);
+                inif.Write("Video", "frameDrop", VM.VideoView.Framedrop_SelectedItem);
                 // Image
-                inif.Write("Video", "brightness", mainwindow.tbxBrightness.Text.ToString());
-                inif.Write("Video", "contrast", mainwindow.tbxContrast.Text.ToString());
-                inif.Write("Video", "hue", mainwindow.tbxHue.Text.ToString());
-                inif.Write("Video", "saturation", mainwindow.tbxSaturation.Text.ToString());
-                inif.Write("Video", "gamma", mainwindow.tbxGamma.Text.ToString());
-                //inif.Write("Video", "gammaAuto", (mainwindow.cboGammaAuto.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "deband", (mainwindow.cboDeband.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "debandGrain", mainwindow.tbxDebandGrain.Text.ToString());
-                inif.Write("Video", "dither", (mainwindow.cboDither.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Video", "brightness", VM.VideoView.Brightness_Text);
+                inif.Write("Video", "contrast", VM.VideoView.Contrast_Text);
+                inif.Write("Video", "hue", VM.VideoView.Hue_Text);
+                inif.Write("Video", "saturation", VM.VideoView.Saturation_Text);
+                inif.Write("Video", "gamma", VM.VideoView.Gamma_Text);
+                //inif.Write("Video", "gammaAuto", (vm.GammaAuto_SelectedItem);
+                inif.Write("Video", "deband", VM.VideoView.Deband_SelectedItem);
+                inif.Write("Video", "debandGrain", VM.VideoView.DebandGrain_Text);
+                inif.Write("Video", "dither", VM.VideoView.Dither_SelectedItem);
                 // Scaling
-                inif.Write("Video", "sigmoidUpscaling", (mainwindow.cboSigmoid.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "scale", (mainwindow.cboScale.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "scaleAntiring", mainwindow.tbxScaleAntiring.Text.ToString());
-                inif.Write("Video", "chromaScale", (mainwindow.cboChromaScale.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "chromaScaleAntiring", mainwindow.tbxChromaAntiring.Text.ToString());
-                inif.Write("Video", "downscale", (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "downscaleAntiring", mainwindow.tbxDownscaleAntiring.Text.ToString());
-                inif.Write("Video", "interpolationScale", (mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Video", "interpolationAntiring", mainwindow.tbxInterpolationAntiring.Text.ToString());
-                inif.Write("Video", "softwareScaler", (mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Video", "sigmoidUpscaling", VM.VideoView.Sigmoid_SelectedItem);
+                inif.Write("Video", "scale", VM.VideoView.Scale_SelectedItem);
+                inif.Write("Video", "scaleAntiring", VM.VideoView.ScaleAntiring_Text);
+                inif.Write("Video", "chromaScale", VM.VideoView.ChromaScale_SelectedItem);
+                inif.Write("Video", "chromaScaleAntiring", VM.VideoView.ChromaAntiring_Text);
+                inif.Write("Video", "downscale", VM.VideoView.Downscale_SelectedItem);
+                inif.Write("Video", "downscaleAntiring", VM.VideoView.DownscaleAntiring_Text);
+                inif.Write("Video", "interpolationScale", VM.VideoView.InterpolationScale_SelectedItem);
+                inif.Write("Video", "interpolationAntiring", VM.VideoView.InterpolationScaleAntiring_Text);
+                inif.Write("Video", "softwareScaler", VM.VideoView.SoftwareScaler_SelectedItem);
 
                 // --------------------------------------------------
                 // Audio
                 // --------------------------------------------------
-                inif.Write("Audio", "driver", (mainwindow.cboAudioDriver.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Audio", "driver", VM.AudioView.AudioDriver_SelectedItem);
 
                 // -------------------------
                 // Languages
@@ -1268,7 +1267,7 @@ namespace Glow
                 // ------------
                 // Order
                 // ------------
-                List<string> listAudioLangOrder = new List<string>(ViewModel.AudioLanguageItems);
+                List<string> listAudioLangOrder = new List<string>(VM.AudioView.LanguagePriority_ListView_Items/*ViewModel.AudioLanguageItems*/);
                 string audioLanguagesOrder = string.Join(",", listAudioLangOrder.Where(s => !string.IsNullOrEmpty(s)));
                 inif.Write("Audio", "languagesOrder", audioLanguagesOrder);
 
@@ -1276,7 +1275,7 @@ namespace Glow
                 // Selected
                 // ------------
                 List<string> listAudioLangSelected = new List<string>();
-                foreach (string item in mainwindow.listViewAudioLanguages.SelectedItems)
+                foreach (string item in VM.AudioView.LanguagePriority_ListView_SelectedItems/*mainwindow.listViewAudioLanguages_SelectedItems*/)
                 {
                     // add checked item name to list
                     listAudioLangSelected.Add(item);
@@ -1284,18 +1283,18 @@ namespace Glow
                 string audioLanguagesSelected = string.Join(",", listAudioLangSelected.Where(s => !string.IsNullOrEmpty(s)));
                 inif.Write("Audio", "languagesSelected", audioLanguagesSelected);
 
-                inif.Write("Audio", "channels", (mainwindow.cboChannels.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Audio", "volume", mainwindow.tbxVolume.Text.ToString());
-                inif.Write("Audio", "volumeMax", mainwindow.tbxVolumeMax.Text.ToString());
-                //inif.Write("Audio", "softVolumeMax", mainwindow.tbxSoftVolumeMax.Text.ToString());
-                inif.Write("Audio", "normalize", (mainwindow.cboNormalize.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Audio", "scaleTempo", (mainwindow.cboScaleTempo.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Audio", "loadFiles", (mainwindow.cboAudioLoadFiles.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Audio", "channels", VM.AudioView.Channels_SelectedItem);
+                inif.Write("Audio", "volume", VM.AudioView.Volume_Text);
+                inif.Write("Audio", "volumeMax", VM.AudioView.VolumeMax_Text);
+                //inif.Write("Audio", "softVolumeMax", vm.SoftVolumeMax_Text);
+                inif.Write("Audio", "normalize", VM.AudioView.Normalize_SelectedItem);
+                inif.Write("Audio", "scaleTempo", VM.AudioView.ScaleTempo_SelectedItem);
+                inif.Write("Audio", "loadFiles", VM.AudioView.AudioLoadFiles_SelectedItem);
 
                 // --------------------------------------------------
                 // Subtitle
                 // --------------------------------------------------
-                inif.Write("Subtitles", "subtitles", (mainwindow.cboSubtitles.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Subtitles", "subtitles", VM.SubtitlesView.Subtitles_SelectedItem);
 
                 // -------------------------
                 // Languages
@@ -1303,7 +1302,7 @@ namespace Glow
                 // ------------
                 // Order
                 // ------------
-                List<string> listSubtitlesLangOrder = new List<string>(ViewModel.SubtitlesLanguageItems);
+                List<string> listSubtitlesLangOrder = new List<string>(VM.SubtitlesView.LanguagePriority_ListView_Items/*ViewModel.SubtitlesLanguageItems*/);
                 string subtitlesLanguagesOrder = string.Join(",", listSubtitlesLangOrder.Where(s => !string.IsNullOrEmpty(s)));
                 inif.Write("Subtitles", "languagesOrder", subtitlesLanguagesOrder);
 
@@ -1311,122 +1310,122 @@ namespace Glow
                 // Selected
                 // ------------
                 List<string> listSubtitlesLang = new List<string>();
-                foreach (string item in mainwindow.listViewSubtitlesLanguages.SelectedItems)
+                foreach (string item in VM.SubtitlesView.LanguagePriority_ListView_SelectedItems/*mainwindow.listViewSubtitlesLanguages_SelectedItems*/)
                 {
                     listSubtitlesLang.Add(item);
                 }
                 string subtitlesLanguages = string.Join(",", listSubtitlesLang.Where(s => !string.IsNullOrEmpty(s)));
                 inif.Write("Subtitles", "languagesSelected", subtitlesLanguages);
 
-                inif.Write("Subtitles", "loadFiles", (mainwindow.cboSubtitlesLoadFiles.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "embeddedFonts", (mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "position", mainwindow.tbxSubtitlePosition.Text.ToString());
-                inif.Write("Subtitles", "fixTiming", (mainwindow.cboSubtitlesFixTiming.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "useMargins", (mainwindow.cboSubtitlesMargins.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "font", (mainwindow.cboSubtitlesFont.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "fontSize", (mainwindow.cboSubtitlesFontSize.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Subtitles", "loadFiles", VM.SubtitlesView.LoadFiles_SelectedItem);
+                inif.Write("Subtitles", "embeddedFonts", VM.SubtitlesView.EmbeddedFonts_SelectedItem);
+                inif.Write("Subtitles", "position", VM.SubtitlesView.Position_Text);
+                inif.Write("Subtitles", "fixTiming", VM.SubtitlesView.FixTiming_SelectedItem);
+                inif.Write("Subtitles", "useMargins", VM.SubtitlesView.Margins_SelectedItem);
+                inif.Write("Subtitles", "font", VM.SubtitlesView.Font_SelectedItem);
+                inif.Write("Subtitles", "fontSize", VM.SubtitlesView.FontSize_SelectedItem);
 
                 // Font Color
-                inif.Write("Subtitles", "fontColor", mainwindow.tbxSubtitlesFontColor.Text.ToString());
-                //selectedItem = (ComboBoxItem)(mainwindow.tbxSubtitlesFontColor.SelectedValue);
+                inif.Write("Subtitles", "fontColor", VM.SubtitlesView.FontColor_Text);
+                //selectedItem = (ComboBoxItem)(vm.FontColor.SelectedValue);
                 //selected = (string)(selectedItem.Content);
                 //inif.Write("Subtitles", "fontColor", selected);
 
                 // Border Size
-                inif.Write("Subtitles", "borderSize", (mainwindow.cboSubtitlesBorderSize.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Subtitles", "borderSize", VM.SubtitlesView.BorderSize_SelectedItem);
 
                 // Border Color
-                inif.Write("Subtitles", "borderColor", mainwindow.tbxSubtitlesBorderColor.Text.ToString());
-                //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesBorderColor.SelectedValue);
+                inif.Write("Subtitles", "borderColor", VM.SubtitlesView.BorderColor_Text);
+                //selectedItem = (ComboBoxItem)(vm.BorderColor.SelectedValue);
                 //selected = (string)(selectedItem.Content);
                 //inif.Write("Subtitles", "borderColor", selected);
 
                 // Shadow Color
-                inif.Write("Subtitles", "shadowColor", mainwindow.tbxSubtitlesShadowColor.Text.ToString());
-                //selectedItem = (ComboBoxItem)(mainwindow.cboSubtitlesShadowColor.SelectedValue);
+                inif.Write("Subtitles", "shadowColor", VM.SubtitlesView.ShadowColor_Text);
+                //selectedItem = (ComboBoxItem)(vm.ShadowColor.SelectedValue);
                 //selected = (string)(selectedItem.Content);
                 //inif.Write("Subtitles", "shadowColor", selected);
 
                 // Shadow Offset
-                inif.Write("Subtitles", "shadowOffset", mainwindow.tbxSubtitlesShadowOffset.Text.ToString());
-                inif.Write("Subtitles", "blend", (mainwindow.cboSubtitlesBlend.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Subtitles", "shadowOffset", VM.SubtitlesView.ShadowOffset_Text);
+                inif.Write("Subtitles", "blend", VM.SubtitlesView.Blend_SelectedItem);
 
                 // ASS
-                inif.Write("Subtitles", "ass", (mainwindow.cboSubtitlesASS.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "assOverride", (mainwindow.cboSubtitlesASSOverride.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "assForceMargins", (mainwindow.cboSubtitlesASSForceMargins.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "assHinting", (mainwindow.cboSubtitlesASSHinting.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Subtitles", "assKerning", (mainwindow.cboSubtitlesASSKerning.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Subtitles", "ass", VM.SubtitlesView.ASS_SelectedItem);
+                inif.Write("Subtitles", "assOverride", VM.SubtitlesView.ASSOverride_SelectedItem);
+                inif.Write("Subtitles", "assForceMargins", VM.SubtitlesView.ASSForceMargins_SelectedItem);
+                inif.Write("Subtitles", "assHinting", VM.SubtitlesView.ASSHinting_SelectedItem);
+                inif.Write("Subtitles", "assKerning", VM.SubtitlesView.ASSKerning_SelectedItem);
 
                 // --------------------------------------------------
                 // Stream
                 // --------------------------------------------------
                 // Demuxer
-                inif.Write("Stream", "demuxThread", (mainwindow.cboDemuxerThread.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Stream", "demuxerBufferSize", mainwindow.tbxDemuxerBuffersize.Text.ToString());
-                inif.Write("Stream", "demuxerReadAhead", mainwindow.tbxDemuxerReadahead.Text.ToString());
-                inif.Write("Stream", "demuxerMKVSubtitlePreroll", (mainwindow.cboDemuxerMKVSubPreroll.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Stream", "demuxThread", VM.StreamView.DemuxerThread_SelectedItem);
+                inif.Write("Stream", "demuxerBufferSize", VM.StreamView.DemuxerBuffersize_Text);
+                inif.Write("Stream", "demuxerReadAhead", VM.StreamView.DemuxerReadahead_Text);
+                inif.Write("Stream", "demuxerMKVSubtitlePreroll", VM.StreamView.DemuxerMKVSubPreroll_SelectedItem);
                 // YouTube
-                inif.Write("Stream", "youtubedl", (mainwindow.cboYouTubeDL.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Stream", "youTubeQuality", (mainwindow.cboYouTubeQuality.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Stream", "youtubedl", VM.StreamView.YouTubeDL_SelectedItem);
+                inif.Write("Stream", "youtubedlQuality", VM.StreamView.YouTubeDLQuality_SelectedItem);
                 // Cache
-                inif.Write("Stream", "cache", (mainwindow.cboCache.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Stream", "cacheDefault", mainwindow.tbxCacheDefault.Text.ToString());
-                inif.Write("Stream", "initial", mainwindow.tbxCacheInitial.Text.ToString());
-                inif.Write("Stream", "seekMin", mainwindow.tbxCacheSeekMin.Text.ToString());
-                inif.Write("Stream", "backBuffer", mainwindow.tbxCacheBackbuffer.Text.ToString());
-                inif.Write("Stream", "seconds", mainwindow.tbxCacheSeconds.Text.ToString());
-                inif.Write("Stream", "file", (mainwindow.cboCacheFile.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Stream", "fileSize", mainwindow.tbxCacheFileSize.Text.ToString());
+                inif.Write("Stream", "cache", VM.StreamView.Cache_SelectedItem);
+                inif.Write("Stream", "cacheDefault", VM.StreamView.CacheDefault_Text);
+                inif.Write("Stream", "initial", VM.StreamView.CacheInitial_Text);
+                inif.Write("Stream", "seekMin", VM.StreamView.CacheSeekMin_Text);
+                inif.Write("Stream", "backBuffer", VM.StreamView.CacheBackbuffer_Text);
+                inif.Write("Stream", "seconds", VM.StreamView.CacheSeconds_Text);
+                inif.Write("Stream", "file", VM.StreamView.CacheFile_SelectedItem);
+                inif.Write("Stream", "fileSize", VM.StreamView.CacheFileSize_Text);
 
                 // --------------------------------------------------
                 // OSC
                 // --------------------------------------------------
-                inif.Write("OSC", "osc", (mainwindow.cboOSC.SelectedItem ?? string.Empty).ToString());
-                inif.Write("OSC", "oscLayout", (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString());
-                inif.Write("OSC", "oscSeekbar", (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString());
+                inif.Write("OSC", "osc", VM.DisplayView.OSC_SelectedItem);
+                inif.Write("OSC", "oscLayout", VM.DisplayView.OSC_Layout_SelectedItem);
+                inif.Write("OSC", "oscSeekbar", VM.DisplayView.OSC_Seekbar_SelectedItem);
 
                 // --------------------------------------------------
                 // OSD
                 // --------------------------------------------------
-                inif.Write("OSD", "videoOSD", (mainwindow.cboOSD.SelectedItem ?? string.Empty).ToString());
-                inif.Write("OSD", "fractions", (mainwindow.cboOSDFractions.SelectedItem ?? string.Empty).ToString());
-                inif.Write("OSD", "duration", mainwindow.tbxOSDDuration.Text.ToString());
-                inif.Write("OSD", "level", (mainwindow.cboOSDLevel.SelectedItem ?? string.Empty).ToString());
-                inif.Write("OSD", "scale", mainwindow.tbxOSDScale.Text.ToString());
-                inif.Write("OSD", "barWidth", mainwindow.tbxOSDBarWidth.Text.ToString());
-                inif.Write("OSD", "barHeight", mainwindow.tbxOSDBarHeight.Text.ToString());
-                inif.Write("OSD", "font", (mainwindow.cboOSDFont.SelectedItem ?? string.Empty).ToString());
-                inif.Write("OSD", "fontSize", (mainwindow.cboOSDFontSize.SelectedItem ?? string.Empty).ToString());
+                inif.Write("OSD", "videoOSD", VM.DisplayView.OSD_SelectedItem);
+                inif.Write("OSD", "fractions", VM.DisplayView.OSD_Fractions_SelectedItem);
+                inif.Write("OSD", "duration", VM.DisplayView.OSD_Duration_Text);
+                inif.Write("OSD", "level", VM.DisplayView.OSD_Level_SelectedItem);
+                inif.Write("OSD", "scale", VM.DisplayView.OSC_Scale_Text);
+                inif.Write("OSD", "barWidth", VM.DisplayView.OSC_BarWidth_Text);
+                inif.Write("OSD", "barHeight", VM.DisplayView.OSC_BarHeight_Text);
+                inif.Write("OSD", "font", VM.DisplayView.OSD_Font_SelectedItem);
+                inif.Write("OSD", "fontSize", VM.DisplayView.OSD_FontSize_SelectedItem);
 
-                inif.Write("OSD", "fontColor", mainwindow.tbxOSDFontColor.Text.ToString());
-                //selectedItem = (ComboBoxItem)(mainwindow.cboOSDFontColor.SelectedValue);
+                inif.Write("OSD", "fontColor", VM.DisplayView.OSD_FontColor_Text);
+                //selectedItem = (ComboBoxItem)(VM.DisplayView.OSD_FontColor.SelectedValue);
                 //selected = (string)(selectedItem.Content);
                 //inif.Write("OSD", "fontColor", selected);
 
-                inif.Write("OSD", "borderSize", (mainwindow.cboOSDFontBorderSize.SelectedItem ?? string.Empty).ToString());
+                inif.Write("OSD", "borderSize", VM.DisplayView.OSD_FontBorderSize_SelectedItem);
 
-                inif.Write("OSD", "borderColor", mainwindow.tbxOSDBorderColor.Text.ToString());
-                //selectedItem = (ComboBoxItem)(mainwindow.cboOSDBorderColor.SelectedValue);
+                inif.Write("OSD", "borderColor", VM.DisplayView.OSD_BorderColor_Text);
+                //selectedItem = (ComboBoxItem)(VM.DisplayView.OSDBorderColor.SelectedValue);
                 //selected = (string)(selectedItem.Content);
                 //inif.Write("OSD", "borderColor", selected);
 
-                inif.Write("OSD", "shadowColor", mainwindow.tbxOSDShadowColor.Text.ToString());
-                //selectedItem = (ComboBoxItem)(mainwindow.cboOSDShadowColor.SelectedValue);
+                inif.Write("OSD", "shadowColor", VM.DisplayView.OSD_ShadowColor_Text);
+                //selectedItem = (ComboBoxItem)(VM.DisplayView.OSDShadowColor.SelectedValue);
                 //selected = (string)(selectedItem.Content);
                 //inif.Write("OSD", "shadowColor", selected);
 
-                inif.Write("OSD", "shadowOffset", mainwindow.tbxOSDShadowOffset.Text.ToString());
+                inif.Write("OSD", "shadowOffset", VM.DisplayView.OSD_ShadowOffset_Text);
 
                 // --------------------------------------------------
                 // Extensions
                 // --------------------------------------------------
-                inif.Write("Extensions", "mkv", (mainwindow.cboExtMKV.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Extensions", "mp4", (mainwindow.cboExtMP4.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Extensions", "webm", (mainwindow.cboExtWebM.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Extensions", "gif", (mainwindow.cboExtGIF.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Extensions", "jpg", (mainwindow.cboExtJPG.SelectedItem ?? string.Empty).ToString());
-                inif.Write("Extensions", "png", (mainwindow.cboExtPNG.SelectedItem ?? string.Empty).ToString());
+                inif.Write("Extensions", "mkv", VM.GeneralView.ExtMKV_SelectedItem);
+                inif.Write("Extensions", "mp4", VM.GeneralView.ExtMP4_SelectedItem);
+                inif.Write("Extensions", "webm", VM.GeneralView.ExtWebM_SelectedItem);
+                inif.Write("Extensions", "gif", VM.GeneralView.ExtGIF_SelectedItem);
+                inif.Write("Extensions", "jpg", VM.GeneralView.ExtJPG_SelectedItem);
+                inif.Write("Extensions", "png", VM.GeneralView.ExtPNG_SelectedItem);
             }
 
             // Create Profiles Directory if does not exist
@@ -1444,7 +1443,7 @@ namespace Glow
                     case MessageBoxResult.Yes:
                         try
                         {
-                            Directory.CreateDirectory(vm.ProfilesPath_Text);
+                            Directory.CreateDirectory(VM.ConfigureView.ProfilesPath_Text);
                         }
                         catch
                         {
@@ -1459,133 +1458,120 @@ namespace Glow
                         break;
                 }
             }
-
         }
 
 
         /// <summary>
         ///    Import Profile
         /// </summary>
-        public static void ImportProfile(MainWindow mainwindow, ViewModel vm, string profile)
+        public static void ImportProfile(MainWindow mainwindow, string profile)
         {
             // If control failed to imported, add to list
             List<string> listFailedImports = new List<string>();
 
             // Start INI File Read
-            ConfigureWindow.INIFile inif = null;
+            Configure.ConfigFile inif = null;
 
             // -------------------------
             // Check if Profile ini file exists
             // -------------------------
             if (File.Exists(profile))
             {
-                inif = new ConfigureWindow.INIFile(profile);
-
-                // --------------------------------------------------
-                // Settings
-                // --------------------------------------------------
-                //Paths.mpvDir = inif.Read("Settings", "mpvDir");
-                //Paths.configDir = inif.Read("Settings", "configDir");
-                //Paths.profilesDir = inif.Read("Settings", "profilesDir");
-
-                //Settings.Default.mpvDir = Paths.mpvDir;
-                //Settings.Default.configDir = Paths.configDir;
-                //Settings.Default.profilesDir = Paths.profilesDir;
-                //Settings.Default.Save();
+                inif = new Configure.ConfigFile(profile);
 
                 // --------------------------------------------------
                 // General
                 // --------------------------------------------------
                 // Priority
                 string priority = inif.Read("General", "priority");
-                if (mainwindow.cboPriority.Items.Contains(priority))
-                    mainwindow.cboPriority.SelectedItem = priority;
+                if (VM.GeneralView.Priority_Items.Contains(priority))
+                    VM.GeneralView.Priority_SelectedItem = priority;
                 else
                     listFailedImports.Add("General: Priority");
 
                 // Save Position
                 string savePositiOnQuit = inif.Read("General", "savePositiOnQuit");
-                if (mainwindow.cboSavePositionQuit.Items.Contains(savePositiOnQuit))
-                    mainwindow.cboSavePositionQuit.SelectedItem = savePositiOnQuit;
+                if (VM.GeneralView.SavePositionQuit_Items.Contains(savePositiOnQuit))
+                    VM.GeneralView.SavePositionQuit_SelectedItem = savePositiOnQuit;
                 else
                     listFailedImports.Add("General: Save Position");
 
                 // Keep Open
                 string keepOpen = inif.Read("General", "keepOpen");
-                if (mainwindow.cboKeepOpen.Items.Contains(keepOpen))
-                    mainwindow.cboKeepOpen.SelectedItem = keepOpen;
+                if (VM.GeneralView.KeepOpen_Items.Contains(keepOpen))
+                    VM.GeneralView.KeepOpen_SelectedItem = keepOpen;
                 else
                     listFailedImports.Add("General: Keep Open");
 
                 // On Top
                 string onTop = inif.Read("General", "onTop");
-                if (mainwindow.cboOnTop.Items.Contains(onTop))
-                    mainwindow.cboOnTop.SelectedItem = onTop;
+                if (VM.GeneralView.OnTop_Items.Contains(onTop))
+                    VM.GeneralView.OnTop_SelectedItem = onTop;
                 else
                     listFailedImports.Add("General: On Top");
 
                 // Border
                 string border = inif.Read("General", "border");
-                if (mainwindow.cboBorder.Items.Contains(border))
-                    mainwindow.cboBorder.SelectedItem = border;
+                if (VM.GeneralView.WindowBorder_Items.Contains(border))
+                    VM.GeneralView.WindowBorder_SelectedItem = border;
                 else
                     listFailedImports.Add("General: Border");
 
                 // Geometry X
-                mainwindow.tbxGeometryX.Text = inif.Read("General", "geometryX");
+                VM.GeneralView.GeometryX_Text = inif.Read("General", "geometryX");
 
                 // Geometry Y
-                mainwindow.tbxGeometryY.Text = inif.Read("General", "geometryY");
+                VM.GeneralView.GeometryY_Text = inif.Read("General", "geometryY");
 
                 // Autofit Width
-                mainwindow.tbxAutofitWidth.Text = inif.Read("General", "autofitWidth");
+                VM.GeneralView.AutofitWidth_Text = inif.Read("General", "autofitWidth");
 
                 // Autofit Height
-                mainwindow.tbxAutofitHeight.Text = inif.Read("General", "autofitHeight");
+                VM.GeneralView.AutofitHeight_Text = inif.Read("General", "autofitHeight");
 
                 // Screensaver
                 string screensaver = inif.Read("General", "screensaver");
-                if (mainwindow.cboScreensaver.Items.Contains(screensaver))
-                    mainwindow.cboScreensaver.SelectedItem = screensaver;
+                if (VM.GeneralView.Screensaver_Items.Contains(screensaver))
+                    VM.GeneralView.Screensaver_SelectedItem = screensaver;
                 else
                     listFailedImports.Add("General: Screensaver");
 
                 // Window Title
                 string windowTitle = inif.Read("General", "windowTitle");
-                if (mainwindow.cboWindowTitle.Items.Contains(windowTitle))
-                    mainwindow.cboWindowTitle.SelectedItem = windowTitle;
+                if (VM.GeneralView.WindowTitle_Items.Contains(windowTitle))
+                    VM.GeneralView.WindowTitle_SelectedItem = windowTitle;
                 else
                     listFailedImports.Add("General: Window Title");
 
                 // Log Path
-                mainwindow.tbxLogPath.Text = inif.Read("General", "logPath");
+                VM.GeneralView.LogPath_Text = inif.Read("General", "logPath");
 
                 // Screenshot Path
-                mainwindow.tbxScreenshotPath.Text = inif.Read("General", "screenshotPath");
+                VM.GeneralView.ScreenshotPath_Text = inif.Read("General", "screenshotPath");
 
                 // Screenshot Template
                 string screenshotTemplate = inif.Read("General", "screenshotTemplate");
-                if (mainwindow.cboScreenshotTemplate.Items.Contains(screenshotTemplate))
-                    mainwindow.cboScreenshotTemplate.SelectedItem = screenshotTemplate;
+                if (VM.GeneralView.ScreenshotTemplate_Items.Contains(screenshotTemplate))
+                    VM.GeneralView.ScreenshotTemplate_SelectedItem = screenshotTemplate;
                 else
                     listFailedImports.Add("General: Screenshot Template");
 
                 // Screenshot Tag Colorspace
                 string screenshotTagColorspace = inif.Read("General", "screenshotTagColorspace");
-                if (mainwindow.cboScreenshotTagColorspace.Items.Contains(screenshotTagColorspace))
-                    mainwindow.cboScreenshotTagColorspace.SelectedItem = screenshotTagColorspace;
+                if (VM.GeneralView.ScreenshotTagColorspace_Items.Contains(screenshotTagColorspace))
+                    VM.GeneralView.ScreenshotTagColorspace_SelectedItem = screenshotTagColorspace;
                 else
                     listFailedImports.Add("General: Screenshot Tag Colorspace");
 
                 // Screenshot Format
                 string screenshotFormat = inif.Read("General", "screenshotFormat");
-                if (mainwindow.cboScreenshotFormat.Items.Contains(screenshotFormat))
-                    mainwindow.cboScreenshotFormat.SelectedItem = screenshotFormat;
+                if (VM.GeneralView.ScreenshotFormat_Items.Contains(screenshotFormat))
+                    VM.GeneralView.ScreenshotFormat_SelectedItem = screenshotFormat;
                 else
                     listFailedImports.Add("General: Screenshot Format");
 
                 // Screenshot Quality
-                mainwindow.tbxScreenshotQuality.Text = inif.Read("General", "screenshotQuality");
+                VM.GeneralView.ScreenshotQuality_Text = inif.Read("General", "screenshotQuality");
 
                 // --------------------------------------------------
                 // Video
@@ -1595,36 +1581,36 @@ namespace Glow
                 // -------------------------
                 // Video Driver
                 string videoDriver = inif.Read("Video", "videoDriver");
-                if (vm.VideoDriver_Items.Contains(videoDriver))
-                    vm.VideoDriver_SelectedItem = videoDriver;
+                if (VM.VideoView.VideoDriver_Items.Contains(videoDriver))
+                    VM.VideoView.VideoDriver_SelectedItem = videoDriver;
                 else
                     listFailedImports.Add("Video: Video Driver");
 
                 // Video Driver API
                 string videoDriverAPI = inif.Read("Video", "videoDriverAPI");
-                if (mainwindow.cboVideoDriverAPI.Items.Contains(videoDriverAPI))
-                    mainwindow.cboVideoDriverAPI.SelectedItem = videoDriverAPI;
+                if (VM.VideoView.VideoDriverAPI_Items.Contains(videoDriverAPI))
+                    VM.VideoView.VideoDriverAPI_SelectedItem = videoDriverAPI;
                 else
                     listFailedImports.Add("Video: Video Driver API");
 
                 // OpenGL PBO
                 string openglPBO = inif.Read("Video", "openglPBO");
-                if (mainwindow.cboOpenGLPBO.Items.Contains(openglPBO))
-                    mainwindow.cboOpenGLPBO.SelectedItem = openglPBO;
+                if (VM.VideoView.OpenGLPBO_Items.Contains(openglPBO))
+                    VM.VideoView.OpenGLPBO_SelectedItem = openglPBO;
                 else
                     listFailedImports.Add("Video: OpenGL PBO");
 
                 // OpenGL PBO Format
                 string openglPBOFormat = inif.Read("Video", "openglPBOFormat");
-                if (mainwindow.cboOpenGLPBOFormat.Items.Contains(openglPBOFormat))
-                    mainwindow.cboOpenGLPBOFormat.SelectedItem = openglPBOFormat;
+                if (VM.VideoView.OpenGLPBOFormat_Items.Contains(openglPBOFormat))
+                    VM.VideoView.OpenGLPBOFormat_SelectedItem = openglPBOFormat;
                 else
                     listFailedImports.Add("Video: OpenGL PBO Format");
 
                 // HW Decoder
                 string hwdec = inif.Read("Video", "hwdec");
-                if (mainwindow.cboHWDecoder.Items.Contains(hwdec))
-                    mainwindow.cboHWDecoder.SelectedItem = hwdec;
+                if (VM.VideoView.HWDecoder_Items.Contains(hwdec))
+                    VM.VideoView.HWDecoder_SelectedItem = hwdec;
                 else
                     listFailedImports.Add("Video: HW Decoder");
 
@@ -1636,104 +1622,103 @@ namespace Glow
                 string iccProfile = inif.Read("Video", "iccProfile");
                 if (iccProfile != "default" && iccProfile != "auto" && iccProfile != "select")
                 {
-                    mainwindow.cboICCProfile.Items.Add(iccProfile);
-                    mainwindow.cboICCProfile.SelectedItem = iccProfile;
-                    mainwindow.cboICCProfile.IsEditable = true;
+                    VM.VideoView.ICCProfile_Items.Add(iccProfile);
+                    VM.VideoView.ICCProfile_SelectedItem = iccProfile;
+                    VM.VideoView.ICCProfile_IsEditable = true;
                 }
 
-
-                if (mainwindow.cboICCProfile.Items.Contains(iccProfile))
-                    mainwindow.cboICCProfile.SelectedItem = iccProfile;
+                if (VM.VideoView.ICCProfile_Items.Contains(iccProfile))
+                    VM.VideoView.ICCProfile_SelectedItem = iccProfile;
                 else
                     listFailedImports.Add("Video: Display Primaries");
-                //mainwindow.tbxICCProfilePath.Text = inif.Read("Video", "iccProfilePath");
+                //vm.ICCProfilePath_Text = inif.Read("Video", "iccProfilePath");
 
                 // Display Primaries
                 string displayPrimaries = inif.Read("Video", "displayPrimaries");
-                if (mainwindow.cboDisplayPrimaries.Items.Contains(displayPrimaries))
-                    mainwindow.cboDisplayPrimaries.SelectedItem = displayPrimaries;
+                if (VM.VideoView.DisplayPrimaries_Items.Contains(displayPrimaries))
+                    VM.VideoView.DisplayPrimaries_SelectedItem = displayPrimaries;
                 else
                     listFailedImports.Add("Video: Display Primaries");
 
                 // Transfer Characteristics
                 string transferCharacteristics = inif.Read("Video", "transferCharacteristics");
-                if (mainwindow.cboTransferCharacteristics.Items.Contains(transferCharacteristics))
-                    mainwindow.cboTransferCharacteristics.SelectedItem = transferCharacteristics;
+                if (VM.VideoView.TransferCharacteristics_Items.Contains(transferCharacteristics))
+                    VM.VideoView.TransferCharacteristics_SelectedItem = transferCharacteristics;
                 else
                     listFailedImports.Add("Video: Transfer Characteristics");
 
                 // Color Space
                 string colorSpace = inif.Read("Video", "colorSpace");
-                if (mainwindow.cboColorSpace.Items.Contains(colorSpace))
-                    mainwindow.cboColorSpace.SelectedItem = colorSpace;
+                if (VM.VideoView.ColorSpace_Items.Contains(colorSpace))
+                    VM.VideoView.ColorSpace_SelectedItem = colorSpace;
                 else
                     listFailedImports.Add("Video: Color Space");
 
                 // Color Range
                 string colorRange = inif.Read("Video", "colorRange");
-                if (mainwindow.cboColorRange.Items.Contains(colorRange))
-                    mainwindow.cboColorRange.SelectedItem = colorRange;
+                if (VM.VideoView.ColorRange_Items.Contains(colorRange))
+                    VM.VideoView.ColorRange_SelectedItem = colorRange;
                 else
                     listFailedImports.Add("Video: Color Range");
 
                 // Deinterlace
                 string deinterlace = inif.Read("Video", "deinterlace");
-                if (mainwindow.cboDeinterlace.Items.Contains(deinterlace))
-                    mainwindow.cboDeinterlace.SelectedItem = deinterlace;
+                if (VM.VideoView.Deinterlace_Items.Contains(deinterlace))
+                    VM.VideoView.Deinterlace_SelectedItem = deinterlace;
                 else
                     listFailedImports.Add("Video: Deinterlace");
 
                 // Interpolation
                 string interpolation = inif.Read("Video", "interpolation");
-                if (mainwindow.cboInterpolation.Items.Contains(interpolation))
-                    mainwindow.cboInterpolation.SelectedItem = interpolation;
+                if (VM.VideoView.Interpolation_Items.Contains(interpolation))
+                    VM.VideoView.Interpolation_SelectedItem = interpolation;
                 else
                     listFailedImports.Add("Video: Interpolation");
 
                 // Video Sync
                 string videoSync = inif.Read("Video", "videoSync");
-                if (mainwindow.cboVideoSync.Items.Contains(videoSync))
-                    mainwindow.cboVideoSync.SelectedItem = videoSync;
+                if (VM.VideoView.VideoSync_Items.Contains(videoSync))
+                    VM.VideoView.VideoSync_SelectedItem = videoSync;
                 else
                     listFailedImports.Add("Video: Video Sync");
 
                 // Frame Drop
                 string frameDrop = inif.Read("Video", "frameDrop");
-                if (mainwindow.cboFramedrop.Items.Contains(frameDrop))
-                    mainwindow.cboFramedrop.SelectedItem = frameDrop;
+                if (VM.VideoView.Framedrop_Items.Contains(frameDrop))
+                    VM.VideoView.Framedrop_SelectedItem = frameDrop;
                 else
                     listFailedImports.Add("Video: Frame Drop");
 
                 // -------------------------
                 // Image
                 // -------------------------
-                mainwindow.tbxBrightness.Text = inif.Read("Video", "brightness");
-                mainwindow.tbxContrast.Text = inif.Read("Video", "contrast");
-                mainwindow.tbxHue.Text = inif.Read("Video", "hue");
-                mainwindow.tbxSaturation.Text = inif.Read("Video", "saturation");
-                mainwindow.tbxGamma.Text = inif.Read("Video", "gamma");
+                VM.VideoView.Brightness_Text = inif.Read("Video", "brightness");
+                VM.VideoView.Contrast_Text = inif.Read("Video", "contrast");
+                VM.VideoView.Hue_Text = inif.Read("Video", "hue");
+                VM.VideoView.Saturation_Text = inif.Read("Video", "saturation");
+                VM.VideoView.Gamma_Text = inif.Read("Video", "gamma");
 
                 // Gamma Auto
                 //string gammaAuto = inif.Read("Video", "gammaAuto");
-                //if (mainwindow.cboGammaAuto.Items.Contains(gammaAuto))
-                //    mainwindow.cboGammaAuto.SelectedItem = gammaAuto;
+                //if (vm.GammaAuto_Items.Contains(gammaAuto))
+                //    vm.GammaAuto_SelectedItem = gammaAuto;
                 //else
                 //    listFailedImports.Add("Video: Gamma Auto");
 
                 // Deband
                 string deband = inif.Read("Video", "deband");
-                if (mainwindow.cboDeband.Items.Contains(deband))
-                    mainwindow.cboDeband.SelectedItem = deband;
+                if (VM.VideoView.Deband_Items.Contains(deband))
+                    VM.VideoView.Deband_SelectedItem = deband;
                 else
                     listFailedImports.Add("Video: Deband");
 
                 // Deband Grain
-                mainwindow.tbxDebandGrain.Text = inif.Read("Video", "debandGrain");
+                VM.VideoView.DebandGrain_Text = inif.Read("Video", "debandGrain");
 
                 // Dither
                 string dither = inif.Read("Video", "dither");
-                if (mainwindow.cboDither.Items.Contains(dither))
-                    mainwindow.cboDither.SelectedItem = dither;
+                if (VM.VideoView.Dither_Items.Contains(dither))
+                    VM.VideoView.Dither_SelectedItem = dither;
                 else
                     listFailedImports.Add("Video: Dither");
 
@@ -1742,55 +1727,55 @@ namespace Glow
                 // -------------------------
                 // Sigmoid Upscaling
                 string sigmoidUpscaling = inif.Read("Video", "sigmoidUpscaling");
-                if (mainwindow.cboSigmoid.Items.Contains(sigmoidUpscaling))
-                    mainwindow.cboSigmoid.SelectedItem = sigmoidUpscaling;
+                if (VM.VideoView.Sigmoid_Items.Contains(sigmoidUpscaling))
+                    VM.VideoView.Sigmoid_SelectedItem = sigmoidUpscaling;
                 else
                     listFailedImports.Add("Video: Sigmoid");
 
                 // Scale
                 string scale = inif.Read("Video", "scale");
-                if (mainwindow.cboScale.Items.Contains(scale))
-                    mainwindow.cboScale.SelectedItem = scale;
+                if (VM.VideoView.Scale_Items.Contains(scale))
+                    VM.VideoView.Scale_SelectedItem = scale;
                 else
                     listFailedImports.Add("Video: Scale");
 
                 // Scale Antiring
-                mainwindow.tbxScaleAntiring.Text = inif.Read("Video", "scaleAntiring");
+                VM.VideoView.ScaleAntiring_Text = inif.Read("Video", "scaleAntiring");
 
                 // Chroma Scale
                 string chromaScale = inif.Read("Video", "chromaScale");
-                if (mainwindow.cboChromaScale.Items.Contains(chromaScale))
-                    mainwindow.cboChromaScale.SelectedItem = chromaScale;
+                if (VM.VideoView.ChromaScale_Items.Contains(chromaScale))
+                    VM.VideoView.ChromaScale_SelectedItem = chromaScale;
                 else
                     listFailedImports.Add("Video: Chroma Scale");
 
                 // Chroma Antiring
-                mainwindow.tbxChromaAntiring.Text = inif.Read("Video", "chromaScaleAntiring");
+                VM.VideoView.ChromaAntiring_Text = inif.Read("Video", "chromaScaleAntiring");
 
                 // Downscale
                 string downscale = inif.Read("Video", "downscale");
-                if (mainwindow.cboDownscale.Items.Contains(downscale))
-                    mainwindow.cboDownscale.SelectedItem = downscale;
+                if (VM.VideoView.Downscale_Items.Contains(downscale))
+                    VM.VideoView.Downscale_SelectedItem = downscale;
                 else
                     listFailedImports.Add("Video: Downscale");
 
                 // Downscale Antiring
-                mainwindow.tbxDownscaleAntiring.Text = inif.Read("Video", "downscaleAntiring");
+                VM.VideoView.DownscaleAntiring_Text = inif.Read("Video", "downscaleAntiring");
 
                 // Interpolation Scale
                 string tscale = inif.Read("Video", "interpolationScale");
-                if (mainwindow.cboInterpolationScale.Items.Contains(tscale))
-                    mainwindow.cboInterpolationScale.SelectedItem = tscale;
+                if (VM.VideoView.InterpolationScale_Items.Contains(tscale))
+                    VM.VideoView.InterpolationScale_SelectedItem = tscale;
                 else
                     listFailedImports.Add("Video: Interpolation Scale");
 
                 // Interpolation Antiring
-                mainwindow.tbxInterpolationAntiring.Text = inif.Read("Video", "interpolationAntiring");
+                VM.VideoView.InterpolationScaleAntiring_Text = inif.Read("Video", "interpolationAntiring");
 
                 // Software Scaler
                 string softwareScaler = inif.Read("Video", "softwareScaler");
-                if (mainwindow.cboSoftwareScaler.Items.Contains(softwareScaler))
-                    mainwindow.cboSoftwareScaler.SelectedItem = softwareScaler;
+                if (VM.VideoView.SoftwareScaler_Items.Contains(softwareScaler))
+                    VM.VideoView.SoftwareScaler_SelectedItem = softwareScaler;
                 else
                     listFailedImports.Add("Video: Software Scaler");
 
@@ -1799,43 +1784,43 @@ namespace Glow
                 // --------------------------------------------------
                 // Audio Driver
                 string audioDriver = inif.Read("Audio", "driver");
-                if (mainwindow.cboAudioDriver.Items.Contains(audioDriver))
-                    mainwindow.cboAudioDriver.SelectedItem = audioDriver;
+                if (VM.AudioView.AudioDriver_Items.Contains(audioDriver))
+                    VM.AudioView.AudioDriver_SelectedItem = audioDriver;
                 else
                     listFailedImports.Add("Audio: Audio Driver");
 
                 // Channels
                 string channels = inif.Read("Audio", "channels");
-                if (mainwindow.cboChannels.Items.Contains(channels))
-                    mainwindow.cboChannels.SelectedItem = channels;
+                if (VM.AudioView.Channels_Items.Contains(channels))
+                    VM.AudioView.Channels_SelectedItem = channels;
                 else
                     listFailedImports.Add("Audio: Channels");
 
                 // Volume
-                mainwindow.tbxVolume.Text = inif.Read("Audio", "volume");
-                mainwindow.tbxVolumeMax.Text = inif.Read("Audio", "volumeMax");
+                VM.AudioView.Volume_Text = inif.Read("Audio", "volume");
+                VM.AudioView.VolumeMax_Text = inif.Read("Audio", "volumeMax");
 
                 // Soft Volume Max
-                //mainwindow.tbxSoftVolumeMax.Text = inif.Read("Audio", "softVolumeMax");
+                //vm.SoftVolumeMax_Text = inif.Read("Audio", "softVolumeMax");
 
                 // Scale Tempo
                 string normalize = inif.Read("Audio", "normalize");
-                if (mainwindow.cboNormalize.Items.Contains(normalize))
-                    mainwindow.cboNormalize.SelectedItem = normalize;
+                if (VM.AudioView.Normalize_Items.Contains(normalize))
+                    VM.AudioView.Normalize_SelectedItem = normalize;
                 else
                     listFailedImports.Add("Audio: Normalize");
 
                 // Scale Tempo
                 string scaleTempo = inif.Read("Audio", "scaleTempo");
-                if (mainwindow.cboScaleTempo.Items.Contains(scaleTempo))
-                    mainwindow.cboScaleTempo.SelectedItem = scaleTempo;
+                if (VM.AudioView.ScaleTempo_Items.Contains(scaleTempo))
+                    VM.AudioView.ScaleTempo_SelectedItem = scaleTempo;
                 else
                     listFailedImports.Add("Audio: Scale Tempo");
 
                 // Load Files
                 string AudioLoadFiles = inif.Read("Audio", "loadFiles");
-                if (mainwindow.cboAudioLoadFiles.Items.Contains(AudioLoadFiles))
-                    mainwindow.cboAudioLoadFiles.SelectedItem = AudioLoadFiles;
+                if (VM.AudioView.AudioLoadFiles_Items.Contains(AudioLoadFiles))
+                    VM.AudioView.AudioLoadFiles_SelectedItem = AudioLoadFiles;
                 else
                     listFailedImports.Add("Audio: Load Files");
 
@@ -1849,10 +1834,11 @@ namespace Glow
                 string audioLangOrder = inif.Read("Audio", "languagesOrder");
                 string[] arrAudioLangOrder = audioLangOrder.Split(',');
                 // recreate the list
-                ViewModel.listAudioLang = new List<string>(arrAudioLangOrder);
+                //ViewModel.listAudioLang = new List<string>(arrAudioLangOrder);
                 // recreate item sources
-                ViewModel._audioLangItems = new ObservableCollection<string>(ViewModel.listAudioLang);
-                mainwindow.listViewAudioLanguages.ItemsSource = ViewModel._audioLangItems;
+                //ViewModel._audioLangItems = new ObservableCollection<string>(ViewModel.listAudioLang);
+                //mainwindow.listViewAudioLanguages.ItemsSource = ViewModel._audioLangItems;
+                VM.AudioView.LanguagePriority_ListView_Items = new ObservableCollection<string>(arrAudioLangOrder);
 
                 // ------------
                 // Selected
@@ -1864,9 +1850,10 @@ namespace Glow
                     string[] arrAudioLang = audioLanguagesSelected.Split(',');
                     foreach (string item in arrAudioLang)
                     {
-                        if (mainwindow.listViewAudioLanguages.Items.Contains(item))
+                        if (/*mainwindow.listViewAudioLanguages.Items*/VM.AudioView.LanguagePriority_ListView_Items.Contains(item))
                         {
-                            mainwindow.listViewAudioLanguages.SelectedItems.Add(item);
+                            /*mainwindow.listViewAudioLanguages_SelectedItems.*/
+                            VM.AudioView.LanguagePriority_ListView_SelectedItems.Add(item);
                         }
                         else
                         {
@@ -1880,79 +1867,79 @@ namespace Glow
                 // --------------------------------------------------
                 // Subtitles
                 string subtitles = inif.Read("Subtitles", "subtitles");
-                if (mainwindow.cboSubtitles.Items.Contains(subtitles))
-                    mainwindow.cboSubtitles.SelectedItem = subtitles;
+                if (VM.SubtitlesView.Subtitles_Items.Contains(subtitles))
+                    VM.SubtitlesView.Subtitles_SelectedItem = subtitles;
                 else
                     listFailedImports.Add("Subtitles: Subtitles");
 
                 // Subtitles Load Files
                 string subtitlesLoadFiles = inif.Read("Subtitles", "loadFiles");
-                if (mainwindow.cboSubtitlesLoadFiles.Items.Contains(subtitlesLoadFiles))
-                    mainwindow.cboSubtitlesLoadFiles.SelectedItem = subtitlesLoadFiles;
+                if (VM.SubtitlesView.LoadFiles_Items.Contains(subtitlesLoadFiles))
+                    VM.SubtitlesView.LoadFiles_SelectedItem = subtitlesLoadFiles;
                 else
                     listFailedImports.Add("Subtitles: Load Files");
 
                 // Subtitles Embedded Fonts
                 string subtitlesEmbeddedFonts = inif.Read("Subtitles", "embeddedFonts");
-                if (mainwindow.cboSubtitlesEmbeddedFonts.Items.Contains(subtitlesEmbeddedFonts))
-                    mainwindow.cboSubtitlesEmbeddedFonts.SelectedItem = subtitlesEmbeddedFonts;
+                if (VM.SubtitlesView.EmbeddedFonts_Items.Contains(subtitlesEmbeddedFonts))
+                    VM.SubtitlesView.EmbeddedFonts_SelectedItem = subtitlesEmbeddedFonts;
                 else
                     listFailedImports.Add("Subtitles: Embedded Fonts");
 
                 // Subtitles Position
-                mainwindow.tbxSubtitlePosition.Text = inif.Read("Subtitles", "position");
+                VM.SubtitlesView.Position_Text = inif.Read("Subtitles", "position");
 
                 // Fix Timing
                 string fixTiming = inif.Read("Subtitles", "fixTiming");
-                if (mainwindow.cboSubtitlesFixTiming.Items.Contains(fixTiming))
-                    mainwindow.cboSubtitlesFixTiming.SelectedItem = fixTiming;
+                if (VM.SubtitlesView.FixTiming_Items.Contains(fixTiming))
+                    VM.SubtitlesView.FixTiming_SelectedItem = fixTiming;
                 else
                     listFailedImports.Add("Subtitles: Fix Timing");
 
                 // Margins
                 string useMargins = inif.Read("Subtitles", "useMargins");
-                if (mainwindow.cboSubtitlesMargins.Items.Contains(useMargins))
-                    mainwindow.cboSubtitlesMargins.SelectedItem = useMargins;
+                if (VM.SubtitlesView.Margins_Items.Contains(useMargins))
+                    VM.SubtitlesView.Margins_SelectedItem = useMargins;
                 else
                     listFailedImports.Add("Subtitles: Margins");
 
                 // Blend
                 string blend = inif.Read("Subtitles", "blend");
-                if (mainwindow.cboSubtitlesBlend.Items.Contains(blend))
-                    mainwindow.cboSubtitlesBlend.SelectedItem = blend;
+                if (VM.SubtitlesView.Blend_Items.Contains(blend))
+                    VM.SubtitlesView.Blend_SelectedItem = blend;
                 else
                     listFailedImports.Add("Subtitles: Blend");
 
                 // Subtitles Font
                 string subtitlesfont = inif.Read("Subtitles", "font");
-                if (mainwindow.cboSubtitlesFont.Items.Contains(subtitlesfont))
-                    mainwindow.cboSubtitlesFont.SelectedItem = subtitlesfont;
+                if (VM.SubtitlesView.Font_Items.Contains(subtitlesfont))
+                    VM.SubtitlesView.Font_SelectedItem = subtitlesfont;
                 else
                     listFailedImports.Add("Subtitles: Font");
 
                 // Font Size
                 string fontSize = inif.Read("Subtitles", "fontSize");
-                if (mainwindow.cboSubtitlesFontSize.Items.Contains(fontSize))
-                    mainwindow.cboSubtitlesFontSize.SelectedItem = fontSize;
+                if (VM.SubtitlesView.FontSize_Items.Contains(fontSize))
+                    VM.SubtitlesView.FontSize_SelectedItem = fontSize;
                 else
                     listFailedImports.Add("Subtitles: Font Size");
 
                 // Font Color
-                mainwindow.tbxSubtitlesFontColor.Text = inif.Read("Subtitles", "fontColor");
+                VM.SubtitlesView.FontColor_Text = inif.Read("Subtitles", "fontColor");
                 // add combobox items to temp list
                 // convert items to string
-                //List<string> listSubtitlesFontColor = new List<string>();
-                //foreach (var item in mainwindow.tbxSubtitlesFontColor.Items)
+                //List<string> listFontColor = new List<string>();
+                //foreach (var item in vm.FontColor_Items)
                 //{
                 //    ComboBoxItem currentItem = (ComboBoxItem)(item);
                 //    string current = (string)(currentItem.Content);
-                //    listSubtitlesFontColor.Add(current);
+                //    listFontColor.Add(current);
                 //}
                 //// read ini color
                 //string subtitlesFontColor = inif.Read("Subtitles", "fontColor");
                 //// if temp list contains color
-                //if (listSubtitlesFontColor.Contains(subtitlesFontColor))
-                //    mainwindow.tbxSubtitlesFontColor.SelectedItem = mainwindow.tbxSubtitlesFontColor.Items
+                //if (listFontColor.Contains(subtitlesFontColor))
+                //    vm.FontColor_SelectedItem = vm.FontColor_Items
                 //        .OfType<ComboBoxItem>()
                 //        .FirstOrDefault(x => x.Content.ToString() == subtitlesFontColor);
                 //else
@@ -1960,21 +1947,21 @@ namespace Glow
 
 
                 // Border Color
-                mainwindow.tbxSubtitlesBorderColor.Text = inif.Read("Subtitles", "borderColor");
+                VM.SubtitlesView.BorderColor_Text = inif.Read("Subtitles", "borderColor");
                 // add combobox items to temp list
                 // convert items to string
-                //List<string> listSubtitlesBorderColor = new List<string>();
-                //foreach (var item in mainwindow.cboSubtitlesBorderColor.Items)
+                //List<string> listBorderColor = new List<string>();
+                //foreach (var item in vm.BorderColor_Items)
                 //{
                 //    ComboBoxItem currentItem = (ComboBoxItem)(item);
                 //    string current = (string)(currentItem.Content);
-                //    listSubtitlesBorderColor.Add(current);
+                //    listBorderColor.Add(current);
                 //}
                 //// read ini color
                 //string subtitlesBorderColor = inif.Read("Subtitles", "borderColor");
                 //// if temp list contains color
-                //if (listSubtitlesBorderColor.Contains(subtitlesBorderColor))
-                //    mainwindow.cboSubtitlesBorderColor.SelectedItem = mainwindow.cboSubtitlesBorderColor.Items
+                //if (listBorderColor.Contains(subtitlesBorderColor))
+                //    vm.BorderColor_SelectedItem = vm.BorderColor_Items
                 //        .OfType<ComboBoxItem>()
                 //        .FirstOrDefault(x => x.Content.ToString() == subtitlesBorderColor);
                 //else
@@ -1983,68 +1970,68 @@ namespace Glow
 
                 // Border Size
                 string subtitlesBorderSize = inif.Read("Subtitles", "borderSize");
-                if (mainwindow.cboSubtitlesBorderSize.Items.Contains(subtitlesBorderSize))
-                    mainwindow.cboSubtitlesBorderSize.SelectedItem = subtitlesBorderSize;
+                if (VM.SubtitlesView.BorderSize_Items.Contains(subtitlesBorderSize))
+                    VM.SubtitlesView.BorderSize_SelectedItem = subtitlesBorderSize;
                 else
                     listFailedImports.Add("Subtitles: Border Size");
 
 
                 // Shadow Color
-                mainwindow.tbxSubtitlesShadowColor.Text = inif.Read("Subtitles", "shadowColor");
+                VM.SubtitlesView.ShadowColor_Text = inif.Read("Subtitles", "shadowColor");
                 // add combobox items to temp list
                 // convert items to string
-                //List<string> listSubtitlesShadowColor = new List<string>();
-                //foreach (var item in mainwindow.cboSubtitlesShadowColor.Items)
+                //List<string> listShadowColor = new List<string>();
+                //foreach (var item in vm.ShadowColor_Items)
                 //{
                 //    ComboBoxItem currentItem = (ComboBoxItem)(item);
                 //    string current = (string)(currentItem.Content);
-                //    listSubtitlesShadowColor.Add(current);
+                //    listShadowColor.Add(current);
                 //}
                 //// read ini color
                 //string subtitlesShadowColor = inif.Read("Subtitles", "shadowColor");
                 //// if temp list contains color
-                //if (listSubtitlesShadowColor.Contains(subtitlesShadowColor))
-                //    mainwindow.cboSubtitlesShadowColor.SelectedItem = mainwindow.cboSubtitlesShadowColor.Items
+                //if (listShadowColor.Contains(subtitlesShadowColor))
+                //    vm.ShadowColor_SelectedItem = vm.ShadowColor_Items
                 //        .OfType<ComboBoxItem>()
                 //        .FirstOrDefault(x => x.Content.ToString() == subtitlesShadowColor);
                 //else
                 //    listFailedImports.Add("Subtitles: Shadow Color");
 
                 // Shadow Offset
-                mainwindow.tbxSubtitlesShadowOffset.Text = inif.Read("Subtitles", "shadowOffset");
+                VM.SubtitlesView.ShadowOffset_Text = inif.Read("Subtitles", "shadowOffset");
 
                 // ASS
                 string subtitlesASS = inif.Read("Subtitles", "ass");
-                if (mainwindow.cboSubtitlesASS.Items.Contains(subtitlesASS))
-                    mainwindow.cboSubtitlesASS.SelectedItem = subtitlesASS;
+                if (VM.SubtitlesView.ASS_Items.Contains(subtitlesASS))
+                    VM.SubtitlesView.ASS_SelectedItem = subtitlesASS;
                 else
                     listFailedImports.Add("Subtitles: ASS");
 
                 // ASS Override
                 string subtitlesASSOverride = inif.Read("Subtitles", "assOverride");
-                if (mainwindow.cboSubtitlesASSOverride.Items.Contains(subtitlesASSOverride))
-                    mainwindow.cboSubtitlesASSOverride.SelectedItem = subtitlesASSOverride;
+                if (VM.SubtitlesView.ASSOverride_Items.Contains(subtitlesASSOverride))
+                    VM.SubtitlesView.ASSOverride_SelectedItem = subtitlesASSOverride;
                 else
                     listFailedImports.Add("Subtitles: ASS Override");
 
                 // ASS ForceMargins
                 string subtitlesASSForceMargins = inif.Read("Subtitles", "assForceMargins");
-                if (mainwindow.cboSubtitlesASSForceMargins.Items.Contains(subtitlesASSForceMargins))
-                    mainwindow.cboSubtitlesASSForceMargins.SelectedItem = subtitlesASSForceMargins;
+                if (VM.SubtitlesView.ASSForceMargins_Items.Contains(subtitlesASSForceMargins))
+                    VM.SubtitlesView.ASSForceMargins_SelectedItem = subtitlesASSForceMargins;
                 else
                     listFailedImports.Add("Subtitles: ASS ForceMargins");
 
                 // ASS Hinting
                 string subtitlesASSHinting = inif.Read("Subtitles", "assHinting");
-                if (mainwindow.cboSubtitlesASSHinting.Items.Contains(subtitlesASSHinting))
-                    mainwindow.cboSubtitlesASSHinting.SelectedItem = subtitlesASSHinting;
+                if (VM.SubtitlesView.ASSHinting_Items.Contains(subtitlesASSHinting))
+                    VM.SubtitlesView.ASSHinting_SelectedItem = subtitlesASSHinting;
                 else
                     listFailedImports.Add("Subtitles: ASS Hinting");
 
                 // ASS Kerning
                 string subtitlesASSKerning = inif.Read("Subtitles", "assKerning");
-                if (mainwindow.cboSubtitlesASSKerning.Items.Contains(subtitlesASSKerning))
-                    mainwindow.cboSubtitlesASSKerning.SelectedItem = subtitlesASSKerning;
+                if (VM.SubtitlesView.ASSKerning_Items.Contains(subtitlesASSKerning))
+                    VM.SubtitlesView.ASSKerning_SelectedItem = subtitlesASSKerning;
                 else
                     listFailedImports.Add("Subtitles: ASS Kerning");
 
@@ -2058,10 +2045,11 @@ namespace Glow
                 string subtitlesLangOrder = inif.Read("Subtitles", "languagesOrder");
                 string[] arrSubtitlesLangOrder = subtitlesLangOrder.Split(',');
                 // recreate the list
-                ViewModel.listSubtitlesLang = new List<string>(arrSubtitlesLangOrder);
+                //ViewModel.listSubtitlesLang = new List<string>(arrSubtitlesLangOrder);
                 // recreate item sources
-                ViewModel._subsLangItems = new ObservableCollection<string>(ViewModel.listSubtitlesLang);
-                mainwindow.listViewSubtitlesLanguages.ItemsSource = ViewModel._subsLangItems;
+                //ViewModel._subsLangItems = new ObservableCollection<string>(ViewModel.listSubtitlesLang);
+                //mainwindow.listViewSubtitlesLanguages_ItemsSource = ViewModel._subsLangItems;
+                VM.SubtitlesView.LanguagePriority_ListView_Items = new ObservableCollection<string>(arrSubtitlesLangOrder);
 
                 // ------------
                 // Selected
@@ -2073,9 +2061,10 @@ namespace Glow
                     string[] arrSubtitlesLang = subtitlesLanguagesSelected.Split(',');
                     foreach (string item in arrSubtitlesLang)
                     {
-                        if (mainwindow.listViewSubtitlesLanguages.Items.Contains(item))
+                        if (/*mainwindow.listViewSubtitlesLanguages_Items*/VM.SubtitlesView.LanguagePriority_ListView_Items.Contains(item))
                         {
-                            mainwindow.listViewSubtitlesLanguages.SelectedItems.Add(item);
+                            //mainwindow.listViewSubtitlesLanguages_SelectedItems.Add(item);
+                            VM.SubtitlesView.LanguagePriority_ListView_SelectedItems.Add(item);
                         }
                         else
                         {
@@ -2089,81 +2078,81 @@ namespace Glow
                 // --------------------------------------------------
                 // Demux Thread
                 string demuxThread = inif.Read("Stream", "demuxThread");
-                if (mainwindow.cboDemuxerThread.Items.Contains(demuxThread))
-                    mainwindow.cboDemuxerThread.SelectedItem = demuxThread;
+                if (VM.StreamView.DemuxerThread_Items.Contains(demuxThread))
+                    VM.StreamView.DemuxerThread_SelectedItem = demuxThread;
                 else
                     listFailedImports.Add("Stream: Demux Thread");
 
                 // Demuxer Buffer Size
-                mainwindow.tbxDemuxerBuffersize.Text = inif.Read("Stream", "demuxerBufferSize");
+                VM.StreamView.DemuxerBuffersize_Text = inif.Read("Stream", "demuxerBufferSize");
 
                 // Demuxer Read Ahead
-                mainwindow.tbxDemuxerReadahead.Text = inif.Read("Stream", "demuxerReadAhead");
+                VM.StreamView.DemuxerReadahead_Text = inif.Read("Stream", "demuxerReadAhead");
 
                 // Demuxer MKV Subtitle Preroll
-                mainwindow.cboDemuxerMKVSubPreroll.SelectedItem = inif.Read("Stream", "demuxerMKVSubtitlePreroll");
+                VM.StreamView.DemuxerMKVSubPreroll_SelectedItem = inif.Read("Stream", "demuxerMKVSubtitlePreroll");
 
 
                 // youtube-dl
                 string youtubedl = inif.Read("Stream", "youtubedl");
-                if (mainwindow.cboYouTubeDL.Items.Contains(youtubedl))
-                    mainwindow.cboYouTubeDL.SelectedItem = youtubedl;
+                if (VM.StreamView.YouTubeDL_Items.Contains(youtubedl))
+                    VM.StreamView.YouTubeDL_SelectedItem = youtubedl;
                 else
                     listFailedImports.Add("Stream: youtube-dl");
 
                 // YouTube Quality
-                string youTubeQuality = inif.Read("Stream", "youTubeQuality");
-                if (mainwindow.cboYouTubeQuality.Items.Contains(youTubeQuality))
-                    mainwindow.cboYouTubeQuality.SelectedItem = youTubeQuality;
+                string youTubeDLQuality = inif.Read("Stream", "youtubedlQuality");
+                if (VM.StreamView.YouTubeDLQuality_Items.Contains(youTubeDLQuality))
+                    VM.StreamView.YouTubeDLQuality_SelectedItem = youTubeDLQuality;
                 else
-                    listFailedImports.Add("Stream: YouTube Quality");
+                    listFailedImports.Add("Stream: youtubedlQuality");
 
 
                 // Cache
                 string cache = inif.Read("Stream", "cache");
-                if (mainwindow.cboCache.Items.Contains(cache))
-                    mainwindow.cboCache.SelectedItem = cache;
+                if (VM.StreamView.Cache_Items.Contains(cache))
+                    VM.StreamView.Cache_SelectedItem = cache;
                 else
                     listFailedImports.Add("Stream: Cache");
 
                 // Cache
-                mainwindow.tbxCacheDefault.Text = inif.Read("Stream", "cacheDefault");
-                mainwindow.tbxCacheInitial.Text = inif.Read("Stream", "initial");
-                mainwindow.tbxCacheSeekMin.Text = inif.Read("Stream", "seekMin");
-                mainwindow.tbxCacheBackbuffer.Text = inif.Read("Stream", "backBuffer");
-                mainwindow.tbxCacheSeconds.Text = inif.Read("Stream", "seconds");
+                //VM.StreamView.CacheDefault_Text = inif.Read("Stream", "cacheDefault");
+                //VM.StreamView.CacheInitial_Text = inif.Read("Stream", "initial");
+                //VM.StreamView.CacheSeekMin_Text = inif.Read("Stream", "seekMin");
+                //VM.StreamView.CacheBackbuffer_Text = inif.Read("Stream", "backBuffer");
+                //VM.StreamView.CacheSeconds_Text = inif.Read("Stream", "seconds");
 
                 // Cache File
-                string cachefile = inif.Read("Stream", "file");
-                if (mainwindow.cboCacheFile.Items.Contains(cachefile))
-                    mainwindow.cboCacheFile.SelectedItem = cachefile;
-                else
-                    listFailedImports.Add("Stream: Cache File");
+                //string cachefile = inif.Read("Stream", "file");
+                //if (VM.StreamView.CacheFile_Items.Contains(cachefile))
+                //    VM.StreamView.CacheFile_SelectedItem = cachefile;
+                //else
+                //    listFailedImports.Add("Stream: Cache File");
 
                 // Cache File Size
-                mainwindow.tbxCacheFileSize.Text = inif.Read("Stream", "fileSize");
+                //VM.StreamView.CacheFileSize_Text = inif.Read("Stream", "fileSize");
 
                 // --------------------------------------------------
                 // OSC
                 // --------------------------------------------------
                 // OSC
                 string osc = inif.Read("OSC", "osc");
-                if (mainwindow.cboOSC.Items.Contains(osc))
-                    mainwindow.cboOSC.SelectedItem = osc;
+                if (VM.DisplayView.OSC_Items.Contains(osc))
+                    VM.DisplayView.OSC_SelectedItem = osc;
                 else
                     listFailedImports.Add("OSC: OSC");
 
                 // OSC Layout
                 string oscLayout = inif.Read("OSC", "oscLayout");
-                if (mainwindow.cboOSCLayout.Items.Contains(oscLayout))
-                    mainwindow.cboOSCLayout.SelectedItem = oscLayout;
+                if (VM.DisplayView.OSC_Layout_Items.Contains(oscLayout))
+                    VM.DisplayView.OSC_Layout_SelectedItem = oscLayout;
                 else
                     listFailedImports.Add("OSC: OSC Layout");
 
                 // OSC Seekbar
                 string oscSeekbar = inif.Read("OSC", "oscSeekbar");
-                if (mainwindow.cboOSCSeekbar.Items.Contains(oscSeekbar))
-                    mainwindow.cboOSCSeekbar.SelectedItem = oscSeekbar;
+                if (VM.DisplayView.OSC_Seekbar_Items.Contains(oscSeekbar))
+                    VM.DisplayView.OSC_Seekbar_SelectedItem = oscSeekbar;
                 else
                     listFailedImports.Add("OSC: OSC Seekbar");
 
@@ -2172,69 +2161,69 @@ namespace Glow
                 // --------------------------------------------------
                 // OSD
                 string videoOSD = inif.Read("OSD", "videoOSD");
-                if (mainwindow.cboOSD.Items.Contains(videoOSD))
-                    mainwindow.cboOSD.SelectedItem = videoOSD;
+                if (VM.DisplayView.OSD_Items.Contains(videoOSD))
+                    VM.DisplayView.OSD_SelectedItem = videoOSD;
                 else
                     listFailedImports.Add("OSD: OSD");
 
                 // Fractions
                 string osdFractions = inif.Read("OSD", "fractions");
-                if (mainwindow.cboOSDFractions.Items.Contains(osdFractions))
-                    mainwindow.cboOSDFractions.SelectedItem = osdFractions;
+                if (VM.DisplayView.OSD_Fractions_Items.Contains(osdFractions))
+                    VM.DisplayView.OSD_Fractions_SelectedItem = osdFractions;
                 else
                     listFailedImports.Add("OSD: Fractions");
 
                 // Duration
-                mainwindow.tbxOSDDuration.Text = inif.Read("OSD", "duration");
+                VM.DisplayView.OSD_Duration_Text = inif.Read("OSD", "duration");
 
                 // Level
                 string osdLevel = inif.Read("OSD", "level");
-                if (mainwindow.cboOSDLevel.Items.Contains(osdLevel))
-                    mainwindow.cboOSDLevel.SelectedItem = osdLevel;
+                if (VM.DisplayView.OSD_Level_Items.Contains(osdLevel))
+                    VM.DisplayView.OSD_Level_SelectedItem = osdLevel;
                 else
                     listFailedImports.Add("OSD: Level");
 
                 // -------------------------
                 // Controls
                 // -------------------------
-                mainwindow.tbxOSDScale.Text = inif.Read("OSD", "scale");
-                mainwindow.tbxOSDBarWidth.Text = inif.Read("OSD", "barWidth");
-                mainwindow.tbxOSDBarHeight.Text = inif.Read("OSD", "barHeight");
+                VM.DisplayView.OSC_Scale_Text = inif.Read("OSD", "scale");
+                VM.DisplayView.OSC_BarWidth_Text = inif.Read("OSD", "barWidth");
+                VM.DisplayView.OSC_BarHeight_Text = inif.Read("OSD", "barHeight");
 
                 // -------------------------
                 // Text
                 // -------------------------
                 // Font
                 string osdFont = inif.Read("OSD", "font");
-                if (mainwindow.cboOSDFont.Items.Contains(osdFont))
-                    mainwindow.cboOSDFont.SelectedItem = osdFont;
+                if (VM.DisplayView.OSD_Font_Items.Contains(osdFont))
+                    VM.DisplayView.OSD_Font_SelectedItem = osdFont;
                 else
                     listFailedImports.Add("OSD: Font");
 
                 // Font Size
                 string osdFontSize = inif.Read("OSD", "fontSize");
-                if (mainwindow.cboOSDFontSize.Items.Contains(osdFontSize))
-                    mainwindow.cboOSDFontSize.SelectedItem = osdFontSize;
+                if (VM.DisplayView.OSD_FontSize_Items.Contains(osdFontSize))
+                    VM.DisplayView.OSD_FontSize_SelectedItem = osdFontSize;
                 else
                     listFailedImports.Add("OSD: Font Size");
 
 
                 // Font Color
-                mainwindow.tbxOSDFontColor.Text = inif.Read("OSD", "fontColor");
+                VM.DisplayView.OSD_FontColor_Text = inif.Read("OSD", "fontColor");
                 // add combobox items to temp list
                 // convert items to string
-                //List<string> listOSDFontColor = new List<string>();
-                //foreach (var item in mainwindow.cboOSDFontColor.Items)
+                //List<string> listOSD_FontColor = new List<string>();
+                //foreach (var item in VM.DisplayView.OSD_FontColor_Items)
                 //{
                 //    ComboBoxItem currentItem = (ComboBoxItem)(item);
                 //    string current = (string)(currentItem.Content);
-                //    listOSDFontColor.Add(current);
+                //    listOSD_FontColor.Add(current);
                 //}
                 //// read ini color
                 //string osdFontColor = inif.Read("OSD", "fontColor");
                 //// if temp list contains color
-                //if (listOSDFontColor.Contains(osdFontColor))
-                //    mainwindow.cboOSDFontColor.SelectedItem = mainwindow.cboOSDFontColor.Items
+                //if (listOSD_FontColor.Contains(osdFontColor))
+                //    VM.DisplayView.OSD_FontColor_SelectedItem = VM.DisplayView.OSD_FontColor_Items
                 //        .OfType<ComboBoxItem>()
                 //        .FirstOrDefault(x => x.Content.ToString() == osdFontColor);
                 //else
@@ -2243,18 +2232,18 @@ namespace Glow
 
                 // Border Size
                 string osdFontBorderSize = inif.Read("OSD", "borderSize");
-                if (mainwindow.cboOSDFontBorderSize.Items.Contains(osdFontBorderSize))
-                    mainwindow.cboOSDFontBorderSize.SelectedItem = osdFontBorderSize;
+                if (VM.DisplayView.OSD_FontBorderSize_Items.Contains(osdFontBorderSize))
+                    VM.DisplayView.OSD_FontBorderSize_SelectedItem = osdFontBorderSize;
                 else
                     listFailedImports.Add("OSD: Border Size");
 
 
                 // Border Color
-                mainwindow.tbxOSDBorderColor.Text = inif.Read("OSD", "borderColor");
+                VM.DisplayView.OSD_BorderColor_Text = inif.Read("OSD", "borderColor");
                 // add combobox items to temp list
                 // convert items to string
                 //List<string> listOSDBorderColor = new List<string>();
-                //foreach (var item in mainwindow.cboOSDBorderColor.Items)
+                //foreach (var item in VM.DisplayView.OSDBorderColor_Items)
                 //{
                 //    ComboBoxItem currentItem = (ComboBoxItem)(item);
                 //    string current = (string)(currentItem.Content);
@@ -2264,7 +2253,7 @@ namespace Glow
                 //string osdBorderColor = inif.Read("OSD", "borderColor");
                 //// if temp list contains color
                 //if (listOSDBorderColor.Contains(osdBorderColor))
-                //    mainwindow.cboOSDBorderColor.SelectedItem = mainwindow.cboOSDBorderColor.Items
+                //    VM.DisplayView.OSDBorderColor_SelectedItem = VM.DisplayView.OSDBorderColor_Items
                 //        .OfType<ComboBoxItem>()
                 //        .FirstOrDefault(x => x.Content.ToString() == osdBorderColor);
                 //else
@@ -2272,12 +2261,12 @@ namespace Glow
 
 
                 // Shadow Color
-                mainwindow.tbxOSDShadowColor.Text = inif.Read("OSD", "shadowColor");
+                VM.DisplayView.OSD_ShadowColor_Text = inif.Read("OSD", "shadowColor");
                 // add combobox items to temp list
                 // convert items to string
                 //List<string> listOSDShadowColor = new List<string>();
                 //// read ini color
-                //foreach (var item in mainwindow.cboOSDShadowColor.Items)
+                //foreach (var item in VM.DisplayView.OSDShadowColor_Items)
                 //{
                 //    ComboBoxItem currentItem = (ComboBoxItem)(item);
                 //    string current = (string)(currentItem.Content);
@@ -2286,7 +2275,7 @@ namespace Glow
                 //// if temp list contains color
                 //string osdShadowColor = inif.Read("OSD", "shadowColor");
                 //if (listOSDShadowColor.Contains(osdShadowColor))
-                //    mainwindow.cboOSDShadowColor.SelectedItem = mainwindow.cboOSDShadowColor.Items
+                //    VM.DisplayView.OSDShadowColor_SelectedItem = VM.DisplayView.OSDShadowColor_Items
                 //        .OfType<ComboBoxItem>()
                 //        .FirstOrDefault(x => x.Content.ToString() == osdShadowColor);
                 //else
@@ -2294,50 +2283,50 @@ namespace Glow
 
 
                 // Shadow Offset
-                mainwindow.tbxOSDShadowOffset.Text = inif.Read("OSD", "shadowOffset");
+                VM.DisplayView.OSD_ShadowOffset_Text = inif.Read("OSD", "shadowOffset");
 
                 // --------------------------------------------------
                 // Extensions
                 // --------------------------------------------------
                 // MKV
                 string mkv = inif.Read("Extensions", "mkv");
-                if (mainwindow.cboExtMKV.Items.Contains(mkv))
-                    mainwindow.cboExtMKV.SelectedItem = mkv;
+                if (VM.GeneralView.ExtMKV_Items.Contains(mkv))
+                    VM.GeneralView.ExtMKV_SelectedItem = mkv;
                 else
                     listFailedImports.Add("Extensions: mkv");
 
                 // MP4
                 string mp4 = inif.Read("Extensions", "mp4");
-                if (mainwindow.cboExtMP4.Items.Contains(mp4))
-                    mainwindow.cboExtMP4.SelectedItem = mp4;
+                if (VM.GeneralView.ExtMP4_Items.Contains(mp4))
+                    VM.GeneralView.ExtMP4_SelectedItem = mp4;
                 else
                     listFailedImports.Add("Extensions: mp4");
 
                 // WebM
                 string webm = inif.Read("Extensions", "webm");
-                if (mainwindow.cboExtWebM.Items.Contains(webm))
-                    mainwindow.cboExtWebM.SelectedItem = webm;
+                if (VM.GeneralView.ExtWebM_Items.Contains(webm))
+                    VM.GeneralView.ExtWebM_SelectedItem = webm;
                 else
                     listFailedImports.Add("Extensions: webm");
 
                 // GIF
                 string gif = inif.Read("Extensions", "gif");
-                if (mainwindow.cboExtGIF.Items.Contains(gif))
-                    mainwindow.cboExtGIF.SelectedItem = gif;
+                if (VM.GeneralView.ExtGIF_Items.Contains(gif))
+                    VM.GeneralView.ExtGIF_SelectedItem = gif;
                 else
                     listFailedImports.Add("Extensions: gif");
 
                 // JPG
                 string jpg = inif.Read("Extensions", "jpg");
-                if (mainwindow.cboExtJPG.Items.Contains(jpg))
-                    mainwindow.cboExtJPG.SelectedItem = jpg;
+                if (VM.GeneralView.ExtJPG_Items.Contains(jpg))
+                    VM.GeneralView.ExtJPG_SelectedItem = jpg;
                 else
                     listFailedImports.Add("Extensions: jpg");
 
                 // PNG
                 string png = inif.Read("Extensions", "png");
-                if (mainwindow.cboExtPNG.Items.Contains(png))
-                    mainwindow.cboExtPNG.SelectedItem = png;
+                if (VM.GeneralView.ExtPNG_Items.Contains(png))
+                    VM.GeneralView.ExtPNG_SelectedItem = png;
                 else
                     listFailedImports.Add("Extensions: png");
 

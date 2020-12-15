@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -18,18 +18,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
+using Glow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViewModel;
 
-namespace Glow
+namespace Generate
 {
-    public partial class Extensions
+    public class Extensions
     {
         /// <summary>
         ///    Extensions Config
         /// </summary>
-        public static String ExtensionsConfig(MainWindow mainwindow)
+        public static String Config(/*MainWindow mainwindow*/)
         {
             // --------------------------------------------------
             // Main
@@ -45,7 +47,7 @@ namespace Glow
             // -------------------------
             string mkv = string.Empty;
 
-            if ((string)(mainwindow.cboExtMKV.SelectedItem ?? string.Empty) == "loop")
+            if (VM.GeneralView.ExtMKV_SelectedItem == "loop")
                 mkv = "[extension.mkv]"
                         +"\r\n"
                         + "loop-file=inf";
@@ -55,7 +57,7 @@ namespace Glow
             // -------------------------
             string mp4 = string.Empty;
 
-            if ((string)(mainwindow.cboExtMP4.SelectedItem ?? string.Empty) == "loop")
+            if (VM.GeneralView.ExtMP4_SelectedItem == "loop")
                 mp4 = "[extension.mp4]"
                         + "\r\n"
                         + "loop-file=inf";
@@ -65,7 +67,7 @@ namespace Glow
             // -------------------------
             string webm = string.Empty;
 
-            if ((string)(mainwindow.cboExtWebM.SelectedItem ?? string.Empty) == "loop")
+            if (VM.GeneralView.ExtWebM_SelectedItem == "loop")
                 webm = "[extension.webm]"
                         + "\r\n"
                         + "cache=no"
@@ -77,7 +79,7 @@ namespace Glow
             // -------------------------
             string gif = string.Empty;
 
-            if ((string)(mainwindow.cboExtGIF.SelectedItem ?? string.Empty) == "loop")
+            if (VM.GeneralView.ExtGIF_SelectedItem == "loop")
                 gif = "[extension.gif]"
                         + "\r\n"
                         + "cache=no"
@@ -89,7 +91,7 @@ namespace Glow
             // -------------------------
             string jpg = string.Empty;
 
-            if ((string)(mainwindow.cboExtJPG.SelectedItem ?? string.Empty) == "pause")
+            if (VM.GeneralView.ExtJPG_SelectedItem == "pause")
                 jpg = "[extension.jpg]"
                         + "\r\n"
                         + "cache=no"
@@ -101,7 +103,7 @@ namespace Glow
             // -------------------------
             string png = string.Empty;
 
-            if ((string)(mainwindow.cboExtPNG.SelectedItem ?? string.Empty) == "pause")
+            if (VM.GeneralView.ExtPNG_SelectedItem == "pause")
                 png = "[extension.png]"
                         + "\r\n"
                         + "cache=no"
@@ -126,14 +128,10 @@ namespace Glow
             // -------------------------
             // Join
             // -------------------------
-            string extensions = string.Join("\r\n", listExtensions
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
+            return string.Join("\r\n", listExtensions
+                                       .Where(s => !string.IsNullOrEmpty(s))
+                              );
 
-            // -------------------------
-            // Return
-            // -------------------------
-            return extensions;
         }
     }
 }

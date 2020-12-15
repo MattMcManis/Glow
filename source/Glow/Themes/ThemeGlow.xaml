@@ -55,7 +55,7 @@
         <GradientStop Color="#FF000000" Offset="0.0"/>
         <GradientStop Color="#FF0c040c" Offset="1.0"/>
     </LinearGradientBrush>-->
-    
+
     <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
         <Setter Property="Background" Value="{DynamicResource MainWindow.Static.Background}" />
@@ -195,7 +195,7 @@
     <!--/////////////////////////////////////
         Rich Text Box
         /////////////////////////////////////-->
-    
+
     <SolidColorBrush x:Key="RichTextBox.Static.Foreground" Color="#FFFFFFFF"/>
     <!--<SolidColorBrush x:Key="RichTextBox.Static.Background" Color="#FF121114"/>-->
     <LinearGradientBrush x:Key="RichTextBox.Static.Background" 
@@ -211,10 +211,10 @@
         <GradientStop Color="#FF0080cb" Offset="0.0"/>
         <GradientStop Color="#FF19191d" Offset="1.0"/>
     </LinearGradientBrush>-->
-    
+
     <SolidColorBrush x:Key="RichTextBox.MouseOver.Border" Color="#FFe9e9e9"/>
     <SolidColorBrush x:Key="RichTextBox.Focus.Border" Color="#FFe9e9e9"/>
-    
+
     <Style x:Key="{x:Type TextBoxBase}" TargetType="{x:Type TextBoxBase}">
         <Setter Property="Background" Value="{DynamicResource RichTextBox.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource RichTextBox.Static.Border}"/>
@@ -294,7 +294,7 @@
     </Style>
 
 
-    
+
     <!--/////////////////////////////////////
         ToolTip
         /////////////////////////////////////-->
@@ -314,7 +314,7 @@
     </Style>
 
 
-    
+
     <!--/////////////////////////////////////
         Scrollbar
         /////////////////////////////////////-->
@@ -323,7 +323,7 @@
         <GradientStop Color="#FF000000" Offset="0.0"/>
         <GradientStop Color="#FF020f31" Offset="1.0"/>
     </LinearGradientBrush>
-    
+
     <!-- Background -->
     <Style TargetType="{x:Type ScrollBar}">
         <Setter Property="Background" Value="{DynamicResource Scrollbar.Static.Background}"/>
@@ -541,14 +541,14 @@
     </ControlTemplate>-->
 
 
-    
-    
+
+
     <!--/////////////////////////////////////
         Tab Control
         /////////////////////////////////////-->
 
     <SolidColorBrush x:Key="TabItem.Selected.Foreground" Color="#FFfff69c"/>
-    
+
     <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FF000000"/>
 
     <SolidColorBrush x:Key="TabItem.Top.Selected.Border" Color="#FF0080cb"/>
@@ -932,7 +932,7 @@
 
 
 
-    
+
     <!--/////////////////////////////////////
         Scroll Viewer
         /////////////////////////////////////-->
@@ -1005,7 +1005,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!-- Static -->
     <SolidColorBrush x:Key="ComboBox.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#FF000000"/>
@@ -1014,11 +1014,11 @@
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
-    
+
     <!-- Editable -->
     <SolidColorBrush x:Key="TextBox.Editable.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="TextBox.Editable.Background" Color="#FF1a1a1d"/>
-    
+
     <!-- MouseOver -->
     <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FFfff69c"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FF111111"/>
@@ -1035,7 +1035,7 @@
         <GradientStop Color="#FFDAECFC" Offset="0.0"/>
         <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
     </LinearGradientBrush>
-    
+
     <!-- Pressed -->
     <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FFfff69c"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFFFFFFF"/>
@@ -1045,7 +1045,7 @@
         <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
     </LinearGradientBrush>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#FFfff69c"/>
-    
+
     <!-- Disabled -->
     <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#FFBFBFBF"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Foreground" Color="#FF999999"/>
@@ -1056,7 +1056,7 @@
     <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Button.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Button.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#FF606060"/>
-    
+
     <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
@@ -1151,7 +1151,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
         <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
             <Grid.ColumnDefinitions>
@@ -1196,7 +1196,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+
     <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="AllowDrop" Value="true"/>
@@ -1213,7 +1213,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <ControlTemplate x:Key="ComboBoxEditableTemplate" TargetType="{x:Type ComboBox}">
         <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
             <Grid.ColumnDefinitions>
@@ -1274,7 +1274,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+
     <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource ComboBox.Static.Background}"/>
@@ -1413,7 +1413,7 @@
     <!-- Disabled -->
     <SolidColorBrush x:Key="SliderThumb.Disabled.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="SliderThumb.Disabled.Border" Color="#FF444444"/>
-    
+
     <ControlTemplate x:Key="SliderThumbHorizontalTop" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
             <Path x:Name="grip" Data="M 0,6 C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6 z" 
@@ -1672,8 +1672,8 @@
         </Style.Triggers>
     </Style>
 
-    
-    
+
+
     <!--/////////////////////////////////////
         Slider Hue
         /////////////////////////////////////-->
@@ -1802,7 +1802,7 @@
                         <Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Height="4.0" Visibility="Hidden"/>
                     </Canvas>
                 </Border>
-                
+
                 <Track x:Name="PART_Track" Grid.Row="1">
                     <Track.DecreaseRepeatButton>
                         <RepeatButton Command="{x:Static Slider.DecreaseLarge}" Style="{StaticResource HueRepeatButtonTransparent}"/>
@@ -1915,7 +1915,7 @@
                 </Grid.ColumnDefinitions>
                 <TickBar x:Name="TopTick" Grid.Column="0" Fill="{TemplateBinding Foreground}" Margin="0,0,2,0" Placement="Left" Visibility="Collapsed" Width="4"/>
                 <TickBar x:Name="BottomTick" Grid.Column="2" Fill="{TemplateBinding Foreground}" Margin="2,0,0,0" Placement="Right" Visibility="Collapsed" Width="4"/>
-                
+
                 <Border x:Name="HueTrackBackground" 
                         BorderBrush="{StaticResource SliderHue.Track.Border}"
                         BorderThickness="1" 
@@ -1929,7 +1929,7 @@
                         <Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Visibility="Hidden" Width="4.0"/>
                     </Canvas>
                 </Border>
-                
+
                 <Track x:Name="PART_Track" Grid.Column="1">
                     <Track.DecreaseRepeatButton>
                         <RepeatButton Command="{x:Static Slider.DecreaseLarge}" Style="{StaticResource HueRepeatButtonTransparent}"/>
@@ -2093,13 +2093,13 @@
     <!--/////////////////////////////////////
         TextBox
         /////////////////////////////////////-->
-    
+
     <SolidColorBrush x:Key="TextBox.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FF1a1a1d"/>
     <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
     <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FFfff69c"/>
     <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FFfff69c"/>
-    
+
     <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource TextBox.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
@@ -2159,7 +2159,7 @@
     <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
     <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-    
+
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
@@ -2217,13 +2217,13 @@
     <SolidColorBrush x:Key="ButtonSmall.Static.Background" Color="#FF000000"/>
     <!--<SolidColorBrush x:Key="ButtonSmall.Static.Border" Color="#FFfff69c"/>-->
     <SolidColorBrush x:Key="ButtonSmall.Static.Border" Color="#FFe9e9e9"/>
-    
+
     <SolidColorBrush x:Key="ButtonSmall.MouseOver.Background" Color="#FF111111"/>
     <SolidColorBrush x:Key="ButtonSmall.MouseOver.Border" Color="#FFfff69c"/>
 
     <SolidColorBrush x:Key="ButtonSmall.Pressed.Background" Color="#FFfff69c"/>
     <SolidColorBrush x:Key="ButtonSmall.Pressed.Border" Color="#FFfff69c"/>
-    
+
     <SolidColorBrush x:Key="ButtonSmall.Disabled.Background" Color="#FFF4F4F4"/>
     <SolidColorBrush x:Key="ButtonSmall.Disabled.Border" Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="ButtonSmall.Disabled.Foreground" Color="#FF838383"/>
@@ -2284,13 +2284,13 @@
     <SolidColorBrush x:Key="ButtonControl.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ButtonControl.Static.Background" Color="#FF302f32"/>
     <SolidColorBrush x:Key="ButtonControl.Static.Border" Color="#FF302f32"/>
-    
+
     <SolidColorBrush x:Key="ButtonControl.MouseOver.Background" Color="#FF111111"/>
     <SolidColorBrush x:Key="ButtonControl.MouseOver.Border" Color="#FFfff69c"/>
 
     <SolidColorBrush x:Key="ButtonControl.Pressed.Background" Color="#FFfff69c"/>
     <SolidColorBrush x:Key="ButtonControl.Pressed.Border" Color="#FFfff69c"/>
-    
+
     <SolidColorBrush x:Key="ButtonControl.Disabled.Background" Color="#FFF4F4F4"/>
     <SolidColorBrush x:Key="ButtonControl.Disabled.Border" Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="ButtonControl.Disabled.Foreground" Color="#FF838383"/>
@@ -2461,56 +2461,56 @@
     <!-- Info Button -->
     <Style x:Key="ButtonInfo" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/White/info.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/info.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
     <!-- Website Button -->
     <Style x:Key="ButtonWebsite" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/White/web.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/web.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
     <!-- Settings Button -->
     <Style x:Key="ButtonSettings" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/White/settings.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/settings.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
     <!-- Update Button -->
     <Style x:Key="ButtonUpdate" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/White/update.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/update.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
     <!-- Config Folder Button -->
     <Style x:Key="ButtonConfigFolder" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/White/folder.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/folder.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
     <!-- Import Button -->
     <Style x:Key="ButtonImport" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/White/import.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/import.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
     <!-- Export Button -->
     <Style x:Key="ButtonExport" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/White/export.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/export.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 
     <!-- Revert Arrow Button -->
     <Style x:Key="ButtonRevertArrow" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/White/revertarrow.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/White/revertarrow.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
     </Style>
 

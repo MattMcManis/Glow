@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -18,18 +18,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
+using Glow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViewModel;
 
-namespace Glow
+namespace Generate
 {
-    public partial class OSC
+    public class OSC
     {
         /// <summary>
         ///    OSD Config
         /// </summary>
-        public static String OSCConfig(MainWindow mainwindow)
+        public static String Config(/*MainWindow mainwindow*/)
         {
             // -------------------------
             // OSC Title
@@ -41,24 +43,48 @@ namespace Glow
             // -------------------------
             string oscEnable = string.Empty;
 
-            if ((string)(mainwindow.cboOSC.SelectedItem ?? string.Empty) != "default")
-                oscEnable = "osc=" + (mainwindow.cboOSC.SelectedItem ?? string.Empty).ToString();
+            if (VM.DisplayView.OSC_SelectedItem != "default")
+                oscEnable = "osc=" + VM.DisplayView.OSC_SelectedItem;
 
             // -------------------------
             // Layout
             // -------------------------
             string oscLayout = string.Empty;
 
-            if ((string)(mainwindow.cboOSCLayout.SelectedItem ?? string.Empty) != "default")
-                oscLayout = "osc-layout=" + (mainwindow.cboOSCLayout.SelectedItem ?? string.Empty).ToString();
+            if (ViewModel.VM.DisplayView.OSC_Layout_SelectedItem != "default")
+                oscLayout = "osc-layout=" + VM.DisplayView.OSC_Layout_SelectedItem;
 
             // -------------------------
             // Seekbar
             // -------------------------
             string oscSeekbar = string.Empty;
 
-            if ((string)(mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty) != "default")
-                oscSeekbar = "osc-seekbarstyle=" + (mainwindow.cboOSCSeekbar.SelectedItem ?? string.Empty).ToString();
+            if (VM.DisplayView.OSC_Seekbar_SelectedItem != "default")
+                oscSeekbar = "osc-seekbarstyle=" + VM.DisplayView.OSC_Seekbar_SelectedItem;
+
+            // -------------------------
+            // Scale
+            // -------------------------
+            string scale = string.Empty;
+
+            if (VM.DisplayView.OSC_Scale_Value != 0.0 /*&& !string.IsNullOrEmpty(VM.DisplayView.OSC_Scale_Text)*/)
+                scale = "osd-scale=" + VM.DisplayView.OSC_Scale_Value/*OSC_Scale_Text*/;
+
+            // -------------------------
+            // Bar Width
+            // -------------------------
+            string barWidth = string.Empty;
+
+            if (VM.DisplayView.OSC_BarWidth_Value != 0.0/* && !string.IsNullOrEmpty(VM.DisplayView.OSC_BarWidth_Text)*/)
+                barWidth = "osd-bar-w=" + VM.DisplayView.OSC_BarWidth_Value/*OSC_BarWidth_Text*/;
+
+            // -------------------------
+            // Bar Height
+            // -------------------------
+            string barHeight = string.Empty;
+
+            if (VM.DisplayView.OSC_BarHeight_Value != 0.0 /*&& !string.IsNullOrEmpty(VM.DisplayView.OSC_BarHeight_Text)*/)
+                barHeight = "osd-bar-h=" + VM.DisplayView.OSC_BarHeight_Value/*OSC_BarHeight_Text*/;
 
             // -------------------------
             // Script Opts
@@ -89,20 +115,19 @@ namespace Glow
                 oscTitle,
                 oscEnable,
                 oscScriptOpts,
+
+                scale,
+                barWidth,
+                barHeight
             };
 
             // -------------------------
             // Join
             // -------------------------
             // OSC
-            string osc = string.Join("\r\n", listOSC
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
-
-            // -------------------------
-            // Return
-            // -------------------------
-            return osc;
+            return string.Join("\r\n", listOSC
+                                       .Where(s => !string.IsNullOrEmpty(s))
+                              );
         }
     }
 }

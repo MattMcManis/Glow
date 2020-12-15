@@ -50,6 +50,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -69,7 +72,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Audio.cs" />
+    <Compile Include="Configure.cs" />
+    <Compile Include="MainWindow\Audio.cs" />
+    <Compile Include="MainWindow\Display.cs" />
+    <Compile Include="MainWindow\General.cs" />
+    <Compile Include="Generators\Audio.cs" />
     <Compile Include="ColorConverter.cs" />
     <Compile Include="ColorPickerWindow.xaml.cs">
       <DependentUpon>ColorPickerWindow.xaml</DependentUpon>
@@ -77,25 +84,35 @@
     <Compile Include="FailedImportWindow.xaml.cs">
       <DependentUpon>FailedImportWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OSC.cs" />
-    <Compile Include="Paths.cs" />
+    <Compile Include="Generators\OSC.cs" />
+    <Compile Include="MainWindow\Video.cs" />
     <Compile Include="ConfigureWindow.xaml.cs">
       <DependentUpon>ConfigureWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Generators\Extensions.cs" />
     <Compile Include="InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Languages.cs" />
-    <Compile Include="OSD.cs" />
+    <Compile Include="Generators\OSD.cs" />
     <Compile Include="Profiles.cs" />
-    <Compile Include="Stream.cs" />
-    <Compile Include="Subtitles.cs" />
+    <Compile Include="Generators\Stream.cs" />
+    <Compile Include="Generators\Subtitles.cs" />
+    <Compile Include="MainWindow\Subtitles.cs" />
     <Compile Include="UpdateWindow.xaml.cs">
       <DependentUpon>UpdateWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Video.cs" />
-    <Compile Include="ViewModel.cs" />
+    <Compile Include="Generators\Video.cs" />
+    <Compile Include="ViewModel\AudioViewModel.cs" />
+    <Compile Include="ViewModel\ConfigureViewModel.cs" />
+    <Compile Include="ViewModel\DisplayViewModel.cs" />
+    <Compile Include="ViewModel\ColorPickerViewModel.cs" />
+    <Compile Include="ViewModel\StreamViewModel.cs" />
+    <Compile Include="ViewModel\SubtitlesViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\VideoViewModel.cs" />
+    <Compile Include="ViewModel\GeneralViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="ColorPickerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,17 +137,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="General.cs" />
-    <Compile Include="Generate.cs" />
+    <Compile Include="Generators\General.cs" />
+    <Compile Include="Generators\Generate.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ThemeGlow.xaml">
+    <Page Include="Themes\ThemeGlow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ThemeSystem.xaml">
+    <Page Include="Themes\ThemeSystem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -202,6 +219,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Buttons\Swatches\transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icons\info.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

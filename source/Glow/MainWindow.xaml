@@ -1,6 +1,6 @@
 ﻿<!-- 
     Glow
-    Copyright (C) 2017, 2018 Matt McManis
+    Copyright (C) 2017-2020 Matt McManis
     http://github.com/MattMcManis/Glow
     http://glowmpv.github.io
     mattmcmanis@outlook.com
@@ -23,22 +23,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
         xmlns:my="clr-namespace:Glow"
+        xmlns:local="clr-namespace:ViewModel"
         xmlns:settings="clr-namespace:Glow.Properties"
-                
+        mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Closing="Window_Closing" 
-        UseLayoutRounding="True"
-        Width="712" 
-        Height="400"
-    
-        Title="{Binding TitleVersion, RelativeSource={RelativeSource Mode=Self}}" 
+        Closing="Window_Closing"
         Icon="Resources/Images/Icons/title-logo.ico"
-        Style="{DynamicResource WindowStyle}" 
+        RenderOptions.BitmapScalingMode="Fant"
+        UseLayoutRounding="True"
+        Width="712"
+        Height="400"
+        Title="{Binding MainView.TitleVersion, Mode=OneWay}"
+        Style="{DynamicResource WindowStyle}"
         >
+
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
 
     <Grid>
         <Grid Margin="0,0,-1,0">
@@ -52,7 +57,10 @@
                 <!--/////////////////////////////////////
                     Video Tab
                 /////////////////////////////////////-->
-                <TabItem Header="Video" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Video" 
+                         DataContext="{Binding VideoView}"
+                         Style="{DynamicResource TabItemStyle}">
+
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0" Template="{DynamicResource ScrollViewerControlTemplate}">
                             <Grid Margin="0,0,0,30">
@@ -70,7 +78,6 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboVideoDriver" 
                                           ItemsSource="{Binding VideoDriver_Items}"
-                                          SelectedIndex="{Binding VideoDriver_SelectedIndex}"
                                           SelectedItem="{Binding VideoDriver_SelectedItem}"
                                           IsEnabled="{Binding VideoDriver_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,10,14,0" 
@@ -80,10 +87,6 @@
                                           SelectionChanged="cboVideoDriver_SelectionChanged"
                                           HorizontalAlignment="Right" 
                                           Width="103">
-                                    <!--<System:String>opengl</System:String>
-                                    <System:String>opengl-hq</System:String>
-                                    <System:String>d3d11</System:String>
-                                    <System:String>vulkan</System:String>-->
                                 </ComboBox>
 
                                 <!-- Driver API -->
@@ -99,7 +102,6 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboVideoDriverAPI" 
                                           ItemsSource="{Binding VideoDriverAPI_Items}"
-                                          SelectedIndex="{Binding VideoDriverAPI_SelectedIndex}"
                                           SelectedItem="{Binding VideoDriverAPI_SelectedItem}"
                                           IsEnabled="{Binding VideoDriverAPI_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,39,14,0" 
@@ -109,10 +111,6 @@
                                           SelectionChanged="cboVideoDriverAPI_SelectionChanged"
                                           HorizontalAlignment="Right" 
                                           Width="103">
-                                    <!--<System:String>opengl</System:String>
-                                    <System:String>opengl-hq</System:String>
-                                    <System:String>d3d11</System:String>
-                                    <System:String>vulkan</System:String>-->
                                 </ComboBox>
 
                                 <!-- OpenGL PBO -->
@@ -128,7 +126,6 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOpenGLPBO" 
                                           ItemsSource="{Binding OpenGLPBO_Items}"
-                                          SelectedIndex="{Binding OpenGLPBO_SelectedIndex}"
                                           SelectedItem="{Binding OpenGLPBO_SelectedItem}"
                                           IsEnabled="{Binding OpenGLPBO_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
@@ -138,8 +135,6 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           SelectionChanged="cboOpenGLPBO_SelectionChanged">
-                                    <!--<System:String>yes</System:String>
-                                    <System:String>no</System:String>-->
                                 </ComboBox>
 
                                 <!-- OpenGL PBO Formats -->
@@ -155,7 +150,6 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOpenGLPBOFormat" 
                                           ItemsSource="{Binding OpenGLPBOFormat_Items}"
-                                          SelectedIndex="{Binding OpenGLPBOFormat_SelectedIndex}"
                                           SelectedItem="{Binding OpenGLPBOFormat_SelectedItem}"
                                           IsEnabled="{Binding OpenGLPBOFormat_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
@@ -164,18 +158,6 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <!--<System:String>default</System:String>
-                                    <System:String>off</System:String>
-                                    <System:String>rgb8</System:String>
-                                    <System:String>rgb10</System:String>
-                                    <System:String>rgb10_a2</System:String>
-                                    <System:String>rgb16</System:String>
-                                    <System:String>rgb16f</System:String>
-                                    <System:String>rgb32f</System:String>
-                                    <System:String>rgba12</System:String>
-                                    <System:String>rgba16</System:String>
-                                    <System:String>rgba16f</System:String>
-                                    <System:String>rgba32f</System:String>-->
                                 </ComboBox>
 
                                 <!-- Hardware Decoder -->
@@ -191,7 +173,6 @@
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboHWDecoder" 
                                           ItemsSource="{Binding HWDecoder_Items}"
-                                          SelectedIndex="{Binding HWDecoder_SelectedIndex}"
                                           SelectedItem="{Binding HWDecoder_SelectedItem}"
                                           IsEnabled="{Binding HWDecoder_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
@@ -200,17 +181,6 @@
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <!--<System:String>off</System:String>
-                                    <System:String>no</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>auto-copy</System:String>
-                                    <System:String>dxva2</System:String>
-                                    <System:String>dxva2-copy</System:String>
-                                    <System:String>d3d11va</System:String>
-                                    <System:String>d3d11va-copy</System:String>
-                                    <System:String>cuda</System:String>
-                                    <System:String>cuda-copy</System:String>
-                                    <System:String>crystalhd</System:String>-->
                                 </ComboBox>
 
 
@@ -251,7 +221,6 @@
                                 </TextBox>-->
                                 <ComboBox x:Name="cboICCProfile" 
                                           ItemsSource="{Binding ICCProfile_Items}"
-                                          SelectedIndex="{Binding ICCProfile_SelectedIndex}"
                                           SelectedItem="{Binding ICCProfile_SelectedItem}"
                                           IsEnabled="{Binding ICCProfile_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,196,14,0" 
@@ -261,9 +230,6 @@
                                           HorizontalAlignment="Right"
                                           Width="103" 
                                           SelectionChanged="cboICCProfile_SelectionChanged">
-                                    <!--<System:String>default</System:String>
-                                    <System:String>auto</System:String>
-                                    <System:String>select</System:String>-->
                                 </ComboBox>
 
                                 <!-- Primaries -->
@@ -278,26 +244,15 @@
                                        ToolTip="Specifies the primaries of the display. Video colors will be adapted to this colorspace when ICC color management is not being used."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDisplayPrimaries" 
+                                          ItemsSource="{Binding DisplayPrimaries_Items}"
+                                          SelectedItem="{Binding DisplayPrimaries_SelectedItem}"
+                                          IsEnabled="{Binding DisplayPrimaries_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,225,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>auto</System:String>
-                                    <System:String>bt.470m</System:String>
-                                    <System:String>bt.601-525</System:String>
-                                    <System:String>bt.601-625</System:String>
-                                    <System:String>bt.709</System:String>
-                                    <System:String>bt.2020</System:String>
-                                    <System:String>apple</System:String>
-                                    <System:String>adobe</System:String>
-                                    <System:String>prophoto</System:String>
-                                    <System:String>cie1931</System:String>
-                                    <System:String>dci-p3</System:String>
-                                    <System:String>v-gamut</System:String>
-                                    <System:String>s-gamut</System:String>
                                 </ComboBox>
 
                                 <!-- Transfer Characteristics -->
@@ -312,26 +267,15 @@
                                        ToolTip="Specifies the transfer characteristics (gamma) of the display. Video colors will be adjusted to this curve when ICC color management is not being used."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboTransferCharacteristics"
+                                          ItemsSource="{Binding TransferCharacteristics_Items}"
+                                          SelectedItem="{Binding TransferCharacteristics_SelectedItem}"
+                                          IsEnabled="{Binding TransferCharacteristics_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,254,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>auto</System:String>
-                                    <System:String>bt.1886</System:String>
-                                    <System:String>srgb</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>gamma1.8</System:String>
-                                    <System:String>gamma2.2</System:String>
-                                    <System:String>gamma2.8</System:String>
-                                    <System:String>prophoto</System:String>
-                                    <System:String>pq</System:String>
-                                    <System:String>hlg</System:String>
-                                    <System:String>v-log</System:String>
-                                    <System:String>s-log1</System:String>
-                                    <System:String>s-log2</System:String>
                                 </ComboBox>
 
                                 <!-- Color Space -->
@@ -346,18 +290,15 @@
                                        ToolTip="Restricts the color space for the next filter without doing any conversion. Use together with the scale filter for a real conversion."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboColorSpace" 
+                                          ItemsSource="{Binding ColorSpace_Items}"
+                                          SelectedItem="{Binding ColorSpace_SelectedItem}"
+                                          IsEnabled="{Binding ColorSpace_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,283,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>bt.601</System:String>
-                                    <System:String>bt.709</System:String>
-                                    <System:String>bt.2020-ncl</System:String>
-                                    <System:String>bt.2020-cl</System:String>
-                                    <System:String>mpte-240m</System:String>
                                 </ComboBox>
 
                                 <!-- Color Range -->
@@ -372,15 +313,15 @@
                                        ToolTip="RGB color levels used with YUV to RGB conversion. Normally, output devices such as PC monitors use full range color levels. However, some TVs and video monitors expect studio RGB levels. Providing full range output to a device expecting studio level input results in crushed blacks and whites, the reverse in dim gray blacks and dim whites."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboColorRange"
+                                          ItemsSource="{Binding ColorRange_Items}"
+                                          SelectedItem="{Binding ColorRange_SelectedItem}"
+                                          IsEnabled="{Binding ColorRange_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,312,14,0"
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>limited</System:String>
-                                    <System:String>full</System:String>
                                 </ComboBox>
 
                                 <!-- Deinterlace -->
@@ -395,15 +336,15 @@
                                        ToolTip="Enable or disable interlacing (default: auto, which usually means no). Interlaced video shows ugly comb-like artifacts, which are visible on fast movement. Enabling this typically inserts the yadif video filter in order to deinterlace the video, or lets the video output apply deinterlacing if supported."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDeinterlace" 
+                                          ItemsSource="{Binding Deinterlace_Items}"
+                                          SelectedItem="{Binding Deinterlace_SelectedItem}"
+                                          IsEnabled="{Binding Deinterlace_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,341,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Interpolation -->
@@ -418,6 +359,9 @@
                                        ToolTip="Reduce stuttering caused by mismatches in the video fps and display refresh rate (also known as judder)."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboInterpolation" 
+                                          ItemsSource="{Binding Interpolation_Items}"
+                                          SelectedItem="{Binding Interpolation_SelectedItem}"
+                                          IsEnabled="{Binding Interpolation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,370,14,0" 
                                           VerticalAlignment="Top" 
@@ -425,9 +369,6 @@
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           SelectionChanged="cboInterpolation_SelectionChanged">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Vsync -->
@@ -442,22 +383,15 @@
                                        ToolTip="How the player synchronizes audio and video. If you use this option, you usually want to set it to display-resample to enable a timing mode that tries to not skip or repeat frames when for example playing 24fps video on a 24Hz screen."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboVideoSync" 
+                                          ItemsSource="{Binding VideoSync_Items}"
+                                          SelectedItem="{Binding VideoSync_SelectedItem}"
+                                          IsEnabled="{Binding VideoSync_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,399,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>off</System:String>
-                                    <System:String>display-resample</System:String>
-                                    <System:String>display-resample-vdrop</System:String>
-                                    <System:String>display-resample-desync</System:String>
-                                    <System:String>display-vdrop</System:String>
-                                    <System:String>display-adrop</System:String>
-                                    <System:String>display-desync</System:String>
-                                    <System:String>desync</System:String>
-                                    <System:String>audio</System:String>
                                 </ComboBox>
 
                                 <!-- Framedrop -->
@@ -472,17 +406,15 @@
                                        ToolTip="Skip displaying some frames to maintain A/V sync on slow systems, or playing high framerate video on video outputs that have an upper framerate limit."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboFramedrop"
+                                          ItemsSource="{Binding Framedrop_Items}"
+                                          SelectedItem="{Binding Framedrop_SelectedItem}"
+                                          IsEnabled="{Binding Framedrop_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,428,14,0"
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>no</System:String>
-                                    <System:String>vo</System:String>
-                                    <System:String>decoder</System:String>
-                                    <System:String>decoder+vo</System:String>
                                 </ComboBox>
 
 
@@ -510,6 +442,8 @@
                                         ToolTip="Adjust the brightness of the video signal (default: 0). Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slBrightness" 
+                                        Value="{Binding Brightness_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Brightness_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,500,52,0" 
                                         VerticalAlignment="Top" 
@@ -543,6 +477,8 @@
                                         ToolTip="Adjust the contrast of the video signal (default: 0). Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slContrast" 
+                                        Value="{Binding Contrast_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Contrast_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,529,52,0" 
                                         VerticalAlignment="Top" 
@@ -576,6 +512,8 @@
                                         ToolTip="Adjust the hue of the video signal (default: 0). You can get a colored negative of the image with this option. Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slHue" 
+                                        Value="{Binding Hue_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Hue_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,558,52,0" 
                                         VerticalAlignment="Top" 
@@ -609,6 +547,8 @@
                                         ToolTip="Adjust the saturation of the video signal (default: 0). You can get grayscale output with this option. Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slSaturation" 
+                                        Value="{Binding Saturation_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Saturation_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,587,52,0" 
                                         VerticalAlignment="Top" 
@@ -642,6 +582,8 @@
                                         ToolTip="Adjust the gamma of the video signal (default: 0). Not supported by all video output drivers."
                                         Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slGamma" 
+                                        Value="{Binding Gamma_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Gamma_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,616,52,0" 
                                         VerticalAlignment="Top" 
@@ -675,16 +617,15 @@
                                        ToolTip="Set dither target depth to N. Default: no."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDither"
+                                          ItemsSource="{Binding Dither_Items}"
+                                          SelectedItem="{Binding Dither_SelectedItem}"
+                                          IsEnabled="{Binding Dither_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,702,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right" 
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>no</System:String>
-                                    <System:String>auto</System:String>
-                                    <System:String>8</System:String>
                                 </ComboBox>
 
                                 <!-- Deband -->
@@ -699,6 +640,9 @@
                                        ToolTip="Enable the debanding algorithm. This greatly reduces the amount of visible banding, blocking and other quantization artifacts, at the expensive of very slightly blurring some of the finest details. In practice, it's virtually always an improvement - the only reason to disable it would be for performance."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDeband" 
+                                          ItemsSource="{Binding Deband_Items}"
+                                          SelectedItem="{Binding Deband_SelectedItem}"
+                                          IsEnabled="{Binding Deband_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,644,14,0"
                                           VerticalAlignment="Top"
                                           SelectionChanged="cboDeband_SelectionChanged"
@@ -706,9 +650,6 @@
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
                                           HorizontalAlignment="Right" 
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Deband Grain -->
@@ -723,6 +664,8 @@
                                        ToolTip="Add some extra noise to the image. This significantly helps cover up remaining quantization artifacts. Higher numbers add more noise. (Default 48)"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxDebandGrain"
+                                         Text="{Binding DebandGrain_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding DebandGrain_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Margin="0,673,14,0" 
                                          Padding="1,1,0,0"
                                          VerticalAlignment="Top" 
@@ -754,15 +697,15 @@
                                        ToolTip="When upscaling, use a sigmoidal color transform to avoid emphasizing ringing artifacts. This also implies --linear-scaling."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSigmoid"
+                                         ItemsSource="{Binding Sigmoid_Items}"
+                                         SelectedItem="{Binding Sigmoid_SelectedItem}"
+                                         IsEnabled="{Binding Sigmoid_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Margin="0,773,14,0" 
                                          VerticalAlignment="Top"
                                          Style="{DynamicResource ComboBoxStyle}"
                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                          HorizontalAlignment="Right" 
                                          Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Scale -->
@@ -777,6 +720,9 @@
                                        ToolTip="The filter function to use when upscaling video."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScale"
+                                          ItemsSource="{Binding Scale_Items}"
+                                          SelectedItem="{Binding Scale_SelectedItem}"
+                                          IsEnabled="{Binding Scale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,802,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -784,29 +730,6 @@
                                           SelectionChanged="cboScale_SelectionChanged" 
                                           HorizontalAlignment="Right" 
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>off</System:String>
-                                    <System:String>nearest</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>bilinear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>gaussian</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>ewa_lanczos</System:String>
-                                    <System:String>ewa_lanczossharp</System:String>
-                                    <System:String>ewa_lanczossoft</System:String>
-                                    <System:String>robidoux</System:String>
-                                    <System:String>robidouxsharp</System:String>
-                                    <System:String>ewa_ginseng</System:String>
-                                    <System:String>ewa_hanning</System:String>
-                                    <System:String>mitchell</System:String>
-                                    <System:String>catmull_rom</System:String>
-                                    <System:String>spline16</System:String>
-                                    <System:String>spline36</System:String>
-                                    <System:String>spline64</System:String>
-                                    <System:String>sinc</System:String>
-                                    <System:String>jinc</System:String>
-                                    <System:String>oversample</System:String>
                                 </ComboBox>
 
                                 <!-- Scale Antiring -->
@@ -821,6 +744,8 @@
                                        ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slScaleAntiring" 
+                                        Value="{Binding ScaleAntiring_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding ScaleAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,832,52,0" 
                                         VerticalAlignment="Top" 
@@ -831,6 +756,7 @@
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxScaleAntiring"
                                          Text="{Binding Value, ElementName=slScaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding ScaleAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,831,14,0"
@@ -852,6 +778,9 @@
                                        ToolTip="As --scale, but for interpolating chroma information. If the image is not subsampled, this option is ignored entirely."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboChromaScale" 
+                                          ItemsSource="{Binding ChromaScale_Items}"
+                                          SelectedItem="{Binding ChromaScale_SelectedItem}"
+                                          IsEnabled="{Binding ChromaScale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,860,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -859,29 +788,6 @@
                                           SelectionChanged="cboChromaScale_SelectionChanged"
                                           HorizontalAlignment="Right" 
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>off</System:String>
-                                    <System:String>nearest</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>bilinear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>gaussian</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>ewa_lanczos</System:String>
-                                    <System:String>ewa_lanczossharp</System:String>
-                                    <System:String>ewa_lanczossoft</System:String>
-                                    <System:String>robidoux</System:String>
-                                    <System:String>robidouxsharp</System:String>
-                                    <System:String>ewa_ginseng</System:String>
-                                    <System:String>ewa_hanning</System:String>
-                                    <System:String>mitchell</System:String>
-                                    <System:String>catmull_rom</System:String>
-                                    <System:String>spline16</System:String>
-                                    <System:String>spline36</System:String>
-                                    <System:String>spline64</System:String>
-                                    <System:String>sinc</System:String>
-                                    <System:String>jinc</System:String>
-                                    <System:String>oversample</System:String>
                                 </ComboBox>
 
                                 <!-- Chroma Antiring -->
@@ -896,6 +802,8 @@
                                        ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slChromaAntiring" 
+                                        Value="{Binding ChromaAntiring_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding ChromaAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,890,52,0" 
                                         VerticalAlignment="Top" 
@@ -906,6 +814,7 @@
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxChromaAntiring"
                                          Text="{Binding Value, ElementName=slChromaAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding ChromaAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,889,14,0"
@@ -927,6 +836,9 @@
                                        ToolTip="Like --scale, but apply these filters on downscaling instead. If this option is unset, the filter implied by --scale will be applied."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDownscale" 
+                                          ItemsSource="{Binding Downscale_Items}"
+                                          SelectedItem="{Binding Downscale_SelectedItem}"
+                                          IsEnabled="{Binding Downscale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,918,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -934,29 +846,6 @@
                                           SelectionChanged="cboDownscale_SelectionChanged" 
                                           HorizontalAlignment="Right"
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>off</System:String>
-                                    <System:String>nearest</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>bilinear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>gaussian</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>ewa_lanczos</System:String>
-                                    <System:String>ewa_lanczossharp</System:String>
-                                    <System:String>ewa_lanczossoft</System:String>
-                                    <System:String>robidoux</System:String>
-                                    <System:String>robidouxsharp</System:String>
-                                    <System:String>ewa_ginseng</System:String>
-                                    <System:String>ewa_hanning</System:String>
-                                    <System:String>mitchell</System:String>
-                                    <System:String>catmull_rom</System:String>
-                                    <System:String>spline16</System:String>
-                                    <System:String>spline36</System:String>
-                                    <System:String>spline64</System:String>
-                                    <System:String>sinc</System:String>
-                                    <System:String>jinc</System:String>
-                                    <System:String>oversample</System:String>
                                 </ComboBox>
 
                                 <!-- Downscale Antiring -->
@@ -971,6 +860,8 @@
                                        ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slDownscaleAntiring" 
+                                        Value="{Binding DownscaleAntiring_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding DownscaleAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,948,52,0" 
                                         VerticalAlignment="Top" 
@@ -981,6 +872,7 @@
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxDownscaleAntiring"
                                          Text="{Binding Value, ElementName=slDownscaleAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding DownscaleAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,947,14,0"
@@ -1002,31 +894,16 @@
                                        ToolTip="The filter used for interpolating the temporal axis (frames). This is only used if --interpolation is enabled. The only valid choices for  --tscale are separable convolution filters (use --tscale=help to get a list). The default is mitchell."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboInterpolationScale" 
+                                          ItemsSource="{Binding InterpolationScale_Items}"
+                                          SelectedItem="{Binding InterpolationScale_SelectedItem}"
+                                          IsEnabled="{Binding InterpolationScale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,976,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right"
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>off</System:String>
-                                    <System:String>nearest</System:String>
-                                    <System:String>linear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>box</System:String>
-                                    <System:String>triangle</System:String>
-                                    <System:String>gaussian</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>robidoux</System:String>
-                                    <System:String>robidouxsharp</System:String>
-                                    <System:String>ginseng</System:String>
-                                    <System:String>mitchell</System:String>
-                                    <System:String>catmull_rom</System:String>
-                                    <System:String>spline16</System:String>
-                                    <System:String>spline36</System:String>
-                                    <System:String>spline64</System:String>
-                                    <System:String>sinc</System:String>
-                                    <System:String>oversample</System:String>
+
                                 </ComboBox>
 
                                 <!-- Interpolation Antiring -->
@@ -1040,7 +917,9 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <Slider x:Name="slInterpolationAntiring" 
+                                <Slider x:Name="slInterpolationAntiring"
+                                        Value="{Binding InterpolationAntiring_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding InterpolationAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,1006,52,0" 
                                         VerticalAlignment="Top" 
@@ -1051,6 +930,7 @@
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxInterpolationAntiring"
                                          Text="{Binding Value, ElementName=slInterpolationAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding InterpolationAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,1005,14,0"
@@ -1072,6 +952,9 @@
                                        ToolTip="Specify the software scaler algorithm to be used with --vf=scale. This also affects video output drivers which lack hardware acceleration, e.g. x11. See also --vf=scale."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSoftwareScaler"
+                                          ItemsSource="{Binding SoftwareScaler_Items}"
+                                          SelectedItem="{Binding SoftwareScaler_SelectedItem}"
+                                          IsEnabled="{Binding SoftwareScaler_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,1034,14,0" 
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
@@ -1079,14 +962,6 @@
                                           SelectionChanged="cboSoftwareScale_SelectionChanged" 
                                           HorizontalAlignment="Right"
                                           Width="103">
-                                    <System:String>default</System:String>
-                                    <System:String>off</System:String>
-                                    <System:String>bilinear</System:String>
-                                    <System:String>bicubic</System:String>
-                                    <System:String>gauss</System:String>
-                                    <System:String>lanczos</System:String>
-                                    <System:String>spline</System:String>
-                                    <System:String>sinc</System:String>
                                 </ComboBox>
 
                             </Grid>
@@ -1097,7 +972,10 @@
                 <!--/////////////////////////////////////
                     Audio Tab
                 /////////////////////////////////////-->
-                <TabItem Header="Audio" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Audio" 
+                         DataContext="{Binding AudioView}"
+                         Style="{DynamicResource TabItemStyle}">
+
                     <Grid Background="Transparent">
                         <ScrollViewer>
                             <Grid Margin="0,0,0,20">
@@ -1113,22 +991,15 @@
                                        ToolTip="Audio output drivers to be used."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboAudioDriver"
+                                          ItemsSource="{Binding AudioDriver_Items}"
+                                          SelectedItem="{Binding AudioDriver_SelectedItem}"
+                                          IsEnabled="{Binding AudioDriver_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,10,14,0"
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>wasapi</System:String>
-                                    <System:String>oss</System:String>
-                                    <System:String>jack</System:String>
-                                    <System:String>openal</System:String>
-                                    <System:String>pulse</System:String>
-                                    <System:String>sdl</System:String>
-                                    <System:String>pcm</System:String>
-                                    <System:String>rsound</System:String>
-                                    <System:String>null</System:String>
                                 </ComboBox>
 
                                 <!-- Load Audio Files -->
@@ -1143,17 +1014,15 @@
                                        ToolTip="Load additional audio files matching the video filename. The parameter specifies how external audio files are matched. exact is enabled by default."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboAudioLoadFiles" 
+                                          ItemsSource="{Binding AudioLoadFiles_Items}"
+                                          SelectedItem="{Binding AudioLoadFiles_SelectedItem}"
+                                          IsEnabled="{Binding AudioLoadFiles_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,39,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>no</System:String>
-                                    <System:String>exact</System:String>
-                                    <System:String>fuzzy</System:String>
-                                    <System:String>all</System:String>
                                 </ComboBox>
 
                                 <!-- Channels -->
@@ -1168,18 +1037,15 @@
                                        ToolTip="Control which audio channels are output (e.g. surround vs. stereo). There are the following possibilities:"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboChannels"
+                                          ItemsSource="{Binding Channels_Items}"
+                                          SelectedItem="{Binding Channels_SelectedItem}"
+                                          IsEnabled="{Binding Channels_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,68,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>auto-safe</System:String>
-                                    <System:String>auto</System:String>
-                                    <System:String>stereo</System:String>
-                                    <System:String>5.1</System:String>
-                                    <System:String>7.1</System:String>
                                 </ComboBox>
 
                                 <!-- Volume -->
@@ -1194,6 +1060,8 @@
                                        ToolTip="Set the startup volume. 0 means silence, 100 means no volume reduction or amplification. Negative values can be passed for compatibility, but are treated as 0."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slVolume" 
+                                        Value="{Binding Volume_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Volume_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,98,52,0" 
                                         VerticalAlignment="Top" 
@@ -1205,6 +1073,7 @@
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxVolume"
                                          Text="{Binding Value, ElementName=slVolume, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding Volume_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,97,14,0"
@@ -1227,6 +1096,8 @@
                                        Style="{DynamicResource LabelStyle}"/>
 
                                 <Slider x:Name="slVolumeMax" 
+                                         Value="{Binding VolumeMax_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding VolumeMax_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,127,52,0" 
                                         VerticalAlignment="Top" 
@@ -1238,6 +1109,7 @@
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxVolumeMax"
                                          Text="{Binding Value, ElementName=slVolumeMax, UpdateSourceTrigger=PropertyChanged}"
+                                          IsEnabled="{Binding VolumeMax_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,126,14,0" 
@@ -1259,15 +1131,15 @@
                                        ToolTip="Enable/disable normalization if surround audio is downmixed to stereo (default: no). If this is disabled, downmix can cause clipping. If it's enabled, the output might be too silent. It depends on the source audio. Technically, this changes the normalize suboption of the lavrresample audio filter, which performs the downmixing. If downmix happens outside of mpv for some reason, this has no effect."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboNormalize" 
+                                          ItemsSource="{Binding Normalize_Items}"
+                                          SelectedItem="{Binding Normalize_SelectedItem}"
+                                          IsEnabled="{Binding Normalize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,158,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Scale Tempo -->
@@ -1282,15 +1154,15 @@
                                        ToolTip="If this is enabled (default), playing with a speed different from normal automatically inserts the scaletempo audio filter. For details, see audio filter section."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScaleTempo" 
+                                          ItemsSource="{Binding ScaleTempo_Items}"
+                                          SelectedItem="{Binding ScaleTempo_SelectedItem}"
+                                          IsEnabled="{Binding ScaleTempo_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,187,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
 
@@ -1304,11 +1176,14 @@
                                        FontWeight="Bold"
                                        Style="{DynamicResource LabelTitleStyle}"/>
                                 <ListView x:Name="listViewAudioLanguages" 
+                                          ItemsSource="{Binding LanguagePriority_ListView_Items}"
+                                          SelectedIndex="{Binding LanguagePriority_ListView_SelectedIndex}"
+                                          IsEnabled="{Binding LanguagePriority_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          SelectionMode="Multiple"
                                           Height="200" 
                                           Margin="10,252,42,0"
                                           VerticalAlignment="Top"
                                           BorderThickness="0"
-                                          ItemsSource="{Binding AudioLanguageItems}"
                                           SelectionChanged="listViewAudioLanguages_SelectionChanged"
                                           Style="{DynamicResource ListViewStyle}">
 
@@ -1324,8 +1199,7 @@
                                             <GridViewColumn>
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <CheckBox Tag="{Binding ItemCore}" 
-                                                                  IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                                                        <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
@@ -1337,7 +1211,7 @@
                                     </ListView.View>
                                 </ListView>
 
-                                <!-- Item Up -->
+                                <!-- Sort Up -->
                                 <Button x:Name="buttonAudioLanguageUp" 
                                         VerticalAlignment="Top" 
                                         Height="22" 
@@ -1349,7 +1223,7 @@
                                         Style="{DynamicResource ButtonControlStyle}">
                                     <TextBlock Text="▴" Margin="0,-2,0,0"/>
                                 </Button>
-                                <!-- Item Down -->
+                                <!-- Sort Down -->
                                 <Button x:Name="buttonAudioLanguageDown" 
                                         HorizontalAlignment="Right" 
                                         VerticalAlignment="Top"
@@ -1426,7 +1300,10 @@
                 <!--/////////////////////////////////////
                     Subtitles Tab
                 /////////////////////////////////////-->
-                <TabItem Header="Subtitles" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Subtitles" 
+                         DataContext="{Binding SubtitlesView}"
+                         Style="{DynamicResource TabItemStyle}">
+
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0">
                             <Grid Margin="0,0,0,130">
@@ -1440,15 +1317,16 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSubtitles" 
+                                          ItemsSource="{Binding Subtitles_Items}"
+                                          SelectedItem="{Binding Subtitles_SelectedItem}"
+                                          IsEnabled="{Binding Subtitles_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,10,14,0"
                                           VerticalAlignment="Top"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
                                           HorizontalAlignment="Right" 
-                                          Width="103" SelectionChanged="cboSubtitles_SelectionChanged">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
+                                          Width="103" 
+                                          SelectionChanged="cboSubtitles_SelectionChanged">
                                 </ComboBox>
 
                                 <!-- Subtitles Load Files -->
@@ -1462,18 +1340,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Load additional subtitle files matching the video filename. The parameter specifies how external subtitle files are matched. exact is enabled by default."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesLoadFiles" 
+                                <ComboBox x:Name="cboLoadFiles" 
+                                          ItemsSource="{Binding LoadFiles_Items}"
+                                          SelectedItem="{Binding LoadFiles_SelectedItem}"
+                                          IsEnabled="{Binding LoadFiles_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,39,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>no</System:String>
-                                    <System:String>exact</System:String>
-                                    <System:String>fuzzy</System:String>
-                                    <System:String>all</System:String>
                                 </ComboBox>
 
                                 <!-- Position -->
@@ -1487,7 +1363,9 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Specify the position of subtitles on the screen. The value is the vertical position of the subtitle in % of the screen height."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <Slider x:Name="slSubtitlePosition" 
+                                <Slider x:Name="slPosition" 
+                                        Value="{Binding Position_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Position_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,69,52,0" 
                                         VerticalAlignment="Top" 
@@ -1495,11 +1373,12 @@
                                         Maximum="100" 
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
-                                        MouseDoubleClick="slSubtitlePosition_MouseDoubleClick"
+                                        MouseDoubleClick="slPosition_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
-                                <TextBox x:Name="tbxSubtitlePosition"
-                                         Text="{Binding Value, ElementName=slSubtitlePosition, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox x:Name="tbxPosition"
+                                         Text="{Binding Value, ElementName=slPosition, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding Position_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,68,14,0" 
@@ -1520,16 +1399,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Adjust subtitle timing is to remove minor gaps or overlaps between subtitles (if the difference is smaller than 210 ms, the gap or overlap is removed)."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesFixTiming"
+                                <ComboBox x:Name="cboFixTiming"
+                                          ItemsSource="{Binding FixTiming_Items}"
+                                          SelectedItem="{Binding FixTiming_SelectedItem}"
+                                          IsEnabled="{Binding FixTiming_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,97,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Subtitles Margins -->
@@ -1543,16 +1422,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Enables placing toptitles and subtitles in black borders when they are available, if the subtitles are in a plain text format (or ASS if  --sub-ass-override is set high enough)."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesMargins"
+                                <ComboBox x:Name="cboMargins"
+                                          ItemsSource="{Binding Margins_Items}"
+                                          SelectedItem="{Binding Margins_SelectedItem}"
+                                          IsEnabled="{Binding Margins_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,126,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Blend -->
@@ -1566,17 +1445,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Blend subtitles directly onto upscaled video frames, before interpolation and/or color management."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesBlend"
+                                <ComboBox x:Name="cboBlend"
+                                          ItemsSource="{Binding Blend_Items}"
+                                          SelectedItem="{Binding Blend_SelectedItem}"
+                                          IsEnabled="{Binding Blend_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,155,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>video</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Fonts -->
@@ -1600,17 +1478,17 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Use fonts embedded in Matroska container files and ASS scripts (default: enabled). These fonts can be used for SSA/ASS subtitle rendering."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesEmbeddedFonts" 
+                                <ComboBox x:Name="cboEmbeddedFonts" 
+                                          ItemsSource="{Binding EmbeddedFonts_Items}"
+                                          SelectedItem="{Binding EmbeddedFonts_SelectedItem}"
+                                          IsEnabled="{Binding EmbeddedFonts_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,411,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboSubtitlesEmbeddedFonts_SelectionChanged">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
+                                          SelectionChanged="cboEmbeddedFonts_SelectionChanged">
                                 </ComboBox>
 
                                 <!-- Font -->
@@ -1621,11 +1499,10 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesFont"
-                                          ItemsSource="{Binding Fonts_Items}"
-                                          SelectedIndex="{Binding Fonts_SelectedIndex}"
-                                          SelectedItem="{Binding Fonts_SelectedItem}"
-                                          IsEnabled="{Binding Fonts_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                <ComboBox x:Name="cboFont"
+                                          ItemsSource="{Binding Font_Items}"
+                                          SelectedItem="{Binding Font_SelectedItem}"
+                                          IsEnabled="{Binding Font_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,440,14,0"
                                           VerticalAlignment="Top"
@@ -1641,29 +1518,16 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesFontSize"
+                                <ComboBox x:Name="cboFontSize"
+                                          ItemsSource="{Binding FontSize_Items}"
+                                          SelectedItem="{Binding FontSize_SelectedItem}"
+                                          IsEnabled="{Binding FontSize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,469,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>96</System:String>
-                                    <System:String>88</System:String>
-                                    <System:String>80</System:String>
-                                    <System:String>72</System:String>
-                                    <System:String>66</System:String>
-                                    <System:String>60</System:String>
-                                    <System:String>54</System:String>
-                                    <System:String>48</System:String>
-                                    <System:String>44</System:String>
-                                    <System:String>40</System:String>
-                                    <System:String>36</System:String>
-                                    <System:String>32</System:String>
-                                    <System:String>28</System:String>
-                                    <System:String>26</System:String>
-                                </ComboBox>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"/>
 
                                 <!-- Font Color -->
                                 <Label Content="Font Color" 
@@ -1693,7 +1557,9 @@
                                     </Ellipse>
                                 </Button>
 
-                                <TextBox x:Name="tbxSubtitlesFontColor"
+                                <TextBox x:Name="tbxFontColor"
+                                         Text="{Binding FontColor_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding FontColor_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          VerticalAlignment="Top" 
                                          Width="67"
@@ -1702,9 +1568,9 @@
                                          Margin="0,498,14,0" 
                                          Padding="1,1,0,0"
                                          MaxLength="6"
-                                         TextChanged="tbxSubtitlesFontColor_TextChanged"
-                                         KeyDown="tbxSubtitlesFontColor_KeyDown"
-                                         KeyUp="tbxSubtitlesFontColor_KeyUp"/>
+                                         TextChanged="tbxFontColor_TextChanged"
+                                         KeyDown="tbxFontColor_KeyDown"
+                                         KeyUp="tbxFontColor_KeyUp"/>
 
                                 <!-- Border Size -->
                                 <Label Content="Border Size"
@@ -1714,23 +1580,16 @@
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesBorderSize"
+                                <ComboBox x:Name="cboBorderSize"
+                                          ItemsSource="{Binding BorderSize_Items}"
+                                          SelectedItem="{Binding BorderSize_SelectedItem}"
+                                          IsEnabled="{Binding BorderSize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,527,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>0</System:String>
-                                    <System:String>1</System:String>
-                                    <System:String>2</System:String>
-                                    <System:String>3</System:String>
-                                    <System:String>4</System:String>
-                                    <System:String>5</System:String>
-                                    <System:String>6</System:String>
-                                    <System:String>7</System:String>
-                                    <System:String>8</System:String>
                                 </ComboBox>
 
                                 <!-- Border Color -->
@@ -1759,7 +1618,8 @@
                                              Stroke="White">
                                     </Ellipse>
                                 </Button>
-                                <TextBox x:Name="tbxSubtitlesBorderColor"
+                                <TextBox x:Name="tbxBorderColor"
+                                         Text="{Binding BorderColor_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          VerticalAlignment="Top" 
                                          Width="67"
@@ -1768,9 +1628,9 @@
                                          Margin="0,556,14,0" 
                                          Padding="1,1,0,0"
                                          MaxLength="6"
-                                         TextChanged="tbxSubtitlesBorderColor_TextChanged"
-                                         KeyDown="tbxSubtitlesBorderColor_KeyDown"
-                                         KeyUp="tbxSubtitlesBorderColor_KeyUp"/>
+                                         TextChanged="tbxBorderColor_TextChanged"
+                                         KeyDown="tbxBorderColor_KeyDown"
+                                         KeyUp="tbxBorderColor_KeyUp"/>
 
                                 <!-- Subtitle Shadow Color -->
                                 <Label Content="Shadow Color" 
@@ -1798,7 +1658,8 @@
                                              Stroke="White">
                                     </Ellipse>
                                 </Button>
-                                <TextBox x:Name="tbxSubtitlesShadowColor"
+                                <TextBox x:Name="tbxShadowColor"
+                                         Text="{Binding ShadowColor_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          VerticalAlignment="Top" 
                                          Width="67"
@@ -1807,9 +1668,9 @@
                                          Margin="0,614,14,0"
                                          Padding="1,1,0,0"
                                          MaxLength="6"
-                                         TextChanged="tbxSubtitlesShadowColor_TextChanged"
-                                         KeyDown="tbxSubtitlesShadowColor_KeyDown"
-                                         KeyUp="tbxSubtitlesShadowColor_KeyUp"/>
+                                         TextChanged="tbxShadowColor_TextChanged"
+                                         KeyDown="tbxShadowColor_KeyDown"
+                                         KeyUp="tbxShadowColor_KeyUp"/>
 
                                 <!-- Subtitle Shadow Offset -->
                                 <Label Content="Shadow Offset" 
@@ -1820,17 +1681,20 @@
                                        Width="78"
                                        Style="{DynamicResource LabelStyle}"/>
 
-                                <Slider x:Name="slSubtitlesShadowOffset" 
+                                <Slider x:Name="slShadowOffset"
+                                        Value="{Binding ShadowOffset_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding ShadowOffset_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,586,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Maximum="5"
-                                        MouseDoubleClick="slSubtitlesShadowOffset_MouseDoubleClick"
+                                        MouseDoubleClick="slShadowOffset_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
-                                <TextBox x:Name="tbxSubtitlesShadowOffset"
-                                        Text="{Binding Value, ElementName=slSubtitlesShadowOffset, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox x:Name="tbxShadowOffset"
+                                        Text="{Binding ShadowOffset_Text, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding ShadowOffset_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,585,14,0" 
@@ -1864,16 +1728,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Render ASS subtitles natively."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesASS" 
+                                <ComboBox x:Name="cboASS" 
+                                          ItemsSource="{Binding ASS_Items}"
+                                          SelectedItem="{Binding ASS_SelectedItem}"
+                                          IsEnabled="{Binding ASS_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,225,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- ASS Override -->
@@ -1887,19 +1751,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Control whether user style overrides should be applied. Note that all of these overrides try to be somewhat smart about figuring out whether or not a subtitle is considered a &quot;sign&quot;."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesASSOverride" 
+                                <ComboBox x:Name="cboASSOverride" 
+                                          ItemsSource="{Binding ASSOverride_Items}"
+                                          SelectedItem="{Binding ASSOverride_SelectedItem}"
+                                          IsEnabled="{Binding ASSOverride_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,254,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>no</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>force</System:String>
-                                    <System:String>scale</System:String>
-                                    <System:String>strip</System:String>
                                 </ComboBox>
 
                                 <!-- ASS Force Margins -->
@@ -1913,16 +1774,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Enables placing toptitles and subtitles in black borders when they are available, if the subtitles are in the ASS format."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesASSForceMargins" 
+                                <ComboBox x:Name="cboASSForceMargins" 
+                                          ItemsSource="{Binding ASSForceMargins_Items}"
+                                          SelectedItem="{Binding ASSForceMargins_SelectedItem}"
+                                          IsEnabled="{Binding ASSForceMargins_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,283,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- ASS Hinting -->
@@ -1936,18 +1797,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Set font hinting type."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesASSHinting" 
+                                <ComboBox x:Name="cboASSHinting" 
+                                          ItemsSource="{Binding ASSHinting_Items}"
+                                          SelectedItem="{Binding ASSHinting_SelectedItem}"
+                                          IsEnabled="{Binding ASSHinting_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,312,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>none</System:String>
-                                    <System:String>light</System:String>
-                                    <System:String>normal</System:String>
-                                    <System:String>native</System:String>
                                 </ComboBox>
 
                                 <!-- ASS Kerning -->
@@ -1961,16 +1820,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Override some style or script info parameters."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboSubtitlesASSKerning" 
+                                <ComboBox x:Name="cboASSKerning" 
+                                          ItemsSource="{Binding ASSKerning_Items}"
+                                          SelectedItem="{Binding ASSKerning_SelectedItem}"
+                                          IsEnabled="{Binding ASSKerning_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,341,14,0"
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Subtitle Languages -->
@@ -1984,11 +1843,13 @@
                                        Style="{DynamicResource LabelTitleStyle}"/>
 
                                 <ListView x:Name="listViewSubtitlesLanguages" 
+                                          ItemsSource="{Binding LanguagePriority_ListView_Items}"
+                                          SelectedIndex="{Binding LanguagePriority_ListView_SelectedIndex}"
+                                          IsEnabled="{Binding LanguagePriority_ListView_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Height="200" 
                                           Margin="10,680,42,-108"
                                           VerticalAlignment="Top"
                                           BorderThickness="0"
-                                          ItemsSource="{Binding SubtitlesLanguageItems}"
                                           SelectionChanged="listViewSubtitleLanguages_SelectionChanged" 
                                           Style="{DynamicResource ListViewStyle}">
 
@@ -2004,8 +1865,7 @@
                                             <GridViewColumn>
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <CheckBox Tag="{Binding ItemCore}" 
-                                                                  IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                                                        <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
@@ -2066,9 +1926,6 @@
                                     <TextBlock Text="-" Margin="0,-2,0,0"/>
                                 </Button>
 
-
-
-
                             </Grid>
                         </ScrollViewer>
                     </Grid>
@@ -2077,7 +1934,10 @@
                 <!--/////////////////////////////////////
                     General Tab
                 /////////////////////////////////////-->
-                <TabItem Header="General" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="General" 
+                         DataContext="{Binding GeneralView}"
+                         Style="{DynamicResource TabItemStyle}">
+
                     <Grid Background="Transparent">
                         <ScrollViewer>
                             <Grid Margin="0,0,0,25">
@@ -2097,19 +1957,16 @@
                                        ToolTip="(Windows only.) Set process priority for mpv according to the predefined priorities available under Windows."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboPriority" 
+                                          ItemsSource="{Binding Priority_Items}"
+                                          SelectedItem="{Binding Priority_SelectedItem}"
+                                          IsEnabled="{Binding Priority_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Margin="0,10,14,0" 
                                           VerticalAlignment="Top"
                                           HorizontalAlignment="Right"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>high</System:String>
-                                    <System:String>abovenormal</System:String>
-                                    <System:String>normal</System:String>
-                                    <System:String>belownormal</System:String>
-                                    <System:String>idle</System:String>
-                                </ComboBox>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
+                                          Grid.Column="1"/>
 
                                 <!-- Save Position on Quit -->
                                 <Label Content="Save Position" 
@@ -2123,16 +1980,16 @@
                                        ToolTip="Always save the current playback position on quit. When this file is played again later, the player will seek to the old playback position on start. This does not happen if playback of a file is stopped in any other way than quitting. For example, going to the next file in the playlist will not save the position, and start playback at beginning the next time the file is played."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboSavePositionQuit" 
+                                          ItemsSource="{Binding SavePositionQuit_Items}"
+                                          SelectedItem="{Binding SavePositionQuit_SelectedItem}"
+                                          IsEnabled="{Binding SavePositionQuit_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,39,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
-                                </ComboBox>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          Grid.Column="1"/>
 
                                 <!-- Keep Open -->
                                 <Label Content="Keep Open"
@@ -2146,16 +2003,16 @@
                                        ToolTip="Do not terminate when playing or seeking beyond the end of the file, and there is not next file to be played (and --loop is not used). Instead, pause the player. When trying to seek beyond end of the file, the player will attempt to seek to the last frame."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboKeepOpen" 
+                                          ItemsSource="{Binding KeepOpen_Items}"
+                                          SelectedItem="{Binding KeepOpen_SelectedItem}"
+                                          IsEnabled="{Binding KeepOpen_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,68,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
-                                </ComboBox>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          Grid.Column="1"/>
 
                                 <!-- On Top -->
                                 <Label Content="On Top" 
@@ -2169,16 +2026,16 @@
                                        ToolTip="Makes the player window stay on top of other windows. On Windows, if combined with fullscreen mode, this causes mpv to be treated as exclusive fullscreen window that bypasses the Desktop Window Manager."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOnTop" 
+                                          ItemsSource="{Binding OnTop_Items}"
+                                          SelectedItem="{Binding OnTop_SelectedItem}"
+                                          IsEnabled="{Binding OnTop_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,97,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
-                                </ComboBox>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          Grid.Column="1"/>
 
                                 <!-- Window Border -->
                                 <Label Content="Window Border" 
@@ -2192,17 +2049,16 @@
                                        ToolTip="Play video with window border and decorations. Since this is on by default, use --no-border to disable the standard window decorations."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboBorder" 
+                                          ItemsSource="{Binding WindowBorder_Items}"
+                                          SelectedItem="{Binding WindowBorder_SelectedItem}"
+                                          IsEnabled="{Binding WindowBorder_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,126,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
-                                </ComboBox>
+                                          Grid.Column="1"/>
 
                                 <!-- Geometry X -->
                                 <Label Content="Geometry X" 
@@ -2216,6 +2072,8 @@
                                        ToolTip="Adjust the initial window position or size. W and H set the window size in pixels. x and y set the window position, measured in pixels from the top-left corner of the screen to the top-left corner of the image being displayed. If a percentage sign (%) is given after the argument, it turns the value into a percentage of the screen size in that direction."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slGeometryX" 
+                                        Value="{Binding GeometryX_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding GeometryX_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,158,52,0" 
                                         VerticalAlignment="Top" 
@@ -2225,11 +2083,13 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slGeometryX_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
+                                        Style="{DynamicResource SliderStyle}" 
+                                        Grid.Column="1"/>
                                 <TextBox x:Name="tbxGeometryX"
-                                        Text="{Binding Value, ElementName=slGeometryX, UpdateSourceTrigger=PropertyChanged}"
-                                        Height="22" 
-                                        TextWrapping="Wrap" 
+                                         Text="{Binding Value, ElementName=slGeometryX, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding GeometryX_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
                                         Margin="0,157,14,0" 
                                         Padding="1,1,0,0"
                                         VerticalAlignment="Top" 
@@ -2249,7 +2109,9 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Adjust the initial window position or size. W and H set the window size in pixels. x and y set the window position, measured in pixels from the top-left corner of the screen to the top-left corner of the image being displayed. If a percentage sign (%) is given after the argument, it turns the value into a percentage of the screen size in that direction."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <Slider x:Name="slGeometryY" 
+                                <Slider x:Name="slGeometryY"
+                                        Value="{Binding GeometryY_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding GeometryY_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,187,52,0" 
                                         VerticalAlignment="Top" 
@@ -2259,7 +2121,8 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slGeometryY_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
+                                        Style="{DynamicResource SliderStyle}" 
+                                        Grid.Column="1"/>
                                 <TextBox x:Name="tbxGeometryY"
                                         Text="{Binding Value, ElementName=slGeometryY, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
@@ -2283,6 +2146,8 @@
                                        ToolTip="Set the initial window size to a maximum size specified by WxH, without changing the window's aspect ratio. The size is measured in pixels, or if a number is followed by a percentage sign (%), in percents of the screen size. This option never changes the aspect ratio of the window. If the aspect ratio mismatches, the window's size is reduced until it fits into the specified size."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slAutofitWidth" 
+                                        Value="{Binding AutofitWidth_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding AutofitWidth_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,216,52,0" 
                                         VerticalAlignment="Top" 
@@ -2292,7 +2157,8 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slAutofitWidth_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
+                                        Style="{DynamicResource SliderStyle}" 
+                                        Grid.Column="1"/>
                                 <TextBox x:Name="tbxAutofitWidth"
                                         Text="{Binding Value, ElementName=slAutofitWidth, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
@@ -2316,6 +2182,8 @@
                                        ToolTip="Set the initial window size to a maximum size specified by WxH, without changing the window's aspect ratio. The size is measured in pixels, or if a number is followed by a percentage sign (%), in percents of the screen size. This option never changes the aspect ratio of the window. If the aspect ratio mismatches, the window's size is reduced until it fits into the specified size."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slAutofitHeight" 
+                                        Value="{Binding AutofitHeight_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding AutofitHeight_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,245,52,0" 
                                         VerticalAlignment="Top" 
@@ -2325,7 +2193,8 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slAutofitHeight_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
+                                        Style="{DynamicResource SliderStyle}" 
+                                        Grid.Column="1"/>
                                 <TextBox x:Name="tbxAutofitHeight"
                                         Text="{Binding Value, ElementName=slAutofitHeight, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
@@ -2349,16 +2218,16 @@
                                        ToolTip="Turns off the screensaver (or screen blanker and similar mechanisms) at startup and turns it on again on exit (default: yes). The screensaver is always re-enabled when the player is paused."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreensaver" 
+                                          ItemsSource="{Binding Screensaver_Items}"
+                                          SelectedItem="{Binding Screensaver_SelectedItem}"
+                                          IsEnabled="{Binding Screensaver_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,273,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>on</System:String>
-                                    <System:String>off</System:String>
-                                </ComboBox>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          Grid.Column="1"/>
 
                                 <!-- Window Title -->
                                 <Label Content="Window Title" 
@@ -2372,16 +2241,16 @@
                                        ToolTip="Set the window title. This is used for the video window, and if possible, also sets the audio stream title."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboWindowTitle" 
+                                          ItemsSource="{Binding WindowTitle_Items}"
+                                          SelectedItem="{Binding WindowTitle_SelectedItem}"
+                                          IsEnabled="{Binding WindowTitle_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,302,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>Filename</System:String>
-                                    <System:String>Media Title</System:String>
-                                </ComboBox>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
+                                          Grid.Column="1"/>
 
                                 <!-- Log Path -->
                                 <Label x:Name="lbLogPath"
@@ -2398,6 +2267,8 @@
                                        PreviewMouseDown="lbLogPath_PreviewMouseDown"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxLogPath"
+                                         Text="{Binding LogPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding LogPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          Margin="0,331,14,0" 
                                          Padding="1,1,0,0"
@@ -2432,6 +2303,8 @@
                                        PreviewMouseDown="lbScreenshotPath_PreviewMouseDown"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxScreenshotPath"
+                                         Text="{Binding ScreenshotPath_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding ScreenshotPath_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          Margin="0,400,14,0" 
                                          Padding="1,1,0,0"
@@ -2454,17 +2327,17 @@
                                        ToolTip="Specify the filename template used to save screenshots. The template specifies the filename without file extension, and can contain format specifiers, which will be substituted when taking a screenshot. By default, the template is mpv-shot%n, which results in filenames like  mpv-shot0012.png for example."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTemplate"
+                                          ItemsSource="{Binding ScreenshotTemplate_Items}"
+                                          SelectedItem="{Binding ScreenshotTemplate_SelectedItem}"
+                                          IsEnabled="{Binding ScreenshotTemplate_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,429,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>Playback Time</System:String>
-                                    <System:String>Date Time</System:String>
-                                    <System:String>Numbered</System:String>
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" 
+                                          Grid.Column="1">
                                 </ComboBox>
 
                                 <!-- Screenshot Tag Colorspace -->
@@ -2479,16 +2352,17 @@
                                        ToolTip="Tag screenshots with the appropriate colorspace. Note that not all formats are supported."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotTagColorspace"
+                                          ItemsSource="{Binding ScreenshotTagColorspace_Items}"
+                                          SelectedItem="{Binding ScreenshotTagColorspace_SelectedItem}"
+                                          IsEnabled="{Binding ScreenshotTagColorspace_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,458,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
+                                          SelectionChanged="cboScreenshotTagColorspace_SelectionChanged"
+                                          Grid.Column="1">
                                 </ComboBox>
 
                                 <!-- Screenshot Format -->
@@ -2503,22 +2377,23 @@
                                        ToolTip="Set the image file type used for saving screenshots."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboScreenshotFormat"
+                                          ItemsSource="{Binding ScreenshotFormat_Items}"
+                                          SelectedItem="{Binding ScreenshotFormat_SelectedItem}"
+                                          IsEnabled="{Binding ScreenshotFormat_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,487,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>png</System:String>
-                                    <System:String>jpg</System:String>
-                                    <System:String>jpeg</System:String>
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" 
+                                          Grid.Column="1">
                                 </ComboBox>
 
                                 <!-- Screenshot Quality -->
                                 <Label x:Name="lbScreenshotQuality"
-                                       Content="Quality" 
+                                       Content="{Binding ScreenshotQuality_Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                       IsEnabled="{Binding ScreenshotQuality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        HorizontalAlignment="Left" 
                                        Margin="10,520,0,0"
                                        Padding="0,0,0,6" 
@@ -2529,6 +2404,8 @@
                                        ToolTip="JPEG: Higher means better quality. PNG: Higher means better compression."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slScreenshotQuality" 
+                                        Value="{Binding ScreenshotQuality_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding ScreenshotQuality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,517,52,0" 
                                         VerticalAlignment="Top" 
@@ -2538,17 +2415,20 @@
                                         IsSnapToTickEnabled="True"
                                         IsMoveToPointEnabled="True"
                                         MouseDoubleClick="slScreenshotQuality_MouseDoubleClick"
-                                        Style="{DynamicResource SliderStyle}" Grid.Column="1"/>
+                                        Style="{DynamicResource SliderStyle}" 
+                                        Grid.Column="1"/>
                                 <TextBox x:Name="tbxScreenshotQuality"
-                                        Text="{Binding Value, ElementName=slScreenshotQuality, UpdateSourceTrigger=PropertyChanged}"
-                                        Height="22" 
-                                        TextWrapping="Wrap" 
-                                        Margin="0,516,14,0" 
-                                        Padding="1,1,0,0"
-                                        VerticalAlignment="Top" 
-                                        HorizontalAlignment="Right" 
-                                        Width="33"
-                                        Style="{DynamicResource TextBoxStyle}" Grid.Column="1"/>
+                                         Text="{Binding Value, ElementName=slScreenshotQuality, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding ScreenshotQuality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="22" 
+                                         TextWrapping="Wrap" 
+                                         Margin="0,516,14,0" 
+                                         Padding="1,1,0,0"
+                                         VerticalAlignment="Top" 
+                                         HorizontalAlignment="Right" 
+                                         Width="33"
+                                         Style="{DynamicResource TextBoxStyle}" 
+                                         Grid.Column="1"/>
 
 
                                 <!-- Extensions -->
@@ -2570,15 +2450,17 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtMKV"
+                                          ItemsSource="{Binding ExtMKV_Items}"
+                                          SelectedItem="{Binding ExtMKV_SelectedItem}"
+                                          IsEnabled="{Binding ExtMKV_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,586,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>loop</System:String>
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" 
+                                          Grid.Column="1">
                                 </ComboBox>
 
                                 <!-- mp4 -->
@@ -2590,15 +2472,17 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtMP4"
+                                          ItemsSource="{Binding ExtMP4_Items}"
+                                          SelectedItem="{Binding ExtMP4_SelectedItem}"
+                                          IsEnabled="{Binding ExtMP4_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,615,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>loop</System:String>
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" 
+                                          Grid.Column="1">
                                 </ComboBox>
 
                                 <!-- webm -->
@@ -2610,15 +2494,17 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtWebM"
+                                          ItemsSource="{Binding ExtWebM_Items}"
+                                          SelectedItem="{Binding ExtWebM_SelectedItem}"
+                                          IsEnabled="{Binding ExtWebM_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,644,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>loop</System:String>
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" 
+                                          Grid.Column="1">
                                 </ComboBox>
 
                                 <!-- gif -->
@@ -2630,15 +2516,17 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtGIF"
+                                          ItemsSource="{Binding ExtGIF_Items}"
+                                          SelectedItem="{Binding ExtGIF_SelectedItem}"
+                                          IsEnabled="{Binding ExtGIF_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,673,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>loop</System:String>
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" 
+                                          Grid.Column="1">
                                 </ComboBox>
 
                                 <!-- jpg -->
@@ -2650,15 +2538,17 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtJPG"
+                                          ItemsSource="{Binding ExtJPG_Items}"
+                                          SelectedItem="{Binding ExtJPG_SelectedItem}"
+                                          IsEnabled="{Binding ExtJPG_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,702,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>pause</System:String>
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" 
+                                          Grid.Column="1">
                                 </ComboBox>
 
                                 <!-- png -->
@@ -2670,15 +2560,17 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboExtPNG"
+                                          ItemsSource="{Binding ExtPNG_Items}"
+                                          SelectedItem="{Binding ExtPNG_SelectedItem}"
+                                          IsEnabled="{Binding ExtPNG_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,731,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" 
-                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" Grid.Column="1">
-                                    <System:String>default</System:String>
-                                    <System:String>pause</System:String>
+                                          SelectionChanged="cboScreenshotFormat_SelectionChanged" 
+                                          Grid.Column="1">
                                 </ComboBox>
 
 
@@ -2690,7 +2582,10 @@
                 <!--/////////////////////////////////////
                     Stream Tab
                 /////////////////////////////////////-->
-                <TabItem Header="Stream" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Stream" 
+                         DataContext="{Binding StreamView}"
+                         Style="{DynamicResource TabItemStyle}">
+
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0">
                             <Grid Margin="0,0,0,30">
@@ -2716,15 +2611,15 @@
                                        Width="78"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDemuxerThread"
+                                          ItemsSource="{Binding DemuxerThread_Items}"
+                                          SelectedItem="{Binding DemuxerThread_SelectedItem}"
+                                          IsEnabled="{Binding DemuxerThread_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,37,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Demuxer Buffersize -->
@@ -2739,6 +2634,8 @@
                                        ToolTip="Size of the stream read buffer allocated for libavformat in bytes (default: 32768). Lowering the size could lower latency. Note that libavformat might reallocate the buffer internally, or not fully use all of it."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxDemuxerBuffersize" 
+                                         Text="{Binding DemuxerBuffersize_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding DemuxerBuffersize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          Margin="0,66,14,0" 
                                          VerticalAlignment="Top"
@@ -2758,6 +2655,8 @@
                                        ToolTip="If --demuxer-thread is enabled, this controls how much the demuxer should buffer ahead in seconds (default: 1). As long as no packet has a timestamp difference higher than the readahead amount relative to the last packet returned to the decoder, the demuxer keeps reading."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxDemuxerReadahead" 
+                                         Text="{Binding DemuxerReadahead_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding DemuxerReadahead_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          Margin="0,95,14,0" 
                                          VerticalAlignment="Top" 
@@ -2777,15 +2676,15 @@
                                        ToolTip="Try harder to show embedded soft subtitles when seeking somewhere. Enabling this option makes the demuxer start reading data a bit before the seek target, so that subtitles appear correctly."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboDemuxerMKVSubPreroll" 
+                                          ItemsSource="{Binding DemuxerMKVSubPreroll_Items}"
+                                          SelectedItem="{Binding DemuxerMKVSubPreroll_SelectedItem}"
+                                          IsEnabled="{Binding DemuxerMKVSubPreroll_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,124,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
 
@@ -2811,159 +2710,18 @@
                                        ToolTipService.InitialShowDelay="100" 
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Set the size of the cache in kilobytes, disable it with no, or automatically enable it if needed with auto (default: auto). With auto, the cache will usually be enabled for network streams, using the size set by --cache-default. With yes, the cache will always be enabled with the size set by  --cache-default (unless the stream cannot be cached, or --cache-default disables caching)."
-                                       Style="{DynamicResource LabelStyle}"/>
+                                       Style="{DynamicResource LabelStyle}" />
+
                                 <ComboBox x:Name="cboCache"
+                                          ItemsSource="{Binding Cache_Items}"
+                                          SelectedItem="{Binding Cache_SelectedItem}"
+                                          IsEnabled="{Binding Cache_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,292,14,0"
                                           VerticalAlignment="Top" Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>auto</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
-
-                                <!-- Cache Default -->
-                                <Label Content="Default" 
-                                       HorizontalAlignment="Left" 
-                                       Margin="10,324,0,0" 
-                                       Padding="0,0,0,6"
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       ToolTipService.InitialShowDelay="100" 
-                                       ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip="Set the size of the cache in kilobytes (default: 75000 KB). Using no will not automatically enable the cache e.g. when playing from a network stream. Note that using --cache will always override this option."
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <TextBox x:Name="tbxCacheDefault" 
-                                         HorizontalAlignment="Right"
-                                         Margin="0,321,14,0"
-                                         VerticalAlignment="Top"
-                                         Width="103" 
-                                         Height="22"
-                                         Style="{DynamicResource TextBoxStyle}"/>
-
-
-                                <!-- Cache Initial -->
-                                <Label Content="Initial" 
-                                       HorizontalAlignment="Left" 
-                                       Margin="10,353,0,0" 
-                                       Padding="0,0,0,6"
-                                       VerticalAlignment="Top"
-                                       Width="75"
-                                       ToolTipService.InitialShowDelay="100" 
-                                       ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip="Playback will start when the cache has been filled up with this many kilobytes of data (default: 0)."
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <TextBox x:Name="tbxCacheInitial" 
-                                         HorizontalAlignment="Right" 
-                                         Margin="0,350,14,0"
-                                         VerticalAlignment="Top" 
-                                         Width="103"
-                                         Height="22"
-                                         Style="{DynamicResource TextBoxStyle}"/>
-
-
-                                <!-- Cache Seek Min -->
-                                <Label Content="Seek Min" 
-                                       HorizontalAlignment="Left" 
-                                       Margin="10,382,0,0" 
-                                       Padding="0,0,0,6"
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       ToolTipService.InitialShowDelay="100" 
-                                       ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip="If a seek is to be made to a position within [kBytes] of the cache size from the current position, mpv will wait for the cache to be filled to this position rather than performing a stream seek (default: 500)."
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <TextBox x:Name="tbxCacheSeekMin" 
-                                         HorizontalAlignment="Right"
-                                         Margin="0,379,14,0" 
-                                         VerticalAlignment="Top" 
-                                         Width="103" 
-                                         Height="22"
-                                         Style="{DynamicResource TextBoxStyle}"/>
-
-
-                                <!-- Cache Backbuffer -->
-                                <Label Content="Backbuffer"
-                                       HorizontalAlignment="Left" 
-                                       Margin="10,411,0,0" 
-                                       Padding="0,0,0,6"
-                                       VerticalAlignment="Top"
-                                       Width="75"
-                                       ToolTipService.InitialShowDelay="100" 
-                                       ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip="Size of the cache back buffer (default: 75000 KB). This will add to the total cache size, and reserved the amount for seeking back. The reserved amount will not be used for readahead, and instead preserves already read data to enable fast seeking back."
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <TextBox x:Name="tbxCacheBackbuffer"
-                                         HorizontalAlignment="Right"
-                                         Margin="0,408,14,0" 
-                                         VerticalAlignment="Top"
-                                         Width="103"
-                                         Height="22"
-                                         Style="{DynamicResource TextBoxStyle}"/>
-
-
-                                <!-- Cache Seconds -->
-                                <Label Content="Seconds" 
-                                       HorizontalAlignment="Left" 
-                                       Margin="10,440,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       ToolTipService.InitialShowDelay="100" 
-                                       ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip="How many seconds of audio/video to prefetch if the cache is active. This overrides the  --demuxer-readahead-secs option if and only if the cache is enabled and the value is larger. (Default: 10.)"
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <TextBox x:Name="tbxCacheSeconds" 
-                                         HorizontalAlignment="Right"
-                                         Margin="0,437,14,0" 
-                                         VerticalAlignment="Top" 
-                                         Width="103"
-                                         Height="22"
-                                         Style="{DynamicResource TextBoxStyle}"/>
-
-
-                                <!-- Cache File -->
-                                <Label Content="File" 
-                                       HorizontalAlignment="Left"
-                                       Margin="10,469,0,0" 
-                                       Padding="0,0,0,6" 
-                                       VerticalAlignment="Top" 
-                                       Width="75"
-                                       ToolTipService.InitialShowDelay="100" 
-                                       ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip="Create a cache file on the filesystem."
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboCacheFile" 
-                                          HorizontalAlignment="Right"
-                                          Margin="0,466,14,0"
-                                          VerticalAlignment="Top"
-                                          Width="103"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>TMP</System:String>
-                                </ComboBox>
-
-                                <!-- Cache File Size -->
-                                <Label Content="File Size" 
-                                       HorizontalAlignment="Left" 
-                                       Margin="10,498,0,0" 
-                                       Padding="0,0,0,6"
-                                       VerticalAlignment="Top"
-                                       Width="75"
-                                       ToolTipService.InitialShowDelay="100" 
-                                       ToolTipService.ShowOnDisabled="True" 
-                                       ToolTip="Maximum size of the file created with --cache-file. For read accesses above this size, the cache is simply not used."
-                                       Style="{DynamicResource LabelStyle}"/>
-                                <TextBox x:Name="tbxCacheFileSize" 
-                                         HorizontalAlignment="Right" 
-                                         Margin="0,495,14,0" 
-                                         VerticalAlignment="Top" 
-                                         Width="103" 
-                                         Height="22"
-                                         Style="{DynamicResource TextBoxStyle}"/>
 
 
                                 <!--/////////////////////////////////////
@@ -2990,14 +2748,14 @@
                                        ToolTip="Enable the youtube-dl hook-script. It will look at the input URL, and will play the video located on the website. This works with many streaming sites, not just the one that the script is named after. This requires a recent version of youtube-dl to be installed on the system. (Enabled by default, except when the client API / libmpv is used.)"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboYouTubeDL"
+                                          ItemsSource="{Binding YouTubeDL_Items}"
+                                          SelectedItem="{Binding YouTubeDL_SelectedItem}"
+                                          IsEnabled="{Binding YouTubeDL_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,193,14,0"
                                           VerticalAlignment="Top" Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- Quality -->
@@ -3011,16 +2769,15 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Video format/quality that is directly passed to youtube-dl. The possible values are specific to the website and the video, for a given url the available formats can be found with the command youtube-dl --list-formats URL. See youtube-dl's documentation for available aliases. (Default: youtube-dl's default, currently bestvideo+bestaudio/best)"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboYouTubeQuality"
+                                <ComboBox x:Name="cboYouTubeDLQuality"
+                                          ItemsSource="{Binding YouTubeDLQuality_Items}"
+                                          SelectedItem="{Binding YouTubeDLQuality_SelectedItem}"
+                                          IsEnabled="{Binding YouTubeDLQuality_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,222,14,0"
                                           VerticalAlignment="Top" Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>best</System:String>
-                                    <System:String>good</System:String>
-                                    <System:String>worst</System:String>
                                 </ComboBox>
 
                             </Grid>
@@ -3031,7 +2788,10 @@
                 <!--/////////////////////////////////////
                     Display Tab
                 /////////////////////////////////////-->
-                <TabItem Header="Display" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Display"
+                         DataContext="{Binding DisplayView}"
+                         Style="{DynamicResource TabItemStyle}">
+
                     <Grid Background="Transparent">
                         <ScrollViewer Margin="0,0,0,0">
                             <Grid Margin="0,0,0,30">
@@ -3057,15 +2817,15 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSC" 
+                                          ItemsSource="{Binding OSC_Items}"
+                                          SelectedItem="{Binding OSC_SelectedItem}"
+                                          IsEnabled="{Binding OSC_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,37,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- OSC Layout -->
@@ -3076,18 +2836,16 @@
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSCLayout" 
+                                <ComboBox x:Name="cboOSC_Layout" 
+                                          ItemsSource="{Binding OSC_Layout_Items}"
+                                          SelectedItem="{Binding OSC_Layout_SelectedItem}"
+                                          IsEnabled="{Binding OSC_Layout_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,66,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>box</System:String>
-                                    <System:String>slimbox</System:String>
-                                    <System:String>bottombar</System:String>
-                                    <System:String>topbar</System:String>
                                 </ComboBox>
 
                                 <!-- OSC Seekbar -->
@@ -3101,17 +2859,16 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip=""
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSCSeekbar" 
+                                <ComboBox x:Name="cboOSC_Seekbar" 
+                                          ItemsSource="{Binding OSC_Seekbar_Items}"
+                                          SelectedItem="{Binding OSC_Seekbar_SelectedItem}"
+                                          IsEnabled="{Binding OSC_Seekbar_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,95,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>bar</System:String>
-                                    <System:String>knob</System:String>
-                                    <System:String>diamond</System:String>
                                 </ComboBox>
 
 
@@ -3137,15 +2894,15 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <ComboBox x:Name="cboOSD" 
+                                          ItemsSource="{Binding OSD_Items}"
+                                          SelectedItem="{Binding OSD_SelectedItem}"
+                                          IsEnabled="{Binding OSD_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,252,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboOSD_SelectionChanged">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
                                 </ComboBox>
 
                                 <!-- OSD Fractions -->
@@ -3159,17 +2916,17 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Show OSD times with fractions of seconds (in millisecond precision). Useful to see the exact timestamp of a video frame."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDFractions"
+                                <ComboBox x:Name="cboOSD_Fractions"
+                                          ItemsSource="{Binding OSD_Fractions_Items}"
+                                          SelectedItem="{Binding OSD_Fractions_SelectedItem}"
+                                          IsEnabled="{Binding OSD_Fractions_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,281,14,0"
                                           VerticalAlignment="Top"
                                           Width="103" 
                                           Height="22"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboOSDFractions_SelectionChanged">
-                                    <System:String>default</System:String>
-                                    <System:String>yes</System:String>
-                                    <System:String>no</System:String>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboOSD_Fractions_SelectionChanged">
                                 </ComboBox>
 
                                 <!-- OSD Duration -->
@@ -3181,6 +2938,8 @@
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <TextBox x:Name="tbxOSDDuration"
+                                         Text="{Binding OSD_Duration_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding OSD_Duration_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right"
                                          Margin="0,310,14,0" 
                                          Padding="1,1,0,0"
@@ -3200,22 +2959,20 @@
                                        ToolTipService.ShowOnDisabled="True" 
                                        ToolTip="Specifies which mode the OSD should start in."
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDLevel"
+                                <ComboBox x:Name="cboOSD_Level"
+                                          ItemsSource="{Binding OSD_Level_Items}"
+                                          SelectedItem="{Binding OSD_Level_SelectedItem}"
+                                          IsEnabled="{Binding OSD_Level_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,339,14,0" 
                                           VerticalAlignment="Top"
                                           Width="103" 
                                           Height="22"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboOSDLevel_SelectionChanged">
-                                    <System:String>default</System:String>
-                                    <System:String>0</System:String>
-                                    <System:String>1</System:String>
-                                    <System:String>2</System:String>
-                                    <System:String>3</System:String>
+                                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="cboOSD_Level_SelectionChanged">
                                 </ComboBox>
 
-                                <!-- OSD Scale -->
+                                <!-- OSC Scale -->
                                 <Label Content="Scale"
                                        HorizontalAlignment="Left" 
                                        Margin="10,127,0,0" 
@@ -3224,17 +2981,20 @@
                                        Width="75"
                                        ToolTipService.InitialShowDelay="100" 
                                        Style="{DynamicResource LabelStyle}"/>
-                                <Slider x:Name="slOSDScale" 
+                                <Slider x:Name="slOSC_Scale" 
+                                        Value="{Binding OSC_Scale_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding OSC_Scale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,125,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
                                         Maximum="10"
-                                        MouseDoubleClick="slOSDScale_MouseDoubleClick"
+                                        MouseDoubleClick="slOSC_Scale_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
-                                <TextBox x:Name="tbxOSDScale"
-                                        Text="{Binding Value, ElementName=slOSDScale, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox x:Name="tbxOSC_Scale"
+                                        Text="{Binding Value, ElementName=slOSC_Scale, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding OSC_Scale_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,124,14,0" 
@@ -3251,18 +3011,21 @@
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <Slider x:Name="slOSDBarWidth" 
+                                <Slider x:Name="slOSC_BarWidth" 
+                                        Value="{Binding OSC_BarWidth_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding OSC_BarWidth_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,154,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
                                         Maximum="100"
-                                        MouseDoubleClick="slOSDBarWidth_MouseDoubleClick"
+                                        MouseDoubleClick="slOSC_BarWidth_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
-                                <TextBox x:Name="tbxOSDBarWidth"
-                                        Text="{Binding Value, ElementName=slOSDBarWidth, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox x:Name="tbxOSC_BarWidth"
+                                        Text="{Binding Value, ElementName=slOSC_BarWidth, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding OSC_BarWidth_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,153,14,0"
@@ -3279,18 +3042,21 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <Slider x:Name="slOSDBarHeight" 
+                                <Slider x:Name="slOSC_BarHeight" 
+                                        Value="{Binding OSC_BarHeight_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding OSC_BarHeight_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,183,52,0" 
                                         VerticalAlignment="Top" 
                                         Width="65"
                                         Minimum="0"
                                         Maximum="50"
-                                        MouseDoubleClick="slOSDBarHeight_MouseDoubleClick"
+                                        MouseDoubleClick="slOSC_BarHeight_MouseDoubleClick"
                                         Style="{DynamicResource SliderStyle}"/>
 
-                                <TextBox x:Name="tbxOSDBarHeight"
-                                        Text="{Binding Value, ElementName=slOSDBarHeight, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox x:Name="tbxOSC_BarHeight"
+                                        Text="{Binding Value, ElementName=slOSC_BarHeight, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding OSC_BarHeight_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,182,14,0" 
@@ -3320,11 +3086,10 @@
                                        VerticalAlignment="Top"
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDFont" 
-                                          ItemsSource="{Binding Fonts_Items}"
-                                          SelectedIndex="{Binding Fonts_SelectedIndex}"
-                                          SelectedItem="{Binding Fonts_SelectedItem}"
-                                          IsEnabled="{Binding Fonts_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                <ComboBox x:Name="cboOSD_Font" 
+                                          ItemsSource="{Binding OSD_Font_Items}"
+                                          SelectedItem="{Binding OSD_Font_SelectedItem}"
+                                          IsEnabled="{Binding OSD_Font_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,411,14,0"
                                           VerticalAlignment="Top" 
@@ -3340,7 +3105,10 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDFontSize"
+                                <ComboBox x:Name="cboOSD_FontSize"
+                                          ItemsSource="{Binding OSD_FontSize_Items}"
+                                          SelectedItem="{Binding OSD_FontSize_SelectedItem}"
+                                          IsEnabled="{Binding OSD_FontSize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right" 
                                           Margin="0,440,14,0" 
                                           VerticalAlignment="Top" 
@@ -3348,21 +3116,6 @@
                                           Height="22"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>96</System:String>
-                                    <System:String>88</System:String>
-                                    <System:String>80</System:String>
-                                    <System:String>72</System:String>
-                                    <System:String>66</System:String>
-                                    <System:String>60</System:String>
-                                    <System:String>54</System:String>
-                                    <System:String>48</System:String>
-                                    <System:String>44</System:String>
-                                    <System:String>40</System:String>
-                                    <System:String>36</System:String>
-                                    <System:String>32</System:String>
-                                    <System:String>28</System:String>
-                                    <System:String>26</System:String>
                                 </ComboBox>
 
                                 <!-- OSD Font Color -->
@@ -3373,12 +3126,12 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <Button x:Name="btnOSDFontColor" 
+                                <Button x:Name="btnOSD_FontColor" 
                                         Height="22" 
                                         Margin="0,469,86,0"
                                         Cursor="Hand"
                                         Style="{DynamicResource ButtonControlStyle}"
-                                        Click="btnOSDFontColor_Click" 
+                                        Click="btnOSD_FontColor_Click" 
                                         FontSize="10"
                                         HorizontalAlignment="Right"
                                         Width="31" VerticalAlignment="Top">
@@ -3390,7 +3143,9 @@
                                              Stroke="White">
                                     </Ellipse>
                                 </Button>
-                                <TextBox x:Name="tbxOSDFontColor"
+                                <TextBox x:Name="tbxOSD_FontColor"
+                                         Text="{Binding OSD_FontColor_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding OSD_FontColor_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          VerticalAlignment="Top" 
                                          Width="67"
@@ -3399,10 +3154,10 @@
                                          Margin="0,469,14,0"
                                          Padding="1,1,0,0"
                                          MaxLength="6"
-                                         TextChanged="tbxOSDFontColor_TextChanged"
-                                         KeyDown="tbxOSDFontColor_KeyDown"
-                                         KeyUp="tbxOSDFontColor_KeyUp"/>
-                                <!--<ComboBox x:Name="cboOSDFontColor" 
+                                         TextChanged="tbxOSD_FontColor_TextChanged"
+                                         KeyDown="tbxOSD_FontColor_KeyDown"
+                                         KeyUp="tbxOSD_FontColor_KeyUp"/>
+                                <!--<ComboBox x:Name="cboOSD_FontColor" 
                                           HorizontalAlignment="Right"
                                           Margin="0,507,14,0" 
                                           VerticalAlignment="Top" 
@@ -3448,23 +3203,16 @@
                                        VerticalAlignment="Top" 
                                        Width="75"
                                        Style="{DynamicResource LabelStyle}"/>
-                                <ComboBox x:Name="cboOSDFontBorderSize" 
+                                <ComboBox x:Name="cboOSD_FontBorderSize" 
+                                          ItemsSource="{Binding OSD_FontBorderSize_Items}"
+                                          SelectedItem="{Binding OSD_FontBorderSize_SelectedItem}"
+                                          IsEnabled="{Binding OSD_FontBorderSize_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           Margin="0,499,14,0" 
                                           VerticalAlignment="Top" 
                                           Width="103"
                                           Style="{DynamicResource ComboBoxStyle}"
                                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                                    <System:String>default</System:String>
-                                    <System:String>0</System:String>
-                                    <System:String>1</System:String>
-                                    <System:String>2</System:String>
-                                    <System:String>3</System:String>
-                                    <System:String>4</System:String>
-                                    <System:String>5</System:String>
-                                    <System:String>6</System:String>
-                                    <System:String>7</System:String>
-                                    <System:String>8</System:String>
                                 </ComboBox>
 
                                 <!-- OSD Border Color -->
@@ -3493,6 +3241,8 @@
                                     </Ellipse>
                                 </Button>
                                 <TextBox x:Name="tbxOSDBorderColor"
+                                         Text="{Binding OSD_BorderColor_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding OSD_BorderColor_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          VerticalAlignment="Top" 
                                          Width="67"
@@ -3567,6 +3317,8 @@
                                     </Ellipse>
                                 </Button>
                                 <TextBox x:Name="tbxOSDShadowColor"
+                                         Text="{Binding OSD_ShadowColor_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding OSD_ShadowColor_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Right" 
                                          VerticalAlignment="Top" 
                                          Width="67"
@@ -3588,6 +3340,8 @@
                                        Width="78"
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slOSDShadowOffset"
+                                        Value="{Binding OSD_ShadowOffset_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding OSD_ShadowOffset_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Margin="0,558,52,0" 
                                         VerticalAlignment="Top"
                                         Maximum="5"
@@ -3597,7 +3351,8 @@
                                         Style="{DynamicResource SliderStyle}"/>
 
                                 <TextBox x:Name="tbxOSDShadowOffset"
-                                        Text="{Binding Value, ElementName=slOSDShadowOffset, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                                         Text="{Binding Value, ElementName=slOSDShadowOffset, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding OSD_ShadowOffset_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="22" 
                                         TextWrapping="Wrap" 
                                         Margin="0,557,14,0" 
@@ -3668,7 +3423,7 @@
             <!-- Settings -->
             <Button x:Name="buttonConfigure" 
                     HorizontalAlignment="Left"
-                    Margin="68,0,0,16" 
+                    Margin="97,0,0,16" 
                     VerticalAlignment="Bottom" 
                     Width="22" Height="22"
                     Cursor="Hand" 
@@ -3688,7 +3443,7 @@
             <!-- Update -->
             <Button x:Name="buttonUpdate" 
                     HorizontalAlignment="Left" 
-                    Margin="97,0,0,16" 
+                    Margin="68,0,0,16" 
                     VerticalAlignment="Bottom"
                     Width="22" Height="22"
                     Cursor="Hand" 
@@ -3754,8 +3509,8 @@
 
             <!-- Presets -->
             <ComboBox x:Name="cboProfile" 
+                      DataContext="{Binding MainView}"
                       ItemsSource="{Binding Profiles_Items}"
-                      SelectedIndex="{Binding Profiles_SelectedIndex}"
                       SelectedItem="{Binding Profiles_SelectedItem}"
                       IsEnabled="{Binding Profiles_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="0,0,181,16"
@@ -3769,12 +3524,6 @@
                       SelectionChanged="cboProfile_SelectionChanged"
                       Style="{DynamicResource ComboBoxStyle}"
                       ItemContainerStyle="{DynamicResource ComboBoxItemStyle}">
-                <!--<System:String>Default</System:String>
-                <System:String>Ultra</System:String>
-                <System:String>High</System:String>
-                <System:String>Medium</System:String>
-                <System:String>Low</System:String>
-                <System:String>Debug</System:String>-->
             </ComboBox>
 
             <!-- Export ini -->

@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -62,13 +62,25 @@ namespace Glow
         }
 
         /// <summary>
+        /// Window Loaded
+        /// </summary>
+        void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
+        /// <summary>
+        /// Window Closing
+        /// </summary>
+        void Window_Closing(object sender, CancelEventArgs e)
+        {
+        }
+        /// <summary>
         /// Close
         /// </summary>
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Close();
-        }
+        //private void Window_Closing(object sender, CancelEventArgs e)
+        //{
+        //    e.Cancel = true;
+        //    this.Close();
+        //}
 
         // -----------------------------------------------
         // Download Handlers
@@ -90,7 +102,7 @@ namespace Glow
                 double bytesIn = double.Parse(e.BytesReceived.ToString());
                 double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
                 double percentage = bytesIn / totalBytes * 100;
-                this.progressBar.Value = int.Parse(Math.Truncate(percentage).ToString());
+                //this.progressBar = int.Parse(Math.Truncate(percentage));
             }));
         }
 
@@ -171,7 +183,7 @@ namespace Glow
                     // Extract
                     "$shell = new-object -com shell.application;",
                     "$zip = $shell.NameSpace('" + tempDir + "Glow.zip');",
-                    "foreach ($item in $zip.items()) {$shell.Namespace('" + Paths.appDir + "').CopyHere($item, 0x14)};",
+                    "foreach ($item in $zip.items()) {$shell.Namespace('" + MainWindow.appRootDir + "').CopyHere($item, 0x14)};",
                     // Delete Temp
                     "Write-Host \"`nDeleting Temp File\";",
                     "del " + "\"" + tempDir + "Glow.zip" + "\";",
@@ -179,7 +191,7 @@ namespace Glow
                     "Write-Host \"`nUpdate Complete. Relaunching Glow.\";",
                     "timeout 3;",
                     // Relaunch Glow
-                    "& '" + Paths.appDir + "Glow.exe'",
+                    "& '" + MainWindow.appRootDir + "Glow.exe'",
                 };
 
                 // Join List with Spaces

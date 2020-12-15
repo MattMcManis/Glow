@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -25,6 +25,9 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows.Input;
+using ViewModel;
+using System.ComponentModel;
+using System.Windows.Shapes;
 
 namespace Glow
 {
@@ -41,14 +44,17 @@ namespace Glow
         // Preview Color converts to Hex Code Textbox
         // Typed Hex Code converts to RGB Preview
 
+        //private MainWindow mainwindow { get; set; }
         private MainWindow mainwindow;
 
-        private string textBoxKey; // Pass Keyword from MainWindow
+        private static string textBoxKey { get; set; } // Pass Keyword from MainWindow
+        //private string textBoxKey; // Pass Keyword from MainWindow
 
         //private ColorPickerWindow colorpickerwindow;
 
         public DispatcherTimer shadePickerTimer = new DispatcherTimer(DispatcherPriority.Render);
 
+        //public Rectangle shadeBase = new Rectangle(); // error
 
         //[DllImport("gdi32")]
         //private static extern int GetPixel(int hdc, int nXPos, int nYPos);
@@ -60,12 +66,18 @@ namespace Glow
         //private static extern int ReleaseDC(int hWnd, int hDC);
 
         // Spectrum Color
+        //System.Drawing.Color spectrumColor { get; set; }
         System.Drawing.Color spectrumColor;
 
         // Spectrum Value
         public static double spectrumValue = 0;
+        //public double spectrumValue { get; set; }
+
+        //Ellipse shadePickerElipse;
 
         // Shade Ellipse Canvas Position X/Y
+        //public double ellipseX { get; set; }
+        //public double ellipseY { get; set; }
         public static double ellipseX = 0;
         public static double ellipseY = 0;
 
@@ -85,11 +97,17 @@ namespace Glow
 
             this.mainwindow = mainwindow;
 
-            this.textBoxKey = textBoxKey; // Pass Keyword from MainWindow
+            ColorPickerWindow.textBoxKey = textBoxKey; // Pass Keyword from MainWindow
 
             shadePickerTimer.Tick += new EventHandler(shadePickerTimer_Tick);
-        }
 
+            //Brush stroke = new System.Windows.Media.SolidColorBrush(
+            //    System.Windows.Media.Color.FromArgb(255, 255, 255, 255));
+            //shadePickerElipse = new Ellipse() { Width = 12, Height = 12, Stroke = stroke };
+            //shadePickerElipse.Margin = new Thickness(121.5, 121.5, 0, 0);
+            //Canvas.SetLeft(shadePickerElipse, 121.5);
+            //Canvas.SetTop(shadePickerElipse, 121.5);
+        }
 
         /// <summary>
         ///    Window Loaded
@@ -121,8 +139,8 @@ namespace Glow
             // Load last position
             else
             {
-                Canvas.SetLeft(shadePickerElipse, ColorPickerWindow.ellipseX);
-                Canvas.SetTop(shadePickerElipse, ColorPickerWindow.ellipseY);
+                Canvas.SetLeft(shadePickerElipse, ellipseX);
+                Canvas.SetTop(shadePickerElipse, ellipseY);
             }
 
             // -------------------------
@@ -136,14 +154,17 @@ namespace Glow
             // Initial Color
             // -------------------------
             // If null, default
-            if (ColorPickerWindow.spectrumValue == 0)
+            if (spectrumValue == 0)
             {
-                GetSpectrumColor();
+                //Dispatcher.Invoke(new Action(delegate
+                //{
+                    GetSpectrumColor();
+                //}));             
             }
             // Load last used color position
             else
             {
-                slHue.Value = ColorPickerWindow.spectrumValue;
+                VM.ColorPickerView.Hue_Value = spectrumValue;
             }
 
 
@@ -153,19 +174,28 @@ namespace Glow
             SetColor(spectrumColor);
         }
 
+        /// <summary>
+        /// Window Closing
+        /// </summary>
+        void Window_Closing(object sender, CancelEventArgs e)
+        {
+        }
+
 
         /// <summary>
         ///    Set Color
         /// </summary>
         public void SetColor(System.Drawing.Color color)
         {
+            //MessageBox.Show(VM.ColorPickerView.Ellipse_Left_Value.ToString());
             // -------------------------
             // Normalize Value
             // -------------------------
             // Shift value 6 pixels to account for half of ellipse
             // White corner must be shifted more towards left
             double modifier = 0;
-            if (Canvas.GetLeft(shadePickerElipse) < 2 && Canvas.GetTop(shadePickerElipse) < 2)
+            //if (Canvas.GetLeft(shadePickerElipse) < 2 && Canvas.GetTop(shadePickerElipse) < 2)
+            if (VM.ColorPickerView.Ellipse_Left_Value < 2 && VM.ColorPickerView.Ellipse_Top_Value < 2)
                 modifier = 3;
             else
             {
@@ -174,9 +204,11 @@ namespace Glow
 
             // 0-255, -6 to account for ellipse width/height
             // Saturation
-            double x = ((Canvas.GetLeft(shadePickerElipse) + modifier) - 0) / (240 - 0);
+            //double x = ((Canvas.GetLeft(shadePickerElipse) + modifier) - 0) / (240 - 0);
+            double x = ((VM.ColorPickerView.Ellipse_Left_Value + modifier) - 0) / (240 - 0);
             // Luminosity
-            double y = 1 - (((Canvas.GetTop(shadePickerElipse) + modifier) - 0) / (240 - 0)); //reverse value
+            //double y = 1 - (((Canvas.GetTop(shadePickerElipse) + modifier) - 0) / (240 - 0)); //reverse value
+            double y = 1 - (((VM.ColorPickerView.Ellipse_Top_Value + modifier) - 0) / (240 - 0)); //reverse value
 
             // -------------------------
             // Filter
@@ -195,7 +227,8 @@ namespace Glow
             // -------------------------
             // Hex Code
             // -------------------------
-            tbxHexColorCode.Text = HexCode(color).ToString();
+            //tbxHexColorCode_Text = HexCode(color).ToString();
+            VM.ColorPickerView.HexColorCode_Text = HexCode(color).ToString();
         }
 
 
@@ -229,7 +262,11 @@ namespace Glow
         /// </summary>
         private void slHue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            GetSpectrumColor();
+            //GetSpectrumColor();
+            //Dispatcher.Invoke(new Action(delegate
+            //{
+                GetSpectrumColor();
+            //}));
         }
 
 
@@ -239,10 +276,10 @@ namespace Glow
         /// </summary>
         public void GetSpectrumColor()
         {
-            spectrumValue = slHue.Value;
+            spectrumValue = VM.ColorPickerView.Hue_Value;
 
             // Change Hue
-            spectrumColor = Hue(spectrumColor, slHue.Value);
+            spectrumColor = Hue(spectrumColor, VM.ColorPickerView.Hue_Value);
 
             // Change Base Color
             SetShadeBaseColor(spectrumColor);
@@ -268,7 +305,24 @@ namespace Glow
             brushBaseColor.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromArgb(255, 255, 255, 255), 0)); // white
             brushBaseColor.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B), 1)); // base color
 
-            shadeBase.Fill = brushBaseColor;
+
+
+            //Dispatcher.Invoke(new Action(delegate
+            //{
+            //    this.shadeBase.Fill = brushBaseColor;
+            //}));
+
+            //Rectangle shadeBase = new Rectangle();
+            //ColorPickerWindow.shadeBase.Fill = brushBaseColor;
+
+            //MessageBox.Show(brushBaseColor.ToString()); //debug
+
+            //this.shadeBase.Fill = brushBaseColor;
+            //this.shadeBase.Fill = "#FFFFFFFF";
+            //VM.ColorPickerView.ShadeBase_Fill = System.Drawing.ColorTranslator.ToHtml(color);
+            //VM.ColorPickerView.ShadeBase_Fill = String.Format("#{0:X2}{1:X2}{2:X2}{3:X2}", color.A, color.R, color.G, color.B);
+            VM.ColorPickerView.ShadeBase_Fill = brushBaseColor;
+
 
             // -------------------------
             // Set Color
@@ -344,8 +398,8 @@ namespace Glow
             }
 
             // Set Ellipse Top/Left Corner to Black
-            if (Canvas.GetTop(shadePickerElipse) < (shadeCanvas.Height / 2.5) - 6
-                && Canvas.GetLeft(shadePickerElipse) < (shadeCanvas.Height / 2.5) - 6)
+            if (Canvas.GetTop(shadePickerElipse) < (shadeCanvas.Height / 2.5) - 6 && 
+                Canvas.GetLeft(shadePickerElipse) < (shadeCanvas.Height / 2.5) - 6)
             {
                 shadePickerElipse.Stroke = new SolidColorBrush(Colors.Black);
             }
@@ -484,16 +538,16 @@ namespace Glow
         // Key Up
         private void tbxHexColorCode_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            MainWindow.AllowOnlyAlphaNumeric(mainwindow, e);
+            MainWindow.AllowOnlyAlphaNumeric(/*mainwindow,*/ e);
 
-            ColorPreview(ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString()));
+            ColorPreview(ConvertHexToRGB("#" + VM.ColorPickerView.HexColorCode_Text));
         }
         // Key Down
         private void tbxHexColorCode_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            MainWindow.AllowOnlyAlphaNumeric(mainwindow, e);
+            MainWindow.AllowOnlyAlphaNumeric(/*mainwindow,*/ e);
 
-            ColorPreview(ConvertHexToRGB("#" + tbxHexColorCode.Text.ToString()));
+            ColorPreview(ConvertHexToRGB("#" + VM.ColorPickerView.HexColorCode_Text));
         }
 
 
@@ -507,7 +561,7 @@ namespace Glow
 
             ColorPreview(ConvertHexToRGB("#" + swatch));
 
-            tbxHexColorCode.Text = swatch;
+            VM.ColorPickerView.HexColorCode_Text = swatch;
         }
 
         /// <summary>
@@ -519,7 +573,7 @@ namespace Glow
 
             ColorPreview(ConvertHexToRGB("#" + swatch));
 
-            tbxHexColorCode.Text = swatch;
+            VM.ColorPickerView.HexColorCode_Text = swatch;
         }
 
         /// <summary>
@@ -554,7 +608,7 @@ namespace Glow
 
             ColorPreview(ConvertHexToRGB("#" + swatch));
 
-            tbxHexColorCode.Text = swatch;
+            VM.ColorPickerView.HexColorCode_Text = swatch;
         }
 
         /// <summary>
@@ -566,7 +620,7 @@ namespace Glow
 
             ColorPreview(ConvertHexToRGB("#" + swatch));
 
-            tbxHexColorCode.Text = swatch;
+            VM.ColorPickerView.HexColorCode_Text = swatch;
         }
 
         /// <summary>
@@ -578,7 +632,7 @@ namespace Glow
 
             ColorPreview(ConvertHexToRGB("#" + swatch));
 
-            tbxHexColorCode.Text = swatch;
+            VM.ColorPickerView.HexColorCode_Text = swatch;
         }
 
         /// <summary>
@@ -590,7 +644,7 @@ namespace Glow
 
             ColorPreview(ConvertHexToRGB("#" + swatch));
 
-            tbxHexColorCode.Text = swatch;
+            VM.ColorPickerView.HexColorCode_Text = swatch;
         }
 
         /// <summary>
@@ -602,7 +656,7 @@ namespace Glow
 
             ColorPreview(ConvertHexToRGB("#" + swatch));
 
-            tbxHexColorCode.Text = swatch;
+            VM.ColorPickerView.HexColorCode_Text = swatch;
         }
 
         /// <summary>
@@ -610,7 +664,7 @@ namespace Glow
         /// </summary>
         private void swatchNone_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            tbxHexColorCode.Text = "";
+            VM.ColorPickerView.HexColorCode_Text = "";
         }
 
 
@@ -620,44 +674,78 @@ namespace Glow
         /// </summary>
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            string HexColorCode = tbxHexColorCode.Text.ToString();
+            string HexColorCode = VM.ColorPickerView.HexColorCode_Text;
 
             // Return Hex Code to TextBox based on Passed Keyword
-            if (textBoxKey == "osdFont")
+            switch (textBoxKey)
             {
-                mainwindow.tbxOSDFontColor.Text = HexColorCode;
-                MainWindow.PreviewOSDFontColor(mainwindow);
+                case "osdFont":
+                    VM.DisplayView.OSD_FontColor_Text = HexColorCode;
+                    MainWindow.PreviewOSD_FontColor(mainwindow);
+                    break;
+
+                case "osdBorder":
+                    VM.DisplayView.OSD_BorderColor_Text = HexColorCode;
+                    MainWindow.PreviewOSDBorderColor(mainwindow);
+                    break;
+
+                case "osdShadow":
+                    VM.DisplayView.OSD_ShadowColor_Text = HexColorCode;
+                    MainWindow.PreviewOSDShadowColor(mainwindow);
+                    break;
+
+                case "subtitlesFont":
+                    VM.SubtitlesView.FontColor_Text = HexColorCode;
+                    MainWindow.PreviewFontColor(mainwindow);
+                    break;
+
+                case "subtitlesBorder":
+                    VM.SubtitlesView.BorderColor_Text = HexColorCode;
+                    MainWindow.PreviewBorderColor(mainwindow);
+                    break;
+
+                case "subtitlesShadow":
+                    VM.SubtitlesView.ShadowColor_Text = HexColorCode;
+                    MainWindow.PreviewShadowColor(mainwindow);
+                    break;
             }
 
-            else if (textBoxKey == "osdBorder")
-            {
-                mainwindow.tbxOSDBorderColor.Text = HexColorCode;
-                MainWindow.PreviewOSDBorderColor(mainwindow);
-            }
+            //// Return Hex Code to TextBox based on Passed Keyword
+            //if (textBoxKey == "osdFont")
+            //{
+            //    VM.DisplayView.OSD_FontColor_Text = HexColorCode;
+            //    MainWindow.PreviewOSD_FontColor(mainwindow);
+            //}
 
-            else if (textBoxKey == "osdShadow")
-            {
-                mainwindow.tbxOSDShadowColor.Text = HexColorCode;
-                MainWindow.PreviewOSDShadowColor(mainwindow);
-            }
+            //else if (textBoxKey == "osdBorder")
+            //{
+            //    VM.DisplayView.OSD_BorderColor_Text = HexColorCode;
+            //    MainWindow.PreviewOSDBorderColor(mainwindow);
+            //}
 
-            else if (textBoxKey == "subtitlesFont")
-            {
-                mainwindow.tbxSubtitlesFontColor.Text = HexColorCode;
-                MainWindow.PreviewSubtitlesFontColor(mainwindow);
-            }
+            //else if (textBoxKey == "osdShadow")
+            //{
+            //    VM.DisplayView.OSD_ShadowColor_Text = HexColorCode;
+            //    MainWindow.PreviewOSDShadowColor(mainwindow);
+            //}
 
-            else if (textBoxKey == "subtitlesBorder")
-            {
-                mainwindow.tbxSubtitlesBorderColor.Text = HexColorCode;
-                MainWindow.PreviewSubtitlesBorderColor(mainwindow);
-            }
+            //else if (textBoxKey == "subtitlesFont")
+            //{
+            //    VM.SubtitlesView.FontColor_Text = HexColorCode;
+            //    MainWindow.PreviewFontColor(mainwindow);
+            //}
 
-            else if (textBoxKey == "subtitlesShadow")
-            {
-                mainwindow.tbxSubtitlesShadowColor.Text = HexColorCode;
-                MainWindow.PreviewSubtitlesShadowColor(mainwindow);
-            }
+            //else if (textBoxKey == "subtitlesBorder")
+            //{
+            //    VM.SubtitlesView.BorderColor_Text = HexColorCode;
+            //    MainWindow.PreviewBorderColor(mainwindow);
+            //}
+
+            //else if (textBoxKey == "subtitlesShadow")
+            //{
+            //    VM.SubtitlesView.ShadowColor_Text = HexColorCode;
+            //    MainWindow.PreviewShadowColor(mainwindow);
+            //}
 
             // Preview Picked Color in MainWindow button
             //MainWindow.PreviewPickedColors(mainwindow);
@@ -671,44 +759,78 @@ namespace Glow
         /// </summary>
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            string HexColorCode = tbxHexColorCode.Text.ToString();
+            string HexColorCode = VM.ColorPickerView.HexColorCode_Text;
 
             // Return Hex Code to TextBox based on Passed Keyword
-            if (textBoxKey == "osdFont")
+            switch (textBoxKey)
             {
-                mainwindow.tbxOSDFontColor.Text = string.Empty;
-                MainWindow.PreviewOSDFontColor(mainwindow);
+                case "osdFont":
+                    VM.DisplayView.OSD_FontColor_Text = string.Empty;
+                    MainWindow.PreviewOSD_FontColor(mainwindow);
+                    break;
+
+                case "osdBorder":
+                    VM.DisplayView.OSD_BorderColor_Text = string.Empty;
+                    MainWindow.PreviewOSDBorderColor(mainwindow);
+                    break;
+
+                case "osdShadow":
+                    VM.DisplayView.OSD_ShadowColor_Text = string.Empty;
+                    MainWindow.PreviewOSDShadowColor(mainwindow);
+                    break;
+
+                case "subtitlesFont":
+                    VM.SubtitlesView.FontColor_Text = string.Empty;
+                    MainWindow.PreviewFontColor(mainwindow);
+                    break;
+
+                case "subtitlesBorder":
+                    VM.SubtitlesView.BorderColor_Text = string.Empty;
+                    MainWindow.PreviewBorderColor(mainwindow);
+                    break;
+
+                case "subtitlesShadow":
+                    VM.SubtitlesView.ShadowColor_Text = string.Empty;
+                    MainWindow.PreviewShadowColor(mainwindow);
+                    break;
             }
 
-            else if (textBoxKey == "osdBorder")
-            {
-                mainwindow.tbxOSDBorderColor.Text = string.Empty;
-                MainWindow.PreviewOSDBorderColor(mainwindow);
-            }
+            //// Return Hex Code to TextBox based on Passed Keyword
+            //if (textBoxKey == "osdFont")
+            //{
+            //    VM.DisplayView.OSD_FontColor_Text = string.Empty;
+            //    MainWindow.PreviewOSD_FontColor(mainwindow);
+            //}
 
-            else if (textBoxKey == "osdShadow")
-            {
-                mainwindow.tbxOSDShadowColor.Text = string.Empty;
-                MainWindow.PreviewOSDShadowColor(mainwindow);
-            }
+            //else if (textBoxKey == "osdBorder")
+            //{
+            //    VM.DisplayView.OSD_BorderColor_Text = string.Empty;
+            //    MainWindow.PreviewOSDBorderColor(mainwindow);
+            //}
 
-            else if (textBoxKey == "subtitlesFont")
-            {
-                mainwindow.tbxSubtitlesFontColor.Text = string.Empty;
-                MainWindow.PreviewSubtitlesFontColor(mainwindow);
-            }
+            //else if (textBoxKey == "osdShadow")
+            //{
+            //    VM.DisplayView.OSD_ShadowColor_Text = string.Empty;
+            //    MainWindow.PreviewOSDShadowColor(mainwindow);
+            //}
 
-            else if (textBoxKey == "subtitlesBorder")
-            {
-                mainwindow.tbxSubtitlesBorderColor.Text = string.Empty;
-                MainWindow.PreviewSubtitlesBorderColor(mainwindow);
-            }
+            //else if (textBoxKey == "subtitlesFont")
+            //{
+            //    VM.SubtitlesView.FontColor_Text = string.Empty;
+            //    MainWindow.PreviewFontColor(mainwindow);
+            //}
 
-            else if (textBoxKey == "subtitlesShadow")
-            {
-                mainwindow.tbxSubtitlesShadowColor.Text = string.Empty;
-                MainWindow.PreviewSubtitlesShadowColor(mainwindow);
-            }
+            //else if (textBoxKey == "subtitlesBorder")
+            //{
+            //    VM.SubtitlesView.BorderColor_Text = string.Empty;
+            //    MainWindow.PreviewBorderColor(mainwindow);
+            //}
+
+            //else if (textBoxKey == "subtitlesShadow")
+            //{
+            //    VM.SubtitlesView.ShadowColor_Text = string.Empty;
+            //    MainWindow.PreviewShadowColor(mainwindow);
+            //}
 
             // Preview Picked Color in MainWindow button
             //MainWindow.PreviewPickedColors(mainwindow);

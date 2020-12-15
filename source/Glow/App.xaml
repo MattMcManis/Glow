@@ -1,6 +1,6 @@
 ﻿<!-- 
     Glow
-    Copyright (C) 2017, 2018 Matt McManis
+    Copyright (C) 2017-2020 Matt McManis
     http://github.com/MattMcManis/Glow
     http://glowmpv.github.io
     mattmcmanis@outlook.com
@@ -21,12 +21,16 @@
 <Application x:Class="Glow.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:Glow"
+             StartupUri="MainWindow.xaml"
+             ShutdownMode="OnMainWindowClose"
+             >
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ThemeGlow.xaml"/>
+                <!-- Default Theme -->
+                <ResourceDictionary Source="Themes/ThemeGlow.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -32,80 +32,63 @@ namespace Glow
         // Convert Selected Language (e.g. English) into (eng,en,enUS,en-US)
         public static String LanguageCode(string input)
         {
-            string language = string.Empty;
+            switch (input)
+            {
+                case "English":
+                    return "eng,en,enUS,en-US,English";
 
+                case "Arabic":
+                    return "ar,ara,Arabic";
 
-            // Enlgish
-            if (input == "English")
-                language = "eng,en,enUS,en-US,English";
+                case "Bengali":
+                    return "bn,ben,Bengali";
 
-            // Arabic
-            else if (input == "Arabic")
-                language = "ar,ara,Arabic";
+                case "Chinese":
+                    return "chi,zh,zho,Chinese";
 
-            // Bengali
-            else if (input == "Bengali")
-                language = "bn,ben,Bengali";
+                case "Dutch":
+                    return "nl,nld,dut,Dutch";
 
-            // Chinese
-            else if (input == "Chinese")
-                language = "chi,zh,zho,Chinese";
+                case "Finnish":
+                    return "fi,fin,Finnish";
 
-            // Dutch
-            else if (input == "Dutch")
-                language = "nl,nld,dut,Dutch";
+                case "French":
+                    return "fr,fra,fre,fra,French";
 
-            // Finnish
-            else if (input == "Finnish")
-                language = "fi,fin,Finnish";
+                case "German":
+                    return "de,ger,deu,German";
 
-            // French
-            else if (input == "French")
-                language = "fr,fra,fre,fra,French";
+                case "Hindi":
+                    return "hi,hin,Hindi";
 
-            // German
-            else if (input == "German")
-                language = "de,ger,deu,German";
+                case "Italian":
+                    return "it,ita,Italian";
 
-            // Hindi
-            else if (input == "Hindi")
-                language = "hi,hin,Hindi";
+                case "Japanese":
+                    return "jpn,jp,jap,Japanese";
 
-            // Italian
-            else if (input == "Italian")
-                language = "it,ita,Italian";
+                case "Korean":
+                    return "kor,ko,Korean";
 
-            // Japanese
-            else if (input == "Japanese")
-                language = "jpn,jp,jap,Japanese";
+                case "Portuguese":
+                    return "pt,por,Portuguese";
 
-            // Korean
-            else if (input == "Korean")
-                language = "kor,ko,Korean";
+                case "Russian":
+                    return "ru,rus,Russian";
 
-            // Portuguese
-            else if (input == "Portuguese")
-                language = "pt,por,Portuguese";
+                case "Spanish":
+                    return "es,spa,Spanish";
 
-            // Russian
-            else if (input == "Russian")
-                language = "ru,rus,Russian";
+                case "Swedish":
+                    return "sv,swe,Swedish";
 
-            // Spanish
-            else if (input == "Spanish")
-                language = "es,spa,Spanish";
+                case "Vietnamese":
+                    return "vi,vie,Vietnamese";
 
-            // Swedish
-            else if (input == "Swedish")
-                language = "sv,swe,Swedish";
+                default:
+                    return "eng,en,enUS,en-US,English";
+            }
 
-            // Vietnamese
-            else if (input == "Vietnamese")
-                language = "vi,vie,Vietnamese";
-
-
-            // Return
-            return language;
         }
     }
 }

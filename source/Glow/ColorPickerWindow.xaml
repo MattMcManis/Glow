@@ -1,6 +1,6 @@
 ﻿<!-- 
     Glow
-    Copyright (C) 2017, 2018 Matt McManis
+    Copyright (C) 2017-2020 Matt McManis
     http://github.com/MattMcManis/Glow
     http://glowmpv.github.io
     mattmcmanis@outlook.com
@@ -23,21 +23,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
         xmlns:my="clr-namespace:Glow"
-        
-        ResizeMode="CanMinimize" 
-        UseLayoutRounding="True"
+        xmlns:local="clr-namespace:ViewModel"
+        xmlns:settings="clr-namespace:Glow.Properties"
+        mc:Ignorable="d"
         Loaded="Window_Loaded"
-        
-        Title="Color Picker" 
-        Height="318" Width="425"
-        
+        Closing="Window_Closing"
+        Icon="Resources/Images/Icons/title-logo.ico"
+        RenderOptions.BitmapScalingMode="Fant"
+        UseLayoutRounding="True"
+        ResizeMode="CanMinimize" 
+        Width="425"
+        Height="318"
+        Title="Color Picker"
         Style="{DynamicResource ColorPickerWindowStyle}" 
-        Icon="Resources/Images/Icons/title-logo.ico">
+        >
 
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
+    
     <Grid>
 
         <Rectangle x:Name="colorPreview" 
@@ -49,6 +57,9 @@
                    Margin="317,12,0,0"/>
 
         <TextBox x:Name="tbxHexColorCode" 
+                 DataContext="{Binding ColorPickerView}"
+                 Text="{Binding HexColorCode_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 IsEnabled="{Binding HexColorCode_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left"
                  Height="23" 
                  TextWrapping="Wrap" 
@@ -85,10 +96,12 @@
 
         <!-- Hue Slider -->
         <Slider x:Name="slHue" 
+                DataContext="{Binding ColorPickerView}"
+                Value="{Binding Hue_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding Hue_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Top" 
                 Minimum="0"
                 Maximum="240"
-                Value="0" 
                 IsMoveToPointEnabled="True"
                 ValueChanged="slHue_ValueChanged" 
                 RenderTransformOrigin="0.5,0.5"
@@ -123,7 +136,9 @@
                        Width="255"
                        Height="255"
                        VerticalAlignment="Top"
-                       Fill="#FFFFFFFF"/>
+                       DataContext="{Binding ColorPickerView}"
+                       Fill="{Binding ShadeBase_Fill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                       />
 
             <!-- Black Fade -->
             <Rectangle x:Name="shadeDarkness"
@@ -139,12 +154,20 @@
 
             <!-- Ellipse -->
             <Ellipse x:Name="shadePickerElipse" 
+                      DataContext="{Binding ColorPickerView}"
+                     Width="12"
+                     Height="12" 
+                     Canvas.Left="{Binding Ellipse_Left_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     Canvas.Top="{Binding Ellipse_Top_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Stroke="#FFCCCCCC"
+                     IsHitTestVisible="False"/>
+            <!--<Ellipse x:Name="shadePickerElipse" 
                      Width="12"
                      Height="12" 
                      Canvas.Left="121.5" 
                      Canvas.Top="121.5"
                      Stroke="#FFCCCCCC"
-                     IsHitTestVisible="False"/>
+                     IsHitTestVisible="False"/>-->
 
         </Canvas>
 

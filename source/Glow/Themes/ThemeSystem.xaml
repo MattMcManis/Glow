@@ -49,8 +49,8 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    
-    
+
+
     <!--/////////////////////////////////////
         ToolTip
         /////////////////////////////////////-->
@@ -70,7 +70,7 @@
     </Style>
 
 
-    
+
     <!--/////////////////////////////////////
         Button Images Black
         /////////////////////////////////////-->
@@ -78,7 +78,7 @@
     <!-- Info Button -->
     <Style x:Key="ButtonInfo" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/Black/info.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/info.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Style.Triggers>
@@ -91,7 +91,7 @@
     <!-- Website Button -->
     <Style x:Key="ButtonWebsite" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/Black/web.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/web.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Style.Triggers>
@@ -104,7 +104,7 @@
     <!-- Settings Button -->
     <Style x:Key="ButtonSettings" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/Black/settings.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/settings.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Style.Triggers>
@@ -117,7 +117,7 @@
     <!-- Update Button -->
     <Style x:Key="ButtonUpdate" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/Black/update.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/update.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Style.Triggers>
@@ -130,7 +130,7 @@
     <!-- Config Folder Button -->
     <Style x:Key="ButtonConfigFolder" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/Black/folder.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/folder.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Style.Triggers>
@@ -143,7 +143,7 @@
     <!-- Import Button -->
     <Style x:Key="ButtonImport" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/Black/import.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/import.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Style.Triggers>
@@ -156,7 +156,7 @@
     <!-- Export Button -->
     <Style x:Key="ButtonExport" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/Black/export.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/export.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Style.Triggers>
@@ -169,7 +169,7 @@
     <!-- Revert Arrow Button -->
     <Style x:Key="ButtonRevertArrow" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/Buttons/Black/revertarrow.png"/>
+        <Setter Property="Source" Value="../Resources/Images/Buttons/Black/revertarrow.png"/>
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Style.Triggers>

@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -18,18 +18,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>. 
 ---------------------------------------------------------------------- */
+using Glow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViewModel;
 
-namespace Glow
+namespace Generate
 {
-    public partial class Video
+    public class Video
     {
         /// <summary>
         ///    Video Config
         /// </summary>
-        public static String VideoConfig(MainWindow mainwindow, ViewModel vm)
+        public static String Config(/*MainWindow mainwindow*/)
         {
             // --------------------------------------------------
             // Main
@@ -50,12 +52,12 @@ namespace Glow
             string driver = string.Empty;
 
             // only if enabled
-            if (vm.VideoDriver_SelectedItem != "default" && 
-                vm.VideoDriver_SelectedItem != "gpu-hq")
-                driver = "vo=" + vm.VideoDriver_SelectedItem;
+            if (VM.VideoView.VideoDriver_SelectedItem != "default" && 
+                VM.VideoView.VideoDriver_SelectedItem != "gpu-hq")
+                driver = "vo=" + VM.VideoView.VideoDriver_SelectedItem;
 
             // opengl-hq special rule
-            if (vm.VideoDriver_SelectedItem == "gpu-hq")
+            if (VM.VideoView.VideoDriver_SelectedItem == "gpu-hq")
                 driver = "profile=gpu-hq";
 
             // -------------------------
@@ -64,8 +66,8 @@ namespace Glow
             string driverAPI = string.Empty;
 
             // only if enabled
-            if (vm.VideoDriverAPI_SelectedItem != "default")
-                driverAPI = "gpu-api=" + vm.VideoDriverAPI_SelectedItem;
+            if (VM.VideoView.VideoDriverAPI_SelectedItem != "default")
+                driverAPI = "gpu-api=" + VM.VideoView.VideoDriverAPI_SelectedItem;
 
             // -------------------------
             // OpenGL PBO
@@ -73,7 +75,7 @@ namespace Glow
             string openglPBO = string.Empty;
 
             // only if on
-            if ((string)(mainwindow.cboOpenGLPBO.SelectedItem ?? string.Empty) == "yes")
+            if (VM.VideoView.OpenGLPBO_SelectedItem == "yes")
                 openglPBO = "opengl-pbo";
 
             // -------------------------
@@ -83,10 +85,11 @@ namespace Glow
 
             // only if on
             // only if OpenGL PBO yes
-            if ((string)(mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty) != "default"
-                && (string)(mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty) != "off"
-                && (string)(mainwindow.cboOpenGLPBO.SelectedItem ?? string.Empty) == "yes")
-                openglPBOFormat = "opengl-fbo-format=" + (mainwindow.cboOpenGLPBOFormat.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.OpenGLPBOFormat_SelectedItem != "default" &&
+                VM.VideoView.OpenGLPBOFormat_SelectedItem != "off" &&
+                VM.VideoView.OpenGLPBO_SelectedItem == "yes")
+
+                openglPBOFormat = /*"opengl-fbo-format="*/ "fbo-format=" + VM.VideoView.OpenGLPBOFormat_SelectedItem;
 
             // -------------------------
             // Hardware Decoder
@@ -94,8 +97,8 @@ namespace Glow
             string hwdec = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboHWDecoder.SelectedItem ?? string.Empty) != "default")
-                hwdec = "hwdec=" + (mainwindow.cboHWDecoder.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.HWDecoder_SelectedItem != "default")
+                hwdec = "hwdec=" + VM.VideoView.HWDecoder_SelectedItem;
 
 
             // --------------------------------------------------
@@ -108,15 +111,15 @@ namespace Glow
             string iccProfile = string.Empty;
 
             // auto
-            if ((string)(mainwindow.cboICCProfile.SelectedItem ?? string.Empty) == "auto")
+            if (VM.VideoView.ICCProfile_SelectedItem == "auto")
                 iccProfile = "icc-profile-auto";
             // Select
-            else if (mainwindow.cboICCProfile.IsEditable)
-                iccProfile = "icc-profile=" + "\"" + (mainwindow.cboICCProfile.SelectedItem ?? string.Empty).ToString() + "\"";
+            else if (VM.VideoView.ICCProfile_IsEditable)
+                iccProfile = "icc-profile=" + "\"" + VM.VideoView.ICCProfile_SelectedItem + "\"";
             //string iccProfilePath = string.Empty;
             //// only if not empty
-            //if (!string.IsNullOrWhiteSpace(mainwindow.tbxICCProfilePath.Text))
-            //    iccProfilePath = "icc-profile=" + "\"" + mainwindow.tbxICCProfilePath.Text.ToString() + "\"";
+            //if (!string.IsNullOrWhiteSpace(VM.VideoView.ICCProfilePath_Text))
+            //    iccProfilePath = "icc-profile=" + "\"" + VM.VideoView.ICCProfilePath_Text + "\"";
 
             // -------------------------
             // Primaries
@@ -124,8 +127,8 @@ namespace Glow
             string displayPrimaries = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty) != "default")
-                displayPrimaries = "target-prim=" + (mainwindow.cboDisplayPrimaries.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.DisplayPrimaries_SelectedItem != "default")
+                displayPrimaries = "target-prim=" + VM.VideoView.DisplayPrimaries_SelectedItem;
 
             // -------------------------
             // Transfer Characteristics
@@ -133,8 +136,8 @@ namespace Glow
             string displayTransChar = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboTransferCharacteristics.SelectedItem ?? string.Empty) != "default")
-                displayTransChar = "target-trc=" + (mainwindow.cboTransferCharacteristics.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.TransferCharacteristics_SelectedItem != "default")
+                displayTransChar = "target-trc=" + VM.VideoView.TransferCharacteristics_SelectedItem;
 
             // -------------------------
             // Color Space
@@ -142,8 +145,8 @@ namespace Glow
             string colorSpace = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboColorSpace.SelectedItem ?? string.Empty) != "default")
-                colorSpace = "format=default:colormatrix=" + (mainwindow.cboColorSpace.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.ColorSpace_SelectedItem != "default")
+                colorSpace = "format=default:colormatrix=" + VM.VideoView.ColorSpace_SelectedItem;
 
             // -------------------------
             // Color Range
@@ -151,8 +154,8 @@ namespace Glow
             string colorRange = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboColorRange.SelectedItem ?? string.Empty) != "default")
-                colorRange = "video-output-levels=" + (mainwindow.cboColorRange.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.ColorRange_SelectedItem != "default")
+                colorRange = "video-output-levels=" + VM.VideoView.ColorRange_SelectedItem;
 
             // -------------------------
             // Deinterlace
@@ -160,8 +163,8 @@ namespace Glow
             string deinterlace = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboDeinterlace.SelectedItem ?? string.Empty) != "default")
-                deinterlace = "deinterlace=" + (mainwindow.cboDeinterlace.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.Deinterlace_SelectedItem != "default")
+                deinterlace = "deinterlace=" + VM.VideoView.Deinterlace_SelectedItem;
 
             // -------------------------
             // Interpolation
@@ -169,7 +172,7 @@ namespace Glow
             string interpolation = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboInterpolation.SelectedItem ?? string.Empty) == "yes")
+            if (VM.VideoView.Interpolation_SelectedItem == "yes")
                 interpolation = "interpolation";
 
             // -------------------------
@@ -178,9 +181,9 @@ namespace Glow
             string videosync = string.Empty;
 
             // only if video sync is on
-            if ((string)(mainwindow.cboVideoSync.SelectedItem ?? string.Empty) != "default" 
-                    && (string)(mainwindow.cboVideoSync.SelectedItem ?? string.Empty) != "off")
-                videosync = "video-sync=" + (mainwindow.cboVideoSync.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.VideoSync_SelectedItem != "default" &&
+                VM.VideoView.VideoSync_SelectedItem != "off")
+                videosync = "video-sync=" + VM.VideoView.VideoSync_SelectedItem;
 
             // -------------------------
             // Framedrop
@@ -188,8 +191,8 @@ namespace Glow
             string framedrop = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboFramedrop.SelectedItem ?? string.Empty) != "default")
-                framedrop = "framedrop=" + (mainwindow.cboFramedrop.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.Framedrop_SelectedItem != "default")
+                framedrop = "framedrop=" + VM.VideoView.Framedrop_SelectedItem;
 
 
             // --------------------------------------------------
@@ -202,8 +205,8 @@ namespace Glow
             string brightness = string.Empty;
 
             // only if not 0
-            if (mainwindow.tbxBrightness.Text != "0")
-                brightness = "brightness=" + mainwindow.tbxBrightness.Text.ToString();
+            if (VM.VideoView.Brightness_Value != 0)
+                brightness = "brightness=" + VM.VideoView.Brightness_Value;
 
             // -------------------------
             // Contrast
@@ -211,8 +214,8 @@ namespace Glow
             string contrast = string.Empty;
 
             // only if not 0
-            if (mainwindow.tbxContrast.Text != "0")
-                contrast = "contrast=" + mainwindow.tbxContrast.Text.ToString();
+            if (VM.VideoView.Contrast_Value != 0)
+                contrast = "contrast=" + VM.VideoView.Contrast_Value;
 
             // -------------------------
             // Hue
@@ -220,8 +223,8 @@ namespace Glow
             string hue = string.Empty;
 
             // only if not 0
-            if (mainwindow.tbxHue.Text != "0")
-                hue = "hue=" + mainwindow.tbxHue.Text.ToString();
+            if (VM.VideoView.Hue_Value != 0)
+                hue = "hue=" + VM.VideoView.Hue_Value;
 
             // -------------------------
             // Saturation
@@ -229,8 +232,8 @@ namespace Glow
             string saturation = string.Empty;
 
             // only if not 0
-            if (mainwindow.tbxSaturation.Text != "0")
-                saturation = "saturation=" + mainwindow.tbxSaturation.Text.ToString();
+            if (VM.VideoView.Saturation_Value != 0)
+                saturation = "saturation=" + VM.VideoView.Saturation_Value;
 
             // -------------------------
             // Gamma
@@ -238,11 +241,11 @@ namespace Glow
             string gamma = string.Empty;
 
             // only if not 0
-            if (mainwindow.tbxGamma.Text != "0")
-                gamma = "gamma=" + mainwindow.tbxGamma.Text.ToString();
+            if (VM.VideoView.Gamma_Value != 0)
+                gamma = "gamma=" + VM.VideoView.Gamma_Value;
 
             // auto
-            //if ((string)(mainwindow.cboGammaAuto.SelectedItem ?? string.Empty) == "yes")
+            //if (VM.VideoView.GammaAuto_SelectedItem == "yes")
             //    gamma = "gamma-auto";
 
             // -------------------------
@@ -250,7 +253,7 @@ namespace Glow
             // -------------------------
             string deband = string.Empty;
 
-            if ((string)(mainwindow.cboDeband.SelectedItem ?? string.Empty) == "yes")
+            if (VM.VideoView.Deband_SelectedItem == "yes")
                 deband = "deband";
 
             // -------------------------
@@ -260,9 +263,9 @@ namespace Glow
 
             // only use if deband is on
             // and deband grain is not empty
-            if ((string)(mainwindow.cboDeband.SelectedItem ?? string.Empty) == "yes" 
-                && !string.IsNullOrWhiteSpace(mainwindow.tbxDebandGrain.Text))
-                debandgrain = "deband-grain=" + mainwindow.tbxDebandGrain.Text.ToString();
+            if (VM.VideoView.Deband_SelectedItem == "yes" 
+                && !string.IsNullOrWhiteSpace(VM.VideoView.DebandGrain_Text))
+                debandgrain = "deband-grain=" + VM.VideoView.DebandGrain_Text;
 
             // -------------------------
             // Dither
@@ -270,8 +273,8 @@ namespace Glow
             string dither = string.Empty;
 
             // only if enabled
-            if ((string)(mainwindow.cboDither.SelectedItem ?? string.Empty) != "default")
-                dither = "dither-depth=" + (mainwindow.cboDither.SelectedItem ?? string.Empty).ToString();
+            if (VM.VideoView.Dither_SelectedItem != "default")
+                dither = "dither-depth=" + VM.VideoView.Dither_SelectedItem;
 
 
             // --------------------------------------------------
@@ -284,10 +287,10 @@ namespace Glow
             string scalerResizeOnly = string.Empty;
 
             // only if scalers are not default
-            if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "default"
-                && (string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "default"
-                && (string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "default"
-                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) != "default")
+            if (VM.VideoView.Scale_SelectedItem != "default" &&
+                VM.VideoView.ChromaScale_SelectedItem != "default" &&
+                VM.VideoView.Downscale_SelectedItem != "default" &&
+                VM.VideoView.SoftwareScaler_SelectedItem != "default")
 
                 // else always on
                 scalerResizeOnly = "scaler-resizes-only";
@@ -297,7 +300,7 @@ namespace Glow
             // -------------------------
             string sigmoidUpscaling = string.Empty;
 
-            if ((string)(mainwindow.cboSigmoid.SelectedItem ?? string.Empty) == "yes")
+            if (VM.VideoView.Sigmoid_SelectedItem == "yes")
                 sigmoidUpscaling = "sigmoid-upscaling";
 
             // -------------------------
@@ -307,13 +310,13 @@ namespace Glow
 
             // software scaler must be default or off
             // scale must be on
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
-                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "default"
-                    && (string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off" ) 
+                if (VM.VideoView.Scale_SelectedItem != "default"
+                    && VM.VideoView.Scale_SelectedItem != "off" ) 
 
-                    scale = "scale=" + (mainwindow.cboScale.SelectedItem ?? string.Empty).ToString();
+                    scale = "scale=" + VM.VideoView.Scale_SelectedItem;
 
             // -------------------------
             // Scale Antiring
@@ -323,14 +326,14 @@ namespace Glow
             // software scaler must be default or off
             // scale must be on
             // antitring must be above 0
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
-                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if ((string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "default"
-                    && (string)(mainwindow.cboScale.SelectedItem ?? string.Empty) != "off"
-                    && mainwindow.slScaleAntiring.Value != 0)
+                if (VM.VideoView.Scale_SelectedItem != "default" &&
+                    VM.VideoView.Scale_SelectedItem != "off" &&
+                    VM.VideoView.ScaleAntiring_Value != 0)
 
-                    scaleAntiring = "scale-antiring=" + mainwindow.tbxScaleAntiring.Text.ToString();
+                    scaleAntiring = "scale-antiring=" + VM.VideoView.ScaleAntiring_Value;
 
             // -------------------------
             // Chroma Scale
@@ -340,13 +343,13 @@ namespace Glow
             // software scaler must be default or off
             // must not be default
             // chrome scale must be on
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
-                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "default"
-                    && (string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off")
+                if (VM.VideoView.ChromaScale_SelectedItem != "default" &&
+                    VM.VideoView.ChromaScale_SelectedItem != "off")
 
-                    chromascale = "cscale=" + (mainwindow.cboChromaScale.SelectedItem ?? string.Empty).ToString();
+                    chromascale = "cscale=" + VM.VideoView.ChromaScale_SelectedItem;
 
             // -------------------------
             // Chroma Antiring
@@ -356,14 +359,14 @@ namespace Glow
             // antitring must be above 0
             string chromascaleAntiring = string.Empty;
 
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
-                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if ((string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "default"
-                    && (string)(mainwindow.cboChromaScale.SelectedItem ?? string.Empty) != "off"
-                    && mainwindow.slChromaAntiring.Value != 0)
+                if (VM.VideoView.ChromaScale_SelectedItem != "default" &&
+                    VM.VideoView.ChromaScale_SelectedItem != "off" &&
+                    VM.VideoView.ChromaAntiring_Value != 0)
 
-                    chromascaleAntiring = "cscale-antiring=" + mainwindow.tbxChromaAntiring.Text.ToString();
+                    chromascaleAntiring = "cscale-antiring=" + VM.VideoView.ChromaAntiring_Value;
 
             // -------------------------
             // Downscale
@@ -373,13 +376,13 @@ namespace Glow
             // software scaler must be default or off
             // must not be default
             // downscale must be on
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
-                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "default"
-                    && (string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off")
+                if (VM.VideoView.Downscale_SelectedItem != "default" &&
+                    VM.VideoView.Downscale_SelectedItem != "off")
 
-                    downscale = "dscale=" + (mainwindow.cboDownscale.SelectedItem ?? string.Empty).ToString();
+                    downscale = "dscale=" + VM.VideoView.Downscale_SelectedItem;
 
             // -------------------------
             // Downscale Antiring
@@ -389,14 +392,14 @@ namespace Glow
             // software scaler must be default or off
             // downscale must be on
             // antitring must be above 0
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
-                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if ((string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "default"
-                    && (string)(mainwindow.cboDownscale.SelectedItem ?? string.Empty) != "off"
-                    && mainwindow.slDownscaleAntiring.Value != 0)
+                if (VM.VideoView.Downscale_SelectedItem != "default" &&
+                    VM.VideoView.Downscale_SelectedItem != "off" &&
+                    VM.VideoView.DownscaleAntiring_Value != 0)
 
-                    downscaleAntiring = "dscale-antiring=" + mainwindow.tbxDownscaleAntiring.Text.ToString();
+                    downscaleAntiring = "dscale-antiring=" + VM.VideoView.DownscaleAntiring_Value;
 
             // -------------------------
             // Inerpolation Scale
@@ -406,13 +409,13 @@ namespace Glow
             // software scaler must be default or off
             // must not be default
             // inerpolation acale must be on
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
-                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if ((string)(mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty) != "default"
-                    && (string)(mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty) != "off")
+                if (VM.VideoView.InterpolationScale_SelectedItem != "default" &&
+                    VM.VideoView.InterpolationScale_SelectedItem != "off")
 
-                    tscale = "tscale=" + (mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty).ToString();
+                    tscale = "tscale=" + VM.VideoView.InterpolationScale_SelectedItem;
 
             // -------------------------
             // Inerpolation Antiring
@@ -422,14 +425,14 @@ namespace Glow
             // software scaler must be default or off
             // downscale must be on
             // antitring must be above 0
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "default"
-                || (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) == "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if ((string)(mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty) != "default"
-                    && (string)(mainwindow.cboInterpolationScale.SelectedItem ?? string.Empty) != "off"
-                    && mainwindow.slInterpolationAntiring.Value != 0)
+                if (VM.VideoView.InterpolationScale_SelectedItem != "default" &&
+                    VM.VideoView.InterpolationScale_SelectedItem != "off" &&
+                    VM.VideoView.InterpolationScaleAntiring_Value != 0)
 
-                    tscaleAntiring = "tscale-antiring=" + mainwindow.tbxInterpolationAntiring.Text.ToString();
+                    tscaleAntiring = "tscale-antiring=" + VM.VideoView.InterpolationScaleAntiring_Value;
 
             // -------------------------
             // Software Scaler
@@ -437,10 +440,10 @@ namespace Glow
             string softwarescaler = string.Empty;
 
             // must not be default of off
-            if ((string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) != "default"
-                && (string)(mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty) != "off")
+            if (VM.VideoView.SoftwareScaler_SelectedItem != "default" &&
+                VM.VideoView.SoftwareScaler_SelectedItem != "off")
 
-                softwarescaler = "sws-scaler=" + (mainwindow.cboSoftwareScaler.SelectedItem ?? string.Empty).ToString();
+                softwarescaler = "sws-scaler=" + VM.VideoView.SoftwareScaler_SelectedItem;
 
 
             // --------------------------------------------------
@@ -496,14 +499,9 @@ namespace Glow
             // -------------------------
             // Join
             // -------------------------
-            string video = string.Join("\r\n", listVideo
-                .Where(s => !string.IsNullOrEmpty(s))
-                );
-
-            // -------------------------
-            // Return
-            // -------------------------
-            return video;
+            return string.Join("\r\n", listVideo
+                                       .Where(s => !string.IsNullOrEmpty(s))
+                              );
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿/* ----------------------------------------------------------------------
 Glow
-Copyright (C) 2017, 2018 Matt McManis
+Copyright (C) 2017-2020 Matt McManis
 http://github.com/MattMcManis/Glow
 http://glowmpv.github.io
 mattmcmanis@outlook.com
@@ -29,37 +29,35 @@ namespace Glow
         /// <summary>
         ///    Hex Color Converter
         /// </summary>
-        public static String HexColor(ComboBoxItem selectedItem)
-        {
-            // ComboBox Selected Item
-            string selected = (string)(selectedItem.Content);
+        //public static String HexColor(ComboBoxItem selectedItem)
+        //{
+        //    // ComboBox Selected Item
+        //    //string selected = (string)(selectedItem.Content);
 
-            // Hex Color
-            string color = string.Empty;
+        //    switch ()
+        //    {
+        //        case "White":
+        //            return "FFFFFF";
 
-            // Convert ComboBox Selected Color to Hex
-            if (selected == "White")
-                color = "FFFFFF";
+        //        case "Gray":
+        //            return "A9A9A9";
 
-            else if (selected == "Gray")
-                color = "A9A9A9";
+        //        case "Dark Gray":
+        //            return "262626";
 
-            else if (selected == "Dark Gray")
-                color = "262626";
+        //        case "Black":
+        //            return "000000";
 
-            else if (selected == "Black")
-                color = "000000";
+        //        case "Yellow":
+        //            return "FDFD02";
 
-            else if (selected == "Yellow")
-                color = "FDFD02";
+        //        case "Blue":
+        //            return "9AAFE4";
 
-            else if (selected == "Blue")
-                color = "9AAFE4";
+        //        case "Pink":
+        //            return "FFB0B0";
+        //    }
+        //}
 
-            else if (selected == "Pink")
-                color = "FFB0B0";
-
-            return color;
-        }
     }
 }

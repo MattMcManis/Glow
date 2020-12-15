@@ -1,6 +1,6 @@
 ﻿<!-- 
     Glow
-    Copyright (C) 2017, 2018 Matt McManis
+    Copyright (C) 2017-2020 Matt McManis
     http://github.com/MattMcManis/Glow
     http://glowmpv.github.io
     mattmcmanis@outlook.com
@@ -23,15 +23,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-        xmlns:local="clr-namespace:Glow"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+        xmlns:my="clr-namespace:Glow"
+        xmlns:local="clr-namespace:ViewModel"
+        xmlns:settings="clr-namespace:Glow.Properties"
         mc:Ignorable="d"
-        ResizeMode="CanMinimize"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Icon="Resources/Images/Icons/title-logo.ico"
+        RenderOptions.BitmapScalingMode="Fant"
         UseLayoutRounding="True"
-        Height="200" Width="400"
+        ResizeMode="CanMinimize" 
+        Width="400"
+        Height="200"
+        Title="Color Picker"
         Style="{DynamicResource UpdateWindowStyle}" 
-        Title="Update" Icon="Resources/Images/Icons/title-logo.ico">
+        >
+
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
 
     <Grid>
         <Grid>
