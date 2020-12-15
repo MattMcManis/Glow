@@ -153,7 +153,9 @@ namespace Glow
                 VM.GeneralView.AutofitHeight_Value = 0;
                 VM.GeneralView.Screensaver_SelectedItem = "default";
                 VM.GeneralView.WindowTitle_SelectedItem = "default";
+                VM.GeneralView.LogPath_Text = "";
                 // Screenshot
+                VM.GeneralView.ScreenshotPath_Text = "";
                 VM.GeneralView.ScreenshotTemplate_SelectedItem = "default";
                 VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "default";
                 VM.GeneralView.ScreenshotFormat_SelectedItem = "default";
@@ -204,8 +206,8 @@ namespace Glow
                 // -------------------------
                 VM.AudioView.AudioDriver_SelectedItem = "default";
                 VM.AudioView.Channels_SelectedItem = "default";
-                VM.AudioView.Volume_Value = 0;
-                VM.AudioView.VolumeMax_Value = 0;
+                VM.AudioView.Volume_Value = 100;
+                VM.AudioView.VolumeMax_Value = 100;
                 VM.AudioView.Normalize_SelectedItem = "default";
                 VM.AudioView.ScaleTempo_SelectedItem = "default";
                 VM.AudioView.AudioLoadFiles_SelectedItem = "default";
@@ -328,7 +330,9 @@ namespace Glow
                 VM.GeneralView.AutofitHeight_Value = 95;
                 VM.GeneralView.Screensaver_SelectedItem = "off";
                 VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
+                VM.GeneralView.LogPath_Text = "";
                 // Screenshot
+                VM.GeneralView.ScreenshotPath_Text = "";
                 VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
                 VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
                 VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
@@ -499,7 +503,9 @@ namespace Glow
                 VM.GeneralView.AutofitHeight_Value = 95;
                 VM.GeneralView.Screensaver_SelectedItem = "off";
                 VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
+                VM.GeneralView.LogPath_Text = "";
                 // Screenshot
+                VM.GeneralView.ScreenshotPath_Text = "";
                 VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
                 VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
                 VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
@@ -673,7 +679,9 @@ namespace Glow
                 VM.GeneralView.AutofitHeight_Value = 95;
                 VM.GeneralView.Screensaver_SelectedItem = "off";
                 VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
+                VM.GeneralView.LogPath_Text = "";
                 // Screenshot
+                VM.GeneralView.ScreenshotPath_Text = "";
                 VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
                 VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
                 VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
@@ -847,7 +855,9 @@ namespace Glow
                 VM.GeneralView.AutofitHeight_Value = 95;
                 VM.GeneralView.Screensaver_SelectedItem = "off";
                 VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
+                VM.GeneralView.LogPath_Text = "";
                 // Screenshot
+                VM.GeneralView.ScreenshotPath_Text = "";
                 VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
                 VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
                 VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
@@ -1022,7 +1032,9 @@ namespace Glow
                 VM.GeneralView.AutofitHeight_Value = 95;
                 VM.GeneralView.Screensaver_SelectedItem = "off";
                 VM.GeneralView.WindowTitle_SelectedItem = "Media Title";
+                VM.GeneralView.LogPath_Text = "";
                 // Screenshot
+                VM.GeneralView.ScreenshotPath_Text = "";
                 VM.GeneralView.ScreenshotTemplate_SelectedItem = "Playback Time";
                 VM.GeneralView.ScreenshotTagColorspace_SelectedItem = "no";
                 VM.GeneralView.ScreenshotFormat_SelectedItem = "png";
@@ -1237,10 +1249,10 @@ namespace Glow
                 inif.Write("General", "keepOpen", VM.GeneralView.KeepOpen_SelectedItem);
                 inif.Write("General", "onTop", VM.GeneralView.OnTop_SelectedItem);
                 inif.Write("General", "border", VM.GeneralView.WindowBorder_SelectedItem);
-                inif.Write("General", "geometryX", VM.GeneralView.GeometryX_Text);
-                inif.Write("General", "geometryY", VM.GeneralView.GeometryY_Text);
-                inif.Write("General", "autofitWidth", VM.GeneralView.AutofitWidth_Text);
-                inif.Write("General", "autofitHeight", VM.GeneralView.AutofitHeight_Text);
+                inif.Write("General", "geometryX", VM.GeneralView.GeometryX_Value.ToString());
+                inif.Write("General", "geometryY", VM.GeneralView.GeometryY_Value.ToString());
+                inif.Write("General", "autofitWidth", VM.GeneralView.AutofitWidth_Value.ToString());
+                inif.Write("General", "autofitHeight", VM.GeneralView.AutofitHeight_Value.ToString());
                 inif.Write("General", "screensaver", VM.GeneralView.Screensaver_SelectedItem);
                 inif.Write("General", "windowTitle", VM.GeneralView.WindowTitle_SelectedItem);
                 inif.Write("General", "logPath", VM.GeneralView.LogPath_Text);
@@ -1249,7 +1261,7 @@ namespace Glow
                 inif.Write("General", "screenshotTemplate", VM.GeneralView.ScreenshotTemplate_SelectedItem);
                 inif.Write("General", "screenshotTagColorspace", VM.GeneralView.ScreenshotTagColorspace_SelectedItem);
                 inif.Write("General", "screenshotFormat", VM.GeneralView.ScreenshotFormat_SelectedItem);
-                inif.Write("General", "screenshotQuality", VM.GeneralView.ScreenshotQuality_Text);
+                inif.Write("General", "screenshotQuality", VM.GeneralView.ScreenshotQuality_Value.ToString());
 
                 // --------------------------------------------------
                 // Video
@@ -1273,11 +1285,11 @@ namespace Glow
                 inif.Write("Video", "videoSync", VM.VideoView.VideoSync_SelectedItem);
                 inif.Write("Video", "frameDrop", VM.VideoView.Framedrop_SelectedItem);
                 // Image
-                inif.Write("Video", "brightness", VM.VideoView.Brightness_Text);
-                inif.Write("Video", "contrast", VM.VideoView.Contrast_Text);
-                inif.Write("Video", "hue", VM.VideoView.Hue_Text);
-                inif.Write("Video", "saturation", VM.VideoView.Saturation_Text);
-                inif.Write("Video", "gamma", VM.VideoView.Gamma_Text);
+                inif.Write("Video", "brightness", VM.VideoView.Brightness_Value.ToString());
+                inif.Write("Video", "contrast", VM.VideoView.Contrast_Value.ToString());
+                inif.Write("Video", "hue", VM.VideoView.Hue_Value.ToString());
+                inif.Write("Video", "saturation", VM.VideoView.Saturation_Value.ToString());
+                inif.Write("Video", "gamma", VM.VideoView.Gamma_Value.ToString());
                 //inif.Write("Video", "gammaAuto", (vm.GammaAuto_SelectedItem);
                 inif.Write("Video", "deband", VM.VideoView.Deband_SelectedItem);
                 inif.Write("Video", "debandGrain", VM.VideoView.DebandGrain_Text);
@@ -1285,13 +1297,13 @@ namespace Glow
                 // Scaling
                 inif.Write("Video", "sigmoidUpscaling", VM.VideoView.Sigmoid_SelectedItem);
                 inif.Write("Video", "scale", VM.VideoView.Scale_SelectedItem);
-                inif.Write("Video", "scaleAntiring", VM.VideoView.ScaleAntiring_Text);
+                inif.Write("Video", "scaleAntiring", VM.VideoView.ScaleAntiring_Value.ToString());
                 inif.Write("Video", "chromaScale", VM.VideoView.ChromaScale_SelectedItem);
-                inif.Write("Video", "chromaScaleAntiring", VM.VideoView.ChromaAntiring_Text);
+                inif.Write("Video", "chromaScaleAntiring", VM.VideoView.ChromaAntiring_Value.ToString());
                 inif.Write("Video", "downscale", VM.VideoView.Downscale_SelectedItem);
-                inif.Write("Video", "downscaleAntiring", VM.VideoView.DownscaleAntiring_Text);
+                inif.Write("Video", "downscaleAntiring", VM.VideoView.DownscaleAntiring_Value.ToString());
                 inif.Write("Video", "interpolationScale", VM.VideoView.InterpolationScale_SelectedItem);
-                inif.Write("Video", "interpolationAntiring", VM.VideoView.InterpolationScaleAntiring_Text);
+                inif.Write("Video", "interpolationAntiring", VM.VideoView.InterpolationScaleAntiring_Value.ToString());
                 inif.Write("Video", "softwareScaler", VM.VideoView.SoftwareScaler_SelectedItem);
 
                 // --------------------------------------------------
@@ -1302,62 +1314,83 @@ namespace Glow
                 // -------------------------
                 // Languages
                 // -------------------------
-                // ------------
                 // Order
-                // ------------
-                List<string> listAudioLangOrder = new List<string>(VM.AudioView.LanguagePriority_ListView_Items/*ViewModel.AudioLanguageItems*/);
-                string audioLanguagesOrder = string.Join(",", listAudioLangOrder.Where(s => !string.IsNullOrEmpty(s)));
-                inif.Write("Audio", "languagesOrder", audioLanguagesOrder);
+                string audioLanguagePriority_ItemOrder = string.Join(",", VM.AudioView.LanguagePriority_ListView_Items
+                                                               .Where(s => !string.IsNullOrWhiteSpace(s)));
+                inif.Write("Audio", "languagesOrder", audioLanguagePriority_ItemOrder);
 
-                // ------------
                 // Selected
-                // ------------
-                List<string> listAudioLangSelected = new List<string>();
-                foreach (string item in VM.AudioView.LanguagePriority_ListView_SelectedItems/*mainwindow.listViewAudioLanguages_SelectedItems*/)
-                {
-                    // add checked item name to list
-                    listAudioLangSelected.Add(item);
-                }
-                string audioLanguagesSelected = string.Join(",", listAudioLangSelected.Where(s => !string.IsNullOrEmpty(s)));
-                inif.Write("Audio", "languagesSelected", audioLanguagesSelected);
+                string audioLanguagePriority_SelectedItems = string.Join(",", VM.AudioView.LanguagePriority_ListView_SelectedItems
+                                                                   .Where(s => !string.IsNullOrEmpty(s)));
+                inif.Write("Audio", "languagesSelected", audioLanguagePriority_SelectedItems);
+
+
+                //// ------------
+                //// Order
+                //// ------------
+                //List<string> listAudioLangOrder = new List<string>(VM.AudioView.LanguagePriority_ListView_Items/*ViewModel.AudioLanguageItems*/);
+                //string audioLanguagesOrder = string.Join(",", listAudioLangOrder.Where(s => !string.IsNullOrEmpty(s)));
+                //inif.Write("Audio", "languagesOrder", audioLanguagesOrder);
+
+                //// ------------
+                //// Selected
+                //// ------------
+                //List<string> listAudioLangSelected = new List<string>();
+                //foreach (string item in VM.AudioView.LanguagePriority_ListView_SelectedItems/*mainwindow.listViewAudioLanguages_SelectedItems*/)
+                //{
+                //    // add checked item name to list
+                //    listAudioLangSelected.Add(item);
+                //}
+                //string audioLanguagesSelected = string.Join(",", listAudioLangSelected.Where(s => !string.IsNullOrEmpty(s)));
+                //inif.Write("Audio", "languagesSelected", audioLanguagesSelected);
 
                 inif.Write("Audio", "channels", VM.AudioView.Channels_SelectedItem);
-                inif.Write("Audio", "volume", VM.AudioView.Volume_Text);
-                inif.Write("Audio", "volumeMax", VM.AudioView.VolumeMax_Text);
+                inif.Write("Audio", "volume", VM.AudioView.Volume_Value.ToString());
+                inif.Write("Audio", "volumeMax", VM.AudioView.VolumeMax_Value.ToString());
                 //inif.Write("Audio", "softVolumeMax", vm.SoftVolumeMax_Text);
                 inif.Write("Audio", "normalize", VM.AudioView.Normalize_SelectedItem);
                 inif.Write("Audio", "scaleTempo", VM.AudioView.ScaleTempo_SelectedItem);
                 inif.Write("Audio", "loadFiles", VM.AudioView.AudioLoadFiles_SelectedItem);
 
                 // --------------------------------------------------
-                // Subtitle
+                // Subtitles
                 // --------------------------------------------------
                 inif.Write("Subtitles", "subtitles", VM.SubtitlesView.Subtitles_SelectedItem);
 
                 // -------------------------
                 // Languages
                 // -------------------------
-                // ------------
                 // Order
-                // ------------
-                List<string> listSubtitlesLangOrder = new List<string>(VM.SubtitlesView.LanguagePriority_ListView_Items/*ViewModel.SubtitlesLanguageItems*/);
-                string subtitlesLanguagesOrder = string.Join(",", listSubtitlesLangOrder.Where(s => !string.IsNullOrEmpty(s)));
-                inif.Write("Subtitles", "languagesOrder", subtitlesLanguagesOrder);
+                string subtitlesLanguagePriority_ItemOrder = string.Join(",", VM.SubtitlesView.LanguagePriority_ListView_Items
+                                                                   .Where(s => !string.IsNullOrWhiteSpace(s)));
+                inif.Write("Subtitles", "languagesOrder", subtitlesLanguagePriority_ItemOrder);
 
-                // ------------
                 // Selected
-                // ------------
-                List<string> listSubtitlesLang = new List<string>();
-                foreach (string item in VM.SubtitlesView.LanguagePriority_ListView_SelectedItems/*mainwindow.listViewSubtitlesLanguages_SelectedItems*/)
-                {
-                    listSubtitlesLang.Add(item);
-                }
-                string subtitlesLanguages = string.Join(",", listSubtitlesLang.Where(s => !string.IsNullOrEmpty(s)));
-                inif.Write("Subtitles", "languagesSelected", subtitlesLanguages);
+                string subtitlesLanguagePriority_SelectedItems = string.Join(",", VM.SubtitlesView.LanguagePriority_ListView_SelectedItems
+                                                                       .Where(s => !string.IsNullOrEmpty(s)));
+                inif.Write("Subtitles", "languagesSelected", subtitlesLanguagePriority_SelectedItems);
+
+                //// ------------
+                //// Order
+                //// ------------
+                //List<string> listSubtitlesLangOrder = new List<string>(VM.SubtitlesView.LanguagePriority_ListView_Items/*ViewModel.SubtitlesLanguageItems*/);
+                //string subtitlesLanguagesOrder = string.Join(",", listSubtitlesLangOrder.Where(s => !string.IsNullOrEmpty(s)));
+                //inif.Write("Subtitles", "languagesOrder", subtitlesLanguagesOrder);
+
+                //// ------------
+                //// Selected
+                //// ------------
+                //List<string> listSubtitlesLang = new List<string>();
+                //foreach (string item in VM.SubtitlesView.LanguagePriority_ListView_SelectedItems/*mainwindow.listViewSubtitlesLanguages_SelectedItems*/)
+                //{
+                //    listSubtitlesLang.Add(item);
+                //}
+                //string subtitlesLanguages = string.Join(",", listSubtitlesLang.Where(s => !string.IsNullOrEmpty(s)));
+                //inif.Write("Subtitles", "languagesSelected", subtitlesLanguages);
 
                 inif.Write("Subtitles", "loadFiles", VM.SubtitlesView.LoadFiles_SelectedItem);
                 inif.Write("Subtitles", "embeddedFonts", VM.SubtitlesView.EmbeddedFonts_SelectedItem);
-                inif.Write("Subtitles", "position", VM.SubtitlesView.Position_Text);
+                inif.Write("Subtitles", "position", VM.SubtitlesView.Position_Value.ToString());
                 inif.Write("Subtitles", "fixTiming", VM.SubtitlesView.FixTiming_SelectedItem);
                 inif.Write("Subtitles", "useMargins", VM.SubtitlesView.Margins_SelectedItem);
                 inif.Write("Subtitles", "font", VM.SubtitlesView.Font_SelectedItem);
@@ -1385,7 +1418,7 @@ namespace Glow
                 //inif.Write("Subtitles", "shadowColor", selected);
 
                 // Shadow Offset
-                inif.Write("Subtitles", "shadowOffset", VM.SubtitlesView.ShadowOffset_Text);
+                inif.Write("Subtitles", "shadowOffset", VM.SubtitlesView.ShadowOffset_Value.ToString());
                 inif.Write("Subtitles", "blend", VM.SubtitlesView.Blend_SelectedItem);
 
                 // ASS
@@ -1430,9 +1463,9 @@ namespace Glow
                 inif.Write("OSD", "fractions", VM.DisplayView.OSD_Fractions_SelectedItem);
                 inif.Write("OSD", "duration", VM.DisplayView.OSD_Duration_Text);
                 inif.Write("OSD", "level", VM.DisplayView.OSD_Level_SelectedItem);
-                inif.Write("OSD", "scale", VM.DisplayView.OSC_Scale_Text);
-                inif.Write("OSD", "barWidth", VM.DisplayView.OSC_BarWidth_Text);
-                inif.Write("OSD", "barHeight", VM.DisplayView.OSC_BarHeight_Text);
+                inif.Write("OSD", "scale", VM.DisplayView.OSC_Scale_Value.ToString());
+                inif.Write("OSD", "barWidth", VM.DisplayView.OSC_BarWidth_Value.ToString());
+                inif.Write("OSD", "barHeight", VM.DisplayView.OSC_BarHeight_Value.ToString());
                 inif.Write("OSD", "font", VM.DisplayView.OSD_Font_SelectedItem);
                 inif.Write("OSD", "fontSize", VM.DisplayView.OSD_FontSize_SelectedItem);
 
@@ -1453,7 +1486,7 @@ namespace Glow
                 //selected = (string)(selectedItem.Content);
                 //inif.Write("OSD", "shadowColor", selected);
 
-                inif.Write("OSD", "shadowOffset", VM.DisplayView.OSD_ShadowOffset_Text);
+                inif.Write("OSD", "shadowOffset", VM.DisplayView.OSD_ShadowOffset_Value.ToString());
 
                 // --------------------------------------------------
                 // Extensions
@@ -1556,16 +1589,24 @@ namespace Glow
                     listFailedImports.Add("General: Border");
 
                 // Geometry X
-                VM.GeneralView.GeometryX_Text = inif.Read("General", "geometryX");
+                double geometryX = 0;
+                double.TryParse(inif.Read("General", "geometryX"), out geometryX);
+                VM.GeneralView.GeometryX_Value = geometryX;
 
                 // Geometry Y
-                VM.GeneralView.GeometryY_Text = inif.Read("General", "geometryY");
+                double geometryY = 0;
+                double.TryParse(inif.Read("General", "geometryY"), out geometryY);
+                VM.GeneralView.GeometryY_Value = geometryY;
 
                 // Autofit Width
-                VM.GeneralView.AutofitWidth_Text = inif.Read("General", "autofitWidth");
+                double autofitWidth = 0;
+                double.TryParse(inif.Read("General", "autofitWidth"), out autofitWidth);
+                VM.GeneralView.AutofitWidth_Value = autofitWidth;
 
                 // Autofit Height
-                VM.GeneralView.AutofitHeight_Text = inif.Read("General", "autofitHeight");
+                double autofitHeight = 0;
+                double.TryParse(inif.Read("General", "autofitHeight"), out autofitHeight);
+                VM.GeneralView.AutofitHeight_Value = autofitHeight;
 
                 // Screensaver
                 string screensaver = inif.Read("General", "screensaver");
@@ -1609,7 +1650,9 @@ namespace Glow
                     listFailedImports.Add("General: Screenshot Format");
 
                 // Screenshot Quality
-                VM.GeneralView.ScreenshotQuality_Text = inif.Read("General", "screenshotQuality");
+                double screenshotQuality = 0;
+                double.TryParse(inif.Read("General", "screenshotQuality"), out screenshotQuality);
+                VM.GeneralView.ScreenshotQuality_Value = screenshotQuality;
 
                 // --------------------------------------------------
                 // Video
@@ -1730,11 +1773,25 @@ namespace Glow
                 // -------------------------
                 // Image
                 // -------------------------
-                VM.VideoView.Brightness_Text = inif.Read("Video", "brightness");
-                VM.VideoView.Contrast_Text = inif.Read("Video", "contrast");
-                VM.VideoView.Hue_Text = inif.Read("Video", "hue");
-                VM.VideoView.Saturation_Text = inif.Read("Video", "saturation");
-                VM.VideoView.Gamma_Text = inif.Read("Video", "gamma");
+                double brightness = 0;
+                double.TryParse(inif.Read("Video", "brightness"), out brightness);
+                VM.VideoView.Brightness_Value = brightness;
+
+                double contrast = 0;
+                double.TryParse(inif.Read("Video", "contrast"), out contrast);
+                VM.VideoView.Contrast_Value = contrast;
+
+                double hue = 0;
+                double.TryParse(inif.Read("Video", "hue"), out hue);
+                VM.VideoView.Hue_Value = hue;
+
+                double saturation = 0;
+                double.TryParse(inif.Read("Video", "saturation"), out saturation);
+                VM.VideoView.Saturation_Value = saturation;
+
+                double gamma = 0;
+                double.TryParse(inif.Read("Video", "gamma"), out gamma);
+                VM.VideoView.Gamma_Value = gamma;
 
                 // Gamma Auto
                 //string gammaAuto = inif.Read("Video", "gammaAuto");
@@ -1778,7 +1835,9 @@ namespace Glow
                     listFailedImports.Add("Video: Scale");
 
                 // Scale Antiring
-                VM.VideoView.ScaleAntiring_Text = inif.Read("Video", "scaleAntiring");
+                double scaleAntiring = 0.0;
+                double.TryParse(inif.Read("Video", "scaleAntiring"), out scaleAntiring);
+                VM.VideoView.ScaleAntiring_Value = scaleAntiring;
 
                 // Chroma Scale
                 string chromaScale = inif.Read("Video", "chromaScale");
@@ -1788,7 +1847,9 @@ namespace Glow
                     listFailedImports.Add("Video: Chroma Scale");
 
                 // Chroma Antiring
-                VM.VideoView.ChromaAntiring_Text = inif.Read("Video", "chromaScaleAntiring");
+                double chromaScaleAntiring = 0.0;
+                double.TryParse(inif.Read("Video", "chromaScaleAntiring"), out chromaScaleAntiring);
+                VM.VideoView.ChromaAntiring_Value = chromaScaleAntiring;
 
                 // Downscale
                 string downscale = inif.Read("Video", "downscale");
@@ -1798,7 +1859,9 @@ namespace Glow
                     listFailedImports.Add("Video: Downscale");
 
                 // Downscale Antiring
-                VM.VideoView.DownscaleAntiring_Text = inif.Read("Video", "downscaleAntiring");
+                double downscaleAntiring = 0.0;
+                double.TryParse(inif.Read("General", "downscaleAntiring"), out downscaleAntiring);
+                VM.VideoView.DownscaleAntiring_Value = downscaleAntiring;
 
                 // Interpolation Scale
                 string tscale = inif.Read("Video", "interpolationScale");
@@ -1808,7 +1871,9 @@ namespace Glow
                     listFailedImports.Add("Video: Interpolation Scale");
 
                 // Interpolation Antiring
-                VM.VideoView.InterpolationScaleAntiring_Text = inif.Read("Video", "interpolationAntiring");
+                double interpolationAntiring = 0.0;
+                double.TryParse(inif.Read("Video", "interpolationAntiring"), out interpolationAntiring);
+                VM.VideoView.InterpolationScaleAntiring_Value = interpolationAntiring;
 
                 // Software Scaler
                 string softwareScaler = inif.Read("Video", "softwareScaler");
@@ -1835,8 +1900,13 @@ namespace Glow
                     listFailedImports.Add("Audio: Channels");
 
                 // Volume
-                VM.AudioView.Volume_Text = inif.Read("Audio", "volume");
-                VM.AudioView.VolumeMax_Text = inif.Read("Audio", "volumeMax");
+                double volume = 100;
+                double.TryParse(inif.Read("Audio", "volume"), out volume);
+                VM.AudioView.Volume_Value = volume;
+
+                double volumeMax = 100;
+                double.TryParse(inif.Read("Audio", "volumeMax"), out volumeMax);
+                VM.AudioView.VolumeMax_Value = volumeMax;
 
                 // Soft Volume Max
                 //vm.SoftVolumeMax_Text = inif.Read("Audio", "softVolumeMax");
@@ -1865,40 +1935,105 @@ namespace Glow
                 // -------------------------
                 // languages
                 // -------------------------
-                // ------------
-                // Order
-                // ------------
+                // Language Priority
                 // import full list new order
-                string audioLangOrder = inif.Read("Audio", "languagesOrder");
-                string[] arrAudioLangOrder = audioLangOrder.Split(',');
-                // recreate the list
-                //ViewModel.listAudioLang = new List<string>(arrAudioLangOrder);
-                // recreate item sources
-                //ViewModel._audioLangItems = new ObservableCollection<string>(ViewModel.listAudioLang);
-                //mainwindow.listViewAudioLanguages.ItemsSource = ViewModel._audioLangItems;
-                VM.AudioView.LanguagePriority_ListView_Items = new ObservableCollection<string>(arrAudioLangOrder);
-
-                // ------------
-                // Selected
-                // ------------
-                string audioLanguagesSelected = inif.Read("Audio", "languagesSelected");
-                // Empty List Check
-                if (!string.IsNullOrEmpty(audioLanguagesSelected))
+                string audioLanguagePriority_ItemOrder = inif.Read("Audio", "languagesOrder");
+                // null check
+                if (!string.IsNullOrWhiteSpace(audioLanguagePriority_ItemOrder))
                 {
-                    string[] arrAudioLang = audioLanguagesSelected.Split(',');
-                    foreach (string item in arrAudioLang)
+                    // Split the list by commas
+                    string[] arrLanguagePriority_ItemOrder = audioLanguagePriority_ItemOrder.Split(',');
+
+                    // Create the new list
+                    // Remove Duplicates
+                    VM.AudioView.LanguagePriority_ListView_Items = new ObservableCollection<string>(arrLanguagePriority_ItemOrder
+                                                                                                    .Distinct()
+                                                                                                    .ToList()
+                                                                                                    .AsEnumerable()
+                                                                                                   );
+                    //VM.ConfigureView.LanguagePriority_ListView_Items = arrLanguagePriority_ItemOrder.Distinct().ToList();
+
+                    // Check the Master Default List for Missing Items
+                    //IEnumerable<string> missingItems = MainWindow.LanguagePriority_Defaults
+                    //                                             .Except(VM.AudioView.LanguagePriority_ListView_Items/*arrLanguagePriority_ItemOrder*/)
+                    //                                             .ToList()
+                    //                                             .AsEnumerable();
+                    //List<string> missingItems = MainWindow.LanguagePriority_Defaults.Except(arrLanguagePriority_ItemOrder).ToList();
+
+                    //foreach (string item in missingItems)
+                    //{
+                    //    VM.AudioView.LanguagePriority_ListView_Items.Add(item/*missingItems[i]*/);
+                    //}
+
+                    // Selected Items String (items separated by commas)
+                    string LanguagePriority_SelectedItems = inif.Read("Audio", "languagesSelected");
+                    // Empty List Check
+                    if (!string.IsNullOrEmpty(LanguagePriority_SelectedItems))
                     {
-                        if (/*mainwindow.listViewAudioLanguages.Items*/VM.AudioView.LanguagePriority_ListView_Items.Contains(item))
+                        // Split
+                        string[] arrLanguagePriority_SelectedItems = LanguagePriority_SelectedItems.Split(',');
+
+                        // Remove Duplicates
+                        List<string> lstLanguagePriority_SelectedItems = arrLanguagePriority_SelectedItems.Distinct().ToList();
+
+                        // Import Selected Items
+                        for (var i = 0; i < lstLanguagePriority_SelectedItems.Count; i++)
                         {
-                            /*mainwindow.listViewAudioLanguages_SelectedItems.*/
-                            VM.AudioView.LanguagePriority_ListView_SelectedItems.Add(item);
-                        }
-                        else
-                        {
-                            listFailedImports.Add("Audio Languages: " + item);
+                            // If Items List Contains the Imported Item
+                            if (VM.AudioView.LanguagePriority_ListView_Items.Contains(arrLanguagePriority_SelectedItems[i]))
+                            {
+                                // Added Item to Selected Items List
+                                //VM.ConfigureView.LanguagePriority_ListView_SelectedItems.Add(arrLanguagePriority_SelectedItems[i]);
+
+                                // Select the Item
+                                try
+                                {
+                                    mainwindow.listViewAudioLanguages.SelectedItems.Add(arrLanguagePriority_SelectedItems[i]);
+                                }
+                                catch
+                                {
+
+                                }
+                            }
                         }
                     }
                 }
+
+                //// ------------
+                //// Order
+                //// ------------
+                //// import full list new order
+                //string audioLangOrder = inif.Read("Audio", "languagesOrder");
+                //string[] arrAudioLangOrder = audioLangOrder.Split(',');
+                //// recreate the list
+                ////ViewModel.listAudioLang = new List<string>(arrAudioLangOrder);
+                //// recreate item sources
+                ////ViewModel._audioLangItems = new ObservableCollection<string>(ViewModel.listAudioLang);
+                ////mainwindow.listViewAudioLanguages.ItemsSource = ViewModel._audioLangItems;
+                //VM.AudioView.LanguagePriority_ListView_Items = new ObservableCollection<string>(arrAudioLangOrder);
+
+                //// ------------
+                //// Selected
+                //// ------------
+                //string audioLanguagesSelected = inif.Read("Audio", "languagesSelected");
+                //// Empty List Check
+                //if (!string.IsNullOrEmpty(audioLanguagesSelected))
+                //{
+                //    string[] arrAudioLang = audioLanguagesSelected.Split(',');
+                //    foreach (string item in arrAudioLang)
+                //    {
+                //        if (/*mainwindow.listViewAudioLanguages.Items*/VM.AudioView.LanguagePriority_ListView_Items.Contains(item))
+                //        {
+
+                //            VM.AudioView.LanguagePriority_ListView_SelectedItems.Add(item);
+                //            mainwindow.listViewAudioLanguages.Add(item);
+                //        }
+                //        else
+                //        {
+                //            listFailedImports.Add("Audio Languages: " + item);
+                //        }
+                //    }
+                //}
 
                 // --------------------------------------------------
                 // Subtitles
@@ -1925,7 +2060,9 @@ namespace Glow
                     listFailedImports.Add("Subtitles: Embedded Fonts");
 
                 // Subtitles Position
-                VM.SubtitlesView.Position_Text = inif.Read("Subtitles", "position");
+                double position = 0.0;
+                double.TryParse(inif.Read("Subtitles", "position"), out position);
+                VM.SubtitlesView.Position_Value = position;
 
                 // Fix Timing
                 string fixTiming = inif.Read("Subtitles", "fixTiming");
@@ -2036,7 +2173,9 @@ namespace Glow
                 //    listFailedImports.Add("Subtitles: Shadow Color");
 
                 // Shadow Offset
-                VM.SubtitlesView.ShadowOffset_Text = inif.Read("Subtitles", "shadowOffset");
+                double subsShadowOffset = 0.0;
+                double.TryParse(inif.Read("Subtitles", "shadowOffset"), out subsShadowOffset);
+                VM.SubtitlesView.ShadowOffset_Value = subsShadowOffset;
 
                 // ASS
                 string subtitlesASS = inif.Read("Subtitles", "ass");
@@ -2076,40 +2215,104 @@ namespace Glow
                 // -------------------------
                 // languages
                 // -------------------------
-                // ------------
-                // Order
-                // ------------
+                // Language Priority
                 // import full list new order
-                string subtitlesLangOrder = inif.Read("Subtitles", "languagesOrder");
-                string[] arrSubtitlesLangOrder = subtitlesLangOrder.Split(',');
-                // recreate the list
-                //ViewModel.listSubtitlesLang = new List<string>(arrSubtitlesLangOrder);
-                // recreate item sources
-                //ViewModel._subsLangItems = new ObservableCollection<string>(ViewModel.listSubtitlesLang);
-                //mainwindow.listViewSubtitlesLanguages_ItemsSource = ViewModel._subsLangItems;
-                VM.SubtitlesView.LanguagePriority_ListView_Items = new ObservableCollection<string>(arrSubtitlesLangOrder);
-
-                // ------------
-                // Selected
-                // ------------
-                string subtitlesLanguagesSelected = inif.Read("Subtitles", "languagesSelected");
-                // Empty List Check
-                if (!string.IsNullOrEmpty(subtitlesLanguagesSelected))
+                string subtitlesLanguagePriority_ItemOrder = inif.Read("Subtitles", "languagesOrder");
+                // null check
+                if (!string.IsNullOrWhiteSpace(subtitlesLanguagePriority_ItemOrder))
                 {
-                    string[] arrSubtitlesLang = subtitlesLanguagesSelected.Split(',');
-                    foreach (string item in arrSubtitlesLang)
+                    // Split the list by commas
+                    string[] arrLanguagePriority_ItemOrder = subtitlesLanguagePriority_ItemOrder.Split(',');
+
+                    // Create the new list
+                    // Remove Duplicates
+                    VM.SubtitlesView.LanguagePriority_ListView_Items = new ObservableCollection<string>(arrLanguagePriority_ItemOrder
+                                                                                                    .Distinct()
+                                                                                                    .ToList()
+                                                                                                    .AsEnumerable()
+                                                                                                   );
+                    //VM.ConfigureView.LanguagePriority_ListView_Items = arrLanguagePriority_ItemOrder.Distinct().ToList();
+
+                    // Check the Master Default List for Missing Items
+                    //IEnumerable<string> missingItems = MainWindow.LanguagePriority_Defaults
+                    //                                             .Except(VM.SubtitlesView.LanguagePriority_ListView_Items/*arrLanguagePriority_ItemOrder*/)
+                    //                                             .ToList()
+                    //                                             .AsEnumerable();
+                    //List<string> missingItems = MainWindow.LanguagePriority_Defaults.Except(arrLanguagePriority_ItemOrder).ToList();
+
+                    //foreach (string item in missingItems)
+                    //{
+                    //    VM.SubtitlesView.LanguagePriority_ListView_Items.Add(item/*missingItems[i]*/);
+                    //}
+
+                    // Selected Items String (items separated by commas)
+                    string LanguagePriority_SelectedItems = inif.Read("Subtitles", "languagesSelected");
+                    // Empty List Check
+                    if (!string.IsNullOrEmpty(LanguagePriority_SelectedItems))
                     {
-                        if (/*mainwindow.listViewSubtitlesLanguages_Items*/VM.SubtitlesView.LanguagePriority_ListView_Items.Contains(item))
+                        // Split
+                        string[] arrLanguagePriority_SelectedItems = LanguagePriority_SelectedItems.Split(',');
+
+                        // Remove Duplicates
+                        List<string> lstLanguagePriority_SelectedItems = arrLanguagePriority_SelectedItems.Distinct().ToList();
+
+                        // Import Selected Items
+                        for (var i = 0; i < lstLanguagePriority_SelectedItems.Count; i++)
                         {
-                            //mainwindow.listViewSubtitlesLanguages_SelectedItems.Add(item);
-                            VM.SubtitlesView.LanguagePriority_ListView_SelectedItems.Add(item);
-                        }
-                        else
-                        {
-                            listFailedImports.Add("Subtitles Languages: " + item);
+                            // If Items List Contains the Imported Item
+                            if (VM.SubtitlesView.LanguagePriority_ListView_Items.Contains(arrLanguagePriority_SelectedItems[i]))
+                            {
+                                // Added Item to Selected Items List
+                                //VM.ConfigureView.LanguagePriority_ListView_SelectedItems.Add(arrLanguagePriority_SelectedItems[i]);
+
+                                // Select the Item
+                                try
+                                {
+                                    mainwindow.listViewSubtitlesLanguages.SelectedItems.Add(arrLanguagePriority_SelectedItems[i]);
+                                }
+                                catch
+                                {
+
+                                }
+                            }
                         }
                     }
                 }
+
+                //// ------------
+                //// Order
+                //// ------------
+                //// import full list new order
+                //string subtitlesLangOrder = inif.Read("Subtitles", "languagesOrder");
+                //string[] arrSubtitlesLangOrder = subtitlesLangOrder.Split(',');
+                //// recreate the list
+                ////ViewModel.listSubtitlesLang = new List<string>(arrSubtitlesLangOrder);
+                //// recreate item sources
+                ////ViewModel._subsLangItems = new ObservableCollection<string>(ViewModel.listSubtitlesLang);
+                ////mainwindow.listViewSubtitlesLanguages_ItemsSource = ViewModel._subsLangItems;
+                //VM.SubtitlesView.LanguagePriority_ListView_Items = new ObservableCollection<string>(arrSubtitlesLangOrder);
+
+                //// ------------
+                //// Selected
+                //// ------------
+                //string subtitlesLanguagesSelected = inif.Read("Subtitles", "languagesSelected");
+                //// Empty List Check
+                //if (!string.IsNullOrEmpty(subtitlesLanguagesSelected))
+                //{
+                //    string[] arrSubtitlesLang = subtitlesLanguagesSelected.Split(',');
+                //    foreach (string item in arrSubtitlesLang)
+                //    {
+                //        if (/*mainwindow.listViewSubtitlesLanguages_Items*/VM.SubtitlesView.LanguagePriority_ListView_Items.Contains(item))
+                //        {
+                //            //mainwindow.listViewSubtitlesLanguages_SelectedItems.Add(item);
+                //            VM.SubtitlesView.LanguagePriority_ListView_SelectedItems.Add(item);
+                //        }
+                //        else
+                //        {
+                //            listFailedImports.Add("Subtitles Languages: " + item);
+                //        }
+                //    }
+                //}
 
                 // --------------------------------------------------
                 // Stream
@@ -2224,9 +2427,17 @@ namespace Glow
                 // -------------------------
                 // Controls
                 // -------------------------
-                VM.DisplayView.OSC_Scale_Text = inif.Read("OSD", "scale");
-                VM.DisplayView.OSC_BarWidth_Text = inif.Read("OSD", "barWidth");
-                VM.DisplayView.OSC_BarHeight_Text = inif.Read("OSD", "barHeight");
+                double osdScale = 0.0;
+                double.TryParse(inif.Read("OSD", "scale"), out osdScale);
+                VM.DisplayView.OSC_Scale_Value = osdScale;
+
+                double barWidth = 0.0;
+                double.TryParse(inif.Read("OSD", "barWidth"), out barWidth);
+                VM.DisplayView.OSC_BarWidth_Value = barWidth;
+
+                double barHeight = 0.0;
+                double.TryParse(inif.Read("OSD", "barHeight"), out barHeight);
+                VM.DisplayView.OSC_BarHeight_Value = barHeight;
 
                 // -------------------------
                 // Text
@@ -2321,7 +2532,9 @@ namespace Glow
 
 
                 // Shadow Offset
-                VM.DisplayView.OSD_ShadowOffset_Text = inif.Read("OSD", "shadowOffset");
+                double osdShadowOffset = 0.00;
+                double.TryParse(inif.Read("OSD", "shadowOffset"), out osdShadowOffset);
+                VM.DisplayView.OSD_ShadowOffset_Value = osdShadowOffset;
 
                 // --------------------------------------------------
                 // Extensions
