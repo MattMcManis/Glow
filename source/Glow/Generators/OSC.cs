@@ -21,6 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using Glow;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using ViewModel;
 
@@ -67,24 +68,27 @@ namespace Generate
             // -------------------------
             string scale = string.Empty;
 
-            if (VM.DisplayView.OSC_Scale_Value != 0.0 /*&& !string.IsNullOrEmpty(VM.DisplayView.OSC_Scale_Text)*/)
-                scale = "osd-scale=" + VM.DisplayView.OSC_Scale_Value/*OSC_Scale_Text*/;
+            if (VM.DisplayView.OSC_Scale_Value != 0.0)
+                scale = "osd-scale=" + VM.DisplayView.OSC_Scale_Value
+                                       .ToString("0.#", CultureInfo.GetCultureInfo("en-US"));
 
             // -------------------------
             // Bar Width
             // -------------------------
             string barWidth = string.Empty;
 
-            if (VM.DisplayView.OSC_BarWidth_Value != 0.0/* && !string.IsNullOrEmpty(VM.DisplayView.OSC_BarWidth_Text)*/)
-                barWidth = "osd-bar-w=" + VM.DisplayView.OSC_BarWidth_Value/*OSC_BarWidth_Text*/;
+            if (VM.DisplayView.OSC_BarWidth_Value != 0.0)
+                barWidth = "osd-bar-w=" + VM.DisplayView.OSC_BarWidth_Value
+                                          .ToString("0.#", CultureInfo.GetCultureInfo("en-US"));
 
             // -------------------------
             // Bar Height
             // -------------------------
             string barHeight = string.Empty;
 
-            if (VM.DisplayView.OSC_BarHeight_Value != 0.0 /*&& !string.IsNullOrEmpty(VM.DisplayView.OSC_BarHeight_Text)*/)
-                barHeight = "osd-bar-h=" + VM.DisplayView.OSC_BarHeight_Value/*OSC_BarHeight_Text*/;
+            if (VM.DisplayView.OSC_BarHeight_Value != 0.0)
+                barHeight = "osd-bar-h=" + VM.DisplayView.OSC_BarHeight_Value
+                                          .ToString("0.#", CultureInfo.GetCultureInfo("en-US"));
 
             // -------------------------
             // Script Opts
