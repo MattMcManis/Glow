@@ -21,6 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using Glow;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using ViewModel;
 
@@ -333,7 +334,8 @@ namespace Generate
                     VM.VideoView.Scale_SelectedItem != "off" &&
                     VM.VideoView.ScaleAntiring_Value != 0)
 
-                    scaleAntiring = "scale-antiring=" + VM.VideoView.ScaleAntiring_Value;
+                    scaleAntiring = "scale-antiring=" + VM.VideoView.ScaleAntiring_Value
+                                                        .ToString("0.#", CultureInfo.GetCultureInfo("en-US"));
 
             // -------------------------
             // Chroma Scale
@@ -366,7 +368,8 @@ namespace Generate
                     VM.VideoView.ChromaScale_SelectedItem != "off" &&
                     VM.VideoView.ChromaAntiring_Value != 0)
 
-                    chromascaleAntiring = "cscale-antiring=" + VM.VideoView.ChromaAntiring_Value;
+                    chromascaleAntiring = "cscale-antiring=" + VM.VideoView.ChromaAntiring_Value
+                                                               .ToString("0.#", CultureInfo.GetCultureInfo("en-US"));
 
             // -------------------------
             // Downscale
@@ -399,7 +402,8 @@ namespace Generate
                     VM.VideoView.Downscale_SelectedItem != "off" &&
                     VM.VideoView.DownscaleAntiring_Value != 0)
 
-                    downscaleAntiring = "dscale-antiring=" + VM.VideoView.DownscaleAntiring_Value;
+                    downscaleAntiring = "dscale-antiring=" + VM.VideoView.DownscaleAntiring_Value
+                                                             .ToString("0.#", CultureInfo.GetCultureInfo("en-US"));
 
             // -------------------------
             // Inerpolation Scale
@@ -425,14 +429,18 @@ namespace Generate
             // software scaler must be default or off
             // downscale must be on
             // antitring must be above 0
-            if (VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
-                VM.VideoView.SoftwareScaler_SelectedItem == "off")
+            if ((VM.VideoView.SoftwareScaler_SelectedItem == "default" ||
+                 VM.VideoView.SoftwareScaler_SelectedItem == "off")
 
-                if (VM.VideoView.InterpolationScale_SelectedItem != "default" &&
-                    VM.VideoView.InterpolationScale_SelectedItem != "off" &&
-                    VM.VideoView.InterpolationScaleAntiring_Value != 0)
+                &&
 
-                    tscaleAntiring = "tscale-antiring=" + VM.VideoView.InterpolationScaleAntiring_Value;
+                (VM.VideoView.InterpolationScale_SelectedItem != "default" &&
+                 VM.VideoView.InterpolationScale_SelectedItem != "off" &&
+                 VM.VideoView.InterpolationScaleAntiring_Value != 0)
+                )
+
+                tscaleAntiring = "tscale-antiring=" + VM.VideoView.InterpolationScaleAntiring_Value
+                                                        .ToString("0.#", CultureInfo.GetCultureInfo("en-US"));
 
             // -------------------------
             // Software Scaler
