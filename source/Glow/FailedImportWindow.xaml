@@ -23,19 +23,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
-        
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+        xmlns:my="clr-namespace:Glow"
+        xmlns:local="clr-namespace:ViewModel"
+        xmlns:settings="clr-namespace:Glow.Properties"
+        mc:Ignorable="d"
         Loaded="Window_Loaded"
-        
-        ResizeMode="CanMinimize" 
-        UseLayoutRounding="True"
-        Title="Failed to Import" 
-        Height="335" 
-        Width="400" 
+        Title="Failed to Import"
+        Width="400"
+        Height="335"
+        UseLayoutRounding="True" 
         Icon="Resources/Images/Icons/title-logo.ico"
-        Style="{DynamicResource InfoWindowStyle}" >
+        Style="{DynamicResource InfoWindowStyle}"
+        >
     <Grid>
         <RichTextBox x:Name="rtbFailedImport" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
