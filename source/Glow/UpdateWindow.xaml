@@ -38,7 +38,7 @@
         ResizeMode="CanMinimize" 
         Width="400"
         Height="200"
-        Title="Color Picker"
+        Title="Update"
         Style="{DynamicResource UpdateWindowStyle}" 
         >
 
