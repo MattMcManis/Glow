@@ -100,8 +100,6 @@ namespace ViewModel
             "default",
             "gpu",
             "gpu-hq",
-            //"opengl", // old
-            //"opengl-hq", // old
             "direct3d",
             "vaapi",
             "caca"
@@ -332,14 +330,18 @@ namespace ViewModel
             "default",
             "no",
             "yes",
+            "auto",
             "auto-copy",
-            "dxva2",
-            "dxva2-copy",
-            "d3d11va",
-            "d3d11va-copy",
+            "auto-safe",
+            "crystalhd",
             "cuda",
             "cuda-copy",
-            "crystalhd"
+            "d3d11va",
+            "d3d11va-copy",
+            "dxva2",
+            "dxva2-copy",
+            "nvdec",
+            "nvdec-copy"
         };
         public List<string> HWDecoder_Items
         {
