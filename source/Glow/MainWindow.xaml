@@ -918,8 +918,8 @@
                                        ToolTip="Set the antiringing strength. This tries to eliminate ringing, but can introduce other artifacts in the process. Must be a float number between 0.0 and 1.0. The default value of 0.0 disables antiringing entirely. Note that this doesn't affect the special filters bilinear and bicubic_fast, nor does it affect any polar (EWA) scalers."
                                        Style="{DynamicResource LabelStyle}"/>
                                 <Slider x:Name="slInterpolationAntiring"
-                                        Value="{Binding InterpolationAntiring_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        IsEnabled="{Binding InterpolationAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Value="{Binding InterpolationScaleAntiring_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding InterpolationScaleAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Right"
                                         Margin="0,1006,52,0" 
                                         VerticalAlignment="Top" 
@@ -930,7 +930,7 @@
                                         Style="{DynamicResource SliderStyle}"/>
                                 <TextBox x:Name="tbxInterpolationAntiring"
                                          Text="{Binding Value, ElementName=slInterpolationAntiring, StringFormat=N1, UpdateSourceTrigger=PropertyChanged}"
-                                         IsEnabled="{Binding InterpolationAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding InterpolationScaleAntiring_IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Height="22" 
                                          TextWrapping="Wrap" 
                                          Margin="0,1005,14,0"
