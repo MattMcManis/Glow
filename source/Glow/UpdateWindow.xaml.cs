@@ -183,7 +183,8 @@ namespace Glow
                     // Extract
                     "$shell = new-object -com shell.application;",
                     "$zip = $shell.NameSpace('" + tempDir + "Glow.zip');",
-                    "foreach ($item in $zip.items()) {$shell.Namespace('" + MainWindow.appRootDir + "').CopyHere($item, 0x14)};",
+                    //"foreach ($item in $zip.items()) {$shell.Namespace('" + MainWindow.appRootDir + "').CopyHere($item, 0x14)};", // all files
+                    "foreach ($item in $zip.items()) {$name = [string]$item.Name; if ($name -match 'Glow.exe') {$shell.Namespace('" + MainWindow.appRootDir + "').CopyHere($item, 0x14)}};",
                     // Delete Temp
                     "Write-Host \"`nDeleting Temp File\";",
                     "del " + "\"" + tempDir + "Glow.zip" + "\";",
