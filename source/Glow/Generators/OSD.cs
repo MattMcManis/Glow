@@ -21,6 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using Glow;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using ViewModel;
 
@@ -28,9 +29,6 @@ namespace Generate
 {
     public class OSD
     {
-        //private static ComboBoxItem selectedItem;
-        //private static string selected;
-
         /// <summary>
         ///    OSD Config
         /// </summary>
@@ -103,8 +101,6 @@ namespace Generate
             // -------------------------
             // Font Color
             // -------------------------
-            //selectedItem = (ComboBoxItem)(VM.DisplayView.OSD_FontColor.SelectedValue;
-            //string fontColor = "osd-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
             string fontColor = string.Empty;
 
             // only if not empty
@@ -122,8 +118,6 @@ namespace Generate
             // -------------------------
             // Border Color
             // -------------------------
-            //selectedItem = (ComboBoxItem)(VM.DisplayView.OSDBorderColor.SelectedValue;
-            //string borderColor = "osd-border-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
             string borderColor = string.Empty;
 
             // only if not empty
@@ -138,15 +132,7 @@ namespace Generate
             // only if not empty
             if (!string.IsNullOrEmpty(VM.DisplayView.OSD_ShadowColor_Text))
                 shadowColor = "osd-shadow-color=" + "\"" + "#33" + VM.DisplayView.OSD_ShadowColor_Text + "\"";
-            //selectedItem = (ComboBoxItem)(VM.DisplayView.OSDShadowColor.SelectedValue;
-            //selected = (string)(selectedItem.Content);
 
-            //string shadowColor = string.Empty;
-
-            //if (selected != "None")
-            //{
-            //    shadowColor = "osd-shadow-color=" + "\"" + "#33" + ColorConverter.HexColor(selectedItem) + "\"";
-            //}
 
             // -------------------------
             // Shadow Offset
@@ -154,9 +140,9 @@ namespace Generate
             string shadowOffset = string.Empty;
 
             // only if shadow color is on
-            //if (!string.IsNullOrEmpty(VM.DisplayView.OSD_ShadowColor_Text))
             if (VM.DisplayView.OSD_ShadowOffset_Value != 0)
-                shadowOffset = "osd-shadow-offset=" + VM.DisplayView.OSD_ShadowOffset_Value/*OSD_ShadowOffset_Text*/;
+                shadowOffset = "osd-shadow-offset=" + VM.DisplayView.OSD_ShadowOffset_Value
+                                                      .ToString("0.##", CultureInfo.GetCultureInfo("en-US"));
 
             // --------------------------------------------------
             // Combine
