@@ -21,6 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 using Glow;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
 using ViewModel;
@@ -86,7 +87,7 @@ namespace Generate
             string position = string.Empty;
 
             if (VM.SubtitlesView.Position_Value != 0.0)
-                position = "sub-pos=" + VM.SubtitlesView.Position_Value/*Position_Text*/;
+                position = "sub-pos=" + VM.SubtitlesView.Position_Value;
 
             // -------------------------
             // Timing
@@ -200,8 +201,6 @@ namespace Generate
             // -------------------------
             // Font Color
             // -------------------------
-            //selectedItem = (ComboBoxItem)(VM.SubtitlesView.FontColor.SelectedValue;
-            //string fontColor = "sub-text-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
             string fontColor = string.Empty;
 
             // only if not empty
@@ -219,8 +218,6 @@ namespace Generate
             // -------------------------
             // Border Color
             // -------------------------
-            //selectedItem = (ComboBoxItem)(VM.SubtitlesView.BorderColor.SelectedValue;
-            //string borderColor = "sub-text-border-color=" + "\"" + "#FF" + ColorConverter.HexColor(selectedItem) + "\"";
             string borderColor = string.Empty;
 
             // only if not empty
@@ -235,26 +232,15 @@ namespace Generate
             // only if not empty
             if (!string.IsNullOrWhiteSpace(VM.SubtitlesView.ShadowColor_Text))
                 shadowColor = "sub-shadow-color=" + "\"" + "#33" + VM.SubtitlesView.ShadowColor_Text + "\"";
-            //selectedItem = (ComboBoxItem)(VM.SubtitlesView.ShadowColor.SelectedValue;
-            //selected = (string)(selectedItem.Content);
-
-            //string shadowColor = string.Empty;
-
-            //if (selected != "None")
-            //{
-            //    shadowColor = "sub-text-shadow-color=" + "\"" + "#33" + ColorConverter.HexColor(selectedItem) + "\"";
-            //}
-
 
             // -------------------------
             // Shadow Offset
             // -------------------------
             string shadowOffset = string.Empty;
 
-            // only if shadow color is on
-            //if (!string.IsNullOrWhiteSpace(VM.SubtitlesView.ShadowColor_Text))
             if (VM.SubtitlesView.ShadowOffset_Value != 0)
-                shadowOffset = "sub-shadow-offset=" + VM.SubtitlesView.ShadowOffset_Value/*ShadowOffset_Text*/;
+                shadowOffset = "sub-shadow-offset=" + VM.SubtitlesView.ShadowOffset_Value
+                                                      .ToString("0.##", CultureInfo.GetCultureInfo("en-US"));
 
 
 
