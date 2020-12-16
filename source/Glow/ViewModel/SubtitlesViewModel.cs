@@ -68,7 +68,7 @@ namespace ViewModel
             FontColor_Text = string.Empty;
             BorderSize_SelectedItem = "default";
             BorderColor_Text = string.Empty;
-            ShadowOffset_Value = 0;
+            ShadowOffset_Value = 0.00;
             ShadowColor_Text = string.Empty;
         }
 
@@ -1007,8 +1007,8 @@ namespace ViewModel
         // Subtitles Shadow Offset
         // -------------------------
         // Value
-        private double? _ShadowOffset_Value;
-        public double? ShadowOffset_Value
+        private double _ShadowOffset_Value;
+        public double ShadowOffset_Value
         {
             get { return _ShadowOffset_Value; }
             set
