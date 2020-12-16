@@ -4,6 +4,15 @@ Glow mpv Configurator
 
 ## [beta]
 
+## [1.0.2.0] - Dec 15, 2020
+### Fixed
+- Sliders Decimal Limit
+- InterpolationAntiring
+
+## [1.0.1.0] - Dec 15, 2020
+### Fixed
+- Save Custom Presets
+
 ## [1.0.0.0] - Dec 14, 2020
 ### Changed
 - Program rebuilt with MVVM
