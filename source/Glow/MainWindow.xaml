@@ -3535,7 +3535,7 @@
                     Cursor="Hand" 
                     ToolTipService.InitialShowDelay="1000" 
                     ToolTipService.ShowOnDisabled="True" 
-                    ToolTip="Import Preset"
+                    ToolTip="Delete Preset"
                     Click="btnDeletePreset_Click"
                     Style="{DynamicResource ButtonSmallStyle}">
                 <Image Style="{DynamicResource ButtonDelete}" 
