@@ -2173,7 +2173,7 @@ namespace Glow
                 //    listFailedImports.Add("Subtitles: Shadow Color");
 
                 // Shadow Offset
-                double subsShadowOffset = 0.0;
+                double subsShadowOffset = 0.00;
                 double.TryParse(inif.Read("Subtitles", "shadowOffset"), out subsShadowOffset);
                 VM.SubtitlesView.ShadowOffset_Value = subsShadowOffset;
 
