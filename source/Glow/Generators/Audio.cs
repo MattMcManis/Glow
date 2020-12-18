@@ -32,16 +32,16 @@ namespace Generate
         /// <summary>
         ///    Audio Config
         /// </summary>
-        public static String Config()
+        public static IEnumerable<string> Config()
         {
             // --------------------------------------------------
             // Main
             // --------------------------------------------------
 
             // -------------------------
-            // Title
+            // Heading
             // -------------------------
-            string title = "## AUDIO ##";
+            string heading = "## AUDIO ##";
 
             // -------------------------
             // Audio Driver
@@ -73,7 +73,7 @@ namespace Generate
             string volume = string.Empty;
 
             if (VM.AudioView.Volume_Value != 100)
-                volume = "volume=" + VM.AudioView.Volume_Value/*Volume_Text*/;
+                volume = "volume=" + VM.AudioView.Volume_Value;
 
             // -------------------------
             // Max Volume
@@ -115,16 +115,13 @@ namespace Generate
 
             // Add Each Language In Priority Order from the top to Audio Languages List
             // Regardless of Order checked in
-            foreach (string item in VM.AudioView.LanguagePriority_ListView_Items/*mainwindow.listViewAudioLanguages_Items*/)
+            foreach (string item in VM.AudioView.LanguagePriority_ListView_Items)
             {
                 // If list contains a checked item
-                if (/*mainwindow.listViewAudioLanguages_SelectedItems*/VM.AudioView.LanguagePriority_ListView_SelectedItems.Contains(item))
+                if (VM.AudioView.LanguagePriority_ListView_SelectedItems.Contains(item))
                 {
-                    // Convert Selected Language (e.g. English) into (eng,en,enUS,en-US)
-                    //string language = Languages.LanguageCode(item);
-
                     // Add language code to list
-                    listAudioLanguages.Add(Languages.LanguageCode(item)/*language*/);
+                    listAudioLanguages.Add(Languages.LanguageCode(item));
                 }
             }
 
@@ -135,9 +132,9 @@ namespace Generate
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listAudio = new List<string>()
+            return new List<string>()
             {
-                title,
+                heading,
                 driver,
                 loadFiles,
                 channels,
@@ -149,13 +146,6 @@ namespace Generate
                 scaleTempo,
                 languages,
             };
-
-            // -------------------------
-            // Join
-            // -------------------------
-            return string.Join("\r\n", listAudio
-                                       .Where(s => !string.IsNullOrEmpty(s))
-                              );
         }
 
     }
