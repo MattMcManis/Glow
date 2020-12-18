@@ -33,21 +33,20 @@ namespace Generate
         public static String Config()
         {
             // -------------------------
-            // Config
+            // Create Master List
             // -------------------------
-            // Combine
-            List<string> listConfig = new List<string>()
+            IEnumerable<string> listConfig = new List<string>()
             {
-                General.Config(),
-                Video.Config(),
-                Audio.Config(),
-                Subtitles.Config(),
-                Stream.Config(),
-                OSC.Config(),
-                OSD.Config(),
-                Extensions.Config()
+                string.Join("\r\n", General.Config().Where(s => !string.IsNullOrEmpty(s))),
+                string.Join("\r\n", Video.Config().Where(s => !string.IsNullOrEmpty(s))),
+                string.Join("\r\n", Audio.Config().Where(s => !string.IsNullOrEmpty(s))),
+                string.Join("\r\n", Subtitles.Config().Where(s => !string.IsNullOrEmpty(s))),
+                string.Join("\r\n", OSC.Config().Where(s => !string.IsNullOrEmpty(s))),
+                string.Join("\r\n", OSD.Config().Where(s => !string.IsNullOrEmpty(s))),
+                string.Join("\r\n", Extensions.Config().Where(s => !string.IsNullOrEmpty(s))),
             };
 
+            // Combine
             return string.Join("\r\n\r\n", listConfig
                                           .Where(s => !string.IsNullOrEmpty(s))
                               );
