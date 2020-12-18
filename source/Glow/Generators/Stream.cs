@@ -31,12 +31,12 @@ namespace Generate
         /// <summary>
         ///    Stream Config
         /// </summary>
-        public static String Config()
+        public static IEnumerable<string> Config()
         {
             // -------------------------
-            // Title
+            // Heading
             // -------------------------
-            string title = "## STREAM ##";
+            string heading = "## STREAM ##";
 
             // --------------------------------------------------
             // Demuxer
@@ -184,9 +184,9 @@ namespace Generate
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listStream = new List<string>()
+            return new List<string>()
             {
-                title,
+                heading,
 
                 // Demuxer
                 demuxThread,
@@ -208,13 +208,6 @@ namespace Generate
                 //file,
                 //fileSize
             };
-
-            // -------------------------
-            // Join
-            // -------------------------
-            return string.Join("\r\n", listStream
-                                       .Where(s => !string.IsNullOrEmpty(s))
-                              );
         }
     }
 }
