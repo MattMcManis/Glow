@@ -32,12 +32,12 @@ namespace Generate
         /// <summary>
         ///    OSD Config
         /// </summary>
-        public static String Config()
+        public static IEnumerable<string> Config()
         {
             // -------------------------
-            // OSC Title
+            // OSC Heading
             // -------------------------
-            string oscTitle = "## OSC ##";
+            string oscHeading = "## OSC ##";
 
             // -------------------------
             // OSC On Screen Controller
@@ -114,9 +114,9 @@ namespace Generate
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listOSC = new List<string>()
+            return new List<string>()
             {
-                oscTitle,
+                oscHeading,
                 oscEnable,
                 oscScriptOpts,
 
@@ -124,14 +124,6 @@ namespace Generate
                 barWidth,
                 barHeight
             };
-
-            // -------------------------
-            // Join
-            // -------------------------
-            // OSC
-            return string.Join("\r\n", listOSC
-                                       .Where(s => !string.IsNullOrEmpty(s))
-                              );
         }
     }
 }
