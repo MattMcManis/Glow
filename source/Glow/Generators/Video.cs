@@ -32,16 +32,16 @@ namespace Generate
         /// <summary>
         ///    Video Config
         /// </summary>
-        public static String Config()
+        public static IEnumerable<string> Config()
         {
             // --------------------------------------------------
             // Main
             // --------------------------------------------------
 
             // -------------------------
-            // Title
+            // Heading
             // -------------------------
-            string title = "## VIDEO ##";
+            string heading = "## VIDEO ##";
 
             // --------------------------------------------------
             // Hardware
@@ -457,9 +457,9 @@ namespace Generate
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listVideo = new List<string>()
+            return new List<string>()
             {
-                title,
+                heading,
 
                 // Hardware
                 driver,
@@ -503,13 +503,6 @@ namespace Generate
                 tscaleAntiring,
                 softwarescaler,
             };
-
-            // -------------------------
-            // Join
-            // -------------------------
-            return string.Join("\r\n", listVideo
-                                       .Where(s => !string.IsNullOrEmpty(s))
-                              );
         }
     }
 }
