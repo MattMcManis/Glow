@@ -31,16 +31,16 @@ namespace Generate
         /// <summary>
         ///    Extensions Config
         /// </summary>
-        public static String Config()
+        public static IEnumerable<string> Config()
         {
             // --------------------------------------------------
             // Main
             // --------------------------------------------------
 
             // -------------------------
-            // Title
+            // Heading
             // -------------------------
-            string title = "## EXTENSIONS ##";
+            string heading = "## EXTENSIONS ##";
 
             // -------------------------
             // MKV
@@ -48,9 +48,9 @@ namespace Generate
             string mkv = string.Empty;
 
             if (VM.GeneralView.ExtMKV_SelectedItem == "loop")
-                mkv = "[extension.mkv]"
-                        + "\r\n"
-                        + "loop-file=inf";
+                mkv = "[extension.mkv]" +
+                      "\r\n" +
+                      "loop-file=inf";
 
             // -------------------------
             // MP4
@@ -58,9 +58,9 @@ namespace Generate
             string mp4 = string.Empty;
 
             if (VM.GeneralView.ExtMP4_SelectedItem == "loop")
-                mp4 = "[extension.mp4]"
-                        + "\r\n"
-                        + "loop-file=inf";
+                mp4 = "[extension.mp4]" +
+                      "\r\n" +
+                      "loop-file=inf";
 
             // -------------------------
             // WebM
@@ -68,11 +68,11 @@ namespace Generate
             string webm = string.Empty;
 
             if (VM.GeneralView.ExtWebM_SelectedItem == "loop")
-                webm = "[extension.webm]"
-                        + "\r\n"
-                        + "cache=no"
-                        + "\r\n"
-                        + "loop-file=inf";
+                webm = "[extension.webm]" +
+                       "\r\n" +
+                       "cache=no" +
+                       "\r\n" +
+                       "loop-file=inf";
 
             // -------------------------
             // GIF
@@ -80,11 +80,11 @@ namespace Generate
             string gif = string.Empty;
 
             if (VM.GeneralView.ExtGIF_SelectedItem == "loop")
-                gif = "[extension.gif]"
-                        + "\r\n"
-                        + "cache=no"
-                        + "\r\n"
-                        + "loop-file=inf";
+                gif = "[extension.gif]" +
+                      "\r\n" +
+                      "cache=no" +
+                      "\r\n" +
+                      "loop-file=inf";
 
             // -------------------------
             // JPG
@@ -92,11 +92,11 @@ namespace Generate
             string jpg = string.Empty;
 
             if (VM.GeneralView.ExtJPG_SelectedItem == "pause")
-                jpg = "[extension.jpg]"
-                        + "\r\n"
-                        + "cache=no"
-                        + "\r\n"
-                        + "pause";
+                jpg = "[extension.jpg]" +
+                      "\r\n" +
+                      "cache=no" +
+                      "\r\n" +
+                      "pause";
 
             // -------------------------
             // PNG
@@ -104,19 +104,19 @@ namespace Generate
             string png = string.Empty;
 
             if (VM.GeneralView.ExtPNG_SelectedItem == "pause")
-                png = "[extension.png]"
-                        + "\r\n"
-                        + "cache=no"
-                        + "\r\n"
-                        + "pause";
+                png = "[extension.png]" +
+                      "\r\n" +
+                      "cache=no" +
+                      "\r\n" +
+                      "pause";
 
 
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listExtensions = new List<string>()
+            return new List<string>()
             {
-                title,
+                heading,
                 mkv,
                 mp4,
                 webm,
@@ -124,14 +124,6 @@ namespace Generate
                 jpg,
                 png,
             };
-
-            // -------------------------
-            // Join
-            // -------------------------
-            return string.Join("\r\n", listExtensions
-                                       .Where(s => !string.IsNullOrEmpty(s))
-                              );
-
         }
     }
 }
