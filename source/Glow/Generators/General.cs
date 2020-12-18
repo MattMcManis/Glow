@@ -31,16 +31,16 @@ namespace Generate
         /// <summary>
         ///    General Config
         /// </summary>
-        public static String Config()
+        public static IEnumerable<string> Config()
         {
             // --------------------------------------------------
             // Main
             // --------------------------------------------------
 
             // -------------------------
-            // Title
+            // Heading
             // -------------------------
-            string title = "## GENERAL ##";
+            string heading = "## GENERAL ##";
 
             // -------------------------
             // Priority
@@ -82,7 +82,6 @@ namespace Generate
             // must not be default
             if (VM.GeneralView.OnTop_SelectedItem == "yes")
                 onTop = "ontop";
-            //onTop = "ontop" + (VM.GeneralView.OnTop_SelectedItem;
 
             // -------------------------
             // Border
@@ -100,7 +99,7 @@ namespace Generate
 
             // if not 0
             if (VM.GeneralView.GeometryX_Value != 0 && VM.GeneralView.GeometryY_Value != 0)
-                geometry = "geometry=" + VM.GeneralView.GeometryX_Value/*GeometryX_Text*/ + "%" + ":" + VM.GeneralView.GeometryY_Value/*GeometryY_Text*/ + "%";
+                geometry = "geometry=" + VM.GeneralView.GeometryX_Value + "%" + ":" + VM.GeneralView.GeometryY_Value + "%";
 
             // -------------------------
             // Auto-Fit
@@ -109,8 +108,7 @@ namespace Generate
 
             // if not 0
             if (VM.GeneralView.AutofitWidth_Value != 0 && VM.GeneralView.AutofitHeight_Value != 0)
-                //autoFit = "autofit-larger=" + VM.GeneralView.AutofitWidth_Text + "%" + ":" + VM.GeneralView.AutofitHeight_Text + "%";
-                autoFit = "autofit-larger=" + VM.GeneralView.AutofitWidth_Value/*AutofitWidth_Text*/ + "%" + "x" + VM.GeneralView.AutofitHeight_Value/*AutofitHeight_Text*/ + "%";
+                autoFit = "autofit-larger=" + VM.GeneralView.AutofitWidth_Value + "%" + "x" + VM.GeneralView.AutofitHeight_Value + "%";
 
             // -------------------------
             // Screensaver
@@ -201,19 +199,19 @@ namespace Generate
                 // jpg
                 if (VM.GeneralView.ScreenshotFormat_SelectedItem == "jpg" ||
                     VM.GeneralView.ScreenshotFormat_SelectedItem == "jpeg")
-                    screenshotQuality = "screenshot-jpeg-quality=" + VM.GeneralView.ScreenshotQuality_Value;//VM.GeneralView.ScreenshotQuality_Text;
+                    screenshotQuality = "screenshot-jpeg-quality=" + VM.GeneralView.ScreenshotQuality_Value;
                 // png
                 else if (VM.GeneralView.ScreenshotFormat_SelectedItem == "png")
-                    screenshotQuality = "screenshot-png-compression=" + VM.GeneralView.ScreenshotQuality_Value;//VM.GeneralView.ScreenshotQuality_Text;
+                    screenshotQuality = "screenshot-png-compression=" + VM.GeneralView.ScreenshotQuality_Value;
             }
 
 
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listGeneral = new List<string>()
+            return new List<string>()
             {
-                title,
+                heading,
                 priority,
                 savePositiOnQuit,
                 keepOpen,
@@ -232,13 +230,6 @@ namespace Generate
                 screenshotFormat,
                 screenshotQuality,
             };
-
-            // -------------------------
-            // Join
-            // -------------------------
-            return string.Join("\r\n", listGeneral
-                                       .Where(s => !string.IsNullOrEmpty(s))
-                               );
         }
 
     }
