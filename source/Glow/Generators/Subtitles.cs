@@ -33,16 +33,16 @@ namespace Generate
         /// <summary>
         ///    Subtitle Config
         /// </summary>
-        public static String Config()
+        public static IEnumerable<string> Config()
         {
             // --------------------------------------------------
             // Main
             // --------------------------------------------------
 
             // -------------------------
-            // Title
+            // Heading
             // -------------------------
-            string title = "## SUBTITLES ##";
+            string heading = "## SUBTITLES ##";
 
             // -------------------------
             // Subtitles
@@ -247,9 +247,9 @@ namespace Generate
             // --------------------------------------------------
             // Combine
             // --------------------------------------------------
-            List<string> listSubtitle = new List<string>()
+            return new List<string>()
             {
-                title,
+                heading,
                 languages,
                 //subtitles,
                 loadFiles,
@@ -275,13 +275,6 @@ namespace Generate
                 assHinting,
                 assKerning,
             };
-
-            // -------------------------
-            // Join
-            // -------------------------
-            return string.Join("\r\n", listSubtitle
-                                       .Where(s => !string.IsNullOrEmpty(s))
-                              );
         }
 
     }
