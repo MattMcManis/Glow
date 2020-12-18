@@ -32,16 +32,16 @@ namespace Generate
         /// <summary>
         ///    OSD Config
         /// </summary>
-        public static String Config()
+        public static IEnumerable<string> Config()
         {
             // --------------------------------------------------
             // Main
             // --------------------------------------------------
 
             // -------------------------
-            // OSD Title
+            // OSD Heading
             // -------------------------
-            string osdTitle = "## OSD ##";
+            string osdHeading = "## OSD ##";
 
             // -------------------------
             // OSD On Screen Display
@@ -148,10 +148,10 @@ namespace Generate
             // Combine
             // --------------------------------------------------
 
-            List<string> listOSD = new List<string>()
+            return new List<string>()
             {
                 // OSD
-                osdTitle,
+                osdHeading,
                 videoOSD,
                 fractions,
                 duration,
@@ -166,14 +166,6 @@ namespace Generate
                 shadowColor,
                 shadowOffset,
             };
-
-            // -------------------------
-            // Join
-            // -------------------------
-            // OSD
-            return string.Join("\r\n", listOSD
-                                       .Where(s => !string.IsNullOrEmpty(s))
-                              );
         }
 
     }
