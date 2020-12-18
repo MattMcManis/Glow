@@ -41,6 +41,7 @@ namespace Generate
                 string.Join("\r\n", Video.Config().Where(s => !string.IsNullOrEmpty(s))),
                 string.Join("\r\n", Audio.Config().Where(s => !string.IsNullOrEmpty(s))),
                 string.Join("\r\n", Subtitles.Config().Where(s => !string.IsNullOrEmpty(s))),
+                string.Join("\r\n", Stream.Config().Where(s => !string.IsNullOrEmpty(s))),
                 string.Join("\r\n", OSC.Config().Where(s => !string.IsNullOrEmpty(s))),
                 string.Join("\r\n", OSD.Config().Where(s => !string.IsNullOrEmpty(s))),
                 string.Join("\r\n", Extensions.Config().Where(s => !string.IsNullOrEmpty(s))),
