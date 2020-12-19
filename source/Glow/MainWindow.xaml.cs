@@ -173,12 +173,6 @@ namespace Glow
                     double.TryParse(Configure.ConfigFile.conf.Read("Main Window", "Window_Position_Left"), out left);
                     this.Left = left;
 
-                    // Center
-                    if (top == 0 && left == 0)
-                    {
-                        this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                    }
-
                     // Window Maximized
                     bool mainwindow_WindowState_Maximized;
                     bool.TryParse(Configure.ConfigFile.conf.Read("Main Window", "WindowState_Maximized").ToLower(), out mainwindow_WindowState_Maximized);
@@ -253,6 +247,16 @@ namespace Glow
             }
 
             // -------------------------
+            // Window Position Center
+            // -------------------------
+            if ((this.Top.ToString() == "NaN" && this.Left.ToString() == "NaN") ||
+                (this.Top == 0 && this.Top == 0)
+               )
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+
+            // -------------------------
             // Theme
             // -------------------------
             //SetTheme();
@@ -309,54 +313,52 @@ namespace Glow
             // glow.conf initialize
             // Create a default config file to be populated
             // -------------------------
-            // Put this here so when the games list is written it will not be above the Main Window section
-
             // Create only if file does not already exist
-            if (!File.Exists(glowConfFile))
-            {
-                // glow.conf actions to write
-                List<Action> actionsToWrite = new List<Action>
-                {
-                    new Action(() =>
-                    {
-                        // -------------------------
-                        // Main Window
-                        // -------------------------
-                        // Window Position Top
-                        Configure.ConfigFile.conf.Write("Main Window", "Window_Position_Top", this.Top.ToString());
-                        // Window Position Left
-                        Configure.ConfigFile.conf.Write("Main Window", "Window_Position_Left", this.Left.ToString());
-                        // Window Width
-                        Configure.ConfigFile.conf.Write("Main Window", "Window_Width", this.Width.ToString());
-                        // Window Height
-                        Configure.ConfigFile.conf.Write("Main Window", "Window_Height", this.Height.ToString());
-                        // Window Maximized
-                        Configure.ConfigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
+            //if (!File.Exists(glowConfFile))
+            //{
+            //    // glow.conf actions to write
+            //    List<Action> actionsToWrite = new List<Action>
+            //    {
+            //        new Action(() =>
+            //        {
+            //            // -------------------------
+            //            // Main Window
+            //            // -------------------------
+            //            // Window Position Top
+            //            Configure.ConfigFile.conf.Write("Main Window", "Window_Position_Top", this.Top.ToString());
+            //            // Window Position Left
+            //            Configure.ConfigFile.conf.Write("Main Window", "Window_Position_Left", this.Left.ToString());
+            //            // Window Width
+            //            Configure.ConfigFile.conf.Write("Main Window", "Window_Width", this.Width.ToString());
+            //            // Window Height
+            //            Configure.ConfigFile.conf.Write("Main Window", "Window_Height", this.Height.ToString());
+            //            // Window Maximized
+            //            Configure.ConfigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
 
-                        // -------------------------
-                        // Settings
-                        // -------------------------
-                        // mpv Path
-                        Configure.ConfigFile.conf.Write("Settings", "mpvPath_Text", VM.ConfigureView.mpvPath_Text);
-                        // mpv Config Path
-                        Configure.ConfigFile.conf.Write("Settings", "mpvConfigPath_Text", VM.ConfigureView.mpvConfigPath_Text);
-                        // Presets Path
-                        Configure.ConfigFile.conf.Write("Settings", "PresetsPath_Text", VM.ConfigureView.PresetsPath_Text);
-                        // Theme
-                        Configure.ConfigFile.conf.Write("Settings", "Theme_SelectedItem", VM.ConfigureView.Theme_SelectedItem);
-                        // Updates
-                        Configure.ConfigFile.conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.ConfigureView.UpdateAutoCheck_IsChecked.ToString().ToLower());
-                    }),
-                };
+            //            // -------------------------
+            //            // Settings
+            //            // -------------------------
+            //            // mpv Path
+            //            Configure.ConfigFile.conf.Write("Settings", "mpvPath_Text", VM.ConfigureView.mpvPath_Text);
+            //            // mpv Config Path
+            //            Configure.ConfigFile.conf.Write("Settings", "mpvConfigPath_Text", VM.ConfigureView.mpvConfigPath_Text);
+            //            // Presets Path
+            //            Configure.ConfigFile.conf.Write("Settings", "PresetsPath_Text", VM.ConfigureView.PresetsPath_Text);
+            //            // Theme
+            //            Configure.ConfigFile.conf.Write("Settings", "Theme_SelectedItem", VM.ConfigureView.Theme_SelectedItem);
+            //            // Updates
+            //            Configure.ConfigFile.conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.ConfigureView.UpdateAutoCheck_IsChecked.ToString().ToLower());
+            //        }),
+            //    };
 
-                // -------------------------
-                // Save glow.conf
-                // -------------------------
-                Configure.WriteGlowConf(glowConfDir,   // Directory: %AppData%\Glow\
-                                        "glow.conf",   // Filename
-                                        actionsToWrite // Actions to write
-                                       );
-            }
+            //    // -------------------------
+            //    // Save glow.conf
+            //    // -------------------------
+            //    Configure.WriteGlowConf(glowConfDir,   // Directory: %AppData%\Glow\
+            //                            "glow.conf",   // Filename
+            //                            actionsToWrite // Actions to write
+            //                           );
+            //}
         }
 
 
@@ -403,15 +405,7 @@ namespace Glow
             // -------------------------
             // Save glow.conf
             // -------------------------
-            // do not use VM.PathsView.Config_Text, glow.conf uses it's own %AppData% folder
             Configure.ConfigFile conf = null;
-
-            double top = Top;
-            double left = Left;
-            double width = this.Width;
-            double height = this.Height;
-
-            bool settings_UpdateAutoCheck_IsChecked = false;
 
             try
             {
@@ -420,21 +414,102 @@ namespace Glow
                 // -------------------------
                 // Window
                 // -------------------------
-                //double top = 0;
+                // Window
+                double top;
                 double.TryParse(conf.Read("Main Window", "Window_Position_Top"), out top);
-                //double left;
+                double left;
                 double.TryParse(conf.Read("Main Window", "Window_Position_Left"), out left);
-                //double width;
+                double width;
                 double.TryParse(conf.Read("Main Window", "Window_Width"), out width);
-                //double height;
+                double height;
                 double.TryParse(conf.Read("Main Window", "Window_Height"), out height);
 
                 // -------------------------
                 // Settings
                 // -------------------------
                 // Updates
+                bool settings_UpdateAutoCheck_IsChecked = true;
                 bool.TryParse(conf.Read("Settings", "UpdateAutoCheck_IsChecked").ToLower(), out settings_UpdateAutoCheck_IsChecked);
 
+                // -------------------------
+                // Save only if changes have been made
+                // -------------------------
+                if (// Main Window
+                    this.Top != top ||
+                    this.Left != left ||
+                    this.Width != width ||
+                    this.Height != height ||
+
+                    VM.ConfigureView.mpvPath_Text != conf.Read("Settings", "mpvPath_Text") ||
+                    VM.ConfigureView.mpvConfigPath_Text != conf.Read("Settings", "mpvConfigPath_Text") ||
+                    VM.ConfigureView.PresetsPath_Text != conf.Read("Settings", "PresetsPath_Text") ||
+                    VM.ConfigureView.Theme_SelectedItem != conf.Read("Settings", "Theme_SelectedItem") ||
+                    VM.ConfigureView.UpdateAutoCheck_IsChecked != settings_UpdateAutoCheck_IsChecked
+                    )
+                {
+                    // -------------------------
+                    // glow.conf actions to write
+                    // -------------------------
+                    List<Action> actionsToWrite = new List<Action>
+                    {
+                        // -------------------------
+                        // Main Window
+                        // -------------------------
+                        new Action(() =>
+                        {
+                            // -------------------------
+                            // Main Window
+                            // -------------------------
+                            // Window Position Top
+                            Configure.ConfigFile.conf.Write("Main Window", "Window_Position_Top", this.Top.ToString());
+                            // Window Position Left
+                            Configure.ConfigFile.conf.Write("Main Window", "Window_Position_Left", this.Left.ToString());
+                            // Window Width
+                            Configure.ConfigFile.conf.Write("Main Window", "Window_Width", this.Width.ToString());
+                            // Window Height
+                            Configure.ConfigFile.conf.Write("Main Window", "Window_Height", this.Height.ToString());
+                            // Window Maximized
+                            if (this.WindowState == WindowState.Maximized)
+                            {
+                                Configure.ConfigFile.conf.Write("Main Window", "WindowState_Maximized", "true");
+                            }
+                            else
+                            {
+                                Configure.ConfigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
+                            }
+
+                            // -------------------------
+                            // Settings
+                            // -------------------------
+                            // mpv Path
+                            Configure.ConfigFile.conf.Write("Settings", "mpvPath_Text", VM.ConfigureView.mpvPath_Text);
+
+                            // mpv Config Path
+                            Configure.ConfigFile.conf.Write("Settings", "mpvConfigPath_Text", VM.ConfigureView.mpvConfigPath_Text);
+
+                            // Presets Path
+                            Configure.ConfigFile.conf.Write("Settings", "PresetsPath_Text", VM.ConfigureView.PresetsPath_Text);
+
+                            // Theme
+                            Configure.ConfigFile.conf.Write("Settings", "Theme_SelectedItem", VM.ConfigureView.Theme_SelectedItem);
+
+                            // Update Auto-Check
+                            Configure.ConfigFile.conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.ConfigureView.UpdateAutoCheck_IsChecked.ToString().ToLower());
+                        }),
+
+                        //new Action(() => { ; }),
+                    };
+
+                    // -------------------------
+                    // Save Config
+                    // -------------------------
+                    Configure.WriteGlowConf(glowConfDir,   // Directory: %AppData%\Glow\
+                                            "glow.conf",   // Filename
+                                            actionsToWrite // Actions to write
+                                           );
+
+                    //MessageBox.Show("Saved"); //debug
+                }
             }
             catch
             {
@@ -442,86 +517,6 @@ namespace Glow
                                 "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
-            }
-
-            // -------------------------
-            // Save only if changes have been made
-            // -------------------------
-            if (// Main Window
-                this.Top != top ||
-                this.Left != left ||
-                this.Width != width ||
-                this.Height != height ||
-
-                VM.ConfigureView.mpvPath_Text != conf.Read("Settings", "mpvPath_Text") ||
-                VM.ConfigureView.mpvConfigPath_Text != conf.Read("Settings", "mpvConfigPath_Text") ||
-                VM.ConfigureView.PresetsPath_Text != conf.Read("Settings", "PresetsPath_Text") ||
-                VM.ConfigureView.Theme_SelectedItem != conf.Read("Settings", "Theme_SelectedItem") ||
-                VM.ConfigureView.UpdateAutoCheck_IsChecked != settings_UpdateAutoCheck_IsChecked // problem
-                )
-            {
-                // -------------------------
-                // glow.conf actions to write
-                // -------------------------
-                List<Action> actionsToWrite = new List<Action>
-                {
-                    // -------------------------
-                    // Main Window
-                    // -------------------------
-                    new Action(() =>
-                    {
-                        // -------------------------
-                        // Main Window
-                        // -------------------------
-                        // Window Position Top
-                        Configure.ConfigFile.conf.Write("Main Window", "Window_Position_Top", this.Top.ToString());
-                        // Window Position Left
-                        Configure.ConfigFile.conf.Write("Main Window", "Window_Position_Left", this.Left.ToString());
-                        // Window Width
-                        Configure.ConfigFile.conf.Write("Main Window", "Window_Width", this.Width.ToString());
-                        // Window Height
-                        Configure.ConfigFile.conf.Write("Main Window", "Window_Height", this.Height.ToString());
-                        // Window Maximized
-                        if (this.WindowState == WindowState.Maximized)
-                        {
-                            Configure.ConfigFile.conf.Write("Main Window", "WindowState_Maximized", "true");
-                        }
-                        else
-                        {
-                            Configure.ConfigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
-                        }
-
-                        // -------------------------
-                        // Settings
-                        // -------------------------
-                        // mpv Path
-                        Configure.ConfigFile.conf.Write("Settings", "mpvPath_Text", VM.ConfigureView.mpvPath_Text);
-
-                        // mpv Config Path
-                        Configure.ConfigFile.conf.Write("Settings", "mpvConfigPath_Text", VM.ConfigureView.mpvConfigPath_Text);
-
-                        // Presets Path
-                        Configure.ConfigFile.conf.Write("Settings", "PresetsPath_Text", VM.ConfigureView.PresetsPath_Text);
-
-                        // Theme
-                        Configure.ConfigFile.conf.Write("Settings", "Theme_SelectedItem", VM.ConfigureView.Theme_SelectedItem);
-
-                        // Update Auto-Check
-                        Configure.ConfigFile.conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.ConfigureView.UpdateAutoCheck_IsChecked.ToString().ToLower());
-                    }),
-
-                    //new Action(() => { ; }),
-                };
-
-                // -------------------------
-                // Save Config
-                // -------------------------
-                Configure.WriteGlowConf(glowConfDir,   // Directory: %AppData%\Glow\
-                                        "glow.conf",   // Filename
-                                        actionsToWrite // Actions to write
-                                       );
-
-                //MessageBox.Show("Saved"); //debug
             }
         }
 
